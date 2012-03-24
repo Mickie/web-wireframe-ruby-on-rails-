@@ -1,8 +1,19 @@
 FanzoSite::Application.routes.draw do
-  
+
   devise_for :users
 
-  root :to => 'home#index'
+  authenticated :user do
+    root to:'static_pages#index'
+  end
+  root to:'static_pages#index'
+
+  resources :users, only: :show
+  
+  get "static_pages/about"
+
+  get "static_pages/contact"
+
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

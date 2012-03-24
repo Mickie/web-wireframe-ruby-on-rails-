@@ -4,6 +4,7 @@ gem 'rails', '3.2.2'
 gem 'pg'
 gem 'jquery-rails'
 gem 'devise', '>= 2.0.4'
+gem 'bootstrap-sass', '>= 2.0.0'
 
 group :assets do
   gem 'sass-rails'
@@ -14,7 +15,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '>= 2.8.1'
-  gem 'guard-rspec', '0.5.5'
+  gem 'guard-rspec', '>= 0.5.5'
 end
 
 group :test do
