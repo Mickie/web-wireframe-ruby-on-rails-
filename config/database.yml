@@ -13,12 +13,13 @@
 # gem 'pg'
 #
 development:
+  host: localhost
   adapter: postgresql
   encoding: unicode
   database: fanzo_site_development
   pool: 5
   username: fanzo_site
-  password:
+  password: fanzo_site
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -39,12 +40,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
+  host: localhost
   adapter: postgresql
   encoding: unicode
   database: fanzo_site_test
   pool: 5
   username: fanzo_site
-  password:
+  password: fanzo_site
 
 production:
   adapter: postgresql
