@@ -1,6 +1,6 @@
 FanzoSite::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   authenticated :user do
     root to:'static_pages#index'
@@ -8,10 +8,9 @@ FanzoSite::Application.routes.draw do
   root to:'static_pages#index'
 
   resources :users, only: :show
-  
-  get "static_pages/about"
 
-  get "static_pages/contact"
+  match '/about',   to: 'static_pages#about'
+  match '/contact', to: 'static_pages#contact'
 
 
   
