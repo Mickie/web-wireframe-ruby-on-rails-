@@ -30,4 +30,5 @@ group :test do
   gem 'launchy', '>= 2.0.5'
   gem 'database_cleaner', '>= 0.7.1'
   gem 'email_spec'
+  gem 'cucumber-rails'
 end
