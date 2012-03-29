@@ -1,2 +1,7 @@
-<h1>StaticPages#index</h1>
-<p>Find me in app/views/static_pages/index.html.erb</p>
+<%= provide(:title, 'FANZO - Uniting people around the world through sports') %>
+
+
+<h1>Welcome to FANZO</h1>
+<p>FANZO is the best way to enjoy the game with other fans</p>
+
+<%= link_to "Get Started", new_user_registration_path, class: "btn btn-large btn-primary" %>
