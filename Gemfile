@@ -25,10 +25,10 @@ group :test do
   gem 'factory_girl_rails', '>= 1.7.0'
   gem 'rb-fsevent', '>= 0.4.3.1', :require => false
   gem 'growl', '>= 1.0.3'
+  gem 'cucumber-rails', :require => false
   gem 'guard-spork', '>= 0.3.2'  
   gem 'spork', '>= 0.9.0'
   gem 'launchy', '>= 2.0.5'
   gem 'database_cleaner', '>= 0.7.1'
   gem 'email_spec'
-  gem 'cucumber-rails'
 end
