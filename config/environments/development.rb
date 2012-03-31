@@ -24,13 +24,13 @@ FanzoSite::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"  
   config.action_mailer.smtp_settings = {
-  address: "smtpout.secureserver.net",
-  port: 80,
-  domain: "fanzo.co",
-  authentication: "plain",
-  user_name: ENV["FANZO_USERNAME"],
-  password: ENV["FANZO_PASSWORD"]
-}
+    address: "smtpout.secureserver.net",
+    port: 80,
+    domain: "fanzo.co",
+    authentication: "plain",
+    user_name: ENV["FANZO_USERNAME"],
+    password: ENV["FANZO_PASSWORD"]
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe User do
   
@@ -81,7 +81,7 @@ describe User do
     it { should be_valid }
   end
   
-  describe "can create user via twitter" do
+  describe "cannot create user via twitter" do
     before do
       OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
                                               info: { nickname: "foo@bar.com" }, 
@@ -91,7 +91,29 @@ describe User do
       @user = User.find_for_twitter_oauth( theHash, nil ) 
     end
     
-    it { should be_valid }
+    it { should be_nil }
+  end
+  
+  describe "can find existing user via twitter" do
+    before do
+      thePassword = Devise.friendly_token[0,20]
+      theUserToFind = User.create!( email: 'twitter_init@fanzo.co', 
+                                    password: thePassword,
+                                    password_confirmation: thePassword,
+                                    twitter_user_id: '12345' )
+      theUserToFind.save
+
+      OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
+                                              info: { nickname: "jimbob" }, 
+                                              extra: { access_token: { token: "a token", secret: "a secret"} } 
+                                              }
+      theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:twitter])
+      @user = User.find_for_twitter_oauth( theHash, nil ) 
+    end
+    
+    it "should have loaded the user to find" do
+      @user.twitter_user_id.should eq('12345') 
+    end
   end
   
 end

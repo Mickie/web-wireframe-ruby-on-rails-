@@ -11,3 +11,8 @@ Feature: Creating Accounts
 		When he clicks the facebook link
 		Then he should see his profile page
 			And he should see a signout link
+			
+	Scenario: Create account via twitter
+		Given a user visits the registration page
+		When he clicks the twitter link
+		Then he should see almost there page

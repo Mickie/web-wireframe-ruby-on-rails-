@@ -36,18 +36,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
-    if user = User.where( twitter_user_id: access_token.uid).first
-      user
-    else 
-      thePassword = Devise.friendly_token[0,20]
-      User.create!( email: 'twitter_init@fanzo.co', 
-                    password: thePassword,
-                    password_confirmation: thePassword,
-                    twitter_user_id: access_token.uid, 
-                    twitter_username: access_token.info.nickname, 
-                    twitter_user_token: access_token.extra.access_token.token,
-                    twitter_user_secret: access_token.extra.access_token.secret) 
-    end
+    User.where( "twitter_user_id = ?", access_token.uid).first
   end
 
   def self.new_with_session(params, session)

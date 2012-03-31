@@ -17,7 +17,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # You need to implement the method below in your model
     @user = User.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
 
-    if @user.persisted?
+    if @user
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Twitter"
       sign_in_and_redirect @user, event: :authentication
     else
