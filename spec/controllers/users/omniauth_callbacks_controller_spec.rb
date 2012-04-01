@@ -7,7 +7,7 @@ describe Users::OmniauthCallbacksController do
     before do
       OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(
                                               { uid: '12345', 
-                                              info: { nickname: "foo@bar.com" }, 
+                                              info: { nickname: "barney" }, 
                                               extra: { access_token: { token: "a token", secret: "a secret"} } 
                                               })
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
@@ -26,6 +26,10 @@ describe Users::OmniauthCallbacksController do
       
       it "should have twitter data in session" do
         session["devise.twitter_data"].should_not be_nil
+        session["devise.twitter_data"].extra.access_token.token.should == 'a token'
+        session["devise.twitter_data"].extra.access_token.secret.should == 'a secret'
+        session["devise.twitter_data"].info.nickname == 'barney'
+        session["devise.twitter_data"].uid == '12345'
       end
     end
    

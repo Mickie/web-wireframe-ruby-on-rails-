@@ -6,7 +6,7 @@ When /^the user submits valid email and password$/ do
   fill_in "Email",    with: "user@email.com"
   fill_in "Password", with: "secret"
   fill_in "Password confirmation", with: "secret"
-  click_button "Sign up"
+  click_button "commit"
 end
 
 When /^he clicks the facebook link$/ do
@@ -47,4 +47,12 @@ Then /^there should be hidden twitter data$/ do
 
   page.should have_selector('#user_twitter_username')
   page.should have_selector(:xpath, '//input[@value="fred"]')
+end
+
+Then /^his twitter data should be store in the DB$/ do
+  user = User.where(email:"user@email.com").first
+  user.twitter_username.should == 'fred'
+  user.twitter_user_secret.should == 'a secret'
+  user.twitter_user_id == '12345'
+  user.twitter_user_token == 'a token'
 end
