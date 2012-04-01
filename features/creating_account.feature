@@ -16,3 +16,4 @@ Feature: Creating Accounts
 		Given a user visits the registration page
 		When he clicks the twitter link
 		Then he should see almost there page
+			And there should be hidden twitter data

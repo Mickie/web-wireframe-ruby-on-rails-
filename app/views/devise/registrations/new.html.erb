@@ -1,11 +1,8 @@
-<h2>Sign up</h2>
 
-<%- if session["devise.twitter_data"] %>
+<% if session["devise.twitter_data"] %>
     <%= render "twitter_authed_new_user" %>
-<%- else %>
+<% else %>
     <%= render "new_user" %>
-<% end -%>
-
-<%= render "new_user" %>
+<% end %>
 
 <%= render "devise/links" %>

@@ -16,7 +16,7 @@ end
 
 When /^he clicks the twitter link$/ do
   OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new( { uid: '12345', 
-                                                                  info: { nickname: "foo@bar.com" }, 
+                                                                  info: { nickname: "fred" }, 
                                                                   extra: { access_token: { token: "a token", secret: "a secret"} } 
                                                                   })
   click_link "Sign in with Twitter"
@@ -33,4 +33,18 @@ end
 
 Then /^he should see almost there page$/ do
   page.should have_selector('h1', text: "Almost there")
+end
+
+Then /^there should be hidden twitter data$/ do
+  page.should have_selector('#user_twitter_user_id')
+  page.should have_selector(:xpath, '//input[@value="12345"]')
+
+  page.should have_selector('#user_twitter_user_token')
+  page.should have_selector(:xpath, '//input[@value="a token"]')
+
+  page.should have_selector('#user_twitter_user_secret')
+  page.should have_selector(:xpath, '//input[@value="a secret"]')
+
+  page.should have_selector('#user_twitter_username')
+  page.should have_selector(:xpath, '//input[@value="fred"]')
 end
