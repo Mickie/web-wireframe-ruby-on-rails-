@@ -11,6 +11,7 @@ Feature: Creating Accounts
 		When he clicks the facebook link
 		Then he should see his profile page
 			And he should see a signout link
+			And his facebook data should be stored in the DB
 			
 	Scenario: Create account via twitter
 		Given a user visits the registration page
@@ -19,5 +20,5 @@ Feature: Creating Accounts
 			And there should be hidden twitter data
 		When the user submits valid email and password
 		Then he should see his profile page
-			And his twitter data should be store in the DB
+			And his twitter data should be stored in the DB
 			

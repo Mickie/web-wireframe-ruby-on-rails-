@@ -10,7 +10,7 @@ When /^the user submits valid email and password$/ do
 end
 
 When /^he clicks the facebook link$/ do
-  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({ uid: '12345', info: { email:"user@email.com" }, credentials: { token: "access me" } })
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({ uid: '54321', info: { email:"user@email.com" }, credentials: { token: "access me" } })
   click_link "Sign in with Facebook"
 end
 
@@ -49,10 +49,16 @@ Then /^there should be hidden twitter data$/ do
   page.should have_selector(:xpath, '//input[@value="fred"]')
 end
 
-Then /^his twitter data should be store in the DB$/ do
+Then /^his twitter data should be stored in the DB$/ do
   user = User.where(email:"user@email.com").first
   user.twitter_username.should == 'fred'
   user.twitter_user_secret.should == 'a secret'
   user.twitter_user_id == '12345'
   user.twitter_user_token == 'a token'
+end
+
+Then /^his facebook data should be stored in the DB$/ do
+  user = User.where(email:"user@email.com").first
+  user.facebook_user_id.should == '54321'
+  user.facebook_access_token.should == 'access me'
 end
