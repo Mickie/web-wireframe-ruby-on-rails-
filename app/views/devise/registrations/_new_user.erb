@@ -1,18 +1,40 @@
-<h2>Sign up</h2>
+<h2>Sign up for FANZO</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<%= render "devise/facebook_twitter_logins" %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+<h3>Or Create an Account:</h3>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+<div class="well">
+  <%= form_for(resource, 
+               as: resource_name, 
+               url: registration_path(resource_name)
+               ) do |f| %>  
+    <%= devise_error_messages! %>
+  
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder:"superfan@sports.com" %>
+    </div>
+  
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+  
+    <div>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  
+    <div>
+      <%= f.submit "Create Account & Login >>", id:'commit', class:'btn btn-large btn-primary' %>
+    </div>
+    
+    <div class='help-block'>  
+      &nbsp; <%= link_to "Already have an account?", new_session_path(resource_name) %>
+    </div>
+  
+  <% end %>
+</div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up", id:'commit' %></div>
-<% end %>
-
-<%= render "devise/links" %>
+<div class="clearfix"></div>

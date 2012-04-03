@@ -28,8 +28,8 @@ FanzoSite::Application.configure do
     port: 80,
     domain: "fanzo.co",
     authentication: "plain",
-    user_name: ENV["FANZO_USERNAME"],
-    password: ENV["FANZO_PASSWORD"]
+    user_name: ENV["FANZO_EMAIL_ACCOUNT"],
+    password: ENV["FANZO_EMAIL_PASSWORD"]
   }
 
   # Print deprecation notices to the Rails logger

@@ -8,8 +8,6 @@ describe "devise/registrations/new" do
   end
   
   it "renders default look for completely new user" do
-    view.should_receive(:devise_mapping).at_least(1).times.and_return(Devise.mappings[:user])
-    view.should_receive(:resource_class).at_least(1).times.and_return(Devise.mappings[:user].to)
     render
     view.should render_template( partial: "_new_user" )
     view.should_not render_template( partial: "_twitter_authed_new_user")

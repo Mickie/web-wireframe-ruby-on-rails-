@@ -11,7 +11,7 @@ end
 
 When /^he clicks the facebook link$/ do
   OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({ uid: '54321', info: { email:"user@email.com" }, credentials: { token: "access me" } })
-  click_link "Sign in with Facebook"
+  click_link "facebook-login-button"
 end
 
 When /^he clicks the twitter link$/ do
@@ -19,7 +19,7 @@ When /^he clicks the twitter link$/ do
                                                                   info: { nickname: "fred" }, 
                                                                   extra: { access_token: { token: "a token", secret: "a secret"} } 
                                                                   })
-  click_link "Sign in with Twitter"
+  click_link "sign-in-with-twitter"
 end
 
 
