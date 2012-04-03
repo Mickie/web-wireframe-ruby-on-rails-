@@ -1,5 +1,8 @@
 require 'spec_helper'
 
-describe "static_pages/index.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe "static_pages/index" do
+  it "should welcome to FANZO" do
+    render
+    rendered.should have_selector("h1", text:"FANZO")
+  end
 end

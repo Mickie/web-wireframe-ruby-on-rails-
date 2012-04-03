@@ -1,7 +1,19 @@
 <%= provide(:title, 'FANZO - Uniting people around the world through sports') %>
 
-
-<h1>Welcome to FANZO</h1>
-<p>FANZO is the best way to enjoy the game with other fans</p>
-
-<%= link_to "Get Started", new_user_registration_path, class: "btn btn-large btn-primary" %>
+<div class="row-fluid">
+  <div class="span12">
+    <div class="hero-unit">
+      <h1>Welcome to FANZO</h1>
+      <h2>FANZO is the best way to enjoy the game with other fans</h2>
+      <%= link_to "Click to Get Started >>", new_user_registration_path, class: "btn btn-large btn-primary" %>
+      <p>With FANZO, you can:</p>
+      <ul class="app_bullets">
+          <li>Find the best venue to watch the game, and meet other fans of your team</li>
+          <li>Connect and share your passion with your friends and other fans</li>
+          <li>Chat with the athletes, coaches, journalists and bloggers for your favorite team</li>
+          <li>See what the world is saying about your team</li>
+      </ul>
+    </div>
+    
+  </div>
+</div>
