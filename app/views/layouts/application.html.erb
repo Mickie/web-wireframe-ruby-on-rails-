@@ -4,12 +4,31 @@
 		<title><%= yield(:title) %></title>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
 		<%= javascript_include_tag "application" %>
-		<%= csrf_meta_tags %>
-	  <%= render 'layouts/shim' %>
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      $(document).ready(function(){
+        initFacebookJSSDK();
+        for (var i=0; i < FANZO.documentReadyFunctions.length; i++)
+        {
+          FANZO.documentReadyFunctions[i]();
+        }
+        setTimeout( function()
+        {
+            window.scrollTo( 0, 1 );
+        }, 100 );
+      })
+    </script>
+    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller] + '.js.coffee') )  %>
+      <%= javascript_include_tag params[:controller] %>
+    <% end %>
+    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller], params[:action] + '.js.coffee') )  %>
+      <%= javascript_include_tag params[:controller] + '/' + params[:action] %>
+    <% end %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
 	</head>
 	<body>
-	  <%= render "partials/facebook_js_sdk"%>
+    <div id="fb-root"></div>
 		<%= render 'layouts/header' %>
 		<div class="container-fluid">
 			<% flash.each do |key, value| %>

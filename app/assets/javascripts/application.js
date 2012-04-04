@@ -13,4 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//= require facebook_js_sdk_loader
+//= require google_analytics
+
+function fanzoGlobal()
+{
+  this.documentReadyFunctions = new Array();
+} 
+
+var FANZO = new fanzoGlobal();
