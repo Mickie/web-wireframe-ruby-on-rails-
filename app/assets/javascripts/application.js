@@ -19,6 +19,6 @@
 function fanzoGlobal()
 {
   this.documentReadyFunctions = new Array();
-} 
+};
 
 var FANZO = new fanzoGlobal();

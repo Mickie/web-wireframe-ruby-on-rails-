@@ -3,4 +3,4 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 checkInToGame = ( e ) ->
-  window.location = "game/watch?game=" + escape( e.target.value );
+  window.location = "game/watch?game=" + escape( e.target.value )
