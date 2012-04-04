@@ -10,11 +10,6 @@ window.fbAsyncInit = function()
   });
 
   // Additional initialization code here
-  FB.getLoginStatus(function(aResponse)
-  {
-    console.log("the response status:" + aResponse.status);
-    console.log("the response data:" + aResponse.authResponse);
-  });
 };
 
 function initFacebookJSSDK()
@@ -27,4 +22,4 @@ function initFacebookJSSDK()
      js.src = "//connect.facebook.net/en_US/all.js";
      ref.parentNode.insertBefore(js, ref);
    }(document));
-}
+};
