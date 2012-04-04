@@ -17,10 +17,10 @@
         }, 100 );
       })
     </script>
-    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller] + '.js.coffee') )  %>
+    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller] + '.js') )  %>
       <%= javascript_include_tag params[:controller] %>
     <% end %>
-    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller], params[:action] + '.js.coffee') )  %>
+    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller], params[:action] + '.js') )  %>
       <%= javascript_include_tag params[:controller] + '/' + params[:action] %>
     <% end %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
