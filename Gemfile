@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'thin', '>= 1.3.1'
 gem 'rails', '3.2.2'
 gem 'pg'
 gem 'jquery-rails'
