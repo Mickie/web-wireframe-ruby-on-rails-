@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Admin do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @user = FactoryGirl.create(:user)
+  end
+  
+  subject { @user }
+  
+  it { should respond_to(:email) }
 end
