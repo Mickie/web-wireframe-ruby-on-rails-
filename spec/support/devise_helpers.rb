@@ -17,8 +17,3 @@ module DeviseHelpers
     end
   end
 end
-
-RSpec.configure do |config|
-  config.include Devise::TestHelpers, :type => :controller
-  config.extend DeviseHelpers, :type => :controller
-end
