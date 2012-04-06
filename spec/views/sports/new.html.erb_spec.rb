@@ -8,8 +8,11 @@ describe "sports/new" do
   it "renders new sport form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => sports_path, :method => "post" do
     end
+
+    view.should render_template( partial: "_form" )
+    rendered.should have_selector('#sport_name')
+    
   end
 end

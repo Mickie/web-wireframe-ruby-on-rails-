@@ -1,6 +1,3 @@
-Before do
-  @user = FactoryGirl.build(:user)
-end
 
 When /^I submit valid email and password$/ do
   fill_in "Email",    with: @user.email

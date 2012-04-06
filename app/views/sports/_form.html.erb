@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save", id:"commit" %>
   </div>
 <% end %>

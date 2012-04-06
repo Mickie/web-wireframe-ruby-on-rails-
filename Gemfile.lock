@@ -227,7 +227,7 @@ DEPENDENCIES
   database_cleaner (>= 0.7.1)
   devise (>= 2.0.4)
   email_spec
-  factory_girl_rails (>= 1.7.0)
+  factory_girl_rails (>= 3.0)
   growl (>= 1.0.3)
   guard-cucumber
   guard-rspec (>= 0.5.5)
