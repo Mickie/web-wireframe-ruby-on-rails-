@@ -1,6 +1,7 @@
 Before do
   @user = FactoryGirl.build(:user)
   @admin = FactoryGirl.build(:admin)
+  @edit_sport = FactoryGirl.create(:sport)
 end
 
 
