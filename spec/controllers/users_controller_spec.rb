@@ -3,14 +3,17 @@ require 'spec_helper'
 describe UsersController do
   login_user
   
-  before do
-    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
-  end
-
   describe "user profile page" do
+    before do
+      get :show, {:id => subject.current_user.to_param}
+    end 
+
     it "should return http success" do
-      visit user_path(subject.current_user)
       response.should be_success
+    end
+
+    it "should send the user to the view" do
+      assigns(:user).should eq(subject.current_user)
     end
   end
 

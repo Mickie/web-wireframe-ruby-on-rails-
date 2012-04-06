@@ -2,6 +2,7 @@ require 'rubygems'
 require 'spork'
 require 'ruby-debug'
 require 'spork/ext/ruby-debug'
+require 'support/devise_helpers'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -23,7 +24,11 @@ Spork.prefork do
   RSpec.configure do |config|
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)  
-    
+
+    config.include Devise::TestHelpers, :type => :controller
+    config.extend DeviseHelpers, :type => :controller
+
+      
     # ## Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
