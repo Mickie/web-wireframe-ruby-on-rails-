@@ -2,10 +2,13 @@ Before do
   @user = FactoryGirl.build(:user)
   @admin = FactoryGirl.build(:admin)
   @sport = FactoryGirl.create(:sport)
+  @league = FactoryGirl.create(:league)
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league)
+  @new_conference = FactoryGirl.build(:conference)
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)
+  @edit_conference = FactoryGirl.create(:conference)
 end
 
 

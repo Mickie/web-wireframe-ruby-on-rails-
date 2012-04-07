@@ -16,8 +16,9 @@
     <%= f.text_field :name %>
   </div>
   
-  <div>
-    <%= f.select(:sport_id, options_for_select(@allSports.collect {|p| [ p.name, p.id ] },  "Select Sport")) %>
+  <div class="field">
+    <%= f.label :sport %><br />
+    <%= f.select(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] },  "Select Sport")) %>
   </div>
   
   <div class="actions">

@@ -27,7 +27,6 @@ class LeaguesController < ApplicationController
   # GET /leagues/new.json
   def new
     @league = League.new
-    @allSports = Sport.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +37,6 @@ class LeaguesController < ApplicationController
   # GET /leagues/1/edit
   def edit
     @league = League.find(params[:id])
-    @allSports = Sport.all
   end
 
   # POST /leagues

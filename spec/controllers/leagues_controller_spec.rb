@@ -2,18 +2,22 @@ require 'spec_helper'
 
 describe LeaguesController do
   login_admin
+  
+  before do
+    @sport = FactoryGirl.create(:sport)
+  end
 
   it "should have current_admin" do
     subject.current_admin.should_not be_nil
   end
   
   def valid_attributes
-    { name:"NFL" }
+    { name:"NFL", sport_id: @sport.id }
   end
 
   describe "GET index" do
     it "assigns all leagues as @leagues" do
-      league = League.create! valid_attributes
+      league = FactoryGirl.create(:league)
       get :index, {}
       assigns(:leagues).should eq([league])
     end
@@ -21,7 +25,7 @@ describe LeaguesController do
 
   describe "GET show" do
     it "assigns the requested league as @league" do
-      league = League.create! valid_attributes
+      league = FactoryGirl.create(:league)
       get :show, {:id => league.to_param}
       assigns(:league).should eq(league)
     end
@@ -31,16 +35,14 @@ describe LeaguesController do
     it "assigns a new league as @league" do
       get :new, {}
       assigns(:league).should be_a_new(League)
-      assigns(:allSports).should be_a_kind_of(Array)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested league as @league" do
-      league = League.create! valid_attributes
+      league = FactoryGirl.create(:league)
       get :edit, {:id => league.to_param}
       assigns(:league).should eq(league)
-      assigns(:allSports).should be_a_kind_of(Array)
     end
   end
 
@@ -84,7 +86,7 @@ describe LeaguesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested league" do
-        league = League.create! valid_attributes
+        league = FactoryGirl.create(:league)
         # Assuming there are no other leagues in the database, this
         # specifies that the League created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -94,13 +96,13 @@ describe LeaguesController do
       end
 
       it "assigns the requested league as @league" do
-        league = League.create! valid_attributes
+        league = FactoryGirl.create(:league)
         put :update, {:id => league.to_param, :league => valid_attributes}
         assigns(:league).should eq(league)
       end
 
       it "redirects to the league" do
-        league = League.create! valid_attributes
+        league = FactoryGirl.create(:league)
         put :update, {:id => league.to_param, :league => valid_attributes}
         response.should redirect_to(league)
       end
@@ -108,7 +110,7 @@ describe LeaguesController do
 
     describe "with invalid params" do
       it "assigns the league as @league" do
-        league = League.create! valid_attributes
+        league = FactoryGirl.create(:league)
         # Trigger the behavior that occurs when invalid params are submitted
         League.any_instance.stub(:save).and_return(false)
         put :update, {:id => league.to_param, :league => {}}
@@ -116,7 +118,7 @@ describe LeaguesController do
       end
 
       it "re-renders the 'edit' template" do
-        league = League.create! valid_attributes
+        league = FactoryGirl.create(:league)
         # Trigger the behavior that occurs when invalid params are submitted
         League.any_instance.stub(:save).and_return(false)
         put :update, {:id => league.to_param, :league => {}}
@@ -127,14 +129,14 @@ describe LeaguesController do
 
   describe "DELETE destroy" do
     it "destroys the requested league" do
-      league = League.create! valid_attributes
+      league = FactoryGirl.create(:league)
       expect {
         delete :destroy, {:id => league.to_param}
       }.to change(League, :count).by(-1)
     end
 
     it "redirects to the leagues list" do
-      league = League.create! valid_attributes
+      league = FactoryGirl.create(:league)
       delete :destroy, {:id => league.to_param}
       response.should redirect_to(leagues_url)
     end
