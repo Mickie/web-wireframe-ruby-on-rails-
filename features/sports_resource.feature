@@ -21,15 +21,24 @@ Feature: Sports Resource
 			And I create a new sport
 		Then I should see the details of the new sport
 			And I should be able to edit it
-	
+			
 	Scenario: I can edit a sport as an admin
 		Given I sign in as admin
 		When I visit the edit sport page
 			And I edit the sport
 		Then the changes to the sport should be saved
+
+	Scenario: The name of a sport should be unique
+		Given I sign in as admin
+			And I have added 2 sports
+		When I visit the edit sport page
+			And I edit the sport with duplicate name
+		Then the changes to the sport should not be saved
+	
 		
 	Scenario: I can see all the sports as an admin
 		Given I sign in as admin
 			And I have added 3 sports
 		When I visit the sports page
 		Then I should see 3 sports
+

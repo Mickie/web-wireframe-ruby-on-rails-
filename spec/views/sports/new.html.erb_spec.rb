@@ -9,10 +9,11 @@ describe "sports/new" do
     render
 
     assert_select "form", :action => sports_path, :method => "post" do
+      assert_select "input#sport_name", :name => "sport[name]"
     end
 
     view.should render_template( partial: "_form" )
-    rendered.should have_selector('#sport_name')
+    rendered.should have_selector('#commit')
     
   end
 end

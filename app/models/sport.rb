@@ -1,3 +1,4 @@
 class Sport < ActiveRecord::Base
-  attr_accessible :name
+  has_many :leagues
+  attr_accessible :name, :leagues
 end

@@ -15,6 +15,7 @@ FanzoSite::Application.routes.draw do
 
   # only for admin users
   resources :sports
+  resources :leagues
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

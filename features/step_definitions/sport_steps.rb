@@ -1,15 +1,3 @@
-Before do
-  @new_sport = FactoryGirl.build(:sport)
-end
-
-When /^I create a new sport$/ do
-  fill_in "Name",    with: @new_sport.name
-  click_button "commit"
-end
-
-Then /^I should be able to edit it$/ do
-  page.should have_link('Edit')
-end
 
 When /^I edit the sport$/ do
   fill_in "Name",    with: "soccer"
@@ -22,22 +10,26 @@ Then /^the changes to the sport should be saved$/ do
   @edit_sport.name.should == "soccer"
 end
 
+When /^I edit the sport with duplicate name$/ do
+  theExistingSport = Sport.find_by_name("sport1")
+  fill_in "Name", with: "basketball"
+  click_button "commit"
+end
+
+When /^I create a new sport$/ do
+  fill_in "Name",    with: @new_sport.name
+  click_button "commit"
+end
+
+
+Then /^the changes to the sport should not be saved$/ do
+  Sport.find_by_name("cricket").should be_nil
+end
+
 Then /^I should see the details of the new sport$/ do
   page.should have_content(@new_sport.name)
 end
 
-Given /^I have added (\d+) sports$/ do |theNumberOfSports|
-  i = 0;
-  begin
-    FactoryGirl.create(:sport, name:"sport#{i}")
-    i += 1
-  end while i < theNumberOfSports.to_i
-end
-
-Then /^I should see (\d+) sports$/ do |theNumberOfSports|
-  i = 0;
-  begin
-    page.should have_content("sport#{i}")
-    i += 1
-  end while i < theNumberOfSports.to_i
+Then /^I should be able to associate a league with the sport$/ do
+  page.should have_selector("#leagues")
 end

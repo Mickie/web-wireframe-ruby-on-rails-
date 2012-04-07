@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :sport do
-    name 'football'
+    sequence(:name) {|n| "sport#{n}" }
   end
 end

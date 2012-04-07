@@ -9,6 +9,6 @@ describe Sport do
   subject { @sport }
   
   it { should respond_to(:name) }
-
+  it { should respond_to(:leagues) }
 
 end
