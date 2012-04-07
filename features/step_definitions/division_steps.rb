@@ -7,7 +7,7 @@ end
 
 When /^I create a new division$/ do 
   fill_in "Name",    with: @new_division.name
-  select @edit_conference.name, from: 'division[conference_id]'
+  select @edit_league.name, from: 'division[league_id]'
   click_button "commit"
 end
 
@@ -22,5 +22,5 @@ Then /^I should see the details of the new division$/ do
 end
 
 Then /^I should be able to associate a sport with the division$/ do
-  page.should have_selector("#division_conference_id")
+  page.should have_selector("#division_league_id")
 end

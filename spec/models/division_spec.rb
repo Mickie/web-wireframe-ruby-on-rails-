@@ -8,5 +8,5 @@ describe Division do
   subject { @division }
   
   it { should respond_to(:name) }
-  it { should respond_to(:conference) }
+  it { should respond_to(:league) }
 end

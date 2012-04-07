@@ -9,10 +9,10 @@
     <th></th>
   </tr>
 
-<% @conferences.each do |conference| %>
+<% @conferences.each do |conference| %> 
   <tr>
     <td><%= conference.name %></td>
-    <td><%= conference.league_id %></td>
+    <td><%= conference.league.name %></td>
     <td><%= link_to 'Show', conference %></td>
     <td><%= link_to 'Edit', edit_conference_path(conference) %></td>
     <td><%= link_to 'Destroy', conference, confirm: 'Are you sure?', method: :delete %></td>

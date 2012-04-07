@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :division do
     sequence(:name) {|n| "division#{n}" }
-    conference { FactoryGirl.create(:conference) }
+    league { FactoryGirl.create(:league) }
   end
 end

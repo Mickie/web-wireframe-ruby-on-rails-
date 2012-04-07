@@ -17,8 +17,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :conference %><br />
-    <%= f.select(:conference_id, options_for_select(Conference.all.collect {|p| [ p.name, p.id ] },  "Select Conference")) %>
+    <%= f.label :league %><br />
+    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] },  "Select League")) %>
   </div>
   
   <div class="actions">

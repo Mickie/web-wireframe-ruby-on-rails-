@@ -14,7 +14,7 @@ describe "divisions/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => divisions_path(@division), :method => "post" do
       assert_select "input#division_name", :name => "division[name]"
-      assert_select "select#division_conference_id", :name => "division[conference_id]"
+      assert_select "select#division_league_id", :name => "division[league_id]"
     end
 
     rendered.should have_selector('#commit')

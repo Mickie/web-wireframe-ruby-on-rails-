@@ -4,7 +4,7 @@ describe DivisionsController do
   login_admin
   
   before do
-    @conference = FactoryGirl.create(:conference)
+    @league = FactoryGirl.create(:league)
   end
 
   it "should have current_admin" do
@@ -12,7 +12,7 @@ describe DivisionsController do
   end
   
   def valid_attributes
-    { name:"NFC West", conference_id: @conference.id }
+    { name:"NFC West", league_id: @league.id }
   end
 
   describe "GET index" do

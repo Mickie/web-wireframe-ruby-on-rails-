@@ -4,7 +4,7 @@ describe "divisions/show" do
   before(:each) do
     @division = assign(:division, stub_model(Division,
       :name => "Name",
-      :conference_id => 1
+      :league => FactoryGirl.create(:league)
     ))
   end
 
