@@ -1,6 +1,18 @@
+
 <div>
-  <%= @sport.name %>
+  <strong>Sport:</strong> 
+  <p><%= @sport.name %></p>
 </div>
 
+<div>
+  <strong>Leagues:</strong>
+  <ul>
+    <% @sport.leagues.each do |aLeague| %>
+      <li>
+        <%= aLeague.name %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 <%= link_to 'Edit', edit_sport_path(@sport) %> |
 <%= link_to 'Back', sports_path %>

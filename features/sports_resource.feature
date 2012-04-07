@@ -42,3 +42,9 @@ Feature: Sports Resource
 		When I visit the sports page
 		Then I should see 3 sports
 
+	Scenario: I can see all the leagues for a sport
+		Given I sign in as admin
+			And I have added 2 leagues
+			And I associate all leagues with a sport
+		When I visit the sport page
+		Then I should see 2 leagues

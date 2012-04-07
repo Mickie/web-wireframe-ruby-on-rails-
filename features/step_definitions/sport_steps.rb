@@ -21,6 +21,9 @@ When /^I create a new sport$/ do
   click_button "commit"
 end
 
+Given /^I associate all leagues with a sport$/ do 
+  @sport.leagues = League.all
+end
 
 Then /^the changes to the sport should not be saved$/ do
   Sport.find_by_name("cricket").should be_nil
