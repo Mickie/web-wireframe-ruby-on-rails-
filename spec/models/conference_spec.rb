@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe Conference do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @conference = FactoryGirl.create(:conference)
+  end
+
+  subject { @conference }
+  
+  it { should respond_to(:name) }
+  it { should respond_to(:league) }
 end
