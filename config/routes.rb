@@ -1,5 +1,7 @@
 FanzoSite::Application.routes.draw do
 
+  resources :divisions
+
   resources :conferences
 
   devise_for :admins, only: :sessions
