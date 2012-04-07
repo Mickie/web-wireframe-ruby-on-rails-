@@ -18,6 +18,7 @@ FanzoSite::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
 
   # only for admin users
+  resources :admins, only: :show
   resources :sports
   resources :leagues
   

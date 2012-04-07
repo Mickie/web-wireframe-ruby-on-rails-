@@ -7,7 +7,7 @@ describe "users/show" do
     ))
   end
 
-  it "should include the username" do
+  it "should include the email" do
     render
     rendered.should match(/joe@foo.com/)
   end
