@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @team.name %>
+</p>
+
+<p>
+  <b>Sport:</b>
+  <%= @team.sport %>
+</p>
+
+<p>
+  <b>League:</b>
+  <%= @team.league %>
+</p>
+
+<p>
+  <b>Division:</b>
+  <%= @team.division %>
+</p>
+
+<p>
+  <b>Conference:</b>
+  <%= @team.conference %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @team.location %>
+</p>
+
+<p>
+  <b>Twitter name:</b>
+  <%= @team.twitter_name %>
+</p>
+
+<p>
+  <b>Facebook page url:</b>
+  <%= @team.facebook_page_url %>
+</p>
+
+<p>
+  <b>Web url:</b>
+  <%= @team.web_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

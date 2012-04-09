@@ -1,5 +1,7 @@
 FanzoSite::Application.routes.draw do
 
+  resources :teams
+
   resources :divisions
 
   resources :conferences

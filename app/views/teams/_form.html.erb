@@ -1,0 +1,53 @@
+<%= form_for(@team) do |f| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% @team.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :sport %><br />
+    <%= f.text_field :sport %>
+  </div>
+  <div class="field">
+    <%= f.label :league %><br />
+    <%= f.text_field :league %>
+  </div>
+  <div class="field">
+    <%= f.label :division %><br />
+    <%= f.text_field :division %>
+  </div>
+  <div class="field">
+    <%= f.label :conference %><br />
+    <%= f.text_field :conference %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter_name %><br />
+    <%= f.text_field :twitter_name %>
+  </div>
+  <div class="field">
+    <%= f.label :facebook_page_url %><br />
+    <%= f.text_field :facebook_page_url %>
+  </div>
+  <div class="field">
+    <%= f.label :web_url %><br />
+    <%= f.text_field :web_url %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
