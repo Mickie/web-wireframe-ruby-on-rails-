@@ -9,4 +9,7 @@ describe League do
   
   it { should respond_to(:name) }
   it { should respond_to(:sport) }
+  it { should respond_to(:teams) }
+  it { should respond_to(:conferences) }
+  it { should respond_to(:divisions) }
 end

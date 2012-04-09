@@ -9,4 +9,6 @@ describe Division do
   
   it { should respond_to(:name) }
   it { should respond_to(:league) }
+  it { should respond_to(:teams) }
+  
 end
