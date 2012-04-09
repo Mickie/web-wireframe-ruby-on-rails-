@@ -8,6 +8,7 @@ gem 'devise', '>= 2.0.4'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'bootstrap-sass', '>= 2.0.0'
+gem 'geocoder'
 
 group :assets do
   gem 'sass-rails'

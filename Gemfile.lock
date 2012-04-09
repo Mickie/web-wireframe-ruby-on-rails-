@@ -79,6 +79,7 @@ GEM
       multipart-post (~> 1.1)
       rack (~> 1.1)
     ffi (1.0.11)
+    geocoder (1.1.1)
     gherkin (2.9.3)
       json (>= 1.4.6)
     growl (1.0.3)
@@ -228,6 +229,7 @@ DEPENDENCIES
   devise (>= 2.0.4)
   email_spec
   factory_girl_rails (>= 3.0)
+  geocoder
   growl (>= 1.0.3)
   guard-cucumber
   guard-rspec (>= 0.5.5)
