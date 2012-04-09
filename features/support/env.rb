@@ -10,6 +10,7 @@ require 'spork/ext/ruby-debug'
  
 Spork.prefork do
   require 'cucumber/rails'
+  require Rails.root.join('db','seeds')
 
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In

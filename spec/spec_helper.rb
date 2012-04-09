@@ -30,7 +30,8 @@ Spork.prefork do
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
-      DatabaseCleaner.clean_with(:truncation)
+      #DatabaseCleaner.clean_with(:truncation)
+      #require Rails.root.join('db','seeds')
     end
   
     config.before(:each) do

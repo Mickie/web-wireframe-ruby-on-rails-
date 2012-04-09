@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Country do
   before do
-    @country = FactoryGirl.create(:country)
+    @country = Country.all.first
   end
 
   subject { @country }

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe State do
   before do
-    @state = FactoryGirl.create(:state)
+    @state = State.find_by_abbreviation('WA')
   end
 
   subject { @state }

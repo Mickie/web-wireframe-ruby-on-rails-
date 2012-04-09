@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409172042) do
+ActiveRecord::Schema.define(:version => 20120409192456) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -58,6 +58,23 @@ ActiveRecord::Schema.define(:version => 20120409172042) do
   end
 
   add_index "leagues", ["name"], :name => "index_leagues_on_name", :unique => true
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address1",                   :null => false
+    t.string   "address2"
+    t.string   "city"
+    t.integer  "state_id",                   :null => false
+    t.string   "postal_code"
+    t.integer  "country_id",  :default => 1, :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "locations", ["country_id"], :name => "index_locations_on_country_id"
+  add_index "locations", ["state_id"], :name => "index_locations_on_state_id"
 
   create_table "sports", :force => true do |t|
     t.string   "name"

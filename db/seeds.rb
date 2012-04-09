@@ -6,7 +6,10 @@
 # ', name:'Cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 # ', name:'Mayor.create(name: 'Emanuel', city: cities.first)
 
+
   puts 'SETTING UP STATES'
+  State.delete_all
+  puts 'Deleted existing states'
   State.create([ 
   { name:'Alabama', abbreviation:'AL' },
   { name:'Alaska', abbreviation:'AK' },
@@ -77,7 +80,28 @@
   puts 'States created'
 
   puts 'SETTING UP COUNTRIES'
+  Country.delete_all
+  puts 'Deleted existing countries'
   Country.create([ 
+  { abbreviation:'US', name:'United States' },  
+  { abbreviation:'CA', name:'Canada' },
+  { abbreviation:'UK', name:'United Kingdom' },   
+  { abbreviation:'IE', name:'Ireland' },
+  { abbreviation:'AU', name:'Australia' }, 
+  { abbreviation:'NZ', name:'New Zealand' },   
+  { abbreviation:'ZA', name:'South Africa' },  
+
+  { abbreviation:'AT', name:'Austria' },  
+  { abbreviation:'BE', name:'Belgium' },
+  { abbreviation:'DK', name:'Denmark' },
+  { abbreviation:'FR', name:'France' },
+  { abbreviation:'DE', name:'Germany' },
+  { abbreviation:'GR', name:'Greece' },
+  { abbreviation:'IT', name:'Italy' },
+  { abbreviation:'MX', name:'Mexico' },
+  { abbreviation:'NL', name:'Netherlands' },   
+  { abbreviation:'ES', name:'Spain' },   
+    
   { abbreviation:'AF', name:'Afghanistan' },   
   { abbreviation:'AL', name:'Albania' },   
   { abbreviation:'DZ', name:'Algeria' },
@@ -90,15 +114,12 @@
   { abbreviation:'AR', name:'Argentina' },   
   { abbreviation:'AM', name:'Armenia' },
   { abbreviation:'AW', name:'Aruba' }, 
-  { abbreviation:'AU', name:'Australia' }, 
-  { abbreviation:'AT', name:'Austria' },  
   { abbreviation:'AZ', name:'Azerbaijan' },
   { abbreviation:'BS', name:'Bahamas' },  
   { abbreviation:'BH', name:'Bahrain' }, 
   { abbreviation:'BD', name:'Bangladesh' },
   { abbreviation:'BB', name:'Barbados' }, 
   { abbreviation:'BY', name:'Belarus' }, 
-  { abbreviation:'BE', name:'Belgium' },
   { abbreviation:'BZ', name:'Belize' },
   { abbreviation:'BJ', name:'Benin' },
   { abbreviation:'BM', name:'Bermuda' },
@@ -115,7 +136,6 @@
   { abbreviation:'BI', name:'Burundi' },   
   { abbreviation:'KH', name:'Cambodia' }, 
   { abbreviation:'CM', name:'Cameroon' },
-  { abbreviation:'CA', name:'Canada' },
   { abbreviation:'CV', name:'Cape Verde' },
   { abbreviation:'KY', name:'Cayman Islands' },
   { abbreviation:'CF', name:'Central African Republic' },
@@ -134,7 +154,6 @@
   { abbreviation:'CU', name:'Cuba' },
   { abbreviation:'CY', name:'Cyprus' },
   { abbreviation:'CZ', name:'Czech Republic' },
-  { abbreviation:'DK', name:'Denmark' },
   { abbreviation:'DJ', name:'Djibouti' },
   { abbreviation:'DM', name:'Dominica' },
   { abbreviation:'DO', name:'Dominican Republic' },
@@ -150,7 +169,6 @@
   { abbreviation:'FO', name:'Faroe Islands' }, 
   { abbreviation:'FJ', name:'Fiji' },
   { abbreviation:'FI', name:'Finland' },
-  { abbreviation:'FR', name:'France' },
   { abbreviation:'FX', name:'France, Metropolitan' },
   { abbreviation:'GF', name:'French Guiana' },
   { abbreviation:'PF', name:'French Polynesia' },
@@ -158,10 +176,8 @@
   { abbreviation:'GA', name:'Gabon' },
   { abbreviation:'GM', name:'Gambia' },
   { abbreviation:'GE', name:'Georgia' },
-  { abbreviation:'DE', name:'Germany' },
   { abbreviation:'GH', name:'Ghana' },  
   { abbreviation:'GI', name:'Gibraltar' },
-  { abbreviation:'GR', name:'Greece' },
   { abbreviation:'GL', name:'Greenland' },
   { abbreviation:'GD', name:'Grenada' }, 
   { abbreviation:'GP', name:'Guadeloupe' },
@@ -180,9 +196,7 @@
   { abbreviation:'ID', name:'Indonesia' },
   { abbreviation:'IR', name:'Iran' },
   { abbreviation:'IQ', name:'Iraq' },
-  { abbreviation:'IE', name:'Ireland' },
   { abbreviation:'IL', name:'Israel' },
-  { abbreviation:'IT', name:'Italy' },
   { abbreviation:'JM', name:'Jamaica' },
   { abbreviation:'JP', name:'Japan' },
   { abbreviation:'JO', name:'Jordan' }, 
@@ -214,8 +228,7 @@
   { abbreviation:'MQ', name:'Martinique' },   
   { abbreviation:'MR', name:'Mauritania' },  
   { abbreviation:'MU', name:'Mauritius' },  
-  { abbreviation:'YT', name:'Mayotte' },   
-  { abbreviation:'MX', name:'Mexico' },   
+  { abbreviation:'YT', name:'Mayotte' },
   { abbreviation:'FM', name:'Micronesia' },   
   { abbreviation:'MD', name:'Moldova' },   
   { abbreviation:'MC', name:'Monaco' },   
@@ -227,10 +240,8 @@
   { abbreviation:'NA', name:'Namibia' },  
   { abbreviation:'NR', name:'Nauru' },   
   { abbreviation:'NP', name:'Nepal' },  
-  { abbreviation:'NL', name:'Netherlands' },   
   { abbreviation:'AN', name:'Netherlands Antilles' },   
   { abbreviation:'NC', name:'New Caledonia' },   
-  { abbreviation:'NZ', name:'New Zealand' },   
   { abbreviation:'NI', name:'Nicaragua' },   
   { abbreviation:'NE', name:'Niger' },   
   { abbreviation:'NG', name:'Nigeria' },
@@ -270,9 +281,7 @@
   { abbreviation:'SI', name:'Slovenia' },   
   { abbreviation:'SB', name:'Solomon Islands' },   
   { abbreviation:'SO', name:'Somalia' },   
-  { abbreviation:'ZA', name:'South Africa' },  
   { abbreviation:'GS', name:'S. Georgia and S. Sandwich Isls.' },  
-  { abbreviation:'ES', name:'Spain' },   
   { abbreviation:'LK', name:'Sri Lanka' },   
   { abbreviation:'SH', name:'St. Helena' },   
   { abbreviation:'PM', name:'St. Pierre and Miquelon' },   
@@ -298,9 +307,7 @@
   { abbreviation:'TV', name:'Tuvalu' },   
   { abbreviation:'UG', name:'Uganda' },  
   { abbreviation:'UA', name:'Ukraine' },
-  { abbreviation:'AE', name:'United Arab Emirates' },   
-  { abbreviation:'UK', name:'United Kingdom' },   
-  { abbreviation:'US', name:'United States' },   
+  { abbreviation:'AE', name:'United Arab Emirates' },
   { abbreviation:'UM', name:'US Minor Outlying Islands' },
   { abbreviation:'UY', name:'Uruguay' },   
   { abbreviation:'UZ', name:'Uzbekistanv' },   
