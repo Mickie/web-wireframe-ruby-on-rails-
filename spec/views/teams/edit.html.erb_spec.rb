@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "teams/edit" do
   before(:each) do
-    @team = assign(:team, stub_model(Team,
+    theStub = stub_model(Team,
       :name => "Seahawks",
       :sport => nil,
       :league => nil,
@@ -12,7 +12,10 @@ describe "teams/edit" do
       :twitter_name => "@seahawks",
       :facebook_page_url => "http://facebook.com/seahawks",
       :web_url => "http://www.seahawks.com"
-    ))
+    )
+    theStub.build_location
+    
+    @team = assign(:team, theStub)
   end
 
   it "renders the edit team form" do
@@ -21,14 +24,21 @@ describe "teams/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => teams_path(@team), :method => "post" do
       assert_select "input#team_name", :name => "team[name]"
-      assert_select "input#team_sport", :name => "team[sport]"
-      assert_select "input#team_league", :name => "team[league]"
-      assert_select "input#team_division", :name => "team[division]"
-      assert_select "input#team_conference", :name => "team[conference]"
-      assert_select "input#team_location", :name => "team[location]"
       assert_select "input#team_twitter_name", :name => "team[twitter_name]"
       assert_select "input#team_facebook_page_url", :name => "team[facebook_page_url]"
       assert_select "input#team_web_url", :name => "team[web_url]"
+      assert_select "select#team_sport_id", :name => "team[sport_id]"
+      assert_select "select#team_league_id", :name => "team[league_id]"
+      assert_select "select#team_division_id", :name => "team[division_id]"
+      assert_select "select#team_conference_id", :name => "team[conference_id]"
+
+      assert_select "input#team_location_attributes_name", :name => "team[location_attributes][name]"
+      assert_select "input#team_location_attributes_address1", :name => "team[location_attributes][address1]"
+      assert_select "input#team_location_attributes_address2", :name => "team[location_attributes][address2]"
+      assert_select "input#team_location_attributes_city", :name => "team[location_attributes][city]"
+      assert_select "input#team_location_attributes_postal_code", :name => "team[location_attributes][postal_code]"
+      assert_select "select#team_location_attributes_state_id", :name => "team[location_attributes][state_id]"
+      assert_select "select#team_location_attributes_country_id", :name => "team[location_attributes][country_id]"
     end
   end
 end

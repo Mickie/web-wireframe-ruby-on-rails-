@@ -4,4 +4,6 @@ class Team < ActiveRecord::Base
   belongs_to :division
   belongs_to :conference
   belongs_to :location
+  
+  accepts_nested_attributes_for :location
 end

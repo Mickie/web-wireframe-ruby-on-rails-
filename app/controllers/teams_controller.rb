@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  before_filter :authenticate_admin!
+
   # GET /teams
   # GET /teams.json
   def index
@@ -25,7 +27,8 @@ class TeamsController < ApplicationController
   # GET /teams/new.json
   def new
     @team = Team.new
-
+    @team.build_location
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @team }

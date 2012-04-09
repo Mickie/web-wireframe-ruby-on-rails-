@@ -5,7 +5,6 @@ describe "leagues/new" do
     assign(:league, stub_model(League,
       :name => "NFL"
     ).as_new_record)
-    assign(:allSports, [stub_model(Sport, name:"football")])
   end
 
   it "renders new league form" do

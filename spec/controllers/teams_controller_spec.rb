@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe TeamsController do
+  login_admin
   
   before do
     @league = FactoryGirl.create(:league)
