@@ -2,14 +2,11 @@ FactoryGirl.define do
   
   factory :location do
     sequence(:name) {|n| "location#{n}" }
-    address1 '100 Main Street'
-    address2 'Suite 100'
-    city 'Tooltown'
+    address1 '12 Seahawks Way'
+    city 'Renton'
     state { State.find_by_abbreviation('WA')}
-    postal_code '98123'
+    postal_code '98056'
     country {Country.first}
-    latitude 100.0
-    longitude 100.0
   end
 
 end

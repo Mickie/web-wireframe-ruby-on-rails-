@@ -16,4 +16,9 @@ describe Team do
   it { should respond_to(:twitter_name) }
   it { should respond_to(:facebook_page_url) }
   it { should respond_to(:web_url) }
+
+  it "should have a latitude and longitude in its location" do
+    @team.location.latitude.should_not be_nil  
+    @team.location.longitude.should_not be_nil
+  end
 end
