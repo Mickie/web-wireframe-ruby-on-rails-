@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409205134) do
+ActiveRecord::Schema.define(:version => 20120410000425) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20120409205134) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "conferences", ["league_id"], :name => "index_conferences_on_league_id"
+
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.string   "abbreviation", :limit => 3
@@ -50,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20120409205134) do
     t.integer  "league_id",  :default => 1, :null => false
   end
 
+  add_index "divisions", ["league_id"], :name => "index_divisions_on_league_id"
+
   create_table "leagues", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -58,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20120409205134) do
   end
 
   add_index "leagues", ["name"], :name => "index_leagues_on_name", :unique => true
+  add_index "leagues", ["sport_id"], :name => "index_leagues_on_sport_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
