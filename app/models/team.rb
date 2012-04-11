@@ -1,10 +1,10 @@
 class Team < ActiveRecord::Base
-  belongs_to :sport
-  belongs_to :league
-  belongs_to :division
-  belongs_to :conference
+  belongs_to :sport, :inverse_of => :teams
+  belongs_to :league, :inverse_of => :teams
+  belongs_to :division, :inverse_of => :teams
+  belongs_to :conference, :inverse_of => :teams
+  belongs_to :affiliation, :inverse_of => :teams
   belongs_to :location
-  belongs_to :affiliation
   
   accepts_nested_attributes_for :location
 end

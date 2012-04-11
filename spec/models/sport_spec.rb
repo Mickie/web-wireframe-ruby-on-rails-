@@ -10,5 +10,6 @@ describe Sport do
   
   it { should respond_to(:name) }
   it { should respond_to(:leagues) }
+  it { should respond_to(:teams) }
 
 end
