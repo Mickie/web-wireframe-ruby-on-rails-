@@ -4,6 +4,8 @@ describe TeamsController do
   login_admin
   
   before do
+    mock_geocoding!
+
     @league = FactoryGirl.create(:league)
     @location = FactoryGirl.create(:location)
   end

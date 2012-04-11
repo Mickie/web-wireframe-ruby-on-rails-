@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "teams/index" do
   before(:each) do
+    mock_geocoding!
     @league = FactoryGirl.create(:league)
     @location = FactoryGirl.create(:location)
     assign(:teams, [

@@ -1,4 +1,6 @@
+
 Before do
+  @mock_geocoder
   @user = FactoryGirl.build(:user)
   @admin = FactoryGirl.build(:admin)
   @sport = FactoryGirl.create(:sport)
@@ -6,16 +8,19 @@ Before do
   @conference = FactoryGirl.create(:conference)
   @division = FactoryGirl.create(:division)
   @team = FactoryGirl.create(:team)
+  @affiliation = FactoryGirl.build(:affiliation)
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league)
   @new_conference = FactoryGirl.build(:conference)
   @new_division = FactoryGirl.build(:division)
   @new_team = FactoryGirl.build(:team)
+  @new_affiliation = FactoryGirl.build(:affiliation)
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)
   @edit_conference = FactoryGirl.create(:conference)
   @edit_division = FactoryGirl.create(:division)
   @edit_team = FactoryGirl.create(:team)
+  @edit_affiliation = FactoryGirl.create(:affiliation)
 end
 
 

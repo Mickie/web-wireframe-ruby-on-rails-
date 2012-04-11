@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Location do
   before do
+    mock_geocoding!
     @location = FactoryGirl.create(:location)
   end
 
@@ -23,6 +24,11 @@ describe Location do
   describe "one_line_address" do
   
     it "should return correctly formatted address" do
+      @location.one_line_address.should == "12 Seahawks Way, Renton, WA 98056"
+    end
+    
+    it "should handle empty string in address2" do
+      @location.address2 = ""
       @location.one_line_address.should == "12 Seahawks Way, Renton, WA 98056"
     end
     

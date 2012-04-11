@@ -1,0 +1,55 @@
+<%= form_for(@affiliation) do |f| %>
+  <% if @affiliation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@affiliation.errors.count, "error") %> prohibited this affiliation from being saved:</h2>
+
+      <ul>
+      <% @affiliation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter_name %><br />
+    <%= f.text_field :twitter_name %>
+  </div>
+  <div class="field">
+    <%= f.label :facebook_page_url %><br />
+    <%= f.text_field :facebook_page_url %>
+  </div>
+  <div class="field">
+    <%= f.label :web_url %><br />
+    <%= f.text_field :web_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.fields_for :location do |l|%>
+      <%= l.label :name %><br />
+      <%= l.text_field :name %>
+      <%= l.label :address1 %><br />
+      <%= l.text_field :address1 %>
+      <%= l.label :address2 %><br />
+      <%= l.text_field :address2 %>
+      <%= l.label :city %><br />
+      <%= l.text_field :city %>
+      <%= l.label :state %><br />
+      <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] } )) %>
+      <%= l.label :postal_code %><br />
+      <%= l.text_field :postal_code %>
+      <%= l.label :country %><br />
+      <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%end%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save", id:"commit" %>
+  </div>
+
+<% end %>

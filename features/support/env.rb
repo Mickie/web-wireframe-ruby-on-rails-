@@ -11,6 +11,7 @@ require 'spork/ext/ruby-debug'
 Spork.prefork do
   require 'cucumber/rails'
   require Rails.root.join('db','seeds')
+  require Rails.root.join('spec', 'support', 'mock_geocoder')
 
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
@@ -22,6 +23,11 @@ Spork.prefork do
 end
  
 Spork.each_run do
+  
+  Before('@mock_geocoder') do
+    mock_geocoding!
+  end
+  
   # By default, any exception happening in your Rails application will bubble up
   # to Cucumber so that your scenario will fail. This is a different from how 
   # your application behaves in the production environment, where an error page will 

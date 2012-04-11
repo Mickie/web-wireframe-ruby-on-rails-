@@ -6,7 +6,7 @@ class Location < ActiveRecord::Base
   after_validation :geocode, :if => :one_line_address_changed?
   
   def one_line_address
-    "#{address1}, #{address2}#{address2 ? ", " : ""}#{city}, #{state.abbreviation} #{postal_code}"
+    "#{address1}, #{address2}#{address2 && !address2.empty? ? ", " : ""}#{city}, #{state.abbreviation} #{postal_code}"
   end
   
   def one_line_address_changed?

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @affiliation.name %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @affiliation.location.one_line_address %>
+</p>
+
+<p>
+  <b>Twitter name:</b>
+  <%= @affiliation.twitter_name %>
+</p>
+
+<p>
+  <b>Facebook page url:</b>
+  <%= @affiliation.facebook_page_url %>
+</p>
+
+<p>
+  <b>Web url:</b>
+  <%= @affiliation.web_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_affiliation_path(@affiliation) %> |
+<%= link_to 'Back', affiliations_path %>

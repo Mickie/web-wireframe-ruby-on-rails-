@@ -1,0 +1,33 @@
+<h1>Listing affiliations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Twitter name</th>
+    <th>Facebook page url</th>
+    <th>Web url</th>
+    <th>City</th>
+    <th>State</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @affiliations.each do |affiliation| %>
+  <tr>
+    <td><%= affiliation.name %></td>
+    <td><%= affiliation.twitter_name %></td>
+    <td><%= affiliation.facebook_page_url %></td>
+    <td><%= affiliation.web_url %></td>
+    <td><%= affiliation.location.city %></td>
+    <td><%= affiliation.location.state.abbreviation %></td>
+    <td><%= link_to 'Show', affiliation %></td>
+    <td><%= link_to 'Edit', edit_affiliation_path(affiliation) %></td>
+    <td><%= link_to 'Destroy', affiliation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Affiliation', new_affiliation_path %>
