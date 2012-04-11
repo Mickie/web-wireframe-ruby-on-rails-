@@ -14,6 +14,7 @@ describe Team do
   it { should respond_to(:conference) }
   it { should respond_to(:division) }
   it { should respond_to(:location) }
+  it { should respond_to(:affiliation) }
   it { should respond_to(:twitter_name) }
   it { should respond_to(:facebook_page_url) }
   it { should respond_to(:web_url) }

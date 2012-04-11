@@ -7,27 +7,27 @@
 
 <p>
   <b>Sport:</b>
-  <%= @team.sport %>
+  <%= @team.sport.name %>
 </p>
 
 <p>
   <b>League:</b>
-  <%= @team.league %>
+  <%= @team.league.name %>
 </p>
 
 <p>
   <b>Division:</b>
-  <%= @team.division %>
+  <%= @team.division.name %>
 </p>
 
 <p>
   <b>Conference:</b>
-  <%= @team.conference %>
+  <%= @team.conference.name %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%= @team.location %>
+  <%= @team.location.name %>
 </p>
 
 <p>
@@ -45,6 +45,10 @@
   <%= @team.web_url %>
 </p>
 
+<p>
+  <b>Affiliation:</b>
+  <%= @team.affiliation.name %>
+</p>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

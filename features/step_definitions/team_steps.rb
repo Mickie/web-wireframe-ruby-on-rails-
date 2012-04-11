@@ -44,4 +44,5 @@ Then /^I should be able to associate other resources with the team$/ do
   page.should have_selector("#team_league_id")
   page.should have_selector("#team_conference_id")
   page.should have_selector("#team_division_id")
+  page.should have_selector("#team_affiliation_id")
 end

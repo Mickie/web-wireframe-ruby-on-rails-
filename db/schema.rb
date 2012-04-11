@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410161316) do
+ActiveRecord::Schema.define(:version => 20120411033729) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -120,8 +120,10 @@ ActiveRecord::Schema.define(:version => 20120410161316) do
     t.string   "web_url"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "affiliation_id"
   end
 
+  add_index "teams", ["affiliation_id"], :name => "index_teams_on_affiliation_id"
   add_index "teams", ["conference_id"], :name => "index_teams_on_conference_id"
   add_index "teams", ["division_id"], :name => "index_teams_on_division_id"
   add_index "teams", ["league_id"], :name => "index_teams_on_league_id"

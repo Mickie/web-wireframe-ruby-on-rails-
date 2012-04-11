@@ -9,6 +9,7 @@ describe "teams/new" do
       :division => nil,
       :conference => nil,
       :location => nil,
+      :affiliation => nil,
       :twitter_name => "MyString",
       :facebook_page_url => "MyString",
       :web_url => "MyString"
@@ -30,6 +31,7 @@ describe "teams/new" do
       assert_select "select#team_league_id", :name => "team[league_id]"
       assert_select "select#team_division_id", :name => "team[division_id]"
       assert_select "select#team_conference_id", :name => "team[conference_id]"
+      assert_select "select#team_affiliation_id", :name => "team[affiliation_id]"
 
       assert_select "input#team_location_attributes_name", :name => "team[location_attributes][name]"
       assert_select "input#team_location_attributes_address1", :name => "team[location_attributes][address1]"

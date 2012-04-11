@@ -49,6 +49,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :affiliation %><br />
+    <%= f.select(:affiliation_id, options_for_select(Affiliation.all.collect {|p| [ p.name, p.id ] } )) %>
+  </div>
+
+  <div class="field">
     <%= f.label :location %><br />
     <%= f.fields_for :location do |l|%>
       <%= l.label :name %><br />

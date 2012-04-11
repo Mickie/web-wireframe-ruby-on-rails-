@@ -41,6 +41,7 @@ Feature: Team Resource
 			And I have added 2 divisions
 			And I have added 2 conferences
 			And I have added 2 locations
+			And I have added 2 affiliations
 			And I have added 2 teams
 		When I visit the edit team page
 		Then I should be able to associate other resources with the team
