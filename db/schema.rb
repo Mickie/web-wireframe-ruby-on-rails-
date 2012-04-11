@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411033729) do
+ActiveRecord::Schema.define(:version => 20120411183944) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20120411033729) do
     t.integer  "sport_id",   :null => false
   end
 
-  add_index "leagues", ["name"], :name => "index_leagues_on_name", :unique => true
   add_index "leagues", ["sport_id"], :name => "index_leagues_on_sport_id"
 
   create_table "locations", :force => true do |t|
