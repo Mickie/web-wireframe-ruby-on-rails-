@@ -1,0 +1,19 @@
+<div class="field">
+  <%= f.label :location %><br />
+  <%= f.fields_for :location do |l|%>
+    <%= l.label :name %><br />
+    <%= l.text_field :name %>
+    <%= l.label :address1 %><br />
+    <%= l.text_field :address1 %>
+    <%= l.label :address2 %><br />
+    <%= l.text_field :address2 %>
+    <%= l.label :city %><br />
+    <%= l.text_field :city %>
+    <%= l.label :state %><br />
+    <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= l.label :postal_code %><br />
+    <%= l.text_field :postal_code %>
+    <%= l.label :country %><br />
+    <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] } )) %>
+  <%end%>
+</div>
