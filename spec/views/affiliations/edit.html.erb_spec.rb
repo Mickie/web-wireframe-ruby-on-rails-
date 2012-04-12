@@ -5,11 +5,10 @@ describe "affiliations/edit" do
     theStub = stub_model(Affiliation,
       :name => "MyString",
       :location => nil,
-      :twitter_name => "MyString",
-      :facebook_page_url => "MyString",
-      :web_url => "MyString"
+      :social_info => nil
     )
     theStub.build_location
+    theStub.build_social_info
     @affiliation = assign(:affiliation, theStub)
   end
 
@@ -19,9 +18,10 @@ describe "affiliations/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => affiliations_path(@affiliation), :method => "post" do
       assert_select "input#affiliation_name", :name => "affiliation[name]"
-      assert_select "input#affiliation_twitter_name", :name => "affiliation[twitter_name]"
-      assert_select "input#affiliation_facebook_page_url", :name => "affiliation[facebook_page_url]"
-      assert_select "input#affiliation_web_url", :name => "affiliation[web_url]"
+      
+      assert_select "input#affiliation_social_info_attributes_twitter_name", :name => "affiliation[social_info_attributes][twitter_name]"
+      assert_select "input#affiliation_social_info_attributes_facebook_page_url", :name => "affiliation[social_info_attributes][facebook_page_url]"
+      assert_select "input#affiliation_social_info_attributes_web_url", :name => "affiliation[social_info_attributes][web_url]"
       
       assert_select "input#affiliation_location_attributes_name", :name => "affiliation[location_attributes][name]"
       assert_select "input#affiliation_location_attributes_address1", :name => "affiliation[location_attributes][address1]"

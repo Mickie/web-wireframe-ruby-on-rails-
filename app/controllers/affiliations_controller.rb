@@ -28,6 +28,7 @@ class AffiliationsController < ApplicationController
   def new
     @affiliation = Affiliation.new
     @affiliation.build_location
+    @affiliation.build_social_info
     
     respond_to do |format|
       format.html # new.html.erb

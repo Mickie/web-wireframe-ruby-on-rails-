@@ -9,18 +9,21 @@ Before do
   @division = FactoryGirl.create(:division)
   @team = FactoryGirl.create(:team)
   @affiliation = FactoryGirl.build(:affiliation)
+  @venue_type = FactoryGirl.build(:venue_type)
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league)
   @new_conference = FactoryGirl.build(:conference)
   @new_division = FactoryGirl.build(:division)
   @new_team = FactoryGirl.build(:team)
   @new_affiliation = FactoryGirl.build(:affiliation)
+  @new_venue_type = FactoryGirl.build(:venue_type)
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)
   @edit_conference = FactoryGirl.create(:conference)
   @edit_division = FactoryGirl.create(:division)
   @edit_team = FactoryGirl.create(:team)
   @edit_affiliation = FactoryGirl.create(:affiliation)
+  @edit_venue_type = FactoryGirl.create(:venue_type)
 end
 
 
@@ -59,15 +62,16 @@ Then /^I should see an alert flash$/ do
   page.should have_selector(".alert-alert")
 end
 
-Given /^I have added (\d+) (\w+)s$/ do |aNumberOfObjects, anObjectType|
+Given /^I have added (\d+) ([\w ]+)s$/ do |aNumberOfObjects, anObjectType|
   i = 0;
+  theObjectType = anObjectType.downcase.gsub(' ', '_')
   begin
-    FactoryGirl.create(eval(":#{anObjectType}"), name:"#{anObjectType}#{i}")
+    FactoryGirl.create(eval(":#{theObjectType}"), name:"#{anObjectType}#{i}")
     i += 1
   end while i < aNumberOfObjects.to_i
 end
 
-Then /^I should see (\d+) (\w+)s$/ do |aNumberOfObjects, anObjectType|
+Then /^I should see (\d+) ([\w ]+)s$/ do |aNumberOfObjects, anObjectType|
   i = 0;
   begin
     page.should have_content("#{anObjectType}#{i}")

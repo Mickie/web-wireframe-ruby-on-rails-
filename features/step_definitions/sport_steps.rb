@@ -11,8 +11,8 @@ Then /^the changes to the sport should be saved$/ do
 end
 
 When /^I edit the sport with duplicate name$/ do
-  theExistingSport = Sport.find_by_name("sport1")
-  fill_in "Name", with: "basketball"
+  theExistingSport = Sport.last
+  fill_in "Name", with: theExistingSport.name
   click_button "commit"
 end
 
@@ -26,7 +26,7 @@ Given /^I associate all leagues with a sport$/ do
 end
 
 Then /^the changes to the sport should not be saved$/ do
-  Sport.find_by_name("cricket").should be_nil
+  Sport.where(name: @edit_sport.name ).count.should == 1
 end
 
 Then /^I should see the details of the new sport$/ do

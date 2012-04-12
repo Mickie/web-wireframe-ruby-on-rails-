@@ -8,10 +8,11 @@ describe AffiliationsController do
     mock_geocoding!
 
     @location = FactoryGirl.create(:location)
+    @social_info = FactoryGirl.create(:social_info)
   end
 
   def valid_attributes
-    { name:'University of Notre Dame', location_id:@location.id}
+    { name:'University of Notre Dame', location_id:@location.id, social_info_id: @social_info.id }
   end
   
   describe "GET index" do

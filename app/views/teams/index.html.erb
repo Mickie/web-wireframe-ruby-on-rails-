@@ -23,9 +23,9 @@
     <td><%= team.league.name %></td>
     <td><%= team.location.city %></td>
     <td><%= team.location.state.name %></td>
-    <td><%= team.twitter_name %></td>
-    <td><%= team.facebook_page_url %></td>
-    <td><%= team.web_url %></td>
+    <td><%= team.social_info.twitter_name %></td>
+    <td><%= team.social_info.facebook_page_url %></td>
+    <td><%= team.social_info.web_url %></td>
     <td><%= link_to 'Show', team %></td>
     <td><%= link_to 'Edit', edit_team_path(team) %></td>
     <td><%= link_to 'Destroy', team, confirm: 'Are you sure?', method: :delete %></td>

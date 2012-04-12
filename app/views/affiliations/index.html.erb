@@ -16,9 +16,9 @@
 <% @affiliations.each do |affiliation| %>
   <tr>
     <td><%= affiliation.name %></td>
-    <td><%= affiliation.twitter_name %></td>
-    <td><%= affiliation.facebook_page_url %></td>
-    <td><%= affiliation.web_url %></td>
+    <td><%= affiliation.social_info.twitter_name %></td>
+    <td><%= affiliation.social_info.facebook_page_url %></td>
+    <td><%= affiliation.social_info.web_url %></td>
     <td><%= affiliation.location.city %></td>
     <td><%= affiliation.location.state.abbreviation %></td>
     <td><%= link_to 'Show', affiliation %></td>
@@ -26,7 +26,7 @@
     <td><%= link_to 'Destroy', affiliation, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
-</table>
+</table> 
 
 <br />
 

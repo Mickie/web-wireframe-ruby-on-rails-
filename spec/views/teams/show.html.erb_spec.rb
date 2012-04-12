@@ -9,6 +9,7 @@ describe "teams/show" do
     @conference = FactoryGirl.build(:conference)
     @division = FactoryGirl.build(:division)
     @affiliation = FactoryGirl.build(:affiliation)
+    @social_info = FactoryGirl.build(:social_info)
     theStub = stub_model(Team,
       :name => "Name",
       :sport => @sport,
@@ -16,10 +17,8 @@ describe "teams/show" do
       :division => @division,
       :conference => @conference,
       :location => @location,
-      :affiliation => @affiliation ,
-      :twitter_name => "Twitter Name",
-      :facebook_page_url => "Facebook Page Url",
-      :web_url => "Web Url"
+      :affiliation => @affiliation,
+      :social_info => @social_info
     )
     @team = assign(:team, theStub)
   end
@@ -33,9 +32,9 @@ describe "teams/show" do
     rendered.should match(/#{@division.name}/)
     rendered.should match(/#{@conference.name}/)
     rendered.should match(/#{@location.name}/)
-    rendered.should match(/Twitter Name/)
-    rendered.should match(/Facebook Page Url/)
-    rendered.should match(/Web Url/)
+    rendered.should match(/#{@social_info.twitter_name}/)
+    rendered.should match(/#{@social_info.facebook_page_url}/)
+    rendered.should match(/#{@social_info.web_url}/)
     rendered.should match(/#{@affiliation.name}/)
   end
 end

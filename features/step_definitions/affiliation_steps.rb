@@ -7,9 +7,10 @@ end
 
 When /^I create a new affiliation$/ do 
   fill_in "affiliation_name",    with: @new_affiliation.name
-  fill_in "Twitter name",    with: @new_affiliation.twitter_name
-  fill_in "Facebook page url",    with: @new_affiliation.facebook_page_url
-  fill_in "Web url",    with: @new_affiliation.web_url
+
+  fill_in "affiliation_social_info_attributes_twitter_name",    with: @new_affiliation.social_info.twitter_name
+  fill_in "affiliation_social_info_attributes_facebook_page_url",    with: @new_affiliation.social_info.facebook_page_url
+  fill_in "affiliation_social_info_attributes_web_url",    with: @new_affiliation.social_info.web_url
 
   fill_in "affiliation_location_attributes_name", with: @new_affiliation.location.name
   fill_in "affiliation_location_attributes_address1", with: @new_affiliation.location.address1
@@ -30,7 +31,7 @@ end
 
 Then /^I should see the details of the new affiliation$/ do
   page.should have_content(@new_affiliation.name)
-  page.should have_content(@new_affiliation.twitter_name)
-  page.should have_content(@new_affiliation.facebook_page_url)
-  page.should have_content(@new_affiliation.web_url)
+  page.should have_content(@new_affiliation.social_info.twitter_name)
+  page.should have_content(@new_affiliation.social_info.facebook_page_url)
+  page.should have_content(@new_affiliation.social_info.web_url)
 end

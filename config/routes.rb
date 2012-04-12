@@ -1,6 +1,8 @@
 FanzoSite::Application.routes.draw do
 
 
+  resources :venue_types
+
   resources :affiliations
 
   devise_for :admins, only: :sessions

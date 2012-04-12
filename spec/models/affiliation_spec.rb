@@ -10,9 +10,7 @@ describe Affiliation do
   
   it { should respond_to(:name) }
   it { should respond_to(:location) }
-  it { should respond_to(:twitter_name) }
-  it { should respond_to(:facebook_page_url) }
-  it { should respond_to(:web_url) }
+  it { should respond_to(:social_info) }
   it { should respond_to(:teams) }
 
   it "should have a latitude and longitude in its location" do

@@ -5,6 +5,7 @@ describe "teams/index" do
     mock_geocoding!
     @league = FactoryGirl.create(:league)
     @location = FactoryGirl.create(:location)
+    @social_info = FactoryGirl.create(:social_info)
     assign(:teams, [
       stub_model(Team,
         :name => "Name",
@@ -13,9 +14,7 @@ describe "teams/index" do
         :division => nil,
         :conference => nil,
         :location => @location,
-        :twitter_name => "Twitter Name",
-        :facebook_page_url => "Facebook Page Url",
-        :web_url => "Web Url"
+        :social_info => @social_info
       ),
       stub_model(Team,
         :name => "Name",
@@ -24,9 +23,7 @@ describe "teams/index" do
         :division => nil,
         :conference => nil,
         :location => @location,
-        :twitter_name => "Twitter Name",
-        :facebook_page_url => "Facebook Page Url",
-        :web_url => "Web Url"
+        :social_info => @social_info
       )
     ])
   end
@@ -38,8 +35,8 @@ describe "teams/index" do
     assert_select "tr>td", :text => @league.sport.name, :count => 2
     assert_select "tr>td", :text => @location.city, :count => 2
     assert_select "tr>td", :text => @location.state.name, :count => 2
-    assert_select "tr>td", :text => "Twitter Name".to_s, :count => 2
-    assert_select "tr>td", :text => "Facebook Page Url".to_s, :count => 2
-    assert_select "tr>td", :text => "Web Url".to_s, :count => 2
+    assert_select "tr>td", :text => @social_info.twitter_name, :count => 2
+    assert_select "tr>td", :text => @social_info.facebook_page_url, :count => 2
+    assert_select "tr>td", :text => @social_info.web_url, :count => 2
   end
 end

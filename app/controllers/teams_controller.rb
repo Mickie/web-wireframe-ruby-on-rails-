@@ -28,6 +28,7 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @team.build_location
+    @team.build_social_info
     
     respond_to do |format|
       format.html # new.html.erb

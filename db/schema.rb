@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411183944) do
+ActiveRecord::Schema.define(:version => 20120412174637) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -32,11 +32,9 @@ ActiveRecord::Schema.define(:version => 20120411183944) do
   create_table "affiliations", :force => true do |t|
     t.string   "name"
     t.integer  "location_id"
-    t.string   "twitter_name"
-    t.string   "facebook_page_url"
-    t.string   "web_url"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "social_info_id"
   end
 
   add_index "affiliations", ["location_id"], :name => "index_affiliations_on_location_id"
@@ -92,6 +90,14 @@ ActiveRecord::Schema.define(:version => 20120411183944) do
   add_index "locations", ["country_id"], :name => "index_locations_on_country_id"
   add_index "locations", ["state_id"], :name => "index_locations_on_state_id"
 
+  create_table "social_infos", :force => true do |t|
+    t.string   "twitter_name"
+    t.string   "facebook_page_url"
+    t.string   "web_url"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "sports", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -108,18 +114,16 @@ ActiveRecord::Schema.define(:version => 20120411183944) do
   end
 
   create_table "teams", :force => true do |t|
-    t.string   "name",              :null => false
-    t.integer  "sport_id",          :null => false
-    t.integer  "league_id",         :null => false
+    t.string   "name",           :null => false
+    t.integer  "sport_id",       :null => false
+    t.integer  "league_id",      :null => false
     t.integer  "division_id"
     t.integer  "conference_id"
-    t.integer  "location_id",       :null => false
-    t.string   "twitter_name"
-    t.string   "facebook_page_url"
-    t.string   "web_url"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "location_id",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "affiliation_id"
+    t.integer  "social_info_id"
   end
 
   add_index "teams", ["affiliation_id"], :name => "index_teams_on_affiliation_id"
@@ -154,5 +158,11 @@ ActiveRecord::Schema.define(:version => 20120411183944) do
   add_index "users", ["facebook_user_id"], :name => "index_users_on_facebook_user_id", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["twitter_user_token"], :name => "index_users_on_twitter_user_token", :unique => true
+
+  create_table "venue_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

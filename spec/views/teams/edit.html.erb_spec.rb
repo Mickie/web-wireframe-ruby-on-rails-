@@ -10,12 +10,11 @@ describe "teams/edit" do
       :conference => nil,
       :location => nil,
       :affiliation => nil, 
-      :twitter_name => "@seahawks",
-      :facebook_page_url => "http://facebook.com/seahawks",
-      :web_url => "http://www.seahawks.com"
+      :social_info => nil
     )
     theStub.build_location
-    
+    theStub.build_social_info
+      
     @team = assign(:team, theStub)
   end
 
@@ -25,9 +24,10 @@ describe "teams/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => teams_path(@team), :method => "post" do
       assert_select "input#team_name", :name => "team[name]"
-      assert_select "input#team_twitter_name", :name => "team[twitter_name]"
-      assert_select "input#team_facebook_page_url", :name => "team[facebook_page_url]"
-      assert_select "input#team_web_url", :name => "team[web_url]"
+      assert_select "input#team_social_info_attributes_twitter_name", :name => "team[social_info_attributes][twitter_name]"
+      assert_select "input#team_social_info_attributes_facebook_page_url", :name => "team[social_info_attributes][facebook_page_url]"
+      assert_select "input#team_social_info_attributes_web_url", :name => "team[social_info_attributes][web_url]"
+
       assert_select "select#team_sport_id", :name => "team[sport_id]"
       assert_select "select#team_league_id", :name => "team[league_id]"
       assert_select "select#team_division_id", :name => "team[division_id]"

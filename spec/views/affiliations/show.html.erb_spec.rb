@@ -4,12 +4,11 @@ describe "affiliations/show" do
   before(:each) do
     mock_geocoding!
     @location = FactoryGirl.create(:location)
+    @social_info = FactoryGirl.create(:social_info)
     @affiliation = assign(:affiliation, stub_model(Affiliation,
       :name => "Name",
       :location => @location,
-      :twitter_name => "Twitter Name",
-      :facebook_page_url => "Facebook Page Url",
-      :web_url => "Web Url"
+      :social_info => @social_info
     ))
   end
 
@@ -18,8 +17,8 @@ describe "affiliations/show" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
     rendered.should match(//)
-    rendered.should match(/Twitter Name/)
-    rendered.should match(/Facebook Page Url/)
-    rendered.should match(/Web Url/)
+    rendered.should match(/#{@social_info.twitter_name}/)
+    rendered.should match(/#{@social_info.facebook_page_url}/)
+    rendered.should match(/#{@social_info.web_url}/)
   end
 end

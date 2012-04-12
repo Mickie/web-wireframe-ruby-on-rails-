@@ -7,13 +7,15 @@ end
 
 When /^I create a new team$/ do 
   fill_in "team_name",    with: @new_team.name
-  fill_in "Twitter name",    with: @new_team.twitter_name
-  fill_in "Facebook page url",    with: @new_team.facebook_page_url
-  fill_in "Web url",    with: @new_team.web_url
   select @edit_sport.name, from: 'team[sport_id]'
   select @edit_league.name, from: 'team[league_id]'
   select @edit_conference.name, from: 'team[conference_id]'
   select @edit_division.name, from: 'team[division_id]'
+
+  fill_in "team_social_info_attributes_twitter_name",    with: @new_team.social_info.twitter_name
+  fill_in "team_social_info_attributes_facebook_page_url",    with: @new_team.social_info.facebook_page_url
+  fill_in "team_social_info_attributes_web_url",    with: @new_team.social_info.web_url
+
 
   fill_in "team_location_attributes_name", with: @new_team.location.name
   fill_in "team_location_attributes_address1", with: @new_team.location.address1
@@ -34,9 +36,9 @@ end
 
 Then /^I should see the details of the new team$/ do
   page.should have_content(@new_team.name)
-  page.should have_content(@new_team.twitter_name)
-  page.should have_content(@new_team.facebook_page_url)
-  page.should have_content(@new_team.web_url)
+  page.should have_content(@new_team.social_info.twitter_name)
+  page.should have_content(@new_team.social_info.facebook_page_url)
+  page.should have_content(@new_team.social_info.web_url)
 end
 
 Then /^I should be able to associate other resources with the team$/ do
