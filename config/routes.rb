@@ -1,6 +1,8 @@
 FanzoSite::Application.routes.draw do
 
 
+  resources :venues
+
   resources :venue_types
 
   resources :affiliations

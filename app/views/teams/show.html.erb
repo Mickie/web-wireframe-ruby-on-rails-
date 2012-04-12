@@ -47,7 +47,11 @@
 
 <p>
   <b>Affiliation:</b>
-  <%= @team.affiliation.name %>
+  <% if @team.affiliation %>
+    <%= @team.affiliation.name %>
+  <% else %>
+    None
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |

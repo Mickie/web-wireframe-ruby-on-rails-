@@ -9,6 +9,6 @@ describe VenueType do
   subject { @venue_type }
   
   it { should respond_to(:name) }
-#  it { should respond_to(:venues) }
+  it { should respond_to(:venues) }
 
 end

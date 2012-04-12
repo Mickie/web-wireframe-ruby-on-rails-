@@ -35,16 +35,8 @@ Feature: VenueTypes Resource
 			And I edit the venue type with duplicate name
 		Then the changes to the venue type should not be saved
 	
-		
 	Scenario: I can see all the venue types as an admin
 		Given I sign in as admin
 			And I have added 3 venue types
 		When I visit the venue types page
 		Then I should see 3 venue types
-
-#	Scenario: I can see all the venues for a venue type
-#		Given I sign in as admin
-#			And I have added 2 venues
-#			And I associate all venues with a venue type
-#		When I visit the venue type page
-#		Then I should see 2 venues

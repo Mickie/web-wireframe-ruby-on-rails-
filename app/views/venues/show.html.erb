@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @venue.name %>
+</p>
+
+<p>
+  <b>Venue type:</b>
+  <%= @venue.venue_type.name %>
+</p>
+
+<b>Social info:</b>
+<p>
+  <b>Twitter:</b>
+  <%= @venue.social_info.twitter_name %><br />
+  <b>Facebook:</b>
+  <%= @venue.social_info.facebook_page_url %><br />
+  <b>Web:</b>
+  <%= @venue.social_info.web_url %><br />
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @venue.location.one_line_address %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_venue_path(@venue) %> |
+<%= link_to 'Back', venues_path %>
