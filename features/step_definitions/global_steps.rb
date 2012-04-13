@@ -1,6 +1,7 @@
 
 Before do
   @mock_geocoder
+  
   @user = FactoryGirl.build(:user)
   @admin = FactoryGirl.build(:admin)
   @sport = FactoryGirl.create(:sport)
@@ -11,6 +12,8 @@ Before do
   @affiliation = FactoryGirl.build(:affiliation)
   @venue_type = FactoryGirl.build(:venue_type)
   @venue = FactoryGirl.build(:venue)
+  @event = FactoryGirl.build(:event)
+
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league)
   @new_conference = FactoryGirl.build(:conference)
@@ -19,6 +22,8 @@ Before do
   @new_affiliation = FactoryGirl.build(:affiliation)
   @new_venue_type = FactoryGirl.build(:venue_type)
   @new_venue = FactoryGirl.build(:venue)
+  @new_event = FactoryGirl.build(:event)
+
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)
   @edit_conference = FactoryGirl.create(:conference)
@@ -27,6 +32,7 @@ Before do
   @edit_affiliation = FactoryGirl.create(:affiliation)
   @edit_venue_type = FactoryGirl.create(:venue_type)
   @edit_venue = FactoryGirl.create(:venue)
+  @edit_event = FactoryGirl.create(:event)
 end
 
 

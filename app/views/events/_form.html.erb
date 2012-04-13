@@ -1,0 +1,43 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_team %><br />
+    <%= f.select(:home_team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @event.home_team_id )) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :visiting_team %><br />
+    <%= f.select(:visiting_team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @event.visiting_team_id )) %>
+  </div>
+  <div class="field">
+    <%= f.label :event_date %><br />
+    <%= f.date_select :event_date %>
+  </div>
+  <div class="field">
+    <%= f.label :event_time %><br />
+    <%= f.time_select :event_time %>
+  </div>
+
+  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @event.location } %>
+
+  <div class="actions">
+    <%= f.submit "Save", id:"commit" %>
+  </div>
+
+<% end %>
