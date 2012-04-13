@@ -20,30 +20,30 @@
   
   <div class="field">
     <%= f.label :sport %><br />
-    <%= f.select(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= f.select(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] }, @team.sport_id )) %>
   </div>
 
   <div class="field">
     <%= f.label :league %><br />
-    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] }, @team.league_id )) %>
   </div>
   
   <div class="field">
     <%= f.label :division %><br />
-    <%= f.select(:division_id, options_for_select(Division.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= f.select(:division_id, options_for_select(Division.all.collect {|p| [ p.name, p.id ] }, @team.division_id )) %>
   </div>
   
   <div class="field">
     <%= f.label :conference %><br />
-    <%= f.select(:conference_id, options_for_select(Conference.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= f.select(:conference_id, options_for_select(Conference.all.collect {|p| [ p.name, p.id ] }, @team.conference_id )) %>
   </div>
 
   <div class="field">
     <%= f.label :affiliation %><br />
-    <%= f.select(:affiliation_id, options_for_select(Affiliation.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= f.select(:affiliation_id, options_for_select(Affiliation.all.collect {|p| [ p.name, p.id ] }, @team.affiliation_id )) %>
   </div>
 
-  <%= render :partial => 'partials/location', :locals => { :f => f } %>
+  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @team.location } %>
 
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

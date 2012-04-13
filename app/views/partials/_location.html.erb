@@ -10,10 +10,10 @@
     <%= l.label :city %><br />
     <%= l.text_field :city %>
     <%= l.label :state %><br />
-    <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] }, location.state_id )) %>
     <%= l.label :postal_code %><br />
     <%= l.text_field :postal_code %>
     <%= l.label :country %><br />
-    <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] }, location.country_id )) %>
   <%end%>
 </div>

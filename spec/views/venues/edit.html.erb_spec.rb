@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe "venues/edit" do
   before(:each) do
+    @venue_type = FactoryGirl.create(:venue_type)
     theStub = stub_model(Venue,
       :name => "MyString",
       :social_info => nil,
       :location => nil,
-      :venue_type => nil
+      :venue_type_id => @venue_type.id
     )
     theStub.build_location
     theStub.build_social_info
@@ -33,7 +34,9 @@ describe "venues/edit" do
       assert_select "select#venue_location_attributes_state_id", :name => "venue[location_attributes][state_id]"
       assert_select "select#venue_location_attributes_country_id", :name => "venue[location_attributes][country_id]"
 
-      assert_select "select#venue_venue_type_id", :name => "venue[venue_type_id]" 
+      assert_select "select#venue_venue_type_id", :name => "venue[venue_type_id]" do
+        assert_select "option[selected]"
+      end
     end
   end
 end

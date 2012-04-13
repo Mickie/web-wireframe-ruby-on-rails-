@@ -18,11 +18,11 @@
 
   <div class="field">
     <%= f.label :venue_type %><br />
-    <%= f.select(:venue_type_id, options_for_select(VenueType.all.collect {|p| [ p.name, p.id ] } )) %>
+    <%= f.select(:venue_type_id, options_for_select(VenueType.all.collect {|p| [ p.name, p.id ] }, @venue.venue_type_id )) %>
   </div>
 
-  <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
-  <%= render :partial => 'partials/location', :locals => { :f => f } %>
+  <%= render :partial => 'partials/social_info', :locals => { :f => f, :social_info => @venue.social_info } %>
+  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @venue.location } %>
 
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

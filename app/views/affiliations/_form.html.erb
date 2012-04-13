@@ -18,7 +18,7 @@
 
   <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
 
-  <%= render :partial => 'partials/location', :locals => { :f => f } %>
+  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @affiliation.location } %>
 
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

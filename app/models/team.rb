@@ -7,6 +7,10 @@ class Team < ActiveRecord::Base
   belongs_to :location
   belongs_to :social_info
   
+  validates :name, presence:true
+  validates :sport_id, presence:true
+  validates :league_id, presence:true
+  
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
 end

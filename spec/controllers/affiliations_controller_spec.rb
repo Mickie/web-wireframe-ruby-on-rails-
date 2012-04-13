@@ -7,27 +7,28 @@ describe AffiliationsController do
   before do
     mock_geocoding!
 
-    @location = FactoryGirl.create(:location)
-    @social_info = FactoryGirl.create(:social_info)
+    @affiliation = FactoryGirl.create(:affiliation)
   end
 
   def valid_attributes
-    { name:'University of Notre Dame', location_id:@location.id, social_info_id: @social_info.id }
+    { 
+      name:"Notre Dame", 
+      social_info_attributes: {twitter_name:"tweeter", facebook_page_url:"fbdude" }
+    }
   end
-  
+
+
   describe "GET index" do
     it "assigns all affiliations as @affiliations" do
-      affiliation = Affiliation.create! valid_attributes
       get :index, {}
-      assigns(:affiliations).should eq([affiliation])
+      assigns(:affiliations).should eq([@affiliation])
     end
   end
 
   describe "GET show" do
     it "assigns the requested affiliation as @affiliation" do
-      affiliation = Affiliation.create! valid_attributes
-      get :show, {:id => affiliation.to_param}
-      assigns(:affiliation).should eq(affiliation)
+      get :show, {:id => @affiliation.to_param}
+      assigns(:affiliation).should eq(@affiliation)
     end
   end
 
@@ -40,9 +41,8 @@ describe AffiliationsController do
 
   describe "GET edit" do
     it "assigns the requested affiliation as @affiliation" do
-      affiliation = Affiliation.create! valid_attributes
-      get :edit, {:id => affiliation.to_param}
-      assigns(:affiliation).should eq(affiliation)
+      get :edit, {:id => @affiliation.to_param}
+      assigns(:affiliation).should eq(@affiliation)
     end
   end
 

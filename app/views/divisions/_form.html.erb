@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :league %><br />
-    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] },  "Select League")) %>
+    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] }, @division.league_id )) %>
   </div>
   
   <div class="actions">
