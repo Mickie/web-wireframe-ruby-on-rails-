@@ -2,15 +2,11 @@ require 'spec_helper'
 
 describe "venues/show" do
   before(:each) do
-    mock_geocoding!
-    @venue_type = FactoryGirl.create(:venue_type)
-    @location = FactoryGirl.create(:location)
-    @social_info = FactoryGirl.create(:social_info)
     @venue = assign(:venue, stub_model(Venue,
       :name => "Name",
-      :social_info => @social_info,
-      :location => @location,
-      :venue_type => @venue_type
+      :social_info => stub_model(SocialInfo, twitter_name:"foo", facebook_page_url:"bar", web_url:"wilma"),
+      :location => stub_model(Location, one_line_address:"100 Main"),
+      :venue_type => stub_model(VenueType, name:"fred")
     ))
   end
 
@@ -18,10 +14,10 @@ describe "venues/show" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
-    rendered.should match(/#{@venue_type.name}/)
-    rendered.should match(/#{@social_info.twitter_name}/)
-    rendered.should match(/#{@social_info.facebook_page_url}/)
-    rendered.should match(/#{@social_info.web_url}/)
-    rendered.should match(/#{@location.one_line_address}/)
+    rendered.should match(/fred/)
+    rendered.should match(/foo/)
+    rendered.should match(/bar/)
+    rendered.should match(/wilma/)
+    rendered.should match(/100 Main/)
   end
 end
