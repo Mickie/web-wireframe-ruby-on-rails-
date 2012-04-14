@@ -7,10 +7,17 @@ class Team < ActiveRecord::Base
   belongs_to :location
   belongs_to :social_info
   
+  has_many :home_games, class_name:"Event", foreign_key:"home_team_id", inverse_of: :home_team
+  has_many :away_games, class_name:"Event", foreign_key:"visiting_team_id", inverse_of: :visiting_team
+  
   validates :name, presence:true
   validates :sport_id, presence:true
   validates :league_id, presence:true
   
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
+  
+  def events
+    self.home_games + self.away_games
+  end
 end
