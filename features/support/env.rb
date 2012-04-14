@@ -10,8 +10,9 @@ require 'spork/ext/ruby-debug'
  
 Spork.prefork do
   require 'cucumber/rails'
+  require 'cucumber/rspec/doubles'
   require Rails.root.join('db','seeds')
-  require Rails.root.join('spec', 'support', 'mock_geocoder')
+  require 'geocoder/results/base'
 
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
@@ -19,13 +20,25 @@ Spork.prefork do
   # prefer to use XPath just remove this line and adjust any selectors in your
   # steps to use the XPath syntax.
   Capybara.default_selector = :css
+  
+  class MockResult < ::Geocoder::Result::Base
+    def initialize(data = [])
+      super(data)
+    end
+  end
+  
 
 end
  
 Spork.each_run do
   
-  Before('@mock_geocoder') do
-    mock_geocoding!
+  Before do
+    options = {address1: 'address1', address2:'address2', coordinates:[1,2], state_id:1, postal_code:'98003', country_id:1 }
+
+    MockResult.new.tap do |result|
+      result.stub options
+      ::Geocoder.stub :search => [result]
+    end
   end
   
   # By default, any exception happening in your Rails application will bubble up

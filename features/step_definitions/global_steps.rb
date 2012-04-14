@@ -1,6 +1,5 @@
 
 Before do
-  @mock_geocoder
   
   @user = FactoryGirl.build(:user)
   @admin = FactoryGirl.build(:admin)
