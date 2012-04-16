@@ -24,6 +24,7 @@ FanzoSite::Application.routes.draw do
   resources :venue_types
   resources :affiliations
   resources :events
+  resources :game_watches
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

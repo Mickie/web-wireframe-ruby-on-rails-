@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @game_watch.name %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @game_watch.event.name %>
+</p>
+
+<p>
+  <b>Venue:</b>
+  <%= @game_watch.venue.name %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @game_watch.creator.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_watch_path(@game_watch) %> |
+<%= link_to 'Back', game_watches_path %>
