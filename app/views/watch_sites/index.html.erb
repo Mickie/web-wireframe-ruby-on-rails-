@@ -1,0 +1,27 @@
+<h1>Listing watch_sites</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Team</th>
+    <th>Venue</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @watch_sites.each do |watch_site| %>
+  <tr>
+    <td><%= watch_site.name %></td>
+    <td><%= watch_site.team.name %></td>
+    <td><%= watch_site.venue.name %></td>
+    <td><%= link_to 'Show', watch_site %></td>
+    <td><%= link_to 'Edit', edit_watch_site_path(watch_site) %></td>
+    <td><%= link_to 'Destroy', watch_site, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Watch site', new_watch_site_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @watch_site.name %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%= @watch_site.team %>
+</p>
+
+<p>
+  <b>Venue:</b>
+  <%= @watch_site.venue %>
+</p>
+
+
+<%= link_to 'Edit', edit_watch_site_path(@watch_site) %> |
+<%= link_to 'Back', watch_sites_path %>

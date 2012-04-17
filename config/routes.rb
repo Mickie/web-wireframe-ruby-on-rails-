@@ -1,5 +1,7 @@
 FanzoSite::Application.routes.draw do
 
+  resources :watch_sites
+
   resources :people
 
   devise_for :admins, only: :sessions
