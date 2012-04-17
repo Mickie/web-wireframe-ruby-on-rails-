@@ -2,6 +2,9 @@ class Venue < ActiveRecord::Base
   belongs_to :social_info
   belongs_to :location
   belongs_to :venue_type
+  
+  has_many :game_watches, inverse_of: :venue
+  has_many :events, through: :game_watches   
 
   validates :name, uniqueness:true, presence:true
   validates :venue_type, presence:true

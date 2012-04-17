@@ -3,6 +3,9 @@ class Event < ActiveRecord::Base
   belongs_to :visiting_team, :class_name => "Team", :foreign_key => "visiting_team_id"
   belongs_to :location
   
+  has_many :game_watches, inverse_of: :event
+  has_many :venues, through: :game_watches 
+  
   validates :home_team, presence:true
   validates :visiting_team, presence:true
   validates :event_date, presence:true
