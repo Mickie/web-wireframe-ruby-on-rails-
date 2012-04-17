@@ -17,7 +17,10 @@ describe Team do
   it { should respond_to(:affiliation) }
   it { should respond_to(:social_info) }
   it { should respond_to(:events) }
-  
+  it { should respond_to(:athletes) }
+  it { should respond_to(:coaches) }
+  it { should respond_to(:journalists) }
+  it { should respond_to(:superfans) }
 
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  

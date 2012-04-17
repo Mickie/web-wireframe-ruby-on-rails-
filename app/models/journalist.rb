@@ -1,0 +1,2 @@
+class Journalist < Person
+end

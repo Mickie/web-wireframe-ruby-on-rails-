@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Person do
+describe Superfan do
 
   before do
     mock_geocoding!
-    @person = FactoryGirl.create(:person)
+    @superfan = FactoryGirl.create(:superfan)
   end
 
-  subject { @person }
+  subject { @superfan }
   
   it { should respond_to(:first_name) }
   it { should respond_to(:last_name) }
@@ -18,13 +18,13 @@ describe Person do
   it { should respond_to(:social_info) }
   
   it "should require a first_name to validate" do
-    @person.first_name = nil
-    @person.should_not be_valid   
+    @superfan.first_name = nil
+    @superfan.should_not be_valid   
   end
 
   it "should require a last_name to validate" do
-    @person.last_name = nil
-    @person.should_not be_valid   
+    @superfan.last_name = nil
+    @superfan.should_not be_valid   
   end
 
 
