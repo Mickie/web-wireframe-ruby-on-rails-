@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416184128) do
+ActiveRecord::Schema.define(:version => 20120417025901) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -118,6 +118,22 @@ ActiveRecord::Schema.define(:version => 20120416184128) do
 
   add_index "locations", ["country_id"], :name => "index_locations_on_country_id"
   add_index "locations", ["state_id"], :name => "index_locations_on_state_id"
+
+  create_table "people", :force => true do |t|
+    t.string   "first_name",     :null => false
+    t.string   "last_name",      :null => false
+    t.string   "home_town"
+    t.string   "home_school"
+    t.string   "position"
+    t.string   "type"
+    t.integer  "social_info_id"
+    t.integer  "team_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "people", ["social_info_id"], :name => "index_people_on_social_info_id"
+  add_index "people", ["team_id"], :name => "index_people_on_team_id"
 
   create_table "social_infos", :force => true do |t|
     t.string   "twitter_name"
