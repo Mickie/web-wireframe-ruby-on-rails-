@@ -1,42 +1,42 @@
-Feature: Leagues Resource
+Feature: people Resource
 
-	Scenario: Adding a league requires admin access
-		Given I visit the new league page
+	Scenario: Adding a person requires admin access
+		Given I visit the new person page
 		Then I should be redirected to the new admin session page
 			And I should see an alert flash
 
-	Scenario: Editing a league requires admin access
-		Given I visit the edit league page
+	Scenario: Editing a person requires admin access
+		Given I visit the edit person page
 		Then I should be redirected to the new admin session page
 			And I should see an alert flash
 
-	Scenario: Seeing the list of leagues requires admin access
-		Given I visit the leagues page
+	Scenario: Seeing the list of people requires admin access
+		Given I visit the people page
 		Then I should be redirected to the new admin session page
 			And I should see an alert flash
 		
-	Scenario: I can add a league as an admin and see the details when complete
+	Scenario: I can add a person as an admin and see the details when complete
 		Given I sign in as admin
-		When I visit the new league page
-			And I create a new league
-		Then I should see the details of the new league
+		When I visit the new person page
+			And I create a new person
+		Then I should see the details of the new person
 			And I should be able to edit it
 	
-	Scenario: I can edit a league as an admin
+	Scenario: I can edit a person as an admin
 		Given I sign in as admin
-		When I visit the edit league page
-			And I edit the league
-		Then the changes to the league should be saved
+		When I visit the edit person page
+			And I edit the person
+		Then the changes to the person should be saved
 		
-	Scenario: I can see all the leagues as an admin
+	Scenario: I can see all the people as an admin
 		Given I sign in as admin
-			And I have added 3 leagues
-		When I visit the leagues page
-		Then I should see 3 leagues
+			And I have added 3 people
+		When I visit the people page
+		Then I should see 3 people
 
-	Scenario: I can associate a sport with the league
+	Scenario: I can associate a sport with the person
 		Given I sign in as admin
 			And I have added 2 sports
-			And I have added 2 leagues
-		When I visit the edit league page
-		Then I should be able to associate a sport with the league
+			And I have added 2 people
+		When I visit the edit person page
+		Then I should be able to associate a team with a person
