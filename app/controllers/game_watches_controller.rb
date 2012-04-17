@@ -1,4 +1,6 @@
 class GameWatchesController < ApplicationController
+  before_filter :authenticate_admin!
+
   # GET /game_watches
   # GET /game_watches.json
   def index
