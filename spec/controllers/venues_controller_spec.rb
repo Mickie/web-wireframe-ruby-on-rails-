@@ -3,12 +3,16 @@ require 'spec_helper'
 describe VenuesController do
   login_admin
   
+  before do
+    @theVenueType = FactoryGirl.create(:venue_type)
+  end
+  
   it "should have current_admin" do
     subject.current_admin.should_not be_nil
   end
   
   def valid_attributes
-    { name:"Pumphouse" }
+    { name:"Pumphouse", venue_type_id:@theVenueType.id }
   end
 
   describe "GET index" do
