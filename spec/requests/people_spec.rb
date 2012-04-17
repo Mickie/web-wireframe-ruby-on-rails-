@@ -1,11 +1,35 @@
 require 'spec_helper'
 
 describe "People" do
-  describe "GET /people" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+  
+  before do
+    mock_geocoding!
+    @person = FactoryGirl.create(:person)
+  end
+  
+  describe "without admin login" do
+    it "should redirect to admin login" do
       get people_path
-      response.status.should be(200)
+      response.should redirect_to(new_admin_session_path)
     end
+  end
+
+  describe "with admin logged in" do
+
+    before do
+      theAdmin = FactoryGirl.create(:admin)
+      visit new_admin_session_path
+      fill_in "Email",    with: theAdmin.email
+      fill_in "Password", with: theAdmin.password
+      click_button "commit"
+      visit people_path
+    end
+    
+    describe "visiting the teams index" do
+      it "should show a team" do
+        page.should have_content(@person.first_name)
+      end
+    end
+    
   end
 end

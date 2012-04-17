@@ -31,15 +31,16 @@
     <%= f.label :position %><br />
     <%= f.text_field :position %>
   </div>
-  <div class="field">
-    <%= f.label :social_info %><br />
-    <%= f.text_field :social_info %>
-  </div>
+
   <div class="field">
     <%= f.label :team %><br />
-    <%= f.text_field :team %>
+    <%= f.select(:team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @person.team_id )) %>
   </div>
+
+  <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
+
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save", id:"commit" %>
   </div>
 <% end %>

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "people/new" do
   before(:each) do
-    assign(:person, stub_model(Person,
+    theStub = stub_model(Person,
       :first_name => "MyString",
       :last_name => "MyString",
       :home_town => "MyString",
@@ -10,7 +10,10 @@ describe "people/new" do
       :position => "MyString",
       :social_info => nil,
       :team => nil
-    ).as_new_record)
+    ).as_new_record
+    
+    theStub.build_social_info
+    assign(:person, theStub)
   end
 
   it "renders new person form" do
@@ -23,8 +26,12 @@ describe "people/new" do
       assert_select "input#person_home_town", :name => "person[home_town]"
       assert_select "input#person_home_school", :name => "person[home_school]"
       assert_select "input#person_position", :name => "person[position]"
-      assert_select "input#person_social_info", :name => "person[social_info]"
-      assert_select "input#person_team", :name => "person[team]"
+      assert_select "select#person_team_id", :name => "person[team_id]"
+      
+      assert_select "input#person_social_info_attributes_twitter_name", :name => "person[social_info_attributes][twitter_name]"
+      assert_select "input#person_social_info_attributes_facebook_page_url", :name => "person[social_info_attributes][facebook_page_url]"
+      assert_select "input#person_social_info_attributes_web_url", :name => "person[social_info_attributes][web_url]"
+      
     end
   end
 end

@@ -27,5 +27,8 @@ describe Person do
     @person.should_not be_valid   
   end
 
+  it "should return full name when name requested" do
+    @person.name.should eq("#{@person.first_name} #{@person.last_name}")
+  end
 
 end

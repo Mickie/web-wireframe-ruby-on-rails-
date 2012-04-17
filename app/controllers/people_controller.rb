@@ -1,4 +1,6 @@
 class PeopleController < ApplicationController
+  before_filter :authenticate_admin!
+  
   # GET /people
   # GET /people.json
   def index
@@ -25,6 +27,7 @@ class PeopleController < ApplicationController
   # GET /people/new.json
   def new
     @person = Person.new
+    @person.build_social_info
 
     respond_to do |format|
       format.html # new.html.erb
