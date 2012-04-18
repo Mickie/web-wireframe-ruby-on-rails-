@@ -14,6 +14,9 @@ class Team < ActiveRecord::Base
   has_many :journalists, inverse_of: :team
   has_many :superfans, inverse_of: :team
    
+  has_many :watch_sites, inverse_of: :team
+  has_many :venues, through: :watch_sites 
+   
   validates :name, presence:true
   validates :sport_id, presence:true
   validates :league_id, presence:true

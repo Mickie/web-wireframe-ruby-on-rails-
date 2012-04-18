@@ -21,6 +21,8 @@ describe Team do
   it { should respond_to(:coaches) }
   it { should respond_to(:journalists) }
   it { should respond_to(:superfans) }
+  it { should respond_to(:watch_sites) }
+  it { should respond_to(:venues) }
 
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  
@@ -46,6 +48,23 @@ describe Team do
     it "should have 2 events" do
       @team.events.length.should == 2
     end
+    
+    it "should have watch_sites" do
+      4.times do
+        theWatchSite = FactoryGirl.create(:watch_site, team: @team)
+      end      
+
+      @team.watch_sites.length.should == 4
+    end
+
+    it "should have venues" do
+      3.times do
+        theWatchSite = FactoryGirl.create(:watch_site, team: @team)
+      end      
+
+      @team.venues.length.should == 3
+    end
+
   end
   
 end
