@@ -27,6 +27,12 @@ describe "people/new" do
       assert_select "input#person_home_school", :name => "person[home_school]"
       assert_select "input#person_position", :name => "person[position]"
       assert_select "select#person_team_id", :name => "person[team_id]"
+      assert_select "select#person_type", :name => "person[type]" do
+        assert_select "option[value='Athlete']"
+        assert_select "option[value='Coach']"
+        assert_select "option[value='Superfan']"
+        assert_select "option[value='Journalist']"
+      end
       
       assert_select "input#person_social_info_attributes_twitter_name", :name => "person[social_info_attributes][twitter_name]"
       assert_select "input#person_social_info_attributes_facebook_page_url", :name => "person[social_info_attributes][facebook_page_url]"

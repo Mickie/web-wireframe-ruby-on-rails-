@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+ 
 describe PeopleController do
   login_admin
   
@@ -7,7 +7,6 @@ describe PeopleController do
     mock_geocoding!
 
     @team = FactoryGirl.create(:team)
-    @social_info = FactoryGirl.create(:social_info)
   end
 
   def valid_attributes
@@ -17,7 +16,7 @@ describe PeopleController do
       home_town:'sportsville',
       home_school:'bcc',
       team_id: @team.id,
-      social_info_id:@social_info.id 
+      social_info_attributes: {twitter_name:"tweeter", facebook_page_url:"fbdude" }
     }
   end
   

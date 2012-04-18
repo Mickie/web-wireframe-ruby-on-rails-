@@ -7,6 +7,8 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :social_info  
   
   def name
-     "#{first_name} #{last_name}"   
+     "#{first_name} #{last_name}" 
   end
+  
+  attr_accessible :social_info, :team, :first_name, :last_name, :type, :position, :home_town, :home_school, :social_info_attributes, :team_id
 end

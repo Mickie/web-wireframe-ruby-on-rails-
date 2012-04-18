@@ -37,6 +37,11 @@
     <%= f.select(:team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @person.team_id )) %>
   </div>
 
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.select(:type, options_for_select( %w[Athlete Coach Journalist Superfan] , @person.type )) %>
+  </div>
+
   <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
 
 

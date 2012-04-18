@@ -1,8 +1,5 @@
 FanzoSite::Application.routes.draw do
 
-  resources :watch_sites
-
-  resources :people
 
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
@@ -29,7 +26,13 @@ FanzoSite::Application.routes.draw do
   resources :affiliations
   resources :events
   resources :game_watches
-  
+  resources :watch_sites
+  resources :people
+  resources :athlete, path: :people
+  resources :coach, path: :people
+  resources :journalist, path: :people
+  resources :superfan, path: :people
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
