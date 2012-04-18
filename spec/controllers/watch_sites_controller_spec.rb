@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WatchSitesController do
-  #login_admin
+  login_admin
   
   before do
     mock_geocoding!

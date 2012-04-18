@@ -14,6 +14,7 @@ Before do
   @venue = FactoryGirl.build(:venue)
   @event = FactoryGirl.build(:event)
   @game_watch = FactoryGirl.build(:game_watch)
+  @watch_site = FactoryGirl.build(:watch_site)
   @person = FactoryGirl.build(:person)
   
   @new_sport = FactoryGirl.build(:sport)
@@ -26,6 +27,7 @@ Before do
   @new_venue = FactoryGirl.build(:venue)
   @new_event = FactoryGirl.build(:event)
   @new_game_watch = FactoryGirl.build(:game_watch)
+  @new_watch_site = FactoryGirl.build(:watch_site)
   @new_person = FactoryGirl.build(:person)
   
   @edit_sport = FactoryGirl.create(:sport)
@@ -38,6 +40,7 @@ Before do
   @edit_venue = FactoryGirl.create(:venue)
   @edit_event = FactoryGirl.create(:event)
   @edit_game_watch = FactoryGirl.create(:game_watch)
+  @edit_watch_site = FactoryGirl.create(:watch_site)
   @edit_person = FactoryGirl.create(:person)
 
 end

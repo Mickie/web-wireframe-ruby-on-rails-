@@ -1,4 +1,6 @@
 class WatchSitesController < ApplicationController
+  before_filter :authenticate_admin!
+  
   # GET /watch_sites
   # GET /watch_sites.json
   def index
