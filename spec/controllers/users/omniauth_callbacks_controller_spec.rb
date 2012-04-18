@@ -26,10 +26,10 @@ describe Users::OmniauthCallbacksController do
       
       it "should have twitter data in session" do
         session["devise.twitter_data"].should_not be_nil
-        session["devise.twitter_data"].extra.access_token.token.should == 'a token'
-        session["devise.twitter_data"].extra.access_token.secret.should == 'a secret'
-        session["devise.twitter_data"].info.nickname == 'barney'
-        session["devise.twitter_data"].uid == '12345'
+        session["devise.twitter_data"].extra.access_token.token.should  eq('a token')
+        session["devise.twitter_data"].extra.access_token.secret.should eq('a secret')
+        session["devise.twitter_data"].info.nickname eq('barney')
+        session["devise.twitter_data"].uid eq('12345')
       end
     end
    

@@ -34,12 +34,12 @@ describe Team do
     end
     
     it "should have the correct home_game" do
-      @team.home_games.length.should == 1
+      @team.home_games.length.should eq(1)
       @team.home_games.first.should == @home_event
     end
     
     it "should have 1 away_game" do
-      @team.away_games.length.should == 1
+      @team.away_games.length.should  eq(1)
       @team.away_games.first.should == @away_event
     end
     
