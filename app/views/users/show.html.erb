@@ -1,5 +1,8 @@
-<%= provide(:title, @user.email ) %>
+<%= provide(:title, "My Profile" ) %>
+<p><%= @user.email if @user.email %></p>
 
-
-<p>User: <%= @user.twitter_username %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<% if @user.teams.length > 0 %>
+  <%= render :partial => 'partials/game_picker' %>
+<% else %>
+  <%= render :partial => 'partials/team_picker' %>
+<% end %>

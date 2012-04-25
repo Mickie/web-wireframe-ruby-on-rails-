@@ -9,7 +9,9 @@ FanzoSite::Application.routes.draw do
   end
   root to:'static_pages#index'
 
-  resources :users, only: :show
+  resources :users, only: :show do
+    resources :user_teams, only: [ :create, :destroy ]
+  end
 
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'

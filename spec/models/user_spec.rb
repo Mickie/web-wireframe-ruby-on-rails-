@@ -15,6 +15,7 @@ describe User do
   it { should respond_to(:twitter_user_secret) }
   it { should respond_to(:facebook_user_id) }
   it { should respond_to(:facebook_access_token) }
+  it { should respond_to(:teams) }
   
   it { should be_valid }
   
@@ -113,6 +114,20 @@ describe User do
     
     it "should have loaded the user to find" do
       @user.twitter_user_id.should eq('12345') 
+    end
+  end
+  
+  describe "can add a team" do
+    before do
+      mock_geocoding!
+      @team = FactoryGirl.create(:team)
+    end
+    
+    it "and it should save properly" do
+      theOriginalCount = UserTeam.all.count
+      @user.teams.push(@team)
+      @user.save
+      UserTeam.all.count.should eq(theOriginalCount + 1)
     end
   end
   

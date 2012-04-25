@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   
+  has_many :user_teams
+  has_many :teams, through: :user_teams
+  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, 
                   :password, 
@@ -17,7 +20,9 @@ class User < ActiveRecord::Base
                   :twitter_user_token, 
                   :twitter_user_secret,
                   :facebook_user_id,
-                  :facebook_access_token
+                  :facebook_access_token,
+                  :user_teams,
+                  :teams
   
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
