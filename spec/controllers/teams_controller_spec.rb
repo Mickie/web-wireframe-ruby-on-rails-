@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe TeamsController do
-  login_admin
   
   before do
     mock_geocoding!
@@ -22,14 +21,23 @@ describe TeamsController do
   end
   
   describe "GET index" do
-    it "assigns all teams as @teams" do
+    login_user
+    it "assigns all teams as @teams when no sport_id" do
       team = Team.create! valid_attributes
       get :index, {}
       assigns(:teams).should eq([team])
     end
+    
+    it "assigns teams for a specific sport when sport_id" do
+      theFirstTeam = Team.create! valid_attributes
+      theSecondTeam = FactoryGirl.create(:team)
+      get :index, {sport_id: theSecondTeam.sport_id} 
+      assigns(:teams).should eq([theSecondTeam])
+    end
   end
 
   describe "GET show" do
+    login_admin
     it "assigns the requested team as @team" do
       team = Team.create! valid_attributes
       get :show, {:id => team.to_param}
@@ -38,6 +46,7 @@ describe TeamsController do
   end
 
   describe "GET new" do
+    login_admin
     it "assigns a new team as @team" do
       get :new, {}
       assigns(:team).should be_a_new(Team)
@@ -45,6 +54,7 @@ describe TeamsController do
   end
 
   describe "GET edit" do
+    login_admin
     it "assigns the requested team as @team" do
       team = Team.create! valid_attributes
       get :edit, {:id => team.to_param}
@@ -53,6 +63,7 @@ describe TeamsController do
   end
 
   describe "POST create" do
+    login_admin
     describe "with valid params" do
       it "creates a new Team" do
         expect {
@@ -90,6 +101,7 @@ describe TeamsController do
   end
 
   describe "PUT update" do
+    login_admin
     describe "with valid params" do
       it "updates the requested team" do
         team = Team.create! valid_attributes
@@ -134,6 +146,7 @@ describe TeamsController do
   end
 
   describe "DELETE destroy" do
+    login_admin
     it "destroys the requested team" do
       team = Team.create! valid_attributes
       expect {

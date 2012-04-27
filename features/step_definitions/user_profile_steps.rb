@@ -3,7 +3,7 @@ Then /^I should see a pick a sport prompt$/ do
 end
 
 When /^I pick a sport$/ do
-  select @edit_sport.name, from: 'sport_picker'
+  select @edit_team.sport.name, from: 'sport_picker'
 end
 
 Then /^I should see a pick a team prompt$/ do

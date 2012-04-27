@@ -10,9 +10,9 @@ Feature: Team Resource
 		Then I should be redirected to the new admin session page
 			And I should see an alert flash
 
-	Scenario: Seeing the list of teams requires admin access
+	Scenario: Seeing the list of teams requires user access
 		Given I visit the teams page
-		Then I should be redirected to the new admin session page
+		Then I should be redirected to the new user session page
 			And I should see an alert flash
 		
 	Scenario: I can add a team as an admin and see the details when complete
@@ -28,8 +28,8 @@ Feature: Team Resource
 			And I edit the team
 		Then the changes to the team should be saved
 		
-	Scenario: I can see all the teams as an admin
-		Given I sign in as admin
+	Scenario: I can see all the teams as a user
+		Given I sign in as user 
 			And I have added 3 teams
 		When I visit the teams page
 		Then I should see 3 teams

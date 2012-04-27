@@ -1,10 +1,15 @@
 class TeamsController < ApplicationController
-  before_filter :authenticate_admin!
+  before_filter :authenticate_admin!, except: [:index]
+  before_filter :authenticate_user!, only: [:index] 
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    if params[:sport_id]
+      @teams = Team.where("sport_id = ?", params[:sport_id])
+    else    
+      @teams = Team.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
