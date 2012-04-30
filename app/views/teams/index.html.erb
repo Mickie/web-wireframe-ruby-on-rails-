@@ -5,8 +5,6 @@
     <th>Name</th>
     <th>Sport</th>
     <th>League</th>
-    <th>Division</th>
-    <th>Conference</th>
     <th>Location</th>
     <th>Twitter name</th>
     <th>Facebook page url</th>
@@ -21,8 +19,7 @@
     <td><%= team.name %></td>
     <td><%= team.sport.name %></td>
     <td><%= team.league.name %></td>
-    <td><%= team.location.city %></td>
-    <td><%= team.location.state.name %></td>
+    <td><%= team.location.city + "," + team.location.state.abbreviation %></td>
     <td><%= team.social_info.twitter_name %></td>
     <td><%= team.social_info.facebook_page_url %></td>
     <td><%= team.social_info.web_url %></td>

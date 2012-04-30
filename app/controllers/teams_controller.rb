@@ -10,6 +10,10 @@ class TeamsController < ApplicationController
     else    
       @teams = Team.all
     end
+    
+    @teams.each do |aTeam|
+      aTeam.build_social_info unless aTeam.social_info
+    end 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,6 +48,7 @@ class TeamsController < ApplicationController
   # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
+    @team.build_social_info unless @team.social_info
   end
 
   # POST /teams

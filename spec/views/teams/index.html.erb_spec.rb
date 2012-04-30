@@ -33,8 +33,7 @@ describe "teams/index" do
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => @league.name, :count => 2
     assert_select "tr>td", :text => @league.sport.name, :count => 2
-    assert_select "tr>td", :text => @location.city, :count => 2
-    assert_select "tr>td", :text => @location.state.name, :count => 2
+    assert_select "tr>td", :text => @location.city + "," + @location.state.abbreviation, :count => 2
     assert_select "tr>td", :text => @social_info.twitter_name, :count => 2
     assert_select "tr>td", :text => @social_info.facebook_page_url, :count => 2
     assert_select "tr>td", :text => @social_info.web_url, :count => 2
