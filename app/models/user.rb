@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   
-  has_many :user_teams
+  has_many :user_teams, :dependent => :delete_all
   has_many :teams, through: :user_teams
   
   # Setup accessible (or protected) attributes for your model

@@ -1,12 +1,12 @@
 class Venue < ActiveRecord::Base
-  belongs_to :social_info
-  belongs_to :location
+  belongs_to :social_info, :dependent => :destroy
+  belongs_to :location, :dependent => :destroy
   belongs_to :venue_type
   
-  has_many :game_watches, inverse_of: :venue
+  has_many :game_watches, inverse_of: :venue, :dependent => :delete_all
   has_many :events, through: :game_watches   
 
-  has_many :watch_sites, inverse_of: :venue
+  has_many :watch_sites, inverse_of: :venue, :dependent => :delete_all
   has_many :teams, through: :watch_sites   
 
   validates :name, uniqueness:true, presence:true
