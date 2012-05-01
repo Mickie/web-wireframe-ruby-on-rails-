@@ -7,7 +7,6 @@
     <th>Visiting team</th>
     <th>Event date</th>
     <th>Event time</th>
-    <th>Location</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,8 +18,7 @@
     <td><%= event.home_team.name %></td>
     <td><%= event.visiting_team.name %></td>
     <td><%= event.event_date %></td>
-    <td><%= event.event_time %></td>
-    <td><%= event.location.one_line_address %></td>
+    <td><%= event.event_time ? event.event_time : "TBA" %></td>
     <td><%= link_to 'Show', event %></td>
     <td><%= link_to 'Edit', edit_event_path(event) %></td>
     <td><%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %></td>

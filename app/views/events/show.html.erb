@@ -25,11 +25,12 @@
   <%= @event.event_time %>
 </p>
 
+<%if @event.location %>
 <p>
   <b>Location:</b>
   <%= @event.location.one_line_address %>
 </p>
-
+<%end%>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'New', new_event_path %> |
