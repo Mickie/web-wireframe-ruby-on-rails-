@@ -169,14 +169,14 @@ ActiveRecord::Schema.define(:version => 20120501015754) do
     t.datetime "updated_at",     :null => false
     t.integer  "affiliation_id"
     t.integer  "social_info_id"
-    t.integer  "espnId"
-    t.string   "espnUrl"
+    t.integer  "espn_team_id"
+    t.string   "espn_team_url"
   end
 
   add_index "teams", ["affiliation_id"], :name => "index_teams_on_affiliation_id"
   add_index "teams", ["conference_id"], :name => "index_teams_on_conference_id"
   add_index "teams", ["division_id"], :name => "index_teams_on_division_id"
-  add_index "teams", ["espnId"], :name => "index_teams_on_espnId", :unique => true
+  add_index "teams", ["espn_team_id"], :name => "index_teams_on_espn_team_id", :unique => true
   add_index "teams", ["league_id"], :name => "index_teams_on_league_id"
   add_index "teams", ["location_id"], :name => "index_teams_on_location_id"
   add_index "teams", ["social_info_id"], :name => "index_teams_on_social_info_id"
