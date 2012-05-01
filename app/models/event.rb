@@ -8,8 +8,7 @@ class Event < ActiveRecord::Base
   
   validates :home_team, presence:true
   validates :visiting_team, presence:true
-  validates :event_date, presence:true
-  validates :event_time, presence:true
+  validates :event_date, presence:true 
   
   accepts_nested_attributes_for :location
 
