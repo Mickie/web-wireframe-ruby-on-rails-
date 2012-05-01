@@ -6,11 +6,27 @@
 # ', name:'Cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 # ', name:'Mayor.create(name: 'Emanuel', city: cities.first)
 
+puts 'SETTING UP SPORTS'
+Sport.delete_all
+football = Sport.create(name:"Football");
+soccer = Sport.create(name:"Soccer");
+baseball = Sport.create(name:"Baseball");
+basketball = Sport.create(name:"Basketball");
 
-  puts 'SETTING UP STATES'
-  State.delete_all
-  puts 'Deleted existing states'
-  State.create([ 
+puts 'SETTING UP LEAGUES'
+League.delete_all
+League.create([
+  {name: 'NFL', sport_id:football.id},
+  {name: 'NCAA Football', sport_id:football.id},
+  {name: 'NBA', sport_id:basketball.id},
+  {name: 'MLB', sport_id:baseball.id},
+  {name: 'MLS', sport_id:soccer.id}
+]);
+
+puts 'SETTING UP STATES'
+State.delete_all
+puts 'Deleted existing states'
+State.create([ 
   { name:'Alabama', abbreviation:'AL' },
   { name:'Alaska', abbreviation:'AK' },
   { name:'Arizona', abbreviation:'AZ' },
@@ -76,13 +92,13 @@
   { name:'Armed Forces Europe', abbreviation:'AE' },
   { name:'Armed Forces Middle East', abbreviation:'AE' },
   { name:'Armed Forces Pacific', abbreviation:'AP' }
-  ])
-  puts 'States created'
+])
+puts 'States created'
 
-  puts 'SETTING UP COUNTRIES'
-  Country.delete_all
-  puts 'Deleted existing countries'
-  Country.create([ 
+puts 'SETTING UP COUNTRIES'
+Country.delete_all
+puts 'Deleted existing countries'
+Country.create([ 
   { abbreviation:'US', name:'United States' },  
   { abbreviation:'CA', name:'Canada' },
   { abbreviation:'UK', name:'United Kingdom' },   

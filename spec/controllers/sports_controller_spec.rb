@@ -18,7 +18,7 @@ describe SportsController do
   describe "GET index" do
     it "assigns all sports as @sports" do
       get :index
-      assigns(:sports).should eq([@sport])
+      assigns(:sports).should include(@sport)
     end
   end
 

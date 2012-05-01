@@ -23,6 +23,8 @@ describe Team do
   it { should respond_to(:superfans) }
   it { should respond_to(:watch_sites) }
   it { should respond_to(:venues) }
+  it { should respond_to(:espnId) }
+  it { should respond_to(:espnUrl) }
 
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  

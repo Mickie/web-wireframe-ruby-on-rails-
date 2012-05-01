@@ -19,7 +19,7 @@ describe LeaguesController do
     it "assigns all leagues as @leagues" do
       league = FactoryGirl.create(:league)
       get :index, {}
-      assigns(:leagues).should eq([league])
+      assigns(:leagues).should include(league)
     end
   end
 
