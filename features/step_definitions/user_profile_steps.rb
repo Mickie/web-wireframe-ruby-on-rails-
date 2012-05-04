@@ -15,6 +15,10 @@ When /^I pick a team$/ do
   click_button "commit"   
 end
 
+Then /^I should see my team$/ do
+  page.should have_link(@event.home_team.name)
+end
+
 Then /^I should see a list of upcoming games for my team$/ do
   page.should have_selector("select#event_id")
 end

@@ -23,15 +23,25 @@ describe "users/show" do
       view.should_not render_template(partial:"_game_picker") 
     end
     
-    it "should show game picker for existing user" do
-      mock_geocoding!
-      @user = assign(:user, stub_model(User,
-        email: "bar@foo.com",
-        teams: [FactoryGirl.create(:team)]
-      ))
-      render
-      view.should_not render_template(partial:"_team_picker")
-      view.should render_template(partial:"_game_picker") 
+    describe "with existing user" do
+      before do
+        mock_geocoding!
+        @user = assign(:user, stub_model(User,
+          email: "bar@foo.com",
+          teams: [FactoryGirl.create(:team), FactoryGirl.create(:team)]
+        ))
+        render
+      end
+      
+      it "should show game picker" do
+        view.should_not render_template(partial:"_team_picker")
+        view.should render_template(partial:"_game_picker") 
+      end
+      
+      it "should show the users teams" do
+        rendered.should match(/#{@user.teams[0].name}/)
+        rendered.should match(/#{@user.teams[1].name}/)
+      end
     end
   end
 end

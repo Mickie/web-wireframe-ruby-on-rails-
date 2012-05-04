@@ -2,6 +2,9 @@
 <p><%= @user.email if @user.email %></p>
 
 <% if @user.teams.length > 0 %>
+  <% @user.teams.each do |aTeam|%>
+    <%= link_to aTeam.name, team_path(aTeam)%>
+  <% end %>
   <%= render :partial => 'partials/game_picker' %>
 <% else %>
   <%= render :partial => 'partials/team_picker' %>
