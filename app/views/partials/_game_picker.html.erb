@@ -1,4 +1,4 @@
 <div class="field">
   <%= label_tag("Pick a game:") %><br />
-  <%= select_tag(:event_id, options_for_select(@user.teams.first.events.collect {|p| [ "#{p.home_team.name} vs. #{p.visiting_team.name}", p.id ] } )) %>
+  <%= select_tag(:event_id, options_for_select(@user.teams.first.events.collect {|p| [ "#{p.home_team.name} vs. #{p.visiting_team.name}", p.id ] }.insert(0, "Select a game") )) %>
 </div>

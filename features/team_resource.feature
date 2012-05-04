@@ -15,8 +15,9 @@ Feature: Team Resource
 		Then I should be redirected to the new user session page
 			And I should see an alert flash
 		
-	Scenario: I can add a team as an admin and see the details when complete
+	Scenario: I can add a team as an admin and see the details as a user when complete
 		Given I sign in as admin
+			And I sign in as user
 		When I visit the new team page
 			And I create a new team
 		Then I should see the details of the new team
@@ -24,6 +25,7 @@ Feature: Team Resource
 	
 	Scenario: I can edit a team as an admin
 		Given I sign in as admin
+			And I sign in as user
 		When I visit the edit team page
 			And I edit the team
 		Then the changes to the team should be saved

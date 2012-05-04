@@ -22,10 +22,12 @@
   </p>
 <% end %>
 
-<p>
-  <b>Conference:</b>
-  <%= @team.conference.name %>
-</p>
+<% if @team.conference %>
+  <p>
+    <b>Conference:</b>
+    <%= @team.conference.name %>
+  </p>
+<% end %>
 
 <p>
   <b>Location:</b>

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe EventsController do
-  login_admin
   
   before do
     mock_geocoding!
@@ -23,6 +22,7 @@ describe EventsController do
   end
   
   describe "GET index" do
+    login_user
     it "assigns all events as @events" do
       event = Event.create! valid_attributes
       get :index, {}
@@ -31,6 +31,7 @@ describe EventsController do
   end
 
   describe "GET show" do
+    login_user
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
       get :show, {:id => event.to_param}
@@ -39,6 +40,7 @@ describe EventsController do
   end
 
   describe "GET new" do
+    login_admin
     it "assigns a new event as @event" do
       get :new, {}
       assigns(:event).should be_a_new(Event)
@@ -46,6 +48,7 @@ describe EventsController do
   end
 
   describe "GET edit" do
+    login_admin
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
       get :edit, {:id => event.to_param}
@@ -54,6 +57,7 @@ describe EventsController do
   end
 
   describe "POST create" do
+    login_admin
     describe "with valid params" do
       it "creates a new Event" do
         expect {
@@ -91,6 +95,7 @@ describe EventsController do
   end
 
   describe "PUT update" do
+    login_admin
     describe "with valid params" do
       it "updates the requested event" do
         event = Event.create! valid_attributes
@@ -135,6 +140,7 @@ describe EventsController do
   end
 
   describe "DELETE destroy" do
+    login_admin
     it "destroys the requested event" do
       event = Event.create! valid_attributes
       expect {

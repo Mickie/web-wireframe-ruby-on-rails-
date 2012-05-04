@@ -68,7 +68,6 @@ end
 Then /^I should be on the (.*) page$/ do |aPageName|
   object = instance_variable_get("@#{aPageName.downcase.gsub(' ','_')}")
   page.current_path.should == send("#{aPageName.downcase.gsub(' ','_')}_path", object)
-  page.status_code.should == 200
 end
 
 Then /^I should be redirected to the (.*) page$/ do |aPageName|

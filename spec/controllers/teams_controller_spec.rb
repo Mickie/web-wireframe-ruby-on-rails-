@@ -37,7 +37,7 @@ describe TeamsController do
   end
 
   describe "GET show" do
-    login_admin
+    login_user
     it "assigns the requested team as @team" do
       team = Team.create! valid_attributes
       get :show, {:id => team.to_param}

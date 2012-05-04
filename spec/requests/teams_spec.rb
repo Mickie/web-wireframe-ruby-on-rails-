@@ -4,12 +4,28 @@ describe "Teams" do
   
   before do
     mock_geocoding!
-    @team = FactoryGirl.create(:team)
+    @team = FactoryGirl.create(:team) 
   end
   
   describe "without admin or user logged in" do
+    
     it "should redirect edit team to admin login" do
       get edit_team_path(@team)
+      response.should redirect_to(new_admin_session_path)
+    end
+    
+    it "should redirect new team to admin login" do
+      get new_team_path
+      response.should redirect_to(new_admin_session_path)
+    end
+    
+    it "should redirect update team to admin login" do
+      put team_path(@team)
+      response.should redirect_to(new_admin_session_path)
+    end
+    
+    it "should redirect delete team to admin login" do
+      delete team_path(@team)
       response.should redirect_to(new_admin_session_path)
     end
     
@@ -17,6 +33,12 @@ describe "Teams" do
       get teams_path
       response.should redirect_to(new_user_session_path)
     end
+    
+    it "should redirect show page to user login" do
+      get team_path(@team)
+      response.should redirect_to(new_user_session_path)
+    end
+
   end
   
   describe "with user logged in" do
@@ -37,6 +59,17 @@ describe "Teams" do
         page.should have_content(@team.name)
       end
     end
+    
+    describe "visiting the team show page" do
+      before do
+        visit team_path(@team)
+      end
+
+      it "should show a team name" do
+        page.should have_content(@team.name)
+      end
+    end
+    
   end
 
   describe "with admin logged in" do
@@ -56,6 +89,16 @@ describe "Teams" do
         page.should have_selector("#team_name")
       end
     end
+    
+    describe "visiting the new team path" do
+      before do
+        visit new_team_path
+      end
+      
+      it "should allow creating an team" do
+        page.should have_selector("#team_name")
+      end
+    end    
     
   end
 end

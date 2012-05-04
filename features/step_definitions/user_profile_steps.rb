@@ -20,11 +20,16 @@ Then /^I should see a list of upcoming games for my team$/ do
 end
 
 Given /^I login with a user who has picked a team$/ do
-  @user.teams = [FactoryGirl.create(:team)]
+  @event.save
+  @user.teams = [@event.home_team]
   @user.save
 
   visit new_user_session_path
   fill_in "Email", with: @user.email
   fill_in "Password", with: @user.password
   click_button "commit"  
+end
+
+When /^I pick an event$/ do
+  select "#{@event.home_team.name} vs. #{@event.visiting_team.name}", from: 'event_id'
 end
