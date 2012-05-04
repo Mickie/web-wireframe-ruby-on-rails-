@@ -9,6 +9,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'bootstrap-sass', '>= 2.0.0'
 gem 'geocoder'
+gem 'dalli'
 
 group :assets do
   gem 'sass-rails'
