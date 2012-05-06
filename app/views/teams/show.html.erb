@@ -5,6 +5,10 @@
   <%= @team.name %>
 </p>
 
+<% if @team.slug %>
+  <img src="<%= logosPath + @team.slug + "_l.gif" %>"></img>
+<% end %>
+
 <p>
   <b>Sport:</b>
   <%= @team.sport.name %>

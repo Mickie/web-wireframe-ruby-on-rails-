@@ -11,7 +11,8 @@ describe "teams/show" do
     @affiliation = FactoryGirl.build(:affiliation)
     @social_info = FactoryGirl.build(:social_info)
     theStub = stub_model(Team,
-      :name => "Name",
+      :name => "killer team",
+      :slug => "killer-team",
       :sport => @sport,
       :league => @league,
       :division => @division,
@@ -25,8 +26,7 @@ describe "teams/show" do
 
   it "renders attributes in <p>" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Name/)
+    rendered.should match(/killer team/)
     rendered.should match(/#{@sport.name}/)
     rendered.should match(/#{@league.name}/)
     rendered.should match(/#{@division.name}/)
@@ -36,5 +36,6 @@ describe "teams/show" do
     rendered.should match(/#{@social_info.facebook_page_url}/)
     rendered.should match(/#{@social_info.web_url}/)
     rendered.should match(/#{@affiliation.name}/)
+    rendered.should match(/killer-team_l.gif/)
   end
 end

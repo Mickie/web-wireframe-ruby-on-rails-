@@ -4,7 +4,7 @@ describe Team do
   before do
     mock_geocoding!
     @team = FactoryGirl.create(:team)
-  end
+  end 
 
   subject { @team }
   
@@ -25,6 +25,7 @@ describe Team do
   it { should respond_to(:venues) }
   it { should respond_to(:espn_team_id) }
   it { should respond_to(:espn_team_url) }
+  it { should respond_to(:slug) } 
 
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  
