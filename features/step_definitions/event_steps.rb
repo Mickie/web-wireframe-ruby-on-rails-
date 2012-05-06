@@ -27,7 +27,6 @@ When /^I create a new event$/ do
 end
 
 Then /^I should see the details of the new event$/ do
-  page.should have_content(@new_event.name)
   page.should have_content(@edit_event.home_team.name)
   page.should have_content(@edit_event.visiting_team.name)
 end

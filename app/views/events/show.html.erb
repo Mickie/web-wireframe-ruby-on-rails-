@@ -1,18 +1,20 @@
-<% if @event.visiting_team.slug && @event.home_team.slug %>
   <div class="row-fluid">
     <div class="span5">
-      <img src="<%= logoPath(@event.visiting_team.slug, :medium) %>" />
-      <h2><%= @event.visiting_team.name %></h2>
+      <% if @event.visiting_team.slug && @event.home_team.slug %>
+        <%= teamLogo(@event.visiting_team, :medium) %>
+      <% end %>
+      <h2><%= link_to @event.visiting_team.name, team_path(@event.visiting_team) %></h2>
     </div>
     <div class="span2">
       <strong>at</strong>
     </div>
     <div class="span5">
-      <img src="<%= logoPath(@event.home_team.slug, :medium) %>" />
-      <h2><%= @event.home_team.name %></h2>
+      <% if @event.visiting_team.slug && @event.home_team.slug %>
+        <%= teamLogo(@event.home_team, :medium) %>
+      <% end %>
+      <h2><%= link_to @event.home_team.name, team_path(@event.home_team) %></h2>
     </div>
   </div>
-<% end %>
 
 
 
@@ -22,12 +24,12 @@
 
 <p>
   <b>Event date:</b>
-  <%= @event.event_date %>
+  <%= @event.event_date.to_formatted_s(:long_ordinal) %>
 </p>
 
 <p>
   <b>Event time:</b>
-  <%= @event.event_time %>
+  <%= @event.event_time.to_formatted_s(:time) %>
 </p>
 
 <%if @event.location %>

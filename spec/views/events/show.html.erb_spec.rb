@@ -6,7 +6,9 @@ describe "events/show" do
       :name => "Superbowl",
       :home_team => stub_model(Team, name:"Seahawks", slug:"seahawks"),
       :visiting_team => stub_model(Team, name:"Cowboys", slug:"cowboys"),
-      :location => stub_model(Location, one_line_address:"100 Main")
+      :location => stub_model(Location, one_line_address:"100 Main"),
+      :event_date => DateTime.now(),
+      :event_time => Time.now
     )
     @event = assign(:event, theStub)
   end

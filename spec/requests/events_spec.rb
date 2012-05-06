@@ -54,7 +54,8 @@ describe "Events" do
       end
 
       it "should show a event" do
-        page.should have_content(@event.name)
+        page.should have_content(@event.home_team.name)
+        page.should have_content(@event.visiting_team.name)
       end
     end
     
@@ -63,8 +64,9 @@ describe "Events" do
         visit event_path(@event)
       end
 
-      it "should show an event name" do
-        page.should have_content(@event.name)
+      it "should show event data" do
+        page.should have_content(@event.home_team.name)
+        page.should have_content(@event.visiting_team.name)
       end
     end
     

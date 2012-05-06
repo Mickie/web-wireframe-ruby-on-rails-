@@ -17,4 +17,14 @@ module ApplicationHelper
     
     return logosPath + aSlug + theSuffix
   end
+  
+  def teamLogo(aTeam, aSize)
+    theImageSize = "50x50"
+    if (aSize == :medium)
+      theImageSize = "80x80"
+    elsif aSize == :large
+      theImageSize = "110x110"
+    end
+    image_tag logoPath(aTeam.slug, aSize), { alt:aTeam.name, size:theImageSize }
+  end
 end
