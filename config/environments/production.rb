@@ -1,5 +1,6 @@
 FanzoSite::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.static_asset_base_path = "http://fanzo_static.s3.amazonaws.com/"
   
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -54,7 +55,7 @@ FanzoSite::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( static_pages.js users.js users/show.js )
+  config.assets.precompile += %w( users/show.js )
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'fanzo.co' }

@@ -66,6 +66,6 @@ module FanzoSite
     
     config.cache_store = :dalli_store
     
-    config.static_asset_base_path = "http://fanzo_static.s3.amazonaws.com/"
+    config.static_asset_base_path = "http://localhost/~paulingalls/fanzo_site/static/"
   end
 end

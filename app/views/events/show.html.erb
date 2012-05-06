@@ -1,19 +1,24 @@
+<% if @event.visiting_team.slug && @event.home_team.slug %>
+  <div class="row-fluid">
+    <div class="span5">
+      <img src="<%= logoPath(@event.visiting_team.slug, :medium) %>" />
+      <h2><%= @event.visiting_team.name %></h2>
+    </div>
+    <div class="span2">
+      <strong>at</strong>
+    </div>
+    <div class="span5">
+      <img src="<%= logoPath(@event.home_team.slug, :medium) %>" />
+      <h2><%= @event.home_team.name %></h2>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @event.name %>
-</p>
-
-<p>
-  <b>Home team:</b>
-  <%= @event.home_team.name %>
-</p>
-
-<p>
-  <b>Visiting team:</b>
-  <%= @event.visiting_team.name %>
-</p>
 
 <p>
   <b>Event date:</b>

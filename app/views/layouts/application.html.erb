@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title><%= yield(:title) %></title>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
@@ -7,10 +7,6 @@
     <script>
       $(document).ready(function(){
         initFacebookJSSDK();
-        for (var i=0; i < FANZO.documentReadyFunctions.length; i++)
-        {
-          FANZO.documentReadyFunctions[i]();
-        }
         setTimeout( function()
         {
             window.scrollTo( 0, 1 );
