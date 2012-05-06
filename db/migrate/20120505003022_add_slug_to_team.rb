@@ -3,10 +3,12 @@ class AddSlugToTeam < ActiveRecord::Migration
     add_column :teams, :slug, :string
 
     Team.all.each do |team|
-      theSlugRegEx = /http:\/\/espn.go.com\/college-football\/team\/_\/id\/(\d+)\/(.*)$/
-      theMatches = theSlugRegEx.match(team.espn_team_url) 
-      team.slug = theMatches[2]
-      team.save
+      if (team.espn_team_url)
+        theSlugRegEx = /http:\/\/espn.go.com\/college-football\/team\/_\/id\/(\d+)\/(.*)$/
+        theMatches = theSlugRegEx.match(team.espn_team_url) 
+        team.slug = theMatches[2]
+        team.save
+      end
     end
 
   end
