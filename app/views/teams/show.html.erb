@@ -22,40 +22,57 @@
     <%= @team.location.one_line_address %>
   </div>
 </div>
-<% if @team.social_info %>
+
 <div class="row-fluid">
-  <div class="span12">
-    <b>Twitter name:</b>
-    <%= @team.social_info.twitter_name %>
+  <div class="span6">
+    <h3>Official Watch Sites</h3>
+    <% @team.watch_sites.each do |aWatchSite| %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= aWatchSite.name ? aWatchSite.name : aWatchsite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="span6">
+    <h3>Social</h3>
+    <% if @team.social_info %>
+      <div class="row-fluid">
+        <div class="span12">
+          <b>Twitter name:</b>
+          <%= @team.social_info.twitter_name %>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <b>Facebook page url:</b>
+          <%= @team.social_info.facebook_page_url %>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <b>Web url:</b>
+          <%= @team.social_info.web_url %>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <b>YouTube channel:</b>
+          <%= @team.social_info.youtube_url %>
+        </div>
+      </div>
+    <% end %>
+    <% if @team.affiliation %>
+      <div class="row-fluid">
+        <div class="span12">
+          <b>Affiliation:</b>
+          <%= @team.affiliation.name %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
-<div class="row-fluid">
-  <div class="span12">
-    <b>Facebook page url:</b>
-    <%= @team.social_info.facebook_page_url %>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12">
-    <b>Web url:</b>
-    <%= @team.social_info.web_url %>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12">
-    <b>YouTube channel:</b>
-    <%= @team.social_info.youtube_url %>
-  </div>
-</div>
-<% end %>
-<% if @team.affiliation %>
-<div class="row-fluid">
-  <div class="span12">
-    <b>Affiliation:</b>
-    <%= @team.affiliation.name %>
-  </div>
-</div>
-<% end %>
+
 
 <% if @team.social_info.hash_tags %>
   <div class="row-fluid">
@@ -76,4 +93,5 @@
     })
   </script>
 <% end %>
+
 
