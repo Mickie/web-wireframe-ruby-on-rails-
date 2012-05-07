@@ -1,3 +1,27 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#newTweets
+{
+  margin:5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tweet
+{
+  margin: 5px;
+}
+
+.timestamp
+{
+  color: gray;
+  margin: 5px 0px;  
+}
+
+.tweet > img
+{
+  margin-right: 10px;
+}
+

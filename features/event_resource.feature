@@ -21,7 +21,6 @@ Feature: Event Resource
 		When I visit the new event page
 			And I create a new event
 		Then I should see the details of the new event
-			And I should be able to edit it
 	
 	Scenario: I can edit a event as an admin
 		Given I sign in as admin

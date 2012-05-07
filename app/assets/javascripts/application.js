@@ -17,3 +17,14 @@
 //= require bootstrap
 //= require facebook_js_sdk_loader
 //= require google_analytics
+//= require twitter_search
+//= require twitter_view
+
+function createDelegate(anObject, aMethod)
+{
+  var theDelegate = function()
+  {
+    return aMethod.apply(anObject, arguments);
+  }
+  return theDelegate;
+}
