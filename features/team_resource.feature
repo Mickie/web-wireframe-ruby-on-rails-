@@ -21,7 +21,6 @@ Feature: Team Resource
 		When I visit the new team page
 			And I create a new team
 		Then I should see the details of the new team
-			And I should be able to edit it
 	
 	Scenario: I can edit a team as an admin
 		Given I sign in as admin

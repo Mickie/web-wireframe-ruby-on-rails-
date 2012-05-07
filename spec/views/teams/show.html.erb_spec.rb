@@ -24,14 +24,14 @@ describe "teams/show" do
     @team = assign(:team, theStub)
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
     render
     rendered.should match(/killer team/)
     rendered.should match(/#{@sport.name}/)
     rendered.should match(/#{@league.name}/)
     rendered.should match(/#{@division.name}/)
     rendered.should match(/#{@conference.name}/)
-    rendered.should match(/#{@location.name}/)
+    rendered.should match(/#{@location.one_line_address}/)
     rendered.should match(/#{@social_info.twitter_name}/)
     rendered.should match(/#{@social_info.facebook_page_url}/)
     rendered.should match(/#{@social_info.web_url}/)
