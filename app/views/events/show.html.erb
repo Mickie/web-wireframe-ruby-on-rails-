@@ -20,24 +20,44 @@
     <h2><%= link_to @event.home_team.name, team_path(@event.home_team) %></h2>
   </div>
 </div>
+
 <div class="row-fluid">
   <div class="span6">
-    <%= @event.event_date.to_formatted_s(:long_ordinal) %>
+    <h3>Game Watch Sites:</h3>
+    <% @event.game_watches.each do |aGameWatch| %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= aGameWatch.name ? aGameWatch.name : aGameWatch.venue.name %> : <%= aGameWatch.venue.location.one_line_address %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="span6">
-    <%= @event.event_time.to_formatted_s(:time) %>
+    <h3>Game Details:</h3>
+    <div class="row-fluid">
+      <div class="span12">
+          <strong>Game Time:</strong>
+        <%= @event.event_date.to_formatted_s(:long_ordinal) %> at
+        <%= @event.event_time.to_formatted_s(:time) %>
+      </div>
+    </div>
+    <%if @event.location %>
+      <div class="row-fluid">
+        <div class="span12">
+          <strong>Location</strong>>
+          <%= @event.location.one_line_address %>
+        </div>
+      </div>
+    <%end%>
   </div>
 </div>
-<%if @event.location %>
-<div class="row-fluid">
-  <div class="span12">
-    <%= @event.location.one_line_address %>
-  </div>
-</div>
-<%end%>
+
+
+
   
 <div class="row-fluid">
   <div class="span12">
+    <h3>What people are saying about the game:</h3>
     <div id="tweetHolder">
       <div id="newTweets" class='alert alert-info fade in' style='display:none'>
         <a class='close' data-dismiss='alert' href='#'>×</a><p><strong>5</strong> new Tweets!</p>

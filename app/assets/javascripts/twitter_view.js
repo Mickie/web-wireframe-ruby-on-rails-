@@ -1,8 +1,10 @@
 var MAX_TWEETS = 15;
 
-var TwitterView = function(anArrayOfHashTags, aMaxTweets)
+var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweetDivId)
 {
   this.myMaxTweets = aMaxTweets ? aMaxTweets : MAX_TWEETS;
+  this.myTweetDivSelector = aTweetDivId ? "div#" + aTweetDivId : "div#tweets";
+  this.myNewTweetDivSelector = aNewTweetDivId ? "div#" + aNewTweetDivId : "div#newTweets";
   this.myHashTags = anArrayOfHashTags;
   this.myNewTweets = new Array();
   this.myFullyLoadedFlag = false;
@@ -25,10 +27,10 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets)
     }
     else
     {
-      $("#tweets").append(this.getTweetMarkup(aTweet));
+      $(this.myTweetDivSelector).append(this.getTweetMarkup(aTweet));
       $(theNewDivSelector).slideDown(200);
       
-      if ($("#tweets").children().length > this.myMaxTweets)
+      if ($(this.myTweetDivSelector).children().length > this.myMaxTweets)
       {
         this.myFullyLoadedFlag = true;
       }
@@ -38,18 +40,18 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets)
 
   this.onError = function(aMessage)
   {
-    $( "#tweets" ).html( "<p>" + aMessage + "</p>" )
+    $( this.myTweetDivSelector ).html( "<p>" + aMessage + "</p>" )
   };
 
   this.showNewTweetsAlert = function()
   {
-    $("#newTweets > p").html("<strong>" + this.myNewTweets.length + "</strong> new Tweets!");
-    $("#newTweets").slideDown(600).click(createDelegate(this, this.showNewTweets));
+    $(this.myNewTweetDivSelector + " > p").html("<strong>" + this.myNewTweets.length + "</strong> new Tweets!");
+    $(this.myNewTweetDivSelector).slideDown(600).click(createDelegate(this, this.showNewTweets));
   };
 
   this.showNewTweets = function()
   {
-    $("#newTweets").slideUp(600);
+    $(this.myNewTweetDivSelector).slideUp(600);
     $.each(this.myNewTweets, createDelegate(this, this.showTweet));
     this.myNewTweets = new Array();
   };
@@ -62,7 +64,7 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets)
     }
 
     var theNewDivSelector = "#" + aTweet.id_str;
-    $("#tweets").prepend(this.getTweetMarkup(aTweet));
+    $(this.myTweetDivSelector).prepend(this.getTweetMarkup(aTweet));
     $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
   };
   
