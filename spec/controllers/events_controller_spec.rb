@@ -5,7 +5,7 @@ describe EventsController do
   before do
     mock_geocoding!
 
-    @home_team = FactoryGirl.create(:team)
+    @home_team = FactoryGirl.create(:team, conference: FactoryGirl.create(:conference))
     @visiting_team = FactoryGirl.create(:team)
     @location = FactoryGirl.create(:location)
   end
@@ -43,29 +43,33 @@ describe EventsController do
         assigns(:event).should eq(@event)
       end
       
-      it "assigns the team hash tags to @hashTag" do
-        assigns(:hashTags).should eq( @home_team.social_info.hash_tags.split(" ") + @visiting_team.social_info.hash_tags.split(" ") )
+      it "assigns the team hash tags to @visitingHashTag & @homeHashTag" do
+        assigns(:homeHashTags).should eq( @home_team.social_info.hash_tags.split(" ") )
+        assigns(:visitingHashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )
       end
     end
     
     describe "sparse events" do
 
-      it "assigns available team hash tags to @hashTag" do
+      it "assigns available team hash tags" do
         @home_team.social_info = nil;
         @home_team.save
         @event = Event.create! valid_attributes
         get :show, {:id => @event.to_param}
-        assigns(:hashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )
+        assigns(:visitingHashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )
+        assigns(:homeHashTags).should eq( ["#" + @home_team.conference.name ]  )
       end
 
       it "assigns team sport to @hashTag when teams don't have one" do
         @visiting_team.social_info = nil
         @visiting_team.save
         @home_team.social_info = nil;
+        @home_team.conference = nil;
         @home_team.save
         @event = Event.create! valid_attributes
         get :show, {:id => @event.to_param}
-        assigns(:hashTags).should eq( ["#" + @home_team.sport.name] )
+        assigns(:visitingHashTags).should eq( ["#fanzo_" + @visiting_team.sport.name] )
+        assigns(:homeHashTags).should eq( ["#fanzo_" + @home_team.sport.name ]  )
       end
 
     end

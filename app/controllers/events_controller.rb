@@ -18,18 +18,24 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     
-    @hashTags = []
+    @homeHashTags = []
     if (@event.home_team.social_info && @event.home_team.social_info.hash_tags)
-      @hashTags += @event.home_team.social_info.hash_tags.split(' ');
-    end
-    if (@event.visiting_team.social_info && @event.visiting_team.social_info.hash_tags)
-      @hashTags += @event.visiting_team.social_info.hash_tags.split(' ');
+      @homeHashTags = @event.home_team.social_info.hash_tags.split(' ');
+    elsif @event.home_team.conference
+      @homeHashTags.push("#" + @event.home_team.conference.name)
+    else
+      @homeHashTags.push("#fanzo_" + @event.home_team.sport.name)
     end
     
-    if (@hashTags.length == 0)
-      @hashTags.push("#" + @event.home_team.sport.name)
+    @visitingHashTags = []
+    if (@event.visiting_team.social_info && @event.visiting_team.social_info.hash_tags)
+      @visitingHashTags = @event.visiting_team.social_info.hash_tags.split(' ');
+    elsif @event.visiting_team.conference
+      @visitingHashTags.push("#" + @event.visiting_team.conference.name)
+    else
+      @visitingHashTags.push("#fanzo_" + @event.visiting_team.sport.name)
     end
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
