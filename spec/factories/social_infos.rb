@@ -5,6 +5,7 @@ FactoryGirl.define do
     facebook_page_url "http://www.facebook.com"
     web_url "http://www.fanzo.co"
     hash_tags "#fanzo"
+    youtube_url "http://www.youtube.com/user/FanzoFans"
   end
 
 end

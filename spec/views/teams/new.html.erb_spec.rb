@@ -27,6 +27,7 @@ describe "teams/new" do
       assert_select "input#team_social_info_attributes_twitter_name", :name => "team[social_info_attributes][twitter_name]"
       assert_select "input#team_social_info_attributes_facebook_page_url", :name => "team[social_info_attributes][facebook_page_url]"
       assert_select "input#team_social_info_attributes_web_url", :name => "team[social_info_attributes][web_url]"
+      assert_select "input#team_social_info_attributes_youtube_url", :name => "team[social_info_attributes][youtube_url]"
 
       assert_select "select#team_sport_id", :name => "team[sport_id]"
       assert_select "select#team_league_id", :name => "team[league_id]"

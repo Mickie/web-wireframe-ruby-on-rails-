@@ -15,6 +15,7 @@ When /^I create a new team$/ do
   fill_in "team_social_info_attributes_twitter_name",    with: @new_team.social_info.twitter_name
   fill_in "team_social_info_attributes_facebook_page_url",    with: @new_team.social_info.facebook_page_url
   fill_in "team_social_info_attributes_web_url",    with: @new_team.social_info.web_url
+  fill_in "team_social_info_attributes_youtube_url", with: @new_team.social_info.youtube_url
 
 
   fill_in "team_location_attributes_name", with: @new_team.location.name
