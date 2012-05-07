@@ -32,10 +32,42 @@ describe EventsController do
 
   describe "GET show" do
     login_user
-    it "assigns the requested event as @event" do
-      event = Event.create! valid_attributes
-      get :show, {:id => event.to_param}
-      assigns(:event).should eq(event)
+    
+    describe "populated events" do 
+      before do
+        @event = Event.create! valid_attributes
+        get :show, {:id => @event.to_param}
+      end
+      
+      it "assigns the requested event as @event" do
+        assigns(:event).should eq(@event)
+      end
+      
+      it "assigns the team hash tags to @hashTag" do
+        assigns(:hashTags).should eq( @home_team.social_info.hash_tags.split(" ") + @visiting_team.social_info.hash_tags.split(" ") )
+      end
+    end
+    
+    describe "sparse events" do
+
+      it "assigns available team hash tags to @hashTag" do
+        @home_team.social_info = nil;
+        @home_team.save
+        @event = Event.create! valid_attributes
+        get :show, {:id => @event.to_param}
+        assigns(:hashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )
+      end
+
+      it "assigns team sport to @hashTag when teams don't have one" do
+        @visiting_team.social_info = nil
+        @visiting_team.save
+        @home_team.social_info = nil;
+        @home_team.save
+        @event = Event.create! valid_attributes
+        get :show, {:id => @event.to_param}
+        assigns(:hashTags).should eq( ["#" + @home_team.sport.name] )
+      end
+
     end
   end
 

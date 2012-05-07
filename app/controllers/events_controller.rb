@@ -20,10 +20,10 @@ class EventsController < ApplicationController
     
     @hashTags = []
     if (@event.home_team.social_info && @event.home_team.social_info.hash_tags)
-      @hashTags.push( @event.home_team.social_info.hash_tags.split(' '));
+      @hashTags += @event.home_team.social_info.hash_tags.split(' ');
     end
     if (@event.visiting_team.social_info && @event.visiting_team.social_info.hash_tags)
-      @hashTags.push( @event.visiting_team.social_info.hash_tags.split(' '));
+      @hashTags += @event.visiting_team.social_info.hash_tags.split(' ');
     end
     
     if (@hashTags.length == 0)
