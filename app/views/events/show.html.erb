@@ -59,19 +59,39 @@
   </div>
 </div>
 
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Official Local Watch Sites:</h3>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h4><%= @event.visiting_team.name %> Watch Sites:</h4>
+    <% @localVisitingTeamWatchSites.each do |aWatchSite| %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchSite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="span6">
+    <h4><%= @event.home_team.name %> Watch Sites:</h4>
+    <% @localHomeTeamWatchSites.each do |aWatchSite| %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchSite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <div class="row-fluid">
   <div class="span12">
     <h3>What people are saying about the game:</h3>
-    <div id="tweetHolder">
-      <div id="newTweets" class='alert alert-info fade in' style='display:none'>
-        <a class='close' data-dismiss='alert' href='#'>×</a><p><strong>5</strong> new Tweets!</p>
-      </div>
-      <div id="tweets"></div>
-    </div>
   </div>
 </div>
-
   
 <div class="row-fluid">
   <div class="span6">

@@ -36,6 +36,22 @@ class EventsController < ApplicationController
       @visitingHashTags.push("#fanzo_" + @event.visiting_team.sport.name)
     end
     
+    theCoordinates = request.location.coordinates
+    if request.remote_ip == "127.0.0.1"
+      theCoordinates = "Northwest University, Kirkland WA"
+    end
+    
+    @localHomeTeamWatchSites = [];
+    @localVisitingTeamWatchSites = [];
+    WatchSite.near(theCoordinates, 20).each do | aWatchSite |
+      if aWatchSite.team.id == @event.home_team.id
+        @localHomeTeamWatchSites.push(aWatchSite)
+      end
+      if aWatchSite.team.id == @event.visiting_team.id
+        @localVisitingTeamWatchSites.push(aWatchSite)
+      end
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }

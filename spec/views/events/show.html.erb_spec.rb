@@ -11,6 +11,13 @@ describe "events/show" do
       :event_time => Time.now
     )
     @event = assign(:event, theStub)
+    
+    @venue = FactoryGirl.build(:venue)
+    @home_watch_site = FactoryGirl.build(:watch_site, team:@event.home_team, venue:@venue)
+    @visiting_watch_site = FactoryGirl.build(:watch_site, name:"", team:@event.visiting_team, venue:@venue)
+    @localHomeTeamWatchSites = assign(:localHomeTeamWatchSites, [@home_watch_site])
+    @localVisitingTeamWatchSites = assign(:localVisitingTeamWatchSites, [@visiting_watch_site])
+    
   end
 
   it "renders attributes in <p>" do
@@ -24,5 +31,11 @@ describe "events/show" do
     @event.event_time = nil;
     render
     rendered.should match(/Seahawks/)
+  end
+  
+  it "shows watch sites" do
+    render
+    rendered.should match(/#{@home_watch_site.name}/)
+    rendered.should match(/#{@visiting_watch_site.venue.name}/)
   end  
 end

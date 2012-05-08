@@ -73,6 +73,28 @@ describe EventsController do
       end
 
     end
+    
+    describe "events with local watch sites" do
+      before do
+        @event = Event.create! valid_attributes
+        @theFirstWatchSite = FactoryGirl.build(:watch_site, team:@home_team)
+        @theSecondWatchSite = FactoryGirl.build(:watch_site, team:@visiting_team)
+        @theThirdWatchSite = FactoryGirl.build(:watch_site)
+        
+        WatchSite.should_receive(:near).and_return([@theFirstWatchSite, @theSecondWatchSite, @theThirdWatchSite])
+      end
+      
+      it "returns the home teams watch sites near location in @localHomeTeamWatchSites" do
+        get :show, {:id => @event.to_param}
+        assigns(:localHomeTeamWatchSites).should eq([@theFirstWatchSite])
+      end
+      
+      it "returns the visiting teams watch sites near location in @localVisitingTeamWatchSites" do
+        get :show, {:id => @event.to_param}
+        assigns(:localVisitingTeamWatchSites).should eq([@theSecondWatchSite])
+      end
+      
+    end
   end
 
   describe "GET new" do
