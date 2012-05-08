@@ -29,7 +29,7 @@
     <% @localTeamWatchSites.each do |aWatchSite| %>
       <div class="row-fluid">
         <div class="span12">
-          <%= aWatchSite.name ? aWatchSite.name : aWatchsite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+          <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchsite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
         </div>
       </div>
     <% end %>
