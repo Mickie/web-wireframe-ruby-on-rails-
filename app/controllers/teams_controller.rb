@@ -33,7 +33,7 @@ class TeamsController < ApplicationController
     
     @localTeamWatchSites = [];
     WatchSite.near(theCoordinates, 20).each do | aWatchSite |
-      if aWatchSite.team.id = @team.id
+      if aWatchSite.team.id == @team.id
         @localTeamWatchSites.push(aWatchSite)
       end
     end
