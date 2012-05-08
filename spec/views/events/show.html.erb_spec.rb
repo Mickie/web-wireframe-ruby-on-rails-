@@ -15,9 +15,14 @@ describe "events/show" do
 
   it "renders attributes in <p>" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Seahawks/)
     rendered.should match(/Cowboys/)
     rendered.should match(/100 Main/)
   end
+  
+  it "handles a nil time" do
+    @event.event_time = nil;
+    render
+    rendered.should match(/Seahawks/)
+  end  
 end

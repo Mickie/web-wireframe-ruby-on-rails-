@@ -36,9 +36,16 @@
     <h3>Game Details:</h3>
     <div class="row-fluid">
       <div class="span12">
-          <strong>Game Time:</strong>
-        <%= @event.event_date.to_formatted_s(:long_ordinal) %> at
-        <%= @event.event_time.to_formatted_s(:time) %>
+        <div class="row-fluid">
+          <div class="span6">
+            <strong>Date:</strong>
+            <%= @event.event_date.to_formatted_s(:long_ordinal) %>
+          </div>
+          <div class="span6">
+            <strong>Time:</strong>
+            <%= @event.event_time? ? @event.event_time.to_formatted_s(:time) : "TBA" %>
+          </div>
+        </div>
       </div>
     </div>
     <%if @event.location %>

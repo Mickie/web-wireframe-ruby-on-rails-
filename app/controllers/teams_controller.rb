@@ -26,8 +26,13 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     
+    theCoordinates = request.location.coordinates
+    if request.remote_ip == "127.0.0.1"
+      theCoordinates = "Northwest University, Kirkland WA"
+    end
+    
     @localTeamWatchSites = [];
-    WatchSite.near(request.location.coordinates, 20).each do | aWatchSite |
+    WatchSite.near(theCoordinates, 20).each do | aWatchSite |
       if aWatchSite.team.id = @team.id
         @localTeamWatchSites.push(aWatchSite)
       end
