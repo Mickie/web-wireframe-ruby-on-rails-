@@ -4,7 +4,9 @@ describe VenuesController do
   login_admin
   
   before do
+    mock_geocoding!
     @theVenueType = FactoryGirl.create(:venue_type)
+    @theLocation = FactoryGirl.create(:location)
   end
   
   it "should have current_admin" do
@@ -12,7 +14,7 @@ describe VenuesController do
   end
   
   def valid_attributes
-    { name:"Pumphouse", venue_type_id:@theVenueType.id }
+    { name:"Pumphouse", venue_type_id:@theVenueType.id, location_id:@theLocation.id }
   end
 
   describe "GET index" do

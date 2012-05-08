@@ -22,6 +22,10 @@ describe "teams/show" do
       :social_info => @social_info
     )
     @team = assign(:team, theStub)
+    
+    @venue = FactoryGirl.build(:venue)
+    @watch_site = FactoryGirl.build(:watch_site, team:@team, venue:@venue)
+    @localTeamWatchSites = assign(:localTeamWatchSites, [@watch_site])
   end
 
   it "renders attributes" do

@@ -25,6 +25,13 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
+    
+    @localTeamWatchSites = [];
+    WatchSite.near(request.location.coordinates, 20).each do | aWatchSite |
+      if aWatchSite.team.id = @team.id
+        @localTeamWatchSites.push(aWatchSite)
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

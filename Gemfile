@@ -10,6 +10,7 @@ gem 'omniauth-twitter'
 gem 'bootstrap-sass', '>= 2.0.0'
 gem 'geocoder'
 gem 'dalli'
+gem 'kgio'
 
 group :assets do
   gem 'sass-rails'

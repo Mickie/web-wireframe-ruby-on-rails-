@@ -25,8 +25,8 @@
 
 <div class="row-fluid">
   <div class="span6">
-    <h3>Official Watch Sites</h3>
-    <% @team.watch_sites.each do |aWatchSite| %>
+    <h3>Local Official Watch Sites</h3>
+    <% @localTeamWatchSites.each do |aWatchSite| %>
       <div class="row-fluid">
         <div class="span12">
           <%= aWatchSite.name ? aWatchSite.name : aWatchsite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>

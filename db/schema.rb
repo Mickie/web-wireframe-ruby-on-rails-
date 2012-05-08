@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507204657) do
+ActiveRecord::Schema.define(:version => 20120508161352) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(:version => 20120507204657) do
   create_table "venues", :force => true do |t|
     t.string   "name",           :null => false
     t.integer  "social_info_id"
-    t.integer  "location_id"
+    t.integer  "location_id",    :null => false
     t.integer  "venue_type_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -246,6 +246,8 @@ ActiveRecord::Schema.define(:version => 20120507204657) do
     t.integer  "venue_id",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "watch_sites", ["team_id"], :name => "index_watch_sites_on_team_id"
