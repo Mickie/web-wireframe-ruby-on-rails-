@@ -1,19 +1,16 @@
 <div class="row-fluid">
   <div class="span12">
-    <p id="notice"><%= notice %></p>
+    <h1><%= @event.visiting_team.name %> at <%= @event.home_team.name %></h1>
   </div>
 </div>
 <div class="row-fluid">
-  <div class="span5">
+  <div class="span6">
     <% if @event.visiting_team.slug && @event.home_team.slug %>
       <%= teamLogo(@event.visiting_team, :medium) %>
     <% end %>
     <h2><%= link_to @event.visiting_team.name, team_path(@event.visiting_team) %></h2>
   </div>
-  <div class="span2">
-    <strong>at</strong>
-  </div>
-  <div class="span5">
+  <div class="span6">
     <% if @event.visiting_team.slug && @event.home_team.slug %>
       <%= teamLogo(@event.home_team, :medium) %>
     <% end %>
