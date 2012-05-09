@@ -19,6 +19,7 @@
 //= require google_analytics
 //= require twitter_search
 //= require twitter_view
+//= require lib/pure
 
 function createDelegate(anObject, aMethod)
 {

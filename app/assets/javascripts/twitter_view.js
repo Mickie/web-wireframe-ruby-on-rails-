@@ -27,7 +27,7 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
     }
     else
     {
-      $(this.myTweetDivSelector).append(this.getTweetMarkup(aTweet));
+      $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
       $(theNewDivSelector).slideDown(200);
       
       if ($(this.myTweetDivSelector).children().length > this.myMaxTweets)
@@ -64,7 +64,7 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
     }
 
     var theNewDivSelector = "#" + aTweet.id_str;
-    $(this.myTweetDivSelector).prepend(this.getTweetMarkup(aTweet));
+    $(this.myTweetDivSelector).prepend(this.generateTweetDiv(aTweet));
     $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
   };
   
@@ -73,25 +73,39 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
     $(".tweet:last").remove();
   };
   
-  
-  this.getTweetMarkup = function( aTweet )
+  this.generateTweetDiv = function(aTweet)
   {
-    var theTweetDate = new Date( aTweet.created_at );
-
-    return "<div id='" + aTweet.id_str + "' class='tweet well' style='display:none'><img src='"
-           + aTweet.profile_image_url
-           + "' style='float:left' width='48px' height='48px'></img> <strong>"
-           + aTweet.from_user_name
-           + ": </strong>"
-           + aTweet.text
-           + "<div class='tweetMenu'><div class='timestamp'>"
-           + theTweetDate.toDateString()
-           + " "
-           + theTweetDate.toLocaleTimeString()
-           + "</div>";
-           
-           // + this.getTweetMenuMarkup(aTweet);
-  }
+    return $("#template").clone().render(aTweet, this.getTweetDirective());
+  };
+  
+  this.getTweetDirective = function()
+  {
+    return {
+      ".@id" : "id_str",
+      "img.twitterAvatar@src" : "profile_image_url",
+      "span.twitterName" : "from_user_name",
+      "span.twitterText" : function(anItem)
+      {
+        var theTweet = anItem.context;
+        var theText = theTweet.text;
+        var theUrls = theTweet.entities.urls;
+        for(var i=0,j=theUrls.length; i<j; i++)
+        {
+          var theUrlData = theUrls[i];
+          var theAnchor = "<a href='" + theUrlData.url + "' target='_blank'>" + theUrlData.display_url + "</a>";
+          theText = theText.replace(theUrlData.url, theAnchor);
+        }
+        return theText;
+      },
+      "div.timestamp" : function(anItem)
+      {
+        var theTweet = anItem.context;
+        var theTweetDate = new Date( theTweet.created_at );
+        return theTweetDate.toDateString() + " " + theTweetDate.toLocaleTimeString()
+      }
+    }
+  };
+  
   
   this.getTweetMenuMarkup = function( aTweet )
   {

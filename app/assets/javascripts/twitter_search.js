@@ -8,7 +8,7 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
 
   this.getLatestTweetsForTerm = function(aSearchTerm)
   {
-    var theQueryString = "?lang=en&callback=?&q=" + escape(aSearchTerm);
+    var theQueryString = "?lang=en&include_entities=true&callback=?&q=" + escape(aSearchTerm);
     $.getJSON(TWITTER_SEARCH_URL + theQueryString, createDelegate(this, this.onSearchComplete));
   };
 
