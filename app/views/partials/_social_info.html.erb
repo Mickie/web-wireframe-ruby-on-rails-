@@ -1,24 +1,24 @@
 <div class="field">
-  <%= f.label :social_info %><br />
+  <%= f.label :social_info %>
   <%= f.fields_for :social_info do |s|%>
     <div class="field">
-      <%= s.label :twitter_name %><br />
+      <%= s.label :twitter_name %>
       <%= s.text_field :twitter_name %>
     </div>
     <div class="field">
-      <%= s.label :hash_tags %><br />
+      <%= s.label :hash_tags %>
       <%= s.text_field :hash_tags %>
     </div>
     <div class="field">
-      <%= s.label :facebook_page_url %><br />
+      <%= s.label :facebook_page_url %>
       <%= s.text_field :facebook_page_url %>
     </div>
     <div class="field">
-      <%= s.label :web_url %><br />
+      <%= s.label :web_url %>
       <%= s.text_field :web_url %>
     </div>
     <div class="field">
-      <%= s.label :youtube_url %><br />
+      <%= s.label :youtube_url %>
       <%= s.text_field :youtube_url %>
     </div>
   <%end%>

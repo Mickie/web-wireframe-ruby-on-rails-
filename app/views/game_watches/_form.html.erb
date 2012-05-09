@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :event %><br />
+    <%= f.label :event %>
     <%= f.select(:event_id, options_for_select(Event.all.collect {|p| [ p.name, p.id ] }, @game_watch.event_id )) %>
   </div>
 
   <div class="field">
-    <%= f.label :venue %><br />
+    <%= f.label :venue %>
     <%= f.select(:venue_id, options_for_select(Venue.all.collect {|p| [ p.name, p.id ] }, @game_watch.venue_id )) %>
   </div>
 
   <div class="field">
-    <%= f.label :creator %><br />
+    <%= f.label :creator %>
     <%= f.select(:creator_id, options_for_select(User.all.collect {|p| [ p.email, p.id ] }, @game_watch.creator_id )) %>
   </div>
 

@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   
   <div class="field">
-    <%= f.label :league %><br />
+    <%= f.label :league %>
     <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] }, @conference.league_id)) %>
   </div>
   

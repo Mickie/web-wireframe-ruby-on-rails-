@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :venue_type %><br />
+    <%= f.label :venue_type %>
     <%= f.select(:venue_type_id, options_for_select(VenueType.all.collect {|p| [ p.name, p.id ] }, @venue.venue_type_id )) %>
   </div>
 

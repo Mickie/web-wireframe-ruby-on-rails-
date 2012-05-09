@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :team %><br />
+    <%= f.label :team %>
     <%= f.select(:team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @watch_site.team_id )) %>
   </div>
   <div class="field">
-    <%= f.label :venue %><br />
+    <%= f.label :venue %>
     <%= f.select(:venue_id, options_for_select(Venue.all.collect {|p| [ p.name, p.id ] }, @watch_site.venue_id )) %>
   </div>
   

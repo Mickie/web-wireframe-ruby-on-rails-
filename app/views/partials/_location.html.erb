@@ -1,19 +1,19 @@
 <div class="field">
-  <%= f.label :location %><br />
+  <%= f.label :location %>
   <%= f.fields_for :location do |l|%>
-    <%= l.label :name %><br />
+    <%= l.label :name %>
     <%= l.text_field :name %>
-    <%= l.label :address1 %><br />
+    <%= l.label :address1 %>
     <%= l.text_field :address1 %>
-    <%= l.label :address2 %><br />
+    <%= l.label :address2 %>
     <%= l.text_field :address2 %>
-    <%= l.label :city %><br />
+    <%= l.label :city %>
     <%= l.text_field :city %>
-    <%= l.label :state %><br />
+    <%= l.label :state %>
     <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] }, location.state_id )) %>
-    <%= l.label :postal_code %><br />
+    <%= l.label :postal_code %>
     <%= l.text_field :postal_code %>
-    <%= l.label :country %><br />
+    <%= l.label :country %>
     <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] }, location.country_id )) %>
   <%end%>
 </div>
