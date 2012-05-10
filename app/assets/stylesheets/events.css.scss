@@ -28,6 +28,24 @@
   float:left;
 }
 
+.tweetMenu > a
+{
+  padding: 5px 10px;
+}
+
+.modal-body .btn
+{
+  margin: 5px 3px;
+}
+
+
+.tweetStarterBtn a
+{
+  float:left;
+  width: 120px;
+  margin: 5px;
+}
+
 #newTweets
 {
   margin:5px;
@@ -39,3 +57,21 @@
 {
   display:none;
 }
+
+#buttonHolder
+{
+  margin: 10px 0px;
+  height: 40px;
+}
+
+#tweetHolder
+{
+  position: relative;
+}
+
+#tweetSuccessAlert
+{
+  margin:5px;
+}
+
+

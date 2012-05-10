@@ -76,6 +76,70 @@
 <% if @team.social_info.hash_tags %>
 <div class="row-fluid">
   <div class="span12">
+    
+    <div id="buttonHolder">
+      <div id="myHappyModal" class="modal hide fade" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Tell the world that Rocked!<br/>Pick a start:</h3>
+        </div>
+        <div class="modal-body">
+          <a id="dunk" class="btn btn-large" href="#">Monster Dunk!</a>
+          <a id="niceShot" class="btn btn-large" href="#">Swoosh!</a>
+          <a id="stickIt" class="btn btn-large" href="#">In your face!</a>
+          <a id="goDefense" class="btn btn-large" href="#">Defense!</a>
+          <a id="goOffense" class="btn btn-large" href="#">Offense!</a>
+          <a id="pretty" class="btn btn-large" href="#">So Pretty!</a>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+
+      <div id="mySadModal" class="modal hide fade" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Tell the world that Sucked!<br/>Pick a start:</h3>
+        </div>
+        <div class="modal-body">
+          <a id="noDefense" class="btn btn-large" href="#">What Defense?</a>
+          <a id="foul" class="btn btn-large" href="#">Foul!</a>
+          <a id="kiddingMe" class="btn btn-large" href="#">You kidding?</a>
+          <a id="ouch" class="btn btn-large" href="#">Ouch!</a>
+          <a id="noOffense" class="btn btn-large" href="#">What Offense?</a>
+          <a id="blindRef" class="btn btn-large" href="#">Ref's Blind!</a>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+      
+      <div id="myTweetModal" class="modal hide fade" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Personalize your tweet:</h3>
+        </div>
+        <div class="modal-body">
+          <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
+        </div>
+      </div>
+          
+      <div class="tweetStarterBtn">
+        <a data-toggle="modal" href="#myHappyModal" id="happyButton" class="btn btn-large btn-primary">Booyah!!!</a>
+      </div>
+      <div class="tweetStarterBtn">
+        <a data-toggle="modal" href="#mySadModal" id="sadButton" class="btn btn-large btn-danger">What?!?!</a>
+      </div>
+    </div>
+    <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
+      <a class='close' data-dismiss='alert' href='#'>×</a><p><strong>Success!</strong> Your status was updated</p>
+    </div>
+    
+    
+    
     <div id="tweetHolder">
       <div id="newTweets" class='alert alert-info fade in' style='display:none'>
         <a class='close' data-dismiss='alert' href='#'>×</a>
@@ -90,6 +154,13 @@
           <span class="twitterText"></span>
           <div class="tweetMenu">
             <div class="timestamp"></div>
+            <a id="reply"><%= image_tag("reply.png") %>Reply</a> |
+            <a id="retweet"><%= image_tag("retweet.png") %>Retweet</a> |
+            <a id="favorite"><%= image_tag("favorite.png") %>Favorite</a>
+          </div>
+          <div class="alert alert-info fade in" style="display:none">
+            <a class="close" data-dismiss="alert" href="#">x</a>
+            <p><strong>Success!</strong></p>
           </div>
         </div>
       </div>
@@ -97,10 +168,11 @@
   </div>
 </div>
 <script language="JavaScript">
+  var myTwitterView;
   $(function()
   {
-    var theTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>, 20);
-    theTwitterView.startLoadingTweets();
+    myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>, 20);
+    myTwitterView.startLoadingTweets();
   })
 </script>
 <% end %>

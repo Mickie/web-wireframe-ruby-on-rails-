@@ -53,7 +53,7 @@ class TwitterProxyController < ApplicationController
   private
   
   def checkForTwitterCredentials
-    redirect_to(new_user_session_path) unless current_user.twitter_user_token && current_user.twitter_user_secret
+    redirect_to("/users/auth/twitter") unless current_user.twitter_user_token && current_user.twitter_user_secret
   end
   
 end

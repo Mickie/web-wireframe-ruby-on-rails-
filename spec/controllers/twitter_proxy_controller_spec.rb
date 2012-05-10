@@ -17,7 +17,7 @@ describe TwitterProxyController do
       describe "when user not connected to twitter" do
         it "should redirect to the new connection page" do
           post 'update_status', statusText: "test status", format: :json
-          response.should redirect_to(new_user_session_path)
+          response.should redirect_to("/users/auth/twitter")
         end
       end
     end
