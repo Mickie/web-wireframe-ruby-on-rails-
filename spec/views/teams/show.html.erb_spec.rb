@@ -22,6 +22,7 @@ describe "teams/show" do
       :social_info => @social_info
     )
     @team = assign(:team, theStub)
+    assign(:current_user, FactoryGirl.create(:user))
     
     @venue = FactoryGirl.build(:venue)
     @watch_site = FactoryGirl.build(:watch_site, team:@team, venue:@venue)

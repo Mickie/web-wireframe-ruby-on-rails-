@@ -37,6 +37,8 @@ class TeamsController < ApplicationController
         @localTeamWatchSites.push(aWatchSite)
       end
     end
+    
+    @current_user = current_user;
 
     respond_to do |format|
       format.html # show.html.erb

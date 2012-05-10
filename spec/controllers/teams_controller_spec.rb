@@ -43,10 +43,19 @@ describe TeamsController do
       @team = Team.create! valid_attributes
     end
     
-    it "assigns the requested team as @team" do
-      get :show, {:id => @team.to_param}
-      assigns(:team).should eq(@team)
-    end
+    describe "assigns appropriate view variables" do
+      before do
+        get :show, {:id => @team.to_param}
+      end
+      
+      it "assigns the requested team as @team" do
+        assigns(:team).should eq(@team)
+      end
+      
+      it "assigns current_user to @current_user" do
+        assigns(:current_user).should eq(subject.current_user)
+      end
+    end      
     
     it "returns the teams watch sites near location in @localTeamWatchSites" do
       theFirstWatchSite = FactoryGirl.build(:watch_site, team:@team)

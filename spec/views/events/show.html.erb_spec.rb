@@ -12,6 +12,8 @@ describe "events/show" do
     )
     @event = assign(:event, theStub)
     
+    assign(:current_user, FactoryGirl.create(:user))
+    
     @venue = FactoryGirl.build(:venue)
     @home_watch_site = FactoryGirl.build(:watch_site, team:@event.home_team, venue:@venue)
     @visiting_watch_site = FactoryGirl.build(:watch_site, name:"", team:@event.visiting_team, venue:@venue)

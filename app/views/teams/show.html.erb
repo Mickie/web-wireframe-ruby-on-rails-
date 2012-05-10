@@ -175,7 +175,7 @@
                                     20,
                                     "tweets",
                                     "newTweets",
-                                    <%= current_user.isConnectedToTwitter? %>);
+                                    <%= @current_user.isConnectedToTwitter? %>);
     myTwitterView.startLoadingTweets();
   })
 </script>

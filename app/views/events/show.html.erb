@@ -198,14 +198,14 @@
                                                       20, 
                                                       "tweetsVisiting", 
                                                       "newTweetsVisiting",
-                                                      <%= current_user.isConnectedToTwitter? %>);
+                                                      <%= @current_user.isConnectedToTwitter? %>);
     theVisitingTeamTwitterView.startLoadingTweets();
 
     var theHomeTeamTwitterView = new TwitterView( <%= raw @homeHashTags %>, 
                                                   20, 
                                                   "tweetsHome", 
                                                   "newTweetsHome",
-                                                  <%= current_user.isConnectedToTwitter? %>);
+                                                  <%= @current_user.isConnectedToTwitter? %>);
     theHomeTeamTwitterView.startLoadingTweets();
   })
 </script>
