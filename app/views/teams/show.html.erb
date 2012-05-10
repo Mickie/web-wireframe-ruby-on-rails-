@@ -171,7 +171,11 @@
   var myTwitterView;
   $(function()
   {
-    myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>, 20);
+    myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>, 
+                                    20,
+                                    "tweets",
+                                    "newTweets",
+                                    <%= current_user.isConnectedToTwitter? %>);
     myTwitterView.startLoadingTweets();
   })
 </script>

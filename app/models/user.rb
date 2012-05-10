@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
                   :user_teams,
                   :teams
   
+  def isConnectedToTwitter?
+    return twitter_user_token? && twitter_user_secret?
+  end
+ 
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     if user = User.where( facebook_user_id: access_token.uid ).first

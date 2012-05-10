@@ -1,22 +1,32 @@
 var MAX_TWEETS = 15;
 
-var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweetDivId)
+var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweetDivId, aConnectedToTwitterFlag)
 {
-  this.myMaxTweets = aMaxTweets ? aMaxTweets : MAX_TWEETS;
-  this.myTweetDivSelector = aTweetDivId ? "div#" + aTweetDivId : "div#tweets";
-  this.myNewTweetDivSelector = aNewTweetDivId ? "div#" + aNewTweetDivId : "div#newTweets";
   this.myHashTags = anArrayOfHashTags;
+  this.myMaxTweets = aMaxTweets;
+  this.myTweetDivSelector = "#" + aTweetDivId;
+  this.myNewTweetDivSelector = "#" + aNewTweetDivId;
+  this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
   this.myNewTweets = new Array();
   this.myFullyLoadedFlag = false;
   this.myTwitterSearch = null;
+  this.myTwitterController = new TwitterController(this);
 
   this.startLoadingTweets = function()
   {
     this.myTwitterSearch = new TwitterSearch(createDelegate(this, this.onNewTweet), createDelegate(this, this.onError));
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags.join(" OR "));
+    this.initializeButtons();
+    
     window.setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
   };
-
+  
+  this.initializeButtons = function()
+  {
+      $( ".modal-body a" ).each( createDelegate(this.myTwitterController, 
+                                                this.myTwitterController.addTweetClick ));
+  };
+  
   this.onNewTweet = function(anIndex, aTweet)
   {
     var theNewDivSelector = "#" + aTweet.id_str;
@@ -132,31 +142,9 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
     $("#myTweetModal").modal("show"); 
   };
 
-  this.onReplyTo = function( aTweetId, aUser)
-  {
-    this.showTweetDialog(aUser + " " + this.myHashTags);
-    $("#sendTweetButton").click(createDelegate(this, this.onSendReply)).attr("reply_id", aTweetId);    
-  };
-  
-  this.onSendTweet = function( e )
-  {
-    var theTweetText = $("#tweetText").val();
-    $.post( "/twitter_proxy/update_status", 
-            {statusText : theTweetText }, 
-            createDelegate(this, this.onTweetComplete), 
-            "json" );  
-    $("#myTweetModal").modal("hide"); 
-  };
-  
-  this.onSendReply = function( e )
-  {
-    var theReplyId = $("#sendTweetButton").attr("reply_id");
-    var theTweetText = $("#tweetText").val();
-    $.post( "/twitter_proxy/update_status", 
-            {statusText : theTweetText, replyId : theReplyId }, 
-            createDelegate(this, this.onTweetComplete), 
-            "json" );  
-  };
+  this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
+  this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
+  this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
   
   this.onTweetComplete = function(aResponse)
   {
@@ -164,22 +152,12 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
     setTimeout(function(){$("#tweetSuccessAlert").slideUp(600);}, 5000);
   };
     
-  this.onRetweet = function( aTweetId )
-  {
-    $.post("/twitter_proxy/retweet", { tweetId : aTweetId }, createDelegate(this, this.onRetweetComplete), "json"); 
-  };
-  
   this.onRetweetComplete = function(aResponse)
   {
     if (aResponse)
     {
       this.showAlertWithHtml( aResponse.retweeted_status.id_str, "<strong>Success!</strong><br/>Your retweet succeeded");
     }
-  };
-  
-  this.onFavorite = function( aTweetId )
-  {
-    $.post("/twitter_proxy/favorite", { favoriteId : aTweetId }, createDelegate(this, this.onFavoriteComplete), "json"); 
   };
   
   this.onFavoriteComplete = function(aResponse)

@@ -16,6 +16,7 @@ describe User do
   it { should respond_to(:facebook_user_id) }
   it { should respond_to(:facebook_access_token) }
   it { should respond_to(:teams) }
+  it { should respond_to(:isConnectedToTwitter?)}
   
   it { should be_valid }
   
@@ -131,4 +132,15 @@ describe User do
     end
   end
   
+  describe "isConnectedToTwitter?" do
+    it "should return false when not connected to twitter" do
+      theUser = FactoryGirl.create(:user)
+      theUser.isConnectedToTwitter?.should be_false 
+    end
+    
+    it "should return true when connected to twitter" do
+      theUser = User.create(email:"joe@server.co", password:"please", password_confirmation: "please", twitter_user_token:'token', twitter_user_secret:'secret')
+      theUser.isConnectedToTwitter?.should be_true
+    end
+  end
 end
