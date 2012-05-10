@@ -1,6 +1,5 @@
 FanzoSite::Application.routes.draw do
 
-
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
@@ -15,6 +14,10 @@ FanzoSite::Application.routes.draw do
 
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
+
+  post "twitter_proxy/update_status"
+  post "twitter_proxy/retweet"
+  post "twitter_proxy/favorite"
 
   # only for admin users
   resources :admins, only: :show
