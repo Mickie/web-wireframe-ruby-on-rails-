@@ -3,33 +3,37 @@ var TwitterController = function(aTwitterView)
 {
   this.myTwitterView = aTwitterView;
   
-  this.addTweetClick = function( i, anAnchorElement )
-  {
-      var theTweetText = this.myTweetHash[anAnchorElement.id][0];
-      anAnchorElement.href = "#";
-      $( anAnchorElement ).click( createDelegate(this, this.onTweetClick) );
-  };
-  
-  this.onTweetClick = function( e )
+  this.handleTweetClick = function( aKey )
   {
     var theRandomIndex = Math.floor( Math.random()
-                                     * this.myTweetHash[e.target.id].length );
-    var theTweetText = this.myTweetHash[e.target.id][theRandomIndex] + " " + this.myTwitterView.myHashTags;
+                                     * this.myTweetHash[aKey].length );
+    var theTweetText = this.myTweetHash[aKey][theRandomIndex] + " " + this.myTwitterView.myHashTags;
   
     this.myTwitterView.showTweetDialog(theTweetText);
         
-    $("#sendTweetButton").click(createDelegate(this, this.onSendTweet));
+    $("#sendTweetButton").click(createDelegate(this, this.onSendTweetFromModal));
   };
   
-  this.onSendTweet = function( e )
+  this.onSendTweetFromModal = function( e )
   {
     var theTweetText = $("#tweetText").val();
-    $.post( "/twitter_proxy/update_status", 
-            {statusText : theTweetText }, 
-            createDelegate(this, this.onTweetComplete), 
-            "json" );  
+    this.sendTweet(theTweetText);
     $("#myTweetModal").modal("hide"); 
-  };    
+  };
+  
+  this.onSendQuickTweet = function( e )
+  {
+    var theTweetText = $("#quickTweetText").val();
+    this.sendTweet(theTweetText);
+  }; 
+
+  this.sendTweet = function(aTweetText)
+  {
+    $.post( "/twitter_proxy/update_status", 
+            {statusText : aTweetText }, 
+            createDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete), 
+            "json" );  
+  };
   
   this.onReplyTo = function( aTweetId, aUser)
   {

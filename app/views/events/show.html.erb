@@ -91,42 +91,6 @@
 </div>
 <div class="row-fluid">
   <div class="span12">
-    <div id="buttonHolder">
-      <div id="myHappyModal" class="modal hide fade" style="display: none;">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Tell the world that Rocked!<br/>Pick a start:</h3>
-        </div>
-        <div class="modal-body">
-          <a id="dunk" class="btn btn-large" href="#">Monster Dunk!</a>
-          <a id="niceShot" class="btn btn-large" href="#">Swoosh!</a>
-          <a id="stickIt" class="btn btn-large" href="#">In your face!</a>
-          <a id="goDefense" class="btn btn-large" href="#">Defense!</a>
-          <a id="goOffense" class="btn btn-large" href="#">Offense!</a>
-          <a id="pretty" class="btn btn-large" href="#">So Pretty!</a>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-        </div>
-      </div>
-
-      <div id="mySadModal" class="modal hide fade" style="display: none;">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Tell the world that Sucked!<br/>Pick a start:</h3>
-        </div>
-        <div class="modal-body">
-          <a id="noDefense" class="btn btn-large" href="#">What Defense?</a>
-          <a id="foul" class="btn btn-large" href="#">Foul!</a>
-          <a id="kiddingMe" class="btn btn-large" href="#">You kidding?</a>
-          <a id="ouch" class="btn btn-large" href="#">Ouch!</a>
-          <a id="noOffense" class="btn btn-large" href="#">What Offense?</a>
-          <a id="blindRef" class="btn btn-large" href="#">Ref's Blind!</a>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-        </div>
-      </div>
       
       <div id="myTweetModal" class="modal hide fade" style="display: none;">
         <div class="modal-header">
@@ -140,18 +104,11 @@
           <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
         </div>
       </div>
-          
-      <div class="tweetStarterBtn">
-        <a data-toggle="modal" href="#myHappyModal" id="happyButton" class="btn btn-large btn-primary">Booyah!!!</a>
-      </div>
-      <div class="tweetStarterBtn">
-        <a data-toggle="modal" href="#mySadModal" id="sadButton" class="btn btn-large btn-danger">What?!?!</a>
-      </div>
     </div>
+
     <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
       <a class='close' data-dismiss='alert' href='#'>×</a><p><strong>Success!</strong> Your status was updated</p>
     </div>    
-  </div>
 </div>
 
 <div class="row-fluid">
@@ -192,21 +149,25 @@
 </div>
 
 <script language="JavaScript">
+  var myVisitingTeamTwitterView;
+  var myHomeTeamTwitterView;
   $(function()
   {
-    var theVisitingTeamTwitterView = new TwitterView( <%= raw @visitingHashTags %>, 
-                                                      20, 
-                                                      "tweetsVisiting", 
-                                                      "newTweetsVisiting",
-                                                      <%= @current_user.isConnectedToTwitter? %>);
-    theVisitingTeamTwitterView.startLoadingTweets();
+    myVisitingTeamTwitterView = new TwitterView( <%= raw @visitingHashTags %>, 
+                                                 20, 
+                                                 "tweetsVisiting", 
+                                                 "newTweetsVisiting",
+                                                 <%= @current_user.isConnectedToTwitter? %>,
+                                                 "myVisitingTeamTwitterView");
+    myVisitingTeamTwitterView.startLoadingTweets();
 
-    var theHomeTeamTwitterView = new TwitterView( <%= raw @homeHashTags %>, 
-                                                  20, 
-                                                  "tweetsHome", 
-                                                  "newTweetsHome",
-                                                  <%= @current_user.isConnectedToTwitter? %>);
-    theHomeTeamTwitterView.startLoadingTweets();
+    myHomeTeamTwitterView = new TwitterView(  <%= raw @homeHashTags %>, 
+                                              20, 
+                                              "tweetsHome", 
+                                              "newTweetsHome",
+                                              <%= @current_user.isConnectedToTwitter? %>,
+                                              "myHomeTeamTwitterView");
+    myHomeTeamTwitterView.startLoadingTweets();
   })
 </script>
 

@@ -1,12 +1,19 @@
 var MAX_TWEETS = 15;
 
-var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweetDivId, aConnectedToTwitterFlag)
+var TwitterView = function( anArrayOfHashTags, 
+                            aMaxTweets, 
+                            aTweetDivId, 
+                            aNewTweetDivId, 
+                            aConnectedToTwitterFlag,
+                            aTwitterViewVariableName)
 {
   this.myHashTags = anArrayOfHashTags;
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
   this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
+  this.myTwitterViewVariableName = aTwitterViewVariableName;
+  
   this.myNewTweets = new Array();
   this.myFullyLoadedFlag = false;
   this.myTwitterSearch = null;
@@ -23,10 +30,10 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
   
   this.initializeButtons = function()
   {
-      $( ".modal-body a" ).each( createDelegate(this.myTwitterController, 
-                                                this.myTwitterController.addTweetClick ));
+    $( "#sendQuickTweetButton").click( createDelegate(this.myTwitterController,
+                                                      this.myTwitterController.onSendQuickTweet));                 
   };
-  
+    
   this.onNewTweet = function(anIndex, aTweet)
   {
     var theNewDivSelector = "#" + aTweet.id_str;
@@ -90,6 +97,7 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
   
   this.getTweetDirective = function()
   {
+    var theThis = this;
     return {
       ".@id" : "id_str",
       "img.twitterAvatar@src" : "profile_image_url",
@@ -115,17 +123,17 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
       {
         var theId = anItem.context.id_str;
         var theUser = anItem.context.from_user;
-        return "javascript:myTwitterView.onReplyTo('" + theId + "', '@" + theUser + "')";
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onReplyTo('" + theId + "', '@" + theUser + "')";
       },
       "a#retweet@href" : function(anItem)
       {
         var theId = anItem.context.id_str;
-        return "javascript:myTwitterView.onRetweet('" + theId + "')";
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "')";
       },
       "a#favorite@href" : function(anItem)
       {
         var theId = anItem.context.id_str;
-        return "javascript:myTwitterView.onFavorite('" + theId + "')";
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onFavorite('" + theId + "')";
       },
       "div.alert > p@id" : function(anItem)
       {
@@ -145,6 +153,7 @@ var TwitterView = function(anArrayOfHashTags, aMaxTweets, aTweetDivId, aNewTweet
   this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
   this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
   this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
+  this.quickTweetClick = createDelegate(this.myTwitterController, this.myTwitterController.handleTweetClick);
   
   this.onTweetComplete = function(aResponse)
   {

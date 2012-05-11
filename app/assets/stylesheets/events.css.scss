@@ -58,19 +58,25 @@
   display:none;
 }
 
-#buttonHolder
+#quickTweetText
 {
-  margin: 10px 0px;
-  height: 40px;
+  float:left;
+}
+
+#sendButtons
+{
+  float:left;
 }
 
 #tweetHolder
 {
   position: relative;
+  clear:both;
 }
 
 #tweetSuccessAlert
 {
+  clear:both;
   margin:5px;
 }
 
