@@ -14,6 +14,7 @@ describe "watch_sites/edit" do
 
   it "renders the edit watch_site form" do
     Team.should_receive(:all).at_least(1).times.and_return([@theStubTeam])
+    Venue.should_receive(:order).at_least(1).times.and_return(Venue)
     Venue.should_receive(:all).at_least(1).times.and_return([@theStubVenue])
 
     render

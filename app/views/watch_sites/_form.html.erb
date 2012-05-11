@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :venue %>
-    <%= f.select(:venue_id, options_for_select(Venue.all.collect {|p| [ p.name, p.id ] }, @watch_site.venue_id )) %>
+    <%= f.select(:venue_id, options_for_select(Venue.order("created_at DESC").all.collect {|p| [ p.name, p.id ] }, @watch_site.venue_id )) %>
   </div>
   
   <div class="actions">

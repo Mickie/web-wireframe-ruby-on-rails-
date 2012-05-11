@@ -11,7 +11,7 @@ describe "watch_sites/new" do
 
   it "renders new watch_site form" do
     Team.should_receive(:all).at_least(1).times.and_return([])
-    Venue.should_receive(:all).at_least(1).times.and_return([])
+    Venue.should_receive(:order).at_least(1).times.and_return(Venue)
 
     render
 
