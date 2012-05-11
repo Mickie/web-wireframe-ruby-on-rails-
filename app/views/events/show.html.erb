@@ -113,6 +113,35 @@
 
 <div class="row-fluid">
   <div class="span6">
+    <div class="controls" id="visitingTweetControls">
+      <div class="input-append">
+        <textarea class="input-xlarge span4" rows="1"><%= raw  @visitingHashTags.join(' ') %></textarea>
+        <div class="btn-group">
+          <button href="#" class="btn btn-primary quickTweetButton">Update Twitter Status</button>
+          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><strong>Booyah!!</strong></li>
+            <li><a href="#" data="dunk">Monster Dunk!</a></li>
+            <li><a href="#" data="niceShot">Swoosh!</a></li>
+            <li><a href="#" data="stickIt">In your face!</a></li>
+            <li><a href="#" data="goDefense">Defense!</a></li>
+            <li><a href="#" data="goOffense">Offense!</a></li>
+            <li><a href="#" data="pretty">So Pretty!</a></li>
+            <li class="divider"></li>
+            <li><strong>What!?!?</strong></li>
+            <li><a href="#" data="noDefense">What Defense?</a></li>
+            <li><a href="#" data="foul">Foul!</a></li>
+            <li><a href="#" data="kiddingMe">You kidding?</a></li>
+            <li><a href="#" data="ouch">Ouch!</a></li>
+            <li><a href="#" data="noOffense">What Offense?</a></li>
+            <li><a href="#" data="blindRef">Ref's Blind!</a></li>
+          </ul>         
+        </div>
+      </div>
+    </div>    
+    
     <div id="tweetHolder">
       <h4><%= @event.visiting_team.name %> tweet stream:</h4>
       <div id="newTweetsVisiting" class='alert alert-info fade in' style='display:none'>
@@ -138,6 +167,35 @@
     </div>
   </div>
   <div class="span6">
+    <div class="controls" id="homeTweetControls">
+      <div class="input-append">
+        <textarea class="input-xlarge span4" rows="1"><%= raw @homeHashTags.join(' ') %></textarea>
+        <div class="btn-group">
+          <button href="#" class="btn btn-primary quickTweetButton">Update Twitter Status</button>
+          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><strong>Booyah!!</strong></li>
+            <li><a href="#" data="dunk">Monster Dunk!</a></li>
+            <li><a href="#" data="niceShot">Swoosh!</a></li>
+            <li><a href="#" data="stickIt">In your face!</a></li>
+            <li><a href="#" data="goDefense">Defense!</a></li>
+            <li><a href="#" data="goOffense">Offense!</a></li>
+            <li><a href="#" data="pretty">So Pretty!</a></li>
+            <li class="divider"></li>
+            <li><strong>What!?!?</strong></li>
+            <li><a href="#" data="noDefense">What Defense?</a></li>
+            <li><a href="#" data="foul">Foul!</a></li>
+            <li><a href="#" data="kiddingMe">You kidding?</a></li>
+            <li><a href="#" data="ouch">Ouch!</a></li>
+            <li><a href="#" data="noOffense">What Offense?</a></li>
+            <li><a href="#" data="blindRef">Ref's Blind!</a></li>
+          </ul>         
+        </div>
+      </div>
+    </div>    
+
     <div id="tweetHolder">
       <h4><%= @event.home_team.name %> tweet stream:</h4>
       <div id="newTweetsHome" class='alert alert-info fade in' style='display:none'>
@@ -157,6 +215,7 @@
                                                  20, 
                                                  "tweetsVisiting", 
                                                  "newTweetsVisiting",
+                                                 "visitingTweetControls",
                                                  <%= @current_user.isConnectedToTwitter? %>,
                                                  "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets();
@@ -165,6 +224,7 @@
                                               20, 
                                               "tweetsHome", 
                                               "newTweetsHome",
+                                              "homeTweetControls",
                                               <%= @current_user.isConnectedToTwitter? %>,
                                               "myHomeTeamTwitterView");
     myHomeTeamTwitterView.startLoadingTweets();

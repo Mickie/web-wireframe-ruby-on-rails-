@@ -3,7 +3,8 @@ var MAX_TWEETS = 15;
 var TwitterView = function( anArrayOfHashTags, 
                             aMaxTweets, 
                             aTweetDivId, 
-                            aNewTweetDivId, 
+                            aNewTweetDivId,
+                            aControlsDivId, 
                             aConnectedToTwitterFlag,
                             aTwitterViewVariableName)
 {
@@ -11,6 +12,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
+  this.myControlsDivSelector = "#" + aControlsDivId;
   this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
   
@@ -30,10 +32,19 @@ var TwitterView = function( anArrayOfHashTags,
   
   this.initializeButtons = function()
   {
-    $( "#sendQuickTweetButton").click( createDelegate(this.myTwitterController,
-                                                      this.myTwitterController.onSendQuickTweet));                 
+    $( this.myControlsDivSelector + " a" ).each( createDelegate(this.myTwitterController, 
+                                                                this.myTwitterController.addTweetClick ));
+    $( this.myControlsDivSelector + " button.quickTweetButton").click( createDelegate(this,
+                                                                                      this.onSendQuickTweet));                 
   };
-    
+  
+  this.onSendQuickTweet = function( e )
+  {
+    var theTweetText = $(this.myControlsDivSelector + " textarea").val();
+    this.myTwitterController.sendTweet(theTweetText);
+  }; 
+  
+  
   this.onNewTweet = function(anIndex, aTweet)
   {
     var theNewDivSelector = "#" + aTweet.id_str;
@@ -153,10 +164,10 @@ var TwitterView = function( anArrayOfHashTags,
   this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
   this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
   this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
-  this.quickTweetClick = createDelegate(this.myTwitterController, this.myTwitterController.handleTweetClick);
   
   this.onTweetComplete = function(aResponse)
   {
+    $(this.myControlsDivSelector + " textarea").val(this.myHashTags);
     $("#tweetSuccessAlert").slideDown(600);
     setTimeout(function(){$("#tweetSuccessAlert").slideUp(600);}, 5000);
   };

@@ -90,30 +90,30 @@
       </div>
     </div>
           
-    <div class="controls">
+    <div class="controls" id="tweetControls">
       <div class="input-append">
-        <textarea class="input-xlarge span11" id="quickTweetText" rows="1"></textarea>
-        <div id="sendButtons" class="btn-group ">
-          <button id="sendQuickTweetButton" href="#" class="btn btn-primary">Update Twitter Status</button>
+        <textarea class="input-xlarge span11" rows="1"><%= raw @team.social_info.hash_tags %></textarea>
+        <div class="btn-group">
+          <button href="#" class="btn btn-primary quickTweetButton">Update Twitter Status</button>
           <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
             <span class="caret"></span>
           </button>
-          <ul id="quickTweets" class="dropdown-menu">
+          <ul class="dropdown-menu">
             <li><strong>Booyah!!</strong></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('dunk')">Monster Dunk!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('niceShot')">Swoosh!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('stickIt')">In your face!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('goDefense')">Defense!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('goOffense')">Offense!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('pretty')">So Pretty!</a></li>
+            <li><a href="#" data="dunk">Monster Dunk!</a></li>
+            <li><a href="#" data="niceShot">Swoosh!</a></li>
+            <li><a href="#" data="stickIt">In your face!</a></li>
+            <li><a href="#" data="goDefense">Defense!</a></li>
+            <li><a href="#" data="goOffense">Offense!</a></li>
+            <li><a href="#" data="pretty">So Pretty!</a></li>
             <li class="divider"></li>
             <li><strong>What!?!?</strong></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('noDefense')">What Defense?</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('foul')">Foul!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('kiddingMe')">You kidding?</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('ouch')">Ouch!</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('noOffense')">What Offense?</a></li>
-            <li><a href="javascript:myTwitterView.quickTweetClick('blindRef')">Ref's Blind!</a></li>
+            <li><a href="#" data="noDefense">What Defense?</a></li>
+            <li><a href="#" data="foul">Foul!</a></li>
+            <li><a href="#" data="kiddingMe">You kidding?</a></li>
+            <li><a href="#" data="ouch">Ouch!</a></li>
+            <li><a href="#" data="noOffense">What Offense?</a></li>
+            <li><a href="#" data="blindRef">Ref's Blind!</a></li>
           </ul>         
         </div>
       </div>
@@ -159,6 +159,7 @@
                                     20,
                                     "tweets",
                                     "newTweets",
+                                    "tweetControls",
                                     <%= @current_user.isConnectedToTwitter? %>,
                                     "myTwitterView");
     myTwitterView.startLoadingTweets();

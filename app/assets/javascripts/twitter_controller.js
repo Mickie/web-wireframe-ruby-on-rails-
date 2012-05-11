@@ -3,11 +3,18 @@ var TwitterController = function(aTwitterView)
 {
   this.myTwitterView = aTwitterView;
   
-  this.handleTweetClick = function( aKey )
+  this.addTweetClick = function( i, anAnchorElement )
   {
+      anAnchorElement.href = "#";
+      $( anAnchorElement ).click( createDelegate(this, this.onTweetClick) );
+  };
+  
+  this.onTweetClick = function( e )
+  {
+    var theKey = e.target.attributes[1].nodeValue;
     var theRandomIndex = Math.floor( Math.random()
-                                     * this.myTweetHash[aKey].length );
-    var theTweetText = this.myTweetHash[aKey][theRandomIndex] + " " + this.myTwitterView.myHashTags;
+                                     * this.myTweetHash[theKey].length );
+    var theTweetText = this.myTweetHash[theKey][theRandomIndex] + " " + this.myTwitterView.myHashTags;
   
     this.myTwitterView.showTweetDialog(theTweetText);
         
@@ -21,12 +28,6 @@ var TwitterController = function(aTwitterView)
     $("#myTweetModal").modal("hide"); 
   };
   
-  this.onSendQuickTweet = function( e )
-  {
-    var theTweetText = $("#quickTweetText").val();
-    this.sendTweet(theTweetText);
-  }; 
-
   this.sendTweet = function(aTweetText)
   {
     $.post( "/twitter_proxy/update_status", 

@@ -38,13 +38,26 @@
   margin: 5px 3px;
 }
 
-
-.tweetStarterBtn a
+#homeTweetControls textarea
 {
   float:left;
-  width: 120px;
-  margin: 5px;
 }
+
+#homeTweetControls div.btn-group
+{
+  float:left;
+}
+
+#visitingTweetControls textarea
+{
+  float:left;
+}
+
+#visitingTweetControls div.btn-group
+{
+  float:left;
+}
+
 
 #newTweets
 {
@@ -56,16 +69,6 @@
 #template
 {
   display:none;
-}
-
-#quickTweetText
-{
-  float:left;
-}
-
-#sendButtons
-{
-  float:left;
 }
 
 #tweetHolder

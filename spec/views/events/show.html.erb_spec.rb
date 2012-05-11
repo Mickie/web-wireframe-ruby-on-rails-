@@ -13,6 +13,8 @@ describe "events/show" do
     @event = assign(:event, theStub)
     
     assign(:current_user, FactoryGirl.create(:user))
+    assign(:homeHashTags, ["#seahawks"])
+    assign(:visitingHashTags, ["#cowboys"])
     
     @venue = FactoryGirl.build(:venue)
     @home_watch_site = FactoryGirl.build(:watch_site, team:@event.home_team, venue:@venue)
