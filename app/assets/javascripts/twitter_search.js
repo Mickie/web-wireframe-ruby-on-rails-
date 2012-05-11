@@ -8,13 +8,16 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
 
   this.getLatestTweetsForTerm = function(aSearchTerm)
   {
-    var theQueryString = "?lang=en&include_entities=true&callback=?&q=" + escape(aSearchTerm);
+    var theCacheBuster = new Date().getTime();
+    var theQueryString = "?lang=en&include_entities=true&callback=?&q=" + escape(aSearchTerm) + "&cb=" + theCacheBuster;
     $.getJSON(TWITTER_SEARCH_URL + theQueryString, createDelegate(this, this.onSearchComplete));
   };
 
   this.grabMoreTweets = function()
   {
-    $.getJSON(TWITTER_SEARCH_URL + this.myRefreshUrl + "&callback=?", createDelegate(this, this.onSearchComplete));
+    var theCacheBuster = new Date().getTime();
+    $.getJSON(TWITTER_SEARCH_URL + this.myRefreshUrl + "&callback=?&cb=" + theCacheBuster, 
+              createDelegate(this, this.onSearchComplete));
   }
 
   this.onSearchComplete = function(aJSON)
