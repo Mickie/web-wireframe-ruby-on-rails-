@@ -17,7 +17,8 @@ var TwitterController = function(aTwitterView)
     var theTweetText = this.myTweetHash[theKey][theRandomIndex] + " " + this.myTwitterView.myHashTags;
   
     this.myTwitterView.showTweetDialog(theTweetText);
-        
+    
+    $("#sendTweetButton").unbind("click");
     $("#sendTweetButton").click(createDelegate(this, this.onSendTweetFromModal));
   };
   
