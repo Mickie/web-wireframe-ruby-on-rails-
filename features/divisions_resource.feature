@@ -34,9 +34,9 @@ Feature: Divisions Resource
 		When I visit the divisions page
 		Then I should see 3 divisions
 
-	Scenario: I can associate a sport with the division
+	Scenario: I can associate a league with the division
 		Given I sign in as admin
-			And I have added 2 sports
+			And I have added 2 leagues
 			And I have added 2 divisions
 		When I visit the edit division page
-		Then I should be able to associate a sport with the division
+		Then I should be able to associate a league with the division

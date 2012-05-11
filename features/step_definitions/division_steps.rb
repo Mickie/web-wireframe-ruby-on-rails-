@@ -21,6 +21,6 @@ Then /^I should see the details of the new division$/ do
   page.should have_content(@new_division.name)
 end
 
-Then /^I should be able to associate a sport with the division$/ do
+Then /^I should be able to associate a league with the division$/ do
   page.should have_selector("#division_league_id")
 end

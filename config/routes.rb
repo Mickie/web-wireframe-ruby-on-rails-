@@ -1,5 +1,7 @@
 FanzoSite::Application.routes.draw do
 
+  resources :quick_tweets
+
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 

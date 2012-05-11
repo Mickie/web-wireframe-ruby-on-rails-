@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508161352) do
+ActiveRecord::Schema.define(:version => 20120511204201) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -134,6 +134,17 @@ ActiveRecord::Schema.define(:version => 20120508161352) do
 
   add_index "people", ["social_info_id"], :name => "index_people_on_social_info_id"
   add_index "people", ["team_id"], :name => "index_people_on_team_id"
+
+  create_table "quick_tweets", :force => true do |t|
+    t.integer  "sport_id"
+    t.string   "name",                         :null => false
+    t.string   "tweet",                        :null => false
+    t.boolean  "happy",      :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "quick_tweets", ["sport_id"], :name => "index_quick_tweets_on_sport_id"
 
   create_table "social_infos", :force => true do |t|
     t.string   "twitter_name"

@@ -1,0 +1,29 @@
+<h1>Listing quick_tweets</h1>
+
+<table>
+  <tr>
+    <th>Sport</th>
+    <th>Name</th>
+    <th>Tweet</th>
+    <th>Happy</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @quick_tweets.each do |quick_tweet| %>
+  <tr>
+    <td><%= quick_tweet.sport %></td>
+    <td><%= quick_tweet.name %></td>
+    <td><%= quick_tweet.tweet %></td>
+    <td><%= quick_tweet.happy %></td>
+    <td><%= link_to 'Show', quick_tweet %></td>
+    <td><%= link_to 'Edit', edit_quick_tweet_path(quick_tweet) %></td>
+    <td><%= link_to 'Destroy', quick_tweet, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Quick tweet', new_quick_tweet_path %>

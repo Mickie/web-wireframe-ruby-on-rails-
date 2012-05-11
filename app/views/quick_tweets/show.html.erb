@@ -1,0 +1,24 @@
+<p>
+  <b>Sport:</b>
+  <%= @quick_tweet.sport.name %>
+</p>
+
+<p>
+  <b>Display:</b>
+  <%= @quick_tweet.name %>
+</p>
+
+<p>
+  <b>Tweet:</b>
+  <%= @quick_tweet.tweet %>
+</p>
+
+<p>
+  <b>Happy:</b>
+  <%= @quick_tweet.happy %>
+</p>
+
+
+<%= link_to 'Edit', edit_quick_tweet_path(@quick_tweet) %> |
+<%= link_to 'New', new_quick_tweet_path %> |
+<%= link_to 'Back', quick_tweets_path %> 
