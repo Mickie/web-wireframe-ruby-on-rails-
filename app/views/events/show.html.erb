@@ -217,6 +217,7 @@
                                                  "newTweetsVisiting",
                                                  "visitingTweetControls",
                                                  <%= @current_user.isConnectedToTwitter? %>,
+                                                 <%= @current_user.id %>,
                                                  "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets();
 
@@ -226,6 +227,7 @@
                                               "newTweetsHome",
                                               "homeTweetControls",
                                               <%= @current_user.isConnectedToTwitter? %>,
+                                              <%= @current_user.id %>,
                                               "myHomeTeamTwitterView");
     myHomeTeamTwitterView.startLoadingTweets();
   })

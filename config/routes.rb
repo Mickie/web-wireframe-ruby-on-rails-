@@ -11,7 +11,8 @@ FanzoSite::Application.routes.draw do
   root to:'static_pages#index'
 
   resources :users, only: :show do
-    resources :user_teams, only: [ :create, :destroy ]
+    get 'connect_twitter', on: :member
+    resources :user_teams, only: [ :create, :destroy ] 
   end
 
   match '/about',   to: 'static_pages#about'

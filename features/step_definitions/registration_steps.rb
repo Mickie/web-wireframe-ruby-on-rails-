@@ -46,6 +46,7 @@ end
 
 Then /^my twitter data should be stored in the DB$/ do
   user = User.find_by_email(@user.email)
+  user.should_not be_nil
   user.twitter_username.should == 'fred'
   user.twitter_user_secret.should == 'a secret'
   user.twitter_user_id == '12345'

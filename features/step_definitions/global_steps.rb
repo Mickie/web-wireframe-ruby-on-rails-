@@ -3,6 +3,7 @@ Before do
   
   @user = FactoryGirl.build(:user)
   @admin = FactoryGirl.build(:admin)
+  @connect_twitter_user = @user
   
   @sport = FactoryGirl.create(:sport)
   @league = FactoryGirl.create(:league)

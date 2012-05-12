@@ -161,6 +161,7 @@
                                     "newTweets",
                                     "tweetControls",
                                     <%= @current_user.isConnectedToTwitter? %>,
+                                    <%= @current_user.id %>,
                                     "myTwitterView");
     myTwitterView.startLoadingTweets();
   })

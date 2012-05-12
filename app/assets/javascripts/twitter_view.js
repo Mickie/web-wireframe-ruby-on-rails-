@@ -6,6 +6,7 @@ var TwitterView = function( anArrayOfHashTags,
                             aNewTweetDivId,
                             aControlsDivId, 
                             aConnectedToTwitterFlag,
+                            aUserId,
                             aTwitterViewVariableName)
 {
   this.myHashTags = anArrayOfHashTags;
@@ -14,6 +15,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
   this.myControlsDivSelector = "#" + aControlsDivId;
   this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
+  this.myUserId = aUserId;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
   
   this.myNewTweets = new Array();
@@ -30,6 +32,40 @@ var TwitterView = function( anArrayOfHashTags,
     window.setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
   };
   
+  if (this.myConnectedToTwitterFlag)
+  {
+    this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
+    this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
+    this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
+
+    this.onSendQuickTweet = function( e )
+    {
+      var theTweetText = $(this.myControlsDivSelector + " textarea").val();
+      this.myTwitterController.sendTweet(theTweetText);
+    }; 
+    
+    this.showTweetDialog = function( aDefaultText )
+    {
+      $("#tweetText").val(aDefaultText);
+      $(".modal").modal("hide");
+      $("#myTweetModal").modal("show"); 
+    };
+
+  }
+  else
+  {
+    this.connectTwitter = function()
+    {
+      document.location = "/users/" + this.myUserId + "/connect_twitter";
+    };
+    this.onReplyTo = this.connectTwitter;
+    this.onRetweet = this.connectTwitter;
+    this.onFavorite = this.connectTwitter;
+    this.onSendQuickTweet = this.connectTwitter;
+    this.showTweetDialog = this.connectTwitter;
+  }
+  
+  
   this.initializeButtons = function()
   {
     $( this.myControlsDivSelector + " a" ).each( createDelegate(this.myTwitterController, 
@@ -37,12 +73,6 @@ var TwitterView = function( anArrayOfHashTags,
     $( this.myControlsDivSelector + " button.quickTweetButton").click( createDelegate(this,
                                                                                       this.onSendQuickTweet));                 
   };
-  
-  this.onSendQuickTweet = function( e )
-  {
-    var theTweetText = $(this.myControlsDivSelector + " textarea").val();
-    this.myTwitterController.sendTweet(theTweetText);
-  }; 
   
   
   this.onNewTweet = function(anIndex, aTweet)
@@ -153,17 +183,6 @@ var TwitterView = function( anArrayOfHashTags,
       }
     }
   };
-  
-  this.showTweetDialog = function( aDefaultText )
-  {
-    $("#tweetText").val(aDefaultText);
-    $(".modal").modal("hide");
-    $("#myTweetModal").modal("show"); 
-  };
-
-  this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
-  this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
-  this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
   
   this.onTweetComplete = function(aResponse)
   {

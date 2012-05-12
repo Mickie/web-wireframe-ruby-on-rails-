@@ -63,11 +63,6 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when password confirmation is nil" do
-    before { @user.password_confirmation = nil }
-    it { should_not be_valid }
-  end
-
   describe "with a password that's too short" do
     before { @user.password = @user.password_confirmation = "a" * 5 }
     it { should be_invalid }
@@ -115,6 +110,30 @@ describe User do
     
     it "should have loaded the user to find" do
       @user.twitter_user_id.should eq('12345') 
+    end
+  end
+  
+  describe "can connect an existing user to twitter" do
+    before do
+      OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
+                                              info: { nickname: "jimbob" }, 
+                                              extra: { access_token: { token: "a token", secret: "a secret"} } 
+                                              }
+      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:twitter])
+    end 
+    
+    it "should return the signed in user" do
+      User.find_for_twitter_oauth( @theHash, @user ).should eq(@user)
+    end   
+    
+    it "should add the twitter data" do
+      User.find_for_twitter_oauth( @theHash, @user )
+      
+      theResult = User.where(email:@user.email).first
+      theResult.twitter_username.should eq('jimbob')
+      theResult.twitter_user_id.should eq('12345')
+      theResult.twitter_user_token.should eq('a token')
+      theResult.twitter_user_secret.should eq('a secret')
     end
   end
   
