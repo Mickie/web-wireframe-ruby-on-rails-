@@ -68,6 +68,11 @@ var TwitterView = function( anArrayOfHashTags,
   
   this.initializeButtons = function()
   {
+    this.myTwitterController.loadButtonData(createDelegate(this, this.onButtonDataLoaded));
+  };
+  
+  this.onButtonDataLoaded = function()
+  {
     this.myTwitterController.addQuickTweetButtons( $( this.myControlsDivSelector + " ul.dropdown-menu") );
     
     $( this.myControlsDivSelector + " a" ).each( createDelegate(this.myTwitterController, 

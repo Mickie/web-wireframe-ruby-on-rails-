@@ -11,7 +11,8 @@ describe QuickTweetsController do
     {
       name:"sweet!",
       tweet:"that was sweet",
-      sport_id:@sport.id
+      sport_id:@sport.id,
+      happy:true
     }
   end
   
@@ -22,6 +23,21 @@ describe QuickTweetsController do
       quick_tweet = QuickTweet.create! valid_attributes
       get :index, {}
       assigns(:quick_tweets).should eq([quick_tweet])
+    end
+    
+    it "responds to json request with correct format" do
+      @theFirstQuickTweet = QuickTweet.create! valid_attributes
+      @theSecondQuickTweet = QuickTweet.create(name:"bad", tweet:"bad tweet", sport_id:@sport.id, happy:false)
+
+      get :index, format: :json
+      theResult = JSON.parse(response.body)
+      theResult["happy"].length.should eq(1)
+      theResult["sad"].length.should eq(1)
+
+      theResult["happy"][0]["name"].should eq(@theFirstQuickTweet.name)
+      theResult["happy"][0]["tweets"][0].should eq(@theFirstQuickTweet.tweet)
+      theResult["sad"][0]["name"].should eq(@theSecondQuickTweet.name)
+      theResult["sad"][0]["tweets"][0].should eq(@theSecondQuickTweet.tweet)
     end
   end
 
@@ -153,6 +169,41 @@ describe QuickTweetsController do
       quick_tweet = QuickTweet.create! valid_attributes
       delete :destroy, {:id => quick_tweet.to_param}
       response.should redirect_to(quick_tweets_url)
+    end
+  end
+  
+  describe "buildDataHash" do
+    before do
+      @theFirstQuickTweet = QuickTweet.create! valid_attributes
+      @theSecondQuickTweet = QuickTweet.create(name:"bad", tweet:"bad tweet", sport_id:@sport.id, happy:false)
+      
+      @theArrayOfQuickTweets = [@theFirstQuickTweet, @theSecondQuickTweet]
+    end
+    
+    it "has elements in happy and sad" do
+      theResult = subject.buildDataHash( @theArrayOfQuickTweets )
+      theResult[:happy].length.should eq(1)
+      theResult[:sad].length.should eq(1)
+    end
+  end
+  
+  describe "findOrInsertTweet" do
+    before do
+      @theQuickTweet = QuickTweet.create! valid_attributes
+      @theArray = []
+    end
+    
+    it "inserts a new element if not found" do
+      subject.findOrInsertTweet( @theQuickTweet, @theArray)
+      @theArray.length.should eq(1)
+    end
+    
+    it "adds to an existing element, if found" do
+      @theArray.push( { name: @theQuickTweet.name,
+                        tweets: [ "tweet1"]
+                        })
+      subject.findOrInsertTweet( @theQuickTweet, @theArray)
+      @theArray[0][:tweets].length.should eq(2)                  
     end
   end
 

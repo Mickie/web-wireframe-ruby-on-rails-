@@ -9,7 +9,10 @@ class QuickTweetsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @quick_tweets }
+      format.json {   
+        theHash = buildDataHash(@quick_tweets)      
+        render json: theHash 
+      }
     end
   end
 
@@ -82,5 +85,31 @@ class QuickTweetsController < ApplicationController
       format.html { redirect_to quick_tweets_url }
       format.json { head :no_content }
     end
+  end
+  
+  def buildDataHash( anArrayOfQuickTweets )
+    theDataHash = { happy:[], sad:[] }
+    
+    anArrayOfQuickTweets.each do |aQuickTweet|
+      if aQuickTweet.happy
+        findOrInsertTweet( aQuickTweet, theDataHash[:happy] )
+      else
+        findOrInsertTweet( aQuickTweet, theDataHash[:sad] )
+      end
+    end
+    
+    return theDataHash
+  end
+  
+  def findOrInsertTweet( aQuickTweet, anArray)
+    anArray.each do |aTweetObject|
+      if (aTweetObject[:name] == aQuickTweet.name)
+        aTweetObject[:tweets].push(aQuickTweet.tweet)
+        return
+      end
+    end
+    anArray.push( { name: aQuickTweet.name, 
+                    tweets: [ aQuickTweet.tweet ]})
+    
   end
 end
