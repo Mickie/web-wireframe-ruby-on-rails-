@@ -18,26 +18,47 @@ describe QuickTweetsController do
   
   describe "GET index" do
     login_user
-    
-    it "assigns all quick_tweets as @quick_tweets" do
-      quick_tweet = QuickTweet.create! valid_attributes
-      get :index, {}
-      assigns(:quick_tweets).should eq([quick_tweet])
-    end
-    
-    it "responds to json request with correct format" do
+
+    before do
       @theFirstQuickTweet = QuickTweet.create! valid_attributes
       @theSecondQuickTweet = QuickTweet.create(name:"bad", tweet:"bad tweet", sport_id:@sport.id, happy:false)
 
+      @theSecondSport = FactoryGirl.create(:sport)
+      @theThirdQuickTweet = QuickTweet.create(name:"good", tweet:"good tweet", sport_id:@theSecondSport.id, happy:true)
+      @theFourthQuickTweet = QuickTweet.create(name:"bitter", tweet:"bitter tweet", sport_id:@theSecondSport.id, happy:false)
+    end
+    
+    it "assigns all quick_tweets as @quick_tweets" do
+      get :index, {}
+      assigns(:quick_tweets).should eq([@theFirstQuickTweet, 
+                                        @theSecondQuickTweet, 
+                                        @theThirdQuickTweet, 
+                                        @theFourthQuickTweet])
+    end
+    
+    it "responds to json request with correct format" do
+
       get :index, format: :json
       theResult = JSON.parse(response.body)
-      theResult["happy"].length.should eq(1)
-      theResult["sad"].length.should eq(1)
+      theResult["happy"].length.should eq(2)
+      theResult["sad"].length.should eq(2)
 
       theResult["happy"][0]["name"].should eq(@theFirstQuickTweet.name)
       theResult["happy"][0]["tweets"][0].should eq(@theFirstQuickTweet.tweet)
       theResult["sad"][0]["name"].should eq(@theSecondQuickTweet.name)
       theResult["sad"][0]["tweets"][0].should eq(@theSecondQuickTweet.tweet)
+    end
+    
+    it "accepts a sport id, and only returns quick tweets for that sport" do
+      get :index, sport_id:@theSecondSport.id, format: :json
+      theResult = JSON.parse(response.body)
+      theResult["happy"].length.should eq(1)
+      theResult["sad"].length.should eq(1)
+
+      theResult["happy"][0]["name"].should eq(@theThirdQuickTweet.name)
+      theResult["happy"][0]["tweets"][0].should eq(@theThirdQuickTweet.tweet)
+      theResult["sad"][0]["name"].should eq(@theFourthQuickTweet.name)
+      theResult["sad"][0]["tweets"][0].should eq(@theFourthQuickTweet.tweet)
     end
   end
 

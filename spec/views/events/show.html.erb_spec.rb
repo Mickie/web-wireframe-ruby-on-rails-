@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe "events/show" do
   before(:each) do
+    theSportStub = stub_model(Sport, name:"Football", id:1)
     theStub = stub_model(Event,
       :name => "Superbowl",
-      :home_team => stub_model(Team, name:"Seahawks", slug:"seahawks"),
-      :visiting_team => stub_model(Team, name:"Cowboys", slug:"cowboys"),
+      :home_team => stub_model(Team, name:"Seahawks", slug:"seahawks", sport:theSportStub),
+      :visiting_team => stub_model(Team, name:"Cowboys", slug:"cowboys", sport:theSportStub),
       :location => stub_model(Location, one_line_address:"100 Main"),
       :event_date => DateTime.now(),
       :event_time => Time.now

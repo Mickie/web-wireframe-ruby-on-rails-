@@ -156,6 +156,7 @@
                                     "tweetControls",
                                     <%= @current_user.isConnectedToTwitter? %>,
                                     <%= @current_user.id %>,
+                                    <%= @team.sport.id %>,
                                     "myTwitterView");
     myTwitterView.startLoadingTweets();
   })

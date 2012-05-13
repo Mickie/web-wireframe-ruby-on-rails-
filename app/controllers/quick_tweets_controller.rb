@@ -5,7 +5,13 @@ class QuickTweetsController < ApplicationController
   # GET /quick_tweets
   # GET /quick_tweets.json
   def index
-    @quick_tweets = QuickTweet.all
+    @quick_tweets = []
+    
+    if params[:sport_id]
+      @quick_tweets = QuickTweet.where("sport_id = ?", params[:sport_id])
+    else
+      @quick_tweets = QuickTweet.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb

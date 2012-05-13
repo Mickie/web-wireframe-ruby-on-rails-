@@ -7,6 +7,7 @@ var TwitterView = function( anArrayOfHashTags,
                             aControlsDivId, 
                             aConnectedToTwitterFlag,
                             aUserId,
+                            aSportId,
                             aTwitterViewVariableName)
 {
   this.myHashTags = anArrayOfHashTags;
@@ -16,6 +17,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.myControlsDivSelector = "#" + aControlsDivId;
   this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
   this.myUserId = aUserId;
+  this.mySportId = aSportId;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
   
   this.myNewTweets = new Array();
@@ -68,7 +70,7 @@ var TwitterView = function( anArrayOfHashTags,
   
   this.initializeButtons = function()
   {
-    this.myTwitterController.loadButtonData(createDelegate(this, this.onButtonDataLoaded));
+    this.myTwitterController.loadButtonData(this.mySportId, createDelegate(this, this.onButtonDataLoaded));
   };
   
   this.onButtonDataLoaded = function()

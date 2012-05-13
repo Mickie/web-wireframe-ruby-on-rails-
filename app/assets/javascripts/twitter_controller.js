@@ -6,15 +6,15 @@ var TwitterController = function(aTwitterView)
   this.myTweetHash = {};
   
   
-  this.loadButtonData = function (aButtonsLoadedCallback)
+  this.loadButtonData = function (aSportId, aButtonsLoadedCallback)
   {
     this.myButtonsLoadedCallback = aButtonsLoadedCallback;
-    $.getJSON("/quick_tweets.json", createDelegate(this, this.onQuickTweetsComplete));
+    $.getJSON("/quick_tweets.json?sport_id=" + aSportId, 
+              createDelegate(this, this.onQuickTweetsComplete));
   };
   
   this.onQuickTweetsComplete = function(aResult)
   {
-    console.log(aResult);
     this.myTweetHash = aResult;
     this.myButtonsLoadedCallback();
   };
