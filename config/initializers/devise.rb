@@ -8,6 +8,9 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, ENV["FANZO_TWITTER_CONSUMER_KEY"], ENV["FANZO_TWITTER_CONSUMER_SECRET"]
   
+  require "omniauth-instagram"
+  config.omniauth :instagram, ENV["FANZO_INSTAGRAM_CLIENT_ID"], ENV["FANZO_INSTAGRAM_CLIENT_SECRET"]
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.

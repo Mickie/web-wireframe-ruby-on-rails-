@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
                   :twitter_user_secret,
                   :facebook_user_id,
                   :facebook_access_token,
+                  :instagram_user_id,
+                  :instagram_user_token,
                   :user_teams,
                   :teams
   def isConnectedToTwitter?
@@ -54,7 +56,21 @@ class User < ActiveRecord::Base
     else
       User.where( "twitter_user_id = ?", access_token.uid).first
     end
+  end
 
+  def self.find_for_instagram_oauth(access_token, signed_in_user)
+    if signed_in_user
+      if signed_in_user.instagram_user_id
+        return signed_in_user
+      else
+        signed_in_user.instagram_user_id = access_token.uid
+        signed_in_user.instagram_user_token = access_token.credentials.token
+        signed_in_user.save!
+        return signed_in_user
+      end
+    else
+      User.where( instagram_user_id: access_token.uid ).first
+    end
   end
 
   def self.new_with_session(params, session)

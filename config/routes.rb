@@ -1,5 +1,6 @@
 FanzoSite::Application.routes.draw do
 
+
   resources :quick_tweets
 
   devise_for :admins, only: :sessions
@@ -21,6 +22,9 @@ FanzoSite::Application.routes.draw do
   post "twitter_proxy/update_status"
   post "twitter_proxy/retweet"
   post "twitter_proxy/favorite"
+
+  get "instagram_proxy/find_tags"
+  get "instagram_proxy/media_for_tag"
 
   # only for admin users
   resources :admins, only: :show

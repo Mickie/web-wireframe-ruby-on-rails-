@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511204201) do
+ActiveRecord::Schema.define(:version => 20120514182549) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -225,6 +225,8 @@ ActiveRecord::Schema.define(:version => 20120511204201) do
     t.string   "facebook_user_id"
     t.string   "facebook_access_token"
     t.string   "twitter_user_id"
+    t.string   "instagram_user_id"
+    t.string   "instagram_user_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

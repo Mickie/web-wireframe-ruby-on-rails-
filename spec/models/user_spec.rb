@@ -15,6 +15,8 @@ describe User do
   it { should respond_to(:twitter_user_secret) }
   it { should respond_to(:facebook_user_id) }
   it { should respond_to(:facebook_access_token) }
+  it { should respond_to(:instagram_user_id) }
+  it { should respond_to(:instagram_user_token) }
   it { should respond_to(:teams) }
   it { should respond_to(:isConnectedToTwitter?)}
   
@@ -134,6 +136,49 @@ describe User do
       theResult.twitter_user_id.should eq('12345')
       theResult.twitter_user_token.should eq('a token')
       theResult.twitter_user_secret.should eq('a secret')
+    end
+  end
+  
+  describe "can find existing user via instagram" do
+    before do
+      thePassword = Devise.friendly_token[0,20]
+      theUserToFind = User.create!( email: 'instagram_init@fanzo.co', 
+                                    password: thePassword,
+                                    password_confirmation: thePassword,
+                                    instagram_user_id: '54321' )
+
+      OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
+                                              info: { nickname: "jimbob", name:"Jim Bob" }, 
+                                              credentials: { token: "inst_token" } 
+                                              }
+      theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
+      @user = User.find_for_instagram_oauth( theHash, nil ) 
+    end
+    
+    it "should have loaded the user to find" do
+      @user.instagram_user_id.should eq('54321') 
+    end
+  end
+  
+  describe "can connect an existing user to instagram" do
+    before do
+      OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
+                                              info: { nickname: "jimbob", name:"Jim Bob" }, 
+                                              credentials: { token: "inst_token" } 
+                                              }
+      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
+    end 
+    
+    it "should return the signed in user" do
+      User.find_for_instagram_oauth( @theHash, @user ).should eq(@user)
+    end   
+    
+    it "should add the twitter data" do
+      User.find_for_instagram_oauth( @theHash, @user )
+      
+      theResult = User.where(email:@user.email).first
+      theResult.instagram_user_id.should eq('54321')
+      theResult.instagram_user_token.should eq('inst_token')
     end
   end
   

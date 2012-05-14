@@ -17,9 +17,8 @@
 //= require bootstrap
 //= require facebook_js_sdk_loader
 //= require google_analytics
-//= require twitter_search
-//= require twitter_view
-//= require twitter_controller
+//= require_tree ./twitter
+//= require_tree ./instagram
 //= require lib/pure
 
 function createDelegate(anObject, aMethod)

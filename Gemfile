@@ -1,17 +1,20 @@
 source 'https://rubygems.org'
 
 gem 'thin', '>= 1.3.1'
-gem 'rails', '3.2.2'
+gem 'rails', '>=3.2.2'
 gem 'pg'
 gem 'jquery-rails'
 gem 'devise', '>= 2.0.4'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'omniauth-instagram'
 gem 'bootstrap-sass', '>= 2.0.0'
 gem 'geocoder'
 gem 'dalli'
 gem 'kgio'
 gem 'twitter'
+gem 'instagram', '>= 0.8.4'
+gem 'faraday', '0.7.6'
 
 group :assets do
   gem 'sass-rails'
@@ -37,4 +40,5 @@ group :test do
   gem 'launchy', '>= 2.0.5'
   gem 'database_cleaner', '>= 0.7.1'
   gem 'email_spec'
+  gem 'selenium-webdriver', '>= 2.22.0.rc1'
 end
