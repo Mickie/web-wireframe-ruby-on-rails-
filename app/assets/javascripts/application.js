@@ -29,3 +29,15 @@ function createDelegate(anObject, aMethod)
   }
   return theDelegate;
 }
+
+function createExtendedDelegate(anObject, aMethod, anArgumentExtensionArray)
+{
+  var theDelegate = function()
+  {
+    var theArgsAsArray = Array.prototype.slice.call(arguments);
+    var theNewArguments = theArgsAsArray.concat(anArgumentExtensionArray)
+    return aMethod.apply(anObject, theNewArguments);
+  }
+  
+  return theDelegate;
+}

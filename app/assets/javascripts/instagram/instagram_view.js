@@ -21,17 +21,20 @@ var InstagramView = function(aDivId, aTeamId)
   this.loadMediaForTag = function( aTag )
   {
     $.getJSON("/instagram_proxy/media_for_tag?tag=" + escape(aTag),
-              createDelegate(this, this.onMediaForTagComplete));
+              createExtendedDelegate(this, this.onMediaForTagComplete, [aTag]));
   };
   
-  this.onMediaForTagComplete = function(aResult)
+  this.onMediaForTagComplete = function(aResult, aTextStatus, aJQXHR, aTag)
   {
+    var theParentDiv = $(this.myContentDivSelector).append("<div id='" + aTag 
+                                                            + "_tag'><h4>Images for tag: " 
+                                                            + aTag + "</h4></div>");
     for (var i=0; i < aResult.data.length; i++) 
     {
       theImageData = aResult.data[i];
-      $(this.myContentDivSelector).append("<img src='" + theImageData.images.low_resolution.url 
-                                          + "' width='" + theImageData.images.low_resolution.width
-                                          + "' height='" + theImageData.images.low_resolution.height + "' />");
+      theParentDiv.append("<img src='" + theImageData.images.low_resolution.url 
+                            + "' width='" + theImageData.images.low_resolution.width
+                            + "' height='" + theImageData.images.low_resolution.height + "' />");
     };
   };
 }
