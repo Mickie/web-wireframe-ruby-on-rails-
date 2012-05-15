@@ -11,5 +11,9 @@ describe UsersController do
       get("/users/1/connect_twitter").should route_to("users#connect_twitter", id: "1")
     end
 
+    it "routes to #connect_instagram" do
+      get("/users/1/connect_instagram").should route_to("users#connect_instagram", id: "1")
+    end
+
   end
 end

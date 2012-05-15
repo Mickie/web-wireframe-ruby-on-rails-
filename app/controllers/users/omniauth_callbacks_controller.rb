@@ -36,6 +36,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Instagram"
       sign_in_and_redirect @user, event: :authentication
+    else
+      session["devise.instagram_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
     end    
   end
 end

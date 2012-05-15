@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
                   :facebook_access_token,
                   :instagram_user_id,
                   :instagram_user_token,
+                  :instagram_username,
                   :user_teams,
                   :teams
   def isConnectedToTwitter?
@@ -65,6 +66,7 @@ class User < ActiveRecord::Base
       else
         signed_in_user.instagram_user_id = access_token.uid
         signed_in_user.instagram_user_token = access_token.credentials.token
+        signed_in_user.instagram_username = access_token.info.nickname
         signed_in_user.save!
         return signed_in_user
       end

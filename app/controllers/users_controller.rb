@@ -12,4 +12,12 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
   end
+
+  def connect_instagram
+    if request.headers["Referer"]
+      session['user_return_to'] = request.headers["Referer"]
+    end
+    @user = User.find(params[:id])
+  end
+
 end

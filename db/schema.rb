@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514182549) do
+ActiveRecord::Schema.define(:version => 20120515005349) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20120514182549) do
     t.string   "twitter_user_id"
     t.string   "instagram_user_id"
     t.string   "instagram_user_token"
+    t.string   "instagram_username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

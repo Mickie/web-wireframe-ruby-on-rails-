@@ -1,0 +1,8 @@
+<%= provide(:title, "My Profile" ) %>
+<p><%= @user.email if @user.email %></p>
+
+<h1>To like or comment on Instagram photos, you need to connect your FANZO account to Instagram</h1>
+
+<div>
+  <%= link_to image_tag("instagram-icon.png", size:"64x64"), omniauth_authorize_path(User, 'instagram'), id: "sign-in-with-instagram" %>
+</div>

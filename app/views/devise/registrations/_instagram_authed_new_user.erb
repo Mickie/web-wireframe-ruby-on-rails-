@@ -1,0 +1,38 @@
+<h1>Almost There</h1>
+
+<p>You have successfully connected your twitter account, now we just need an email and password and you are on your way.</p>
+
+<% resource.instagram_user_id = session["devise.instagram_data"].uid %>
+<% resource.instagram_user_token = session["devise.instagram_data"].credentials.token %>
+<% resource.instagram_username = session["devise.instagram_data"].info.nickname %>
+
+<div class="well">
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+    
+    <div id="hidden_twitter_fields">
+        <%= f.hidden_field :instagram_user_id %>
+        <%= f.hidden_field :instagram_user_token %>
+        <%= f.hidden_field :instagram_username %>
+    </div>
+  
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder:"superfan@sports.com" %>
+    </div>
+  
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+  
+    <div>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  
+    <div>
+      <%= f.submit "Complete Registration >>", id:'commit', class:'btn btn-large btn-primary' %>
+    </div>
+  <% end %>
+</div>

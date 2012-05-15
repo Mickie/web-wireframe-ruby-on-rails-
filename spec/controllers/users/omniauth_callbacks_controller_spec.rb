@@ -47,4 +47,51 @@ describe Users::OmniauthCallbacksController do
       
     end
   end  
+  
+  
+  describe "getting instagram callbacks" do
+
+    before do
+      OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
+                                              info: { nickname: "jimbob", name:"Jim Bob" }, 
+                                              credentials: { token: "inst_token" } 
+                                              }
+      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
+      request.env["omniauth.auth"] = @theHash
+      request.env["devise.mapping"] = Devise.mappings[:user] 
+    end
+  
+    describe "when no user signed in" do
+
+      before do
+        get :instagram 
+      end
+
+      it "should redirect to registration page" do
+        response.should redirect_to(new_user_registration_path)
+      end
+      
+      it "should have instagram data in session" do
+        session["devise.instagram_data"].should_not be_nil
+        session["devise.instagram_data"].credentials.token.should  eq('inst_token')
+        session["devise.instagram_data"].info.name.should eq('Jim Bob')
+        session["devise.instagram_data"].info.nickname eq('jimbob')
+        session["devise.instagram_data"].uid eq('54321')
+      end
+    end
+   
+    describe "for existing user" do
+
+      before do
+        user.instagram_user_id = '54321'
+        user.save
+        get :instagram
+      end      
+      
+      it "should find user and redirect to user profile" do
+        response.should redirect_to( user_path(user) )
+      end
+      
+    end
+  end   
 end

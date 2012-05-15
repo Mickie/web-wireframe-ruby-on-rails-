@@ -1,5 +1,7 @@
 <% if session["devise.twitter_data"] %>
     <%= render "twitter_authed_new_user" %>
+<% elsif session["devise.instagram_data"] %>
+    <%= render "instagram_authed_new_user" %>
 <% else %>
     <%= render "new_user" %>
 <% end %>

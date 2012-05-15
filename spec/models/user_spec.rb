@@ -15,6 +15,7 @@ describe User do
   it { should respond_to(:twitter_user_secret) }
   it { should respond_to(:facebook_user_id) }
   it { should respond_to(:facebook_access_token) }
+  it { should respond_to(:instagram_username) }
   it { should respond_to(:instagram_user_id) }
   it { should respond_to(:instagram_user_token) }
   it { should respond_to(:teams) }
@@ -179,6 +180,7 @@ describe User do
       theResult = User.where(email:@user.email).first
       theResult.instagram_user_id.should eq('54321')
       theResult.instagram_user_token.should eq('inst_token')
+      theResult.instagram_username.should eq('jimbob')
     end
   end
   
