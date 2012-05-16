@@ -43,8 +43,12 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_twitter_oauth(access_token, signed_in_user)
+    theUserWithThisTwitterId = User.where( "twitter_user_id = ?", access_token.uid).first
+
     if signed_in_user
-      if signed_in_user.twitter_user_id
+      if theUserWithThisTwitterId && signed_in_user.id != theUserWithThisTwitterId.id
+        return theUserWithThisTwitterId
+      elsif signed_in_user.twitter_user_id
         return signed_in_user
       else
         signed_in_user.twitter_user_id = access_token.uid
@@ -55,7 +59,7 @@ class User < ActiveRecord::Base
         return signed_in_user
       end
     else
-      User.where( "twitter_user_id = ?", access_token.uid).first
+      return theUserWithThisTwitterId
     end
   end
 

@@ -23,4 +23,11 @@ describe StaticPagesController do
     end
   end
 
+  describe "GET 'channel'" do
+    it "returns http success" do
+      get 'channel'
+      response.should be_success
+    end
+  end
+
 end

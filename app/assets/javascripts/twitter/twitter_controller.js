@@ -95,8 +95,13 @@ var TwitterController = function(aTwitterView)
   {
     $.post( "/twitter_proxy/update_status", 
             {statusText : aTweetText }, 
-            createDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete), 
-            "json" );  
+            createExtendedDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete, ['twitter']), 
+            "json" );
+            
+    if (myFacebookView)
+    {
+      myFacebookView.postToFeed(aTweetText, createExtendedDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete, ['facebook']));              
+    }
   };
   
   this.onReplyTo = function( aTweetId, aUser)

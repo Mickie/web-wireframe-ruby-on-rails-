@@ -86,14 +86,14 @@ var TwitterView = function( anArrayOfHashTags,
   
   this.onNewTweet = function(anIndex, aTweet)
   {
-    var theNewDivSelector = "#" + aTweet.id_str;
     if(this.myFullyLoadedFlag)
     {
-      this.myNewTweets.unshift(aTweet);
+      this.myNewTweets.push(aTweet);
       this.showNewTweetsAlert();
     }
     else
     {
+      var theNewDivSelector = "#" + aTweet.id_str;
       $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
       $(theNewDivSelector).slideDown(200);
       
@@ -119,8 +119,14 @@ var TwitterView = function( anArrayOfHashTags,
   this.showNewTweets = function()
   {
     $(this.myNewTweetDivSelector).slideUp(600);
+    this.chopOffOldestTweetsSoWeShowOnlyTheLatest();
     $.each(this.myNewTweets, createDelegate(this, this.showTweet));
     this.myNewTweets = new Array();
+  };
+
+  this.chopOffOldestTweetsSoWeShowOnlyTheLatest = function()
+  {
+    this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets - 1);    
   };
 
   this.showTweet = function(i, aTweet)
@@ -131,7 +137,7 @@ var TwitterView = function( anArrayOfHashTags,
     }
 
     var theNewDivSelector = "#" + aTweet.id_str;
-    $(this.myTweetDivSelector).prepend(this.generateTweetDiv(aTweet));
+    $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
     $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
   };
   
@@ -155,12 +161,15 @@ var TwitterView = function( anArrayOfHashTags,
       "span.twitterText" : function(anItem)
       {
         var theText = anItem.context.text;
-        var theUrls = anItem.context.entities.urls;
-        for(var i=0,j=theUrls.length; i<j; i++)
+        if (anItem.context.entities && anItem.context.entities.urls)
         {
-          var theUrlData = theUrls[i];
-          var theAnchor = "<a href='" + theUrlData.url + "' target='_blank'>" + theUrlData.display_url + "</a>";
-          theText = theText.replace(theUrlData.url, theAnchor);
+          var theUrls = anItem.context.entities.urls;
+          for(var i=0,j=theUrls.length; i<j; i++)
+          {
+            var theUrlData = theUrls[i];
+            var theAnchor = "<a href='" + theUrlData.url + "' target='_blank'>" + theUrlData.display_url + "</a>";
+            theText = theText.replace(theUrlData.url, theAnchor);
+          }
         }
         return theText;
       },
@@ -193,12 +202,23 @@ var TwitterView = function( anArrayOfHashTags,
     }
   };
   
-  this.onTweetComplete = function(aResponse)
+  this.onTweetComplete = function(aResponse, aSource)
   {
     $(this.myControlsDivSelector + " textarea").val(this.myHashTags);
+    $("#tweetSuccessAlert div.messageHolder").append('<p><strong>Success!</strong> Your ' + aSource + ' status was updated</p>');
     $("#tweetSuccessAlert").slideDown(600);
-    setTimeout(function(){$("#tweetSuccessAlert").slideUp(600);}, 5000);
+    setTimeout(createDelegate(this, this.hideTweetSuccess), 5000);
   };
+  
+  this.hideTweetSuccess = function()
+  {
+    $("#tweetSuccessAlert").slideUp(600, createDelegate(this, this.onHideComplete));
+  }
+  
+  this.onHideComplete = function()
+  {
+    $("#tweetSuccessAlert div.messageHolder").empty();    
+  }
     
   this.onRetweetComplete = function(aResponse)
   {

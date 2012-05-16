@@ -17,6 +17,7 @@
 //= require bootstrap
 //= require facebook_js_sdk_loader
 //= require google_analytics
+//= require_tree ./facebook
 //= require_tree ./twitter
 //= require_tree ./instagram
 //= require lib/pure

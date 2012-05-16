@@ -22,7 +22,7 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
 
   this.onSearchComplete = function(aJSON)
   {
-    if(aJSON)
+    if(aJSON && aJSON.results)
     {
       $.each(aJSON.results, this.myNewTweetCallback);
       

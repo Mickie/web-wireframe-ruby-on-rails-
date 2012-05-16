@@ -22,4 +22,13 @@ describe "StaticPages" do
     end
     
   end
+  
+  describe "channel html file" do
+    it "should return facebook script tag only" do
+      get '/channel.html'
+      
+      response.status.should be(200)
+      response.body.should eq("<script src='//connect.facebook.net/en_US/all.js'></script>") 
+    end
+  end
 end

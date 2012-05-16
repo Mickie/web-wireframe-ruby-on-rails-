@@ -3,13 +3,18 @@ window.fbAsyncInit = function()
 {
   FB.init({
     appId      : <%= ENV["FANZO_FACEBOOK_APP_ID"] %>, // App ID
-    channelUrl : '//www.fanzo.co/channel.html', // Channel File
+    channelUrl : '//<%= ENV["FANZO_WEB_HOST"] %>/channel.html', // Channel File
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
   });
 
-  // Additional initialization code here
+  if (myFacebookView)
+  {
+    myFacebookView.initialize();
+  }
+
+
 };
 
 function initFacebookJSSDK()

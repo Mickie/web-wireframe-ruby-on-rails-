@@ -83,25 +83,11 @@
 <% if @team.social_info.hash_tags %>
 <div class="row-fluid">
   <div class="span12">
-    
-    <div id="myTweetModal" class="modal hide fade" style="display: none;">
-      <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Personalize your tweet:</h3>
-      </div>
-      <div class="modal-body">
-        <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
-      </div>
-      <div class="modal-footer">
-        <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
-      </div>
-    </div>
-          
     <div class="controls" id="tweetControls">
       <div class="input-append">
-        <textarea class="input-xlarge span11" rows="1"><%= raw @team.social_info.hash_tags %></textarea>
+        <textarea class="input-xlarge span10" rows="1"><%= raw @team.social_info.hash_tags %></textarea>
         <div class="btn-group">
-          <button href="#" class="btn btn-primary quickTweetButton">Update Twitter Status</button>
+          <button href="#" class="btn btn-primary quickTweetButton">Update Social Status</button>
           <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
             <span class="caret"></span>
           </button>
@@ -119,10 +105,28 @@
         </div>
       </div>
     </div>    
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
     
+    <div id="myTweetModal" class="modal hide fade" style="display: none;">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Personalize your tweet:</h3>
+      </div>
+      <div class="modal-body">
+        <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
+      </div>
+    </div>
+          
     
     <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
-      <a class='close' data-dismiss='alert' href='#'>×</a><p><strong>Success!</strong> Your status was updated</p>
+      <a class='close' data-dismiss='alert' href='#'>×</a>
+      <div class="messageHolder"></div>
     </div>
     
     <div id="tweetHolder">
@@ -155,8 +159,11 @@
 <script language="JavaScript">
   var myTwitterView;
   var myInstagramView;
+  var myFacebookView;
+  
   $(function()
   {
+    myFacebookView = new FacebookView();
     myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>, 
                                     20,
                                     "tweets",
