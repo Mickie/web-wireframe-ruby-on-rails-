@@ -12,7 +12,6 @@
 #
 src_files:
   - assets/application.js
-  - assets/jasmine_examples/*.js
 
 # stylesheets
 #
