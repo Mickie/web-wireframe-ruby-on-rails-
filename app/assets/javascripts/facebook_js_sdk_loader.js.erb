@@ -9,7 +9,7 @@ window.fbAsyncInit = function()
     xfbml      : true  // parse XFBML
   });
 
-  if (myFacebookView)
+  if (typeof myFacebookView !== 'undefined')
   {
     myFacebookView.initialize();
   }

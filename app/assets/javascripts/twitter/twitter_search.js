@@ -6,10 +6,10 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
   this.myNewTweetCallback = anOnTweetCallback;
   this.myErrorCallback = anOnErrorCallback;
 
-  this.getLatestTweetsForTerm = function(aSearchTerm)
+  this.getLatestTweetsForTerm = function(aSearchTerm, aNumberToGet)
   {
     var theCacheBuster = new Date().getTime();
-    var theQueryString = "?lang=en&include_entities=true&callback=?&q=" + escape(aSearchTerm) + "&cb=" + theCacheBuster;
+    var theQueryString = "?lang=en&include_entities=true&callback=?&q=" + escape(aSearchTerm) + "&rpp=" + aNumberToGet + "&cb=" + theCacheBuster;
     $.getJSON(TWITTER_SEARCH_URL + theQueryString, createDelegate(this, this.onSearchComplete));
   };
 

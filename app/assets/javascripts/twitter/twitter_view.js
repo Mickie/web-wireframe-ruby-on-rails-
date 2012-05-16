@@ -28,7 +28,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.startLoadingTweets = function()
   {
     this.myTwitterSearch = new TwitterSearch(createDelegate(this, this.onNewTweet), createDelegate(this, this.onError));
-    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags.join(" OR "));
+    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags.join(" OR "), this.myMaxTweets);
     this.initializeButtons();
     
     window.setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
@@ -97,7 +97,7 @@ var TwitterView = function( anArrayOfHashTags,
       $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
       $(theNewDivSelector).slideDown(200);
       
-      if ($(this.myTweetDivSelector).children().length > this.myMaxTweets)
+      if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets)
       {
         this.myFullyLoadedFlag = true;
       }
@@ -126,7 +126,10 @@ var TwitterView = function( anArrayOfHashTags,
 
   this.chopOffOldestTweetsSoWeShowOnlyTheLatest = function()
   {
-    this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets - 1);    
+    if (this.myNewTweets.length > this.myMaxTweets)
+    {
+      this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets - 1);    
+    }
   };
 
   this.showTweet = function(i, aTweet)
@@ -137,7 +140,7 @@ var TwitterView = function( anArrayOfHashTags,
     }
 
     var theNewDivSelector = "#" + aTweet.id_str;
-    $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
+    $(this.myTweetDivSelector).prepend(this.generateTweetDiv(aTweet));
     $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
   };
   
