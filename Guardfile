@@ -45,7 +45,7 @@ guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1].singularize}_pages_spec.rb" }
 end
 
-guard 'jasmine', :cli => "--drb", :jasmine_url => 'http://localhost:8888/' do
+guard 'jasmine', :cli => "--drb", :jasmine_url => 'http://localhost:8888/jasmine' do
   watch(%r{spec/javascripts/spec\.(js\.coffee|js|coffee)$})         { "spec/javascripts" }
   watch(%r{spec/javascripts/.+_spec\.(js\.coffee|js|coffee)$})
   watch(%r{app/assets/javascripts/(.+?)\.(js\.coffee|js|coffee)$})  { |m| "spec/javascripts/#{m[1]}_spec.#{m[2]}" }

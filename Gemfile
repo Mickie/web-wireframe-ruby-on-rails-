@@ -28,6 +28,8 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'guard-jasmine'
   gem 'jasmine'
+  gem 'jasminerice'
+  gem 'coffee-rails'
   gem 'ruby-debug19'
 end
 

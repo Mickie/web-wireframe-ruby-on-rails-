@@ -8,9 +8,13 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
 
   this.getLatestTweetsForTerm = function(aSearchTerm, aNumberToGet)
   {
-    var theCacheBuster = new Date().getTime();
-    var theQueryString = "?lang=en&include_entities=true&callback=?&q=" + escape(aSearchTerm) + "&rpp=" + aNumberToGet + "&cb=" + theCacheBuster;
-    $.getJSON(TWITTER_SEARCH_URL + theQueryString, createDelegate(this, this.onSearchComplete));
+    var theQueryString = "?lang=en&include_entities=true&q=" + escape(aSearchTerm) + "&rpp=" + aNumberToGet;
+    $.ajax({
+             url: TWITTER_SEARCH_URL + theQueryString,
+             cache:false,
+             dataType: "jsonp",
+             success: createDelegate(this, this.onSearchComplete)
+           });
   };
 
   this.grabMoreTweets = function()
@@ -19,8 +23,8 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
     $.getJSON(TWITTER_SEARCH_URL + this.myRefreshUrl + "&callback=?&cb=" + theCacheBuster, 
               createDelegate(this, this.onSearchComplete));
   }
-
-  this.onSearchComplete = function(aJSON)
+  
+  this.onSearchComplete = function(aJSON, aTextStatus, aJqHR)
   {
     if(aJSON && aJSON.results)
     {
@@ -30,7 +34,7 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
     }
     else
     {
-      this.myErrorCallback("Woops! There was a problem getting tweets from Twitter..:(")
+      this.myErrorCallback("Woops! There was a problem getting tweets from Twitter: " + aTextStatus );
     }
   }
 

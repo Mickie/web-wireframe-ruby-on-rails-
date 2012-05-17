@@ -43,6 +43,13 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.2)
       ffi (~> 1.0.6)
+    coffee-rails (3.2.2)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.2.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.3.2)
     columnize (0.3.6)
     cucumber (1.2.0)
       builder (>= 2.1.2)
@@ -101,6 +108,7 @@ GEM
     guard-spork (0.8.0)
       guard (>= 0.10.0)
       spork (>= 0.8.4)
+    haml (3.1.6)
     hashie (1.2.0)
     hike (1.2.1)
     httpauth (0.1)
@@ -116,6 +124,8 @@ GEM
       rspec (>= 1.3.1)
       selenium-webdriver (>= 0.1.3)
     jasmine-core (1.2.0)
+    jasminerice (0.0.8)
+      haml
     journey (1.0.3)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -256,6 +266,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (>= 2.0.0)
   capybara (>= 1.1.2)
+  coffee-rails
   cucumber-rails
   dalli
   database_cleaner (>= 0.7.1)
@@ -271,6 +282,7 @@ DEPENDENCIES
   guard-spork (>= 0.3.2)
   instagram (>= 0.8.4)
   jasmine
+  jasminerice
   jquery-rails
   kgio
   launchy (>= 2.0.5)
