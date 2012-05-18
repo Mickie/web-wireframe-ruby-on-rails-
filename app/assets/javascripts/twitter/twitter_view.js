@@ -128,7 +128,7 @@ var TwitterView = function( anArrayOfHashTags,
   {
     if (this.myNewTweets.length > this.myMaxTweets)
     {
-      this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets - 1);    
+      this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets);    
     }
   };
 
@@ -154,6 +154,19 @@ var TwitterView = function( anArrayOfHashTags,
     return $("#template").clone().render(aTweet, this.getTweetDirective());
   };
   
+  this.makeInlineUrlsLinks = function(aText, anArrayOfUrls)
+  {
+    var theText = aText;
+    for(var i=0,j=anArrayOfUrls.length; i<j; i++)
+    {
+      var theUrlData = anArrayOfUrls[i];
+      var theAnchor = "<a href='" + theUrlData.url + "' target='_blank'>" + theUrlData.display_url + "</a>";
+      theText = theText.replace(theUrlData.url, theAnchor);
+    }
+    
+    return theText;
+  };
+  
   this.getTweetDirective = function()
   {
     var theThis = this;
@@ -167,12 +180,7 @@ var TwitterView = function( anArrayOfHashTags,
         if (anItem.context.entities && anItem.context.entities.urls)
         {
           var theUrls = anItem.context.entities.urls;
-          for(var i=0,j=theUrls.length; i<j; i++)
-          {
-            var theUrlData = theUrls[i];
-            var theAnchor = "<a href='" + theUrlData.url + "' target='_blank'>" + theUrlData.display_url + "</a>";
-            theText = theText.replace(theUrlData.url, theAnchor);
-          }
+          theText = theThis.makeInlineUrlsLinks(theText, theUrls);
         }
         return theText;
       },

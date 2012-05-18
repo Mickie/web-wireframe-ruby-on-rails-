@@ -3,6 +3,24 @@
   <p></p>
 </div>
 
-<div id="tweets"></div>
+
+
+<div id="tweets">
+  <div id="template" class="tweet well">
+    <img class="twitterAvatar" width="48px" height="48px">
+    <span class="twitterName"></span>: 
+    <span class="twitterText"></span>
+    <div class="tweetMenu">
+      <div class="timestamp"></div>
+      <a id="reply">Reply</a> |
+      <a id="retweet">Retweet</a> |
+      <a id="favorite">Favorite</a>
+    </div>
+    <div class="alert alert-info fade in" style="display:none">
+      <a class="close" data-dismiss="alert" href="#">x</a>
+      <p><strong>Success!</strong></p>
+    </div>
+  </div>
+</div>
 
 <div id="tweetControls"></div>

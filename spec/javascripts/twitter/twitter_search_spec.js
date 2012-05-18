@@ -19,7 +19,7 @@ describe("TwitterSearch", function()
       registerFakeAjax(
       { 
         url: THE_SEARCH_URL,
-        successData: TwitterSearchResponses.search.success
+        successData: TwitterData.searchResponses.success
       })
 
       myTwitterSearch.getLatestTweetsForTerm( 'notredame', 1); 
@@ -46,7 +46,7 @@ describe("TwitterSearch", function()
         url: THE_SEARCH_URL,
         success: 
         {
-          data: TwitterSearchResponses.search.error,
+          data: TwitterData.searchResponses.error,
           status: 'bad error'
         }
       })
