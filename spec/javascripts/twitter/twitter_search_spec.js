@@ -1,7 +1,6 @@
-describe("TwitterSearch", function() 
+describe("TwitterSearch", function()  
 {
   var myTwitterSearch;
-  var myRequest;
   var onTweet, onError;
   var THE_SEARCH_URL = 'http://search.twitter.com/search.json?lang=en&include_entities=true&q=notredame&rpp=1';
   

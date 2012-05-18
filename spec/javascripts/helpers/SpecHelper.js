@@ -7,3 +7,10 @@ beforeEach(function() {
     }
   })
 });
+
+function loadJasmineFixture(aFixture)
+{
+  useRealAjaxFor({url:'jasmine/fixtures/' + aFixture});
+  jasmine.getFixtures().fixturesPath = 'jasmine/fixtures';
+  loadFixtures( aFixture );
+}

@@ -107,9 +107,9 @@ var TwitterView = function( anArrayOfHashTags,
 
   this.onError = function(aMessage)
   {
-    $( this.myTweetDivSelector ).html( "<p>" + aMessage + "</p>" )
+    console.log("Error getting tweets: " + aMessage);
   };
-
+  
   this.showNewTweetsAlert = function()
   {
     $(this.myNewTweetDivSelector + " > p").html("<strong>" + this.myNewTweets.length + "</strong> new Tweets!");
