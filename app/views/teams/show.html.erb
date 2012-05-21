@@ -79,7 +79,9 @@
 <div class="row-fluid">
   <div class="span12">
     <h3>Instagram Photos</h3>
-    <div id="team_instagrams"></div>
+    <div id="slides">
+      <div class="slides_container"></div>
+    </div>
   </div>
 </div>
 
@@ -178,8 +180,16 @@
                                     "myTwitterView");
     myTwitterView.startLoadingTweets();
     
-    myInstagramView = new InstagramView("team_instagrams", <%= @team.id %>);
-    myInstagramView.startLoadingImages();
+    myInstagramView = new InstagramView("slides");
+    myInstagramView.startLoadingImagesForTeam(<%= @team.id %>, function(){
+      $('#slides').slides({
+        preload: false,
+        play: 5000,
+        pause: 2500,
+        hoverPause: true,
+        generatePagination: false
+      });
+    });
   })
 </script>
 <% end %>

@@ -34,6 +34,10 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
     }
     else
     {
+      console.log("aJSON:");
+      console.log(aJSON);
+      console.log("aJqHR:");
+      console.log(aJqHR);
       this.myErrorCallback("Woops! There was a problem getting tweets from Twitter: " + aTextStatus );
     }
   }

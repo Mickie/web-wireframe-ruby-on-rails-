@@ -22,10 +22,6 @@ describe "venues/index" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Name", :count => 2
-    assert_select "tr>td", :text => "fred", :count => 2
     assert_select "tr>td", :text => "100 Main", :count => 2
-    assert_select "tr>td", :text => "foo", :count => 2
-    assert_select "tr>td", :text => "bar", :count => 2
-    assert_select "tr>td", :text => "wilma", :count => 2
   end
 end

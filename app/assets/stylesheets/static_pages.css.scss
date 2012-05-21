@@ -20,3 +20,17 @@ h2
     line-height: 20px;
   }
 }
+
+.slides_container {
+  width:306px;
+  overflow:hidden;
+  position:relative;
+  display:none;
+
+  img
+  {
+    width:306px;
+    height:306px;
+    display:block;
+  }
+}

@@ -1,8 +1,16 @@
 <%= provide(:title, 'FANZO - Uniting people around the world through sports') %>
 
 <div class="row-fluid">
-  <div class="span12">
-    <div class="hero-unit">
+  <div class="span12 hero-unit">
+    <div class="span4">
+      <div id="slides">
+        <div class="slides_container">
+        </div>
+        <a href="#" class="prev">prev</a>
+        <a href="#" class="next">next</a>
+      </div>
+    </div>
+    <div class="span8">
       <h1>Welcome to FANZO</h1>
       <h2>FANZO is the best way to enjoy the game with other fans</h2>
       <%= link_to "Click to Get Started >>", new_user_registration_path, class: "btn btn-large btn-primary" %>
@@ -14,6 +22,26 @@
           <li>See what the world is saying about your team</li>
       </ul>
     </div>
-    
   </div>
 </div>
+
+<script language="JavaScript">
+  var myInstagramView;
+  
+  $(function()
+  {
+    myInstagramView = new InstagramView("slides");
+    myInstagramView.loadMediaForTag("tailgate", function(){
+      $('#slides').slides({
+        preload: false,
+        play: 5000,
+        pause: 2500,
+        hoverPause: true,
+        generatePagination: false
+      });
+    });
+  
+  
+  })
+</script>
+

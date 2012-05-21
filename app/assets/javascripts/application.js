@@ -20,7 +20,7 @@
 //= require_tree ./facebook
 //= require_tree ./twitter
 //= require_tree ./instagram
-//= require lib/pure
+//= require_tree ./lib
 
 function createDelegate(anObject, aMethod)
 {
