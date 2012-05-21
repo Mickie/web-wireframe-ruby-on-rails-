@@ -2,11 +2,9 @@ var InstagramView = function(aDivId)
 {
   this.myContentDivSelector = "div#" + aDivId;
   this.myTeamId = "";
-  this.myMediaLoadedCompleteCallback = null;
   
-  this.startLoadingImagesForTeam = function( aTeamId, aCompleteCallback )
+  this.startLoadingImagesForTeam = function( aTeamId )
   {
-    this.myMediaLoadedCompleteCallback = aCompleteCallback;
     this.myTeamId = aTeamId;
     $.getJSON("/instagram_proxy/find_tags.json?team_id=" + this.myTeamId, 
               createDelegate(this, this.onFindTagsComplete));
@@ -17,20 +15,25 @@ var InstagramView = function(aDivId)
     for (var i=0; i < aResult.length; i++) 
     {
       var theTag = aResult[i];
-      this.loadMediaForTag(theTag.name, this.myMediaLoadedCompleteCallback);
+      this.createSlideHolderForTag(theTag.name);
+      this.loadMediaForTag(theTag.name);
     };
   };
   
-  this.loadMediaForTag = function( aTag, aCompleteCallback )
+  this.createSlideHolderForTag = function(aTag)
   {
-    this.myMediaLoadedCompleteCallback = aCompleteCallback;
+    $(this.myContentDivSelector).append('<div id="slides_' + aTag + '"><div class="slides_container"></div></div>');
+  };
+  
+  this.loadMediaForTag = function( aTag )
+  {
     $.getJSON("/instagram_proxy/media_for_tag?tag=" + escape(aTag),
               createExtendedDelegate(this, this.onMediaForTagComplete, [aTag]));
   };
   
   this.onMediaForTagComplete = function(aResult, aTextStatus, aJQXHR, aTag)
   {
-    var theParentDiv = $(this.myContentDivSelector + " div.slides_container");
+    var theParentDiv = $("div#slides_" + aTag + " div.slides_container");
     for (var i=0; i < aResult.data.length; i++) 
     {
       theImageData = aResult.data[i];
@@ -38,10 +41,19 @@ var InstagramView = function(aDivId)
                             + "' width='" + theImageData.images.low_resolution.width
                             + "' height='" + theImageData.images.low_resolution.height + "' />");
     };
-    
-    if (this.myMediaLoadedCompleteCallback)
-    {
-      this.myMediaLoadedCompleteCallback();
-    }
+
+    this.startSlideshowForTag(aTag);    
   };
+  
+  this.startSlideshowForTag = function( aTag )
+  {
+    var theSlideContainerSelector = "div#slides_" + aTag;
+    $(theSlideContainerSelector).slides({
+      preload: true,
+      play: 5000,
+      pause: 2500,
+      hoverPause: true,
+      generatePagination: false
+    });
+  }
 }

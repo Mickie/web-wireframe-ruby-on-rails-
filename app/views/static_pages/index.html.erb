@@ -4,10 +4,12 @@
   <div class="span12 hero-unit">
     <div class="span4">
       <div id="slides">
-        <div class="slides_container">
+        <div id="slides_tailgate">
+          <div class="slides_container">
+          </div>
+          <a href="#" class="prev">prev</a>
+          <a href="#" class="next">next</a>
         </div>
-        <a href="#" class="prev">prev</a>
-        <a href="#" class="next">next</a>
       </div>
     </div>
     <div class="span8">
@@ -31,15 +33,7 @@
   $(function()
   {
     myInstagramView = new InstagramView("slides");
-    myInstagramView.loadMediaForTag("tailgate", function(){
-      $('#slides').slides({
-        preload: false,
-        play: 5000,
-        pause: 2500,
-        hoverPause: true,
-        generatePagination: false
-      });
-    });
+    myInstagramView.loadMediaForTag("tailgate" );
   
   
   })
