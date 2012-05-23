@@ -10,9 +10,9 @@ describe "users/show" do
     ))
   end
 
-  it "should include the email" do
+  it "should be the parking lot" do
     render
-    rendered.should match(/joe@foo.com/)
+    rendered.should match(/parking lot/i)
   end 
   
   describe "partials" do
@@ -20,7 +20,6 @@ describe "users/show" do
     it "should show team picker for new user" do
       render
       view.should render_template(partial:"_team_picker")
-      view.should_not render_template(partial:"_game_picker") 
     end
     
     describe "with existing user" do
@@ -31,11 +30,6 @@ describe "users/show" do
           teams: [FactoryGirl.create(:team), FactoryGirl.create(:team)]
         ))
         render
-      end
-      
-      it "should show game picker" do
-        view.should_not render_template(partial:"_team_picker")
-        view.should render_template(partial:"_game_picker") 
       end
       
       it "should show the users teams" do

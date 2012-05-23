@@ -1,10 +1,23 @@
-<%= label_tag(:sport_id, "Pick a sport:") %>
-<%= select_tag(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] } ), {id:"sport_picker", prompt:"Select from this list"}) %>
+
+<div class="modal-body">
+  <%= label_tag(:sport_id, "Pick a sport:") %>
+  <%= select_tag(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] } ), {id:"sport_picker", prompt:"Select from this list"}) %>
+</div>
 
 <%= form_for(@user_team, url: user_user_teams_path(@user, @user_team) ) do |f| %>
+
+<div class="modal-body">
   <div class="field">
     <%= f.label :team_id, "Then pick a team:" %>
     <%= f.select(:team_id, []) %>
   </div>
-  <%= submit_tag("Done", id:"commit") %>
+</div>
+
+<div class="modal-footer">
+  <%= submit_tag("Add", id:"commit", class:"btn") %>
+</div>
+
 <% end %>
+
+
+

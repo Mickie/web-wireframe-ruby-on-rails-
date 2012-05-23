@@ -1,24 +1,24 @@
 Feature: User Profile
 
 	@javascript
-	Scenario: First time user should get initial queries
+	Scenario: User can add a team
 		Given I visit the new user registration page
 		When I submit valid email and password
 		Then I should be on the user page
-			And I should see a pick a sport prompt
+			And I should see an add a team link
+		When I click the add a team link
+		Then I should see a pick a sport prompt
 		When I pick a sport
 		Then I should see a pick a team prompt
 		When I pick a team
-		Then I should see a list of upcoming games for my team
+		Then I should see my team link
 		
-	Scenario: Returning user should see their team and upcoming games
+	Scenario: Returning user should see their team
 		Given I login with a user who has picked a team
 		Then I should be on the user page
-			And I should see my team
-			And I should see a list of upcoming games for my team
+			And I should see my team link
 			
-	@javascript		
-	Scenario: Picking a game should take you to the game show page
+	Scenario: Clicking a team link should take me to the team page
 		Given I login with a user who has picked a team
-		When I pick an event
-		Then I should be on the event page		
+		When I click on a team link
+		Then I should be on the team page	

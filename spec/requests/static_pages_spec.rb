@@ -17,7 +17,7 @@ describe "StaticPages" do
     
     describe "for new users" do
       
-      it { should have_link("Get Started", href: new_user_registration_path ) }
+      it { should have_link("Join the Party", href: new_user_registration_path ) }
       
     end
     

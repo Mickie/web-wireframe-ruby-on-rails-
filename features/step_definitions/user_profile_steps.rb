@@ -3,7 +3,7 @@ Then /^I should see a pick a sport prompt$/ do
 end
 
 When /^I pick a sport$/ do
-  select @edit_team.sport.name, from: 'sport_picker'
+  select @team.sport.name, from: 'sport_picker'
 end
 
 Then /^I should see a pick a team prompt$/ do
@@ -11,21 +11,17 @@ Then /^I should see a pick a team prompt$/ do
 end
 
 When /^I pick a team$/ do
-  select @edit_team.name, from: 'user_team_team_id'
+  select @team.name, from: 'user_team_team_id'
   click_button "commit"   
 end
 
-Then /^I should see my team$/ do
-  page.should have_link(@event.home_team.name)
-end
-
-Then /^I should see a list of upcoming games for my team$/ do
-  page.should have_selector("select#event_id")
+Then /^I should see my team link$/ do
+  page.should have_link(@team.name)
 end
 
 Given /^I login with a user who has picked a team$/ do
-  @event.save
-  @user.teams = [@event.home_team]
+  @team.save
+  @user.teams = [@team]
   @user.save
 
   visit new_user_session_path
@@ -34,6 +30,15 @@ Given /^I login with a user who has picked a team$/ do
   click_button "commit"  
 end
 
-When /^I pick an event$/ do
-  select "#{@event.home_team.name} vs. #{@event.visiting_team.name}", from: 'event_id'
+Then /^I should see an add a team link$/ do
+  @team.save
+  page.should have_link("Add Team")
+end
+
+When /^I click the add a team link$/ do
+  click_link "Add Team"
+end
+
+When /^I click on a team link$/ do
+  click_link @team.name
 end
