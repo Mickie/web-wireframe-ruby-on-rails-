@@ -1,66 +1,67 @@
 <%= provide(:title, "My Profile" ) %>
 
-<div class="row-fluid">
-  <div class="span12">
-    <h1>The Parking Lot</h1>
+<div id="userShow">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>The Parking Lot</h1>
+    </div>
   </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <h2><%= link_to "Start Your Own Tailgate >>", "#", class: "btn btn-large btn-primary" %></h2>
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <h2><%= link_to "Start Your Own Tailgate >>", "#", class: "btn btn-large btn-primary" %></h2>
+    </div>
   </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <div id="myAddTeamModal" class="modal hide fade" style="display: none;">
-      <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Add a team:</h3>
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="myAddTeamModal" class="modal hide fade" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Add a team:</h3>
+        </div>
+        <%= render :partial => 'partials/team_picker' %>
       </div>
-      <%= render :partial => 'partials/team_picker' %>
+    </div>
+  </div>
+  
+  
+  <div class="row-fluid">
+    <div class="span4">
+      <h3>My Official Tailgates</h3>
+      <div class="well">
+        <dl>
+          <% @user.teams.each do |aTeam|%>
+            <dt><%= aTeam.sport.name %></dt>
+            <dd><%= link_to aTeam.name, team_path(aTeam)%></dd>
+          <% end %>
+        </dl>      
+      </div>
+      <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
+    </div>
+    <div class="span4">
+      <h3>My Local Tailgates</h3>
+      <div class="well">
+        <dl>
+          <dt>Sport</dt>
+          <dd>Team</dd>
+          <dt>Sport</dt>
+          <dd>Team</dd>
+        </dl>      
+      </div>
+    </div>
+    <div class="span4">
+      <h3>My Trending Tailgates</h3>
+      <div class="well">
+        <dl>
+          <dt>Sport</dt>
+          <dd>Team</dd>
+          <dt>Sport</dt>
+          <dd>Team</dd>
+        </dl>      
+      </div>
     </div>
   </div>
 </div>
-
-
-<div class="row-fluid">
-  <div class="span4">
-    <h3>My Official Tailgates</h3>
-    <div class="well">
-      <dl>
-        <% @user.teams.each do |aTeam|%>
-          <dt><%= aTeam.sport.name %></dt>
-          <dd><%= link_to aTeam.name, team_path(aTeam)%></dd>
-        <% end %>
-      </dl>      
-    </div>
-    <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
-  </div>
-  <div class="span4">
-    <h3>My Local Tailgates</h3>
-    <div class="well">
-      <dl>
-        <dt>Sport</dt>
-        <dd>Team</dd>
-        <dt>Sport</dt>
-        <dd>Team</dd>
-      </dl>      
-    </div>
-  </div>
-  <div class="span4">
-    <h3>My Trending Tailgates</h3>
-    <div class="well">
-      <dl>
-        <dt>Sport</dt>
-        <dd>Team</dd>
-        <dt>Sport</dt>
-        <dd>Team</dd>
-      </dl>      
-    </div>
-  </div>
-</div>
-
 
 
