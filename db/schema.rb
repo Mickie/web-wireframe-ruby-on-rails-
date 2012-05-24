@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515005349) do
+ActiveRecord::Schema.define(:version => 20120523033142) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -170,6 +170,17 @@ ActiveRecord::Schema.define(:version => 20120515005349) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  create_table "tailgates", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tailgates", ["team_id"], :name => "index_tailgates_on_team_id"
+  add_index "tailgates", ["user_id"], :name => "index_tailgates_on_user_id"
 
   create_table "teams", :force => true do |t|
     t.string   "name",           :null => false

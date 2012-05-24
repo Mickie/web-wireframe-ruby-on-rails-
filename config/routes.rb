@@ -1,6 +1,8 @@
 FanzoSite::Application.routes.draw do
 
 
+  resources :tailgates
+
   resources :quick_tweets
 
   devise_for :admins, only: :sessions

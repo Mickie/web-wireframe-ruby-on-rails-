@@ -18,6 +18,7 @@ Before do
   @watch_site = FactoryGirl.build(:watch_site)
   @person = FactoryGirl.build(:person)
   @quick_tweet = FactoryGirl.build(:quick_tweet)
+  @tailgate = FactoryGirl.build(:tailgate)
   
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league)
@@ -32,6 +33,7 @@ Before do
   @new_watch_site = FactoryGirl.build(:watch_site)
   @new_person = FactoryGirl.build(:person)
   @new_quick_tweet = FactoryGirl.build(:quick_tweet)
+  @new_tailgate = FactoryGirl.build(:tailgate)
   
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)
@@ -46,6 +48,7 @@ Before do
   @edit_watch_site = FactoryGirl.create(:watch_site)
   @edit_person = FactoryGirl.create(:person)
   @edit_quick_tweet = FactoryGirl.create(:quick_tweet)
+  @edit_tailgate = FactoryGirl.create(:tailgate)
 
 end
 
