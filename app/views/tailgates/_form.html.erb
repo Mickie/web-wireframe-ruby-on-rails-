@@ -1,0 +1,29 @@
+<%= form_for(@tailgate) do |f| %>
+  <% if @tailgate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tailgate.errors.count, "error") %> prohibited this tailgate from being saved:</h2>
+
+      <ul>
+      <% @tailgate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="hidden_field">
+    <%= f.hidden_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :team %>
+    <%= f.select(:team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @tailgate.team_id )) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", id:"commit" %>
+  </div>
+<% end %>

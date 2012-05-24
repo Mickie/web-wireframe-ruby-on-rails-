@@ -1,0 +1,25 @@
+<h1>Listing tailgates</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Team</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tailgates.each do |tailgate| %>
+  <tr>
+    <td><%= tailgate.name %></td>
+    <td><%= tailgate.team.name %></td>
+    <td><%= link_to 'Show', tailgate %></td>
+    <td><%= link_to 'Edit', edit_tailgate_path(tailgate) %></td>
+    <td><%= link_to 'Destroy', tailgate, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tailgate', new_tailgate_path %>
