@@ -42,3 +42,7 @@ end
 When /^I click on a team link$/ do
   click_link @team.name
 end
+
+When /^I click on the create tailgate button$/ do
+  click_link "Start Your Own Tailgate" 
+end

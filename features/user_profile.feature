@@ -22,3 +22,8 @@ Feature: User Profile
 		Given I login with a user who has picked a team
 		When I click on a team link
 		Then I should be on the team page	
+		
+	Scenario: Clicking the create tailgate button should take me to the new tailgate page
+		Given I sign in as user
+		When I click on the create tailgate button
+		Then I should be on the new tailgate page			
