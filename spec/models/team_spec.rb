@@ -26,6 +26,9 @@ describe Team do
   it { should respond_to(:espn_team_id) }
   it { should respond_to(:espn_team_url) }
   it { should respond_to(:slug) } 
+  it { should respond_to(:short_name) } 
+  it { should respond_to(:mascot) } 
+  it { should respond_to(:espn_team_name_id) } 
 
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  
