@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524232621) do
+ActiveRecord::Schema.define(:version => 20120524234712) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -183,14 +183,14 @@ ActiveRecord::Schema.define(:version => 20120524232621) do
   add_index "tailgates", ["user_id"], :name => "index_tailgates_on_user_id"
 
   create_table "teams", :force => true do |t|
-    t.string   "name",           :null => false
-    t.integer  "sport_id",       :null => false
-    t.integer  "league_id",      :null => false
+    t.string   "name",              :null => false
+    t.integer  "sport_id",          :null => false
+    t.integer  "league_id",         :null => false
     t.integer  "division_id"
     t.integer  "conference_id"
-    t.integer  "location_id",    :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "location_id",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "affiliation_id"
     t.integer  "social_info_id"
     t.integer  "espn_team_id"
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20120524232621) do
     t.string   "slug"
     t.string   "short_name"
     t.string   "mascot"
+    t.string   "espn_team_name_id"
   end
 
   add_index "teams", ["affiliation_id"], :name => "index_teams_on_affiliation_id"
