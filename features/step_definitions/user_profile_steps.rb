@@ -1,9 +1,9 @@
-Then /^I should see a pick a sport prompt$/ do
-  page.should have_selector("select#sport_picker")
+Then /^I should see a pick a league prompt$/ do
+  page.should have_selector("select#league_picker")
 end
 
-When /^I pick a sport$/ do
-  select @team.sport.name, from: 'sport_picker'
+When /^I pick a league$/ do
+  select @team.league.name, from: 'league_picker'
 end
 
 Then /^I should see a pick a team prompt$/ do

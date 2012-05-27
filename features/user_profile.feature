@@ -7,8 +7,8 @@ Feature: User Profile
 		Then I should be on the user page
 			And I should see an add a team link
 		When I click the add a team link
-		Then I should see a pick a sport prompt
-		When I pick a sport
+		Then I should see a pick a league prompt
+		When I pick a league 
 		Then I should see a pick a team prompt
 		When I pick a team
 		Then I should see my team link

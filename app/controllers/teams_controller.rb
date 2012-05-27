@@ -7,6 +7,8 @@ class TeamsController < ApplicationController
   def index
     if params[:sport_id]
       @teams = Team.where("sport_id = ?", params[:sport_id])
+    elsif params[:league_id]    
+      @teams = Team.where("league_id = ?", params[:league_id])
     else    
       @teams = Team.all
     end

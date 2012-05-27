@@ -34,6 +34,14 @@ describe TeamsController do
       get :index, {sport_id: theSecondTeam.sport_id} 
       assigns(:teams).should eq([theSecondTeam])
     end
+
+    it "assigns teams for a specific league when league_id" do
+      theFirstTeam = Team.create! valid_attributes
+      theSecondTeam = FactoryGirl.create(:team)
+      get :index, {league_id: theSecondTeam.league_id} 
+      assigns(:teams).should eq([theSecondTeam])
+    end
+
   end
 
   describe "GET show" do

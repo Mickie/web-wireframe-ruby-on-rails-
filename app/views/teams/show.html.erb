@@ -30,11 +30,11 @@
   <div class="span6">
     <h3>Local Official Watch Sites</h3>
     <% @localTeamWatchSites.each do |aWatchSite| %>
-    <div class="row-fluid">
-      <div class="span12">
-        <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchSite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+      <div class="row-fluid">
+        <div class="span12">
+          <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchSite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+        </div>
       </div>
-    </div>
     <% end %>
   </div>
   <div class="span6">

@@ -1,0 +1,24 @@
+<div class="modal-body">
+  <label for="league_id">Pick a League:</label>
+  <select id="league_picker" name="league_id">
+    <option value="">Select from this list</option>
+    <option value="1">NFL</option>
+    <option value="2">NCAA FB</option>
+  </select>
+</div>
+
+<form accept-charset="UTF-8" action="/users/5/user_teams" class="new_user_team" id="new_user_team" method="post">
+  <div class="modal-body">
+    <div class="field">
+      <label for="user_team_team_id">Then pick a team:</label>
+      <select id="user_team_team_id" name="user_team[team_id]">
+      </select>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <input class="btn" id="commit" name="commit" type="submit" value="Add">
+  </div>
+
+</form>
+
