@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= f.label :team_id, "Then pick a team:" %>
-    <%= f.select(:team_id, []) %>
+    <%= f.select(:team_id, options_for_select( @tailgate.team ? [@tailgate.team.name, @tailgate.team.id ] : [], @tailgate.team_id)) %>
   </div>
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

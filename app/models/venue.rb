@@ -9,6 +9,9 @@ class Venue < ActiveRecord::Base
   has_many :watch_sites, inverse_of: :venue, :dependent => :delete_all
   has_many :teams, through: :watch_sites   
 
+  has_many :tailgate_venues, inverse_of: :venue, :dependent => :delete_all
+  has_many :tailgates, through: :tailgate_venues   
+
   validates :name, uniqueness:true, presence:true
   validates :venue_type, presence:true
 

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tailgate:</b>
+  <%= @tailgate_venue.tailgate %>
+</p>
+
+<p>
+  <b>Venue:</b>
+  <%= @tailgate_venue.venue %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @tailgate_venue.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @tailgate_venue.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_tailgate_venue_path(@tailgate_venue) %> |
+<%= link_to 'Back', tailgate_venues_path %>

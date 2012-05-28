@@ -17,6 +17,7 @@ describe Venue do
   it { should respond_to(:events) }
   it { should respond_to(:watch_sites) }
   it { should respond_to(:teams) }
+  it { should respond_to(:tailgates) }
   
   it "should require a venue type" do
     @venue.venue_type_id = nil
@@ -45,10 +46,18 @@ describe Venue do
   end
   
   it "should have correct number of teams" do
-    5.times do
+    3.times do
       theGameWatch = FactoryGirl.create(:watch_site, venue:@venue)
     end
-    @venue.teams.length.should eq(5)
+    @venue.teams.length.should eq(3)
+  end
+
+  it "should have correct number of tailgates" do
+    3.times do
+      theTailgate = FactoryGirl.create(:tailgate)
+      theTailgateVenue = TailgateVenue.create tailgate:theTailgate, venue:@venue
+    end
+    @venue.tailgates.length.should eq(3)
   end
 
 end

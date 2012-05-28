@@ -1,9 +1,6 @@
 FanzoSite::Application.routes.draw do
 
-
-  resources :tailgates
-
-  resources :quick_tweets
+  resources :tailgate_venues
 
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
@@ -30,7 +27,6 @@ FanzoSite::Application.routes.draw do
   get "instagram_proxy/find_tags"
   get "instagram_proxy/media_for_tag"
 
-  # only for admin users
   resources :admins, only: :show
   resources :sports
   resources :leagues
@@ -43,6 +39,8 @@ FanzoSite::Application.routes.draw do
   resources :events
   resources :game_watches
   resources :watch_sites
+  resources :tailgates
+  resources :quick_tweets
   resources :people
   resources :athlete, path: :people
   resources :coach, path: :people

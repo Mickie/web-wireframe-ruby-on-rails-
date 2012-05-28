@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524234712) do
+ActiveRecord::Schema.define(:version => 20120528203031) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -170,6 +170,18 @@ ActiveRecord::Schema.define(:version => 20120524234712) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  create_table "tailgate_venues", :force => true do |t|
+    t.integer  "tailgate_id"
+    t.integer  "venue_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "tailgate_venues", ["tailgate_id"], :name => "index_tailgate_venues_on_tailgate_id"
+  add_index "tailgate_venues", ["venue_id"], :name => "index_tailgate_venues_on_venue_id"
 
   create_table "tailgates", :force => true do |t|
     t.string   "name"

@@ -19,11 +19,15 @@ Feature: Tailgates Resource
 		Given I have added 3 tailgates
 		When I visit the tailgates page
 		Then I should see 3 tailgates 
-		
+	
+	@javascript	
 	Scenario: I can add a tailgate as a user and see the details when complete
 		Given I sign in as user
 		When I visit the new tailgate page
-			And I create a new tailgate
+		Then I should see a pick a league prompt
+		When I pick a league 
+			And I pick a team for my tailgate
+			And I finish creating a new tailgate
 		Then I should see the details of the new tailgate
 			And I should be able to edit it
 	

@@ -12,9 +12,12 @@ Then /^I should see see the details of the new tailgate$/ do
   page.should have_content(@tailgate.name)
 end
 
-When /^I create a new tailgate$/ do
+When /^I pick a team for my tailgate$/ do
+  select @team.name, from: 'tailgate_team_id'
+end
+
+When /^I finish creating a new tailgate$/ do
   fill_in "Name", with: @new_tailgate.name
-  select @edit_team.name, from: 'tailgate[team_id]'
   click_button "commit"  
 end
 
@@ -24,7 +27,6 @@ end
 
 When /^I edit the tailgate$/ do
   fill_in "Name", with: "Dave's killer tailgate"
-  select @edit_team.name, from: 'tailgate[team_id]'
   click_button "commit"  
 end
 
