@@ -18,6 +18,8 @@ describe TailgateVenuesController do
 
 
   describe "GET index" do
+    login_user
+
     it "assigns all tailgate_venues as @tailgate_venues" do
       tailgate_venue = TailgateVenue.create! valid_attributes
       get :index, {}
@@ -26,6 +28,8 @@ describe TailgateVenuesController do
   end
 
   describe "GET show" do
+    login_admin
+    
     it "assigns the requested tailgate_venue as @tailgate_venue" do
       tailgate_venue = TailgateVenue.create! valid_attributes
       get :show, {:id => tailgate_venue.to_param}
@@ -34,6 +38,8 @@ describe TailgateVenuesController do
   end
 
   describe "GET new" do
+    login_admin
+    
     it "assigns a new tailgate_venue as @tailgate_venue" do
       get :new, {}
       assigns(:tailgate_venue).should be_a_new(TailgateVenue)
@@ -41,6 +47,8 @@ describe TailgateVenuesController do
   end
 
   describe "GET edit" do
+    login_admin
+
     it "assigns the requested tailgate_venue as @tailgate_venue" do
       tailgate_venue = TailgateVenue.create! valid_attributes
       get :edit, {:id => tailgate_venue.to_param}
@@ -49,6 +57,8 @@ describe TailgateVenuesController do
   end
 
   describe "POST create" do
+    login_user
+    
     describe "with valid params" do
       it "creates a new TailgateVenue" do
         expect {
@@ -86,6 +96,8 @@ describe TailgateVenuesController do
   end
 
   describe "PUT update" do
+    login_admin
+    
     describe "with valid params" do
       it "updates the requested tailgate_venue" do
         tailgate_venue = TailgateVenue.create! valid_attributes
@@ -130,6 +142,8 @@ describe TailgateVenuesController do
   end
 
   describe "DELETE destroy" do
+    login_user
+
     it "destroys the requested tailgate_venue" do
       tailgate_venue = TailgateVenue.create! valid_attributes
       expect {

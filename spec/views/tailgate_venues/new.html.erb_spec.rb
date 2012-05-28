@@ -15,10 +15,8 @@ describe "tailgate_venues/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => tailgate_venues_path, :method => "post" do
-      assert_select "input#tailgate_venue_tailgate", :name => "tailgate_venue[tailgate]"
-      assert_select "input#tailgate_venue_venue", :name => "tailgate_venue[venue]"
-      assert_select "input#tailgate_venue_latitude", :name => "tailgate_venue[latitude]"
-      assert_select "input#tailgate_venue_longitude", :name => "tailgate_venue[longitude]"
+      assert_select "select#tailgate_venue_venue_id", :name => "tailgate_venue[venue_id]"
+      assert_select "select#tailgate_venue_tailgate_id", :name => "tailgate_venue[tailgate_id]"
     end
   end
 end

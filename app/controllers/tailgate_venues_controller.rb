@@ -1,4 +1,8 @@
 class TailgateVenuesController < ApplicationController
+  before_filter :authenticate_admin!, except: [:index, :create, :destroy]
+  before_filter :authenticate_user!, only: [:index, :create, :destroy] 
+
+
   # GET /tailgate_venues
   # GET /tailgate_venues.json
   def index

@@ -13,21 +13,13 @@
 
   <div class="field">
     <%= f.label :tailgate %><br />
-    <%= f.text_field :tailgate %>
+    <%= f.select(:tailgate_id, options_for_select(Tailgate.order("created_at DESC").all.collect {|p| [ p.name, p.id ] }, @tailgate_venue.tailgate_id )) %>
   </div>
   <div class="field">
     <%= f.label :venue %><br />
-    <%= f.text_field :venue %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br />
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br />
-    <%= f.text_field :longitude %>
+    <%= f.select(:venue_id, options_for_select(Venue.order("created_at DESC").all.collect {|p| [ p.name, p.id ] }, @tailgate_venue.venue_id )) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save", id:"commit" %>
   </div>
 <% end %>
