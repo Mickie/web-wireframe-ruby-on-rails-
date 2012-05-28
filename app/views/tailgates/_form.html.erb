@@ -19,9 +19,15 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
-    <%= f.label :team %>
-    <%= f.select(:team_id, options_for_select(Team.all.collect {|p| [ p.name, p.id ] }, @tailgate.team_id )) %>
+    <%= label_tag(:league_id, "Pick a League:") %>
+    <%= select_tag(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :team_id, "Then pick a team:" %>
+    <%= f.select(:team_id, []) %>
   </div>
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>
