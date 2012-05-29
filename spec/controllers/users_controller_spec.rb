@@ -19,6 +19,7 @@ describe UsersController do
   
       it "should send the user to the view" do
         assigns(:user).should eq(subject.current_user)
+        assigns(:user_team).should be_a(UserTeam)
       end
     end
     

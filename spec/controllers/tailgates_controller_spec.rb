@@ -26,11 +26,14 @@ describe TailgatesController do
   end
 
   describe "GET show" do
-    it "assigns the requested tailgate as @tailgate" do
-      tailgate = Tailgate.create! valid_attributes
-      get :show, {:id => tailgate.to_param}
-      assigns(:tailgate).should eq(tailgate)
+    before do
+      @tailgate = Tailgate.create! valid_attributes
+      get :show, {:id => @tailgate.to_param}
     end
+    it "assigns the requested tailgate as @tailgate" do
+      assigns(:tailgate).should eq(@tailgate)
+    end
+
   end
 
   describe "GET new" do
@@ -42,16 +45,22 @@ describe TailgatesController do
     describe "with logged in user" do
       login_user
       
-      it "assigns a new tailgate as @tailgate" do
+      before do
         get :new, {}
+      end
+
+      it "assigns a new tailgate as @tailgate" do
         assigns(:tailgate).should be_a_new(Tailgate)
       end
 
       it "the new tailgate should be associated with logged in user" do
-        get :new, {}
         assigns(:tailgate).user_id.should eq(subject.current_user.id) 
       end
 
+      it "assigns a new tailgate_venue for use in form" do
+        assigns(:tailgateVenue).should be_a(TailgateVenue)
+        assigns(:tailgateVenue).tailgate.should eq(assigns(:tailgate))
+      end
     end
   end
 

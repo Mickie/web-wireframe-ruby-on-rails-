@@ -30,6 +30,8 @@ class TailgatesController < ApplicationController
     @tailgate = Tailgate.new
     @tailgate.user_id = current_user.id
 
+    @tailgateVenue = TailgateVenue.new tailgate:@tailgate
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tailgate }
