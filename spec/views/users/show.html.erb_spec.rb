@@ -2,12 +2,24 @@ require 'spec_helper'
 
 describe "users/show" do
   before(:each) do
+    mock_geocoding!
+    
     @user = assign(:user, stub_model(User,
       :email => "joe@foo.com"
     ))
     @user_team = assign(:user_team, stub_model(UserTeam,
       :user_id => 1
     ))
+    
+    theTeam = FactoryGirl.create(:team)
+    theVenue = FactoryGirl.create(:venue)
+    theTailgate = FactoryGirl.create(:tailgate)
+    theWatchSite = FactoryGirl.build(:watch_site, team: theTeam, venue: theVenue)
+    theTailgateVenue = TailgateVenue.new venue:theVenue, tailgate:theTailgate
+    @localTeamWatchSites = assign(:localTeamWatchSites, [theWatchSite])
+    @localWatchSites = assign(:localTeamWatchSites, [theWatchSite])
+    @localTailgateVenues = assign(:localTailgateVenues, [theTailgateVenue])
+    
   end
 
   it "should be the parking lot" do

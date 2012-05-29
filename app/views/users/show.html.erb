@@ -38,15 +38,24 @@
         </dl>      
       </div>
       <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
+      <h3>My Team's Local Official Watch Sites</h3>
+      <div class="well">
+        <dl>
+          <% @localTeamWatchSites.each do |aWatchSite|%>
+            <dt><%= aWatchSite.team.name %></dt>
+            <dd><%= link_to aWatchSite.venue.name, venue_path(aWatchSite.venue)%></dd>
+          <% end %>
+        </dl>      
+      </div>
     </div>
     <div class="span4">
       <h3>My Local Tailgates</h3>
       <div class="well">
         <dl>
-          <dt>Sport</dt>
-          <dd>Team</dd>
-          <dt>Sport</dt>
-          <dd>Team</dd>
+          <% @localTailgateVenues.each do |aTailgateVenue|%>
+            <dt><%= aTailgateVenue.tailgate.name %> - <%= aTailgateVenue.tailgate.team.name %></dt>
+            <dd><%= link_to aTailgateVenue.venue.name, venue_path(aTailgateVenue.venue)%></dd>
+          <% end %>
         </dl>      
       </div>
     </div>
@@ -54,10 +63,10 @@
       <h3>My Trending Tailgates</h3>
       <div class="well">
         <dl>
-          <dt>Sport</dt>
-          <dd>Team</dd>
-          <dt>Sport</dt>
-          <dd>Team</dd>
+          <% @localWatchSites.each do |aWatchSite|%>
+            <dt><%= aWatchSite.team.name %></dt>
+            <dd><%= link_to aWatchSite.venue.name, venue_path(aWatchSite.venue)%></dd>
+          <% end %>
         </dl>      
       </div>
     </div>
