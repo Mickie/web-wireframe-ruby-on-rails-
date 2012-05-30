@@ -4,7 +4,7 @@ class WatchSitesController < ApplicationController
   # GET /watch_sites
   # GET /watch_sites.json
   def index
-    @watch_sites = WatchSite.all
+    @watch_sites = WatchSite.includes(:team, :venue).all
 
     respond_to do |format|
       format.html # index.html.erb
