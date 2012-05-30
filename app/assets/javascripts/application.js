@@ -19,6 +19,7 @@
 //= require google_analytics
 //= require_tree ./facebook
 //= require_tree ./twitter
+//= require_tree ./youtube
 //= require_tree ./instagram
 //= require_tree ./lib
 

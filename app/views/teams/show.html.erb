@@ -78,8 +78,32 @@
 
 <div class="row-fluid">
   <div class="span12">
+    
+    <div id="myVideoModal" class="modal hide fade" style="display: none;">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Video Title</h3>
+      </div>
+      <div class="modal-body">
+        <div id="player"></div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Done</a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span7">
     <h3>Instagram Photos</h3>
     <div id="slides">
+    </div>
+  </div>
+  <div class="span5">
+    <h3>YouTube Videos</h3>
+    <div id="youtubeVideos">
     </div>
   </div>
 </div>
@@ -164,6 +188,7 @@
   var myTwitterView;
   var myInstagramView;
   var myFacebookView;
+  var myYouTubeView;
   
   $(function()
   {
@@ -181,7 +206,14 @@
     
     myInstagramView = new InstagramView("slides");
     myInstagramView.startLoadingImagesForTeam(<%= @team.id %>);
-  })
+    
+    myYouTubeView = new YouTubeView("<%= @team.short_name %>",
+                                    "<%= @team.sport.name %>", 
+                                    <%= raw @team.social_info.hash_tags.split(" ") %>,
+                                    5, 
+                                    "youtubeVideos");
+    myYouTubeView.loadSDK();
+  });
 </script>
 <% end %>
 
