@@ -4,7 +4,7 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+    @venues = Venue.includes(:location => :state).all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -28,7 +28,7 @@
   
   <div class="row-fluid">
     <div class="span4">
-      <h3>My Official Tailgates</h3>
+      <h3>My Teams</h3>
       <div class="well">
         <dl>
           <% @user.teams.each do |aTeam|%>
@@ -38,7 +38,21 @@
         </dl>      
       </div>
       <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
-      <h3>My Team's Local Official Watch Sites</h3>
+    </div>
+    <div class="span4">
+      <h3>My Local Tailgates</h3>
+      <div class="well">
+        <dl>
+            <dt>Killers Tailgate - Huskers</dt>
+            <dd>Pumphouse</dd>
+          <% @localTailgateVenues.each do |aTailgateVenue|%>
+            <dt><%= aTailgateVenue.tailgate.name %> - <%= aTailgateVenue.tailgate.team.name %></dt>
+            <dd><%= link_to aTailgateVenue.venue.name, venue_path(aTailgateVenue.venue)%></dd>
+          <% end %>
+        </dl>      
+      </div>
+      <a href="#myAddTeamModal" data-toggle="modal">Add Location</a>
+      <h3>My Local Watch Sites</h3>
       <div class="well">
         <dl>
           <% @localTeamWatchSites.each do |aWatchSite|%>
@@ -49,18 +63,7 @@
       </div>
     </div>
     <div class="span4">
-      <h3>My Local Tailgates</h3>
-      <div class="well">
-        <dl>
-          <% @localTailgateVenues.each do |aTailgateVenue|%>
-            <dt><%= aTailgateVenue.tailgate.name %> - <%= aTailgateVenue.tailgate.team.name %></dt>
-            <dd><%= link_to aTailgateVenue.venue.name, venue_path(aTailgateVenue.venue)%></dd>
-          <% end %>
-        </dl>      
-      </div>
-    </div>
-    <div class="span4">
-      <h3>My Trending Tailgates</h3>
+      <h3>Other Local Watch Sites</h3>
       <div class="well">
         <dl>
           <% @localWatchSites.each do |aWatchSite|%>
