@@ -6,11 +6,11 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     if params[:sport_id]
-      @teams = Team.where("sport_id = ?", params[:sport_id])
+      @teams = Team.includes(:social_info, :league, :sport, :location => :state).where("sport_id = ?", params[:sport_id])
     elsif params[:league_id]    
-      @teams = Team.where("league_id = ?", params[:league_id])
+      @teams = Team.includes(:social_info, :league, :sport, :location => :state).where("league_id = ?", params[:league_id])
     else    
-      @teams = Team.all
+      @teams = Team.includes(:social_info, :league, :sport, :location => :state).all
     end
     
     @teams.each do |aTeam|
