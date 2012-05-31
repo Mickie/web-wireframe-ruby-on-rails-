@@ -37,10 +37,6 @@ describe "teams/show" do
     rendered.should match(/#{@division.name}/)
     rendered.should match(/#{@conference.name}/)
     rendered.should match(/#{@location.one_line_address}/)
-    rendered.should match(/#{@social_info.twitter_name}/)
-    rendered.should match(/#{@social_info.facebook_page_url}/)
-    rendered.should match(/#{@social_info.web_url}/)
-    rendered.should match(/#{@affiliation.name}/)
     rendered.should match(/killer-team_l.gif/)
   end
 end

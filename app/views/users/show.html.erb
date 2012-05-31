@@ -51,7 +51,7 @@
         <dl>
           <% @user.teams.each do |aTeam|%>
             <dt><%= aTeam.sport.name %></dt>
-            <dd><%= link_to aTeam.name, team_path(aTeam)%></dd>
+            <dd><%= teamLogo(aTeam, :small) %> <%= link_to aTeam.name, team_path(aTeam)%></dd>
           <% end %>
         </dl>      
       </div>
@@ -60,7 +60,7 @@
       <div class="well">
         <dl>
           <% @user.teams.each do |aTeam|%>
-            <dt><%= aTeam.name %></dt>
+            <dt><%= teamLogo(aTeam, :small) %> <%= aTeam.name %></dt>
             <% aTeam.tailgates do | aTailgate | %>
               <dd><%= link_to aTailgate.name, tailgate_path(aTailgate)%></dd>
             <% end %>
@@ -98,7 +98,7 @@
       <div class="well">
         <dl>
           <% @localWatchSites.each do |aWatchSite|%>
-            <dt><%= aWatchSite.team.name %></dt>
+            <dt><%= teamLogo(aWatchSite.team, :small) %> <%= aWatchSite.team.name %></dt>
             <dd><%= link_to aWatchSite.venue.name, venue_path(aWatchSite.venue)%></dd>
           <% end %>
         </dl>      

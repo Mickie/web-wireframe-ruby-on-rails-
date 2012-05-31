@@ -38,8 +38,8 @@ describe Team do
   
   describe "has many associations" do
     before do
-      @home_event = FactoryGirl.create(:event, home_team: @team)
-      @away_event = FactoryGirl.create(:event, visiting_team: @team)
+      @home_event = FactoryGirl.create(:event, home_team: @team, event_date: Date.tomorrow)
+      @away_event = FactoryGirl.create(:event, visiting_team: @team, event_date: Date.today)
     end
     
     it "should have the correct home_game" do
@@ -52,8 +52,10 @@ describe Team do
       @team.away_games.first.should == @away_event
     end
     
-    it "should have 2 events" do
-      @team.events.length.should == 2
+    it "should have 2 events and they should be sorted by date" do
+      @team.events.length.should eq(2)
+      @team.events[0].should eq(@away_event)
+      @team.events[1].should eq(@home_event)
     end
     
     it "should have watch_sites" do

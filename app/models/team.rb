@@ -7,8 +7,8 @@ class Team < ActiveRecord::Base
   belongs_to :location, :dependent => :destroy
   belongs_to :social_info, :dependent => :destroy
   
-  has_many :home_games, class_name:"Event", foreign_key:"home_team_id", inverse_of: :home_team, :dependent => :delete_all
-  has_many :away_games, class_name:"Event", foreign_key:"visiting_team_id", inverse_of: :visiting_team, :dependent => :delete_all
+  has_many :home_games, class_name:"Event", foreign_key:"home_team_id", inverse_of: :home_team, :dependent => :delete_all, order: "event_date"
+  has_many :away_games, class_name:"Event", foreign_key:"visiting_team_id", inverse_of: :visiting_team, :dependent => :delete_all, order: "event_date"
   has_many :athletes, inverse_of: :team, :dependent => :delete_all
   has_many :coaches, inverse_of: :team, :dependent => :delete_all
   has_many :journalists, inverse_of: :team, :dependent => :delete_all
@@ -26,6 +26,7 @@ class Team < ActiveRecord::Base
   accepts_nested_attributes_for :social_info
   
   def events
-    self.home_games + self.away_games
+    theEvents = self.home_games + self.away_games
+    theEvents.sort_by {|e| e[:event_date] }
   end
 end

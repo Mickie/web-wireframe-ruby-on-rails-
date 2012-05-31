@@ -37,9 +37,6 @@ end
 
 Then /^I should see the details of the new team$/ do
   page.should have_content(@new_team.name)
-  page.should have_content(@new_team.social_info.twitter_name)
-  page.should have_content(@new_team.social_info.facebook_page_url)
-  page.should have_content(@new_team.social_info.web_url)
 end
 
 Then /^I should be able to associate other resources with the team$/ do
