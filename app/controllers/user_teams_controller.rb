@@ -17,4 +17,15 @@ class UserTeamsController < ApplicationController
     end
   end
   
+  def destroy
+    @user_team = UserTeam.find(params[:id])
+    @user = User.find(params[:user_id])
+    @user_team.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_path(@user) }
+      format.json { head :no_content }
+    end
+  end
+  
 end
