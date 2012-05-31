@@ -29,6 +29,7 @@ describe Team do
   it { should respond_to(:short_name) } 
   it { should respond_to(:mascot) } 
   it { should respond_to(:espn_team_name_id) } 
+  it { should respond_to(:tailgates) } 
 
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  
@@ -70,7 +71,14 @@ describe Team do
 
       @team.venues.length.should == 3
     end
-
+  
+    it "should have tailgates" do
+      2.times do
+        theTailgate = FactoryGirl.create(:tailgate, team: @team)
+      end
+      
+      @team.tailgates.length.should == 2
+    end
   end
   
 end

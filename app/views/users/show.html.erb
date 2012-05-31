@@ -56,6 +56,17 @@
         </dl>      
       </div>
       <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
+      <h3>Trending Team Tailgates</h3>
+      <div class="well">
+        <dl>
+          <% @user.teams.each do |aTeam|%>
+            <dt><%= aTeam.name %></dt>
+            <% aTeam.tailgates do | aTailgate | %>
+              <dd><%= link_to aTailgate.name, tailgate_path(aTailgate)%></dd>
+            <% end %>
+          <% end %>
+        </dl>      
+      </div>
     </div>
     <div class="span4">
       <h3>My Local Watch Sites</h3>

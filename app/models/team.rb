@@ -13,6 +13,7 @@ class Team < ActiveRecord::Base
   has_many :coaches, inverse_of: :team, :dependent => :delete_all
   has_many :journalists, inverse_of: :team, :dependent => :delete_all
   has_many :superfans, inverse_of: :team, :dependent => :delete_all
+  has_many :tailgates, inverse_of: :team 
    
   has_many :watch_sites, inverse_of: :team, :dependent => :delete_all
   has_many :venues, through: :watch_sites 
