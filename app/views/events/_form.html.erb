@@ -34,7 +34,10 @@
     <%= f.time_select :event_time %>
   </div>
 
-  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @event.location } %>
+  <div class="field">
+    <%= f.label :location %>
+    <%= render :partial => 'partials/location', :locals => { :f => f, :location => @event.location } %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

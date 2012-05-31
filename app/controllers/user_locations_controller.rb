@@ -4,9 +4,13 @@ class UserLocationsController < ApplicationController
   def create
     @user_location = UserLocation.new(params[:user_location])
     @user = User.find(params[:user_id])
+    @user_location.user = @user 
 
     respond_to do |format|
-      if @user_location.save
+      if @user != current_user
+        format.html { redirect_to current_user, error: 'Cannot add a location to a different user' }
+        format.json { render json: { error: 'Cannot add a location to a different user' }, status: :unprocessable_entity }
+      elsif @user_location.save
         format.html { redirect_to @user, notice: 'User location was successfully created.' }
         format.json { render json: @user_location, status: :created, location: @user_location }
       else

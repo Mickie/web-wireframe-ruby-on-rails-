@@ -22,7 +22,11 @@
   </div>
 
   <%= render :partial => 'partials/social_info', :locals => { :f => f, :social_info => @venue.social_info } %>
-  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @venue.location } %>
+  
+  <div class="field">
+    <%= f.label :location %>
+    <%= render :partial => 'partials/location', :locals => { :f => f, :location => @venue.location } %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :user_teams, :dependent => :delete_all
   has_many :teams, through: :user_teams
+  
+  has_many :user_locations, :dependent => :delete_all
+  has_many :locations, through: :user_locations
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email,
@@ -22,7 +25,10 @@ class User < ActiveRecord::Base
                   :instagram_user_token,
                   :instagram_username,
                   :user_teams,
-                  :teams
+                  :teams,
+                  :user_locations,
+                  :locations
+                  
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
   end

@@ -22,7 +22,7 @@ module MockGeocoder
   end
 
   def mock_geocoding!(options = {})
-    options.reverse_merge!(address1: 'address1', address2:'address2', coordinates:[1,2], state_id:1, postal_code:'98003', country_id:1 )
+    options.reverse_merge!(address1: 'address1', address2:'address2', city:'Kirkland', coordinates:[1,2], state_code:'WA', postal_code:'98003', country_code:'US' )
 
     MockResult.new.tap do |result|
       result.stub options
@@ -33,6 +33,9 @@ module MockGeocoder
   class MockResult < ::Geocoder::Result::Base
     def initialize(data = [])
       super(data)
+    end
+    def city
+      'Kirkland'
     end
   end
 end

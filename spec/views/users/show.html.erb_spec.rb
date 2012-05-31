@@ -1,39 +1,46 @@
 require 'spec_helper'
 
-describe "users/show" do
+describe "users/show" do 
   before(:each) do
     mock_geocoding!
-    
-    @user = assign(:user, stub_model(User,
-      :email => "joe@foo.com"
-    ))
-    @user_team = assign(:user_team, stub_model(UserTeam,
-      :user_id => 1
-    ))
-    
+
+    @user = assign( :user, 
+                    stub_model(User,
+                               :email => "joe@foo.com"
+                    ))
+    @user_team = assign(:user_team, 
+                        stub_model(UserTeam,
+                                  :user_id => 1
+                        ))
+
+    @user_location = assign(:user_location,
+                            stub_model(UserLocation,
+                                      :user_id => 1
+                            ))
+
     theTeam = FactoryGirl.create(:team)
     theVenue = FactoryGirl.create(:venue)
     theTailgate = FactoryGirl.create(:tailgate)
-    theWatchSite = FactoryGirl.build(:watch_site, team: theTeam, venue: theVenue)
-    theTailgateVenue = TailgateVenue.new venue:theVenue, tailgate:theTailgate
-    @localTeamWatchSites = assign(:localTeamWatchSites, [theWatchSite])
+    theWatchSite = FactoryGirl.create(:watch_site, team: theTeam, venue: theVenue)
+    theTailgateVenue = TailgateVenue.create venue:theVenue, tailgate:theTailgate
     @localWatchSites = assign(:localTeamWatchSites, [theWatchSite])
-    @localTailgateVenues = assign(:localTailgateVenues, [theTailgateVenue])
-    
+    @locationsWithTeamWatchSites = assign(:localTeamWatchSites, [{ "locationName" => "Chicago, IL", localTeamWatchSiteList: [theWatchSite] }])
+    @locationsWithTailgateVenues = assign(:localTailgateVenues, [{ "locationName" => "San Diego, CA", tailgateVenueList: [theTailgateVenue] }])
+
   end
 
   it "should be the parking lot" do
     render
     rendered.should match(/parking lot/i)
-  end 
-  
+  end
+
   describe "partials" do
-    
+
     it "should show team picker for new user" do
       render
       view.should render_template(partial:"_team_picker")
     end
-    
+
     describe "with existing user" do
       before do
         mock_geocoding!
@@ -43,7 +50,7 @@ describe "users/show" do
         ))
         render
       end
-      
+
       it "should show the users teams" do
         rendered.should match(/#{@user.teams[0].name}/)
         rendered.should match(/#{@user.teams[1].name}/)

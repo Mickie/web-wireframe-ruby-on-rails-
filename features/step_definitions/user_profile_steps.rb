@@ -46,3 +46,32 @@ end
 When /^I click on the create tailgate button$/ do
   click_link "Start Your Own Tailgate" 
 end
+
+Then /^I should see an add a location link$/ do
+  page.should have_link("Add Location")
+end
+
+When /^I click the add a location link$/ do
+  click_link "Add Location"
+end
+
+Then /^I should see a location form$/ do
+  page.should have_selector("#user_location_location_attributes_name")
+end
+
+When /^I fill in the location form$/ do
+  fill_in "user_location_location_attributes_name", with: @new_venue.location.name
+  fill_in "user_location_location_attributes_address1", with: @new_venue.location.address1
+  fill_in "user_location_location_attributes_address2", with: @new_venue.location.address2
+  fill_in "user_location_location_attributes_city", with: @new_venue.location.city
+  fill_in "user_location_location_attributes_postal_code", with: @new_venue.location.postal_code
+  select @new_venue.location.state.name, from: 'user_location[location_attributes][state_id]'
+  select @new_venue.location.country.name, from: 'user_location[location_attributes][country_id]'
+
+  click_button "commit"
+end
+
+Then /^I should see my location data$/ do  
+  find("#localWatchSiteList").should have_content(@new_venue.location.city)
+  find("#localWatchSiteList").should have_content(@new_venue.location.state.abbreviation)
+end

@@ -12,6 +12,17 @@ Feature: User Profile
 		Then I should see a pick a team prompt
 		When I pick a team
 		Then I should see my team link
+
+	@javascript
+	Scenario: User can add a location
+		Given I visit the new user registration page
+		When I submit valid email and password
+		Then I should be on the user page
+			And I should see an add a location link
+		When I click the add a location link
+		Then I should see a location form
+		When I fill in the location form
+		Then I should see my location data
 		
 	Scenario: Returning user should see their team
 		Given I login with a user who has picked a team

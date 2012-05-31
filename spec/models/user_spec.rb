@@ -19,6 +19,7 @@ describe User do
   it { should respond_to(:instagram_user_id) }
   it { should respond_to(:instagram_user_token) }
   it { should respond_to(:teams) }
+  it { should respond_to(:locations) }
   it { should respond_to(:isConnectedToTwitter?)}
   
   it { should be_valid }

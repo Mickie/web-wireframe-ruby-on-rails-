@@ -4,7 +4,7 @@ describe UserLocationsController do
   login_user
 
   before do
-    @user = FactoryGirl.create(:user)
+    @user = subject.current_user
   end
 
   def valid_attributes
