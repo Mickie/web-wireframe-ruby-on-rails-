@@ -7,11 +7,13 @@
     </div>
   </div>
   
-  <div class="row-fluid">
-    <div class="span12">
-      <h2><%= link_to "Start Your Own Tailgate >>", new_tailgate_path, class: "btn btn-large btn-primary" %></h2>
+  <% if @user.tailgates.length == 0 %>
+    <div class="row-fluid">
+      <div class="span12">
+        <h2><%= link_to "Start Your Own Tailgate >>", new_tailgate_path, class: "btn btn-large btn-primary" %></h2>
+      </div>
     </div>
-  </div>
+  <% end %>
   
   <div class="row-fluid">
     <div class="span12">
@@ -46,6 +48,18 @@
   
   <div class="row-fluid">
     <div class="span4">
+      <% if @user.tailgates.length > 0 %>
+        <h3>My Tailgates</h3>
+        <div class="well">
+          <dl>
+            <% @user.tailgates.each do |aTailgate|%>
+              <dt><%= aTailgate.team.name %></dt>
+              <dd><%= teamLogo(aTailgate.team, :small) %> <%= link_to aTailgate.name, tailgate_path(aTailgate)%></dd>
+            <% end %>
+          </dl>      
+        </div>
+        <%= link_to "Start Another Tailgate >>", new_tailgate_path, class: "btn" %>
+      <% end %>
       <h3>My Teams</h3>
       <div class="well">
         <dl>
@@ -55,7 +69,7 @@
           <% end %>
         </dl>      
       </div>
-      <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
+      <a href="#myAddTeamModal" data-toggle="modal" class="btn">Add Team</a>
       <h3>Trending Team Tailgates</h3>
       <div class="well">
         <dl>
@@ -91,7 +105,7 @@
           <% end %>
         </dl>      
       </div>
-      <a href="#myAddLocationModal" data-toggle="modal">Add Location</a>
+      <a href="#myAddLocationModal" data-toggle="modal" class="btn">Add Location</a>
     </div>
     <div class="span4">
       <h3>Other Local Watch Sites</h3>

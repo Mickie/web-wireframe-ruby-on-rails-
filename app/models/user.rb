@@ -4,11 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  has_many :user_teams, :dependent => :delete_all
+  has_many :user_teams, inverse_of: :user, dependent: :delete_all
   has_many :teams, through: :user_teams
   
-  has_many :user_locations, :dependent => :delete_all
+  has_many :user_locations, inverse_of: :user, dependent: :delete_all
   has_many :locations, through: :user_locations
+  
+  has_many :tailgates, inverse_of: :user, dependent: :delete_all
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email,
@@ -27,7 +29,8 @@ class User < ActiveRecord::Base
                   :user_teams,
                   :teams,
                   :user_locations,
-                  :locations
+                  :locations,
+                  :tailgates 
                   
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
