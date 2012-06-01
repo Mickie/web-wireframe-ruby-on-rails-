@@ -13,13 +13,13 @@
   <tr>
     <td><%= post.title %></td>
     <td><%= post.content %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', tailgate_post_path(@tailgate, post) %></td>
+    <td><%= link_to 'Edit', edit_tailgate_post_path(@tailgate, post) %></td>
+    <td><%= link_to 'Destroy', tailgate_post_path(@tailgate, post), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_tailgate_post_path(@tailgate) %>

@@ -10,15 +10,16 @@ Before do
   @conference = FactoryGirl.create(:conference)
   @division = FactoryGirl.create(:division)
   @team = FactoryGirl.create(:team)
-  @affiliation = FactoryGirl.build(:affiliation)
-  @venue_type = FactoryGirl.build(:venue_type)
-  @venue = FactoryGirl.build(:venue)
-  @event = FactoryGirl.build(:event)
-  @game_watch = FactoryGirl.build(:game_watch)
-  @watch_site = FactoryGirl.build(:watch_site)
-  @person = FactoryGirl.build(:person)
-  @quick_tweet = FactoryGirl.build(:quick_tweet)
-  @tailgate = FactoryGirl.build(:tailgate)
+  @affiliation = FactoryGirl.create(:affiliation)
+  @venue_type = FactoryGirl.create(:venue_type)
+  @venue = FactoryGirl.create(:venue)
+  @event = FactoryGirl.create(:event)
+  @game_watch = FactoryGirl.create(:game_watch)
+  @watch_site = FactoryGirl.create(:watch_site)
+  @person = FactoryGirl.create(:person)
+  @quick_tweet = FactoryGirl.create(:quick_tweet)
+  @tailgate = FactoryGirl.create(:tailgate)
+  @post = FactoryGirl.create(:post, tailgate:@tailgate)
   
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league)
@@ -34,6 +35,7 @@ Before do
   @new_person = FactoryGirl.build(:person)
   @new_quick_tweet = FactoryGirl.build(:quick_tweet)
   @new_tailgate = FactoryGirl.build(:tailgate)
+  @new_post = FactoryGirl.build(:post, tailgate:@tailgate)
   
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)
@@ -49,6 +51,7 @@ Before do
   @edit_person = FactoryGirl.create(:person)
   @edit_quick_tweet = FactoryGirl.create(:quick_tweet)
   @edit_tailgate = FactoryGirl.create(:tailgate)
+  @edit_post = FactoryGirl.create(:post, tailgate:@edit_tailgate)
 
 end
 
@@ -57,6 +60,21 @@ Given /^I visit the (.*) page$/ do |aPageName|
   object = instance_variable_get("@#{aPageName.downcase.gsub(' ','_')}")
   visit send("#{aPageName.downcase.gsub(' ','_')}_path", object)
 end
+
+Given /^I visit the (.*) nested resource$/ do |aNestedResource|
+  theResources = aNestedResource.split(' ')
+  theParent = instance_variable_get("@#{theResources[theResources.length-2].downcase}")
+  
+  thePrefix = ""
+  if (theResources.length > 2)
+    thePrefix = theResources[0] + "_"
+  end
+    
+  theNestedResource = instance_variable_get("@#{thePrefix}#{theResources[theResources.length-1].downcase}")
+  
+  visit send("#{aNestedResource.downcase.gsub(' ','_')}_path", theParent, theNestedResource)
+end
+
 
 Given /^I sign in as (.*)$/ do |anAccountType|
   object = instance_variable_get("@#{anAccountType.downcase.gsub(' ','_')}")

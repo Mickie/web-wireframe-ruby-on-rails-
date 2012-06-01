@@ -11,6 +11,8 @@ describe Tailgate do
   it { should respond_to(:name) }
   it { should respond_to(:team) }
   it { should respond_to(:user) }
+  it { should respond_to(:venues) }
+  it { should respond_to(:posts) }
   
   it "should require a name to validate" do
     @tailgate.name = nil

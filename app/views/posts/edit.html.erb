@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Show', tailgate_post_path(@tailgate, @post) %> |
+<%= link_to 'Back', tailgate_posts_path(@tailgate) %>

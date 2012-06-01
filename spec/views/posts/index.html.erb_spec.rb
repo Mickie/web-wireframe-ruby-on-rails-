@@ -2,14 +2,20 @@ require 'spec_helper'
 
 describe "posts/index" do
   before(:each) do
+    @tailgate = assign(:tailgate, stub_model(Tailgate,
+      :name => "MyTailgate",
+      :id => "1"
+    ))
     assign(:posts, [
       stub_model(Post,
         :title => "Title",
-        :content => "MyText"
+        :content => "MyText",
+        :tailgate => @tailgate
       ),
       stub_model(Post,
         :title => "Title",
-        :content => "MyText"
+        :content => "MyText",
+        :tailgate => @tailgate
       )
     ])
   end

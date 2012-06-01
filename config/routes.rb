@@ -1,7 +1,5 @@
 FanzoSite::Application.routes.draw do
 
-  resources :posts
-
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
@@ -15,6 +13,10 @@ FanzoSite::Application.routes.draw do
     get 'connect_instagram', on: :member
     resources :user_teams, only: [ :create, :destroy ] 
     resources :user_locations, only: [ :create, :destroy ]
+  end
+
+  resources :tailgates do
+    resources :posts
   end
 
   match '/about',   to: 'static_pages#about'
@@ -40,7 +42,6 @@ FanzoSite::Application.routes.draw do
   resources :events
   resources :game_watches
   resources :watch_sites
-  resources :tailgates
   resources :quick_tweets
   resources :people
   resources :tailgate_venues

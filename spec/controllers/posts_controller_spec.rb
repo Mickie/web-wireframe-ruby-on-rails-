@@ -1,18 +1,24 @@
 require 'spec_helper'
 
 describe PostsController do
+  
+  before do
+    mock_geocoding!
+    @tailgate = FactoryGirl.create(:tailgate)
+  end
 
   def valid_attributes
     {
       title: "a title",
-      content: "some content"
+      content: "some content",
+      tailgate_id: @tailgate.id
     }
   end
   
   describe "GET index" do
     it "assigns all posts as @posts" do
       post = Post.create! valid_attributes
-      get :index, {}
+      get :index, { tailgate_id: @tailgate.id }
       assigns(:posts).should eq([post])
     end
   end
@@ -20,43 +26,46 @@ describe PostsController do
   describe "GET show" do
     it "assigns the requested post as @post" do
       post = Post.create! valid_attributes
-      get :show, {:id => post.to_param}
+      get :show, {:id => post.to_param, tailgate_id: @tailgate.id}
       assigns(:post).should eq(post)
     end
   end
 
   describe "GET new" do
+    login_user
     it "assigns a new post as @post" do
-      get :new, {}
+      get :new, { tailgate_id: @tailgate.id }
       assigns(:post).should be_a_new(Post)
     end
   end
 
   describe "GET edit" do
+    login_user
     it "assigns the requested post as @post" do
       post = Post.create! valid_attributes
-      get :edit, {:id => post.to_param}
+      get :edit, {:id => post.to_param, tailgate_id: @tailgate.id}
       assigns(:post).should eq(post)
     end
   end
 
   describe "POST create" do
+    login_user
     describe "with valid params" do
       it "creates a new Post" do
         expect {
-          post :create, {:post => valid_attributes}
+          post :create, {:post => valid_attributes, tailgate_id: @tailgate.id}
         }.to change(Post, :count).by(1)
       end
 
       it "assigns a newly created post as @post" do
-        post :create, {:post => valid_attributes}
+        post :create, {:post => valid_attributes, tailgate_id: @tailgate.id}
         assigns(:post).should be_a(Post)
         assigns(:post).should be_persisted
       end
 
       it "redirects to the created post" do
-        post :create, {:post => valid_attributes}
-        response.should redirect_to(Post.last)
+        post :create, {:post => valid_attributes, tailgate_id: @tailgate.id}
+        response.should redirect_to(tailgate_post_path(@tailgate, Post.last) )
       end
     end
 
@@ -64,20 +73,21 @@ describe PostsController do
       it "assigns a newly created but unsaved post as @post" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => {}}
+        post :create, {:post => {}, tailgate_id: @tailgate.id}
         assigns(:post).should be_a_new(Post)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => {}}
+        post :create, {:post => {}, tailgate_id: @tailgate.id}
         response.should render_template("new")
       end
     end
   end
 
   describe "PUT update" do
+    login_user
     describe "with valid params" do
       it "updates the requested post" do
         post = Post.create! valid_attributes
@@ -86,19 +96,19 @@ describe PostsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Post.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => post.to_param, :post => {'these' => 'params'}}
+        put :update, {:id => post.to_param, :post => {'these' => 'params'}, tailgate_id: @tailgate.id}
       end
 
       it "assigns the requested post as @post" do
         post = Post.create! valid_attributes
-        put :update, {:id => post.to_param, :post => valid_attributes}
+        put :update, {:id => post.to_param, :post => valid_attributes, tailgate_id: @tailgate.id}
         assigns(:post).should eq(post)
       end
 
       it "redirects to the post" do
         post = Post.create! valid_attributes
-        put :update, {:id => post.to_param, :post => valid_attributes}
-        response.should redirect_to(post)
+        put :update, {:id => post.to_param, :post => valid_attributes, tailgate_id: @tailgate.id}
+        response.should redirect_to(tailgate_post_path(@tailgate, post))
       end
     end
 
@@ -107,7 +117,7 @@ describe PostsController do
         post = Post.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => {}}
+        put :update, {:id => post.to_param, :post => {}, tailgate_id: @tailgate.id}
         assigns(:post).should eq(post)
       end
 
@@ -115,24 +125,25 @@ describe PostsController do
         post = Post.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => {}}
+        put :update, {:id => post.to_param, :post => {}, tailgate_id: @tailgate.id}
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
+    login_user
     it "destroys the requested post" do
       post = Post.create! valid_attributes
       expect {
-        delete :destroy, {:id => post.to_param}
+        delete :destroy, {:id => post.to_param, tailgate_id: @tailgate.id}
       }.to change(Post, :count).by(-1)
     end
 
     it "redirects to the posts list" do
       post = Post.create! valid_attributes
-      delete :destroy, {:id => post.to_param}
-      response.should redirect_to(posts_url)
+      delete :destroy, {:id => post.to_param, tailgate_id: @tailgate.id}
+      response.should redirect_to(tailgate_posts_url(@tailgate))
     end
   end
 

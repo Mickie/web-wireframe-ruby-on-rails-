@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
-  # GET /posts
-  # GET /posts.json
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
+
   def index
-    @posts = Post.all
+    @tailgate = Tailgate.find(params[:tailgate_id]) 
+    @posts  = @tailgate.posts
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,9 +11,8 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
+    @tailgate = Tailgate.find(params[:tailgate_id])
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -21,10 +21,9 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
   def new
-    @post = Post.new
+    @tailgate = Tailgate.find(params[:tailgate_id])
+    @post = Post.new(tailgate:@tailgate)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,19 +31,19 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1/edit
   def edit
+    @tailgate = Tailgate.find(params[:tailgate_id])
     @post = Post.find(params[:id])
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
+    @tailgate = Tailgate.find(params[:tailgate_id])
     @post = Post.new(params[:post])
+    @post.tailgate = @tailgate 
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to tailgate_post_url(@tailgate, @post), notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -53,14 +52,16 @@ class PostsController < ApplicationController
     end
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.json
   def update
+    @tailgate = Tailgate.find(params[:tailgate_id])
     @post = Post.find(params[:id])
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+      if @post.tailgate != @tailgate
+        format.html { render action: "new", error: 'Cannot update post with a different tailgate' }
+        format.json { render json: { error: 'Cannot update post with a different tailgate' }, status: :unprocessable_entity }
+      elsif @post.update_attributes(params[:post])
+        format.html { redirect_to tailgate_post_url(@tailgate, @post), notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,14 +70,16 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
+    @tailgate = Tailgate.find(params[:tailgate_id])
     @post = Post.find(params[:id])
-    @post.destroy
 
+    if @post.tailgate == @tailgate
+      @post.destroy
+    end
+    
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to tailgate_posts_url(@tailgate) }
       format.json { head :no_content }
     end
   end

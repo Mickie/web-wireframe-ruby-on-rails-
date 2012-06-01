@@ -2,9 +2,14 @@ require 'spec_helper'
 
 describe "posts/show" do
   before(:each) do
+    @tailgate = assign(:tailgate, stub_model(Tailgate,
+      :name => "MyTailgate",
+      :id => "1"
+    ))
     @post = assign(:post, stub_model(Post,
-      :title => "Title",
-      :content => "MyText"
+      :title => "MyString",
+      :content => "MyText",
+      :tailgate_id => @tailgate.id
     ))
   end
 
