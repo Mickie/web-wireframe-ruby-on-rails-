@@ -31,7 +31,6 @@ group :development, :test do
   gem 'jasminerice'
   gem 'coffee-rails'
   gem 'ruby-debug19'
-  gem 'nested_scaffold'
 end
 
 group :test do
