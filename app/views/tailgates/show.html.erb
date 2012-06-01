@@ -1,20 +1,127 @@
-<p id="notice"><%= notice %></p>
+<%= provide(:title, @tailgate.name + "- FANZO") %>
 
-<p>
-  <b>Name:</b>
-  <%= @tailgate.name %>
-</p>
+<div class="row-fluid">
+  <div class="span12 hero-unit">
+    <h1><%= @tailgate.name %></h1>
+    <p>Created by <%= @tailgate.user.email %>, a <%= @tailgate.team.name %> Super Fan</p>
+    <% if @current_user == @tailgate.user %>
+      <p>Hey! This is your tailgate, so you can <%= link_to "edit", edit_tailgate_path(@tailgate)%> it!</p>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <b>User:</b>
-  <%= @tailgate.user.email %>
-</p>
+<div class="row-fluid">
+  <div class="span3">
+    <h2>Social Streams</h2>
+    <div class="controls" id="tweetControls">
+      <div class="input-append">
+        <textarea class="input-xlarge span10" rows="1"><%= raw @tailgate.team.social_info.hash_tags %></textarea>
+        <div class="btn-group">
+          <button href="#" class="btn btn-primary quickTweetButton">Update Social Status</button>
+          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><strong>Booyah!!</strong></li>
+            <div class="happy">
+              <li><a href="#"></a></li>
+            </div>
+            <li class="divider"></li>
+            <li><strong>What!?!?</strong></li>
+            <div class="sad">
+              <li><a href="#"></a></li>
+            </div>
+          </ul>         
+        </div>
+      </div>
+    </div>    
+    <div id="myTweetModal" class="modal hide fade" style="display: none;">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Personalize your tweet:</h3>
+      </div>
+      <div class="modal-body">
+        <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
+      </div>
+    </div>
+        
+    <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
+      <a class='close' data-dismiss='alert' href='#'>×</a>
+      <div class="messageHolder"></div>
+    </div>
+        
+    <div id="tweetHolder">
+      <div id="newTweets" class='alert alert-info fade in' style='display:none'>
+        <a class='close' data-dismiss='alert' href='#'>×</a>
+        <p>
+          <strong>5</strong> new Tweets!
+        </p>
+      </div>
+      <div id="tweets">
+        <div id="template" class="tweet well">
+          <img class="twitterAvatar" width="48px" height="48px">
+          <span class="twitterName"></span>: 
+          <span class="twitterText"></span>
+          <div class="tweetMenu">
+            <div class="timestamp"></div>
+            <a id="reply"><%= image_tag("reply.png") %>Reply</a> |
+            <a id="retweet"><%= image_tag("retweet.png") %>Retweet</a> |
+            <a id="favorite"><%= image_tag("favorite.png") %>Favorite</a>
+          </div>
+          <div class="alert alert-info fade in" style="display:none">
+            <a class="close" data-dismiss="alert" href="#">x</a>
+            <p><strong>Success!</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="span6">
+    <h2>Latest Posts</h2>
+    <div id="postForm">
+      <%= render "/posts/form"%>
+    </div>
+    <div id="posts">
+      <% @tailgate.posts.each do | aPost |%>
+        <div class="well">
+          <h3><%= aPost.title %></h3>
+          <p><%= aPost.content %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="span3">
+    <h2>Social Images</h2>
+    <div id="slides">
+    </div>
+  </div>
+</div>
 
-<p>
-  <b>Team:</b>
-  <%= @tailgate.team.name %>
-</p>
 
+<script language="JavaScript">
+  var myTwitterView;
+  var myFacebookView;
+  var myInstagramView;
+  
+  $(function()
+  {
+    myFacebookView = new FacebookView();
+    myTwitterView = new TwitterView(<%= raw @tailgate.team.social_info.hash_tags.split(" ") %>, 
+                                    20,
+                                    "tweets",
+                                    "newTweets",
+                                    "tweetControls",
+                                    <%= @current_user && @current_user.isConnectedToTwitter? %>,
+                                    <%= @current_user ? @current_user.id : 0 %>,
+                                    <%= @tailgate.team.sport.id %>,
+                                    "myTwitterView");
+    myTwitterView.startLoadingTweets();
 
-<%= link_to 'Edit', edit_tailgate_path(@tailgate) %> |
-<%= link_to 'Back', tailgates_path %>
+    myInstagramView = new InstagramView("slides");
+    myInstagramView.startLoadingImagesForTeam(<%= @tailgate.team.id %>);
+
+   });
+</script>

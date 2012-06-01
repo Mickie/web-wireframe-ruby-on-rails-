@@ -17,6 +17,8 @@ class TailgatesController < ApplicationController
   # GET /tailgates/1.json
   def show
     @tailgate = Tailgate.find(params[:id])
+    @post = Post.new(tailgate:@tailgate)
+    @current_user = current_user
 
     respond_to do |format|
       format.html # show.html.erb

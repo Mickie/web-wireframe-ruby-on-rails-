@@ -25,7 +25,6 @@ Feature: Posts Resource
 		When I visit the new tailgate post nested resource
 			And I create a new post
 		Then I should see the details of the new post
-			And I should be able to edit it
 	
 	Scenario: I can edit a post as the user who created it
 		Given I previously created a post

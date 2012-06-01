@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to tailgate_post_url(@tailgate, @post), notice: 'Post was successfully created.' }
+        format.html { redirect_to tailgate_url(@tailgate), notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }

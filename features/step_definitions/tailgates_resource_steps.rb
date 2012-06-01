@@ -38,3 +38,13 @@ end
 Then /^I should be able to associate a team with the tailgate$/ do
   page.should have_selector("#tailgate_team_id")
 end
+
+When /^I add a post$/ do
+  fill_in "Title", with: @new_post.title
+  fill_in "Content", with: @new_post.content
+  click_button "commit"
+end
+
+Then /^I see the new post on the tailgate page$/ do
+  page.find("#posts").should have_content(@new_post.content)
+end

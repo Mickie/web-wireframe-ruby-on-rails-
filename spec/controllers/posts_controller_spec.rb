@@ -63,9 +63,9 @@ describe PostsController do
         assigns(:post).should be_persisted
       end
 
-      it "redirects to the created post" do
+      it "redirects to the tailgate for the post" do
         post :create, {:post => valid_attributes, tailgate_id: @tailgate.id}
-        response.should redirect_to(tailgate_post_path(@tailgate, Post.last) )
+        response.should redirect_to(tailgate_path(@tailgate) )
       end
     end
 
