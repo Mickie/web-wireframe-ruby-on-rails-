@@ -56,7 +56,7 @@ describe TwitterProxyController do
           theStatus = double("Twitter::Status")
           theStatus.stub(:to_json).and_return({ text:'test status' }.to_json)
           theClient = double("Twitter::Client")
-          theClient.should_receive(:update).with("test status", {in_reply_to_status_id:"1"}).and_return(theStatus)
+          theClient.should_receive(:update).with("test status", {in_reply_to_status_id:1}).and_return(theStatus)
           Twitter::Client.stub(:new).and_return(theClient)
           post 'update_status', statusText: "test status", replyId: 1, format: :json
         end
@@ -74,7 +74,7 @@ describe TwitterProxyController do
           theStatus = double("Twitter::Status")
           theStatus.stub(:to_json).and_return({ text:'test status', retweetId: 'foo' }.to_json)
           theClient = double("Twitter::Client")
-          theClient.should_receive(:retweet).with("1").and_return(theStatus)
+          theClient.should_receive(:retweet).with(1).and_return(theStatus)
           Twitter::Client.stub(:new).and_return(theClient)
           post 'retweet', tweetId: 1, format: :json
         end
@@ -96,7 +96,7 @@ describe TwitterProxyController do
           theStatus = double("Twitter::Status")
           theStatus.stub(:to_json).and_return({ text:'test status', retweetId: 'foo' }.to_json)
           theClient = double("Twitter::Client")
-          theClient.should_receive(:favorite).with("1").and_return(theStatus)
+          theClient.should_receive(:favorite).with(1).and_return(theStatus)
           Twitter::Client.stub(:new).and_return(theClient)
           post 'favorite', favoriteId: 1, format: :json
         end

@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
+  before_filter :load_tailgate
 
   def index
-    @tailgate = Tailgate.find(params[:tailgate_id]) 
-    @posts  = @tailgate.posts
+    @posts  = @tailgate.posts.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,8 +12,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @tailgate = Tailgate.find(params[:tailgate_id])
-    @post = Post.find(params[:id])
+    @post = @tailgate.posts.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -22,8 +21,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @tailgate = Tailgate.find(params[:tailgate_id])
-    @post = Post.new(tailgate:@tailgate)
+    @post = @tailgate.posts.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,14 +30,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @tailgate = Tailgate.find(params[:tailgate_id])
-    @post = Post.find(params[:id])
+    @post = @tailgate.posts.find(params[:id])
   end
 
   def create
-    @tailgate = Tailgate.find(params[:tailgate_id])
-    @post = Post.new(params[:post])
-    @post.tailgate = @tailgate 
+    @post = @tailgate.posts.new(params[:post])
 
     respond_to do |format|
       if @post.save
@@ -53,8 +48,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @tailgate = Tailgate.find(params[:tailgate_id])
-    @post = Post.find(params[:id])
+    @post = @tailgate.posts.find(params[:id])
 
     respond_to do |format|
       if @post.tailgate != @tailgate
@@ -71,8 +65,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @tailgate = Tailgate.find(params[:tailgate_id])
-    @post = Post.find(params[:id])
+    @post = @tailgate.posts.find(params[:id])
 
     if @post.tailgate == @tailgate
       @post.destroy
@@ -83,4 +76,10 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+    
+    def load_tailgate
+      @tailgate = Tailgate.find(params[:tailgate_id])
+    end
 end

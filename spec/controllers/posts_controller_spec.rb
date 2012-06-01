@@ -33,9 +33,14 @@ describe PostsController do
 
   describe "GET new" do
     login_user
+    before do
+      get :new, { tailgate_id: @tailgate.id }      
+    end
     it "assigns a new post as @post" do
-      get :new, { tailgate_id: @tailgate.id }
       assigns(:post).should be_a_new(Post)
+    end
+    it "the post is linked to the tailgate" do
+      assigns(:post).tailgate.should eq(@tailgate)
     end
   end
 
@@ -61,6 +66,7 @@ describe PostsController do
         post :create, {:post => valid_attributes, tailgate_id: @tailgate.id}
         assigns(:post).should be_a(Post)
         assigns(:post).should be_persisted
+        assigns(:post).tailgate.should eq(@tailgate)
       end
 
       it "redirects to the tailgate for the post" do
