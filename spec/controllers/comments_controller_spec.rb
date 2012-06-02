@@ -31,13 +31,16 @@ describe CommentsController do
   end
 
   describe "GET new" do
+    login_user
     it "assigns a new comment as @comment" do
       get :new, { post_id: @post.id }
       assigns(:comment).should be_a_new(Comment)
+      assigns(:comment).user.should eq(subject.current_user)
     end
   end
 
   describe "GET edit" do
+    login_user
     it "assigns the requested comment as @comment" do
       comment = @post.comments.create! valid_attributes
       get :edit, { id: comment.to_param, post_id: @post.id }
@@ -46,22 +49,31 @@ describe CommentsController do
   end
 
   describe "POST create" do
+    login_user
     describe "with valid params" do
       it "creates a new Comment" do
         expect {
           post :create, { comment: valid_attributes, post_id: @post.id }
         }.to change(Comment, :count).by(1)
       end
-
-      it "assigns a newly created comment as @comment" do
-        post :create, { comment: valid_attributes, post_id: @post.id }
-        assigns(:comment).should be_a(Comment)
-        assigns(:comment).should be_persisted
-      end
-
-      it "redirects to the tailgate" do
-        post :create, { comment: valid_attributes, post_id: @post.id }
-        response.should redirect_to(@tailgate)
+      
+      describe "with the correct stuff" do
+        before do
+          post :create, { comment: valid_attributes, post_id: @post.id }
+        end
+  
+        it "assigns a newly created comment as @comment" do
+          assigns(:comment).should be_a(Comment)
+          assigns(:comment).should be_persisted
+        end
+  
+        it "redirects to the tailgate" do
+          response.should redirect_to(@tailgate)
+        end
+        
+        it "associates the signed in user with the comment" do
+          assigns(:comment).user.should eq(subject.current_user)          
+        end
       end
     end
 
@@ -83,6 +95,7 @@ describe CommentsController do
   end
 
   describe "PUT update" do
+    login_user
     describe "with valid params" do
       it "updates the requested comment" do
         comment = @post.comments.create! valid_attributes
@@ -127,6 +140,7 @@ describe CommentsController do
   end
 
   describe "DELETE destroy" do
+    login_user
     it "destroys the requested comment" do
       comment = @post.comments.create! valid_attributes
       expect {

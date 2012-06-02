@@ -42,9 +42,25 @@ end
 When /^I add a post$/ do
   fill_in "Title", with: @new_post.title
   fill_in "Content", with: @new_post.content
-  click_button "commit"
+  click_button "add_post"
 end
 
 Then /^I see the new post on the tailgate page$/ do
   page.find("#posts").should have_content(@new_post.content)
 end
+
+Given /^I previously added a post$/ do
+end
+
+When /^I comment on the post$/ do
+  fill_in "Comment", with: @new_comment.content
+  click_button "add_comment"
+end
+
+Then /^I should see the comment on the post on the tailgate page$/ do
+  page.find("#posts").should have_content(@new_comment.content)
+end
+
+
+
+

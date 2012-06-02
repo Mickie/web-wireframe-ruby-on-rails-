@@ -1,6 +1,6 @@
 <h1>Editing comment</h1>
 
-<%= render 'form' %>
+<%= render 'form', post:@post, comment:@comment %>
 
 <%= link_to 'Show', [@post.tailgate, @post, @comment] %> |
 <%= link_to 'Back', tailgate_post_comments_path(@post.tailgate, @post) %>

@@ -1,6 +1,6 @@
 Feature: User Profile
 
-	@javascript
+	@javascript 
 	Scenario: User can add a team
 		Given I visit the new user registration page
 		When I submit valid email and password

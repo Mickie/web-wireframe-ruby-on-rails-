@@ -1,5 +1,6 @@
 
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
   before_filter :load_post
   
   # GET /comments
@@ -28,6 +29,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
     @comment = @post.comments.new
+    @comment.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +46,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = @post.comments.new(params[:comment])
+    @comment.user = current_user
 
     respond_to do |format|
       if @comment.save

@@ -85,10 +85,14 @@
       <%= render "/posts/form"%>
     </div>
     <div id="posts">
-      <% @tailgate.posts.each do | aPost |%>
+      <% @tailgate.posts.each do | aPost | %>
         <div class="well">
           <h3><%= aPost.title %></h3>
           <p><%= aPost.content %></p>
+          <% aPost.comments.each do |aComment| %>
+            <p><strong><%= aComment.user.email %>:</strong> <%= aComment.content %></p>
+          <% end %>
+          <%= render "/comments/form", post:aPost, comment:aPost.comments.new %>
         </div>
       <% end %>
     </div>

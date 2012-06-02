@@ -36,6 +36,7 @@ Before do
   @new_quick_tweet = FactoryGirl.build(:quick_tweet)
   @new_tailgate = FactoryGirl.build(:tailgate)
   @new_post = FactoryGirl.build(:post, tailgate:@tailgate)
+  @new_comment = FactoryGirl.build(:comment)
   
   @edit_sport = FactoryGirl.create(:sport)
   @edit_league = FactoryGirl.create(:league)

@@ -1,10 +1,10 @@
-<%= form_for([@post.tailgate, @post, @comment]) do |f| %>
-  <% if @comment.errors.any? %>
+<%= form_for([post.tailgate, post, comment]) do |f| %>
+  <% if comment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
       <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
+      <% comment.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -12,18 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
-  <div class="field">
-    <%= f.label :post %><br />
-    <%= f.text_field :post %>
+    <%= f.label :content, "Comment" %>
+    <%= f.text_area :content, rows:2 %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add", id:"add_comment" %>
   </div>
 <% end %>

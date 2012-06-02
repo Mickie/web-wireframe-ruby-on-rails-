@@ -34,12 +34,12 @@ When /^I create a new post$/ do
   page.should have_content("Title")
   fill_in "post_title", with: @new_post.title
   fill_in "post_content", with: @new_post.content
-  click_button "commit"  
+  click_button "add_post"  
 end
 
 When /^I edit the post$/ do
   fill_in "Title", with: "Dave's killer post"
-  click_button "commit"  
+  click_button "add_post"  
 end
 
 Then /^the changes to the post should be saved$/ do

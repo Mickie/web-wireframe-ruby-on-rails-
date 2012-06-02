@@ -16,8 +16,8 @@ class TailgatesController < ApplicationController
   # GET /tailgates/1
   # GET /tailgates/1.json
   def show
-    @tailgate = Tailgate.find(params[:id])
-    @post = Post.new(tailgate:@tailgate)
+    @tailgate = Tailgate.includes(:posts => :comments ).find(params[:id])
+    @post = Post.new
     @current_user = current_user
 
     respond_to do |format|

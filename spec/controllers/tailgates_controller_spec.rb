@@ -34,6 +34,9 @@ describe TailgatesController do
       assigns(:tailgate).should eq(@tailgate)
     end
 
+    it "assigns a new post for use in forms" do
+      assigns(:post).should be_a(Post)
+    end
   end
 
   describe "GET new" do

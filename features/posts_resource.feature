@@ -38,3 +38,4 @@ Feature: Posts Resource
 			And I have created 3 posts
 		When I visit the tailgate posts nested resource
 		Then there should be 3 posts
+ 

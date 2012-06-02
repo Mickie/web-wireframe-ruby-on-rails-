@@ -56,7 +56,7 @@ Feature: Tailgates Resource
 		When I visit the edit tailgate page
 		Then I should be able to associate a team with the tailgate
 		
-	Scenario: I can't add a post to a tailgate without loging in
+	Scenario: I can't add a post to a tailgate without logging in
 		Given I previously created a tailgate
 		When I visit the tailgate page
 			And I add a post
@@ -69,3 +69,20 @@ Feature: Tailgates Resource
 		When I visit the tailgate page
 			And I add a post
 		Then I see the new post on the tailgate page
+		
+	Scenario: I can't add a comment to a tailgate post without logging in	
+		Given I previously created a tailgate
+			And I previously added a post
+		When I visit the tailgate page
+			And I comment on the post
+		Then I should be redirected to the new user session page
+			And I should see an alert flash
+	
+	Scenario: I can add a comment to a tailgate post as a user
+		Given I sign in as user	
+			And I previously created a tailgate
+			And I previously added a post
+		When I visit the tailgate page
+			And I comment on the post
+		Then I should see the comment on the post on the tailgate page	
+	
