@@ -16,5 +16,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Edit', edit_tailgate_post_comment_path(@post.tailgate, @post, @comment) %> |
+<%= link_to 'Back', tailgate_post_comments_path(@post.tailgate, @post) %>

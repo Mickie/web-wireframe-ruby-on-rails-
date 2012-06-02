@@ -16,12 +16,12 @@
     <td><%= comment.user %></td>
     <td><%= comment.post %></td>
     <td><%= link_to 'Show', comment %></td>
-    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-    <td><%= link_to 'Destroy', comment, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Edit', edit_tailgate_post_comment_path(comment.post.tailgate, comment.post, comment) %></td>
+    <td><%= link_to 'Destroy', [comment.post.tailgate, comment.post, comment], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Comment', new_comment_path %>
+<%= link_to 'New Comment', new_tailgate_post_comment_path(@post.tailgate, @post) %>

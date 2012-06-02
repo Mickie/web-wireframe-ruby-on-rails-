@@ -2,10 +2,13 @@ require 'spec_helper'
 
 describe "comments/show" do
   before(:each) do
+    @tailgate = stub_model(Tailgate, id:1)
+    @post = stub_model(Post, id:1, tailgate:@tailgate)
     @comment = assign(:comment, stub_model(Comment,
+      :id => 1,
       :content => "MyText",
       :user => nil,
-      :post => nil
+      :post => @post
     ))
   end
 

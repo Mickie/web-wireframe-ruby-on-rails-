@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe "comments/index" do
   before(:each) do
+    @tailgate = stub_model(Tailgate, id:1)
     @user = stub_model(User)
-    @post = stub_model(Post)
+    @post = stub_model(Post, id:1, tailgate:@tailgate)
     assign(:comments, [
       stub_model(Comment,
         :content => "MyText",

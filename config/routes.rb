@@ -18,7 +18,9 @@ FanzoSite::Application.routes.draw do
   end
 
   resources :tailgates do
-    resources :posts
+    resources :posts do
+      resources :comments
+    end
   end
 
   match '/about',   to: 'static_pages#about'
