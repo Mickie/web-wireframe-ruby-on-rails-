@@ -37,7 +37,7 @@ describe("YouTubeView", function()
                                       "youtube");
       registerFakeAjax(
       { 
-        url: "http://gdata.youtube.com/feeds/api/videos?alt=json-in-script&format=5,6&hd&category=Sports&v=2&q=%22Notre%20Dame%20Football%22%7Cnotredame%7Cgoirish&max-results=2",
+        url: "http://gdata.youtube.com/feeds/api/videos?alt=json-in-script&format=5,6&category=Sports&v=2&q=%22Notre%20Dame%20Football%22%7Cnotredame%7Cgoirish&max-results=2",
         successData: YouTubeData.videoSearchResponse
       })
 

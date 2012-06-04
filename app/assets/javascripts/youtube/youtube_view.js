@@ -28,7 +28,7 @@ var YouTubeView = function( aShortName,
   
   this.loadVideos = function()
   {
-    var theQueryString = "?alt=json-in-script&format=5,6&hd&category=Sports&v=2&q=" 
+    var theQueryString = "?alt=json-in-script&format=5,6&category=Sports&v=2&q=" 
                           + escape(this.getQuery()) 
                           + "&max-results=" + this.myMaxVideos;
     $.ajax({
