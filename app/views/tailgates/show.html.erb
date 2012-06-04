@@ -113,7 +113,8 @@
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = new TwitterView(<%= raw @tailgate.team.social_info.hash_tags.split(" ") %>, 
+    myTwitterView = new TwitterView(<%= raw @tailgate.team.social_info.hash_tags.split(" ") %>,
+                                    <%= raw @tailgate.team.social_info.not_tags.split(" ") %>,
                                     20,
                                     "tweets",
                                     "newTweets",

@@ -12,5 +12,6 @@ describe SocialInfo do
   it { should respond_to(:facebook_page_url) }
   it { should respond_to(:web_url) }
   it { should respond_to(:hash_tags) }
+  it { should respond_to(:not_tags) }
   it { should respond_to(:youtube_url) } 
 end

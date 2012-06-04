@@ -164,7 +164,8 @@
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>, 
+    myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>,
+                                    <%= raw @team.social_info.not_tags.split(" ") %>,
                                     20,
                                     "tweets",
                                     "newTweets",

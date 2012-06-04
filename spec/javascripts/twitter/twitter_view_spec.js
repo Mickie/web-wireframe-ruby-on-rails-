@@ -5,7 +5,8 @@ describe("TwitterView", function()
   beforeEach(function()
   {
     
-    myTwitterView = new TwitterView(["notredame"], 
+    myTwitterView = new TwitterView(["notredame"],
+                                    [], 
                                     1,
                                     "tweets",
                                     "newTweets",

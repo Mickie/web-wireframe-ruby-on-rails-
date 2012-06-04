@@ -9,7 +9,7 @@ describe "teams/show" do
     @conference = FactoryGirl.build(:conference)
     @division = FactoryGirl.build(:division)
     @affiliation = FactoryGirl.build(:affiliation)
-    @social_info = FactoryGirl.build(:social_info)
+    @social_info = FactoryGirl.build(:social_info, not_tags:"")
     theStub = stub_model(Team,
       :name => "killer team",
       :slug => "killer-team",

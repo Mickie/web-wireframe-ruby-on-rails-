@@ -1,6 +1,7 @@
 var MAX_TWEETS = 15;
 
 var TwitterView = function( anArrayOfHashTags, 
+                            anArrayOfNotTags,
                             aMaxTweets, 
                             aTweetDivId, 
                             aNewTweetDivId,
@@ -11,6 +12,7 @@ var TwitterView = function( anArrayOfHashTags,
                             aTwitterViewVariableName)
 {
   this.myHashTags = anArrayOfHashTags;
+  this.myNotTags = anArrayOfNotTags;
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
@@ -28,7 +30,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.startLoadingTweets = function()
   {
     this.myTwitterSearch = new TwitterSearch(createDelegate(this, this.onNewTweet), createDelegate(this, this.onError));
-    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags.join(" OR "), this.myMaxTweets);
+    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
     this.initializeButtons();
     
     window.setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);

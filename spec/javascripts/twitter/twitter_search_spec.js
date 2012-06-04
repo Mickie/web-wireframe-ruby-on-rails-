@@ -2,7 +2,7 @@ describe("TwitterSearch", function()
 {
   var myTwitterSearch;
   var onTweet, onError;
-  var THE_SEARCH_URL = 'http://search.twitter.com/search.json?lang=en&include_entities=true&q=notredame&rpp=1';
+  var THE_SEARCH_URL = 'http://search.twitter.com/search.json?lang=en&include_entities=true&q=notredame%20-dakota&rpp=1';
   
   beforeEach(function()
   {
@@ -10,6 +10,39 @@ describe("TwitterSearch", function()
     onError = jasmine.createSpy('onError');
     
     myTwitterSearch = new TwitterSearch(onTweet, onError);
+  });
+  
+  describe("getSearchQuery", function()
+  {
+    it("returns a properly formatted query - no OR or not", function()
+    {
+      var theResult = myTwitterSearch.getSearchQuery(['notredame'], []);
+      expect(theResult).toEqual("notredame");
+    });
+
+    it("returns a properly formatted query - with OR but no not", function()
+    {
+      var theResult = myTwitterSearch.getSearchQuery(['notredame', 'nd'], []);
+      expect(theResult).toEqual("notredame OR nd");
+    });
+
+    it("returns a properly formatted query - no OR but a not", function()
+    {
+      var theResult = myTwitterSearch.getSearchQuery(['notredame'], ['dakota']);
+      expect(theResult).toEqual("notredame -dakota");
+    });
+
+    it("returns a properly formatted query - with OR and not", function()
+    {
+      var theResult = myTwitterSearch.getSearchQuery(['notredame', 'nd'], ['dakota']);
+      expect(theResult).toEqual("notredame OR nd -dakota");
+    });
+
+    it("returns a properly formatted query - with OR and multiple nots", function()
+    {
+      var theResult = myTwitterSearch.getSearchQuery(['notredame', 'nd'], ['dakota', 'north']);
+      expect(theResult).toEqual("notredame OR nd -dakota -north");
+    });
   });
   
   describe("on success", function()
@@ -22,7 +55,7 @@ describe("TwitterSearch", function()
         successData: TwitterData.searchResponses.success
       })
 
-      myTwitterSearch.getLatestTweetsForTerm( 'notredame', 1); 
+      myTwitterSearch.getLatestTweetsForTerm( ['notredame'], ['dakota'], 1); 
     });
 
     it("calls onTweet with an array of tweets", function() 
@@ -51,7 +84,7 @@ describe("TwitterSearch", function()
         }
       })
 
-      myTwitterSearch.getLatestTweetsForTerm( 'notredame', 1); 
+      myTwitterSearch.getLatestTweetsForTerm( ['notredame'], ['dakota'], 1); 
     });
 
     it("calls onError with error message", function() 

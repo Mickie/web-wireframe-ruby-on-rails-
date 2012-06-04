@@ -6,15 +6,26 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
   this.myNewTweetCallback = anOnTweetCallback;
   this.myErrorCallback = anOnErrorCallback;
 
-  this.getLatestTweetsForTerm = function(aSearchTerm, aNumberToGet)
+  this.getLatestTweetsForTerm = function(anArrayOfHashTags, anArrayOfNotTags, aNumberToGet)
   {
-    var theQueryString = "?lang=en&include_entities=true&q=" + escape(aSearchTerm) + "&rpp=" + aNumberToGet;
+    var theSearchQuery = this.getSearchQuery(anArrayOfHashTags, anArrayOfNotTags);
+    var theQueryString = "?lang=en&include_entities=true&q=" + escape(theSearchQuery) + "&rpp=" + aNumberToGet;
     $.ajax({
              url: TWITTER_SEARCH_URL + theQueryString,
              cache:false,
              dataType: "jsonp",
              success: createDelegate(this, this.onSearchComplete)
            });
+  };
+  
+  this.getSearchQuery = function( anArrayOfHashTags, anArrayOfNotTags )
+  {
+    var theQuery = anArrayOfHashTags.join(" OR ");
+    for (var i=0; i < anArrayOfNotTags.length; i++) 
+    {
+      theQuery += " -" + anArrayOfNotTags[i];
+    };
+    return theQuery;
   };
 
   this.grabMoreTweets = function()

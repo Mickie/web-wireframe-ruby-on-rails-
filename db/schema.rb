@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120601232646) do
+ActiveRecord::Schema.define(:version => 20120604031624) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -171,10 +171,11 @@ ActiveRecord::Schema.define(:version => 20120601232646) do
     t.string   "twitter_name"
     t.string   "facebook_page_url"
     t.string   "web_url"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "hash_tags"
     t.string   "youtube_url"
+    t.string   "not_tags",          :default => ""
   end
 
   create_table "sports", :force => true do |t|
