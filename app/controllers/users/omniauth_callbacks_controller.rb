@@ -22,8 +22,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       theAuthData = request.env["omniauth.auth"]
       theTwitterData = OmniAuth::AuthHash.new({ uid: theAuthData.uid, 
                                                 info: { nickname: theAuthData.info.nickname }, 
-                                                extra: { access_token: {  token: theAuthData.extra.access_token.token, 
-                                                                          secret: theAuthData.extra.access_token.secret } } 
+                                                credentials: {  token: theAuthData.credentials.token, 
+                                                                secret: theAuthData.credentials.secret }  
                                               })
       session["devise.twitter_data"] = theTwitterData
       redirect_to new_user_registration_url
@@ -41,4 +41,21 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end    
   end
+
+  def foursquare
+    @user = User.find_for_foursquare_oauth(request.env["omniauth.auth"], current_user)
+
+    if @user
+      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Foursquare"
+      sign_in_and_redirect @user, event: :authentication
+    else
+      theAuthData = request.env["omniauth.auth"]
+      theFoursquareData = OmniAuth::AuthHash.new({ uid: theAuthData.uid, 
+                                                   credentials: { token: theAuthData.credentials.token } 
+                                                  })
+      session["devise.foursquare_data"] = theFoursquareData
+      redirect_to new_user_registration_url
+    end    
+  end
+
 end

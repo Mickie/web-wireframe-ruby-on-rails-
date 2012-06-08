@@ -3,15 +3,15 @@
 <p>You have successfully connected your twitter account, now we just need an email and password and you are on your way.</p>
 
 <% resource.twitter_user_id = session["devise.twitter_data"].uid %>
-<% resource.twitter_user_token = session["devise.twitter_data"].extra.access_token.token %>
-<% resource.twitter_user_secret = session["devise.twitter_data"].extra.access_token.secret %>
+<% resource.twitter_user_token = session["devise.twitter_data"].credentials.token %>
+<% resource.twitter_user_secret = session["devise.twitter_data"].credentials.secret %>
 <% resource.twitter_username = session["devise.twitter_data"].info.nickname %>
 
 <div class="well">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
     
-    <div id="hidden_twitter_fields">
+    <div id="hidden_fields">
         <%= f.hidden_field :twitter_user_id %>
         <%= f.hidden_field :twitter_user_token %>
         <%= f.hidden_field :twitter_user_secret %>

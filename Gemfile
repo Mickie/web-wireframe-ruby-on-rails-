@@ -9,6 +9,7 @@ gem 'devise', '>= 2.0.4'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-instagram'
+gem 'omniauth-foursquare'
 gem 'bootstrap-sass', '>= 2.0.0'
 gem 'geocoder'
 gem 'dalli'
@@ -24,17 +25,21 @@ end
 
 
 group :development, :test do
+  gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p194/gems/linecache19-0.5.13/"
+  gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p194/gems/ruby-debug-base19-0.11.26/"
+  gem 'ruby-debug-ide19'
+  gem 'jasmine'
+  gem 'jasminerice'
+end
+
+group :test do
   gem 'rspec-rails', '>= 2.8.1'
   gem 'guard-rspec', '>= 0.5.5'
   gem 'guard-cucumber'
   gem 'guard-jasmine'
-  gem 'jasmine'
-  gem 'jasminerice'
   gem 'coffee-rails'
   gem 'ruby-debug19'
-end
 
-group :test do
   gem 'capybara', '>= 1.1.2'
   gem 'factory_girl_rails', '>= 3.0'
   gem 'rb-fsevent', '>= 0.4.3.1', :require => false
@@ -45,5 +50,5 @@ group :test do
   gem 'launchy', '>= 2.0.5'
   gem 'database_cleaner', '>= 0.7.1'
   gem 'email_spec'
-  gem 'selenium-webdriver', '>= 2.22.0.rc1'
+  gem 'selenium-webdriver', '>= 2.22.2'
 end

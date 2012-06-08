@@ -14,13 +14,20 @@ describe "devise/registrations/new" do
   end
   
   it "should show post twitter auth fields" do
-    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(
-                                            { uid: '12345', 
-                                            info: { nickname: "wilma" }, 
-                                            extra: { access_token: { token: "a token", secret: "a secret"} } 
-                                            })
+    OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
+                                            info: 
+                                            { 
+                                              nickname: "jimbob",
+                                              name: "Jim Bob",
+                                              image: "image url",
+                                              description: "he is a cool dude",
+                                              location: "Sequim, WA"
+                                            }, 
+                                            credentials: { token: "a token", secret: "a secret"} 
+                                          }
+    theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:twitter])
     
-    session["devise.twitter_data"] = OmniAuth.config.mock_auth[:twitter]
+    session["devise.twitter_data"] = theHash
     render
     
     view.should_not render_template( partial: "_new_user")
@@ -32,13 +39,19 @@ describe "devise/registrations/new" do
   end
 
   it "should show post instagram auth fields" do
-    OmniAuth.config.mock_auth[:instagram] = OmniAuth::AuthHash.new(
-                                            { uid: '54321', 
-                                              info: { nickname: "jimbob", name:"Jim Bob" }, 
+    OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
+                                              info: 
+                                                { 
+                                                  nickname: "jimbob", 
+                                                  name: "Jim Bob",
+                                                  image: "image url",
+                                                  bio: "jim is a cool dude" 
+                                                }, 
                                               credentials: { token: "inst_token" } 
-                                              })
-    
-    session["devise.instagram_data"] = OmniAuth.config.mock_auth[:instagram]
+                                            }
+    theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
+  
+    session["devise.instagram_data"] = theHash
     render
     
     view.should_not render_template( partial: "_new_user")

@@ -5,12 +5,19 @@ describe Users::OmniauthCallbacksController do
   describe "getting twitter callbacks" do
 
     before do
-      OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(
-                                              { uid: '12345', 
-                                              info: { nickname: "barney" }, 
-                                              extra: { access_token: { token: "a token", secret: "a secret"} } 
-                                              })
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
+      OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
+                                              info: 
+                                              { 
+                                                nickname: "barney",
+                                                name: "Jim Bob",
+                                                image: "image url",
+                                                description: "he is a cool dude",
+                                                location: "Sequim, WA"
+                                              }, 
+                                              credentials: { token: "a token", secret: "a secret"} 
+                                            }
+
+      request.env["omniauth.auth"] = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:twitter])
       request.env["devise.mapping"] = Devise.mappings[:user] 
     end
   
@@ -26,8 +33,8 @@ describe Users::OmniauthCallbacksController do
       
       it "should have twitter data in session" do
         session["devise.twitter_data"].should_not be_nil
-        session["devise.twitter_data"].extra.access_token.token.should  eq('a token')
-        session["devise.twitter_data"].extra.access_token.secret.should eq('a secret')
+        session["devise.twitter_data"].credentials.token.should  eq('a token')
+        session["devise.twitter_data"].credentials.secret.should eq('a secret')
         session["devise.twitter_data"].info.nickname eq('barney')
         session["devise.twitter_data"].uid eq('12345')
       end
@@ -53,8 +60,14 @@ describe Users::OmniauthCallbacksController do
 
     before do
       OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
-                                              info: { nickname: "jimbob", name:"Jim Bob" }, 
-                                              credentials: { token: "inst_token" } 
+                                                info: 
+                                                  { 
+                                                    nickname: "jimbob", 
+                                                    name: "Jim Bob",
+                                                    image: "image url",
+                                                    bio: "jim is a cool dude" 
+                                                  }, 
+                                                credentials: { token: "inst_token" } 
                                               }
       @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
       request.env["omniauth.auth"] = @theHash

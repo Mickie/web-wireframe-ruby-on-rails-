@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604031624) do
+ActiveRecord::Schema.define(:version => 20120605050515) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -265,18 +265,18 @@ ActiveRecord::Schema.define(:version => 20120604031624) do
   add_index "user_teams", ["user_id"], :name => "index_user_teams_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                   :default => "", :null => false
+    t.string   "encrypted_password",      :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",           :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "twitter_username"
     t.string   "twitter_user_token"
     t.string   "twitter_user_secret"
@@ -286,11 +286,21 @@ ActiveRecord::Schema.define(:version => 20120604031624) do
     t.string   "instagram_user_id"
     t.string   "instagram_user_token"
     t.string   "instagram_username"
+    t.string   "foursquare_user_id"
+    t.string   "foursquare_access_token"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "name"
+    t.string   "image"
+    t.string   "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["facebook_user_id"], :name => "index_users_on_facebook_user_id", :unique => true
+  add_index "users", ["foursquare_user_id"], :name => "index_users_on_foursquare_user_id", :unique => true
+  add_index "users", ["instagram_user_id"], :name => "index_users_on_instagram_user_id", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["twitter_user_id"], :name => "index_users_on_twitter_user_id", :unique => true
   add_index "users", ["twitter_user_token"], :name => "index_users_on_twitter_user_token", :unique => true
 
   create_table "venue_types", :force => true do |t|
