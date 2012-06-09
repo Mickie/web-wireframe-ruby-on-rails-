@@ -15,7 +15,6 @@ Spork.prefork do
   require 'rspec/rails'
   require 'email_spec'
   require 'rspec/autorun'
-  require 'support/devise_helpers'
   
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -27,6 +26,8 @@ Spork.prefork do
 
     config.include Devise::TestHelpers, :type => :controller
     config.extend DeviseHelpers, :type => :controller
+    
+    config.include OmniAuthHelpers
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction

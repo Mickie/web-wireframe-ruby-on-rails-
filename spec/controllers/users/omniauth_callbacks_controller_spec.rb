@@ -5,19 +5,7 @@ describe Users::OmniauthCallbacksController do
   describe "getting twitter callbacks" do
 
     before do
-      OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
-                                              info: 
-                                              { 
-                                                nickname: "barney",
-                                                name: "Jim Bob",
-                                                image: "image url",
-                                                description: "he is a cool dude",
-                                                location: "Sequim, WA"
-                                              }, 
-                                              credentials: { token: "a token", secret: "a secret"} 
-                                            }
-
-      request.env["omniauth.auth"] = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:twitter])
+      request.env["omniauth.auth"] = twitter_auth
       request.env["devise.mapping"] = Devise.mappings[:user] 
     end
   
@@ -59,18 +47,7 @@ describe Users::OmniauthCallbacksController do
   describe "getting instagram callbacks" do
 
     before do
-      OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
-                                                info: 
-                                                  { 
-                                                    nickname: "jimbob", 
-                                                    name: "Jim Bob",
-                                                    image: "image url",
-                                                    bio: "jim is a cool dude" 
-                                                  }, 
-                                                credentials: { token: "inst_token" } 
-                                              }
-      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
-      request.env["omniauth.auth"] = @theHash
+      request.env["omniauth.auth"] = instagram_auth
       request.env["devise.mapping"] = Devise.mappings[:user] 
     end
   

@@ -20,6 +20,11 @@ describe User do
   it { should respond_to(:instagram_username) }
   it { should respond_to(:instagram_user_id) }
   it { should respond_to(:instagram_user_token) }
+  it { should respond_to(:first_name) }
+  it { should respond_to(:last_name) }
+  it { should respond_to(:name) }
+  it { should respond_to(:image) }
+  it { should respond_to(:description) }
   it { should respond_to(:teams) }
   it { should respond_to(:locations) }
   it { should respond_to(:tailgates) }
@@ -82,18 +87,7 @@ describe User do
 
   describe "twitter integration" do
     before do
-      OmniAuth.config.mock_auth[:twitter] = { uid: '12345', 
-                                              info: 
-                                              { 
-                                                nickname: "jimbob",
-                                                name: "Jim Bob",
-                                                image: "image url",
-                                                description: "he is a cool dude",
-                                                location: "Sequim, WA"
-                                              }, 
-                                              credentials: { token: "a token", secret: "a secret"} 
-                                            }
-      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:twitter])
+      @theHash = twitter_auth
     end
     
 
@@ -159,17 +153,7 @@ describe User do
   describe "instagram integration" do
 
     before do
-      OmniAuth.config.mock_auth[:instagram] = { uid: '54321', 
-                                                info: 
-                                                  { 
-                                                    nickname: "jimbob", 
-                                                    name: "Jim Bob",
-                                                    image: "image url",
-                                                    bio: "jim is a cool dude" 
-                                                  }, 
-                                                credentials: { token: "inst_token" } 
-                                              }
-      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:instagram])
+      @theHash = instagram_auth
     end
   
     describe "can find existing user via instagram" do
@@ -222,18 +206,7 @@ describe User do
 
   describe "facebook integration" do
     before do
-      OmniAuth.config.mock_auth[:facebook] = { uid: '54321', 
-                                              info: 
-                                                { 
-                                                  email: "facebook_init@fanzo.co",
-                                                  first_name: "first",
-                                                  last_name: "last",
-                                                  image: "image url",
-                                                  location: "Spokane, WA" 
-                                                }, 
-                                              credentials: { token: "facebook_token" } 
-                                              }
-      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:facebook])
+      @theHash = facebook_auth
     end
   
 
@@ -339,18 +312,7 @@ describe User do
 
   describe "foursquare integration" do
     before do
-      OmniAuth.config.mock_auth[:foursquare] = {  uid: '54321', 
-                                                  info: 
-                                                  { 
-                                                    email: "foursquare_init@fanzo.co",
-                                                    first_name: "first",
-                                                    last_name: "last",
-                                                    image: "image url",
-                                                    location: "Kirland, WA"
-                                                  }, 
-                                                  credentials: { token: "foursquare_token" } 
-                                                  }
-      @theHash = OmniAuth::AuthHash.new(OmniAuth.config.mock_auth[:foursquare])
+      @theHash = foursquare_auth
     end
   
     describe "can create user via foursquare" do

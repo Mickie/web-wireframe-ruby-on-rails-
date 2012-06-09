@@ -17,6 +17,7 @@ gem 'kgio'
 gem 'twitter'
 gem 'instagram', '>= 0.8.4'
 gem 'faraday', '0.7.6'
+gem 'foursquare2'
 
 group :assets do
   gem 'sass-rails'
