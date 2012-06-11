@@ -1,4 +1,4 @@
-Feature: Venue Resource
+Feature: Venue Resource 
 
 	Scenario: Adding a venue requires admin access
 		Given I visit the new venue page
@@ -15,15 +15,17 @@ Feature: Venue Resource
 		Then I should be redirected to the new admin session page
 			And I should see an alert flash
 		
-	Scenario: I can add a venue as an admin and see the details when complete
+	Scenario: I can add a venue as an admin and see the details as a user when complete
 		Given I sign in as admin
+			And I sign in as user
 		When I visit the new venue page
 			And I create a new venue
 		Then I should see the details of the new venue
 			And I should be able to edit it
 	
-	Scenario: I can edit a venue as an admin
+	Scenario: I can edit a venue as an admin ans see result as user
 		Given I sign in as admin
+			And I sign in as user
 		When I visit the edit venue page
 			And I edit the venue
 		Then the changes to the venue should be saved

@@ -1,11 +1,27 @@
 
 When /^I edit the venue$/ do
+  @edit_venue.foursquare_id = '12345'
+  @edit_venue.save
+  
   fill_in "Name",    with: "Pumphouse"
   click_button "commit"
   page.should have_content('Venue was successfully updated')
 end
 
 When /^I create a new venue$/ do 
+  theStubClient = double(Foursquare2::Client)
+  Foursquare2::Client.stub(:new).and_return(theStubClient)
+  theVenuesResponse = {
+    venues: [ Hashie::Mash.new(
+      {
+        id: "4af34dacf964a52073ec21e3",
+        name: "Bailey's Pub & Grille"
+      })
+    ]
+  }
+  
+  theStubClient.stub(:search_venues).and_return(theVenuesResponse)
+  
   fill_in "venue_name",    with: @new_venue.name
   select @edit_venue_type.name, from: 'venue[venue_type_id]'
 
