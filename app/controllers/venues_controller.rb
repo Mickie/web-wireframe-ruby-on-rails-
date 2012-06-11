@@ -18,7 +18,7 @@ class VenuesController < ApplicationController
   def show
     @venue = Venue.find(params[:id])
     
-    @foursquare_id = getFoursquareId @venue
+    @foursquare_id = @venue.getFoursquareId
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,46 +26,6 @@ class VenuesController < ApplicationController
     end
   end
   
-  def getFoursquareId(aVenue)
-    if aVenue.foursquare_id
-      return aVenue.foursquare_id
-    end
-    
-    theId = ENV["FANZO_FOURSQUARE_CLIENT_ID"]
-    theSecret = ENV["FANZO_FOURSQUARE_CLIENT_SECRET"]
-    
-    if current_user.foursquare_user_id
-      theClient = Foursquare2::Client.new(:oauth_token => current_user.foursquare_access_token)
-    else
-      theClient = Foursquare2::Client.new(:client_id => theId, :client_secret => theSecret)
-    end
-    
-    theResponse = theClient.search_venues(ll: "#{aVenue.location.latitude},#{aVenue.location.longitude}", 
-                                          query: aVenue.name, 
-                                          intent:'match',
-                                          v:'20120609')
-    theResponse[:venues].each do |aFoursquareVenue|
-      if aFoursquareVenue[:location]
-        if aVenue.location.isSimilarAddress?(aFoursquareVenue[:location][:address], aFoursquareVenue[:location][:postal_code])
-          aVenue.foursquare_id = aFoursquareVenue[:id]
-          aVenue.save
-          return aVenue.foursquare_id
-        end
-      end
-      
-      if aFoursquareVenue[:name]
-        if aVenue.isSimilarName? aFoursquareVenue[:name] 
-          aVenue.foursquare_id = aFoursquareVenue[:id]
-          aVenue.save
-          return aVenue.foursquare_id
-        end
-      end  
-    end   
-                                       
-    return aVenue.foursquare_id
-  end
-  
-
   # GET /venues/new
   # GET /venues/new.json
   def new

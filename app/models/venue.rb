@@ -18,6 +18,42 @@ class Venue < ActiveRecord::Base
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
   
+  def getFoursquareId
+    if self.foursquare_id
+      return self.foursquare_id
+    end
+    
+    theId = ENV["FANZO_FOURSQUARE_CLIENT_ID"]
+    theSecret = ENV["FANZO_FOURSQUARE_CLIENT_SECRET"]
+    
+    theClient = Foursquare2::Client.new(:client_id => theId, :client_secret => theSecret)
+    
+    theResponse = theClient.search_venues(ll: "#{self.location.latitude},#{self.location.longitude}", 
+                                          query: self.name, 
+                                          intent:'match',
+                                          v:'20120609')
+    theResponse[:venues].each do |aFoursquareVenue|
+      if aFoursquareVenue[:location]
+        if self.location.isSimilarAddress?(aFoursquareVenue[:location][:address], aFoursquareVenue[:location][:postal_code])
+          self.foursquare_id = aFoursquareVenue[:id]
+          self.save
+          return self.foursquare_id
+        end
+      end
+      
+      if aFoursquareVenue[:name]
+        if self.isSimilarName? aFoursquareVenue[:name] 
+          self.foursquare_id = aFoursquareVenue[:id]
+          self.save
+          return self.foursquare_id
+        end
+      end  
+    end   
+                                       
+    return self.foursquare_id
+  end
+  
+  
   def isSimilarName? (aNameToCheck)
     if aNameToCheck == self.name
       return true
