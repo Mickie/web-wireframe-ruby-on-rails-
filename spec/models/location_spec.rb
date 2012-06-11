@@ -46,4 +46,34 @@ describe Location do
     end
     
   end
+  
+  describe "isSimilarAddress?" do
+    before do
+      @location.address1 = '1864 W Lk St.'
+      @location.postal_code = '86457'
+    end
+    
+    it "should be false if zips don't match" do
+      @location.isSimilarAddress?('1864 W Lk St.', '76092').should be_false
+    end
+
+    it "should be false if house numbers don't match" do
+      @location.isSimilarAddress?('1234 N 168th Ave', '86457').should be_false      
+    end
+    
+    it "should be true if zip matches and address1 is close" do
+      @location.isSimilarAddress?('1864 W Lk St.', '86457').should be_true
+      @location.isSimilarAddress?('1864 West Lk St.', '86457').should be_true
+      @location.isSimilarAddress?('1864 W Lake St.', '86457').should be_true
+      @location.isSimilarAddress?('1864 W Lake ST', '86457').should be_true
+    end
+    
+    it "works with harder matches" do
+      @location.address1 = 'One Legends Way'
+
+      @location.isSimilarAddress?('1 Legends Way', '86457').should be_true
+      @location.isSimilarAddress?('One Legends Wy', '86457').should be_true
+
+    end
+  end
 end

@@ -59,5 +59,25 @@ describe Venue do
     end
     @venue.tailgates.length.should eq(3)
   end
+  
+  describe "isSimilarName?" do
+    before do
+      @venue.name = "Bailey's Pub & Grille"
+    end
+    
+    it "should return true for exact match" do
+      @venue.isSimilarName?("Bailey's Pub & Grille").should be_true
+    end
+    
+    it "should return false for different names" do
+      @venue.isSimilarName?("Eat at Joes").should be_false
+      @venue.isSimilarName?("Joes Pub").should be_false
+    end
+    
+    it "should return true for similar names" do
+      @venue.isSimilarName?("Bailey's Pub and Grille").should be_true
+      @venue.isSimilarName?("Baileys Pub & Grille").should be_true
+    end
+  end
 
 end

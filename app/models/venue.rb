@@ -17,4 +17,19 @@ class Venue < ActiveRecord::Base
 
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
+  
+  def isSimilarName? (aNameToCheck)
+    if aNameToCheck == self.name
+      return true
+    end
+
+    theMatches = 0    
+    aNameToCheck.split(" ").each do |aChunk|
+      if self.name.include? aChunk
+        theMatches += 1
+      end
+    end
+    
+    return theMatches > 2
+  end
 end

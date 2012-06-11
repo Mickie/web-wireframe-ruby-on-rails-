@@ -44,8 +44,24 @@ class VenuesController < ApplicationController
                                           query: aVenue.name, 
                                           intent:'match',
                                           v:'20120609')
-    aVenue.foursquare_id = theResponse[:venues][0][:id]
-    aVenue.save
+    theResponse[:venues].each do |aFoursquareVenue|
+      if aFoursquareVenue[:location]
+        if aVenue.location.isSimilarAddress?(aFoursquareVenue[:location][:address], aFoursquareVenue[:location][:postal_code])
+          aVenue.foursquare_id = aFoursquareVenue[:id]
+          aVenue.save
+          return aVenue.foursquare_id
+        end
+      end
+      
+      if aFoursquareVenue[:name]
+        if aVenue.isSimilarName? aFoursquareVenue[:name] 
+          aVenue.foursquare_id = aFoursquareVenue[:id]
+          aVenue.save
+          return aVenue.foursquare_id
+        end
+      end  
+    end   
+                                       
     return aVenue.foursquare_id
   end
   
@@ -111,4 +127,5 @@ class VenuesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end
