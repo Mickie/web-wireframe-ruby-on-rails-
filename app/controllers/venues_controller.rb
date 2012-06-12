@@ -16,7 +16,7 @@ class VenuesController < ApplicationController
   # GET /venues/1
   # GET /venues/1.json
   def show
-    @venue = Venue.find(params[:id])
+    @venue = Venue.includes(:location => :state).find(params[:id])
     
     @foursquare_id = @venue.getFoursquareId
 
@@ -41,7 +41,7 @@ class VenuesController < ApplicationController
 
   # GET /venues/1/edit
   def edit
-    @venue = Venue.find(params[:id])
+    @venue = Venue.includes(:location => :state).find(params[:id])
   end
 
   # POST /venues

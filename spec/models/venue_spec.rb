@@ -78,21 +78,19 @@ describe Venue do
       @venue.isSimilarName?("Bailey's Pub and Grille").should be_true
       @venue.isSimilarName?("Baileys Pub & Grille").should be_true
     end
+    
+    it "should return true for similar names when name to check is shorter" do
+      @venue.name = "Cruisers Pub"
+      @venue.isSimilarName?("Cruisers").should be_true
+    end
   end
 
   describe "get_foursquare_id" do
     before do
       @theStubClient = double(Foursquare2::Client)
       Foursquare2::Client.stub(:new).and_return(@theStubClient)
-    end
-    
-    it "should return existing id" do
-      @venue.foursquare_id = '12345'
-      subject.getFoursquareId.should eq('12345')
-    end
-    
-    it "should request id, save locally, and return if no existing id" do
-      theVenuesResponse = 
+
+      @theVenuesResponse = 
       {
         venues: [
           Hashie::Mash.new(
@@ -102,7 +100,7 @@ describe Venue do
             }),
           Hashie::Mash.new(
             {
-              id: "12345",
+              id: "12345678",
               name: "Eat At Joes",
               location: {
                 address: "Joes Street",
@@ -207,16 +205,38 @@ describe Venue do
               }
             })
           ]     
-          }      
-      
+          }
+    end
+    
+    it "should return existing id" do
+      @venue.foursquare_id = '12345'
+      subject.getFoursquareId.should eq('12345')
+    end
+
+    it "should request id, save locally, and return if no existing id when the names match" do
       @theStubClient.should_receive(:search_venues).with(ll:"#{@venue.location.latitude},#{@venue.location.longitude}",
                                                          query: @venue.name,
                                                          intent: 'match',
-                                                         v:'20120609').and_return(theVenuesResponse)
+                                                         v:'20120609').and_return(@theVenuesResponse)
       subject.getFoursquareId.should eq('4af34dacf964a52073ec21e3')
       
       theDBVenue = Venue.where(id:@venue.id).first
       theDBVenue.foursquare_id.should eq('4af34dacf964a52073ec21e3')     
+    end
+
+    
+    it "should request id, save locally, and return if no existing id when the addresses match" do
+      @venue.name = "Joe"
+      @venue.location.address1 = "Joes Street"
+      @venue.location.postal_code = "48084"
+      @theStubClient.should_receive(:search_venues).with(ll:"#{@venue.location.latitude},#{@venue.location.longitude}",
+                                                         query: @venue.name,
+                                                         intent: 'match',
+                                                         v:'20120609').and_return(@theVenuesResponse)
+      subject.getFoursquareId.should eq('12345678')
+      
+      theDBVenue = Venue.where(id:@venue.id).first
+      theDBVenue.foursquare_id.should eq('12345678')     
     end
   end
 

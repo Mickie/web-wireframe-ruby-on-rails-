@@ -32,40 +32,60 @@ class Venue < ActiveRecord::Base
                                           query: self.name, 
                                           intent:'match',
                                           v:'20120609')
-    theResponse[:venues].each do |aFoursquareVenue|
-      if aFoursquareVenue[:location]
-        if self.location.isSimilarAddress?(aFoursquareVenue[:location][:address], aFoursquareVenue[:location][:postal_code])
-          self.foursquare_id = aFoursquareVenue[:id]
-          self.save
-          return self.foursquare_id
-        end
-      end
-      
-      if aFoursquareVenue[:name]
-        if self.isSimilarName? aFoursquareVenue[:name] 
-          self.foursquare_id = aFoursquareVenue[:id]
-          self.save
-          return self.foursquare_id
-        end
-      end  
-    end   
-                                       
-    return self.foursquare_id
+    
+    theId = findMatchingVenue(theResponse[:venues])
+    
+    if !theId
+      theResponse = theClient.search_venues(ll: "#{self.location.latitude},#{self.location.longitude}", 
+                                            query: self.name, 
+                                            intent:'checkin',
+                                            v:'20120609')
+      theId = findMatchingVenue(theResponse[:venues])
+    end
+
+    self.foursquare_id = theId
+    self.save
+                                         
+    return theId
   end
-  
   
   def isSimilarName? (aNameToCheck)
     if aNameToCheck == self.name
       return true
     end
 
-    theMatches = 0    
-    aNameToCheck.split(" ").each do |aChunk|
+    theMatches = 0
+    theChunks = aNameToCheck.split(" ")
+    theChunks.each do |aChunk|
       if self.name.include? aChunk
         theMatches += 1
       end
     end
     
-    return theMatches > 2
+    if theMatches > (1 + theChunks.length)/2
+      return true
+    end
+
+    return self.name.include? aNameToCheck    
   end
+  
+  private
+    
+    def findMatchingVenue(aListOfVenues)
+      aListOfVenues.each do |aFoursquareVenue|
+        if aFoursquareVenue[:location] && aFoursquareVenue[:location][:address]
+          if self.location.isSimilarAddress?(aFoursquareVenue[:location][:address], aFoursquareVenue[:location][:postalCode])
+            return aFoursquareVenue[:id]
+          end
+        end
+        
+        if aFoursquareVenue[:name]
+          if self.isSimilarName? aFoursquareVenue[:name] 
+            return aFoursquareVenue[:id]
+          end
+        end  
+      end
+      
+      return nil
+    end
 end
