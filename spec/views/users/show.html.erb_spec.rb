@@ -29,11 +29,6 @@ describe "users/show" do
 
   end
 
-  it "should be the parking lot" do
-    render
-    rendered.should match(/parking lot/i)
-  end
-
   describe "partials" do
 
     it "should show team picker for new user" do

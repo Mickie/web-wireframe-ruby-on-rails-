@@ -44,7 +44,7 @@ When /^I click on a team link$/ do
 end
 
 When /^I click on the create tailgate button$/ do
-  click_link "Start Your Own Tailgate" 
+  click_link "Start Your Own FANZOne" 
 end
 
 Then /^I should see an add a location link$/ do
@@ -52,6 +52,7 @@ Then /^I should see an add a location link$/ do
 end
 
 When /^I click the add a location link$/ do
+  click_link "Local FANZOnes"
   click_link "Add Location"
 end
 
@@ -72,6 +73,6 @@ When /^I fill in the location form$/ do
 end
 
 Then /^I should see my location data$/ do  
-  find("#localWatchSiteList").should have_content(@new_venue.location.city)
-  find("#localWatchSiteList").should have_content(@new_venue.location.state.abbreviation)
+  find("#localTailgateList").should have_content(@new_venue.location.city)
+  find("#localTailgateList").should have_content(@new_venue.location.state.abbreviation)
 end
