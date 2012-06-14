@@ -67,7 +67,7 @@
               <dl>
                 <% @user.tailgates.each do |aTailgate|%>
                   <dt><%= aTailgate.team.name %></dt>
-                  <dd><%= teamLogo(aTailgate.team, :small) %> <%= link_to aTailgate.name, tailgate_path(aTailgate)%></dd>
+                  <dd><%= teamLogo(aTailgate.team, :small) %> <%= link_to aTailgate.name, "javascript:loadData('#{tailgate_path(id:aTailgate, noLayout:true )}')"%></dd>
                 <% end %>
                 <%= link_to "Start Another FANZOne >>", new_tailgate_path, class: "btn" %>
               </dl>  
@@ -91,9 +91,7 @@
       </ul>
     </div>
     
-    <div class="span9 container-fluid">
-      <div class="row-fluid">
-      </div>
+    <div id="frameContent" class="span9 container-fluid">
     </div>    
   </div>
 </div>

@@ -21,7 +21,11 @@ class TailgatesController < ApplicationController
     @current_user = current_user
 
     respond_to do |format|
-      format.html # show.html.erb
+      if (params[:noLayout])
+        format.html { render layout: false }
+      else
+        format.html # show.html.erb
+      end
       format.json { render json: @tailgate }
     end
   end
