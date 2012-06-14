@@ -16,10 +16,15 @@ describe LeaguesController do
   end
 
   describe "GET index" do
+    before do
+      @league = FactoryGirl.create(:league, visible:true)
+      @invisibleLeague = FactoryGirl.create(:league, visible:false)
+    end
+    
     it "assigns all leagues as @leagues" do
-      league = FactoryGirl.create(:league)
       get :index, {}
-      assigns(:leagues).should include(league)
+      assigns(:leagues).should include(@league)
+      assigns(:leagues).should include(@invisibleLeague)
     end
   end
 

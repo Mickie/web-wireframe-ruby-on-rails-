@@ -22,7 +22,7 @@
 
   <div class="field">
     <%= label_tag(:league_id, "Pick a League:") %>
-    <%= select_tag(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
+    <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
   </div>
 
   <div class="field">

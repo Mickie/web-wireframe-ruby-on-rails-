@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120609213625) do
+ActiveRecord::Schema.define(:version => 20120614045205) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -106,9 +106,10 @@ ActiveRecord::Schema.define(:version => 20120609213625) do
 
   create_table "leagues", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "sport_id",   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "sport_id",                      :null => false
+    t.boolean  "visible",    :default => false
   end
 
   add_index "leagues", ["sport_id"], :name => "index_leagues_on_sport_id"

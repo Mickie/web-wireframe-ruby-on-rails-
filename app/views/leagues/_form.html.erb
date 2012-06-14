@@ -21,6 +21,11 @@
     <%= f.select(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] }, @league.sport_id )) %>
   </div>
   
+  <div class="field">
+    <%= f.label :visible %>
+    <%= f.check_box(:visible) %>
+  </div>
+  
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>
   </div>

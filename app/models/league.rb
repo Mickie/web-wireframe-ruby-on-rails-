@@ -9,6 +9,8 @@ class League < ActiveRecord::Base
   validates_associated :conferences
   validates_associated :divisions
 
+  attr_accessible :name, :visible, :sport_id
 
-  attr_accessible :name, :sport_id
+  scope :visible, where(visible:true)  
+
 end
