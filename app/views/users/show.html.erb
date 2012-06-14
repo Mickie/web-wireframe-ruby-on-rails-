@@ -36,7 +36,7 @@
               <% @user.teams.each do |aTeam|%>
                 <dt><%= teamLogo(aTeam, :small) %> <%= aTeam.name %></dt>
                 <% aTeam.tailgates do | aTailgate | %>
-                  <dd><%= link_to aTailgate.name, tailgate_path(aTailgate)%></dd>
+                  <dd><%= link_to aTailgate.name,  "javascript:loadData('#{tailgate_path(aTailgate, noLayout:true )}')"%></dd>
                 <% end %>
               <% end %>
             </dl>
@@ -50,7 +50,7 @@
               <% @locationsWithTailgateVenues.each do |aLocation|%>
                 <dt><%= aLocation[:locationName] %></dt>
                   <% aLocation[:tailgateVenueList].each do |aTailgateVenue|%>
-                    <dd><%= link_to "#{aTailgateVenue.venue.name} - #{aTailgateVenue.tailgate.team.name}", tailgate_path(aTailgateVenue.tailgate)%></dd>
+                    <dd><%= link_to "#{aTailgateVenue.venue.name} - #{aTailgateVenue.tailgate.team.name}", "javascript:loadData('#{tailgate_path(aTailgateVenue.tailgate, noLayout:true )}')"%></dd>
                   <% end %>
               <% end %>              
               <a href="#myAddLocationModal" data-toggle="modal" class="btn">Add Location</a>
@@ -81,7 +81,7 @@
             <dl>
               <% @user.teams.each do |aTeam|%>
                 <dt><%= aTeam.sport.name %></dt>
-                <dd><%= teamLogo(aTeam, :small) %> <%= link_to aTeam.name, team_path(aTeam)%></dd>
+                <dd><%= teamLogo(aTeam, :small) %> <%= link_to aTeam.name, "javascript:loadData('#{team_path(aTeam, noLayout:true )}')"%></dd>
               <% end %>
               <a href="#myAddTeamModal" data-toggle="modal" class="btn">Add Team</a>
             </dl>
