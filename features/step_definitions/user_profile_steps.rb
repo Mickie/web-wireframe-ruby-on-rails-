@@ -39,7 +39,8 @@ When /^I click the add a team link$/ do
   click_link "Add Team"
 end
 
-When /^I click on a team link$/ do
+When /^I click on a team link$/ do 
+  page.should have_link(@team.name)
   click_link @team.name
 end
 
@@ -75,4 +76,8 @@ end
 Then /^I should see my location data$/ do  
   find("#localTailgateList").should have_content(@new_venue.location.city)
   find("#localTailgateList").should have_content(@new_venue.location.state.abbreviation)
+end
+
+Then /^I should see team data$/ do
+  page.should have_content(@team.location.address1)
 end

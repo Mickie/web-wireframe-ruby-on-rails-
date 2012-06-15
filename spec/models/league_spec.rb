@@ -15,8 +15,8 @@ describe League do
   it { should respond_to(:divisions) }
   
   it "should have visible named scope" do
-    visibleLeague = FactoryGirl.create(:league, visible:true)
-    League.visible.should include(visibleLeague)
-    League.visible.should_not include(@league)
+    invisibleLeague = FactoryGirl.create(:league, visible:false)
+    League.visible.should_not include(invisibleLeague)
+    League.visible.should include(@league)
   end
 end

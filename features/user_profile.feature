@@ -1,6 +1,6 @@
 Feature: User Profile
 
-	@javascript 
+	@javascript
 	Scenario: User can add a team
 		Given I visit the new user registration page
 		When I submit valid email and password
@@ -28,11 +28,12 @@ Feature: User Profile
 		Given I login with a user who has picked a team
 		Then I should be on the user page
 			And I should see my team link
-			
-	Scenario: Clicking a team link should take me to the team page
+	
+	@javascript		
+	Scenario: Clicking a team link should show the team data in right page
 		Given I login with a user who has picked a team
 		When I click on a team link
-		Then I should be on the team page	
+		Then I should see team data	
 		
 	Scenario: Clicking the create tailgate button should take me to the new tailgate page
 		Given I sign in as user

@@ -6,7 +6,7 @@ Before do
   @connect_twitter_user = @user
   
   @sport = FactoryGirl.create(:sport)
-  @league = FactoryGirl.create(:league)
+  @league = FactoryGirl.create(:league, visible:true)
   @conference = FactoryGirl.create(:conference)
   @division = FactoryGirl.create(:division)
   @team = FactoryGirl.create(:team)
@@ -22,7 +22,7 @@ Before do
   @post = FactoryGirl.create(:post, tailgate:@tailgate)
   
   @new_sport = FactoryGirl.build(:sport)
-  @new_league = FactoryGirl.build(:league)
+  @new_league = FactoryGirl.build(:league, visible:true)
   @new_conference = FactoryGirl.build(:conference)
   @new_division = FactoryGirl.build(:division)
   @new_team = FactoryGirl.build(:team)
@@ -39,7 +39,7 @@ Before do
   @new_comment = FactoryGirl.build(:comment)
   
   @edit_sport = FactoryGirl.create(:sport)
-  @edit_league = FactoryGirl.create(:league)
+  @edit_league = FactoryGirl.create(:league, visible:true)
   @edit_conference = FactoryGirl.create(:conference)
   @edit_division = FactoryGirl.create(:division)
   @edit_team = FactoryGirl.create(:team)
