@@ -11,7 +11,37 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span3">
+  <div class="span12">
+    <div id="myMediaSlider">
+      <div id="myMediaContent">
+        <div id="myMediaTemplate" class="mediaThumbnail">
+          <img class="mediaImage"  />
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span8">
+    <h2>Latest Posts</h2>
+    <div id="postForm">
+      <%= render "/posts/form"%>
+    </div>
+    <div id="posts">
+      <% @tailgate.posts.each do | aPost | %>
+        <div class="well">
+          <h3><%= aPost.title %></h3>
+          <p><%= aPost.content %></p>
+          <% aPost.comments.each do |aComment| %>
+            <p><strong><%= aComment.user.email %>:</strong> <%= aComment.content %></p>
+          <% end %>
+          <%= render "/comments/form", post:aPost, comment:aPost.comments.new %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="span4">
     <h2>Social Streams</h2>
     <div class="controls" id="tweetControls">
       <div class="input-append">
@@ -79,36 +109,14 @@
       </div>
     </div>
   </div>
-  <div class="span6">
-    <h2>Latest Posts</h2>
-    <div id="postForm">
-      <%= render "/posts/form"%>
-    </div>
-    <div id="posts">
-      <% @tailgate.posts.each do | aPost | %>
-        <div class="well">
-          <h3><%= aPost.title %></h3>
-          <p><%= aPost.content %></p>
-          <% aPost.comments.each do |aComment| %>
-            <p><strong><%= aComment.user.email %>:</strong> <%= aComment.content %></p>
-          <% end %>
-          <%= render "/comments/form", post:aPost, comment:aPost.comments.new %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="span3">
-    <h2>Social Images</h2>
-    <div id="slides">
-    </div>
-  </div>
 </div>
+
 
 
 <script language="JavaScript">
   var myTwitterView;
   var myFacebookView;
-  var myInstagramView;
+  var myMediaSlider;
   
   $(function()
   {
@@ -125,8 +133,8 @@
                                     "myTwitterView");
     myTwitterView.startLoadingTweets();
 
-    myInstagramView = new InstagramView("slides");
-    myInstagramView.startLoadingImagesForTeam(<%= @tailgate.team.id %>);
+    myMediaSlider = new MediaSlider("myMediaSlider");
+    myMediaSlider.createSliderForTeam(<%= @tailgate.team.id %>);
 
    });
 </script>

@@ -2,41 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.tweet
-{
-  margin: 5px;
-}
-
-.timestamp
-{
-  color: gray;
-  margin: 5px 0px;  
-}
-
-.tweet > img
-{
-  margin-right: 10px;
-}
-
-.twitterName
-{
-  font-weight: bold;
-}
-
-.twitterAvatar
-{
-  float:left;
-}
-
-.tweetMenu > a
-{
-  padding: 5px 10px;
-}
-
-.modal-body .btn
-{
-  margin: 5px 3px;
-}
 
 #homeTweetControls textarea
 {
@@ -57,30 +22,3 @@
 {
   float:left;
 }
-
-
-#newTweets
-{
-  margin:5px;
-  text-align: center;
-  cursor: pointer;
-}
-
-#template
-{
-  display:none;
-}
-
-#tweetHolder
-{
-  position: relative;
-  clear:both;
-}
-
-#tweetSuccessAlert
-{
-  clear:both;
-  margin:5px;
-}
-
-

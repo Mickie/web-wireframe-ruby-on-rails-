@@ -1,0 +1,27 @@
+div#myMediaSlider
+{
+  height: 150px;
+  overflow: hidden;
+  
+  div#myMediaTemplate
+  {
+    display:none;
+  }
+  
+  div.mediaThumbnail
+  {
+    float:left;
+  }
+  
+  img.mediaImage
+  {
+    opacity:0.6;
+    filter:alpha(opacity=60);
+
+    &:hover 
+    {
+      opacity:1.0;
+      filter:alpha(opacity=100);
+    }    
+  }
+}

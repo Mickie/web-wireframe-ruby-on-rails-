@@ -1,7 +1,9 @@
 var myTeamHelper = new TeamHelper("#league_picker", "#user_team_team_id");
 
 $(function(){
-  myTeamHelper.connectToLeaguePicker();  
+  myTeamHelper.connectToLeaguePicker();
+  
+  $("div#myTailgateList dl dd a")[0].click();
 })
 
 function onLoadDataComplete(aResult)

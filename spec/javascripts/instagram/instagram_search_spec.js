@@ -80,7 +80,7 @@ describe("InstagramSearch", function()
     {
       expect(myInstagramSearch.myCompleteCallback).wasNotCalled();
       myInstagramSearch.onGetMediaForTagComplete(InstagramData.mediaResponse, "success", null, "goIrish");       
-      expect(myInstagramSearch.myCompleteCallback).toHaveBeenCalled();
+      expect(myInstagramSearch.myCompleteCallback).toHaveBeenCalledWith(InstagramData.mediaResponse.data.concat(InstagramData.mediaResponse.data));
     });
     
     it("stores data for access", function()

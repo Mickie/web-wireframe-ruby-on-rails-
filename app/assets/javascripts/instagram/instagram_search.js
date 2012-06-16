@@ -9,6 +9,7 @@ var InstagramSearch = function()
   {
     this.myTeamId = aTeamId;
     this.myCompleteCallback = aCompleteCallback;
+    this.getTags();
   };
   
   this.getTags = function()
@@ -41,7 +42,7 @@ var InstagramSearch = function()
     this.myMediaResponseCount++;
     if (this.myMediaResponseCount == this.myTags.length)
     {
-      this.myCompleteCallback();
+      this.myCompleteCallback(this.myMedia);
     }
   };
 }
