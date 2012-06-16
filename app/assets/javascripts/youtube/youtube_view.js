@@ -1,5 +1,3 @@
-var YOUTUBE_VIDEO_SEARCH_URL = "http://gdata.youtube.com/feeds/api/videos";
-
 function onYouTubePlayerAPIReady() 
 {
   myYouTubeView.loadVideos();
@@ -11,12 +9,9 @@ var YouTubeView = function( aShortName,
                             aMaxVideos, 
                             aVideoDivId)
 {
-  this.myShortName = aShortName;
-  this.mySport = aSport;
-  this.myHashTags = anArrayOfHashTags;
-  this.myMaxVideos = aMaxVideos;
   this.myVideoDivSelector = "#" + aVideoDivId;
   this.myPlayer = null;
+  this.myYouTubeSearch = new YouTubeSearch(aShortName, aSport, anArrayOfHashTags, aMaxVideos);
   
   this.loadSDK = function()
   {
@@ -28,20 +23,12 @@ var YouTubeView = function( aShortName,
   
   this.loadVideos = function()
   {
-    var theQueryString = "?alt=json-in-script&format=5,6&category=Sports&v=2&q=" 
-                          + escape(this.getQuery()) 
-                          + "&max-results=" + this.myMaxVideos;
-    $.ajax({
-             url: YOUTUBE_VIDEO_SEARCH_URL + theQueryString,
-             cache:false,
-             dataType: "jsonp",
-             success: createDelegate(this, this.onSearchComplete)
-           });
+    this.myYouTubeSearch.loadVideos(createDelegate(this, this.onSearchComplete));
   };
   
   this.onSearchComplete = function( aResult )
   {
-    var theEntries = aResult.feed.entry || [];
+    var theEntries = aResult;
 
     if (theEntries.length > 0)
     {
@@ -105,12 +92,6 @@ var YouTubeView = function( aShortName,
     this.myPlayer.stopVideo();
     this.myPlayer.clearVideo();
   }
-  
-  this.getQuery = function()
-  {
-    var theName = '"' + this.myShortName + ' ' + this.mySport + '"';
-    return theName + '|' + this.myHashTags.join('|').replace(/#/g, "");
-  };
   
   this.startSlideshow = function()
   {
