@@ -1,7 +1,3 @@
-function onYouTubePlayerAPIReady() 
-{
-  myYouTubeView.loadVideos();
-}
 
 var YouTubeView = function( aShortName,
                             aSport, 
@@ -12,14 +8,6 @@ var YouTubeView = function( aShortName,
   this.myVideoDivSelector = "#" + aVideoDivId;
   this.myPlayer = null;
   this.myYouTubeSearch = new YouTubeSearch(aShortName, aSport, anArrayOfHashTags, aMaxVideos);
-  
-  this.loadSDK = function()
-  {
-    var theTag = document.createElement('script');
-    theTag.src = "http://www.youtube.com/player_api";
-    var theFirstScriptTag = document.getElementsByTagName('script')[0];
-    theFirstScriptTag.parentNode.insertBefore(theTag, theFirstScriptTag);  
-  }
   
   this.loadVideos = function()
   {

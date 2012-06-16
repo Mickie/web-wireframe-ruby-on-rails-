@@ -39,7 +39,7 @@ describe("YouTubeSearch", function()
       })
 
       myYouTubeSearch.onSearchComplete = jasmine.createSpy('onSearchComplete');
-      myYouTubeSearch.loadVideos(null); 
+      myYouTubeSearch.startVideoSearch(); 
     });
 
     it("calls onSearchComplete with results", function() 
