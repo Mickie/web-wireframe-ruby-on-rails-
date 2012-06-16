@@ -1,11 +1,5 @@
 var myTeamHelper = new TeamHelper("#league_picker", "#user_team_team_id");
 
-$(function(){
-  myTeamHelper.connectToLeaguePicker();
-  
-  $("div#myTailgateList dl dd a")[0].click();
-})
-
 function onLoadDataComplete(aResult)
 {
   $("#frameContent").html(aResult);
@@ -27,3 +21,12 @@ function loadData(aPath)
          });
 }
 
+$(function(){
+  myTeamHelper.connectToLeaguePicker();
+  
+  var theFirstFanzone = $("div#myTailgateList dl dd a")[0];
+  if (theFirstFanzone)
+  {
+    window.location = theFirstFanzone.href;
+  }
+})
