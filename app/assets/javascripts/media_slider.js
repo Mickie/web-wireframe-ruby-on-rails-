@@ -1,6 +1,10 @@
-var MediaSlider = function( aContainerDivId )
+var MediaSlider = function( aContainerDivId, aVideoModalDivId )
 {
   this.myContainerDiv = "div#" + aContainerDivId;
+  this.myVideoModalDiv = "div#" + aVideoModalDivId;
+  this.myPlayer = null;
+  this.myInstagramSearch = null;
+  this.myYouTubeSearch = null;
   
   this.createSliderForTeam = function( aTeamId, 
                                         aShortName,
@@ -55,6 +59,9 @@ var MediaSlider = function( aContainerDivId )
     {
       theParentDiv.append(this.generateMediaDivFromYouTube(anArrayOfMedia[i]))      
     };
+
+    $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss))
+
   };
   
   this.generateMediaDivFromYouTube = function( aYouTubeVideo ) 
@@ -81,8 +88,44 @@ var MediaSlider = function( aContainerDivId )
   
   this.onYouTubeClick = function(e)
   {
-    console.log("youtube click");
+    var theVideoId = $(e.target.parentElement).attr("id");
+    if (!this.myPlayer)
+    {
+      this.myPlayer = new YT.Player('player', {
+                                    height: '390',
+                                    width: '640',
+                                    videoId: theVideoId,
+                                    events: {
+                                      'onReady': createDelegate(this, this.onPlayerReady),
+                                      'onStateChange': createDelegate(this, this.onPlayerStateChange)
+                                    }
+                                  });
+    }
+    else
+    {
+      this.myPlayer.loadVideoById(theVideoId);
+    }
+        
+            
+    $(".modal").modal("hide");
+    $(this.myVideoModalDiv).modal("show");
   };
+  
+  this.onPlayerReady = function()
+  {
+    
+  };
+  
+  this.onPlayerStateChange = function()
+  {
+    
+  };
+  
+  this.onVideoDismiss = function(e)
+  {
+    this.myPlayer.stopVideo();
+    this.myPlayer.clearVideo();
+  }
   
 
 }
