@@ -23,10 +23,9 @@ var MediaSlider = function( aContainerDivId )
     theDiv.find("img").click(createDelegate(this, this.onInstagramClick));
     return theDiv; 
   };
-  
+
   this.getInstagramDirective = function()
   {
-    var theThis = this;
     return {
       ".@id" : "id",
       "img@src" : "images.thumbnail.url",
@@ -39,4 +38,42 @@ var MediaSlider = function( aContainerDivId )
   {
     console.log("click");
   };
+
+  this.onYouTubeMediaLoaded = function(anArrayOfMedia)
+  {
+    var theParentDiv = $(this.myContainerDiv);
+    for (var i=0; i < anArrayOfMedia.length; i++) 
+    {
+      theParentDiv.append(this.generateMediaDivFromYouTube(anArrayOfMedia[i]))      
+    };
+  };
+  
+  this.generateMediaDivFromYouTube = function( aYouTubeVideo ) 
+  {
+    var theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( aYouTubeVideo, this.getYouTubeDirective());
+    theDiv.find("img").click(createDelegate(this, this.onYouTubeClick));
+    return theDiv; 
+  };
+  
+  this.getYouTubeDirective = function()
+  {
+    return {
+      ".@id" : "media$group.yt$videoid.$t",
+      "img@src" : function(anItem){ return anItem.context.media$group.media$thumbnail[0].url; },
+      "img@width" : function(anItem)
+        { 
+          var theWidth =  anItem.context.media$group.media$thumbnail[0].width * 150 
+                          / anItem.context.media$group.media$thumbnail[0].height;
+          return theWidth.toString()
+        },
+      "img@height" : function(anItem){return "150";}
+    }    
+  };
+  
+  this.onYouTubeClick = function(e)
+  {
+    console.log("youtube click");
+  };
+  
+
 }
