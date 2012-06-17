@@ -134,7 +134,11 @@
     myTwitterView.startLoadingTweets();
 
     myMediaSlider = new MediaSlider("myMediaSlider");
-    myMediaSlider.createSliderForTeam(<%= @tailgate.team.id %>);
+    myMediaSlider.createSliderForTeam(<%= @tailgate.team.id %>,
+                                      "<%= @tailgate.team.short_name %>",
+                                      "<%= @tailgate.team.sport.name %>", 
+                                      <%= raw @tailgate.team.social_info.hash_tags.split(" ") %>,
+                                      5);
 
    });
 </script>

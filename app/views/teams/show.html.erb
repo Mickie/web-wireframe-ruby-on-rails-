@@ -161,7 +161,6 @@
   var myTwitterView;
   var myInstagramView;
   var myFacebookView;
-  var myYouTubeView;
   
   $(function()
   {
@@ -180,13 +179,6 @@
     
     myInstagramView = new InstagramView("slides");
     myInstagramView.startLoadingImagesForTeam(<%= @team.id %>);
-    
-    myYouTubeView = new YouTubeView("<%= @team.short_name %>",
-                                    "<%= @team.sport.name %>", 
-                                    <%= raw @team.social_info.hash_tags.split(" ") %>,
-                                    5, 
-                                    "youtubeVideos");
-    myYouTubeView.loadVideos();
   });
 </script>
 <% end %>
