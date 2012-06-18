@@ -1,5 +1,5 @@
 var YOUTUBE_VIDEO_SEARCH_URL = "http://gdata.youtube.com/feeds/api/videos";
-var myLocalYouTubeSearch;
+var myLocalYouTubeSearch = null;
 
 function onYouTubePlayerAPIReady() 
 {
@@ -35,13 +35,13 @@ var YouTubeSearch = function( aShortName,
   this.loadVideos = function( aLoadCompleteCallback )
   {
     this.myLoadCompleteCallback = aLoadCompleteCallback;
-    if (typeof YT === undefined)
+    if (myLocalYouTubeSearch)
     {
-      this.loadSDK();
+      this.startVideoSearch();
     }
     else
     {
-      this.startVideoSearch();
+      this.loadSDK();
     }
   };
 
