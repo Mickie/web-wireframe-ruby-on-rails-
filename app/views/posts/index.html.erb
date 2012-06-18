@@ -15,7 +15,7 @@
     <td><%= post.content %></td>
     <td><%= link_to 'Show', tailgate_post_path(@tailgate, post) %></td>
     <td><%= link_to 'Edit', edit_tailgate_post_path(@tailgate, post) %></td>
-    <td><%= link_to 'Destroy', tailgate_post_path(@tailgate, post), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', tailgate_post_path(@tailgate, post), data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

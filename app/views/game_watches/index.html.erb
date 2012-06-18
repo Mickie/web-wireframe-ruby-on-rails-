@@ -19,7 +19,7 @@
     <td><%= game_watch.creator.email %></td>
     <td><%= link_to 'Show', game_watch %></td>
     <td><%= link_to 'Edit', edit_game_watch_path(game_watch) %></td>
-    <td><%= link_to 'Destroy', game_watch, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', game_watch, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

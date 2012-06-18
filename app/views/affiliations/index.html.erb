@@ -23,7 +23,7 @@
     <td><%= affiliation.location.state.abbreviation %></td>
     <td><%= link_to 'Show', affiliation %></td>
     <td><%= link_to 'Edit', edit_affiliation_path(affiliation) %></td>
-    <td><%= link_to 'Destroy', affiliation, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', affiliation, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table> 

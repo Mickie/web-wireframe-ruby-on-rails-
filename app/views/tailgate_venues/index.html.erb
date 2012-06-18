@@ -15,7 +15,7 @@
     <td><%= tailgate_venue.venue.name %></td>
     <td><%= link_to 'Show', tailgate_venue %></td>
     <td><%= link_to 'Edit', edit_tailgate_venue_path(tailgate_venue) %></td>
-    <td><%= link_to 'Destroy', tailgate_venue, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', tailgate_venue, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

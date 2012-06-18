@@ -15,7 +15,7 @@
     <td><%= tailgate.team.name %></td>
     <td><%= link_to 'Show', tailgate %></td>
     <td><%= link_to 'Edit', edit_tailgate_path(tailgate) %></td>
-    <td><%= link_to 'Destroy', tailgate, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', tailgate, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

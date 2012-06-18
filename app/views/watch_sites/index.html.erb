@@ -17,7 +17,7 @@
     <td><%= watch_site.venue.name %></td>
     <td><%= link_to 'Show', watch_site %></td>
     <td><%= link_to 'Edit', edit_watch_site_path(watch_site) %></td>
-    <td><%= link_to 'Destroy', watch_site, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', watch_site, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

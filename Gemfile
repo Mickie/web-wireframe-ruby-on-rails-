@@ -4,13 +4,11 @@ ruby "1.9.3"
 gem 'thin', '>= 1.3.1'
 gem 'rails', '>=3.2.2'
 gem 'pg'
-gem 'jquery-rails'
 gem 'devise', '>= 2.0.4'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-instagram'
 gem 'omniauth-foursquare'
-gem 'bootstrap-sass', '>= 2.0.0'
 gem 'geocoder'
 gem 'dalli'
 gem 'kgio'
@@ -20,6 +18,8 @@ gem 'faraday', '0.7.6'
 gem 'foursquare2'
 
 group :assets do
+  gem 'jquery-rails'
+  gem 'bootstrap-sass', '>= 2.0.0'
   gem 'sass-rails'
   gem 'uglifier', '>=1.2.4'
 end

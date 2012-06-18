@@ -19,7 +19,7 @@
     <td><%= quick_tweet.happy %></td>
     <td><%= link_to 'Show', quick_tweet %></td>
     <td><%= link_to 'Edit', edit_quick_tweet_path(quick_tweet) %></td>
-    <td><%= link_to 'Destroy', quick_tweet, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', quick_tweet, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -13,7 +13,7 @@
     <td><%= venue_type.name %></td>
     <td><%= link_to 'Show', venue_type %></td>
     <td><%= link_to 'Edit', edit_venue_type_path(venue_type) %></td>
-    <td><%= link_to 'Destroy', venue_type, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', venue_type, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

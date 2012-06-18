@@ -15,7 +15,7 @@
     <td><%= conference.league.name %></td>
     <td><%= link_to 'Show', conference %></td>
     <td><%= link_to 'Edit', edit_conference_path(conference) %></td>
-    <td><%= link_to 'Destroy', conference, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', conference, data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>
