@@ -17,7 +17,6 @@ var YouTubeSearch = function( aShortName,
   this.myMaxVideos = aMaxVideos;
   this.myLoadCompleteCallback = null;
   this.mySearchResults = null;
-  this.myApiReadyFlag = false;
 
   this.loadSDK = function()
   {
@@ -30,20 +29,19 @@ var YouTubeSearch = function( aShortName,
   
   this.onApiReady = function()
   {
-    this.myApiReadyFlag = true;
     this.startVideoSearch();
   };
   
   this.loadVideos = function( aLoadCompleteCallback )
   {
     this.myLoadCompleteCallback = aLoadCompleteCallback;
-    if (this.myApiReadyFlag)
+    if (typeof YT === undefined)
     {
-      this.startVideoSearch();
+      this.loadSDK();
     }
     else
     {
-      this.loadSDK();
+      this.startVideoSearch();
     }
   };
 

@@ -16,9 +16,11 @@ describe("MediaSlider", function()
       myMediaSlider.onInstagramMediaLoaded(InstagramData.mediaResponse.data);
     });
 
-    it("should create the right number of media divs", function()
+    it("should create the right hash map to hold the data", function()
     {
-      expect($("#myMediaSlider").find(".mediaThumbnail").length).toEqual(17);
+      expect(myMediaSlider.myInstagrams[InstagramData.mediaResponse.data[0].id]).toEqual(InstagramData.mediaResponse.data[0]);
+      expect(myMediaSlider.myInstagrams[InstagramData.mediaResponse.data[1].id]).toEqual(InstagramData.mediaResponse.data[1]);
+      expect(myMediaSlider.myInstagrams[InstagramData.mediaResponse.data[2].id]).toEqual(InstagramData.mediaResponse.data[2]);
     });
   });
   
@@ -29,12 +31,65 @@ describe("MediaSlider", function()
       myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
     });
 
+    it("should create the right hash map to hold the data", function()
+    {
+      expect(myMediaSlider.myYouTubeVideos[YouTubeData.videoSearchResponse.feed.entry[0].media$group.yt$videoid.$t]).toEqual(YouTubeData.videoSearchResponse.feed.entry[0]);
+      expect(myMediaSlider.myYouTubeVideos[YouTubeData.videoSearchResponse.feed.entry[1].media$group.yt$videoid.$t]).toEqual(YouTubeData.videoSearchResponse.feed.entry[1]);
+    });
+  });
+  
+  describe("onAllMediaLoaded", function()
+  {
+    beforeEach(function()
+    {
+      myMediaSlider.myInstagrams = {};
+      myMediaSlider.myInstagrams[InstagramData.mediaResponse.data[0].id] = InstagramData.mediaResponse.data[0];
+
+      myMediaSlider.myYouTubeVideos = {};
+      myMediaSlider.myYouTubeVideos[YouTubeData.videoSearchResponse.feed.entry[0].media$group.yt$videoid.$t] = YouTubeData.videoSearchResponse.feed.entry[0];
+
+      myMediaSlider.onAllMediaLoaded();
+    });
+
     it("should create the right number of media divs", function()
     {
       expect($("#myMediaSlider").find(".mediaThumbnail").length).toEqual(3);
     });
   });
-  
+
+  describe("onAllMediaLoaded is called when all media is loaded", function()
+  {
+    beforeEach(function()
+    {
+      myMediaSlider.onAllMediaLoaded = jasmine.createSpy('onAllMediaLoaded');
+    });
+      
+    it("doesn't call onAllMediaLoaded with only instagram loaded", function() 
+    {
+      myMediaSlider.onInstagramMediaLoaded(InstagramData.mediaResponse.data);
+      expect(myMediaSlider.onAllMediaLoaded).wasNotCalled();
+    });
+
+    it("doesn't call onAllMediaLoaded with only youtube loaded", function() 
+    {
+      myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
+      expect(myMediaSlider.onAllMediaLoaded).wasNotCalled();
+    });
+
+    it("calls onAllMediaLoaded when both loaded, youtube last", function() 
+    {
+      myMediaSlider.onInstagramMediaLoaded(InstagramData.mediaResponse.data);
+      myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
+      expect(myMediaSlider.onAllMediaLoaded).toHaveBeenCalled();
+    });
+
+    it("calls onAllMediaLoaded when both loaded, instagram last", function() 
+    {
+      myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
+      myMediaSlider.onInstagramMediaLoaded(InstagramData.mediaResponse.data);
+      expect(myMediaSlider.onAllMediaLoaded).toHaveBeenCalled();
+    });
+  });
 
   describe("generateMediaDivFromInstagram", function()
   {

@@ -5,6 +5,8 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
   this.myPlayer = null;
   this.myInstagramSearch = null;
   this.myYouTubeSearch = null;
+  this.myInstagrams = {};
+  this.myYouTubeVideos = {};
   
   this.createSliderForTeam = function( aTeamId, 
                                         aShortName,
@@ -21,13 +23,43 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };
   
-  this.onInstagramMediaLoaded = function(anArrayOfMedia)
+  this.onAllMediaLoaded = function()
   {
     var theParentDiv = $(this.myContainerDiv);
+    var theInstagramIds = _.keys(this.myInstagrams);
+    var theYouTubeIds = _.keys(this.myYouTubeVideos);
+    for (var i=0, y=0; i < theInstagramIds.length;) 
+    {
+      theParentDiv.append(this.generateMediaDivFromInstagram(this.myInstagrams[theInstagramIds[i++]]));
+      if (i < theInstagramIds.length)
+      {
+        theParentDiv.append(this.generateMediaDivFromInstagram(this.myInstagrams[theInstagramIds[i++]]));
+      }
+      if (y < theYouTubeIds.length)
+      {
+        theParentDiv.append(this.generateMediaDivFromYouTube(this.myYouTubeVideos[theYouTubeIds[y++]]));     
+      }
+    };
+    
+    while(y < theYouTubeIds.length)
+    {
+      theParentDiv.append(this.generateMediaDivFromYouTube(this.myYouTubeVideos[theYouTubeIds[y++]]));     
+    }
+    
+    $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));    
+  };
+  
+  this.onInstagramMediaLoaded = function(anArrayOfMedia)
+  {
     for (var i=0; i < anArrayOfMedia.length; i++) 
     {
-      theParentDiv.append(this.generateMediaDivFromInstagram(anArrayOfMedia[i]))      
+      this.myInstagrams[anArrayOfMedia[i].id] = anArrayOfMedia[i];
     };
+
+    if (_.keys(this.myYouTubeVideos).length > 0)
+    {
+      this.onAllMediaLoaded();
+    }
   };
   
   this.generateMediaDivFromInstagram = function( anInstagram ) 
@@ -54,14 +86,15 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
 
   this.onYouTubeMediaLoaded = function(anArrayOfMedia)
   {
-    var theParentDiv = $(this.myContainerDiv);
     for (var i=0; i < anArrayOfMedia.length; i++) 
     {
-      theParentDiv.append(this.generateMediaDivFromYouTube(anArrayOfMedia[i]))      
+      this.myYouTubeVideos[anArrayOfMedia[i].media$group.yt$videoid.$t] = anArrayOfMedia[i];
     };
 
-    $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss))
-
+    if (_.keys(this.myInstagrams).length > 0)
+    {
+      this.onAllMediaLoaded();
+    }
   };
   
   this.generateMediaDivFromYouTube = function( aYouTubeVideo ) 
