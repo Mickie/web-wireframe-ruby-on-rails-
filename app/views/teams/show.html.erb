@@ -1,180 +1,181 @@
 <%= provide(:title, @team.name + " on FANZO") %>
 
-
-<div class="row-fluid">
-  <div class="span12">
-    <%= @team.sport.name %>
-    &gt; <%= @team.league.name %>
-    <% if @team.division %>
-    &gt; <%= @team.division.name %>
-    <% end %>
-    <% if @team.conference %>
-    &gt; <%= @team.conference.name  %>
-    <% end %>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12">
-    <h1><%= teamLogo(@team, :large) %><%= @team.name %></h1>
-  </div>
-</div>
-
-
-<div class="row-fluid">
-  <div class="span12">
-    <div id="myVideoModal" class="modal hide fade" style="display: none;">
-      <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Video Title</h3>
-      </div>
-      <div class="modal-body">
-        <div id="player"></div>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Done</a>
-      </div>
-    </div>
-    <div id="myMediaSlider">
-      <div id="myMediaContent">
-        <div id="myMediaTemplate" class="mediaThumbnail">
-          <img class="mediaImage"  />
-        </div>
-      </div>
-    </div>    
-  </div>
-</div>
-
-<% if @team.social_info.hash_tags %>
-<div class="row-fluid">
-  <div class="span12">
-    <div class="controls" id="tweetControls">
-      <div class="input-append">
-        <textarea class="input-xlarge span10" rows="1"><%= raw @team.social_info.hash_tags %></textarea>
-        <div class="btn-group">
-          <button href="#" class="btn btn-primary quickTweetButton">Update Social Status</button>
-          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><strong>Booyah!!</strong></li>
-            <div class="happy">
-              <li><a href="#"></a></li>
-            </div>
-            <li class="divider"></li>
-            <li><strong>What!?!?</strong></li>
-            <div class="sad">
-              <li><a href="#"></a></li>
-            </div>
-          </ul>         
-        </div>
-      </div>
-    </div>    
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12">
-    
-    <div id="myTweetModal" class="modal hide fade" style="display: none;">
-      <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Personalize your tweet:</h3>
-      </div>
-      <div class="modal-body">
-        <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
-      </div>
-      <div class="modal-footer">
-        <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
-      </div>
-    </div>
-          
-    
-    <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
-      <a class='close' data-dismiss='alert' href='#'>×</a>
-      <div class="messageHolder"></div>
-    </div>
-    
-    <div id="tweetHolder">
-      <div id="newTweets" class='alert alert-info fade in' style='display:none'>
-        <a class='close' data-dismiss='alert' href='#'>×</a>
-        <p>
-          <strong>5</strong> new Tweets!
-        </p>
-      </div>
-      <div id="tweets">
-        <div id="template" class="tweet well">
-          <img class="twitterAvatar" width="48px" height="48px">
-          <span class="twitterName"></span>: 
-          <span class="twitterText"></span>
-          <div class="tweetMenu">
-            <div class="timestamp"></div>
-            <a id="reply"><%= image_tag("reply.png") %>Reply</a> |
-            <a id="retweet"><%= image_tag("retweet.png") %>Retweet</a> |
-            <a id="favorite"><%= image_tag("favorite.png") %>Favorite</a>
-          </div>
-          <div class="alert alert-info fade in" style="display:none">
-            <a class="close" data-dismiss="alert" href="#">x</a>
-            <p><strong>Success!</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span6">
-    <h3>Schedule</h3>
-    <ul>
-      <% @team.events.each do | anEvent |%>
-        <li><%= link_to "#{anEvent.visiting_team.short_name} at #{anEvent.home_team.short_name} : #{anEvent.event_date.to_formatted_s(:short)}", event_path(anEvent)%></li>
+<div id="team_show">
+  <div class="row-fluid">
+    <div class="span12">
+      <%= @team.sport.name %>
+      &gt; <%= @team.league.name %>
+      <% if @team.division %>
+      &gt; <%= @team.division.name %>
       <% end %>
-    </ul>    
+      <% if @team.conference %>
+      &gt; <%= @team.conference.name  %>
+      <% end %>
+    </div>
   </div>
-  <div class="span6">
-    <h3>Local Official Watch Sites</h3>
-    <% @localTeamWatchSites.each do |aWatchSite| %>
-      <div class="row-fluid">
-        <div class="span12">
-          <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchSite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+  <div class="row-fluid">
+    <div class="span12">
+      <h1><%= teamLogo(@team, :large) %><%= @team.name %></h1>
+    </div>
+  </div>
+  
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="myVideoModal" class="modal hide fade" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Video Title</h3>
+        </div>
+        <div class="modal-body">
+          <div id="player"></div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn" data-dismiss="modal">Done</a>
         </div>
       </div>
-    <% end %>
+      <div id="myMediaSlider">
+        <div id="myMediaContent">
+          <div id="myMediaTemplate" class="mediaThumbnail">
+            <img class="mediaImage"  />
+          </div>
+        </div>
+      </div>    
+    </div>
   </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <b>Location:</b>
-    <%= @team.location.one_line_address %>
+  
+  <% if @team.social_info.hash_tags %>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="controls" id="tweetControls">
+        <div class="input-append">
+          <textarea class="input-xlarge span10" rows="1"><%= raw @team.social_info.hash_tags %></textarea>
+          <div class="btn-group">
+            <button href="#" class="btn btn-primary quickTweetButton">Update Social Status</button>
+            <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><strong>Booyah!!</strong></li>
+              <div class="happy">
+                <li><a href="#"></a></li>
+              </div>
+              <li class="divider"></li>
+              <li><strong>What!?!?</strong></li>
+              <div class="sad">
+                <li><a href="#"></a></li>
+              </div>
+            </ul>         
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      
+      <div id="myTweetModal" class="modal hide fade" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Personalize your tweet:</h3>
+        </div>
+        <div class="modal-body">
+          <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
+        </div>
+      </div>
+            
+      
+      <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
+        <a class='close' data-dismiss='alert' href='#'>×</a>
+        <div class="messageHolder"></div>
+      </div>
+      
+      <div id="tweetHolder">
+        <div id="newTweets" class='alert alert-info fade in' style='display:none'>
+          <a class='close' data-dismiss='alert' href='#'>×</a>
+          <p>
+            <strong>5</strong> new Tweets!
+          </p>
+        </div>
+        <div id="tweets">
+          <div id="template" class="tweet well">
+            <img class="twitterAvatar" width="48px" height="48px">
+            <span class="twitterName"></span>: 
+            <span class="twitterText"></span>
+            <div class="tweetMenu">
+              <div class="timestamp"></div>
+              <a id="reply"><%= image_tag("reply.png") %>Reply</a> |
+              <a id="retweet"><%= image_tag("retweet.png") %>Retweet</a> |
+              <a id="favorite"><%= image_tag("favorite.png") %>Favorite</a>
+            </div>
+            <div class="alert alert-info fade in" style="display:none">
+              <a class="close" data-dismiss="alert" href="#">x</a>
+              <p><strong>Success!</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row-fluid">
+    <div class="span6">
+      <h3>Schedule</h3>
+      <ul>
+        <% @team.events.each do | anEvent |%>
+          <li><%= link_to "#{anEvent.visiting_team.short_name} at #{anEvent.home_team.short_name} : #{anEvent.event_date.to_formatted_s(:short)}", event_path(anEvent)%></li>
+        <% end %>
+      </ul>    
+    </div>
+    <div class="span6">
+      <h3>Local Official Watch Sites</h3>
+      <% @localTeamWatchSites.each do |aWatchSite| %>
+        <div class="row-fluid">
+          <div class="span12">
+            <%= aWatchSite.name && aWatchSite.name.length > 0 ? aWatchSite.name : aWatchSite.venue.name %> : <%= aWatchSite.venue.location.one_line_address %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <b>Location:</b>
+      <%= @team.location.one_line_address %>
+    </div>
   </div>
 </div>
 
 <script language="JavaScript">
   var myTwitterView;
   var myFacebookView;
-  var myMediaSlider;
+  var myTeamMediaSlider;
   
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = new TwitterView(<%= raw @team.social_info.hash_tags.split(" ") %>,
-                                    <%= raw @team.social_info.not_tags.split(" ") %>,
-                                    20,
-                                    "tweets",
-                                    "newTweets",
-                                    "tweetControls",
-                                    <%= @current_user.isConnectedToTwitter? %>,
-                                    <%= @current_user.id %>,
-                                    <%= @team.sport.id %>,
-                                    "myTwitterView");
+    myTwitterView = TwitterView.create( <%= raw @team.social_info.hash_tags.split(" ") %>,
+                                        <%= raw @team.social_info.not_tags.split(" ") %>,
+                                        20,
+                                        "tweets",
+                                        "newTweets",
+                                        "tweetControls",
+                                        <%= @current_user.isConnectedToTwitter? %>,
+                                        <%= @current_user.id %>,
+                                        <%= @team.sport.id %>,
+                                        "myTwitterView");
     myTwitterView.startLoadingTweets();
     
 
-    myMediaSlider = new MediaSlider("myMediaSlider", "myVideoModal");
-    myMediaSlider.createSliderForTeam(<%= @team.id %>,
-                                      "<%= @team.short_name %>",
-                                      "<%= @team.sport.name %>", 
-                                      <%= raw @team.social_info.hash_tags.split(" ") %> );
+    myTeamMediaSlider = MediaSlider.create("div#team_show div#myMediaSlider", "div#team_show div#myVideoModal");
+    myTeamMediaSlider.createSliderForTeam(<%= @team.id %>,
+                                          "<%= @team.short_name %>",
+                                          "<%= @team.sport.name %>", 
+                                          <%= raw @team.social_info.hash_tags.split(" ") %> );
   });
 </script>
 <% end %>

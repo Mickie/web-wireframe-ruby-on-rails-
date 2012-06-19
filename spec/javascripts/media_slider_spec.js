@@ -1,10 +1,10 @@
 describe("MediaSlider", function() 
 {
-  var myMediaSlider;
+  var myMediaSlider; 
 
   beforeEach(function()
   {
-    myMediaSlider = new MediaSlider("myMediaSlider");
+    myMediaSlider = new MediaSlider("div#media_slider_spec div#myMediaSlider", "div#media_slider_spec div#myVideoModal");
 
     loadJasmineFixture('media_slider');
   });

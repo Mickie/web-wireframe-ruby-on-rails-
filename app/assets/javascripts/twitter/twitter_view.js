@@ -26,6 +26,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.myFullyLoadedFlag = false;
   this.myTwitterSearch = null;
   this.myTwitterController = new TwitterController(this);
+  this.myRefreshTweetsInterval;
 
   this.startLoadingTweets = function()
   {
@@ -33,7 +34,12 @@ var TwitterView = function( anArrayOfHashTags,
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
     this.initializeButtons();
     
-    window.setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
+    this.myRefreshTweetsInterval = setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
+  };
+  
+  this.destroy = function()
+  {
+    clearInterval(this.myRefreshTweetsInterval);
   };
   
   if (this.myConnectedToTwitterFlag)
@@ -260,3 +266,33 @@ var TwitterView = function( anArrayOfHashTags,
   }
   
 }
+
+var myCurrentTwitterViews = {};
+TwitterView.create = function(anArrayOfHashTags, 
+                              anArrayOfNotTags,
+                              aMaxTweets, 
+                              aTweetDivId, 
+                              aNewTweetDivId,
+                              aControlsDivId, 
+                              aConnectedToTwitterFlag,
+                              aUserId,
+                              aSportId,
+                              aTwitterViewVariableName)
+{
+  if (myCurrentTwitterViews[aTwitterViewVariableName])
+  {
+    myCurrentTwitterViews[aTwitterViewVariableName].destroy();
+  }
+  myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView( anArrayOfHashTags, 
+                                                                    anArrayOfNotTags,
+                                                                    aMaxTweets, 
+                                                                    aTweetDivId, 
+                                                                    aNewTweetDivId,
+                                                                    aControlsDivId, 
+                                                                    aConnectedToTwitterFlag,
+                                                                    aUserId,
+                                                                    aSportId,
+                                                                    aTwitterViewVariableName);
+  
+  return myCurrentTwitterViews[aTwitterViewVariableName];
+};

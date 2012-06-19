@@ -1,7 +1,7 @@
-var MediaSlider = function( aContainerDivId, aVideoModalDivId )
+var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector )
 {
-  this.myContainerDiv = "div#" + aContainerDivId;
-  this.myVideoModalDiv = "div#" + aVideoModalDivId;
+  this.myContainerDiv = aContainerDivSelector;
+  this.myVideoModalDiv = aVideoModalDivSelector;
   this.myPlayer = null;
   this.myInstagramSearch = null;
   this.myYouTubeSearch = null;
@@ -20,6 +20,13 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
                                               15);
     this.myInstagramSearch.loadMediaForTeam(aTeamId, createDelegate(this, this.onInstagramMediaLoaded));
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
+  };
+  
+  this.destroy = function()
+  {
+    this.stopSliderTimer();
+    $(this.myContainerDiv + " div#myMediaContent").clearQueue();
+    $(this.myContainerDiv + " div#myMediaContent").stop();
   };
   
   this.startSliderTimer = function()
@@ -75,9 +82,12 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
   this.onTransitionComplete = function()
   {
     var theLeftMostDiv = $(this.myContainerDiv + " div#myMediaContent div:first").detach();
-    $(this.myContainerDiv + " div#myMediaContent").append(theLeftMostDiv);
-    $(this.myContainerDiv + " div#myMediaContent").css({left:"0px"});
-    this.startSliderTimer();    
+    if (theLeftMostDiv)
+    {
+      $(this.myContainerDiv + " div#myMediaContent").append(theLeftMostDiv);
+      $(this.myContainerDiv + " div#myMediaContent").css({left:"0px"});
+      this.startSliderTimer();    
+    }
   };
   
   this.onHoverStart = function(e)
@@ -199,7 +209,20 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
   {
     this.myPlayer.stopVideo();
     this.myPlayer.clearVideo();
-  }
+  };
   
 
-}
+};
+
+
+var myCurrentMediaSlider = null;
+MediaSlider.create = function(aContainerDivSelector, aVideoModalDivSelector)
+{
+  if (myCurrentMediaSlider)
+  {
+    myCurrentMediaSlider.destroy();
+  }
+  myCurrentMediaSlider = new MediaSlider(aContainerDivSelector, aVideoModalDivSelector);
+  
+  return myCurrentMediaSlider;
+};
