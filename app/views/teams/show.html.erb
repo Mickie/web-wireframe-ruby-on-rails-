@@ -174,8 +174,7 @@
     myMediaSlider.createSliderForTeam(<%= @team.id %>,
                                       "<%= @team.short_name %>",
                                       "<%= @team.sport.name %>", 
-                                      <%= raw @team.social_info.hash_tags.split(" ") %>,
-                                      5);
+                                      <%= raw @team.social_info.hash_tags.split(" ") %> );
   });
 </script>
 <% end %>

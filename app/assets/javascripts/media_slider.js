@@ -11,14 +11,13 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
   this.createSliderForTeam = function( aTeamId, 
                                         aShortName,
                                         aSport, 
-                                        anArrayOfHashTags,
-                                        aMaxVideos )
+                                        anArrayOfHashTags )
   {
     this.myInstagramSearch = new InstagramSearch();
     this.myYouTubeSearch = new YouTubeSearch( aShortName,
                                               aSport, 
                                               anArrayOfHashTags,
-                                              aMaxVideos);
+                                              15);
     this.myInstagramSearch.loadMediaForTeam(aTeamId, createDelegate(this, this.onInstagramMediaLoaded));
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };

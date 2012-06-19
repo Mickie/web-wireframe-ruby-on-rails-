@@ -149,8 +149,7 @@
     myMediaSlider.createSliderForTeam(<%= @tailgate.team.id %>,
                                       "<%= @tailgate.team.short_name %>",
                                       "<%= @tailgate.team.sport.name %>", 
-                                      <%= raw @tailgate.team.social_info.hash_tags.split(" ") %>,
-                                      5);
+                                      <%= raw @tailgate.team.social_info.hash_tags.split(" ") %> );
 
    });
 </script>
