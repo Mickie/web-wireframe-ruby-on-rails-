@@ -22,25 +22,7 @@
   
   <div class="row-fluid">
     <div class="span12">
-      <div id="myVideoModal" class="modal hide fade" style="display: none;">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Video Title</h3>
-        </div>
-        <div class="modal-body">
-          <div id="player"></div>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn" data-dismiss="modal">Done</a>
-        </div>
-      </div>
-      <div id="myMediaSlider">
-        <div id="myMediaContent">
-          <div id="myMediaTemplate" class="mediaThumbnail">
-            <img class="mediaImage"  />
-          </div>
-        </div>
-      </div>    
+      <%= render partial:'partials/media_slider' %>
     </div>
   </div>
   
@@ -171,7 +153,9 @@
     myTwitterView.startLoadingTweets();
     
 
-    myTeamMediaSlider = MediaSlider.create("div#team_show div#myMediaSlider", "div#team_show div#myVideoModal");
+    myTeamMediaSlider = MediaSlider.create( "div#team_show div#myMediaSlider", 
+                                            "div#team_show div#myVideoModal",
+                                            "div#tailgate_show div#myInstagramModal");
     myTeamMediaSlider.createSliderForTeam(<%= @team.id %>,
                                           "<%= @team.short_name %>",
                                           "<%= @team.sport.name %>", 

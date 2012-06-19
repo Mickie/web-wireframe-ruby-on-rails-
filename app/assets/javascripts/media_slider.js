@@ -1,7 +1,8 @@
-var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector )
+var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector )
 {
   this.myContainerDiv = aContainerDivSelector;
   this.myVideoModalDiv = aVideoModalDivSelector;
+  this.myInstagramModalDiv = anInstagramModalDivSelector;
   this.myPlayer = null;
   this.myInstagramSearch = null;
   this.myYouTubeSearch = null;
@@ -132,7 +133,12 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector )
   
   this.onInstagramClick = function(e)
   {
-    console.log("here");
+    var theInstagramId = $(e.target.parentElement).attr("id");
+    var theInstagram = this.myInstagrams[theInstagramId];
+    $(this.myInstagramModalDiv + " div#instagramImage").html("<img src='" + theInstagram.images.standard_resolution.url + "' width='612' height=612'/>");
+
+    $(".modal").modal("hide");
+    $(this.myInstagramModalDiv).modal("show");
   };
 
   this.onYouTubeMediaLoaded = function(anArrayOfMedia)
@@ -189,8 +195,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector )
     {
       this.myPlayer.loadVideoById(theVideoId);
     }
-        
-            
+
     $(".modal").modal("hide");
     $(this.myVideoModalDiv).modal("show");
   };
@@ -216,13 +221,13 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector )
 
 
 var myCurrentMediaSlider = null;
-MediaSlider.create = function(aContainerDivSelector, aVideoModalDivSelector)
+MediaSlider.create = function(aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector)
 {
   if (myCurrentMediaSlider)
   {
     myCurrentMediaSlider.destroy();
   }
-  myCurrentMediaSlider = new MediaSlider(aContainerDivSelector, aVideoModalDivSelector);
+  myCurrentMediaSlider = new MediaSlider(aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector);
   
   return myCurrentMediaSlider;
 };

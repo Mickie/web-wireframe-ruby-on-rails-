@@ -27,10 +27,10 @@ describe "teams/show" do
     @venue = FactoryGirl.build(:venue)
     @watch_site = FactoryGirl.build(:watch_site, team:@team, venue:@venue)
     @localTeamWatchSites = assign(:localTeamWatchSites, [@watch_site])
+    render
   end
 
   it "renders attributes" do
-    render
     rendered.should match(/killer team/)
     rendered.should match(/#{@sport.name}/)
     rendered.should match(/#{@league.name}/)
@@ -38,5 +38,9 @@ describe "teams/show" do
     rendered.should match(/#{@conference.name}/)
     rendered.should match(/#{@location.one_line_address}/)
     rendered.should match(/killer-team_l.gif/)
+  end
+  
+  it "renders partial" do
+    view.should render_template(partial:"_media_slider")
   end
 end

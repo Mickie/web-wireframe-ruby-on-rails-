@@ -4,7 +4,9 @@ describe("MediaSlider", function()
 
   beforeEach(function()
   {
-    myMediaSlider = new MediaSlider("div#media_slider_spec div#myMediaSlider", "div#media_slider_spec div#myVideoModal");
+    myMediaSlider = new MediaSlider("div#media_slider_spec div#myMediaSlider", 
+                                    "div#media_slider_spec div#myVideoModal",
+                                    "div#media_slider_spec div#myInstagramModal");
 
     loadJasmineFixture('media_slider');
   });
@@ -155,6 +157,22 @@ describe("MediaSlider", function()
     it("gives the image a click handler", function() 
     {
       expect(theResult.find("img.mediaImage")).toHandle("click");
+    });
+    
+  });
+  
+  describe("onInstagramClick", function()
+  {
+    beforeEach(function()
+    {
+      myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
+      myMediaSlider.onInstagramMediaLoaded(InstagramData.mediaResponse.data);
+      $("div#myMediaContent div.mediaThumbnail:first img.mediaImage").click();
+    });
+    
+    it("adds the correct image to the modal", function() 
+    {
+      expect($("div#instagramImage img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].images.standard_resolution.url);
     });
     
   });

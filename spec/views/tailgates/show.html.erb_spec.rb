@@ -13,13 +13,17 @@ describe "tailgates/show" do
     ))
     @post = assign(:post, Post.new(tailgate:@tailgate))
     @current_user = assign(:current_user, @user)
+    render
   end
 
   it "renders attributes in <p>" do
-    render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
     rendered.should match(/Joe@bar.com/)
     rendered.should match(/Seahawks/)
+  end
+
+  it "renders partial" do
+    view.should render_template(partial:"_media_slider")
   end
 end
