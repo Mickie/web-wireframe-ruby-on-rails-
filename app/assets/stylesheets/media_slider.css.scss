@@ -20,4 +20,25 @@ div#myMediaSlider
     position:absolute;
     width: 3000px;
   }
+  
+}
+
+div#myVideoModal 
+{
+  width:680px;
+}
+
+div#myInstagramModal 
+{
+  width: 640px;
+  height: 746px;
+  top: 10px;
+  margin: 0 0 0 -320px;
+
+  
+  .modal-body
+  {
+    max-height: 612px;
+    height: 612px;
+  }
 }

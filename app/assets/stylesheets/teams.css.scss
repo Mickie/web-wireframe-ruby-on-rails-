@@ -7,27 +7,3 @@
 {
   float:left;
 }
-
-div#youtubeVideos div.slides_container {
-  width:480px;
-  overflow:hidden;
-  position:relative;
-  display:none;
-
-  img
-  {
-    width:480px;
-    height:360px;
-    display:block;
-  }
-}
-
-div#youtubeVideos > div
-{
-  float:left;
-}
-
-div#myVideoModal 
-{
-  width:680px;
-}
