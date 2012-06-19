@@ -23,6 +23,16 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };
   
+  this.startSliderTimer = function()
+  {
+    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 10000);
+  };
+
+  this.stopSliderTimer = function()
+  {
+    clearInterval(this.mySlideInterval);
+  };
+  
   this.onAllMediaLoaded = function()
   {
     var theParentDiv = $(this.myContainerDiv + " div#myMediaContent");
@@ -48,13 +58,15 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
     
     $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));
     
-    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 1000);
+    $(this.myContainerDiv).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
+
+    this.startSliderTimer();    
   };
   
   this.onSlideInterval = function()
   {
     var theLeftMostDivImageWidth = $(this.myContainerDiv + " div#myMediaContent div:first img").attr("width");
-    clearInterval(this.mySlideInterval);
+    this.stopSliderTimer();
     $(this.myContainerDiv + " div#myMediaContent").animate({ left:"-" + theLeftMostDivImageWidth + "px"}, 
                                                                 500, 
                                                                 'linear', 
@@ -66,8 +78,18 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
     var theLeftMostDiv = $(this.myContainerDiv + " div#myMediaContent div:first").detach();
     $(this.myContainerDiv + " div#myMediaContent").append(theLeftMostDiv);
     $(this.myContainerDiv + " div#myMediaContent").css({left:"0px"});
-    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 1000);
-  };  
+    this.startSliderTimer();    
+  };
+  
+  this.onHoverStart = function(e)
+  {
+    this.stopSliderTimer();
+  };
+  
+  this.onHoverEnd = function(e)
+  {
+    this.startSliderTimer();
+  };
   
   this.onInstagramMediaLoaded = function(anArrayOfMedia)
   {
