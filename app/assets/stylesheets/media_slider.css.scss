@@ -2,6 +2,7 @@ div#myMediaSlider
 {
   height: 150px;
   overflow: hidden;
+  position: relative;
   
   div#myMediaTemplate
   {
@@ -13,4 +14,9 @@ div#myMediaSlider
     float:left;
   }
   
+  div#myMediaContent
+  {
+    position:absolute;
+    width: 3000px;
+  }
 }

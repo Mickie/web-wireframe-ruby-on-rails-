@@ -25,7 +25,7 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
   
   this.onAllMediaLoaded = function()
   {
-    var theParentDiv = $(this.myContainerDiv);
+    var theParentDiv = $(this.myContainerDiv + " div#myMediaContent");
     var theInstagramIds = _.keys(this.myInstagrams);
     var theYouTubeIds = _.keys(this.myYouTubeVideos);
     for (var i=0, y=0; i < theInstagramIds.length;) 
@@ -46,8 +46,28 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
       theParentDiv.append(this.generateMediaDivFromYouTube(this.myYouTubeVideos[theYouTubeIds[y++]]));     
     }
     
-    $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));    
+    $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));
+    
+    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 1000);
   };
+  
+  this.onSlideInterval = function()
+  {
+    var theLeftMostDivImageWidth = $(this.myContainerDiv + " div#myMediaContent div:first img").attr("width");
+    clearInterval(this.mySlideInterval);
+    $(this.myContainerDiv + " div#myMediaContent").animate({ left:"-" + theLeftMostDivImageWidth + "px"}, 
+                                                                500, 
+                                                                'linear', 
+                                                                createDelegate(this, this.onTransitionComplete) );
+  };
+  
+  this.onTransitionComplete = function()
+  {
+    var theLeftMostDiv = $(this.myContainerDiv + " div#myMediaContent div:first").detach();
+    $(this.myContainerDiv + " div#myMediaContent").append(theLeftMostDiv);
+    $(this.myContainerDiv + " div#myMediaContent").css({left:"0px"});
+    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 1000);
+  };  
   
   this.onInstagramMediaLoaded = function(anArrayOfMedia)
   {
@@ -81,7 +101,7 @@ var MediaSlider = function( aContainerDivId, aVideoModalDivId )
   
   this.onInstagramClick = function(e)
   {
-    console.log("click");
+    console.log("here");
   };
 
   this.onYouTubeMediaLoaded = function(anArrayOfMedia)

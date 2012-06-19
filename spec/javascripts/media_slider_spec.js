@@ -53,7 +53,7 @@ describe("MediaSlider", function()
 
     it("should create the right number of media divs", function()
     {
-      expect($("#myMediaSlider").find(".mediaThumbnail").length).toEqual(3);
+      expect($("#myMediaContent").find(".mediaThumbnail").length).toEqual(2);
     });
   });
 
