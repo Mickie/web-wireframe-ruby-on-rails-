@@ -3,17 +3,14 @@ Feature: Sports Resource
 	Scenario: Adding a sport requires admin access
 		Given I visit the new sport page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a sport requires admin access
 		Given I visit the edit sport page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of sports requires admin access
 		Given I visit the sports page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a sport as an admin and see the details when complete
 		Given I sign in as admin

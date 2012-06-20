@@ -3,17 +3,14 @@ Feature: Game Watch Resource
 	Scenario: Adding a game watch requires admin access
 		Given I visit the new game watch page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a game watch requires admin access
 		Given I visit the edit game watch page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of game watches requires admin access
 		Given I visit the game watches page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a game watch as an admin and see the details when complete
 		Given I sign in as admin

@@ -84,7 +84,6 @@ Given /^I sign in as (.*)$/ do |anAccountType|
   fill_in "Email",    with: object.email
   fill_in "Password", with: object.password
   click_button "commit"
-  page.should have_content('Signed in successfully')
 end
 
 Then /^I should be able to edit it$/ do
@@ -100,10 +99,6 @@ Then /^I should be redirected to the (.*) page$/ do |aPageName|
   page.driver.request.env['HTTP_REFERER'].should_not be_nil
   page.driver.request.env['HTTP_REFERER'].should_not == page.current_url
   step %Q(I should be on the #{aPageName} page)
-end
-
-Then /^I should see an alert flash$/ do
-  page.should have_selector(".alert-alert")
 end
 
 Given /^I have added (\d+) ([\w ]+)s$/ do |aNumberOfObjects, anObjectType|

@@ -3,17 +3,14 @@ Feature: Team Resource
 	Scenario: Adding a team requires admin access
 		Given I visit the new team page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a team requires admin access
 		Given I visit the edit team page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of teams requires user access
 		Given I visit the teams page
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 		
 	Scenario: I can add a team as an admin and see the details as a user when complete
 		Given I sign in as admin

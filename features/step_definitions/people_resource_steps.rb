@@ -3,7 +3,6 @@ When /^I edit the person$/ do
   fill_in "person_first_name",    with: "howdy"
   fill_in "person_last_name",    with: "doody"
   click_button "commit"
-  page.should have_content('Person was successfully updated')
 end
 
 When /^I create a new person$/ do 

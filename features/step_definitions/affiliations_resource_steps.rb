@@ -2,7 +2,6 @@
 When /^I edit the affiliation$/ do
   fill_in "Name",    with: "University of Notre Dame"
   click_button "commit"
-  page.should have_content('Affiliation was successfully updated')
 end
 
 When /^I create a new affiliation$/ do 

@@ -27,10 +27,7 @@
     <div id="fb-root"></div>
 		<%= render 'layouts/header' %>
 		<div class="container-fluid">
-			<% flash.each do |key, value| %>
-				<%= content_tag(:div, value, class: "alert alert-#{key}") %>
-			<% end %>
-			
+
 			<%= yield %>
 			
 			<%= render 'layouts/footer' %>

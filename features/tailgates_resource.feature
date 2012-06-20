@@ -8,12 +8,10 @@ Feature: Tailgates Resource
 	Scenario: Adding a tailgate requires user access
 		Given I visit the new tailgate page
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 
 	Scenario: Editing a tailgate requires at least user access
 		Given I visit the edit tailgate page
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of tailgates doesn't require user access
 		Given I have added 3 tailgates
@@ -41,7 +39,6 @@ Feature: Tailgates Resource
 		Given I sign in as user
 		When I visit the edit tailgate page
 		Then I should be redirected to the user page
-			And I should see an alert flash
 
 	Scenario: I can see all the tailgates as a user
 		Given I sign in as user
@@ -61,7 +58,6 @@ Feature: Tailgates Resource
 		When I visit the tailgate page
 			And I add a post
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 			
 	Scenario: I can add a post to a tailgate as a user
 		Given I sign in as user
@@ -76,7 +72,6 @@ Feature: Tailgates Resource
 		When I visit the tailgate page
 			And I comment on the post
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 	
 	Scenario: I can add a comment to a tailgate post as a user
 		Given I sign in as user	

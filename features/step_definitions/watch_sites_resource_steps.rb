@@ -2,7 +2,6 @@
 When /^I edit the watch site$/ do
   fill_in "Name",    with: "Irish watch"
   click_button "commit"
-  page.should have_content('Watch site was successfully updated')
 end
 
 Then /^the changes to the watch site should be saved$/ do

@@ -2,7 +2,6 @@
 When /^I edit the team$/ do
   fill_in "Name",    with: "Sounders"
   click_button "commit"
-  page.should have_content('Team was successfully updated')
 end
 
 When /^I create a new team$/ do 

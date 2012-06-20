@@ -3,17 +3,14 @@ Feature: people Resource
 	Scenario: Adding a person requires admin access
 		Given I visit the new person page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a person requires admin access
 		Given I visit the edit person page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of people requires admin access
 		Given I visit the people page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a person as an admin and see the details when complete
 		Given I sign in as admin

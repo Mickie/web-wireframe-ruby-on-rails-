@@ -3,17 +3,14 @@ Feature: Divisions Resource
 	Scenario: Adding a division requires admin access
 		Given I visit the new division page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a division requires admin access
 		Given I visit the edit division page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of divisions requires admin access
 		Given I visit the divisions page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a division as an admin and see the details when complete
 		Given I sign in as admin

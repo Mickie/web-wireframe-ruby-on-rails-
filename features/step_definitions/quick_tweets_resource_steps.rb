@@ -3,7 +3,6 @@ When /^I edit the quick tweet$/ do
   fill_in "Name",    with: "Nice!"
   fill_in "Tweet", with: "that was a sweet play"
   click_button "commit"
-  page.should have_content('Quick tweet was successfully updated')
 end
 
 When /^I create a new quick tweet$/ do 

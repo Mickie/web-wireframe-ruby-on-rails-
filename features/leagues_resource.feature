@@ -3,17 +3,14 @@ Feature: Leagues Resource
 	Scenario: Adding a league requires admin access
 		Given I visit the new league page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a league requires admin access
 		Given I visit the edit league page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of leagues requires admin access
 		Given I visit the leagues page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a league as an admin and see the details when complete
 		Given I sign in as admin

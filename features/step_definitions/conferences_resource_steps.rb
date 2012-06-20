@@ -2,7 +2,6 @@
 When /^I edit the conference$/ do
   fill_in "Name",    with: "MLS"
   click_button "commit"
-  page.should have_content('Conference was successfully updated')
 end
 
 When /^I create a new conference$/ do 

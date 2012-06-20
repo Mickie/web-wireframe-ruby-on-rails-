@@ -3,17 +3,14 @@ Feature: Event Resource
 	Scenario: Adding a event requires admin access
 		Given I visit the new event page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a event requires admin access
 		Given I visit the edit event page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of events requires user access
 		Given I visit the events page
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 		
 	Scenario: I can add a event as an admin and see the details as a user when complete
 		Given I sign in as admin

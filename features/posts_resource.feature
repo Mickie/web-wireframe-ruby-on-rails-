@@ -8,12 +8,10 @@ Feature: Posts Resource
 	Scenario: Adding a post requires user access 
 		Given I visit the new tailgate post nested resource
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 
 	Scenario: Editing a post requires at least user access
 		Given I visit the edit tailgate post nested resource
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of posts doesn't require user access
 		Given I have created 3 posts

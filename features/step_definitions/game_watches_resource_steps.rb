@@ -2,7 +2,6 @@
 When /^I edit the game watch$/ do
   fill_in "Name",    with: "Killer Watch"
   click_button "commit"
-  page.should have_content('Game watch was successfully updated')
 end
 
 Then /^the changes to the game watch should be saved$/ do

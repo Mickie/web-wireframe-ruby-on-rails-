@@ -2,7 +2,6 @@
 When /^I edit the event$/ do
   fill_in "Name",    with: "Superbowl"
   click_button "commit"
-  page.should have_content('Event was successfully updated')
 end
 
 Then /^the changes to the event should be saved$/ do

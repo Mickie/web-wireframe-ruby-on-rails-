@@ -2,7 +2,6 @@
 When /^I edit the sport$/ do
   fill_in "Name",    with: "soccer"
   click_button "commit"
-  page.should have_content('Sport was successfully updated')
 end
 
 Then /^the changes to the sport should be saved$/ do

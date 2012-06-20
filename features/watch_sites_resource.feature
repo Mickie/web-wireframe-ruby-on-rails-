@@ -3,17 +3,14 @@ Feature: Watch site Resource
 	Scenario: Adding a watch site requires admin access
 		Given I visit the new watch site page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a watch site requires admin access
 		Given I visit the edit watch site page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of watch sitees requires admin access
 		Given I visit the watch sites page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a watch site as an admin and see the details when complete
 		Given I sign in as admin

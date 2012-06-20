@@ -3,17 +3,14 @@ Feature: Conferences Resource
 	Scenario: Adding a conference requires admin access
 		Given I visit the new conference page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a conference requires admin access
 		Given I visit the edit conference page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of conferences requires admin access
 		Given I visit the conferences page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a conference as an admin and see the details when complete
 		Given I sign in as admin

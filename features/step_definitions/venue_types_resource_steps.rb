@@ -2,7 +2,6 @@
 When /^I edit the venue type$/ do
   fill_in "Name",    with: "Sport Bar"
   click_button "commit"
-  page.should have_content('Venue type was successfully updated')
 end
 
 Then /^the changes to the venue type should be saved$/ do

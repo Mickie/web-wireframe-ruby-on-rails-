@@ -3,17 +3,14 @@ Feature: QuickTweets Resource
 	Scenario: Adding a quick tweet requires admin access
 		Given I visit the new quick tweet page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a quick tweet requires admin access
 		Given I visit the edit quick tweet page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of quick tweets requires user access
 		Given I visit the quick tweets page
 		Then I should be redirected to the new user session page
-			And I should see an alert flash
 		
 	Scenario: I can add a quick tweet as an admin and see the details when complete
 		Given I sign in as admin

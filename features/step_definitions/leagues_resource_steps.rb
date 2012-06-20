@@ -2,7 +2,6 @@
 When /^I edit the league$/ do
   fill_in "Name",    with: "MLS"
   click_button "commit"
-  page.should have_content('League was successfully updated')
 end
 
 When /^I create a new league$/ do 

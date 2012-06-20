@@ -5,7 +5,6 @@ When /^I edit the venue$/ do
   
   fill_in "Name",    with: "Pumphouse"
   click_button "commit"
-  page.should have_content('Venue was successfully updated')
 end
 
 When /^I create a new venue$/ do 

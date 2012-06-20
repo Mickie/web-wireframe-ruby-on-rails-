@@ -3,17 +3,14 @@ Feature: VenueTypes Resource
 	Scenario: Adding a venue type requires admin access
 		Given I visit the new venue type page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a venue type requires admin access
 		Given I visit the edit venue type page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of venue types requires admin access
 		Given I visit the venue types page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a venue type as an admin and see the details when complete
 		Given I sign in as admin

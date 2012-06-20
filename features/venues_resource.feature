@@ -3,17 +3,14 @@ Feature: Venue Resource
 	Scenario: Adding a venue requires admin access
 		Given I visit the new venue page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Editing a venue requires admin access
 		Given I visit the edit venue page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 
 	Scenario: Seeing the list of venues requires admin access
 		Given I visit the venues page
 		Then I should be redirected to the new admin session page
-			And I should see an alert flash
 		
 	Scenario: I can add a venue as an admin and see the details as a user when complete
 		Given I sign in as admin
