@@ -175,6 +175,33 @@ describe("MediaSlider", function()
       expect($("div#instagramImage img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].images.standard_resolution.url);
     });
     
+    it("adds the correct title to the modal", function() 
+    {
+      expect($("div#myInstagramModal div.modal-header h3")).toHaveText(InstagramData.mediaResponse.data[0].user.full_name);
+    });
+
+    it("adds the correct profile image to the modal", function() 
+    {
+      expect($("div#myInstagramModal div.modal-header img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].caption.from.profile_picture);
+    });
+    
+  });
+
+  describe("onYouTubeClickClick", function()
+  {
+    beforeEach(function()
+    {
+      myMediaSlider.myPlayer = { loadVideoById: function(){} };
+      myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
+      myMediaSlider.onInstagramMediaLoaded([]);
+      $("div#myMediaContent div.mediaThumbnail:first img.mediaImage").click();
+    });
+    
+    it("adds the correct title to the modal", function() 
+    {
+      expect($("div#myVideoModal div.modal-header h3")).toHaveText(YouTubeData.videoSearchResponse.feed.entry[0].title.$t);
+    });
+    
   });
 
 });

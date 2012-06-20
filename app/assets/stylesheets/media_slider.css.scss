@@ -35,9 +35,24 @@ div#myInstagramModal
   top: 10px;
   margin: 0 0 0 -320px;
 
+  .modal-header 
+  {
+    height: 27px;
+    
+    h3
+    {
+      float: left;
+    }
+    img
+    {
+      float:left;
+      padding-right: 10px;
+    }
+  }
   
   .modal-body
   {
+    clear: both;
     max-height: 612px;
     height: 612px;
   }

@@ -136,6 +136,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     var theInstagramId = $(e.target.parentElement).attr("id");
     var theInstagram = this.myInstagrams[theInstagramId];
     $(this.myInstagramModalDiv + " div#instagramImage").html("<img src='" + theInstagram.images.standard_resolution.url + "' width='612' height=612'/>");
+    $(this.myInstagramModalDiv + " div.modal-header h3").text(theInstagram.user.full_name);
+    $(this.myInstagramModalDiv + " div.modal-header img").attr("src", theInstagram.caption.from.profile_picture);
 
     $(".modal").modal("hide");
     $(this.myInstagramModalDiv).modal("show");
@@ -195,6 +197,10 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     {
       this.myPlayer.loadVideoById(theVideoId);
     }
+    
+    var theVideo = this.myYouTubeVideos[theVideoId];
+    $(this.myVideoModalDiv + " div.modal-header h3").text(theVideo.title.$t);
+    
 
     $(".modal").modal("hide");
     $(this.myVideoModalDiv).modal("show");
