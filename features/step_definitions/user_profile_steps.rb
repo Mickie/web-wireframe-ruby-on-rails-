@@ -3,7 +3,6 @@ Then /^I should see a pick a league prompt$/ do
 end
 
 When /^I pick a league$/ do
-  wait_until { !find("#league_picker").visible? }
   select @team.league.name, from: 'league_picker' 
 end
 
