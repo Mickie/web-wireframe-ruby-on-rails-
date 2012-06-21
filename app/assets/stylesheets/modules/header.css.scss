@@ -1,0 +1,19 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+
+header
+{
+  .navbar-inner
+  {
+    @include gradient-vertical($grayLighter, $grayLighter);
+    @include box-shadow(none);
+  }
+  
+}
+
+.navbar .nav > li > a 
+{
+  color: $gray;
+}
+
+

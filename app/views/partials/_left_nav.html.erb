@@ -1,0 +1,40 @@
+<nav id="left_nav">
+  
+  <ul class="nav nav-tabs nav-stacked">
+    <li id="logo">
+      <a href="/">
+        <div>
+          <span class="brand">FANZO</span><span class="tld">.ME</span>
+          <p class="tagline">
+            where fans rule
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="<%= new_tailgate_path %>">
+        <span class="create">+ &nbsp; CREATE A FANZONE</span>
+      </a>
+    </li>
+    
+    <li id="allFanZones">
+      <a onclick="loadData('/fan_zones/all')" href="#">ALL FANZONES</a> 
+    </li>
+    
+    <li>
+      <a onclick="loadData('/fan_zones/mine')" href="#">MY FANZONES</a> 
+    </li>
+
+    <% if signed_in? && current_user.tailgates.length != 0 %>
+      <% current_user.tailgates.each do |aTailgate|%>
+        <li>
+          <a onclick="loadData('<%= tailgate_path(id:aTailgate, noLayout:true ) %>')">
+            <%= teamLogo(aTailgate.team, :small) %>
+            <%= aTailgate.name %>
+          </a>
+        </li>
+      <% end %>
+    <% end %>
+    
+  </ul>
+</nav>

@@ -1,0 +1,40 @@
+.fanzoneTile
+{
+  border: #CCCCCC solid 1px;
+  
+  .banner
+  {
+    background: #002A5C;
+    height: 30px;
+      
+    h3
+    {
+      color: white;
+    }
+  }
+
+  .content
+  {
+    background: white;
+    height:200px; 
+    
+    .posts
+    { 
+      height:180px; 
+      
+      .post 
+      {
+      
+      }
+    }
+    
+    .stats
+    {
+       height: 20px;
+       border-top: #F3F3F3 solid 1px;
+       border-bottom: #F3F3F3 solid 1px;    
+    }
+    
+  }
+}
+

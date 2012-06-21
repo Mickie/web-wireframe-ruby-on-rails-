@@ -12,12 +12,12 @@ describe "StaticPages" do
       response.status.should be(200)
     end
     
-    it { should have_selector('title', text: 'FANZO - Uniting people around the world through sports') }
-    it { should have_selector('h1', text: 'Welcome') }
+    it { should have_selector('title', text: 'FANZO - Where Fans Rule!') }
+    it { should have_selector('p.tagline', text: 'where fans rule') }
     
-    describe "for new users" do
+    describe "for guest" do
       
-      it { should have_link("Join the Party", href: new_user_registration_path ) }
+      it { should have_link("Sign in", href: new_user_session_path ) }
       
     end
     

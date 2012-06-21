@@ -1,0 +1,84 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+
+nav#left_nav
+{
+  li
+  {
+    background-color: $navBackgroundColor;
+    margin: 0;
+    
+    a
+    {
+      color:$navTextColor;
+      border-bottom-color: $navBorderColorBottom;
+      border-top-color: $navBorderColorTop;
+      text-align:center;    
+      padding:15px 0px;
+      font-weight:bold;
+    }
+    
+    .create
+    {
+      color: white;
+      background-color: black;
+      padding: 3px 8px;
+    }
+    
+  }
+
+  .nav-tabs.nav-stacked > li
+  {
+     &:last-child > a, &:first-child > a
+     {
+        @include border-radius(0);
+     }
+  }
+
+  .nav-tabs > .active > a
+  {
+    color: $navActiveTextColor;
+    background-color: $navActiveBackgroundColor;
+    border-right-color: $navActiveBorderColorRightLeft;
+    border-left-color: $navActiveBorderColorRightLeft;
+    border-top-color: $navActiveBorderColorTopBottom;
+    border-bottom-color: $navActiveBorderColorTopBottom;
+  }
+
+  
+  #logo 
+  {
+    color:black;
+    background-color: white;
+    
+    a
+    {
+      div
+      {
+        padding: 20px 0px;
+        
+        .brand
+        {
+          font-weight: bold;
+          font-size: 3em;
+        }
+        
+        .tld
+        {
+          font-size: 2em;
+        }
+        
+        .tagline
+        {
+          padding-top:10px;
+          padding-left:3px;
+          color: grey;
+          font-size: 1.85em;
+          letter-spacing: 1px;  
+        }
+      }
+    }
+  }
+    
+}
+

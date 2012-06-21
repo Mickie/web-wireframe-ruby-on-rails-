@@ -1,19 +1,12 @@
-@import "bootstrap";
-
-$grayMediumLight: #eaeaea;
-$navyBlue: #000066;
-$darkBlue: #000099;
-
-@mixin box_sizing {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box;
-}
+@import "bootstrap/mixins";
+@import "partials/colors";
 
 body
 {
-  padding-top:60px;
+  padding-top:40px;
   padding-bottom:40px;
+  background-color: $grayLighter;
+  font-family: 'Open Sans', sans-serif;  
 }
 
 h1 
@@ -26,52 +19,13 @@ h2, h3
   color: $darkBlue;
 }
 
-.navbar-inner
-{
-  @include gradient-vertical($navyBlue, $darkBlue);
-}
-
-#logo {
-  font-weight: bold;
-  line-height: 1;
-  color:white;
-  &:hover {
-    color: white;
-    text-decoration: none;
-  }
-}
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
-  a {
-    color: $gray;
-    &:hover { 
-      color: $grayDarker;
-    }
-  }  
-  small { 
-    float: left; 
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
-  }
-}
-
 .debug_dump 
 {
   clear: both;
   float: left;
   width: 100%;
   margin-top: 45px;
-  @include box_sizing;
+  @include box_sizing(border-box);
 }
 
 input, textarea, select, .uneditable-input 
@@ -81,7 +35,7 @@ input, textarea, select, .uneditable-input
   padding: 10px;
   height: auto;
   margin-bottom: 15px;
-  @include box_sizing;
+  @include box_sizing(border-box);
 }
 
 .field_with_errors 
@@ -96,57 +50,6 @@ input, textarea, select, .uneditable-input
   label
   {
     font-weight:bold;
-  }
-}
-
-#error_explanation 
-{
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  h2 
-  {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff; 
-  }
-  ul li 
-  {
-    font-size: 12px;
-    list-style: square; 
-  } 
-}
-
-@import "bootstrap-responsive";
-
-@media (max-width: 480px)
-{
-
-  .container-fluid
-  {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .hero-unit
-  {
-    padding:10px;
-    h1
-    {
-      font-size:30px;
-    }
-    h2
-    {
-      font-size: 20px;
-      line-height: 22px;
-    }
   }
 }
 

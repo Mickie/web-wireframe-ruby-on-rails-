@@ -3,7 +3,8 @@ Then /^I should see a pick a league prompt$/ do
 end
 
 When /^I pick a league$/ do
-  select @team.league.name, from: 'league_picker'
+  wait_until { !find("#league_picker").visible? }
+  select @team.league.name, from: 'league_picker' 
 end
 
 Then /^I should see a pick a team prompt$/ do
@@ -45,7 +46,7 @@ When /^I click on a team link$/ do
 end
 
 When /^I click on the create tailgate button$/ do
-  click_link "Start Your Own FANZOne" 
+  click_link "Start Your Own Fanzone" 
 end
 
 Then /^I should see an add a location link$/ do
@@ -53,7 +54,7 @@ Then /^I should see an add a location link$/ do
 end
 
 When /^I click the add a location link$/ do
-  click_link "Local FANZOnes"
+  click_link "Local Fanzones"
   click_link "Add Location"
 end
 
