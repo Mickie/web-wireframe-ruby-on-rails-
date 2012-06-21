@@ -1,0 +1,24 @@
+<div class="span4 fanzoneTile">
+  <div class="banner">
+    <h3><%= tailgate.name %></h3>
+  </div>
+  <div class="content">
+    <div class="posts">
+      <% for i in 0..1 do %>
+        <% if i < tailgate.posts.length %>
+          <div class="post">
+            <%= tailgate.posts[i].content %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="stats">
+      <span class="numFollowers">
+        23 fans
+      </span>
+      <span class="lastUpdateDate">
+        19 June
+      </span>
+    </div>
+  </div>
+</div>

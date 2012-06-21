@@ -5,10 +5,18 @@ class TailgatesController < ApplicationController
   # GET /tailgates
   # GET /tailgates.json
   def index
-    @tailgates = Tailgate.all
+    if ( params[:filter] == "user" && current_user )
+      @tailgates = Tailgate.includes(:posts).where(user_id: current_user.id )
+    else
+      @tailgates = Tailgate.includes(:posts).all
+    end
 
     respond_to do |format|
-      format.html # index.html.erb
+      if (params[:noLayout])
+        format.html { render layout: false }
+      else
+        format.html # index.html.erb
+      end
       format.json { render json: @tailgates }
     end
   end

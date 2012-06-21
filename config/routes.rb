@@ -1,8 +1,4 @@
 FanzoSite::Application.routes.draw do
-
-  get "fan_zones/all"
-  get "fan_zones/mine"
-
   resources :comments
 
   devise_for :admins, only: :sessions

@@ -1,11 +1,13 @@
 .fanzoneTile
 {
   border: #CCCCCC solid 1px;
+  margin-bottom: 20px;
   
   .banner
   {
     background: #002A5C;
     height: 30px;
+    padding: 5px;
       
     h3
     {
@@ -16,11 +18,12 @@
   .content
   {
     background: white;
-    height:200px; 
+    height:220px; 
     
     .posts
     { 
       height:180px; 
+      padding: 5px;
       
       .post 
       {
@@ -30,9 +33,20 @@
     
     .stats
     {
-       height: 20px;
-       border-top: #F3F3F3 solid 1px;
-       border-bottom: #F3F3F3 solid 1px;    
+      padding: 5px;
+      height: 20px;
+      border-top: #F3F3F3 solid 1px;
+      border-bottom: #F3F3F3 solid 1px;
+       
+      .numFollowers
+      {
+        
+      }
+      
+      .lastUpdateDate
+      {
+        float:right;
+      }
     }
     
   }
