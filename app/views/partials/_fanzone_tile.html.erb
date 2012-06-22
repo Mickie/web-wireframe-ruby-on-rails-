@@ -1,12 +1,25 @@
 <div class="span4 fanzoneTile">
   <div class="banner">
-    <h3><%= tailgate.name %></h3>
+    <div class="join_fanzone">
+      <a href="#">Join</a>
+    </div>
+    <div class="banner_content">
+      <div class="team_logo">
+        <%= teamLogo(tailgate.team, :small) %>      
+      </div>
+      <h3><%= tailgate.name %></h3>
+    </div>
   </div>
   <div class="content">
     <div class="posts">
       <% for i in 0..1 do %>
         <% if i < tailgate.posts.length %>
           <div class="post">
+            <div class="profile_pic">
+              <% if tailgate.posts[i].user.image %>
+                <%= image_tag( tailgate.posts[i].user.image, size:"32x32") %>
+              <% end %>
+            </div>
             <%= tailgate.posts[i].content %>
           </div>
         <% end %>

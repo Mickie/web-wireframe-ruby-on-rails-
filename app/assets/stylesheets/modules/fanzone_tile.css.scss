@@ -1,3 +1,6 @@
+@import "partials/colors";
+
+
 .fanzoneTile
 {
   border: #CCCCCC solid 1px;
@@ -6,13 +9,47 @@
   .banner
   {
     background: #002A5C;
-    height: 30px;
-    padding: 5px;
-      
-    h3
+    height: 80px;
+    
+    .join_fanzone
     {
-      color: white;
+      float:right;
+      
+      a
+      {
+        padding: 2px 10px;
+        color: black;
+        font-weight: bold;
+        background-color: $joinBackground;
+        border: $joinBorder solid 1px;
+        text-transform: uppercase;
+      }
     }
+    
+    .banner_content
+    {
+      padding: 0px 5px;
+      clear: both;
+
+      .team_logo
+      {
+        float:left;
+        margin-right: 10px;
+        
+        img
+        {
+          width: 32px;
+          height: 32px;
+        }
+      }
+        
+      h3
+      {
+        font-size: 1em;
+        color: white;
+      }
+    }
+    
   }
 
   .content
@@ -27,7 +64,13 @@
       
       .post 
       {
-      
+        .profile_pic
+        {
+          float: left;
+          height: 40px;
+          width: 32px;
+          padding-right: 5px;
+        }
       }
     }
     
