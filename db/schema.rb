@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614045205) do
+ActiveRecord::Schema.define(:version => 20120622170423) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -153,9 +153,11 @@ ActiveRecord::Schema.define(:version => 20120614045205) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "tailgate_id"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["tailgate_id"], :name => "index_posts_on_tailgate_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "quick_tweets", :force => true do |t|
     t.integer  "sport_id"

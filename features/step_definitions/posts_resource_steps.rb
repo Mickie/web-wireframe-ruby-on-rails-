@@ -1,6 +1,6 @@
 Given /^I have created 3 posts$/ do
   3.times do |n|
-    FactoryGirl.create(:post, title:"title#{n}", tailgate:@tailgate)
+    FactoryGirl.create(:post, title:"title#{n}", tailgate:@tailgate, user:@tailgate.user)
   end
 end  
 
@@ -14,6 +14,7 @@ Given /^I previously created a post$/ do
   @tailgate.save
   @tailgate.reload 
   @edit_post.tailgate = @tailgate
+  @edit_post.user = @user
   @edit_post.save
 
   @post.tailgate = @tailgate

@@ -41,7 +41,9 @@ end
 
 When /^I click on a team link$/ do 
   page.should have_link(@team.name)
-  click_link @team.name
+  
+  link=find_link(@team.name)
+  link.native.send_keys([:return])  
 end
 
 When /^I click on the create tailgate button$/ do

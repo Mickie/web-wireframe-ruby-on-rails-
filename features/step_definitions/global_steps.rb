@@ -19,7 +19,7 @@ Before do
   @person = FactoryGirl.create(:person)
   @quick_tweet = FactoryGirl.create(:quick_tweet)
   @tailgate = FactoryGirl.create(:tailgate)
-  @post = FactoryGirl.create(:post, tailgate:@tailgate)
+  @post = FactoryGirl.create(:post, tailgate:@tailgate, user:@tailgate.user)
   
   @new_sport = FactoryGirl.build(:sport)
   @new_league = FactoryGirl.build(:league, visible:true)
@@ -35,7 +35,7 @@ Before do
   @new_person = FactoryGirl.build(:person)
   @new_quick_tweet = FactoryGirl.build(:quick_tweet)
   @new_tailgate = FactoryGirl.build(:tailgate)
-  @new_post = FactoryGirl.build(:post, tailgate:@tailgate)
+  @new_post = FactoryGirl.build(:post, tailgate:@tailgate, user:@tailgate.user)
   @new_comment = FactoryGirl.build(:comment)
   
   @edit_sport = FactoryGirl.create(:sport)
@@ -52,7 +52,7 @@ Before do
   @edit_person = FactoryGirl.create(:person)
   @edit_quick_tweet = FactoryGirl.create(:quick_tweet)
   @edit_tailgate = FactoryGirl.create(:tailgate)
-  @edit_post = FactoryGirl.create(:post, tailgate:@edit_tailgate)
+  @edit_post = FactoryGirl.create(:post, tailgate:@edit_tailgate, user:@tailgate.user)
 
 end
 

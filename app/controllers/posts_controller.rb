@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = @tailgate.posts.new
+    @post = @tailgate.posts.new(user_id: current_user.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -31,10 +31,15 @@ class PostsController < ApplicationController
 
   def edit
     @post = @tailgate.posts.find(params[:id])
+    
+    if ( @post.user.id != current_user.id )
+      render action: "new", error: 'Cannot edit a post from a different user'
+    end
   end
 
   def create
     @post = @tailgate.posts.new(params[:post])
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
@@ -54,6 +59,9 @@ class PostsController < ApplicationController
       if @post.tailgate != @tailgate
         format.html { render action: "new", error: 'Cannot update post with a different tailgate' }
         format.json { render json: { error: 'Cannot update post with a different tailgate' }, status: :unprocessable_entity }
+      elsif @post.user != current_user
+        format.html { render action: "new", error: 'Cannot update post with a different user' }
+        format.json { render json: { error: 'Cannot update post with a different user' }, status: :unprocessable_entity }
       elsif @post.update_attributes(params[:post])
         format.html { redirect_to tailgate_post_url(@tailgate, @post), notice: 'Post was successfully updated.' }
         format.json { head :no_content }

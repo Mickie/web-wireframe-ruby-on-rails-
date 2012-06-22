@@ -23,7 +23,7 @@
     <% if signed_in? && current_user.tailgates.length != 0 %>
       <% current_user.tailgates.each do |aTailgate|%>
         <li>
-          <a onclick="loadData('<%= tailgate_path(id:aTailgate, noLayout:true ) %>')">
+          <a href="#" onclick="loadData('<%= tailgate_path(id:aTailgate, noLayout:true ) %>')">
             <%= teamLogo(aTailgate.team, :small) %>
             <%= aTailgate.name %>
           </a>

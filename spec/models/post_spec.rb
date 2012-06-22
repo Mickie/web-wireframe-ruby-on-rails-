@@ -3,7 +3,10 @@ require 'spec_helper'
 describe Post do
 
   before do
-    @post = FactoryGirl.create(:post)
+    mock_geocoding!
+    
+    theTailgate = FactoryGirl.create(:tailgate)
+    @post = FactoryGirl.create(:post, tailgate:theTailgate, user:theTailgate.user)
   end
 
   subject { @post }
@@ -11,5 +14,6 @@ describe Post do
   it { should respond_to(:title) }
   it { should respond_to(:content) }
   it { should respond_to(:tailgate) }
+  it { should respond_to(:user) }
 
 end
