@@ -1,7 +1,28 @@
 <% if session["devise.twitter_data"] %>
-    <%= render "twitter_authed_new_user" %>
+  <%= render "twitter_authed_new_user" %>
 <% elsif session["devise.instagram_data"] %>
-    <%= render "instagram_authed_new_user" %>
+  <%= render "instagram_authed_new_user" %>
 <% else %>
-    <%= render "new_user" %>
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Register with FANZO</h1>
+      <%= render "devise/only_facebook" %>
+    </div>
+  </div>
+  
+  <% if Rails.env.test? %>
+    <%= form_for(resource, 
+                 as: resource_name, 
+                 url: registration_path(resource_name)
+                 ) do |f| %>
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder:"superfan@sports.com" %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.submit "Create Account & Login >>", id:'commit' %>
+    <% end %>
+  <% end %>
+  
 <% end %>

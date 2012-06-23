@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
                   :locations,
                   :tailgates 
                   
-  def self.find_for_facebook_oauth(access_token, signed_in_user=nil)
+  def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)
   
     theId = access_token.uid
     theToken = access_token.credentials.token
@@ -51,20 +51,22 @@ class User < ActiveRecord::Base
     
     if theUserWithThisFacebookId
       return theUserWithThisFacebookId
-    elsif signed_in_user
-      signed_in_user.facebook_user_id = theId
-      signed_in_user.facebook_access_token = theToken
-      signed_in_user.first_name = theFirstName unless signed_in_user.first_name
-      signed_in_user.last_name = theLastName unless signed_in_user.last_name
-      signed_in_user.image = theImage unless signed_in_user.image
-      signed_in_user.save!
-      return signed_in_user
+    elsif aSignedInUser
+      aSignedInUser.facebook_user_id = theId
+      aSignedInUser.facebook_access_token = theToken
+      aSignedInUser.first_name = theFirstName unless aSignedInUser.first_name
+      aSignedInUser.last_name = theLastName unless aSignedInUser.last_name
+      aSignedInUser.image = theImage unless aSignedInUser.image
+      aSignedInUser.remember_me = true
+      aSignedInUser.save!
+      return aSignedInUser
     elsif theUserWithThisEmail = User.where( email: theEmail ).first
       theUserWithThisEmail.facebook_user_id = theId
       theUserWithThisEmail.facebook_access_token = theToken
       theUserWithThisEmail.first_name = theFirstName unless theUserWithThisEmail.first_name
       theUserWithThisEmail.last_name = theLastName unless theUserWithThisEmail.last_name
       theUserWithThisEmail.image = theImage unless theUserWithThisEmail.image
+      theUserWithThisEmail.remember_me = true
       theUserWithThisEmail.save!
       return theUserWithThisEmail
     else
@@ -76,12 +78,13 @@ class User < ActiveRecord::Base
                                   facebook_access_token: theToken,
                                   first_name: theFirstName,
                                   last_name: theLastName,
-                                  image: theImage)
+                                  image: theImage,
+                                  remember_me: true)
       return theNewUser    
     end
   end
   
-  def self.find_for_foursquare_oauth(access_token, signed_in_user)
+  def self.find_for_foursquare_oauth(access_token, aSignedInUser)
 
     theId = access_token.uid
     theToken = access_token.credentials.token
@@ -95,20 +98,22 @@ class User < ActiveRecord::Base
 
     if theUserWithThisFoursquareId
       return theUserWithThisFoursquareId
-    elsif signed_in_user
-      signed_in_user.foursquare_user_id = theId
-      signed_in_user.foursquare_access_token = theToken
-      signed_in_user.first_name = theFirstName unless signed_in_user.first_name
-      signed_in_user.last_name = theLastName unless signed_in_user.last_name
-      signed_in_user.image = theImage unless signed_in_user.image
-      signed_in_user.save!
-      return signed_in_user
+    elsif aSignedInUser
+      aSignedInUser.foursquare_user_id = theId
+      aSignedInUser.foursquare_access_token = theToken
+      aSignedInUser.first_name = theFirstName unless aSignedInUser.first_name
+      aSignedInUser.last_name = theLastName unless aSignedInUser.last_name
+      aSignedInUser.image = theImage unless aSignedInUser.image
+      aSignedInUser.remember_me = true
+      aSignedInUser.save!
+      return aSignedInUser
     elsif theUserWithThisEmail = User.where( email: theEmail ).first
       theUserWithThisEmail.foursquare_user_id = theId
       theUserWithThisEmail.foursquare_access_token = theToken
       theUserWithThisEmail.first_name = theFirstName unless theUserWithThisEmail.first_name
       theUserWithThisEmail.last_name = theLastName unless theUserWithThisEmail.last_name
       theUserWithThisEmail.image = theImage unless theUserWithThisEmail.image
+      theUserWithThisEmail.remember_me = true
       theUserWithThisEmail.save!
       return theUserWithThisEmail
     else
@@ -120,13 +125,14 @@ class User < ActiveRecord::Base
                                   foursquare_access_token: theToken,
                                   first_name: theFirstName,
                                   last_name: theLastName,
-                                  image: theImage)
+                                  image: theImage,
+                                  remember_me: true)
       return theNewUser    
     end
   end
   
 
-  def self.find_for_twitter_oauth(access_token, signed_in_user)
+  def self.find_for_twitter_oauth(access_token, aSignedInUser)
   
     theId = access_token.uid
     theToken = access_token.credentials.token
@@ -139,28 +145,28 @@ class User < ActiveRecord::Base
   
     theUserWithThisTwitterId = User.where( twitter_user_id: theId ).first
 
-    if signed_in_user
-      if theUserWithThisTwitterId && signed_in_user.id != theUserWithThisTwitterId.id
+    if aSignedInUser
+      if theUserWithThisTwitterId && aSignedInUser.id != theUserWithThisTwitterId.id
         return theUserWithThisTwitterId
-      elsif signed_in_user.twitter_user_id
-        return signed_in_user
+      elsif aSignedInUser.twitter_user_id
+        return aSignedInUser
       else
-        signed_in_user.twitter_user_id = theId
-        signed_in_user.twitter_username = theNickname
-        signed_in_user.twitter_user_token = theToken
-        signed_in_user.twitter_user_secret = theSecret
-        signed_in_user.name = theName unless signed_in_user.name
-        signed_in_user.image = theImage unless signed_in_user.image
-        signed_in_user.description = theBio unless signed_in_user.description
-        signed_in_user.save!
-        return signed_in_user
+        aSignedInUser.twitter_user_id = theId
+        aSignedInUser.twitter_username = theNickname
+        aSignedInUser.twitter_user_token = theToken
+        aSignedInUser.twitter_user_secret = theSecret
+        aSignedInUser.name = theName unless aSignedInUser.name
+        aSignedInUser.image = theImage unless aSignedInUser.image
+        aSignedInUser.description = theBio unless aSignedInUser.description
+        aSignedInUser.save!
+        return aSignedInUser
       end
     else
       return theUserWithThisTwitterId
     end
   end
 
-  def self.find_for_instagram_oauth(access_token, signed_in_user)
+  def self.find_for_instagram_oauth(access_token, aSignedInUser)
     theId = access_token.uid
     theToken = access_token.credentials.token
     theName = access_token.info.name
@@ -170,20 +176,20 @@ class User < ActiveRecord::Base
 
     theUserWithThisInstagramId = User.where( instagram_user_id: theId).first
 
-    if signed_in_user
-      if signed_in_user == theUserWithThisInstagramId
-        return signed_in_user
+    if aSignedInUser
+      if aSignedInUser == theUserWithThisInstagramId
+        return aSignedInUser
       elsif theUserWithThisInstagramId
         return theUserWithThisInstagramId
       else
-        signed_in_user.instagram_user_id = theId
-        signed_in_user.instagram_user_token = theToken
-        signed_in_user.instagram_username = theNickname
-        signed_in_user.name = theName unless signed_in_user.name
-        signed_in_user.image = theImage unless signed_in_user.image
-        signed_in_user.description = theBio unless signed_in_user.description
-        signed_in_user.save!
-        return signed_in_user
+        aSignedInUser.instagram_user_id = theId
+        aSignedInUser.instagram_user_token = theToken
+        aSignedInUser.instagram_username = theNickname
+        aSignedInUser.name = theName unless aSignedInUser.name
+        aSignedInUser.image = theImage unless aSignedInUser.image
+        aSignedInUser.description = theBio unless aSignedInUser.description
+        aSignedInUser.save!
+        return aSignedInUser
       end
     else
       theUserWithThisInstagramId
