@@ -2,12 +2,20 @@
 
 <div id="tailgate_show">
   <div class="row-fluid">
-    <div class="span12 hero-unit">
-      <h1><%= @tailgate.name %></h1>
-      <p>Created by <%= @tailgate.user.email %>, a <%= @tailgate.team.name %> Super Fan</p>
-      <% if @current_user == @tailgate.user %>
-        <p>Hey! This is your tailgate, so you can <%= link_to "edit", edit_tailgate_path(@tailgate)%> it!</p>
-      <% end %>
+    <div class="span12 banner">
+      <div class="join_fanzone">
+        <a href="#">Join</a>
+      </div>
+      <div class="banner_content">
+        <div class="team_logo">
+          <%= teamLogo(@tailgate.team, :large) %>      
+        </div>
+        <h1><%= @tailgate.name %></h1>
+        <p class="owner"><span class="fan_count">74 FANS</span> : Created by <%= @tailgate.user.full_name %> : Updated on June 22, 2012</p>
+        <% if @current_user == @tailgate.user %>
+          <p>Hey! This is your tailgate, so you can <%= link_to "edit", edit_tailgate_path(@tailgate)%> it!</p>
+        <% end %>
+      </div>
     </div>
   </div>
   

@@ -208,6 +208,26 @@ class User < ActiveRecord::Base
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
   end
+  
+  def full_name
+    if name && name.length > 0
+      return name
+    elsif ( first_name && first_name.length > 0 ) && ( last_name && last_name.length > 0)
+      return "#{first_name} #{last_name}"
+    elsif ( first_name && first_name.length > 0 ) && !( last_name && last_name.length > 0)
+      return first_name
+    elsif !( first_name && first_name.length > 0 ) && ( last_name && last_name.length > 0)
+      return last_name
+    elsif twitter_username && twitter_username.length > 0 
+      return twitter_username
+    elsif twitter_username && twitter_username.length > 0 
+      return twitter_username
+    elsif instagram_username && instagram_username.length > 0 
+      return instagram_username
+    else
+      return email
+    end 
+  end
 
 end
 

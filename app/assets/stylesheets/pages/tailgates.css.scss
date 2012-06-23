@@ -1,0 +1,55 @@
+@import "partials/colors";
+
+div#tailgate_show
+{
+  div.banner
+  {
+    background-color: black;
+    padding-bottom: 40px;
+
+    div.join_fanzone
+    {
+      float:right;
+      
+      a
+      {
+        padding: 2px 25px;
+        color: black;
+        font-weight: bold;
+        background-color: $joinBackground;
+        border: $joinBorder solid 1px;
+        text-transform: uppercase;
+      }
+    }
+    
+    div.banner_content
+    {
+      clear: both;
+      
+      div.team_logo
+      {
+        float:left;
+        margin: 0px 10px;
+      }
+      
+      h1
+      {
+        color:white;
+        padding: 10px;
+      }
+      
+      p.owner
+      {
+        color: $ownerText;
+        
+        span.fan_count
+        {
+          color: white;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  
+  
+}

@@ -20,7 +20,6 @@ describe "tailgates/show" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
     rendered.should match(/Joe@bar.com/)
-    rendered.should match(/Seahawks/)
   end
 
   it "renders partial" do

@@ -29,8 +29,26 @@ describe User do
   it { should respond_to(:locations) }
   it { should respond_to(:tailgates) }
   it { should respond_to(:isConnectedToTwitter?)}
+  it { should respond_to(:full_name)}
   
   it { should be_valid }
+  
+  describe "full_name" do
+    it "should return name if exists" do
+      @user.name = "aName"
+      @user.full_name.should eq("aName")
+    end
+    
+    it "should return combo of first and last if name is empty" do
+      @user.first_name = "First"
+      @user.last_name = "Last"
+      @user.full_name.should eq("First Last")
+    end
+    
+    it "should fall back to email if no other name parts" do
+      @user.full_name.should eq(@user.email)
+    end
+  end
   
   describe "email validation" do
     describe "when email is not present" do
