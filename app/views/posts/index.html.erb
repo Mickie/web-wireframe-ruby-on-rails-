@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Title</th>
     <th>Content</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @posts.each do |post| %>
   <tr>
-    <td><%= post.title %></td>
     <td><%= post.content %></td>
     <td><%= link_to 'Show', tailgate_post_path(@tailgate, post) %></td>
     <td><%= link_to 'Edit', edit_tailgate_post_path(@tailgate, post) %></td>

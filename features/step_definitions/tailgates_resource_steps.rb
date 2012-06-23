@@ -40,7 +40,6 @@ Then /^I should be able to associate a team with the tailgate$/ do
 end
 
 When /^I add a post$/ do
-  fill_in "Title", with: @new_post.title
   fill_in "Content", with: @new_post.content
   click_button "add_post"
 end
