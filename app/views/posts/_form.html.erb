@@ -1,8 +1,7 @@
 <%= form_for([@tailgate, @post]) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
+      <h4><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h4>
       <ul>
       <% @post.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,11 +10,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content, rows:3 %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save", id:"add_post", class:"btn" %>
-  </div>
+  <%= f.text_area :content, rows:3, placeholder:"What's up?" %>
+  <%= f.submit "Post", id:"add_post" %>
 <% end %>

@@ -50,6 +50,64 @@ div#tailgate_show
       }
     }
   }
+
+  h4
+  {
+    text-align:center;
+  }
+  
+  div.fanzonePosts
+  {
+    border: grey solid 1px;
+    
+    div#postForm
+    {
+      #add_post
+      {
+        padding: 3px 15px;
+        background: black;
+        color: white;
+        text-transform: uppercase;
+        float:right;
+      }
+    }
+    
+    div#posts
+    {
+      clear:both;
+
+      div.post
+      {
+        background: white;
+        padding: 10px 0px;
+        div.profile_pic
+        {
+          float:left;
+          margin-right: 10px;
+        }
+        
+        div.comment_form
+        {
+          padding: 5px 0px;
+          
+          .comment_submit
+          {
+            padding: 3px 15px;
+            background: black;
+            color: white;
+            text-transform: uppercase;
+            float:right;
+          }
+        }
+      }
+    }
+  
+  }
+  
+  div.twitterStream
+  {
+    border: grey solid 1px;
+  }
   
   
 }

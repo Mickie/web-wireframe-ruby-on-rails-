@@ -40,7 +40,7 @@ Then /^I should be able to associate a team with the tailgate$/ do
 end
 
 When /^I add a post$/ do
-  fill_in "Content", with: @new_post.content
+  fill_in "post_content", with: @new_post.content
   click_button "add_post"
 end
 
@@ -52,8 +52,8 @@ Given /^I previously added a post$/ do
 end
 
 When /^I comment on the post$/ do
-  fill_in "Comment", with: @new_comment.content
-  click_button "add_comment"
+  fill_in "comment_content", with: @new_comment.content
+  click_button "Add Comment"
 end
 
 Then /^I should see the comment on the post on the tailgate page$/ do

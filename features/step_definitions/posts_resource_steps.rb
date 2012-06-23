@@ -37,7 +37,7 @@ When /^I create a new post$/ do
 end
 
 When /^I edit the post$/ do
-  fill_in "Content", with: "Dave's killer post"
+  fill_in "post_content", with: "Dave's killer post"
   click_button "add_post"  
 end
 
