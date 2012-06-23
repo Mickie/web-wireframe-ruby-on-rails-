@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "devise/registrations/new" do
 
   before do
+    view.should_receive(:resource).at_least(1).times.and_return(User.new)
     view.should_receive(:resource_name).at_least(1).times.and_return("user")
   end
   
@@ -13,9 +14,6 @@ describe "devise/registrations/new" do
   end
 
   describe "two step registrations" do
-    before do
-      view.should_receive(:resource).at_least(1).times.and_return(User.new)
-    end
     
     it "should show post twitter auth fields" do
       session["devise.twitter_data"] = twitter_auth

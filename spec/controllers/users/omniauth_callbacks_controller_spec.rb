@@ -36,8 +36,8 @@ describe Users::OmniauthCallbacksController do
         get :twitter
       end      
       
-      it "should find user and redirect to user profile" do
-        response.should redirect_to( user_path(user) )
+      it "should find user and redirect to root" do
+        response.should redirect_to( root_path )
       end
       
     end
@@ -78,8 +78,8 @@ describe Users::OmniauthCallbacksController do
         get :instagram
       end      
       
-      it "should find user and redirect to user profile" do
-        response.should redirect_to( user_path(user) )
+      it "should find user and redirect to root" do
+        response.should redirect_to( root_path )
       end
       
     end
