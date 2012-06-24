@@ -60,6 +60,11 @@ div#tailgate_show
   {
     border: grey solid 1px;
     
+    h4
+    {
+      padding: 10px;
+    }
+    
     div#postForm
     {
       #add_post
@@ -107,6 +112,17 @@ div#tailgate_show
   div.twitterStream
   {
     border: grey solid 1px;
+    margin: 0px;
+    
+    .quickTweetButton
+    {
+      width: 90%;
+    }
+    
+    .dropdown-toggle
+    {
+      width: 10%;
+    }
   }
   
   
