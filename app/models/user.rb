@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :locations, through: :user_locations
   
   has_many :tailgates, inverse_of: :user, dependent: :delete_all
+  
+  has_many :tailgate_followers, inverse_of: :user, dependent: :delete_all
+  has_many :followed_tailgates, through: :tailgate_followers, source: :tailgate 
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email,
@@ -228,7 +231,18 @@ class User < ActiveRecord::Base
       return email
     end 
   end
+  
+  def following?( aTailgate )
+    tailgate_followers.find_by_tailgate_id( aTailgate.id )
+  end
 
+  def follow!( aTailgate )
+    tailgate_followers.create!( tailgate_id: aTailgate.id)
+  end  
+
+  def unfollow!( aTailgate )
+    tailgate_followers.find_by_tailgate_id( aTailgate.id ).destroy
+  end
 end
 
 

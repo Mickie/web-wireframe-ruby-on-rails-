@@ -11,8 +11,11 @@ describe Tailgate do
   it { should respond_to(:name) }
   it { should respond_to(:team) }
   it { should respond_to(:user) }
+  it { should respond_to(:tailgate_venues) }
   it { should respond_to(:venues) }
   it { should respond_to(:posts) }
+  it { should respond_to(:tailgate_followers) }
+  it { should respond_to(:followers) }
   
   it "should require a name to validate" do
     @tailgate.name = nil
@@ -27,9 +30,25 @@ describe Tailgate do
   it "should have correct number of venues" do
     3.times do
       theVenue = FactoryGirl.create(:venue)
-      theTailgateVenue = TailgateVenue.create tailgate:@tailgate, venue:theVenue
+      @tailgate.tailgate_venues.create(venue_id:theVenue.id)
     end
     @tailgate.venues.length.should eq(3)
   end
+
+  it "should have correct follower" do
+    theUser = FactoryGirl.create(:user)
+    theUser.follow!( @tailgate )
+    theUser.should be_following(@tailgate)
+    @tailgate.followers.should include( theUser )
+  end
+  
+  it "should have correct number of tailgate_followers" do
+    3.times do
+      theUser = FactoryGirl.create(:user)
+      theUser.follow!( @tailgate )
+    end
+    @tailgate.followers.length.should eq(3)
+  end
+  
   
 end

@@ -26,10 +26,18 @@ describe User do
   it { should respond_to(:image) }
   it { should respond_to(:description) }
   it { should respond_to(:teams) }
+  it { should respond_to(:user_locations) }
   it { should respond_to(:locations) }
   it { should respond_to(:tailgates) }
   it { should respond_to(:isConnectedToTwitter?)}
   it { should respond_to(:full_name)}
+
+  it { should respond_to(:tailgate_followers)}
+  it { should respond_to(:followed_tailgates)}
+  it { should respond_to(:following?)}
+  it { should respond_to(:follow!)}
+  it { should respond_to(:unfollow!)}
+  
   
   it { should be_valid }
   
@@ -48,6 +56,24 @@ describe User do
     it "should fall back to email if no other name parts" do
       @user.full_name.should eq(@user.email)
     end
+  end
+  
+  describe "following a tailgate" do
+    let(:tailgate) { FactoryGirl.create(:tailgate) }
+    before do
+      mock_geocoding!
+      @user.follow!( tailgate )
+    end 
+    
+    it { should be_following( tailgate ) }
+    its(:followed_tailgates) { should include(tailgate) }
+    
+    describe "and unfollowing" do
+      before { @user.unfollow!( tailgate ) }
+
+      it { should_not be_following( tailgate ) }
+      its(:followed_tailgates) { should_not include( tailgate ) }
+    end    
   end
   
   describe "email validation" do

@@ -1,4 +1,5 @@
 @import "partials/colors";
+@import "bootstrap/mixins";
 
 div#tailgate_show
 {
@@ -58,15 +59,18 @@ div#tailgate_show
   
   div.fanzonePosts
   {
+    background-color: white;
     border: grey solid 1px;
-    
-    h4
-    {
-      padding: 10px;
-    }
     
     div#postForm
     {
+      background-color: $postBackground;
+
+      h4
+      {
+        padding: 10px;
+      }
+      
       #add_post
       {
         padding: 3px 15px;
@@ -79,7 +83,8 @@ div#tailgate_show
     
     div#posts
     {
-      clear:both;
+      @include clearfix();
+      padding: 10px;    
 
       div.post
       {
@@ -88,7 +93,7 @@ div#tailgate_show
         div.profile_pic
         {
           float:left;
-          margin-right: 10px;
+          margin: 0px 10px 10px 0px;
         }
         
         div.comment_form
