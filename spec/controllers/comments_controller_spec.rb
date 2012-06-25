@@ -17,7 +17,7 @@ describe CommentsController do
   describe "GET index" do
     it "assigns all comments as @comments" do
       comment = @post.comments.create! valid_attributes
-      get :index, { post_id: @post.id }
+      get :index, { post_id: @post.id, tailgate_id: @tailgate.id }
       assigns(:comments).should eq([comment])
     end
   end
@@ -25,7 +25,7 @@ describe CommentsController do
   describe "GET show" do
     it "assigns the requested comment as @comment" do
       comment = @post.comments.create! valid_attributes
-      get :show, { id: comment.to_param, post_id: @post.id }
+      get :show, { id: comment.to_param, post_id: @post.id, tailgate_id: @tailgate.id }
       assigns(:comment).should eq(comment)
     end
   end
@@ -33,7 +33,7 @@ describe CommentsController do
   describe "GET new" do
     login_user
     it "assigns a new comment as @comment" do
-      get :new, { post_id: @post.id }
+      get :new, { post_id: @post.id, tailgate_id: @tailgate.id }
       assigns(:comment).should be_a_new(Comment)
       assigns(:comment).user.should eq(subject.current_user)
     end
@@ -43,7 +43,7 @@ describe CommentsController do
     login_user
     it "assigns the requested comment as @comment" do
       comment = @post.comments.create! valid_attributes
-      get :edit, { id: comment.to_param, post_id: @post.id }
+      get :edit, { id: comment.to_param, post_id: @post.id, tailgate_id: @tailgate.id }
       assigns(:comment).should eq(comment)
     end
   end
@@ -53,13 +53,13 @@ describe CommentsController do
     describe "with valid params" do
       it "creates a new Comment" do
         expect {
-          post :create, { comment: valid_attributes, post_id: @post.id }
+          post :create, { comment: valid_attributes, post_id: @post.id, tailgate_id: @tailgate.id }
         }.to change(Comment, :count).by(1)
       end
       
       describe "with the correct stuff" do
         before do
-          post :create, { comment: valid_attributes, post_id: @post.id }
+          post :create, { comment: valid_attributes, post_id: @post.id, tailgate_id: @tailgate.id }
         end
   
         it "assigns a newly created comment as @comment" do
@@ -81,14 +81,14 @@ describe CommentsController do
       it "assigns a newly created but unsaved comment as @comment" do
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        post :create, { comment: {}, post_id: @post.id }
+        post :create, { comment: {}, post_id: @post.id, tailgate_id: @tailgate.id }
         assigns(:comment).should be_a_new(Comment)
       end
 
       it "redirects back to tailgate" do
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        post :create, { comment: {}, post_id: @post.id }
+        post :create, { comment: {}, post_id: @post.id, tailgate_id: @tailgate.id }
         response.should redirect_to(@tailgate)
       end
     end
@@ -104,18 +104,18 @@ describe CommentsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Comment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => comment.to_param, :comment => {'these' => 'params'}, post_id: @post.id }
+        put :update, {:id => comment.to_param, :comment => {'these' => 'params'}, post_id: @post.id, tailgate_id: @tailgate.id }
       end
 
       it "assigns the requested comment as @comment" do
         comment = @post.comments.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes, post_id: @post.id }
+        put :update, {:id => comment.to_param, :comment => valid_attributes, post_id: @post.id, tailgate_id: @tailgate.id }
         assigns(:comment).should eq(comment)
       end
 
       it "redirects to the tailgate" do
         comment = @post.comments.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes, post_id: @post.id }
+        put :update, {:id => comment.to_param, :comment => valid_attributes, post_id: @post.id, tailgate_id: @tailgate.id }
         response.should redirect_to(@tailgate)
       end
     end
@@ -125,7 +125,7 @@ describe CommentsController do
         comment = @post.comments.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => comment.to_param, :comment => {}, post_id: @post.id }
+        put :update, {:id => comment.to_param, :comment => {}, post_id: @post.id, tailgate_id: @tailgate.id }
         assigns(:comment).should eq(comment)
       end
 
@@ -133,7 +133,7 @@ describe CommentsController do
         comment = @post.comments.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Comment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => comment.to_param, :comment => {}, post_id: @post.id }
+        put :update, {:id => comment.to_param, :comment => {}, post_id: @post.id, tailgate_id: @tailgate.id }
         response.should redirect_to(@tailgate)
       end
     end
@@ -144,13 +144,13 @@ describe CommentsController do
     it "destroys the requested comment" do
       comment = @post.comments.create! valid_attributes
       expect {
-        delete :destroy, {:id => comment.to_param, post_id: @post.id }
+        delete :destroy, {:id => comment.to_param, post_id: @post.id, tailgate_id: @tailgate.id }
       }.to change(Comment, :count).by(-1)
     end
 
     it "redirects to the tailgate" do
       comment = @post.comments.create! valid_attributes
-      delete :destroy, {:id => comment.to_param, post_id: @post.id }
+      delete :destroy, {:id => comment.to_param, post_id: @post.id, tailgate_id: @tailgate.id }
       response.should redirect_to(@tailgate)
     end
   end
