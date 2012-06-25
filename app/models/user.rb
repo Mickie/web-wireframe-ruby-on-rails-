@@ -7,15 +7,14 @@ class User < ActiveRecord::Base
   has_many :user_teams, inverse_of: :user, dependent: :delete_all
   has_many :teams, through: :user_teams
   
-  has_many :user_locations, inverse_of: :user, dependent: :delete_all
+  has_many :user_locations, inverse_of: :user, dependent: :destroy
   has_many :locations, through: :user_locations
   
-  has_many :tailgates, inverse_of: :user, dependent: :delete_all
+  has_many :tailgates, inverse_of: :user, dependent: :destroy
   
   has_many :tailgate_followers, inverse_of: :user, dependent: :delete_all
   has_many :followed_tailgates, through: :tailgate_followers, source: :tailgate 
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email,
                   :first_name,
                   :last_name,
@@ -33,12 +32,7 @@ class User < ActiveRecord::Base
                   :foursquare_access_token,
                   :instagram_user_id,
                   :instagram_user_token,
-                  :instagram_username,
-                  :user_teams,
-                  :teams,
-                  :user_locations,
-                  :locations,
-                  :tailgates 
+                  :instagram_username
                   
   def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)
   

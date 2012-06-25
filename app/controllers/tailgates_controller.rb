@@ -41,10 +41,8 @@ class TailgatesController < ApplicationController
   # GET /tailgates/new
   # GET /tailgates/new.json
   def new
-    @tailgate = Tailgate.new
-    @tailgate.user_id = current_user.id
-
-    @tailgateVenue = TailgateVenue.new tailgate:@tailgate
+    @tailgate = current_user.tailgates.build
+    @tailgateVenue = @tailgate.tailgate_venues.build
 
     respond_to do |format|
       format.html # new.html.erb

@@ -11,5 +11,7 @@ class Event < ActiveRecord::Base
   validates :event_date, presence:true 
   
   accepts_nested_attributes_for :location
+  
+  attr_accessible :name, :home_team_id, :visiting_team_id, :event_date, :event_time, :location_attributes
 
 end

@@ -55,7 +55,7 @@ describe Venue do
   it "should have correct number of tailgates" do
     3.times do
       theTailgate = FactoryGirl.create(:tailgate)
-      theTailgateVenue = TailgateVenue.create tailgate:theTailgate, venue:@venue
+      theTailgateVenue = TailgateVenue.create tailgate_id:theTailgate.id, venue_id:@venue.id
     end
     @venue.tailgates.length.should eq(3)
   end

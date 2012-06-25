@@ -6,8 +6,8 @@ describe TeamsController do
     mock_geocoding!
 
     @league = FactoryGirl.create(:league)
-    @location = FactoryGirl.create(:location)
-    @social_info = FactoryGirl.create(:social_info)
+    @location = FactoryGirl.build(:location)
+    @social_info = FactoryGirl.build(:social_info)
   end
 
   def valid_attributes
@@ -15,8 +15,8 @@ describe TeamsController do
       name:'Seahawks', 
       league_id:@league.id, 
       sport_id:@league.sport.id, 
-      location_id:@location.id,
-      social_info_id:@social_info.id
+      location_attributes: accessible_attributes(Location, @location),
+      social_info_attributes: accessible_attributes(SocialInfo, @social_info)
     }
   end
   

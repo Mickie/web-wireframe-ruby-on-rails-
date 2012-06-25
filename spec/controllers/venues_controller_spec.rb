@@ -10,7 +10,11 @@ describe VenuesController do
   
   
   def valid_attributes
-    { name:"Pumphouse", venue_type_id:@theVenueType.id, location_id:@theLocation.id }
+    { 
+      name:"Pumphouse", 
+      venue_type_id:@theVenueType.id, 
+      location_attributes: accessible_attributes(Location, @theLocation)
+    }
   end
 
   describe "GET index" do

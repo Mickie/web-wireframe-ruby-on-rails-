@@ -4,4 +4,6 @@ class UserTeam < ActiveRecord::Base
   
   validates :team_id, presence:true
   validates :user_id, presence:true
+  
+  attr_accessible :team_id, :user_id
 end

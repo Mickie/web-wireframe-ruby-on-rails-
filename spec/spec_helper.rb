@@ -27,6 +27,8 @@ Spork.prefork do
     config.include Devise::TestHelpers, :type => :controller
     config.extend DeviseHelpers, :type => :controller
     
+    config.include AttributeHelpers
+    
     config.include OmniAuthHelpers
 
     config.before(:suite) do

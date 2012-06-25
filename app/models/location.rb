@@ -5,6 +5,8 @@ class Location < ActiveRecord::Base
   geocoded_by :one_line_address
   after_validation :geocode, :if => :one_line_address_changed?
   
+  attr_accessible :name, :address1, :address2, :city, :state_id, :postal_code, :country_id
+  
   def one_line_address
     "#{address1}, #{address2}#{address2 && !address2.empty? ? ", " : ""}#{city}, #{state.abbreviation} #{postal_code}"
   end

@@ -33,12 +33,12 @@ describe UsersController do
         subject.current_user.locations.push(@location)
         subject.current_user.save
         
-        @theFirstWatchSite = FactoryGirl.build(:watch_site, team:@team)
-        @theSecondWatchSite = FactoryGirl.build(:watch_site)
+        @theFirstWatchSite = FactoryGirl.create(:watch_site, team:@team)
+        @theSecondWatchSite = FactoryGirl.create(:watch_site)
         WatchSite.should_receive(:near).exactly(3).times.and_return([@theFirstWatchSite, @theSecondWatchSite])
         
-        @theFirstTailgateVenue = TailgateVenue.create tailgate:FactoryGirl.create(:tailgate), venue:@theFirstWatchSite.venue
-        @theSecondTailgateVenue = TailgateVenue.create tailgate:FactoryGirl.create(:tailgate), venue:@theSecondWatchSite.venue
+        @theFirstTailgateVenue = TailgateVenue.create tailgate_id:FactoryGirl.create(:tailgate).id, venue_id:@theFirstWatchSite.venue.id
+        @theSecondTailgateVenue = TailgateVenue.create tailgate_id:FactoryGirl.create(:tailgate).id, venue_id:@theSecondWatchSite.venue.id
         TailgateVenue.should_receive(:near).twice.and_return([@theFirstTailgateVenue, @theSecondTailgateVenue])
 
         get :show, {id: subject.current_user.to_param}

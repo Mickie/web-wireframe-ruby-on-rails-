@@ -5,7 +5,7 @@ describe UserTeam do
     mock_geocoding!
     @team = FactoryGirl.create(:team)
     @user = FactoryGirl.create(:user)
-    @user_team = UserTeam.new(user:@user, team:@team)
+    @user_team = @user.user_teams.build(team_id:@team.id)
   end
 
   subject { @user_team }

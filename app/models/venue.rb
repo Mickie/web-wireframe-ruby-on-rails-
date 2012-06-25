@@ -18,6 +18,8 @@ class Venue < ActiveRecord::Base
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
   
+  attr_accessible :name, :venue_type_id, :social_info_attributes, :location_attributes
+  
   def getFoursquareId
     if self.foursquare_id
       return self.foursquare_id

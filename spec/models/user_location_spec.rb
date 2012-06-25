@@ -5,7 +5,7 @@ describe UserLocation do
     mock_geocoding!
     @location = FactoryGirl.create(:location)
     @user = FactoryGirl.create(:user)
-    @user_location = UserLocation.new(user:@user, location:@location)
+    @user_location = @user.user_locations.build( location_attributes: accessible_attributes( Location, @location ) )
   end
 
   subject { @user_location }

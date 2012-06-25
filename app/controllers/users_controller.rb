@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @user_team = UserTeam.new(user_id:@user.id)
-    @user_location = UserLocation.new(user_id:@user.id)
+    @user_team = @user.user_teams.build
+    @user_location = @user.user_locations.build
     @user_location.build_location
     
     theCoordinates = request.location.coordinates

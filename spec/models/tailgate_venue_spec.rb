@@ -5,7 +5,7 @@ describe TailgateVenue do
     mock_geocoding!
     @tailgate = FactoryGirl.create(:tailgate)
     @venue = FactoryGirl.create(:venue)
-    @tailgate_venue = TailgateVenue.new(tailgate:@tailgate, venue:@venue)
+    @tailgate_venue = TailgateVenue.new(tailgate_id:@tailgate.id, venue_id:@venue.id)
   end
 
   subject { @tailgate_venue }

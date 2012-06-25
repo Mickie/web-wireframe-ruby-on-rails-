@@ -1,7 +1,11 @@
 class TailgateVenue < ActiveRecord::Base
   belongs_to :tailgate
   belongs_to :venue
-  attr_accessible :latitude, :longitude, :tailgate, :venue, :tailgate_id, :venue_id
+  
+  validates :venue_id, presence: true
+  validates :tailgate_id, presence: true
+  
+  attr_accessible :tailgate_id, :venue_id
   
   geocoded_by :venue_address
   after_validation :geocode, :if => :venue_address_changed?

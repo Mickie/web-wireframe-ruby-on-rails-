@@ -25,6 +25,15 @@ class Team < ActiveRecord::Base
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
   
+  attr_accessible :name, 
+                  :sport_id, 
+                  :league_id, 
+                  :division_id, 
+                  :conference_id, 
+                  :affiliation_id, 
+                  :location_attributes,
+                  :social_info_attributes
+  
   def events
     theEvents = self.home_games + self.away_games
     theEvents.sort_by {|e| e[:event_date] }

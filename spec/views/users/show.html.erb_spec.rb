@@ -21,8 +21,8 @@ describe "users/show" do
     theTeam = FactoryGirl.create(:team)
     theVenue = FactoryGirl.create(:venue)
     theTailgate = FactoryGirl.create(:tailgate)
-    theWatchSite = FactoryGirl.create(:watch_site, team: theTeam, venue: theVenue)
-    theTailgateVenue = TailgateVenue.create venue:theVenue, tailgate:theTailgate
+    theWatchSite = FactoryGirl.create(:watch_site, team_id: theTeam.id, venue_id: theVenue.id)
+    theTailgateVenue = TailgateVenue.create venue_id:theVenue.id, tailgate_id:theTailgate.id 
     @localWatchSites = assign(:localTeamWatchSites, [theWatchSite])
     @locationsWithTeamWatchSites = assign(:localTeamWatchSites, [{ "locationName" => "Chicago, IL", localTeamWatchSiteList: [theWatchSite] }])
     @locationsWithTailgateVenues = assign(:localTailgateVenues, [{ "locationName" => "San Diego, CA", tailgateVenueList: [theTailgateVenue] }])

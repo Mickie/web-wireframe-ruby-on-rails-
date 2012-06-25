@@ -7,7 +7,8 @@ describe EventsController do
 
     @home_team = FactoryGirl.create(:team, conference: FactoryGirl.create(:conference))
     @visiting_team = FactoryGirl.create(:team)
-    @location = FactoryGirl.create(:location)
+    @location = FactoryGirl.build(:location)
+    
   end
 
   def valid_attributes
@@ -15,7 +16,7 @@ describe EventsController do
       name:'Superbowl', 
       home_team_id:@home_team.id, 
       visiting_team_id:@visiting_team.id, 
-      location_id:@location.id,
+      location_attributes: accessible_attributes(Location, @location),
       event_date: Date.today,
       event_time: Time.now
     }

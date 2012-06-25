@@ -4,7 +4,7 @@ describe "TailgateVenues" do
 
   before do
     mock_geocoding!
-    @tailgateVenue = TailgateVenue.create tailgate:FactoryGirl.create(:tailgate), venue:FactoryGirl.create(:venue)
+    @tailgateVenue = TailgateVenue.create tailgate_id:FactoryGirl.create(:tailgate).id, venue_id:FactoryGirl.create(:venue).id
   end
   
   describe "without admin or user logged in" do

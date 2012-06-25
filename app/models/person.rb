@@ -11,5 +11,5 @@ class Person < ActiveRecord::Base
      "#{first_name} #{last_name}" 
   end
   
-  attr_accessible :social_info, :team, :first_name, :last_name, :type, :position, :home_town, :home_school, :social_info_attributes, :team_id
+  attr_accessible :first_name, :last_name, :type, :position, :home_town, :home_school, :social_info_id, :social_info_attributes, :team_id
 end
