@@ -3,9 +3,9 @@
     <div class="join_fanzone">
       <% if signed_in? %>
         <% if current_user.following?(tailgate) %>
-          <div class="myFanzone">F</div>
+          <div class="myFanzone"></div>
         <% elsif current_user == tailgate.user %>
-          <div class="myFanzone">M</div>
+          <div class="myFanzone"></div>
         <% else %>
           <%= render partial: "partials/follow_button", locals: { tailgate: tailgate } %>
         <% end %>
