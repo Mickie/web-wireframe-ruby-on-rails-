@@ -25,29 +25,34 @@ class Venue < ActiveRecord::Base
       return self.foursquare_id
     end
     
-    theId = ENV["FANZO_FOURSQUARE_CLIENT_ID"]
-    theSecret = ENV["FANZO_FOURSQUARE_CLIENT_SECRET"]
-    
-    theClient = Foursquare2::Client.new(:client_id => theId, :client_secret => theSecret)
-    
-    theResponse = theClient.search_venues(ll: "#{self.location.latitude},#{self.location.longitude}", 
-                                          query: self.name, 
-                                          intent:'match',
-                                          v:'20120609')
-    
-    theId = findMatchingVenue(theResponse[:venues])
-    
-    if !theId
+    begin 
+      theId = ENV["FANZO_FOURSQUARE_CLIENT_ID"]
+      theSecret = ENV["FANZO_FOURSQUARE_CLIENT_SECRET"]
+      
+      theClient = Foursquare2::Client.new(:client_id => theId, :client_secret => theSecret)
+      
       theResponse = theClient.search_venues(ll: "#{self.location.latitude},#{self.location.longitude}", 
                                             query: self.name, 
-                                            intent:'checkin',
+                                            intent:'match',
                                             v:'20120609')
+      
       theId = findMatchingVenue(theResponse[:venues])
+      
+      if !theId
+        theResponse = theClient.search_venues(ll: "#{self.location.latitude},#{self.location.longitude}", 
+                                              query: self.name, 
+                                              intent:'checkin',
+                                              v:'20120609')
+        theId = findMatchingVenue(theResponse[:venues])
+      end
+  
+      self.foursquare_id = theId
+      self.save
+    rescue Exception => e
+      Rails.logger.warn "Error getting Foursquare ID: #{e.to_s}"
+      return null
     end
-
-    self.foursquare_id = theId
-    self.save
-                                         
+                                             
     return theId
   end
   
