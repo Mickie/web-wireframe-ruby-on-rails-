@@ -13,29 +13,51 @@ nav#left_nav
       color:$navTextColor;
       border-bottom-color: $navBorderColorBottom;
       border-top-color: $navBorderColorTop;
-      text-align:center;    
-      padding:15px;
+      text-align:center;
       font-weight:bold;
+      padding:10px;
     }
     
   }
   
   .fanzone
   {
+    clear:both;
+    
     a
     {
+      height: 42px;
       text-align: left;
+      font-weight:normal;
+      padding:0px;
+      
       .team_logo
       {
         float: left;
-        margin-right: 10px;
-        margin-top: -6px;
+        padding: 5px 10px;
         
         img
         {
           width:32px;
           height:32px;
         }
+      }
+      
+      .myFanzone
+      {
+        float:right;
+        width:0px;
+        height:0px;
+        margin:0px -1px 0px 0px;
+        padding:0px;
+        border-bottom: #CCCCCC solid 20px;
+        border-right: #F0F0F0 solid 20px;
+      }
+      
+      .team_name
+      {
+        padding: 10px 0px;
+        float:left;
       }
     }
   }
@@ -64,7 +86,7 @@ nav#left_nav
         width:32px;
         float: left;
         margin-right: 10px;
-        margin-top: -6px;
+        margin-top: -7px;
       }
       span
       {
