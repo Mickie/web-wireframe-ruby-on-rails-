@@ -3,9 +3,13 @@
 <div id="tailgate_show">
   <div class="row-fluid">
     <div class="span12 banner">
-      <div class="join_fanzone">
-        <a href="#">Join</a>
-      </div>
+      <% if signed_in? && ( current_user.tailgates.includes(@tailgate) || current_user.following?(@tailgate) ) %>
+        <div class="myFanzone"></div>
+      <% else %>
+        <div class="join_fanzone">
+          <a href="#">Follow</a>
+        </div>
+      <% end %>
       <div class="banner_content">
         <div class="team_logo">
           <%= teamLogo(@tailgate.team, :large) %>      
