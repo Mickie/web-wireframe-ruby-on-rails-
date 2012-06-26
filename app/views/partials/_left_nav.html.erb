@@ -11,13 +11,25 @@
         </div>
       </a>
     </li>
+    <li id="createFanzone">
+      <a href="<%= new_tailgate_path %>">
+        <span class="create">+ &nbsp; CREATE A FANZONE</span>
+      </a>
+    </li>  
     
     <li id="allFanZones">
       <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>')" href="#">ALL FANZONES</a> 
     </li>
     
-    <li>
-      <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>')" href="#">MY FANZONES</a> 
+    <li id="myFanzones">
+      <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>')" href="#">
+        <div>
+          <% if signed_in? && current_user.image %>
+            <%= image_tag( current_user.image, size:"32x32") %>
+          <% end %>
+        </div>
+        <span>My Fanzones</span>
+      </a> 
     </li>
 
     <% if signed_in? %>
@@ -29,11 +41,5 @@
       <% end %>
     <% end %>
 
-    <li>
-      <a href="<%= new_tailgate_path %>">
-        <span class="create">+ &nbsp; CREATE A FANZONE</span>
-      </a>
-    </li>
-    
   </ul>
 </nav>

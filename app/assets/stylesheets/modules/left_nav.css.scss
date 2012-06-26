@@ -14,17 +14,30 @@ nav#left_nav
       border-bottom-color: $navBorderColorBottom;
       border-top-color: $navBorderColorTop;
       text-align:center;    
-      padding:15px 0px;
+      padding:15px;
       font-weight:bold;
     }
     
-    .create
+  }
+  
+  .fanzone
+  {
+    a
     {
-      color: white;
-      background-color: black;
-      padding: 3px 8px;
+      text-align: left;
+      .team_logo
+      {
+        float: left;
+        margin-right: 10px;
+        margin-top: -6px;
+        
+        img
+        {
+          width:32px;
+          height:32px;
+        }
+      }
     }
-    
   }
 
   .nav-tabs.nav-stacked > li
@@ -39,10 +52,43 @@ nav#left_nav
   {
     color: $navActiveTextColor;
     background-color: $navActiveBackgroundColor;
-    border-right-color: $navActiveBorderColorRightLeft;
-    border-left-color: $navActiveBorderColorRightLeft;
-    border-top-color: $navActiveBorderColorTopBottom;
-    border-bottom-color: $navActiveBorderColorTopBottom;
+  }
+  
+  #myFanzones
+  {
+    a 
+    {
+      text-align:left;
+      div
+      {
+        width:32px;
+        float: left;
+        margin-right: 10px;
+        margin-top: -6px;
+      }
+      span
+      {
+        text-transform:uppercase;
+      }
+    }
+  }
+  
+  #createFanzone
+  {
+    background-color: black;
+    
+    a
+    {
+      border-top-width:0px;
+      border-bottom-width:0px;
+      .create
+      {
+        color: black;
+        background-color: $createFanzoneButtonBackground;
+        border: $createFanzoneButtonBorder solid 1px;
+        padding: 3px 8px;
+      }
+    }
   }
 
   
@@ -53,9 +99,12 @@ nav#left_nav
     
     a
     {
+      border-bottom-width:0px;
+      padding: 0px;
+      
       div
       {
-        padding: 20px 0px;
+        padding: 20px 0px 10px 0px;
         color:white;
         
         .brand
