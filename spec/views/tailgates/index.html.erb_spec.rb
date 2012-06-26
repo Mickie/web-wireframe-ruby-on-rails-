@@ -17,6 +17,7 @@ describe "tailgates/index" do
         :team => @team
       )
     ])
+    view.stub(:signed_in?).and_return(false);    
   end
 
   it "renders a list of tailgates" do
