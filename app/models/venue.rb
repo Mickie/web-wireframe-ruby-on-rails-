@@ -50,7 +50,7 @@ class Venue < ActiveRecord::Base
       self.save
     rescue Exception => e
       Rails.logger.warn "Error getting Foursquare ID: #{e.to_s}"
-      return null
+      return nil
     end
                                              
     return theId
