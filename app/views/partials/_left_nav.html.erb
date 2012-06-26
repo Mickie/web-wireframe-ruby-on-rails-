@@ -20,14 +20,12 @@
       <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>')" href="#">MY FANZONES</a> 
     </li>
 
-    <% if signed_in? && current_user.tailgates.length != 0 %>
-      <% current_user.tailgates.each do |aTailgate|%>
-        <li>
-          <a href="#" onclick="loadData('<%= tailgate_path(id:aTailgate, noLayout:true ) %>')">
-            <%= teamLogo(aTailgate.team, :small) %>
-            <%= aTailgate.name %>
-          </a>
-        </li>
+    <% if signed_in? %>
+      <% current_user.tailgates.each do | aTailgate |%>
+        <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>
+      <% end %>
+      <% current_user.followed_tailgates.each do | aTailgate | %>
+        <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>
       <% end %>
     <% end %>
 
