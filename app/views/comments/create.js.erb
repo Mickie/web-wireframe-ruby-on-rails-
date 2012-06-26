@@ -1,0 +1,1 @@
+$("#<%= @comment.post.id -%>_comments").prepend("<%= escape_javascript(render partial:"partials/comment", locals:{ aComment:@comment }) %>");

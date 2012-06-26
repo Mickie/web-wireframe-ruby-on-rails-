@@ -104,6 +104,11 @@ div#tailgate_show
           margin: 0px 10px 10px 0px;
         }
         
+        div.post_comments
+        {
+          clear:both;
+        }
+        
         div.comment_form
         {
           padding: 5px 0px;
@@ -125,7 +130,6 @@ div#tailgate_show
   div.twitterStream
   {
     border: grey solid 1px;
-    margin: 0px;
     
     .input-append
     {

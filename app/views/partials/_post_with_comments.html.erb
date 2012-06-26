@@ -5,9 +5,15 @@
     <% end %>
   </div>
   
-  <p><%= aPost.content %></p>
-  <% aPost.comments.each do |aComment| %>
-    <p class="comment"><strong><%= aComment.user.full_name %>:</strong> <%= aComment.content %></p>
-  <% end %>
+  <p class="post_content">
+    <%= aPost.content %>
+  </p>
+  
+  <div class="post_comments" id="<%= aPost.id %>_comments">
+    <% aPost.comments.each do |aComment| %>
+      <%= render partial: "partials/comment", locals: { aComment: aComment } %>
+    <% end %>
+  </div>
+  
   <%= render "/comments/form", post:aPost, comment:aPost.comments.build %>
 </div>

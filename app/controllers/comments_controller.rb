@@ -52,9 +52,11 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @post.tailgate, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
+        format.js
       else
         format.html { redirect_to @post.tailgate, error: 'Unable to create comment'}
         format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
