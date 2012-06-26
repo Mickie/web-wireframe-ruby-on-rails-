@@ -1,5 +1,5 @@
 <div class="span4 fanzoneTile" id="tailgate_<%= tailgate.id %>">
-  <div class="banner">
+  <div class="banner" onclick="loadData('<%= tailgate_path(id:tailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= tailgate.id -%>')">
     <div class="join_fanzone">
       <% if signed_in? %>
         <% if current_user.following?(tailgate) %>

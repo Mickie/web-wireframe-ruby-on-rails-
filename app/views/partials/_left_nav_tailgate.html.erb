@@ -1,5 +1,5 @@
-<li class="fanzone">
-  <a href="#" onclick="loadData('<%= tailgate_path(id:aTailgate, noLayout:true ) %>')">
+<li class="fanzone" id="nav_fanzone_<%= aTailgate.id -%>">
+  <a href="#" onclick="loadData('<%= tailgate_path(id:aTailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= aTailgate.id -%>')">
     <div class="team_logo"><%= teamLogo(aTailgate.team, :small) -%></div>
     <div class="team_name"><%= aTailgate.name -%></div>
     <div class="myFanzone"></div>

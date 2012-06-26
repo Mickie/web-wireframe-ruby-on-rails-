@@ -18,11 +18,11 @@
     </li>  
     
     <li id="allFanZones">
-      <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>')" href="#">ALL FANZONES</a> 
+      <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanZones')" href="#">ALL FANZONES</a> 
     </li>
     
     <li id="myFanzones">
-      <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>')" href="#">
+      <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#">
         <div>
           <% if signed_in? && current_user.image %>
             <%= image_tag( current_user.image, size:"32x32") %>

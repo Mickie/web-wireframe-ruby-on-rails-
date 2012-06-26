@@ -8,15 +8,15 @@ function onLoadError(anError)
   console.log(anError);  
 }
 
-function handleClick()
+function handleClick(aNewActiveSelector)
 {
   $('.active').removeClass('active');
-  $(this.event.target.parentNode).addClass('active'); 
+  $(aNewActiveSelector).addClass('active'); 
 }
 
-function loadData(aPath)
+function loadData(aPath, aNewActiveSelector)
 {
-  handleClick();
+  handleClick(aNewActiveSelector);
   $.ajax({
            url: aPath,
            cache:false,
