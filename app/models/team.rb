@@ -33,6 +33,8 @@ class Team < ActiveRecord::Base
                   :affiliation_id, 
                   :location_attributes,
                   :social_info_attributes
+                  
+  default_scope order: "name"
   
   def events
     theEvents = self.home_games + self.away_games

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Team do
   before do
     mock_geocoding!
-    @team = FactoryGirl.create(:team)
+    @team = FactoryGirl.create(:team, name:"xxxx")
   end 
 
   subject { @team }
@@ -34,6 +34,16 @@ describe Team do
   it "should have a latitude and longitude in its location" do
     @team.location.latitude.should_not be_nil  
     @team.location.longitude.should_not be_nil
+  end
+  
+  describe "teams are ordered alphabetically" do
+    let!(:team2) { FactoryGirl.create(:team, name:"gggg")}
+    let!(:team3) { FactoryGirl.create(:team, name:"bbbb")}
+    
+    it "should have lowest letter first" do
+      Team.all.count.should eq(3)
+      Team.all.first.should eq(team3)
+    end
   end
   
   describe "has many associations" do
