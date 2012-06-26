@@ -1,5 +1,5 @@
 @import "partials/colors";
-
+@import "bootstrap/mixins";
 
 div.fanzoneTile
 {
@@ -15,7 +15,7 @@ div.fanzoneTile
     {
       float:right;
       
-      a
+      .follow_button
       {
         padding: 2px 10px;
         color: black;
@@ -23,6 +23,8 @@ div.fanzoneTile
         background-color: $joinBackground;
         border: $joinBorder solid 1px;
         text-transform: uppercase;
+        @include border-radius(0);
+        @include box-shadow(none); 
       }
     }
     

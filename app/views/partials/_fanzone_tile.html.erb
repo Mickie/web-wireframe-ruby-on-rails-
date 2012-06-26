@@ -1,7 +1,9 @@
 <div class="span4 fanzoneTile">
   <div class="banner">
     <div class="join_fanzone">
-      <a href="#">Join</a>
+      <% if signed_in? %>
+        <%= render partial: "partials/follow_button", locals: { tailgate: tailgate } %>
+      <% end %>
     </div>
     <div class="banner_content">
       <div class="team_logo">

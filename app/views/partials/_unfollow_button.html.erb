@@ -1,0 +1,5 @@
+<%= form_for(current_user.tailgate_followers.find_by_tailgate_id(tailgate),
+             html: { method: :delete },
+             remote: true) do |f| %>
+  <%= f.submit "Unfollow", class: "follow_button" %>
+<% end %>

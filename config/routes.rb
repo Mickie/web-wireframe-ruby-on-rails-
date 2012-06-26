@@ -20,6 +20,8 @@ FanzoSite::Application.routes.draw do
       resources :comments
     end
   end
+  
+  resources :tailgate_followers, only: [ :create, :destroy ]
 
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
