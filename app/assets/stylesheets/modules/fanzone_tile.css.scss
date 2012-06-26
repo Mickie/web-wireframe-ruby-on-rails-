@@ -11,12 +11,25 @@ div.fanzoneTile
     background: #002A5C;
     height: 80px;
     
+    .myFanzone
+    {
+      color:white;
+      float:right;
+      padding: 5px;
+    }
+    
     .join_fanzone
     {
       float:right;
       
+      form
+      {
+        margin:0px;
+      }
+      
       .follow_button
       {
+        margin: 0px;
         padding: 2px 10px;
         color: black;
         font-weight: bold;
@@ -61,17 +74,24 @@ div.fanzoneTile
     
     .posts
     { 
-      height:180px; 
+      height:188px; 
       padding: 5px;
+      overflow: hidden;
       
       .post 
       {
         .profile_pic
         {
-          float: left;
-          height: 40px;
-          width: 32px;
-          padding-right: 5px;
+          width:32px;
+          height:32px;
+          padding:8px;
+          vertical-align: top;
+        }
+        
+        .post_content
+        {
+          padding: 5px 8px 0px 0px;
+          vertical-align: top;
         }
       }
     }
