@@ -45,9 +45,11 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to @tailgate, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

@@ -65,14 +65,22 @@ div#tailgate_show
     div#postForm
     {
       background-color: $postBackground;
+      height: 145px;
 
       h4
       {
         padding: 10px;
       }
       
+      #post_content
+      {
+        width: 98%;
+        margin: 5px;
+      }
+      
       #add_post
       {
+        margin:0px 5px;
         padding: 3px 15px;
         background: black;
         color: white;
@@ -119,9 +127,19 @@ div#tailgate_show
     border: grey solid 1px;
     margin: 0px;
     
+    .input-append
+    {
+      textarea
+      {
+        width:96%;
+        margin:5px;
+      }
+    }
+    
     .quickTweetButton
     {
-      width: 90%;
+      margin-left: 5px;
+      width: 87%;
     }
     
     .dropdown-toggle

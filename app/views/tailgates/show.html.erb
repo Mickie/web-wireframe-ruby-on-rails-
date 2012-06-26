@@ -34,19 +34,7 @@
       </div>
       <div id="posts">
         <% @tailgate.posts.each do | aPost | %>
-          <div class="post">
-            <div class="profile_pic">
-              <% if aPost.user.image %>
-                <%= image_tag( aPost.user.image ) %>
-              <% end %>
-            </div>
-            
-            <p><%= aPost.content %></p>
-            <% aPost.comments.each do |aComment| %>
-              <p class="comment"><strong><%= aComment.user.full_name %>:</strong> <%= aComment.content %></p>
-            <% end %>
-            <%= render "/comments/form", post:aPost, comment:aPost.comments.new %>
-          </div>
+          <%= render partial: "partials/post_with_comments", locals: {aPost: aPost}%>
         <% end %>
       </div>
     </div>
