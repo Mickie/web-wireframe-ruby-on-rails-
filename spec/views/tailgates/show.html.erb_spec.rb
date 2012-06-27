@@ -12,6 +12,8 @@ describe "tailgates/show" do
       :team => @team
     ))
     @post = assign(:post, Post.new(tailgate_id:@tailgate.id))
+    view.stub(:signed_in?).and_return(false);
+    
     render
   end
 
