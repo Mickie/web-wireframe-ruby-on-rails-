@@ -55,6 +55,9 @@ div.fanzoneTile
       {
         float:left;
         margin-right: 10px;
+        background-color: white;
+        @include border-radius(50%);
+        padding: 5px;
         
         img
         {
