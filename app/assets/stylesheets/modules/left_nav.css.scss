@@ -176,12 +176,13 @@ nav#left_nav
     {
       background-color: black;
       text-transform: uppercase;
-      padding-bottom: 20px;
       
       a
       {
         border-top-width:0px;
         border-bottom-width:0px;
+        padding-bottom: 20px;
+
         .create
         {
           color: black;
