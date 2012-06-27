@@ -52,7 +52,7 @@
                   <% aLocation[:tailgateVenueList].each do |aTailgateVenue|%>
                     <dd><%= link_to "#{aTailgateVenue.venue.name} - #{aTailgateVenue.tailgate.team.name}", "#", onclick:"loadData('#{tailgate_path(aTailgateVenue.tailgate, noLayout:true )}')"%></dd>
                   <% end %>
-              <% end %>              
+              <% end %>
               <a href="#myAddLocationModal" data-toggle="modal" class="btn">Add Location</a>
             </dl>
           </div>      

@@ -67,12 +67,15 @@ class TailgatesController < ApplicationController
       if (@tailgate.user_id != current_user.id)
         format.html { render action: "new", notice: 'Cannot create a tailgate for another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
+        format.js { "alert('Cannot create a tailgate for another user');"}
       elsif @tailgate.save
         format.html { redirect_to @tailgate, notice: 'Tailgate was successfully created.' }
         format.json { render json: @tailgate, status: :created, location: @tailgate }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
+        format.js { "alert('There was a problem creating the tailgate');" }
       end
     end
   end

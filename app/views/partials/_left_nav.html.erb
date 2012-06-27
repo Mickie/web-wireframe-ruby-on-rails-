@@ -1,4 +1,8 @@
 <nav id="left_nav">
+
+  <% if signed_in? %>
+    <%= render partial: "partials/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build } %>
+  <% end %>
   
   <ul class="nav nav-tabs nav-stacked">
     <li id="logo">
@@ -12,7 +16,7 @@
       </a>
     </li>
     <li id="createFanzone">
-      <a href="<%= new_tailgate_path %>">
+      <a href="#myCreateFanzoneModal" data-toggle="modal">
         <span class="create">+ &nbsp; CREATE A FANZONE</span>
       </a>
     </li>  
@@ -34,7 +38,7 @@
 
     <% if signed_in? %>
       <% current_user.tailgates.each do | aTailgate |%>
-        <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>
+        <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
       <% end %>
       <% current_user.followed_tailgates.each do | aTailgate | %>
         <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>

@@ -18,6 +18,7 @@
 //= require facebook_js_sdk_loader
 //= require google_analytics
 //= require_tree ./facebook
+//= require_tree ./utilities
 //= require_tree ./modules
 //= require_tree ./lib
 

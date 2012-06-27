@@ -1,3 +1,11 @@
+var myTeamHelper = new TeamHelper("#league_picker", "#tailgate_team_id");
+
+
+$(function(){
+  myTeamHelper.connectToLeaguePicker();
+});
+
+
 function onLoadDataComplete(aResult)
 {
   $("#frameContent").html(aResult);
