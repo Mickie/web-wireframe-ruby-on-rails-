@@ -10,6 +10,10 @@ nav#left_nav
     
     a
     {
+      &:hover
+      {
+        background-color: inherit;
+      }
       color:$navTextColor;
       border-bottom-color: $navBorderColorBottom;
       border-top-color: $navBorderColorTop;
