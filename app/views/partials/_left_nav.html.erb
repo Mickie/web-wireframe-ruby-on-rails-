@@ -4,46 +4,75 @@
     <%= render partial: "partials/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build } %>
   <% end %>
   
-  <ul class="nav nav-tabs nav-stacked">
-    <li id="logo">
-      <a href="/">
-        <div>
-          <span class="brand">FANZO</span><span class="tld">.ME</span>
-          <p class="tagline">
-            where fans rule
-          </p>
-        </div>
-      </a>
-    </li>
-    <li id="createFanzone">
-      <a href="#myCreateFanzoneModal" data-toggle="modal">
-        <span class="create">+ &nbsp; CREATE A FANZONE</span>
-      </a>
-    </li>  
-    
-    <li id="allFanZones">
-      <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanZones')" href="#">ALL FANZONES</a> 
-    </li>
-    
-    <li id="myFanzones">
-      <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#">
-        <div>
-          <% if signed_in? && current_user.image %>
-            <%= image_tag( current_user.image, size:"32x32") %>
-          <% end %>
-        </div>
-        <span>My Fanzones</span>
-      </a> 
-    </li>
-
-    <% if signed_in? %>
-      <% current_user.tailgates.each do | aTailgate |%>
-        <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
+  <div id="account">
+    <div id="account_content">
+      <ul id="account_nav" class="nav">
+        <% if signed_in? %>
+          <li class="dropdown" id="account_dropdown">
+            <a id="users_name" href="#account_dropdown" data-toggle="dropdown"><%= current_user.first_name %> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Log in", new_user_session_path, id:"user_login" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="tab">
+      <div id="tab_inner"></div>
+      <div id="tab_border"></div>
+    </div>
+  </div>
+  <div id="fanzone_nav">
+    <ul class="nav nav-tabs nav-stacked">
+      <li id="logo">
+        <a href="/">
+          <div>
+            <span class="brand">FANZO</span><span class="tld">.ME</span>
+            <p class="tagline">
+              where fans rule
+            </p>
+          </div>
+        </a>
+      </li>
+      <li id="createFanzone">
+        <a href="#myCreateFanzoneModal" data-toggle="modal">
+          <span class="create">+ &nbsp; Create a Fanzone</span>
+        </a>
+      </li>  
+      
+      <li id="allFanZones">
+        <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanZones')" href="#">All Fanzones</a> 
+      </li>
+      
+      <li id="myFanzones">
+        <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#">
+          <div>
+            <% if signed_in? && current_user.image %>
+              <%= image_tag( current_user.image, size:"32x32") %>
+            <% end %>
+          </div>
+          <span>My Fanzones</span>
+        </a> 
+      </li>
+  
+      <% if signed_in? %>
+        <% current_user.tailgates.each do | aTailgate |%>
+          <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
+        <% end %>
+        <% current_user.followed_tailgates.each do | aTailgate | %>
+          <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>
+        <% end %>
       <% end %>
-      <% current_user.followed_tailgates.each do | aTailgate | %>
-        <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>
-      <% end %>
-    <% end %>
-
-  </ul>
+  
+    </ul>
+  </div>
 </nav>

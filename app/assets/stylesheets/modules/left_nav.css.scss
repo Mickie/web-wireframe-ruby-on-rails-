@@ -3,154 +3,226 @@
 
 nav#left_nav
 {
-  li
-  {
-    background-color: $navBackgroundColor;
-    margin: 0;
-    
-    a
-    {
-      &:hover
-      {
-        background-color: inherit;
-      }
-      color:$navTextColor;
-      border-bottom-color: $navBorderColorBottom;
-      border-top-color: $navBorderColorTop;
-      text-align:center;
-      font-weight:bold;
-      padding:10px;
-    }
-    
-  }
+  padding-top: 20px;
   
-  .fanzone
+  div#account
   {
-    clear:both;
-    
-    a
-    {
-      height: 42px;
-      text-align: left;
-      font-weight:normal;
-      padding:0px;
-      
-      .team_logo
-      {
-        float: left;
-        padding: 5px 10px;
-        
-        img
-        {
-          width:32px;
-          height:32px;
-        }
-      }
-      
-      .myFanzone
-      {
-        float:right;
-        width:0px;
-        height:0px;
-        margin:0px -1px 0px 0px;
-        padding:0px;
-        border-bottom: #CCCCCC solid 20px;
-        border-right: #F0F0F0 solid 20px;
-      }
-      
-      .team_name
-      {
-        padding: 10px 0px;
-        float:left;
-      }
-    }
-  }
+    width: 40%;
 
-  .nav-tabs.nav-stacked > li
-  {
-     &:last-child > a, &:first-child > a
-     {
-        @include border-radius(0);
-     }
-  }
-
-  .nav-tabs > .active > a
-  {
-    color: $navActiveTextColor;
-    background-color: $navActiveBackgroundColor;
-  }
-  
-  #myFanzones
-  {
-    a 
+    #account_content
     {
-      text-align:left;
-      div
-      {
-        width:32px;
-        float: left;
-        margin-right: 10px;
-        margin-top: -7px;
-      }
-      span
-      {
-        text-transform:uppercase;
-      }
-    }
-  }
-  
-  #createFanzone
-  {
-    background-color: black;
-    
-    a
-    {
-      border-top-width:0px;
-      border-bottom-width:0px;
-      .create
+      height: 15px;
+      float:left;
+      background-color: $navLoginBackground;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 2px 20px;
+      border-left: $borderColor solid 1px;
+      border-top: $borderColor solid 1px;
+      
+      a
       {
         color: black;
-        background-color: $createFanzoneButtonBackground;
-        border: $createFanzoneButtonBorder solid 1px;
-        padding: 3px 8px;
+        
+        &:hover
+        {
+          background-color: inherit;
+        }
       }
     }
-  }
-
-  
-  #logo 
-  {
-    color:white;
-    background-color: black;
     
-    a
+    #tab
     {
-      border-bottom-width:0px;
-      padding: 0px;
+      float:left;
+      position: relative;
       
-      div
+      #tab_inner
       {
-        padding: 20px 0px 10px 0px;
-        color:white;
-        
-        .brand
+        position: absolute;
+        left: 0px;
+        top: 1px;
+        z-index: 10;
+        width:0px;
+        height:0px;
+        padding:0px;
+        border-bottom: $navLoginBackground solid 19px;
+        border-right: transparent solid 20px;
+      }
+      
+      #tab_border
+      {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 0;
+        width:0px;
+        height:0px;
+        padding:0px;
+        border-bottom: $borderColor solid 20px;
+        border-right: transparent solid 20px;
+      }
+    }
+    
+  }
+  
+  div#fanzone_nav
+  {
+    li
+    {
+      clear:both;
+      background-color: $navBackgroundColor;
+      margin: 0;
+      
+      a
+      {
+        color:$navTextColor;
+        border-bottom-color: $navBorderColorBottom;
+        border-top-color: $navBorderColorTop;
+        text-align:center;
+        font-weight:bold;
+        padding:10px;
+
+        &:hover
         {
-          font-weight: bold;
-          font-size: 3em;
+          background-color: inherit;
+        }
+      }
+      
+    }
+    
+    .fanzone
+    {
+      
+      a
+      {
+        height: 42px;
+        text-align: left;
+        font-weight:normal;
+        padding:0px;
+        
+        .team_logo
+        {
+          float: left;
+          padding: 5px 10px;
+          
+          img
+          {
+            width:32px;
+            height:32px;
+          }
         }
         
-        .tld
+        .myFanzone
         {
-          font-size: 2em;
+          float:right;
+          width:0px;
+          height:0px;
+          margin:0px -1px 0px 0px;
+          padding:0px;
+          border-bottom: #CCCCCC solid 20px;
+          border-right: #F0F0F0 solid 20px;
         }
         
-        .tagline
+        .team_name
         {
-          padding-top:10px;
-          padding-left:3px;
-          color: grey;
-          font-size: 1.85em;
-          letter-spacing: 1px;  
+          padding: 10px 0px;
+          float:left;
+        }
+      }
+    }
+  
+    .nav-tabs.nav-stacked > li
+    {
+       &:last-child > a, &:first-child > a
+       {
+          @include border-radius(0);
+       }
+    }
+  
+    .nav-tabs > .active > a
+    {
+      color: $navActiveTextColor;
+      background-color: $navActiveBackgroundColor;
+    }
+    
+    #allFanZones
+    {
+      text-transform: uppercase;
+    }
+    
+    #myFanzones
+    {
+      a 
+      {
+        text-align:left;
+        div
+        {
+          width:32px;
+          float: left;
+          margin-right: 10px;
+          margin-top: -7px;
+        }
+        span
+        {
+          text-transform:uppercase;
+        }
+      }
+    }
+    
+    #createFanzone
+    {
+      background-color: black;
+      text-transform: uppercase;
+      
+      a
+      {
+        border-top-width:0px;
+        border-bottom-width:0px;
+        .create
+        {
+          color: black;
+          background-color: $createFanzoneButtonBackground;
+          border: $createFanzoneButtonBorder solid 1px;
+          padding: 3px 8px;
+        }
+      }
+    }
+  
+    
+    #logo 
+    {
+      color:white;
+      background-color: black;
+      
+      a
+      {
+        border-bottom-width:0px;
+        padding: 0px;
+        
+        div
+        {
+          padding: 20px 0px 10px 0px;
+          color:white;
+          
+          .brand
+          {
+            font-weight: bold;
+            font-size: 3em;
+          }
+          
+          .tld
+          {
+            font-size: 2em;
+          }
+          
+          .tagline
+          {
+            padding-top:10px;
+            padding-left:3px;
+            color: grey;
+            font-size: 1.85em;
+            letter-spacing: 1px;  
+          }
         }
       }
     }
