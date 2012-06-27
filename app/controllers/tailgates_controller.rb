@@ -6,7 +6,7 @@ class TailgatesController < ApplicationController
   # GET /tailgates.json
   def index
     if ( params[:filter] == "user" && current_user )
-      @tailgates = current_user.includes(:posts).tailgates + current_user.includes(:posts).followed_tailgates
+      @tailgates = current_user.tailgates.includes(:posts) + current_user.followed_tailgates.includes(:posts)
     else
       @tailgates = Tailgate.includes(:posts).all
     end
