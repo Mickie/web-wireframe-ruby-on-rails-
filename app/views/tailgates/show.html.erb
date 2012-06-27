@@ -3,7 +3,7 @@
 <div id="tailgate_show">
   <div class="row-fluid">
     <div class="span12 banner">
-      <% if signed_in? && ( current_user.tailgates.includes(@tailgate) || current_user.following?(@tailgate) ) %>
+      <% if signed_in? && current_user.mine_or_following?( @tailgate ) %>
         <div class="myFanzone"></div>
       <% else %>
         <div class="join_fanzone">
@@ -16,7 +16,7 @@
         </div>
         <h1><%= @tailgate.name %></h1>
         <p class="owner"><span class="fan_count">74 FANS</span> : Created by <%= @tailgate.user.full_name %> : Updated on June 22, 2012</p>
-        <% if @current_user == @tailgate.user %>
+        <% if signed_in? && current_user.mine?(@tailgate) %>
           <p>Hey! This is your tailgate, so you can <%= link_to "edit", edit_tailgate_path(@tailgate)%> it!</p>
         <% end %>
       </div>
@@ -129,8 +129,8 @@
                                         "tweets",
                                         "newTweets",
                                         "tweetControls",
-                                        <%= @current_user && @current_user.isConnectedToTwitter? %>,
-                                        <%= @current_user ? @current_user.id : 0 %>,
+                                        <%= signed_in? && current_user.isConnectedToTwitter? %>,
+                                        <%= signed_in? ? current_user.id : 0 %>,
                                         <%= @tailgate.team.sport.id %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets();

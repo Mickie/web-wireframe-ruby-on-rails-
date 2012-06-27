@@ -76,6 +76,30 @@ describe User do
     end    
   end
   
+  describe "tailgate relationships" do
+    let(:followed_tailgate) { FactoryGirl.create(:tailgate) }
+    let(:not_followed_or_owned_tailgate) { FactoryGirl.create(:tailgate) }
+    let(:owned_tailgate) { FactoryGirl.create(:tailgate, user_id:@user.id) }
+    
+    before do
+      mock_geocoding!
+      @user.follow!( followed_tailgate )
+    end
+    
+    it { should be_mine( owned_tailgate ) }
+    it { should_not be_mine( followed_tailgate ) }
+    it { should_not be_mine( not_followed_or_owned_tailgate ) }
+
+    it { should_not be_following( owned_tailgate ) }
+    it { should be_following( followed_tailgate ) }
+    it { should_not be_following( not_followed_or_owned_tailgate ) }    
+    
+    it { should be_mine_or_following( followed_tailgate ) }
+    it { should be_mine_or_following( owned_tailgate ) }
+    it { should_not be_mine_or_following( not_followed_or_owned_tailgate ) }
+    
+  end
+  
   describe "email validation" do
     describe "when email is not present" do
       before { @user.email = " " }

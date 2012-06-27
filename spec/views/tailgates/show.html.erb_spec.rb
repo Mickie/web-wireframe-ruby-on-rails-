@@ -12,7 +12,6 @@ describe "tailgates/show" do
       :team => @team
     ))
     @post = assign(:post, Post.new(tailgate_id:@tailgate.id))
-    @current_user = assign(:current_user, @user)
     render
   end
 

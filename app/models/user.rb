@@ -226,8 +226,16 @@ class User < ActiveRecord::Base
     end 
   end
   
+  def mine?( aTailgate )
+    tailgates.include?( aTailgate )
+  end
+  
   def following?( aTailgate )
     tailgate_followers.find_by_tailgate_id( aTailgate.id )
+  end
+
+  def mine_or_following?( aTailgate )
+    mine?(aTailgate) || following?( aTailgate )
   end
 
   def follow!( aTailgate )

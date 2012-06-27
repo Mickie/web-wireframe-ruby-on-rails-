@@ -26,7 +26,6 @@ class TailgatesController < ApplicationController
   def show
     @tailgate = Tailgate.includes(:posts => :comments ).find(params[:id])
     @post = Post.new
-    @current_user = current_user
 
     respond_to do |format|
       if (params[:noLayout])
