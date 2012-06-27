@@ -55,7 +55,7 @@ div.fanzoneTile
       {
         float:left;
         margin-right: 10px;
-        background-color: white;
+        @include gradient-vertical(#FFFFFF, #E5E5E5);  
         @include border-radius(50%);
         padding: 5px;
         
