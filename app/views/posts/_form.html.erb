@@ -1,6 +1,6 @@
 <%= form_for([@tailgate, @post], remote: true) do |f| %>
   <% if @post.errors.any? %>
-    <div id="error_explanation">
+    <div class="error_explanation">
       <h4><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h4>
       <ul>
       <% @post.errors.full_messages.each do |msg| %>

@@ -1,4 +1,4 @@
-<div class="post" id="<%= aPost.id %>">
+<div class="post" id="post_<%= aPost.id %>">
   <div class="profile_pic">
     <% if aPost.user.image %>
       <%= image_tag( aPost.user.image ) %>
@@ -9,7 +9,7 @@
     <%= aPost.content %>
   </p>
   
-  <div class="post_comments" id="<%= aPost.id %>_comments">
+  <div class="post_comments" id="post_<%= aPost.id %>_comments">
     <% aPost.comments.each do |aComment| %>
       <%= render partial: "partials/comment", locals: { aComment: aComment } %>
     <% end %>

@@ -1,1 +1,2 @@
-$("#<%= @comment.post.id -%>_comments").prepend("<%= escape_javascript(render partial:"partials/comment", locals:{ aComment:@comment }) %>");
+$("#post_<%= @comment.post.id -%> .comment_form textarea").val("");
+$("#post_<%= @comment.post.id -%>_comments").prepend("<%= escape_javascript(render partial:"partials/comment", locals:{ aComment:@comment }) %>");

@@ -1,1 +1,2 @@
+$("#postForm textarea#post_content").val("");
 $("#posts").prepend("<%=  escape_javascript(render partial:'partials/post_with_comments', locals: { aPost: @post }) %>");

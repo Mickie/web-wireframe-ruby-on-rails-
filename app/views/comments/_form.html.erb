@@ -1,7 +1,7 @@
 <div class="comment_form">
   <%= form_for([post.tailgate, post, comment], remote:true) do |f| %>
     <% if comment.errors.any? %>
-      <div id="error_explanation">
+      <div class="error_explanation">
         <h4><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
   
         <ul>
