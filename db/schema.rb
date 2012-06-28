@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120624163949) do
+ActiveRecord::Schema.define(:version => 20120628035703) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -222,8 +222,11 @@ ActiveRecord::Schema.define(:version => 20120624163949) do
     t.string   "name"
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "color",      :default => "#002A5C"
+    t.boolean  "official",   :default => false
+    t.string   "topic_tags"
   end
 
   add_index "tailgates", ["team_id"], :name => "index_tailgates_on_team_id"
