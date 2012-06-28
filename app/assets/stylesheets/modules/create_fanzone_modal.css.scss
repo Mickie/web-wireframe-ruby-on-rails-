@@ -1,0 +1,19 @@
+div#myCreateFanzoneModal
+{
+  
+  form#new_tailgate
+  {
+    margin:0px;
+  
+    .modal-footer
+    {
+      padding:0px;
+      
+      input#createFanzoneSubmit
+      {
+        margin:5px;
+        padding: 2px 20px;
+      }
+    }
+  }
+}
