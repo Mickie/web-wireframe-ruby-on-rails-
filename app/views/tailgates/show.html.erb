@@ -139,6 +139,10 @@
                                               "<%= @tailgate.team.short_name %>",
                                               "<%= @tailgate.team.sport.name %>", 
                                               <%= raw @tailgate.team.social_info.hash_tags.split(" ") %> );
-
+                                              
+      $('#postForm form').on('ajax:success', function(event, xhr, settings) 
+      {
+        $("#postForm textarea#post_content").val("");
+      });  
    });
 </script>
