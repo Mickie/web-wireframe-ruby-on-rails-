@@ -43,10 +43,12 @@
     </table>
     <div class="stats">
       <span class="numFollowers">
-        23 fans
+        <%= tailgate.followers.count %> fans
       </span>
       <span class="lastUpdateDate">
-        19 June
+        <% if tailgate.posts.any? %>
+          Updated <%= time_ago_in_words(tailgate.posts[0].created_at) %> ago
+        <% end %>
       </span>
     </div>
   </div>
