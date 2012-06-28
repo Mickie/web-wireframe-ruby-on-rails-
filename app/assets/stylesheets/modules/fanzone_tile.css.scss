@@ -86,11 +86,12 @@ div.fanzoneTile
   .content
   {
     background: white;
-    height:220px; 
+    height:220px;
+    border: 1px solid #ccc;     
     
     .posts
     { 
-      height:188px; 
+      height:198px; 
       padding: 5px;
       overflow: hidden;
       
@@ -114,11 +115,13 @@ div.fanzoneTile
     
     .stats
     {
-      padding: 5px;
+      padding: 0px 5px;
       height: 20px;
       border-top: #F3F3F3 solid 1px;
       border-bottom: #F3F3F3 solid 1px;
-       
+      font-size: 11px;
+      color: #888;
+         
       .numFollowers
       {
         

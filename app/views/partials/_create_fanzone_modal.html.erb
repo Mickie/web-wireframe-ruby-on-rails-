@@ -6,7 +6,7 @@
   <%= form_for( aTailgate, remote:true ) do |f| %>
     <div class="modal-body">
       <%= f.hidden_field :user_id %>
-      <%= f.label :name %><br />
+      <%= f.label :name %>
       <%= f.text_field :name %>
       <%= label_tag(:league_id, "Pick a League:") %>
       <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
