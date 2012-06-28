@@ -1,3 +1,5 @@
+require 'Sass'
+
 class Tailgate < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
