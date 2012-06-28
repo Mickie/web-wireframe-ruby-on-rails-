@@ -1,0 +1,11 @@
+<div id="myLoginModal" class="modal hide fade" style="display: none;">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Log in to FANZO with your Facebook account:</h3>
+  </div>
+  <div class="modal-body">
+    <%= render partial: "devise/only_facebook", locals:{resource_name:"user"} %>
+  </div>
+</div>
+
+

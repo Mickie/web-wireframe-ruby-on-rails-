@@ -1,4 +1,4 @@
 <div id="facebookCreateAccount">
-  <h2>To continue, login with your Facebook account</h2>
-  <%= link_to image_tag("facebook-login-button.png", size:"64x64"), omniauth_authorize_path(resource_name, 'facebook'), id:"facebook-login-button" %>
+  <h3>To continue, login with your Facebook account</h3>
+  <%= link_to "Log in with Facebook", omniauth_authorize_path(resource_name, 'facebook'), id:"facebook-login-button", class:"zocial facebook" %>
 </div>

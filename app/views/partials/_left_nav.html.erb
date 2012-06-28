@@ -2,6 +2,8 @@
 
   <% if signed_in? %>
     <%= render partial: "partials/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build } %>
+  <% else %>
+    <%= render partial: "partials/login_modal" %>
   <% end %>
   
   <div id="account">
@@ -21,7 +23,7 @@
           </li>
         <% else %>
           <li>
-            <%= link_to "Log in", new_user_session_path, id:"user_login" %>
+            <a href="#myLoginModal" data-toggle="modal">Log in</a>
           </li>
         <% end %>
       </ul>
