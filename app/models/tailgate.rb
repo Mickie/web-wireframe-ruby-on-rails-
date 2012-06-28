@@ -1,4 +1,4 @@
-require 'Sass'
+require 'sass'
 
 class Tailgate < ActiveRecord::Base
   belongs_to :user
