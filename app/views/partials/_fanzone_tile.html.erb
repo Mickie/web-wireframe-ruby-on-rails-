@@ -43,7 +43,7 @@
     </table>
     <div class="stats">
       <span class="numFollowers">
-        <%= tailgate.followers.count %> fans
+        <%= pluralize(tailgate.followers.count + 1, "fan") %>
       </span>
       <span class="lastUpdateDate">
         <% if tailgate.posts.any? %>

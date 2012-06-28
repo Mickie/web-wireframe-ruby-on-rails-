@@ -15,7 +15,15 @@
           <%= teamLogo(@tailgate.team, :large) %>      
         </div>
         <h1><%= @tailgate.name %></h1>
-        <p class="owner"><span class="fan_count">74 FANS</span> : Created by <%= @tailgate.user.full_name %> : Updated on June 22, 2012</p>
+        <p class="owner">
+          <span class="fan_count">
+            <%= pluralize(@tailgate.followers.count + 1, "fan") %>
+          </span> 
+          : Created by <%= @tailgate.user.full_name %>
+          <% if @tailgate.posts.any? %>
+            : Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago
+          <% end %>
+        </p>
         <% if signed_in? && current_user.mine?(@tailgate) %>
           <p>Hey! This is your tailgate, so you can <%= link_to "edit", edit_tailgate_path(@tailgate)%> it!</p>
         <% end %>
