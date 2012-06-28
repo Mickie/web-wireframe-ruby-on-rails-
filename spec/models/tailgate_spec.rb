@@ -50,5 +50,16 @@ describe Tailgate do
     @tailgate.followers.length.should eq(3)
   end
   
-  
+  describe "light_color" do
+    
+    it "should return white for white color" do
+      @tailgate.color = "#FFFFFF"
+      @tailgate.light_color.should eq("white")
+    end
+
+    it "should return grey for black color" do
+      @tailgate.color = "#000000"
+      @tailgate.light_color.should eq("#bfbfbf")
+    end
+  end
 end

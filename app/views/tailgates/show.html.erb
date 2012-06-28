@@ -2,9 +2,9 @@
 
 <div id="tailgate_show">
   <div class="row-fluid">
-    <div class="span12 banner">
+    <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
       <% if signed_in? && current_user.mine_or_following?( @tailgate ) %>
-        <div class="myFanzone"></div>
+        <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
       <% else %>
         <div class="join_fanzone">
           <a href="#">Follow</a>

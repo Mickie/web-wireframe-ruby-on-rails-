@@ -1,11 +1,13 @@
 <div class="span4 fanzoneTile" id="tailgate_<%= tailgate.id %>">
-  <div class="banner" onclick="loadData('<%= tailgate_path(id:tailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= tailgate.id -%>')">
+  <div class="banner" 
+       onclick="loadData('<%= tailgate_path(id:tailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= tailgate.id -%>')"
+       style="background-color:<%= tailgate.color %>">
     <div class="join_fanzone">
       <% if signed_in? %>
         <% if current_user.following?(tailgate) %>
-          <div class="myFanzone"></div>
+          <div class="myFanzone" style="border-bottom-color: <%= tailgate.light_color %>;"></div>
         <% elsif current_user == tailgate.user %>
-          <div class="myFanzone"></div>
+          <div class="myFanzone" style="border-bottom-color: <%= tailgate.light_color %>;"></div>
         <% else %>
           <%= render partial: "partials/follow_button", locals: { tailgate: tailgate } %>
         <% end %>
