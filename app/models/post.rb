@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :tailgate
   belongs_to :user
   
-  has_many :comments, inverse_of: :post, :dependent => :delete_all
+  has_many :comments, inverse_of: :post, :dependent => :delete_all, order: "created_at"
   
   validates :user, :tailgate, presence:true
   
