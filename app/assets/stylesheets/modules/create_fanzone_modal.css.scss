@@ -1,3 +1,5 @@
+@import "partials/colors";
+
 div#myCreateFanzoneModal
 {
   
@@ -15,5 +17,23 @@ div#myCreateFanzoneModal
         padding: 2px 20px;
       }
     }
+    
+    div#colorPicker
+    {
+      .color
+      {
+        border: $borderColor solid 1px;
+        width:25px;
+        height:25px;
+        float:left;
+        margin:5px;
+      }
+      
+      .selected
+      {
+        border: $selectedBorder solid 3px;
+        margin: 3px;
+      }
+    }    
   }
 }

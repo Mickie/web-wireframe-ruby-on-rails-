@@ -12,6 +12,18 @@
       <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
       <%= f.label :team_id, "Then pick a team:" %>
       <%= f.select(:team_id, options_for_select( aTailgate.team ? [aTailgate.team.name, aTailgate.team.id ] : [], aTailgate.team_id)) %>
+      <div id="colorPicker">
+        <%= f.label :color, "Pick your theme:" %>
+        <%= f.hidden_field :color %>
+        <div class="color" data-color="#333333"></div>
+        <div class="color" data-color="#002A5C"></div>
+        <div class="color" data-color="#993333"></div>
+        <div class="color" data-color="#663366"></div>
+        <div class="color" data-color="#669999"></div>
+        <div class="color" data-color="#CC6600"></div>
+        <div class="color" data-color="#336633"></div>
+        <div class="color" data-color="#562B00"></div>
+      </div>
     </div>
     <div class="modal-footer">
       <%= f.submit "Save", id:"createFanzoneSubmit" %>

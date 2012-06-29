@@ -15,7 +15,7 @@ class Tailgate < ActiveRecord::Base
   validates :name, presence:true
   validates :user_id, presence:true
 
-  attr_accessible :name, :team_id, :user_id
+  attr_accessible :name, :team_id, :user_id, :color
   
   def light_color
     theStyle = Sass.compile(".style { color: mix(#FFFFFF, #{color}, 75%);}")
