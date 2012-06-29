@@ -9,7 +9,7 @@ describe "devise/registrations/new" do
   
   it "renders default look for completely new user" do
     render
-    view.should render_template( partial: "_only_facebook" )
+    view.should render_template( partial: "_facebook_login_button" )
     view.should_not render_template( partial: "_twitter_authed_new_user")
   end
 

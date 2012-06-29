@@ -64,15 +64,22 @@ var TwitterView = function( anArrayOfHashTags,
   }
   else
   {
-    this.connectTwitter = function()
+    this.handleDisconnectStatus = function()
     {
-      document.location = "/users/" + this.myUserId + "/connect_twitter";
+      if (this.myUserId > 0)
+      {
+        $("#myConnectTwitterModal").modal("show"); 
+      }
+      else
+      {
+        $("#myLoginModal").modal("show"); 
+      }
     };
-    this.onReplyTo = this.connectTwitter;
-    this.onRetweet = this.connectTwitter;
-    this.onFavorite = this.connectTwitter;
-    this.onSendQuickTweet = this.connectTwitter;
-    this.showTweetDialog = this.connectTwitter;
+    this.onReplyTo = this.handleDisconnectStatus;
+    this.onRetweet = this.handleDisconnectStatus;
+    this.onFavorite = this.handleDisconnectStatus;
+    this.onSendQuickTweet = this.handleDisconnectStatus;
+    this.showTweetDialog = this.handleDisconnectStatus;
   }
   
   

@@ -3,6 +3,4 @@
 
 <h1>To share your thoughts, you need to connect to Twitter</h1>
 
-<div>
-  <%= link_to image_tag("sign-in-with-twitter.png", size:"450x72"), omniauth_authorize_path(User, 'twitter'), id: "sign-in-with-twitter" %>
-</div>
+<%= render partial:"partials/connect_twitter_button.html.erb"%>
