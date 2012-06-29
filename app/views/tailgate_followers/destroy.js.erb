@@ -1,0 +1,2 @@
+$("#fanzone_nav #nav_fanzone_<%= @tailgate.id -%>").remove();
+$("#tailgate_<%= @tailgate.id -%> .join_fanzone").html("<%= escape_javascript(render partial:'partials/follow_button', locals: { tailgate: @tailgate }) %>");

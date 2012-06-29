@@ -14,50 +14,6 @@ div.fanzoneTile
     height: 80px;
     cursor: pointer;
     
-    .join_fanzone
-    {
-      float:right;
-      
-      form
-      {
-        margin:0px;
-        padding:0px;
-        height: 19px;
-      }
-      
-      .follow_button
-      {
-        margin: -1px 0px 0px 0px;
-        padding: 0px 10px;
-        color: black;
-        font-weight: bold;
-        background-color: $joinBackground;
-        border-left: $joinBorder solid 1px;
-        border-bottom: $joinBorder solid 1px;
-        border-right-width: 0px;
-        border-top-width: 0px;
-        text-transform: uppercase;
-        @include border-radius(0);
-        @include box-shadow(none); 
-        
-        &:hover
-        {
-          text-decoration:none;
-        }
-      }
-      
-      .myFanzone
-      {
-        float:right;
-        width:0px;
-        height:0px;
-        margin:-1px -1px 0px 0px;
-        padding:0px;
-        border-bottom: #788DA6 solid 20px;
-        border-right: #F0F0F0 solid 20px;
-      }
-    }
-    
     .banner_content
     {
       padding: 0px 10px;

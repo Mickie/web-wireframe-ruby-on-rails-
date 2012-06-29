@@ -19,7 +19,9 @@ class TailgateFollowersController < ApplicationController
   
   def destroy
     @tailgate_follower = TailgateFollower.find(params[:id])
-    current_user.unfollow!( @tailgate_follower.tailgate )
+    @tailgate = @tailgate_follower.tailgate
+
+    current_user.unfollow!( @tailgate )
     @tailgate_follower.destroy
 
     respond_to do |format|
