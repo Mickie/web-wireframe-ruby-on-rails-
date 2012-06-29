@@ -2,19 +2,7 @@ require 'spec_helper'
 
 describe InstagramProxyController do
   
-  describe "before filters" do
-    
-    describe "without user logged in" do
-      it "redirects to user page" do
-        post 'find_tags', statusText: "test status"
-        response.should redirect_to(new_user_session_path)
-      end
-    end
-    
-  end  
-
-  describe "with user logged in" do
-    login_user
+  describe "InstagramProxuController" do
     
     before do
       mock_geocoding!

@@ -11,6 +11,8 @@
         <% else %>
           <%= render partial: "partials/follow_button", locals: { tailgate: tailgate } %>
         <% end %>
+      <% else %>
+        <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
       <% end %>
     </div>
     <div class="banner_content">

@@ -28,16 +28,6 @@ describe "QuickTweets" do
       response.should redirect_to(new_admin_session_path)
     end
     
-    it "should redirect quick_tweet index to user login" do
-      get quick_tweets_path
-      response.should redirect_to(new_user_session_path)
-    end
-    
-    it "should redirect show page to user login" do
-      get quick_tweet_path(@quick_tweet)
-      response.should redirect_to(new_user_session_path)
-    end
-
   end
   
   describe "with user logged in" do

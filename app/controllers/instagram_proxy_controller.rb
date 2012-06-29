@@ -1,11 +1,10 @@
 class InstagramProxyController < ApplicationController
-  before_filter :authenticate_user!, only: [:find_tags]
 
   def find_tags
     theTeam = Team.find(params[:team_id])
     
     theClient = nil
-    if current_user.instagram_user_token
+    if signed_in? && current_user.instagram_user_token
       theClient = Instagram.client( access_token: current_user.instagram_user_token )
     else
       theClient = Instagram.client()

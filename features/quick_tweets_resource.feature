@@ -8,10 +8,6 @@ Feature: QuickTweets Resource
 		Given I visit the edit quick tweet page
 		Then I should be redirected to the new admin session page
 
-	Scenario: Seeing the list of quick tweets requires user access
-		Given I visit the quick tweets page
-		Then I should be redirected to the new user session page
-		
 	Scenario: I can add a quick tweet as an admin and see the details when complete
 		Given I sign in as admin
 			And I sign in as user

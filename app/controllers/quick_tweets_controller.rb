@@ -1,6 +1,5 @@
 class QuickTweetsController < ApplicationController
   before_filter :authenticate_admin!, except: [:index, :show]
-  before_filter :authenticate_user!, only: [:index, :show] 
 
   # GET /quick_tweets
   # GET /quick_tweets.json
