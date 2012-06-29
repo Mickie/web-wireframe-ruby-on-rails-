@@ -35,7 +35,7 @@ When /^I click the twitter link$/ do
                                                                   }, 
                                                                   credentials: { token: "a token", secret: "a secret"} 
                                                                 })
-  click_link "sign-in-with-twitter"
+  click_link "connect_twitter_link"
 end
 
 
