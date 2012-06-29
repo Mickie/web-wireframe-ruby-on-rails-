@@ -15,5 +15,8 @@ function initializeColorPicker()
       $(e.target).addClass('selected');
       $("#colorPicker #tailgate_color").val($(e.target).data("color"));  
     });
-  })  
+  });
+  
+  var theRandomIndex = Math.floor(Math.random() * $("#colorPicker .color").length);
+  $("#colorPicker .color")[theRandomIndex].click();  
 }
