@@ -48,9 +48,15 @@
         </a>
       </li>
       <li id="createFanzone">
-        <a href="#myCreateFanzoneModal" data-toggle="modal">
-          <span class="create">+ &nbsp; Create a Fanzone</span>
-        </a>
+        <% if signed_in? %>
+          <a href="#myCreateFanzoneModal" data-toggle="modal">
+            <span class="create">+ &nbsp; Create a Fanzone</span>
+          </a>
+        <% else %>
+          <a href="#myLoginModal" data-toggle="modal">
+            <span class="create">+ &nbsp; Create a Fanzone</span>
+          </a>
+        <% end %>
       </li>  
       
       <li id="allFanzones">
