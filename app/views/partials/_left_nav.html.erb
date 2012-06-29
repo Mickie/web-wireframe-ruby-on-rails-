@@ -34,6 +34,7 @@
       <div id="tab_border"></div>
     </div>
   </div>
+  
   <div id="fanzone_nav">
     <ul class="nav nav-tabs nav-stacked">
       <li id="logo">
@@ -52,13 +53,13 @@
         </a>
       </li>  
       
-      <li id="allFanZones">
-        <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanZones')" href="#">All Fanzones</a> 
+      <li id="allFanzones">
+        <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanzones')" href="#allFanzones">All Fanzones</a> 
       </li>
       
       <li id="myFanzones">
         <%if signed_in? %>
-          <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#">
+          <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#myFanzones">
             <div>
               <% if current_user.image %>
                 <%= image_tag( current_user.image, size:"32x32") %>
