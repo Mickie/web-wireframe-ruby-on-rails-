@@ -17,7 +17,7 @@ describe "StaticPages" do
     
     describe "for guest" do
       
-      it { should have_link("Log in", href: new_user_session_path ) }
+      it { should have_link("Log in" ) }
       
     end
     
