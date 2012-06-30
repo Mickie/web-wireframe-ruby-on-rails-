@@ -1,6 +1,5 @@
 <%= render "tailgate_rows" %>
 
 <script type="text/javascript">
-  var myInfiniteScroller = new InfiniteScroller();
-  myInfiniteScroller.handleScrollingForResource("<%= tailgates_path -%>");
+  InfiniteScroller.get().handleScrollingForResource("<%= tailgates_path -%>");
 </script>

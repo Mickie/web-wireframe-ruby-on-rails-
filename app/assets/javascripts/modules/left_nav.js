@@ -90,6 +90,10 @@ function loadData(aPath, aNewActiveSelector)
     addActiveToCurrentNavItem(aNewActiveSelector);
     window.location.hash = aNewActiveSelector;
   }
+  
+  InfiniteScroller.get().stop();
+  
+  
   $.ajax({
            url: aPath,
            cache:false,

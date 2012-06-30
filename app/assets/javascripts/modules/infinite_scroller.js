@@ -3,6 +3,7 @@ var InfiniteScroller = function()
   this.myCurrentPage = 1;
   this.myLoadingFlag = false;
   this.myResourceUrl = "";
+  this.myOnScrollDelegate = null;
 
   function nearBottomOfPage() 
   {
@@ -12,7 +13,14 @@ var InfiniteScroller = function()
   this.handleScrollingForResource = function(aResourceUrl)
   {
     this.myResourceUrl = aResourceUrl;
-    $(window).scroll( createDelegate( this, this.onScroll ));
+    this.myOnScrollDelegate = createDelegate( this, this.onScroll );
+    $(window).on("scroll", this.myOnScrollDelegate);
+  };
+
+  this.stop = function()
+  {
+    $(window).off("scroll", this.myOnScrollDelegate);
+    this.myOnScrollDelegate = null;
   };
 
   this.getUrlForCurrentPage = function()
@@ -46,5 +54,11 @@ var InfiniteScroller = function()
     this.myLoadingFlag = false;    
   }
 
+};
+
+var myInfiniteScroller = new InfiniteScroller();
+InfiniteScroller.get = function()
+{
+  return myInfiniteScroller;
 };
 
