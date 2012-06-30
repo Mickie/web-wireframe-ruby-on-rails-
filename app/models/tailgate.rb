@@ -17,6 +17,8 @@ class Tailgate < ActiveRecord::Base
 
   attr_accessible :name, :team_id, :user_id, :color
   
+  paginates_per 24
+  
   def light_color
     theStyle = Sass.compile(".style { color: mix(#FFFFFF, #{color}, 75%);}")
     theStyle.match("color: (.*);")[1]

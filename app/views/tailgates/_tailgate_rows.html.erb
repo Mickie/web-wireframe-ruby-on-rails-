@@ -1,0 +1,7 @@
+<% @tailgates.each_slice(3) do |anArrayOfThreeTailgates| %>
+  <div class="row-fluid">
+    <% anArrayOfThreeTailgates.each do |aTailgate| %>
+      <%= render partial: "partials/fanzone_tile", locals: { tailgate: aTailgate}%>  
+    <% end %>
+  </div>
+<% end %>

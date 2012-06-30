@@ -8,7 +8,7 @@ class TailgatesController < ApplicationController
     if ( params[:filter] == "user" && current_user )
       @tailgates = current_user.tailgates.includes(:posts) + current_user.followed_tailgates.includes(:posts)
     else
-      @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").all
+      @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").page(params[:page])
     end
 
     respond_to do |format|
@@ -18,6 +18,7 @@ class TailgatesController < ApplicationController
         format.html # index.html.erb
       end
       format.json { render json: @tailgates }
+      format.js
     end
   end
 

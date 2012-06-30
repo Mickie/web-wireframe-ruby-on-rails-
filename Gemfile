@@ -16,6 +16,7 @@ gem 'twitter'
 gem 'instagram', '>= 0.8.4'
 gem 'faraday', '0.7.6'
 gem 'foursquare2'
+gem 'kaminari'
 
 group :assets do
   gem 'jquery-rails'
