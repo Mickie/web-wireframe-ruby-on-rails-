@@ -8,7 +8,7 @@ class TailgatesController < ApplicationController
     if ( params[:filter] == "user" && current_user )
       @tailgates = current_user.tailgates.includes(:posts) + current_user.followed_tailgates.includes(:posts)
     else
-      @tailgates = Tailgate.includes(:posts).all
+      @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").all
     end
 
     respond_to do |format|
