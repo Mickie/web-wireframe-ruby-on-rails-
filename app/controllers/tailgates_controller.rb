@@ -62,6 +62,14 @@ class TailgatesController < ApplicationController
   # POST /tailgates.json
   def create
     @tailgate = Tailgate.new(params[:tailgate])
+    
+    if (@tailgate.topic_tags.length == 0 && @tailgate.team)
+      if ( @tailgate.team.social_info )
+        @tailgate.topic_tags = @tailgate.team.social_info.hash_tags
+      else
+        @tailgate.topic_tags = "##{@tailgate.team.mascot}"
+      end
+    end
 
     respond_to do |format|
       if (@tailgate.user_id != current_user.id)

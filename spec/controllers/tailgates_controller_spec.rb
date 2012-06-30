@@ -127,14 +127,14 @@ describe TailgatesController do
         it "assigns a newly created but unsaved tailgate as @tailgate" do
           # Trigger the behavior that occurs when invalid params are submitted
           Tailgate.any_instance.stub(:save).and_return(false)
-          post :create, {:tailgate => {}}
+          post :create, {:tailgate => {team_id:@team.id}}
           assigns(:tailgate).should be_a_new(Tailgate)
         end
   
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           Tailgate.any_instance.stub(:save).and_return(false)
-          post :create, {:tailgate => {}}
+          post :create, {:tailgate => {team_id:@team.id}}
           response.should render_template("new")
         end
 
