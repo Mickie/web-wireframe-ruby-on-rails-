@@ -42,9 +42,7 @@ div.fanzoneTile
 
       .team_logo
       {
-        float:left;
-        margin-top: -5px;
-        margin-right: 10px;
+        width:20%;
         @include gradient-vertical(#FFFFFF, #E5E5E5);  
         @include border-radius(50%);
         padding: 10px;
@@ -55,12 +53,17 @@ div.fanzoneTile
           height: 32px;
         }
       }
-        
-      h3
+
+      .team_name
       {
-        font-size: 1em;
-        line-height: 1.3em;
-        color: white;
+        padding:10px;
+        width:80%;
+        h3
+        {
+          font-size: 1em;
+          line-height: 1.3em;
+          color: white;
+        }
       }
     }
     

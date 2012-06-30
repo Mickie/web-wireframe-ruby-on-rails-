@@ -19,10 +19,16 @@
       </div>
     <% end %>
     <div class="banner_content">
-      <div class="team_logo">
-        <%= teamLogo(tailgate.team, :small) %>      
-      </div>
-      <h3><%= tailgate.name %></h3>
+      <table>
+        <tr>
+          <td class="team_logo">
+            <%= teamLogo(tailgate.team, :small) %>      
+          </td>
+          <td class="team_name">
+            <h3><%= tailgate.name %></h3>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
   <div class="content">
