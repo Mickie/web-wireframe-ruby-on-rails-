@@ -7,19 +7,18 @@ describe("InstagramSearch", function()
     myInstagramSearch = new InstagramSearch();
   });
 
-  describe("getTags", function()
+  describe("getTagsForTeam", function()
   {
     beforeEach(function()
     {
-      myInstagramSearch.myTeamId = 1;
       registerFakeAjax(
       { 
-        url: "/instagram_proxy/find_tags.json?team_id=1",
+        url: "/instagram_proxy/find_tags_for_team.json?team_id=1",
         successData: InstagramData.tagsResponse
       })
 
       myInstagramSearch.onGetTagsComplete = jasmine.createSpy('onGetTagsComplete');
-      myInstagramSearch.getTags(); 
+      myInstagramSearch.getTagsForTeam(1); 
     });
 
     it("calls onGetTagsComplete with results", function() 
@@ -27,6 +26,27 @@ describe("InstagramSearch", function()
       expect(myInstagramSearch.onGetTagsComplete).toHaveBeenCalledWith(InstagramData.tagsResponse);
     });
   });
+
+  describe("getTagsForFanzone", function()
+  {
+    beforeEach(function()
+    {
+      registerFakeAjax(
+      { 
+        url: "/instagram_proxy/find_tags_for_fanzone.json?fanzone_id=1",
+        successData: InstagramData.tagsResponse
+      })
+
+      myInstagramSearch.onGetTagsComplete = jasmine.createSpy('onGetTagsComplete');
+      myInstagramSearch.getTagsForFanzone(1); 
+    });
+
+    it("calls onGetTagsComplete with results", function() 
+    {
+      expect(myInstagramSearch.onGetTagsComplete).toHaveBeenCalledWith(InstagramData.tagsResponse);
+    });
+  });
+
   
   describe("onGetTagsComplete", function()
   {

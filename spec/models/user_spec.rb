@@ -280,6 +280,8 @@ describe User do
 
     describe "can create user via facebook" do
       before do
+        mock_geocoding!
+        @fanzoTailgate = FactoryGirl.create(:tailgate, name:"The World's Largest Tailgate Party!")
         @user = User.find_for_facebook_oauth( @theHash, nil ) 
       end
       
@@ -294,6 +296,7 @@ describe User do
         theResult.image.should eq("image url")
         theResult.last_name.should eq("last")
         theResult.first_name.should eq("first")
+        theResult.following?(@fanzoTailgate).should be_true
       end
     end
   
@@ -385,6 +388,8 @@ describe User do
   
     describe "can create user via foursquare" do
       before do
+        mock_geocoding!
+        @fanzoTailgate = FactoryGirl.create(:tailgate, name:"The World's Largest Tailgate Party!")
         @user = User.find_for_foursquare_oauth( @theHash, nil ) 
       end
       
@@ -399,6 +404,7 @@ describe User do
         theResult.image.should eq("image url")
         theResult.last_name.should eq("last")
         theResult.first_name.should eq("first")
+        theResult.should be_following(@fanzoTailgate)
       end
     end
 

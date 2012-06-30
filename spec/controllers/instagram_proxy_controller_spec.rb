@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe InstagramProxyController do
   
-  describe "InstagramProxuController" do
+  describe "InstagramProxyController" do
     
     before do
       mock_geocoding!
@@ -13,12 +13,12 @@ describe InstagramProxyController do
     end
     
     
-    describe "GET 'find_tags' responds to JSON request" do
+    describe "GET 'find_tags_for_team' responds to JSON request" do
       before do
         theListOfTags = [ Hashie::Mash.new({media_count:2108,name:"nd"}), Hashie::Mash.new({media_count:492,name:"goirish"}) ]
         @theClientDouble.stub(:tag_search).and_return(theListOfTags)
           
-        get 'find_tags', team_id:@myTeam.id, format: :json
+        get 'find_tags_for_team', team_id:@myTeam.id, format: :json
       end
       
       it "returns http success" do

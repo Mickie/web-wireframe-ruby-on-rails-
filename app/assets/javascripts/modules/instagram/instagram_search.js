@@ -1,26 +1,41 @@
 var InstagramSearch = function()
 {
-  this.myTeamId;
   this.myMediaResponseCount = 0;
   this.myCompleteCallback;
   this.myMedia = [];
   
   this.loadMediaForTeam = function( aTeamId, aCompleteCallback )
   {
-    this.myTeamId = aTeamId;
     this.myCompleteCallback = aCompleteCallback;
-    this.getTags();
+    this.getTagsForTeam(aTeamId);
+  };
+
+  this.loadMediaForFanzone = function( aFanzoneId, aCompleteCallback )
+  {
+    this.myCompleteCallback = aCompleteCallback;
+    this.getTagsForFanzone(aFanzoneId);
   };
   
-  this.getTags = function()
+  this.getTagsForTeam = function(aTeamId)
   {
-    $.getJSON("/instagram_proxy/find_tags.json?team_id=" + this.myTeamId, 
+    $.getJSON("/instagram_proxy/find_tags_for_team.json?team_id=" + aTeamId, 
+              createDelegate(this, this.onGetTagsComplete));
+  };
+
+  this.getTagsForFanzone = function(aFanzoneId)
+  {
+    $.getJSON("/instagram_proxy/find_tags_for_fanzone.json?fanzone_id=" + aFanzoneId, 
               createDelegate(this, this.onGetTagsComplete));
   };
   
   this.onGetTagsComplete = function(aResult)
   {
     this.myTags = aResult;
+    
+    if (!this.myTags || this.myTags.length == 0)
+    {
+      this.myCompleteCallback([]);
+    }
     
     this.myMediaResponseCount = 0;
     for (var i=0; i < this.myTags.length; i++) 

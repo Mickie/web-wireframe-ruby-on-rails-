@@ -9,7 +9,9 @@ describe "tailgates/show" do
     @tailgate = assign(:tailgate, stub_model(Tailgate,
       :name => "Name",
       :user => @user,
-      :team => @team
+      :team => @team,
+      :topic_tags => "#goirish",
+      :not_tags => ""
     ))
     @post = assign(:post, Post.new(tailgate_id:@tailgate.id))
     view.stub(:signed_in?).and_return(false);

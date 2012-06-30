@@ -1,7 +1,7 @@
 <div>
-  <%= link_to image_tag("facebook-login-button.png", size:"64x64"), omniauth_authorize_path(resource_name, 'facebook'), id:"facebook-login-button" %>
-  <%= link_to image_tag("sign-in-with-twitter.png", size:"64x64"), omniauth_authorize_path(resource_name, 'twitter'), id: "sign-in-with-twitter" %>
-  <%= link_to image_tag("instagram-icon.png", size:"64x64" ), omniauth_authorize_path(resource_name, 'instagram'), id: "sign-in-with-instagram" %>
-  <%= link_to image_tag("foursquare-login-button.png", size:"64x64"), omniauth_authorize_path(resource_name, 'foursquare'), id:"foursquare-login-button" %>
+  <%= link_to "Log in with Facebook", omniauth_authorize_path(resource_name, 'facebook'), id:"facebook-login-button", class:"zocial facebook" %>
+  <%= link_to "Connect with Twitter", omniauth_authorize_path(User, 'twitter'), id:"connect_twitter_link", class:"zocial twitter" %>
+  <%= link_to "Connect with Instagram", omniauth_authorize_path(resource_name, 'instagram'), id: "sign-in-with-instagram", class:"zocial instagram" %>
+  <%= link_to "Log in with Foursquare", omniauth_authorize_path(resource_name, 'foursquare'), id:"foursquare-login-button", class:"zocial foursquare" %>
 </div>
 

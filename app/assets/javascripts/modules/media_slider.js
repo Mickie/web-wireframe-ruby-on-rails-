@@ -8,6 +8,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.myYouTubeSearch = null;
   this.myInstagrams = {};
   this.myYouTubeVideos = {};
+  this.myApiResponses = 0;
   
   this.createSliderForTeam = function( aTeamId, 
                                         aShortName,
@@ -20,6 +21,20 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
                                               anArrayOfHashTags,
                                               15);
     this.myInstagramSearch.loadMediaForTeam(aTeamId, createDelegate(this, this.onInstagramMediaLoaded));
+    this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
+  };
+  
+  this.createSliderForFanzone = function( aFanzoneId,
+                                        aShortName,
+                                        aSport, 
+                                        anArrayOfHashTags )
+  {
+    this.myInstagramSearch = new InstagramSearch();
+    this.myYouTubeSearch = new YouTubeSearch( aShortName,
+                                              aSport, 
+                                              anArrayOfHashTags,
+                                              15);
+    this.myInstagramSearch.loadMediaForFanzone(aFanzoneId, createDelegate(this, this.onInstagramMediaLoaded));
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };
   
@@ -108,7 +123,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
       this.myInstagrams[anArrayOfMedia[i].id] = anArrayOfMedia[i];
     };
 
-    if (_.keys(this.myYouTubeVideos).length > 0)
+    this.myApiResponses++;
+    if (this.myApiResponses >= 2)
     {
       this.onAllMediaLoaded();
     }
@@ -150,7 +166,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
       this.myYouTubeVideos[anArrayOfMedia[i].media$group.yt$videoid.$t] = anArrayOfMedia[i];
     };
 
-    if (_.keys(this.myInstagrams).length > 0)
+    this.myApiResponses++;
+    if (this.myApiResponses >= 2)
     {
       this.onAllMediaLoaded();
     }

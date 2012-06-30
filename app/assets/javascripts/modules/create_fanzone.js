@@ -5,6 +5,11 @@ $(function()
 
 function initializeColorPicker()
 {
+  if ($("#colorPicker").length == 0)
+  {
+    return;
+  } 
+  
   $("#colorPicker .color").each(function(anIndex, anElement)
   {
     var theColor = $(this).data("color");
@@ -17,6 +22,7 @@ function initializeColorPicker()
     });
   });
   
-  var theRandomIndex = Math.floor(Math.random() * $("#colorPicker .color").length);
+  var theRandomNumber = (Math.random() + Math.random())/2.0;
+  var theRandomIndex = Math.floor(theRandomNumber * $("#colorPicker .color").length);
   $("#colorPicker .color")[theRandomIndex].click();  
 }

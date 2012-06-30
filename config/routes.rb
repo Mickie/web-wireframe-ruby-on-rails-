@@ -31,7 +31,8 @@ FanzoSite::Application.routes.draw do
   post "twitter_proxy/retweet"
   post "twitter_proxy/favorite"
 
-  get "instagram_proxy/find_tags"
+  get "instagram_proxy/find_tags_for_team"
+  get "instagram_proxy/find_tags_for_fanzone"
   get "instagram_proxy/media_for_tag"
 
   resources :admins, only: :show

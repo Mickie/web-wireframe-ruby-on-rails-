@@ -77,6 +77,7 @@ class User < ActiveRecord::Base
                                   last_name: theLastName,
                                   image: theImage,
                                   remember_me: true)
+      theNewUser.followDefaultTailgate
       return theNewUser    
     end
   end
@@ -124,6 +125,7 @@ class User < ActiveRecord::Base
                                   last_name: theLastName,
                                   image: theImage,
                                   remember_me: true)
+      theNewUser.followDefaultTailgate
       return theNewUser    
     end
   end
@@ -204,6 +206,13 @@ class User < ActiveRecord::Base
 
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
+  end
+  
+  def followDefaultTailgate
+    theDefaultTailgate = Tailgate.find_by_name("The World's Largest Tailgate Party!")
+    if (theDefaultTailgate)
+      follow!(theDefaultTailgate)
+    end
   end
   
   def full_name
