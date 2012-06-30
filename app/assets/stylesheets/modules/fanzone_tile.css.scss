@@ -13,6 +13,27 @@ div.fanzoneTile
     background-color: #002A5C;
     height: 80px;
     cursor: pointer;
+    position:relative;
+    
+    .official
+    {
+      width:100%;
+      @include gradient-radial(#AAAAAA, #000000);
+      height:13px;
+      line-height:11px;
+      text-align:center;
+      span
+      {
+        position:absolute;
+        left:40%;
+        height:13px;
+        line-height:11px;
+        font-size:11px;
+        text-transform: uppercase;
+        color: white;
+        text-align:center;
+      }
+    }
     
     .banner_content
     {
@@ -49,7 +70,8 @@ div.fanzoneTile
   {
     background: white;
     height:220px;
-    border: 1px solid #ccc;     
+    border: 1px solid #ccc; 
+    clear: both;    
     
     .posts
     { 
