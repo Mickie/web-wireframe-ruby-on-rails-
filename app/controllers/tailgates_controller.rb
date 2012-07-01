@@ -1,6 +1,16 @@
 class TailgatesController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
 
+  # GET /tailgates/search.js
+  def search
+    @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").where(team_id: params[:team_id])
+
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @tailgates }
+      format.js 
+    end
+  end
 
   # GET /tailgates
   # GET /tailgates.json

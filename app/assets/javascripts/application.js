@@ -14,6 +14,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.autocomplete
+//= require autocomplete-rails
 //= require bootstrap
 //= require facebook_js_sdk_loader
 //= require google_analytics

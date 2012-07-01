@@ -1,6 +1,9 @@
 class TeamsController < ApplicationController
-  before_filter :authenticate_admin!, except: [:index, :show]
+  before_filter :authenticate_admin!, except: [:index, :show, :autocomplete_team_name]
   before_filter :authenticate_user!, only: [:index, :show] 
+
+  autocomplete :team, :name, full: true
+
 
   # GET /teams
   # GET /teams.json

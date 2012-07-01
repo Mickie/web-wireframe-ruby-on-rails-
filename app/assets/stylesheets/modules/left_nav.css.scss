@@ -161,6 +161,22 @@ nav#left_nav
     #allFanzones
     {
       text-transform: uppercase;
+      
+      #fanzone_search
+      {
+        border-left: $borderColor solid 1px;
+        border-right: $borderColor solid 1px;
+        form
+        {
+          padding:10px;
+          margin:0px;
+          .search_input
+          {
+            height:30px;
+            @include border-radius(15px);
+          }
+        }
+      }
     }
     
     #myFanzones

@@ -16,9 +16,14 @@ FanzoSite::Application.routes.draw do
   end
 
   resources :tailgates do
+    get 'search', on: :collection
     resources :posts do
       resources :comments
     end
+  end
+
+  resources :teams do
+    get :autocomplete_team_name, on: :collection
   end
   
   resources :tailgate_followers, only: [ :create, :destroy ]
@@ -40,7 +45,6 @@ FanzoSite::Application.routes.draw do
   resources :leagues
   resources :divisions
   resources :conferences
-  resources :teams
   resources :venues
   resources :venue_types
   resources :affiliations
