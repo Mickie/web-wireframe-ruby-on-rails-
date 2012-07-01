@@ -104,7 +104,6 @@ nav#left_nav
         
         .team_logo
         {
-          float: left;
           padding: 5px 10px;
           
           img
@@ -125,10 +124,22 @@ nav#left_nav
           border-right: #F0F0F0 solid 20px;
         }
         
-        .team_name
+        .fanzone_name
         {
-          padding: 10px 0px;
-          float:left;
+          width: 175px;
+          height: 40px;
+          overflow: hidden;
+          position: relative;
+          span
+          {
+            display:block;
+            position:absolute; 
+            top:0; 
+            bottom:0; 
+            left:0; 
+            right:0;
+            margin:auto; 
+          }
         }
       }
     }

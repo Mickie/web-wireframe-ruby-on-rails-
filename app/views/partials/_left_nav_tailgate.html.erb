@@ -1,7 +1,11 @@
 <li class="fanzone" id="nav_fanzone_<%= aTailgate.id -%>">
   <a href="#nav_fanzone_<%= aTailgate.id -%>" onclick="loadData('<%= tailgate_path(id:aTailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= aTailgate.id -%>')">
-    <div class="team_logo"><%= teamLogo(aTailgate.team, :small) -%></div>
-    <div class="team_name"><%= aTailgate.name -%></div>
-    <div class="myFanzone"></div>
+    <table>
+      <tr>
+        <td class="team_logo"><%= teamLogo(aTailgate.team, :small) -%></td>
+        <td class="fanzone_name"><%= aTailgate.name -%></td>
+        <td class="myFanzone"></td>
+      </tr>
+    </table>
   </a>
 </li>
