@@ -70,6 +70,12 @@ function onLoadDataComplete(aResult)
 {
   $("#frameContent").html(aResult);
   window.scrollTo( 0, 1 );
+  
+  if ($(".active").attr("id") == "allFanzones")
+  {
+    InfiniteScroller.get().handleScrollingForResource("/tailgates");
+  }
+  
 }
 
 function onLoadError(anError)
