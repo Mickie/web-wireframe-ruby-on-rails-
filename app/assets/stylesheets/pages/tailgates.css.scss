@@ -146,6 +146,13 @@ div#tailgate_show
       width: 10%;
     }
   }
-  
-  
+}
+
+div#allTiles
+{
+  & [class*="span"]
+  {
+    width:30%;
+    margin:0px 15px 20px 0px;
+  }
 }
