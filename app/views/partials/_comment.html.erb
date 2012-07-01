@@ -1,1 +1,9 @@
-<p class="comment"><strong><%= aComment.user.full_name %>:</strong> <%= aComment.content %></p>
+<div class="comment">
+  <div class="profile_pic">
+    <% if aComment.user.image %>
+      <%= image_tag( aComment.user.image ) %>
+    <% end %>
+  </div>
+  
+  <p class="comment_content"><strong><%= aComment.user.full_name %>:</strong> <%= aComment.content %></p>
+</div>

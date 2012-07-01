@@ -96,11 +96,17 @@ div#tailgate_show
         div.post_comments
         {
           clear:both;
+          padding-left: 20px;
+          
+          .comment
+          {
+            clear:both;
+          }
         }
         
         div.comment_form
         {
-          padding: 5px 0px;
+          padding: 5px 0px 5px 20px;
           
           .comment_submit
           {

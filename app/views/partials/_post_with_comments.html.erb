@@ -6,7 +6,7 @@
   </div>
   
   <p class="post_content">
-    <%= aPost.content %>
+    <strong><%= aPost.user.full_name %> :</strong> <%= aPost.content %>
   </p>
   
   <div class="post_comments" id="post_<%= aPost.id %>_comments">
