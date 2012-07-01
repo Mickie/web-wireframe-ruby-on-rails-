@@ -1,13 +1,23 @@
 <footer class="footer">
-  <small>
-  	FANZO: Where Fans Rule!
-  </small>
   <nav>
     <ul>
       <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Contact", contact_path %></li>
-      <li><a href="http://www.twitter.com/fanzofans">Follow us on Twitter</a></li>
-      <li><a href="http://www.facebook.com/fanzofans">Like us on Facebook</a></li>
+      <li><%= link_to "Team", fanzo_team_path %></li>
+      <li>
+        <a href="https://twitter.com/FanzoFans" class="twitter-follow-button" data-show-count="false" data-lang="en">
+          Follow @FanzoFans
+        </a>
+      <li>
+        <div class="fb-like" 
+             data-href="https://www.facebook.com/FanzoFans" 
+             data-send="false" 
+             data-layout="button_count" 
+             data-width="100" 
+             data-show-faces="true">
+        </div>    
+      </li>
     </ul>
   </nav>
 </footer>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>      </li>

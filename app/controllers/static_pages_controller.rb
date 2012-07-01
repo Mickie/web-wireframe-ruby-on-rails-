@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   def about
   end
 
-  def contact
+  def fanzo_team
   end
   
   def channel

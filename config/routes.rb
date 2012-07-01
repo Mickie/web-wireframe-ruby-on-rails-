@@ -29,7 +29,7 @@ FanzoSite::Application.routes.draw do
   resources :tailgate_followers, only: [ :create, :destroy ]
 
   match '/about',   to: 'static_pages#about'
-  match '/contact', to: 'static_pages#contact'
+  match '/fanzo_team', to: 'static_pages#fanzo_team'
   match '/channel', to: 'static_pages#channel'
 
   post "twitter_proxy/update_status"
