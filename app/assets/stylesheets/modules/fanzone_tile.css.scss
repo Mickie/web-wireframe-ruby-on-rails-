@@ -83,14 +83,17 @@ div.fanzoneTile
     
     .posts
     { 
-      height:198px; 
+      height:188px; 
       padding: 5px;
       overflow: hidden;
       
       .post 
       {
+        clear:both;
+        
         .profile_pic
         {
+          float:left;
           width:32px;
           height:32px;
           padding:8px;
@@ -99,7 +102,7 @@ div.fanzoneTile
         
         .post_content
         {
-          padding: 5px 8px 0px 0px;
+          padding: 5px 8px 0px 48px;
           vertical-align: top;
         }
       }

@@ -32,28 +32,26 @@
     </div>
   </div>
   <div class="content">
-    <table class="posts">
-      <tbody>
-        <% if tailgate.posts.any? %>
-          <% for i in 0..1 do %>
-            <% if i < tailgate.posts.length %>
-              <tr class="post">
-                <td class="profile_pic">
-                  <% if tailgate.posts[i].user.image %>
-                    <%= image_tag( tailgate.posts[i].user.image, size:"32x32") %>
-                  <% end %>
-                </td>
-                <td class="post_content">
-                  <strong><%= tailgate.posts[i].user.full_name %></strong> <span><%= tailgate.posts[i].content %></span>
-                </td>
-              </tr>
-            <% end %>
+    <div class="posts">
+      <% if tailgate.posts.any? %>
+        <% for i in 0..1 do %>
+          <% if i < tailgate.posts.length %>
+            <div class="post">
+              <div class="profile_pic">
+                <% if tailgate.posts[i].user.image %>
+                  <%= image_tag( tailgate.posts[i].user.image, size:"32x32") %>
+                <% end %>
+              </div>
+              <div class="post_content">
+                <strong><%= tailgate.posts[i].user.full_name %></strong> <span><%= tailgate.posts[i].content %></span>
+              </div>
+            </div>
           <% end %>
-        <% else %>
-          <tr class="post"><td class="profile_pic"></td><td class="post_content">No New Posts... </td></tr>
         <% end %>
-      </tbody>
-    </table>
+      <% else %>
+        <tr class="post"><td class="profile_pic"></td><td class="post_content">No New Posts... </td></tr>
+      <% end %>
+    </div>
     <div class="stats">
       <span class="numFollowers">
         <%= pluralize(tailgate.followers.count + 1, "fan") %>
