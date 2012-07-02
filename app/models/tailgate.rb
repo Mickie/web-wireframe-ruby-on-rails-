@@ -14,8 +14,9 @@ class Tailgate < ActiveRecord::Base
   
   validates :name, presence:true
   validates :user_id, presence:true
+  validates :topic_tags, presence:true
 
-  attr_accessible :name, :team_id, :user_id, :color
+  attr_accessible :name, :team_id, :user_id, :color, :topic_tags, :not_tags
   
   paginates_per 24
   

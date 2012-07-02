@@ -13,7 +13,8 @@ describe TailgatesController do
     { 
       name:'Seahawks Party', 
       team_id:@team.id,
-      user_id:aUserId 
+      user_id:aUserId,
+      topic_tags:"#seahawks" 
     }
   end
 

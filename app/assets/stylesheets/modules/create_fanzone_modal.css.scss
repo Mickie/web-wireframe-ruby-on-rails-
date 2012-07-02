@@ -1,20 +1,79 @@
 @import "partials/colors";
+@import "bootstrap/mixins";
 
 div#myCreateFanzoneModal
 {
   
+  .modal-header
+  {
+    ul 
+    {
+      text-align: center;
+      list-style: none;
+
+      li
+      {
+        padding: 0px 10px;
+        float:left;
+      }        
+    }
+  }
+  
   form#new_tailgate
   {
     margin:0px;
+    clear: both;
+  
+    .current_page
+    {
+      display:block;
+    }
+  
+    #page1
+    {
+      display:none;
+    }
+    
+    #page2
+    {
+      display:none;
+    }
+
+    #page3
+    {
+      display:none;
+    }
+
+    #page4
+    {
+      display:none;
+    }
   
     .modal-footer
     {
-      padding:0px;
+      padding:10px;
       
-      input#createFanzoneSubmit
+      a, input#createFanzoneSubmit
       {
-        margin:5px;
+        margin:0px;
+        height: 23px;
         padding: 2px 20px;
+        color: black;
+        font-family: 'Open Sans', sans-serif;  
+        font-size: 12px;
+        line-height: 1.5em;
+        font-weight: bold;
+        vertical-align:inherit;
+        background-color: $joinBackground;
+        border: $joinBorder solid 1px;
+        text-transform: uppercase;
+        @include border-radius(0);
+        @include box-shadow(none); 
+        
+        &:hover
+        {
+          text-decoration:none;
+        }
       }
     }
     

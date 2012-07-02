@@ -23,7 +23,7 @@ function initializeFrameContent()
   
   if(theHash.length > 0)
   {
-    var theLeftNavElement = $(theHash + ' a');
+    var theLeftNavElement = $("#fanzo_navigation " + theHash + ' a');
     if (theLeftNavElement.length > 0)
     {
       theLeftNavElement.click();
@@ -32,14 +32,27 @@ function initializeFrameContent()
     else
     {
       var theTailgateId = getIdFromHash(theHash);
-      loadData("/tailgates/" + theTailgateId + "?noLayout=true", theHash);
+      if (parseInt(theTailgateId) > 0)
+      {
+        loadData("/tailgates/" + theTailgateId + "?noLayout=true", theHash);
+      }
+      else
+      {
+        window.location.hash = "";
+        navToAllFanzones();
+      }
     }
   }
   else
   {
-    $('#allFanzones a').click();
-    $('#allFanzones').addClass('active');
+    navToAllFanzones();
   }
+}
+
+function navToAllFanzones()
+{
+  $('#allFanzones a').click();
+  $('#allFanzones').addClass('active');
 }
 
 function getIdFromHash( aHash )
