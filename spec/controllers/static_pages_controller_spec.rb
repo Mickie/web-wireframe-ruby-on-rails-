@@ -16,9 +16,9 @@ describe StaticPagesController do
     end
   end
 
-  describe "GET 'contact'" do
+  describe "GET 'fanzo_team'" do
     it "returns http success" do
-      get 'contact'
+      get 'fanzo_team'
       response.should be_success
     end
   end
