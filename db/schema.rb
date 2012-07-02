@@ -264,7 +264,7 @@ ActiveRecord::Schema.define(:version => 20120702041550) do
   create_table "topics", :force => true do |t|
     t.string   "name"
     t.string   "hash_tags"
-    t.string   "not_tags"
+    t.string   "not_tags",   :default => ""
     t.boolean  "visible",    :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
