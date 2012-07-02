@@ -58,12 +58,25 @@ function clearLocation()
   setCookie("myCurrentLocationHash", "");
 }
 
+function handleSearchSubmit()
+{
+  window.location.hash = "";
+  InfiniteScroller.get().stop();
+}
+
+function handleSearchSelect()
+{
+  $('#fanzone_search form').submit();
+}
+
 function initializeNavigationWatchers()
 {
   $('#myLoginModal').on('shown', saveLocation);
   $('#myLoginModal').on('hidden', clearLocation);  
   $('#myConnectTwitterModal').on('shown', saveLocation);
-  $('#myConnectTwitterModal').on('hidden', clearLocation);  
+  $('#myConnectTwitterModal').on('hidden', clearLocation);
+  $('#fanzone_search form').on('submit', handleSearchSubmit);
+  $('#fanzone_search').on('railsAutocomplete.select', handleSearchSelect);
 }
 
 function onLoadDataComplete(aResult)
