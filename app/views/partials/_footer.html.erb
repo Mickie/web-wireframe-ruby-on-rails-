@@ -1,22 +1,24 @@
 <footer class="footer">
   <nav>
     <ul>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Team", fanzo_team_path %></li>
-      <li>
+      <li id="twitter_follow">
         <a href="https://twitter.com/FanzoFans" class="twitter-follow-button" data-show-count="false" data-lang="en">
-          Follow @FanzoFans
+          Follow Fanzo
         </a>
-      <li>
+      <li id="facebook_like">
         <div class="fb-like" 
              data-href="https://www.facebook.com/FanzoFans" 
              data-send="false" 
              data-layout="button_count" 
-             data-width="100" 
+             data-width="80" 
              data-show-faces="true">
         </div>    
       </li>
     </ul>
+    <div>
+      <%= link_to "About", about_path %> | 
+      <%= link_to "Team", fanzo_team_path %>
+    </div>
   </nav>
 </footer>
 
