@@ -71,7 +71,7 @@ function handleTopicChanged(e)
 
 function initializeColorPicker()
 {
-  if ($("#colorPicker").length == 0)
+  if ($("#colorPicker .color").length == 0)
   {
     return;
   } 
