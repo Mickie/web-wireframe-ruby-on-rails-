@@ -37,6 +37,13 @@ class TailgatesController < ApplicationController
   def show
     @tailgate = Tailgate.includes(:posts => :comments ).find(params[:id])
     @post = Post.new
+    
+    theCoordinates = request.location.coordinates
+    if request.remote_ip == "127.0.0.1"
+      theCoordinates = "Northwest University, Kirkland WA"
+    end
+    
+    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => :location).near(theCoordinates, 20);
 
     respond_to do |format|
       if (params[:noLayout])

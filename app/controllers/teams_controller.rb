@@ -37,14 +37,9 @@ class TeamsController < ApplicationController
     if request.remote_ip == "127.0.0.1"
       theCoordinates = "Northwest University, Kirkland WA"
     end
-    
-    @localTeamWatchSites = [];
-    WatchSite.near(theCoordinates, 20).each do | aWatchSite |
-      if aWatchSite.team.id == @team.id
-        @localTeamWatchSites.push(aWatchSite)
-      end
-    end
-    
+
+    @localTeamWatchSites = @team.watch_sites.includes(:venue => :location).near(theCoordinates, 20);
+        
     respond_to do |format|
       if (params[:noLayout])
         format.html { render layout: false }

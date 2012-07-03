@@ -65,7 +65,7 @@ describe TeamsController do
     it "returns the teams watch sites near location in @localTeamWatchSites" do
       theFirstWatchSite = FactoryGirl.build(:watch_site, team:@team)
       theSecondWatchSite = FactoryGirl.build(:watch_site)
-      WatchSite.should_receive(:near).and_return([theFirstWatchSite, theSecondWatchSite])
+      WatchSite.should_receive(:near).and_return([theFirstWatchSite])
       get :show, {:id => @team.to_param}
       assigns(:localTeamWatchSites).should eq([theFirstWatchSite])
     end

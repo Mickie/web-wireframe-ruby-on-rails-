@@ -61,27 +61,14 @@
       </div>
 
       <div class="rightColumn">
-        <div class="venues">
-          <h4>Venues</h4>
-          <div class="venue">
-            <div class="venue_image"></div>
-            <div class="venue_content">
-              <div class="venue_name">Venue 1</div>
-              <div class="venue_address">
-                123 Main Street<br/>Seattle, WA
-              </div>
-            </div>
-          </div>  
-          <div class="venue">
-            <div class="venue_image"></div>
-            <div class="venue_content">
-              <div class="venue_name">Venue 1</div>
-              <div class="venue_address">
-                123 Main Street<br/>Seattle, WA
-              </div>
-            </div>
-          </div>  
-        </div>
+        <% if @localTeamWatchSites.any? %>
+          <div class="venues">
+            <h4>Local <%= @tailgate.team.mascot -%> Venues</h4>
+            <% @localTeamWatchSites.each do |aWatchSite| %>
+              <%= render partial: "partials/venue", locals: { aVenue: aWatchSite.venue }%>
+            <% end %>
+          </div>
+        <% end %>
         <div class="twitterStream">
           <div class="controls" id="tweetControls">
             <h4>Tweets</h4>

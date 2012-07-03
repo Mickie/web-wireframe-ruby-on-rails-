@@ -16,6 +16,9 @@ describe "tailgates/show" do
     @post = assign(:post, Post.new(tailgate_id:@tailgate.id))
     view.stub(:signed_in?).and_return(false);
     
+    @venue = FactoryGirl.build(:venue)
+    @watch_site = FactoryGirl.build(:watch_site, team:@team, venue:@venue)
+    @localTeamWatchSites = assign(:localTeamWatchSites, [@watch_site])
     render
   end
 
