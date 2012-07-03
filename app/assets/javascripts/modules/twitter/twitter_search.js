@@ -23,7 +23,7 @@ var TwitterSearch = function( anOnTweetCallback, anOnErrorCallback )
     var theQuery = anArrayOfHashTags.join(" OR ");
     for (var i=0; i < anArrayOfNotTags.length; i++) 
     {
-      theQuery += " -" + anArrayOfNotTags[i];
+      theQuery += " -" + $.trim(anArrayOfNotTags[i]);
     };
     return theQuery;
   };

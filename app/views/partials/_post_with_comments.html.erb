@@ -1,7 +1,7 @@
 <div class="post" id="post_<%= aPost.id %>">
   <div class="profile_pic">
     <% if aPost.user.image %>
-      <%= image_tag( aPost.user.image ) %>
+      <%= image_tag( aPost.user.image, size:"32x32" ) %>
     <% end %>
   </div>
   
