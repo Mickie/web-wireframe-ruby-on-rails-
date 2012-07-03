@@ -98,19 +98,8 @@
 </div>
 <div class="row-fluid">
   <div class="span12">
-      
-      <div id="myTweetModal" class="modal hide fade" style="display: none;">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Personalize your tweet:</h3>
-        </div>
-        <div class="modal-body">
-          <textarea class="input-xlarge" id="tweetText" rows="3"></textarea>
-        </div>
-        <div class="modal-footer">
-          <a id="sendTweetButton" href="#" class="btn" data-dismiss="modal">Send</a>
-        </div>
-      </div>
+    <div>  
+      <%= render partial:"partials/twitter/tweet_modal" %>
     </div>
 
     <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
@@ -198,8 +187,8 @@
                                                  "tweetsVisiting", 
                                                  "newTweetsVisiting",
                                                  "visitingTweetControls",
-                                                 <%= @current_user.isConnectedToTwitter? %>,
-                                                 <%= @current_user.id %>,
+                                                  <%= signed_in? && current_user.isConnectedToTwitter? %>,
+                                                  <%= signed_in? ? current_user.id : 0 %>,
                                                  <%= @event.visiting_team.sport.id %>,
                                                  "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets();
@@ -210,8 +199,8 @@
                                               "tweetsHome", 
                                               "newTweetsHome",
                                               "homeTweetControls",
-                                              <%= @current_user.isConnectedToTwitter? %>,
-                                              <%= @current_user.id %>,
+                                              <%= signed_in? && current_user.isConnectedToTwitter? %>,
+                                              <%= signed_in? ? current_user.id : 0 %>,
                                               <%= @event.home_team.sport.id %>,
                                               "myHomeTeamTwitterView");
     myHomeTeamTwitterView.startLoadingTweets();

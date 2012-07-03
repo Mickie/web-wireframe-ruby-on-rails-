@@ -44,10 +44,6 @@ describe EventsController do
         assigns(:event).should eq(@event)
       end
       
-      it "assigns current_user to @current_user" do
-        assigns(:current_user).should eq(subject.current_user)
-      end
-      
       it "assigns the team hash tags to @visitingHashTag & @homeHashTag" do
         assigns(:homeHashTags).should eq( @home_team.social_info.hash_tags.split(" ") )
         assigns(:visitingHashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )

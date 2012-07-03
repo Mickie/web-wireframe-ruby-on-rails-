@@ -2,6 +2,7 @@ $(function()
 {
   initializeNavigation();
   initializeTopicPicker();
+  initializeTeamPicker();
   initializeColorPicker();
 });
 
@@ -18,6 +19,34 @@ function handleNavClick(e)
   var theNewPageSelector = $(e.target).attr("href");
   $("#myCreateFanzoneModal " + theNewPageSelector ).addClass("current_page").slideDown(200);
   return false;
+}
+
+function initializeTeamPicker()
+{
+  $("#myCreateFanzoneModal #tailgate_team_id").change(handleTeamPicked);
+}
+
+function handleTeamLoaded(aTeam)
+{
+  console.log(aTeam);
+  
+  if ( $("#myCreateFanzoneModal #tailgate_topic_tags").val().length == 0 )
+  {
+     $("#myCreateFanzoneModal #tailgate_topic_tags").val(aTeam.social_info.hash_tags);
+     $("#myCreateFanzoneModal #tailgate_not_tags").val(aTeam.social_info.not_tags);
+  }
+}
+
+function handleTeamPicked(e)
+{
+  var theId = $(this).val();
+  $.ajax({
+           url: "/teams/" + theId + ".json",
+           cache:false,
+           dataType: "json",
+           success: handleTeamLoaded
+         });
+  
 }
 
 function initializeTopicPicker()

@@ -60,9 +60,6 @@ describe TeamsController do
         assigns(:team).should eq(@team)
       end
       
-      it "assigns current_user to @current_user" do
-        assigns(:current_user).should eq(subject.current_user)
-      end
     end      
     
     it "returns the teams watch sites near location in @localTeamWatchSites" do

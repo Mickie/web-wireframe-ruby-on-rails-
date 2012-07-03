@@ -31,7 +31,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @team = Team.find(params[:id])
+    @team = Team.includes(:social_info).find(params[:id])
     
     theCoordinates = request.location.coordinates
     if request.remote_ip == "127.0.0.1"
@@ -45,15 +45,13 @@ class TeamsController < ApplicationController
       end
     end
     
-    @current_user = current_user;
-
     respond_to do |format|
       if (params[:noLayout])
         format.html { render layout: false }
       else
         format.html # show.html.erb
       end
-      format.json { render json: @team }
+      format.json { render json: @team.to_json(include: [:social_info]) }
     end
   end
 

@@ -48,9 +48,15 @@
         <p>Crazy about Tim Tebow? Love to talk about defense? Add a topic and go beyond just your team.</p>
         <%= label_tag(:topic_tags, "Pick a predefined topic:") %>
         <%= select_tag(:topic_data, options_for_select(Topic.visible.collect {|p| [ p.name, { hash_tags:p.hash_tags, not_tags:p.not_tags } ] }, aTailgate.topic_tags ), { prompt:"Select from this list"} ) %>
-        <p>or make up your own:</p>
+        <p>or make up your own combination (we already started with your team tags):</p>
         <%= f.text_field :topic_tags, placeholder:'eg. "Cowboy Cheerleaders"' %>
         <%= f.hidden_field :not_tags %>
+        <h5>Here are some other examples</h5>
+        <ul>
+          <li>#Packers, "Mean Joe Greene"</li>
+          <li>#DCC, "Cowboy Cheerleaders"</li>
+          <li>#dabears, #ditka</li>
+        </ul>
       </div>
       <div class="modal-footer">
         <a href="#page2">&lt; Previous</a>
