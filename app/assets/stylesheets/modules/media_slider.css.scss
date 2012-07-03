@@ -1,9 +1,12 @@
+@import "partials/colors";
+
 div#myMediaSlider
 {
   height: 150px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  border: $fanzoneBorder solid 1px;
   
   div#myMediaTemplate
   {

@@ -1,0 +1,52 @@
+@import "partials/colors";
+
+#template
+{
+  display:none;
+}
+
+.tweet
+{
+  padding:10px;
+  border-bottom: $fanzoneLightBorder solid 1px;
+
+  .twitterPic
+  {
+    float:left;
+  }
+  
+  .tweetContent
+  {
+    margin-left: 42px;
+    .timestamp
+    {
+      color: gray;
+      margin: 5px 0px;  
+    }
+  
+    .twitterName
+    {
+      font-weight: bold;
+      line-height: 1em;
+      margin-bottom: 3px;
+    }
+
+    .tweetMenu
+    {
+      .actions
+      {
+        a
+        {
+          padding: 5px;
+          color: #003399;
+          
+          &:first-child
+          {
+            color: #003399;
+            padding-left:0px;
+          }
+        }
+      }
+    }
+  }
+}

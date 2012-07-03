@@ -188,7 +188,7 @@ var TwitterView = function( anArrayOfHashTags,
     return {
       ".@id" : "id_str",
       "img.twitterAvatar@src" : "profile_image_url",
-      "span.twitterName" : "from_user_name",
+      "div.twitterName" : "from_user_name",
       "span.twitterText" : function(anItem)
       {
         var theText = anItem.context.text;

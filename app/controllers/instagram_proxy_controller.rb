@@ -22,7 +22,11 @@ class InstagramProxyController < ApplicationController
     theMedia = []
 
     theClient = getClient
-    theMedia = theClient.tag_recent_media(params[:tag])
+    begin
+      theMedia = theClient.tag_recent_media(params[:tag])
+    rescue Exception => e
+      Rails.logger.warn "Error getting instagram media for tag: #{params[:tag]} => #{e.to_s}"
+    end
 
     respond_to do |format|
       format.json { render json: theMedia }

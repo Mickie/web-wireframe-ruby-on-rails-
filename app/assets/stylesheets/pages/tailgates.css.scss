@@ -6,7 +6,8 @@ div#tailgate_show
   div.banner
   {
     background-color: black;
-    border: $borderColor solid 1px;
+    border: $fanzoneBorder solid 1px;
+    border-bottom-width: 0px;
 
     div.banner_content
     {
@@ -17,7 +18,7 @@ div#tailgate_show
       {
         float:left;
         margin-right: 10px;
-        @include gradient-vertical(#FFFFFF, #E5E5E5);  
+        @include gradient-vertical(#FFFFFF, #E5E5E5);
         @include border-radius(50%);
         padding: 20px;
       }
@@ -41,74 +42,55 @@ div#tailgate_show
     }
   }
 
-  h4
+  div#fanzoneContent
   {
-    text-align:center;
-  }
-  
-  div.fanzonePosts
-  {
-    background-color: white;
-    border: grey solid 1px;
+    border: $fanzoneBorder solid 1px;
+    border-top-width: 0px;
     
-    div#postForm
+    h4
     {
-      background-color: $postBackground;
-      height: 145px;
-
-      h4
-      {
-        padding: 10px;
-      }
-      
-      #post_content
-      {
-        width: 98%;
-        margin: 5px;
-      }
-      
-      #add_post
-      {
-        margin:0px 5px;
-        padding: 3px 15px;
-        background: black;
-        color: white;
-        text-transform: uppercase;
-        float:right;
-      }
+      text-transform: uppercase;
+      padding:10px;
+      background-color: $fanzoneBackground;
+      color: $fanzoneHeaderText;
+      font-weight: normal;
     }
-    
-    div#posts
-    {
-      @include clearfix();
-      padding: 10px;    
 
-      div.post
+    .fanzonePosts
+    {
+      float: left;
+      width: 66.6%;
+      background-color: white;
+      border-right: $fanzoneBorder solid 1px;
+      
+      textarea
       {
-        background: white;
-        padding: 10px 0px;
-        div.profile_pic
+        @include border-radius(0);
+        @include box-shadow(none); 
+      }
+      
+
+      div#postForm
+      {
+        background-color: $fanzoneBackground;
+        padding:10px;
+        
+        h4
+        {
+          padding-top:0px;
+        }
+        
+        .profile_pic
         {
           float:left;
-          margin: 0px 10px 10px 0px;
+          margin-right:10px;
         }
-        
-        div.post_comments
+
+        .post_fields
         {
-          clear:both;
-          padding-left: 20px;
+          padding-left:42px;
           
-          .comment
-          {
-            clear:both;
-          }
-        }
-        
-        div.comment_form
-        {
-          padding: 5px 0px 5px 20px;
-          
-          .comment_submit
+          #add_post
           {
             padding: 3px 15px;
             background: black;
@@ -118,32 +100,126 @@ div#tailgate_show
           }
         }
       }
-    }
-  
-  }
-  
-  div.twitterStream
-  {
-    border: grey solid 1px;
-    
-    .input-append
-    {
-      textarea
+      
+      div#posts
       {
-        width:96%;
-        margin:5px;
+        .profile_pic
+        {
+          float:left;
+          margin: 0px 10px 10px 0px;
+        }
+
+        div.post
+        {
+          background: white;
+          padding: 10px;
+          border-top: $fanzoneLightBorder solid 1px;
+          
+          
+          .post_content
+          {
+            margin-left: 42px;
+          }
+          
+          div.post_comments
+          {
+            clear:both;
+            padding-left: 42px;
+            
+            .comment
+            {
+              clear:both;
+            }
+          }
+          
+          .post_comment_form
+          {
+            clear:both;
+            padding-left:42px;
+            
+            .comment_form
+            {
+              padding-left:42px;
+              
+              .comment_submit
+              {
+                padding: 3px 15px;
+                background: black;
+                color: white;
+                text-transform: uppercase;
+                float:right;
+              }
+            }
+          }
+        }
       }
+    
     }
     
-    .quickTweetButton
+    div.rightColumn
     {
-      margin-left: 5px;
-      width: 87%;
-    }
-    
-    .dropdown-toggle
-    {
-      width: 10%;
+      float: left;
+      width: 33.1%;
+      
+      .venues
+      {
+        
+        .venue
+        {
+          border-top: $fanzoneLightBorder solid 1px;
+          background-color: white;
+          padding: 10px;
+          
+          .venue_image
+          {
+            float: left;
+            width:32px;
+            height:32px;
+            background-color: #F0F0F0;
+          }
+          
+          .venue_content
+          {
+            margin-left: 42px;
+            .venue_name
+            {
+              font-weight:bold;
+            }
+            .venue_address
+            {
+              
+            }
+          }
+        }
+      }
+      
+      .twitterStream
+      {
+        .controls
+        {
+          background-color: $fanzoneBackground;
+
+          .input-append
+          {
+            textarea
+            {
+              width:96%;
+              margin:5px;
+            }
+          }
+        }
+        
+        .quickTweetButton
+        {
+          margin-left: 5px;
+          width: 87%;
+        }
+        
+        .dropdown-toggle
+        {
+          width: 10%;
+        }
+      }
     }
   }
 }
