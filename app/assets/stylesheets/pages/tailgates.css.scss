@@ -6,17 +6,17 @@ div#tailgate_show
   div.banner
   {
     background-color: black;
-    padding-bottom: 40px;
     border: $borderColor solid 1px;
 
     div.banner_content
     {
-      clear: both;
+      padding:10px;
+      height: 124px;
       
       div.team_logo
       {
         float:left;
-        margin: 0px 10px;
+        margin-right: 10px;
         @include gradient-vertical(#FFFFFF, #E5E5E5);  
         @include border-radius(50%);
         padding: 20px;
