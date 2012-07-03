@@ -140,8 +140,8 @@
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = TwitterView.create( <%= raw @team.social_info.hash_tags.split(" ") %>,
-                                        <%= raw @team.social_info.not_tags.split(" ") %>,
+    myTwitterView = TwitterView.create( <%= raw @team.social_info.hash_tags.split(",") %>,
+                                        <%= raw @team.social_info.not_tags.split(",") %>,
                                         20,
                                         "tweets",
                                         "newTweets",
@@ -159,7 +159,7 @@
     myTeamMediaSlider.createSliderForTeam(<%= @team.id %>,
                                           "<%= @team.short_name %>",
                                           "<%= @team.sport.name %>", 
-                                          <%= raw @team.social_info.hash_tags.split(" ") %> );
+                                          <%= raw @team.social_info.hash_tags.split(",") %> );
   });
 </script>
 <% end %>

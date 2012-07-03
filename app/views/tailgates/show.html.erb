@@ -130,8 +130,8 @@
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = TwitterView.create( <%= raw @tailgate.topic_tags.split(" ") %>,
-                                        <%= raw @tailgate.not_tags.split(" ") %>,
+    myTwitterView = TwitterView.create( <%= raw @tailgate.topic_tags.split(",") %>,
+                                        <%= raw @tailgate.not_tags.split(",") %>,
                                         20,
                                         "tweets",
                                         "newTweets",
@@ -148,7 +148,7 @@
     myTailgateMediaSlider.createSliderForFanzone(<%= @tailgate.id %>,
                                               "<%= @tailgate.team.short_name %>",
                                               "<%= @tailgate.team.sport.name %>", 
-                                              <%= raw @tailgate.topic_tags.split(" ") %> );
+                                              <%= raw @tailgate.topic_tags.split(",") %> );
                                               
   });
 </script>

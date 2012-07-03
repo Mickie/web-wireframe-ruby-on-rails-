@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     
     @homeHashTags = []
     if (@event.home_team.social_info && @event.home_team.social_info.hash_tags)
-      @homeHashTags = @event.home_team.social_info.hash_tags.split(' ');
+      @homeHashTags = @event.home_team.social_info.hash_tags.split(',');
     elsif @event.home_team.conference
       @homeHashTags.push("#" + @event.home_team.conference.name)
     else
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     
     @visitingHashTags = []
     if (@event.visiting_team.social_info && @event.visiting_team.social_info.hash_tags)
-      @visitingHashTags = @event.visiting_team.social_info.hash_tags.split(' ');
+      @visitingHashTags = @event.visiting_team.social_info.hash_tags.split(',');
     elsif @event.visiting_team.conference
       @visitingHashTags.push("#" + @event.visiting_team.conference.name)
     else
