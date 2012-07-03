@@ -78,9 +78,9 @@ function initializeColorPicker()
   
   $("#colorPicker .color").each(function(anIndex, anElement)
   {
-    var theColor = $(this).data("color");
-    $(this).css("backgroundColor", theColor);
-    $(this).click(function(e) 
+    var theColor = $(anElement).data("color");
+    $(anElement).css("backgroundColor", theColor);
+    $(anElement).click(function(e) 
     {
       $("#colorPicker .selected").removeClass('selected');
       $(e.target).addClass('selected');
@@ -90,5 +90,5 @@ function initializeColorPicker()
   
   var theRandomNumber = (Math.random() + Math.random())/2.0;
   var theRandomIndex = Math.floor(theRandomNumber * $("#colorPicker .color").length);
-  $("#colorPicker .color")[theRandomIndex].click();  
+  $($("#colorPicker .color")[theRandomIndex]).click();  
 }
