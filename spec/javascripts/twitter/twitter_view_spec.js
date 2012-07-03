@@ -74,9 +74,9 @@ describe("TwitterView", function()
       expect(theResult).toHaveId(TwitterData.tweet.id); 
     });
 
-    it("gives the tweet the correct id", function() 
+    it("stuffs the correct name in the name div", function() 
     {
-      expect(theResult.find("span.twitterName")).toHaveText(TwitterData.tweet.from_user_name); 
+      expect(theResult.find("div.twitterName")).toHaveText(TwitterData.tweet.from_user_name); 
     });
     
     it("wraps urls in the tweet text", function() 
