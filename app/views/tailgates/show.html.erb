@@ -17,6 +17,7 @@
           <% else %>
             <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
           <% end %>
+          <div class="fan_count"><%= pluralize(@tailgate.followers.count + 1, "Fan") -%></div> 
         </div>
         
         <div class="banner_content">
@@ -25,10 +26,7 @@
           </div>
           <h1><%= @tailgate.name %></h1>
           <p class="owner">
-            <span class="fan_count">
-              <%= pluralize(@tailgate.followers.count + 1, "fan") %>
-            </span> 
-            : Created by <%= @tailgate.user.full_name %>
+            Created by <%= @tailgate.user.full_name %>
             <% if @tailgate.posts.any? %>
               : Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago
             <% end %>

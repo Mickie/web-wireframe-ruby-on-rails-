@@ -8,6 +8,18 @@ div#tailgate_show
     background-color: black;
     border: $fanzoneBorder solid 1px;
     border-bottom-width: 0px;
+    
+    .join_fanzone
+    {
+      .fan_count
+      {
+        width:56px;
+        padding:10px;
+        clear:both;
+        color:white;
+        text-align:center;
+      }
+    }
 
     div.banner_content
     {
@@ -27,6 +39,7 @@ div#tailgate_show
       {
         color:white;
         padding: 10px;
+        padding-top: 30px;
       }
       
       p.owner
