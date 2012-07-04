@@ -5,5 +5,8 @@
     <% end %>
   </div>
   
-  <p class="comment_content"><strong><%= aComment.user.full_name %>:</strong> <%= aComment.content %></p>
+  <div class="comment_content">
+    <div><%= aComment.user.full_name %></div>
+    <p><%= raw aComment.content.gsub(/\n/, "<br/>") %></p>
+  </div>
 </div>

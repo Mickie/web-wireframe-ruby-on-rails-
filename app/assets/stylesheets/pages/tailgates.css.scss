@@ -132,6 +132,11 @@ div#tailgate_show
           .post_content
           {
             margin-left: 42px;
+            
+            div
+            {
+              font-weight:bold;
+            }
           }
           
           div.post_comments
@@ -142,6 +147,15 @@ div#tailgate_show
             .comment
             {
               clear:both;
+              
+              .comment_content
+              {
+                padding-left: 42px;
+                div
+                {
+                  font-weight:bold;
+                }
+              }
             }
           }
           

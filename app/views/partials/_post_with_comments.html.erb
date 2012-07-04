@@ -5,9 +5,10 @@
     <% end %>
   </div>
   
-  <p class="post_content">
-    <strong><%= aPost.user.full_name %> :</strong> <%= aPost.content %>
-  </p>
+  <div class="post_content">
+    <div><%= aPost.user.full_name %></div>
+    <p><%= raw aPost.content.gsub(/\n/, "<br/>") %></p>
+  </div>
   
   <div class="post_comments" id="post_<%= aPost.id %>_comments">
     <% aPost.comments.each do |aComment| %>
