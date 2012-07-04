@@ -1,0 +1,11 @@
+<% if aWatchSiteList.any? %>
+  <% aWatchSiteList.each do |aWatchSite| %>
+    <%= render partial: "partials/venue", locals: { aVenue: aWatchSite.venue }%>
+  <% end %>
+<% else %>
+  <div class="noVenues">
+    <span>No Venues found for <%= aCityState %></span>
+  </div>
+<% end %>
+
+

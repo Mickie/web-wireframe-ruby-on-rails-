@@ -1,0 +1,4 @@
+$(".modal").modal("hide");
+$(".venueHeader span").html("Location: <%= @currentCityState %>");
+$(".venueList").html("<%= escape_javascript( render partial:"partials/watch_site_venue_list", 
+                                                    locals:{ aWatchSiteList: @watch_sites, aCityState: @currentCityState } ) %>");

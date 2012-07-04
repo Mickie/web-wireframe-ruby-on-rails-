@@ -1,0 +1,19 @@
+<div id="myChangeLocationModal" class="modal hide fade" style="display: none;">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Set Your Current Location:</h3>
+  </div>
+  <%= form_tag("/watch_sites/search", :method => "get", remote: 'true',  class: "form-location") do %>
+    <div class="modal-body">
+      <%= hidden_field_tag(:team_id, aTeam.id) %>
+      <%= label_tag(:city, "City:") %>
+      <%= text_field_tag(:city) %>      
+      <%= label_tag(:state, "State:") %>
+      <%= text_field_tag(:state) %>      
+    </div>
+    <div class="modal-footer">
+      <%= submit_tag("Update") %>
+    </div>
+  <% end %>
+</div>
+

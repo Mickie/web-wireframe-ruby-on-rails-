@@ -29,6 +29,11 @@ FanzoSite::Application.routes.draw do
   end
   
   resources :tailgate_followers, only: [ :create, :destroy ]
+  
+  resources :watch_sites do
+    get 'search', on: :collection
+  end
+  
 
   match '/about',   to: 'static_pages#about'
   match '/fanzo_team', to: 'static_pages#fanzo_team'
@@ -52,7 +57,6 @@ FanzoSite::Application.routes.draw do
   resources :affiliations
   resources :events
   resources :game_watches
-  resources :watch_sites
   resources :quick_tweets
   resources :people
   resources :tailgate_venues

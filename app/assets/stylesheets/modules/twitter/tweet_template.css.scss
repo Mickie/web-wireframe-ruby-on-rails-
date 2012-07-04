@@ -38,11 +38,10 @@
         a
         {
           padding: 5px;
-          color: #003399;
+          color: $linkColor;
           
           &:first-child
           {
-            color: #003399;
             padding-left:0px;
           }
         }

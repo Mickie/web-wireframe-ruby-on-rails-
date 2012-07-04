@@ -1,6 +1,10 @@
 <%= provide(:title, @tailgate.name + "- FANZO") %>
 
 <div id="tailgate_show">
+  <div class="modals">
+    <%= render partial: "partials/dialogs/change_location", locals: { aTeam: @tailgate.team } %>    
+  </div>
+  
   <div id="tailgate_<%= @tailgate.id -%>">
     <div class="row-fluid">
       <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
@@ -61,14 +65,18 @@
       </div>
 
       <div class="rightColumn">
-        <% if @localTeamWatchSites.any? %>
-          <div class="venues">
+        <div class="venues">
+          <div class="venueHeader">
             <h4>Local <%= @tailgate.team.mascot -%> Venues</h4>
-            <% @localTeamWatchSites.each do |aWatchSite| %>
-              <%= render partial: "partials/venue", locals: { aVenue: aWatchSite.venue }%>
-            <% end %>
+            <div class="locationLabel">
+              <span>Location: <%= @currentCityState %></span>
+              <a href="#myChangeLocationModal" data-toggle="modal">change</a>
+            </div>
           </div>
-        <% end %>
+          <div class="venueList">
+            <%= render partial:"partials/watch_site_venue_list", locals:{ aWatchSiteList: @localTeamWatchSites, aCityState: @currentCityState } %>
+          </div>
+        </div>
         <div class="twitterStream">
           <div class="controls" id="tweetControls">
             <h4>Tweets</h4>

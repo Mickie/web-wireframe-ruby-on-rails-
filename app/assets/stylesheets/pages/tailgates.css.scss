@@ -191,7 +191,22 @@ div#tailgate_show
       
       .venues
       {
+       
+        .locationLabel
+        {
+          padding:10px;
+          a
+          {
+            color: $linkColor;
+          }
+        }
         
+        .noVenues
+        {
+          border-top: $fanzoneLightBorder solid 1px;
+          background-color: white;
+          padding: 10px;
+        }
         .venue
         {
           border-top: $fanzoneLightBorder solid 1px;

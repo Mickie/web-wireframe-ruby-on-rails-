@@ -1,5 +1,17 @@
 class WatchSitesController < ApplicationController
-  before_filter :authenticate_admin!
+  before_filter :authenticate_admin!, except: [:search]
+
+  # GET /watch_sites/search.js
+  def search
+    @currentCityState = "#{params[:city]}, #{params[:state]}"
+    @watch_sites = WatchSite.includes(:team, :venue).where(team_id: params[:team_id]).near(@currentCityState, 20)
+
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @watch_sites }
+      format.js 
+    end
+  end
   
   # GET /watch_sites
   # GET /watch_sites.json
