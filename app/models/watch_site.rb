@@ -12,7 +12,7 @@ class WatchSite < ActiveRecord::Base
   end
   
   def venue_address_changed?
-    return venue.location.one_line_address_changed?
+    return venue.location.one_line_address_changed? || latitude != venue.location.latitude || longitude != venue.location.longitude
   end
   
 end
