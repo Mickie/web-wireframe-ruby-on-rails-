@@ -21,6 +21,19 @@ h2, h3
   color: $darkBlue;
 }
 
+.profile_pic
+{
+  float:left;
+  width:32px;
+  height:32px;
+  
+  img
+  {
+    @include border_radius(5px);
+  }
+}
+
+
 .debug_dump 
 {
   clear: both;

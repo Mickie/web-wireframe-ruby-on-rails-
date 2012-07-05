@@ -80,7 +80,7 @@
         <li id="myFanzones">
           <%if signed_in? %>
             <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#myFanzones">
-              <div>
+              <div class="profile_pic">
                 <% if current_user.image %>
                   <%= image_tag( current_user.image, size:"32x32") %>
                 <% end %>
