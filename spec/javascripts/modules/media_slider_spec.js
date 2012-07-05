@@ -55,7 +55,7 @@ describe("MediaSlider", function()
 
     it("should create the right number of media divs", function()
     {
-      expect($("#myMediaContent").find(".mediaThumbnail").length).toEqual(2);
+      expect($("#myMediaContent").find(".mediaThumbnail").length).toEqual(2); 
     });
   });
 
@@ -120,9 +120,9 @@ describe("MediaSlider", function()
       expect(theResult.find("img.mediaImage")).toHaveAttr("height", "150"); 
     });
 
-    it("gives the image a click handler", function() 
+    it("gives the div a click handler", function() 
     {
-      expect(theResult.find("img.mediaImage")).toHandle("click");
+      expect(theResult).toHandle("click");
     });
     
   });
@@ -154,9 +154,9 @@ describe("MediaSlider", function()
       expect(theResult.find("img.mediaImage")).toHaveAttr("height", "150"); 
     });
 
-    it("gives the image a click handler", function() 
+    it("gives the div a click handler", function() 
     {
-      expect(theResult.find("img.mediaImage")).toHandle("click");
+      expect(theResult).toHandle("click");
     });
     
   });

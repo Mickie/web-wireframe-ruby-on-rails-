@@ -133,7 +133,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.generateMediaDivFromInstagram = function( anInstagram ) 
   {
     var theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( anInstagram, this.getInstagramDirective());
-    theDiv.find("img").click(createDelegate(this, this.onInstagramClick));
+    theDiv.click(createDelegate(this, this.onInstagramClick));
     return theDiv; 
   };
 
@@ -141,15 +141,15 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   {
     return {
       ".@id" : "id",
-      "img@src" : "images.thumbnail.url",
-      "img@width" : "images.thumbnail.width",
-      "img@height" : "images.thumbnail.height"
+      "div.media img@src" : "images.thumbnail.url",
+      "div.media img@width" : "images.thumbnail.width",
+      "div.media img@height" : "images.thumbnail.height"
     }    
   };
   
   this.onInstagramClick = function(e)
   {
-    var theInstagramId = $(e.target.parentElement).attr("id");
+    var theInstagramId = $(e.currentTarget).attr("id");
     var theInstagram = this.myInstagrams[theInstagramId];
     $(this.myInstagramModalDiv + " div#instagramImage").html("<img src='" + theInstagram.images.standard_resolution.url + "' width='612' height=612'/>");
     $(this.myInstagramModalDiv + " div.modal-header h3").text(theInstagram.user.full_name);
@@ -176,7 +176,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.generateMediaDivFromYouTube = function( aYouTubeVideo ) 
   {
     var theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( aYouTubeVideo, this.getYouTubeDirective());
-    theDiv.find("img").click(createDelegate(this, this.onYouTubeClick));
+    theDiv.click(createDelegate(this, this.onYouTubeClick));
     return theDiv; 
   };
   
@@ -184,21 +184,21 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   {
     return {
       ".@id" : "media$group.yt$videoid.$t",
-      "img@src" : function(anItem){ return anItem.context.media$group.media$thumbnail[0].url; },
-      "img@width" : function(anItem)
+      "div.media img@src" : function(anItem){ return anItem.context.media$group.media$thumbnail[0].url; },
+      "div.media img@width" : function(anItem)
         { 
           var theWidth =  anItem.context.media$group.media$thumbnail[0].width * 150 
                           / anItem.context.media$group.media$thumbnail[0].height;
           return theWidth.toString()
         },
-      "img@height" : function(anItem){return "150";},
-      "div.mediaAnnotation@class" : function(anItem){ return "mediaAnnotation playButton"}
+      "div.media img@height" : function(anItem){return "150";},
+      "div.mediaAnnotation@class" : function(anItem){ return "mediaAnnotation playButton";}
     }    
   };
   
   this.onYouTubeClick = function(e)
   {
-    var theVideoId = $(e.target.parentElement).attr("id");
+    var theVideoId = $(e.currentTarget).attr("id");
     if (!this.myPlayer)
     {
       this.myPlayer = new YT.Player('player', {
