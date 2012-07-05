@@ -33,24 +33,43 @@ class InstagramProxyController < ApplicationController
     end
   end
   
-  private
-  
   def getSortedInstagramTags( aStringOfHashTags )
     theClient = getClient
     
-    theTags = []
+    theArrayOfTagArrays = []
 
     begin
+      i = 0
       aStringOfHashTags.split(",").each do |aHashTag|
-        theTags += theClient.tag_search(aHashTag.gsub(/\s/, ""))
+        theArrayOfTagArrays[i] = theClient.tag_search(aHashTag.gsub(/\s/, ""))
+        i += 1
       end
     rescue Exception => e
       Rails.logger.warn "Error getting tags from instagram: #{e.to_s}"
     end
     
-    theTags = theTags.sort {|aLeft, aRight| aRight.media_count <=> aLeft.media_count }
+    return mergeTags( theArrayOfTagArrays )    
+  end
+  
+  def mergeTags( anArrayOfTagArrays )
+    theResult = []
 
-    return theTags    
+    theCurrentIndex = 0
+    theAddedFlag = false;
+    begin
+      theCurrentSet = []
+      theAddedFlag = false;
+      anArrayOfTagArrays.each do |aTagArray|
+        if (theCurrentIndex < aTagArray.length)
+          theCurrentSet.push(aTagArray[theCurrentIndex])
+          theAddedFlag = true
+        end
+      end
+      theResult += theCurrentSet.sort {|aLeft, aRight| aRight.media_count <=> aLeft.media_count }
+      theCurrentIndex += 1
+    end while theAddedFlag
+    
+    return theResult
   end
   
   def getClient
