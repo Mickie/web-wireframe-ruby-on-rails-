@@ -191,7 +191,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
                           / anItem.context.media$group.media$thumbnail[0].height;
           return theWidth.toString()
         },
-      "img@height" : function(anItem){return "150";}
+      "img@height" : function(anItem){return "150";},
+      "div.mediaAnnotation@class" : function(anItem){ return "mediaAnnotation playButton"}
     }    
   };
   
