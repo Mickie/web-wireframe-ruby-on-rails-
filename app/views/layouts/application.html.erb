@@ -11,7 +11,6 @@
     <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller], params[:action] + '.js') )  %>
       <%= javascript_include_tag params[:controller] + '/' + params[:action] %>
     <% end %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
 	</head>
