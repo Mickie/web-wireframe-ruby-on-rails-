@@ -105,9 +105,29 @@ div#tailgate_show
           .social_controls
           {
             float:left;
-            span
+            
+            input
             {
-              padding:5px;
+              float:left;
+              margin:5px;
+            }
+            
+            div
+            {
+              float:left;
+              height:20px;
+              width:20px;
+            }
+            
+            .twitter_check
+            {
+              background: asset-url("fanzo-icons.png", image) 0px 0px no-repeat;
+              margin-right: 20px
+            }
+            
+            .facebook_check
+            {
+              background: asset-url("fanzo-icons.png", image) -20px 0px no-repeat;
             }
           }
           
