@@ -4,7 +4,11 @@ Devise.setup do |config|
   
   require "omniauth-facebook"
   config.omniauth :facebook, ENV["FANZO_FACEBOOK_APP_ID"], ENV["FANZO_FACEBOOK_APP_SECRET"], 
-    :scope => 'email, user_birthday, friends_birthday, user_education_history, friends_education_history, user_events, user_groups, user_hometown, user_interests, user_likes, user_location, user_status, friends_status, create_event, publish_checkins, publish_stream, rsvp_event, friends_online_presence'
+    :scope => 'email, publish_stream'
+
+# user_hometown, user_interests, user_likes, user_location, 
+# user_birthday, friends_birthday, user_education_history, friends_education_history, user_events, 
+# user_groups, user_status, friends_status, create_event, publish_checkins, rsvp_event, friends_online_presence
   
   require "omniauth-twitter"
   config.omniauth :twitter, ENV["FANZO_TWITTER_CONSUMER_KEY"], ENV["FANZO_TWITTER_CONSUMER_SECRET"]
