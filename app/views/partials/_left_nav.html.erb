@@ -15,9 +15,11 @@
             <li class="dropdown" id="account_dropdown">
               <a id="users_name" href="#account_dropdown" data-toggle="dropdown"><%= current_user.first_name %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
-                <li class="divider"></li>
+                <% if false %>
+                  <li><%= link_to "Profile", current_user %></li>
+                  <li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
+                  <li class="divider"></li>
+                <% end %>
                 <li>
                   <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
                 </li>
