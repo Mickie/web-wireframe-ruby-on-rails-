@@ -157,7 +157,9 @@ var TwitterView = function( anArrayOfHashTags,
   
   this.generateTweetDiv = function(aTweet)
   {
-    return $("#template").clone().render(aTweet, this.getTweetDirective());
+    var theDiv = $("#template").clone().render(aTweet, this.getTweetDirective());
+    theDiv.find(".timestamp").timeago();
+    return theDiv;
   };
   
   this.makeInlineUrlsLinks = function(aText, anArrayOfUrls)
@@ -193,7 +195,12 @@ var TwitterView = function( anArrayOfHashTags,
       "div.timestamp" : function(anItem)
       {
         var theTweetDate = new Date( anItem.context.created_at );
-        return theTweetDate.toDateString() + " " + theTweetDate.toLocaleTimeString()
+        return theTweetDate.toDateString() + " " + theTweetDate.toLocaleTimeString();
+      },
+      "div.timestamp@title" : function(anItem)
+      {
+        var theTweetDate = new Date( anItem.context.created_at );
+        return theTweetDate.toISOString();
       },
       "a#reply@href" : function(anItem)
       {
