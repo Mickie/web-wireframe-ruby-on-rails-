@@ -212,7 +212,7 @@ var TwitterView = function( anArrayOfHashTags,
       {
         var theId = anItem.context.id_str;
         var theText = anItem.context.text;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', '" + theText + "')";
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', \"" + theText.escapeQuotes() + "\")";
       },
       "a#favorite@href" : function(anItem)
       {

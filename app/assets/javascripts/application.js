@@ -76,6 +76,11 @@ function getCookie(aName)
   return null;
 }
 
+String.prototype.escapeQuotes = function() 
+{ 
+   return this.replace(/([\\"'])/g, "\\$1"); 
+}
+
 $(function()
 {
   setTimeout(function()

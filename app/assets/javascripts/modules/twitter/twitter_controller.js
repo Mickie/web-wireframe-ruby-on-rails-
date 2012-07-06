@@ -85,11 +85,13 @@ var TwitterController = function(aTwitterView)
   this.onReplyTo = function( aTweetId, aUser)
   {
     this.myTwitterView.updatePostForm(aUser + " " + this.myTwitterView.myHashTags, aTweetId);
+    $("body").animate({scrollTop:0}, 400);
   };
   
   this.onRetweet = function( aTweetId, aTweetText )
   {
     this.myTwitterView.updatePostForm(aTweetText, "", aTweetId);
+    $("body").animate({scrollTop:0}, 400);
   };
   
   this.onFavorite = function( aTweetId )

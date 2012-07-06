@@ -41,7 +41,9 @@ class PostsController < ApplicationController
     @post = @tailgate.posts.new(params[:post])
     @post.user = current_user
     
-    sendToSocialNetworks(@post)
+    if (@post.valid?)
+      sendToSocialNetworks(@post)
+    end
 
     respond_to do |format|
       if @post.save
