@@ -47,12 +47,17 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.startSliderTimer = function()
   {
+    this.stopSliderTimer();
     this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 10000);
   };
 
   this.stopSliderTimer = function()
   {
-    clearInterval(this.mySlideInterval);
+    if (this.mySlideInterval)
+    {
+      clearInterval(this.mySlideInterval);
+    }
+    this.mySlideInterval = null;
   };
   
   this.onAllMediaLoaded = function()

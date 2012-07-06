@@ -10,17 +10,19 @@
       <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
   
         <div class="join_fanzone">
-          <% if signed_in? %>
-            <% if current_user == @tailgate.user %>
-              <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
-            <% elsif current_user.following?(@tailgate) %>
-              <%= render partial: "partials/unfollow_button", locals: { tailgate: @tailgate } %>
+          <div class="fanzoneState">
+            <% if signed_in? %>
+              <% if current_user == @tailgate.user %>
+                <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
+              <% elsif current_user.following?(@tailgate) %>
+                <%= render partial: "partials/unfollow_button", locals: { tailgate: @tailgate } %>
+              <% else %>
+                <%= render partial: "partials/follow_button", locals: { tailgate: @tailgate } %>
+              <% end %>
             <% else %>
-              <%= render partial: "partials/follow_button", locals: { tailgate: @tailgate } %>
+              <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
             <% end %>
-          <% else %>
-            <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
-          <% end %>
+          </div>
           <div class="fan_count"><%= pluralize(@tailgate.followers.count + 1, "Fan") -%></div> 
         </div>
         
