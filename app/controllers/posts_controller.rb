@@ -103,6 +103,11 @@ class PostsController < ApplicationController
     end
     
     def sendToTwitter( aPost )
+      if (current_user.twitter_user_token.empty? || current_user.twitter_user_secret.empty?)
+        Rails.logger.warn "Error posting to twitter: user not connected"
+        return
+      end
+      
       theClient = Twitter::Client.new( 
         oauth_token: current_user.twitter_user_token,
         oauth_token_secret: current_user.twitter_user_secret
@@ -125,6 +130,12 @@ class PostsController < ApplicationController
     end
 
     def sendToFacebook( aPost )
+      if (current_user.facebook_access_token.empty? )
+        Rails.logger.warn "Error posting to facebook: user not connected"
+        return
+      end
+      
+      
       theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
       
       begin
