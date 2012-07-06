@@ -102,14 +102,54 @@ div#tailgate_show
         {
           padding-left:42px;
           
-          #add_post
+          .social_controls
           {
-            padding: 3px 15px;
-            background: black;
-            color: white;
-            text-transform: uppercase;
-            float:right;
+            float:left;
+            span
+            {
+              padding:5px;
+            }
           }
+          
+          .post_combo
+          {
+            float: right;
+            
+            #add_post, .quickTweetButton
+            {
+              margin:0px;
+              padding: 2px 25px;
+              color: black;
+              font-family: 'Open Sans', sans-serif;  
+              font-size: 12px;
+              line-height: 1.5em;
+              font-weight: bold;
+              vertical-align:inherit;
+              background-color: $joinBackground;
+              border: $joinBorder solid 1px;
+              text-transform: uppercase;
+              @include border-radius(0);
+              @include box-shadow(none);
+              
+              float:left;
+            }
+            
+            .quickTweetButton
+            {
+              padding: 6px 10px;
+              border-left-width: 0px;
+              div
+              {
+                margin: 0px;
+                width:0px;
+                height:0px;
+                border-top: black solid 10px;
+                border-left: transparent solid 5px;
+                border-right: transparent solid 5px;
+              }
+            }
+          }
+          
         }
       }
       
@@ -236,30 +276,6 @@ div#tailgate_show
       
       .twitterStream
       {
-        .controls
-        {
-          background-color: $fanzoneBackground;
-
-          .input-append
-          {
-            textarea
-            {
-              width:96%;
-              margin:5px;
-            }
-          }
-        }
-        
-        .quickTweetButton
-        {
-          margin-left: 5px;
-          width: 87%;
-        }
-        
-        .dropdown-toggle
-        {
-          width: 10%;
-        }
       }
     }
   }

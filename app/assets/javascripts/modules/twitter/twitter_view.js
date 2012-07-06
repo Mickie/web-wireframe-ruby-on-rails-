@@ -48,17 +48,11 @@ var TwitterView = function( anArrayOfHashTags,
     this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
     this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
 
-    this.onSendQuickTweet = function( e )
+    this.updatePostForm = function( aDefaultText, aReplyId, aRetweetId )
     {
-      var theTweetText = $(this.myControlsDivSelector + " textarea").val();
-      this.myTwitterController.sendTweet(theTweetText);
-    }; 
-    
-    this.showTweetDialog = function( aDefaultText )
-    {
-      $("#tweetText").val(aDefaultText);
-      $(".modal").modal("hide");
-      $("#myTweetModal").modal("show"); 
+      $(this.myControlsDivSelector + " #post_content").val(aDefaultText);
+      $(this.myControlsDivSelector + " #post_twitter_reply_id").val(aReplyId ? aReplyId : "");
+      $(this.myControlsDivSelector + " #post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
     };
 
   }
@@ -78,8 +72,7 @@ var TwitterView = function( anArrayOfHashTags,
     this.onReplyTo = this.handleDisconnectStatus;
     this.onRetweet = this.handleDisconnectStatus;
     this.onFavorite = this.handleDisconnectStatus;
-    this.onSendQuickTweet = this.handleDisconnectStatus;
-    this.showTweetDialog = this.handleDisconnectStatus;
+    this.updatePostForm = this.handleDisconnectStatus;
   }
   
   
@@ -93,9 +86,7 @@ var TwitterView = function( anArrayOfHashTags,
     this.myTwitterController.addQuickTweetButtons( $( this.myControlsDivSelector + " ul.dropdown-menu") );
     
     $( this.myControlsDivSelector + " a" ).each( createDelegate(this.myTwitterController, 
-                                                                this.myTwitterController.addTweetClick ));
-    $( this.myControlsDivSelector + " button.quickTweetButton").click( createDelegate(this,
-                                                                                      this.onSendQuickTweet));                 
+                                                                this.myTwitterController.addQuickTweetClick ));
   };
   
   
@@ -213,7 +204,8 @@ var TwitterView = function( anArrayOfHashTags,
       "a#retweet@href" : function(anItem)
       {
         var theId = anItem.context.id_str;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "')";
+        var theText = anItem.context.text;
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', '" + theText + "')";
       },
       "a#favorite@href" : function(anItem)
       {

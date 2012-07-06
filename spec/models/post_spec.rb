@@ -14,5 +14,11 @@ describe Post do
   it { should respond_to(:content) }
   it { should respond_to(:tailgate) }
   it { should respond_to(:user) }
+  it { should respond_to(:twitter_id) }
+  it { should respond_to(:twitter_flag) }
+  it { should respond_to(:twitter_retweet_id) }
+  it { should respond_to(:twitter_reply_id) }
+  it { should respond_to(:facebook_flag) }
+  it { should respond_to(:facebook_id) }
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702190043) do
+ActiveRecord::Schema.define(:version => 20120706031420) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -148,11 +148,17 @@ ActiveRecord::Schema.define(:version => 20120702190043) do
   add_index "people", ["team_id"], :name => "index_people_on_team_id"
 
   create_table "posts", :force => true do |t|
-    t.text     "content",     :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "content",            :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "tailgate_id"
     t.integer  "user_id"
+    t.string   "twitter_id"
+    t.boolean  "twitter_flag"
+    t.string   "twitter_reply_id"
+    t.string   "twitter_retweet_id"
+    t.boolean  "facebook_flag"
+    t.string   "facebook_id"
   end
 
   add_index "posts", ["tailgate_id"], :name => "index_posts_on_tailgate_id"

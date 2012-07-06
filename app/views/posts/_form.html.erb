@@ -10,6 +10,28 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :twitter_reply_id %>
+  <%= f.hidden_field :twitter_retweet_id %>
   <%= f.text_area :content, rows:3, placeholder:"What's up?" %>
-  <%= f.submit "Post", id:"add_post" %>
+  <div class="social_controls">
+    <%= f.check_box :twitter_flag %><span class="twitter_check">T</span>
+    <%= f.check_box :facebook_flag %><span class="facebook_check">F</span>    
+  </div>
+  <div class="post_combo btn-group">
+    <%= f.submit "Post", id:"add_post" %>
+    <button class="quickTweetButton dropdown-toggle" data-toggle="dropdown">
+      <div></div>
+    </button>
+    <ul class="dropdown-menu">
+      <li><strong>Booyah!!</strong></li>
+      <div class="happy">
+        <li><a href="#"></a></li>
+      </div>
+      <li class="divider"></li>
+      <li><strong>What!?!?</strong></li>
+      <div class="sad">
+        <li><a href="#"></a></li>
+      </div>
+    </ul>         
+  </div>
 <% end %>

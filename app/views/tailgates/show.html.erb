@@ -80,28 +80,7 @@
         <div class="twitterStream">
           <div class="controls" id="tweetControls">
             <h4>Tweets</h4>
-            <div class="input-append">
-              <textarea rows="1"><%= raw @tailgate.topic_tags %></textarea>
-              <div class="btn-group">
-                <button href="#" class="btn btn-primary quickTweetButton">Update Social Status</button>
-                <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><strong>Booyah!!</strong></li>
-                  <div class="happy">
-                    <li><a href="#"></a></li>
-                  </div>
-                  <li class="divider"></li>
-                  <li><strong>What!?!?</strong></li>
-                  <div class="sad">
-                    <li><a href="#"></a></li>
-                  </div>
-                </ul>         
-              </div>
-            </div>
           </div>
-          <%= render partial:"partials/twitter/tweet_modal" %>
               
           <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
             <a class='close' data-dismiss='alert' href='#'>×</a>
@@ -140,7 +119,7 @@
                                         20,
                                         "tweets",
                                         "newTweets",
-                                        "tweetControls",
+                                        "postForm",
                                         <%= signed_in? && current_user.isConnectedToTwitter? %>,
                                         <%= signed_in? ? current_user.id : 0 %>,
                                         <%= @tailgate.team.sport.id %>,

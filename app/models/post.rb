@@ -6,5 +6,13 @@ class Post < ActiveRecord::Base
   
   validates :user, :tailgate, presence:true
   
-  attr_accessible :content, :tailgate_id, :user_id
+  attr_accessible :content, 
+                  :tailgate_id, 
+                  :user_id, 
+                  :twitter_id, 
+                  :twitter_flag, 
+                  :twitter_reply_id, 
+                  :twitter_retweet_id, 
+                  :facebook_flag, 
+                  :facebook_id
 end

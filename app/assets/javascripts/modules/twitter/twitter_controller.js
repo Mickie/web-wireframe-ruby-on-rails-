@@ -19,10 +19,10 @@ var TwitterController = function(aTwitterView)
     this.myButtonsLoadedCallback();
   };
   
-  this.addTweetClick = function( i, anAnchorElement )
+  this.addQuickTweetClick = function( i, anAnchorElement )
   {
       anAnchorElement.href = "#";
-      $( anAnchorElement ).click( createDelegate(this, this.onTweetClick) );
+      $( anAnchorElement ).click( createDelegate(this, this.onQuickTweetClick) );
   };
   
   this.addQuickTweetButtons = function( aParentUL )
@@ -48,7 +48,7 @@ var TwitterController = function(aTwitterView)
     }
   };
   
-  this.onTweetClick = function( e )
+  this.onQuickTweetClick = function( e )
   {
     var theKey = e.target.attributes[1].nodeValue;
     var theArrayOfChoices = this.getQuickTweetChoices(theKey);
@@ -56,10 +56,8 @@ var TwitterController = function(aTwitterView)
                                      * theArrayOfChoices.length );
     var theTweetText = theArrayOfChoices[theRandomIndex] + " " + this.myTwitterView.myHashTags;
   
-    this.myTwitterView.showTweetDialog(theTweetText);
+    this.myTwitterView.updatePostForm(theTweetText);
     
-    $("#sendTweetButton").unbind("click");
-    $("#sendTweetButton").click(createDelegate(this, this.onSendTweetFromModal));
   };
   
   this.getQuickTweetChoices = function( aKey )
@@ -84,52 +82,19 @@ var TwitterController = function(aTwitterView)
     return null;    
   };
   
-  this.onSendTweetFromModal = function( e )
-  {
-    var theTweetText = $("#tweetText").val();
-    this.sendTweet(theTweetText);
-    $("#myTweetModal").modal("hide"); 
-  };
-  
-  this.sendTweet = function(aTweetText)
-  {
-    $.post( "/twitter_proxy/update_status", 
-            {statusText : aTweetText }, 
-            createExtendedDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete, ['twitter']), 
-            "json" );
-            
-    if (myFacebookView)
-    {
-      myFacebookView.postToFeed(aTweetText, createExtendedDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete, ['facebook']));              
-    }
-  };
-  
   this.onReplyTo = function( aTweetId, aUser)
   {
-    this.myTwitterView.showTweetDialog(aUser + " " + this.myTwitterView.myHashTags);
-    $("#sendTweetButton").click(createDelegate(this, this.onSendReply)).attr("reply_id", aTweetId);    
+    this.myTwitterView.updatePostForm(aUser + " " + this.myTwitterView.myHashTags, aTweetId);
   };
   
-  this.onSendReply = function( e )
+  this.onRetweet = function( aTweetId, aTweetText )
   {
-    var theReplyId = $("#sendTweetButton").attr("reply_id");
-    var theTweetText = $("#tweetText").val();
-    $.post( "/twitter_proxy/update_status", 
-            {statusText : theTweetText, replyId : theReplyId }, 
-            createDelegate(this.myTwitterView, this.myTwitterView.onTweetComplete), 
-            "json" );  
-  };
-    
-  this.onRetweet = function( aTweetId )
-  {
-    $.post( "/twitter_proxy/retweet", 
-            { tweetId : aTweetId }, 
-            createDelegate(this.myTwitterView, this.myTwitterView.onRetweetComplete), 
-            "json"); 
+    this.myTwitterView.updatePostForm(aTweetText, "", aTweetId);
   };
   
   this.onFavorite = function( aTweetId )
   {
+    console.log("TODO: need to handle");
     $.post( "/twitter_proxy/favorite", 
             { favoriteId : aTweetId }, 
             createDelegate(this.myTwitterView, this.myTwitterView.onFavoriteComplete), 
