@@ -7,6 +7,6 @@
   
   <div class="comment_content">
     <div><%= aComment.user.full_name %></div>
-    <p><%= raw aComment.content.gsub(/\n/, "<br/>") %></p>
+    <p><%= raw handleNewlinesAndUrls(aComment.content) %></p>
   </div>
 </div>

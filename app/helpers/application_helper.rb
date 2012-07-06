@@ -29,4 +29,10 @@ module ApplicationHelper
       return image_tag logoPath(aTeam.slug, aSize), { alt:aTeam.name, size:theImageSize }
     end
   end
+  
+  def handleNewlinesAndUrls( aString )
+    aString.gsub(/\n/, "<br/>").gsub(/\(?\bhttp:\/\/[-A-Za-z0-9+&@#\/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#\/%=~_()|]/i) { |a| 
+      "<a href='#{a}' target='_blank'>#{a}</a>"
+    }
+  end
 end

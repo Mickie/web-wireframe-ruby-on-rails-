@@ -21,6 +21,16 @@ h2, h3
   color: $darkBlue;
 }
 
+a
+{
+  color: $linkColor;
+  
+  &:hover
+  {
+    color: $linkColor;
+  }
+}
+
 .profile_pic
 {
   float:left;
