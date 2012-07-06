@@ -14,8 +14,10 @@
   <%= f.hidden_field :twitter_retweet_id %>
   <%= f.text_area :content, rows:3, placeholder:"What's up?" %>
   <div class="social_controls">
-    <%= f.check_box :twitter_flag %><div class="twitter_check"></div>
-    <%= f.check_box :facebook_flag %><div class="facebook_check"></div>    
+    <%= f.check_box :twitter_flag %>
+    <div class="twitter_check"></div>
+    <%= f.check_box :facebook_flag %>
+    <div class="facebook_check"></div>    
   </div>
   <div class="post_combo btn-group">
     <%= f.submit "Post", id:"add_post" %>
