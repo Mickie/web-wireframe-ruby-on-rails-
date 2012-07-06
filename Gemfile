@@ -13,6 +13,7 @@ gem 'geocoder'
 gem 'dalli'
 gem 'kgio'
 gem 'twitter'
+gem "koala"
 gem 'instagram', '>= 0.8.4'
 gem 'faraday', '0.7.6'
 gem 'foursquare2'

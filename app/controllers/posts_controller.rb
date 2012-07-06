@@ -40,6 +40,8 @@ class PostsController < ApplicationController
   def create
     @post = @tailgate.posts.new(params[:post])
     @post.user = current_user
+    
+    sendToSocialNetworks(@post)
 
     respond_to do |format|
       if @post.save
@@ -88,6 +90,49 @@ class PostsController < ApplicationController
   end
   
   private
+  
+    def sendToSocialNetworks( aPost )
+      if (aPost.twitter_flag)
+        sendToTwitter(aPost)
+      end
+      if (aPost.facebook_flag)
+        sendToFacebook(aPost)
+      end
+    end
+    
+    def sendToTwitter( aPost )
+      theClient = Twitter::Client.new( 
+        oauth_token: current_user.twitter_user_token,
+        oauth_token_secret: current_user.twitter_user_secret
+      )
+
+      begin
+        if aPost.twitter_retweet_id && !aPost.twitter_retweet_id.empty?
+          theStatus = theClient.retweet(aPost.twitter_retweet_id)
+        elsif aPost.twitter_reply_id && !aPost.twitter_reply_id.empty?
+          theStatus = theClient.update(aPost.content, {in_reply_to_status_id: aPost.twitter_reply_id})
+        else
+          theStatus = theClient.update(aPost.content)
+        end
+        
+        aPost.twitter_id = theStatus.id_str
+      rescue Exception => e
+        Rails.logger.warn "Error posting to twitter: #{aPost.content} => #{e.to_s}"
+      end
+
+    end
+
+    def sendToFacebook( aPost )
+      theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
+      
+      begin
+        theResult = theGraph.put_connections("me", "feed", :message => aPost.content)
+        
+        aPost.facebook_id = theResult.id
+      rescue Exception => e
+        Rails.logger.warn "Error posting to facebook #{aPost.content} => #{e.to_s}"
+      end
+    end
     
     def load_tailgate
       @tailgate = Tailgate.find(params[:tailgate_id])

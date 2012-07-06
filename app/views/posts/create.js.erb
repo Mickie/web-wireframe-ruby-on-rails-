@@ -1,2 +1,4 @@
 $("#postForm textarea#post_content").val("");
+$("#postForm textarea#post_twitter_reply_id").val("");
+$("#postForm textarea#post_twitter_retweet_id").val("");
 $("#posts").prepend("<%=  escape_javascript(render partial:'partials/post_with_comments', locals: { aPost: @post }) %>");
