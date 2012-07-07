@@ -45,7 +45,7 @@
                 <% end %>
               </div>
               <div class="post_content">
-                <strong><%= tailgate.posts[i].user.full_name %></strong> <span><%= tailgate.posts[i].content %></span>
+                <strong><%= tailgate.posts[i].user.full_name %></strong> <span><%= raw handleNewlinesAndUrls(tailgate.posts[i].content) %></span>
               </div>
             </div>
           <% end %>
