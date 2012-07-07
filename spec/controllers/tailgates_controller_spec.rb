@@ -240,5 +240,45 @@ describe TailgatesController do
       end
     end
   end
+  
+  describe "cleanupTags" do
+    it "removes extra spaces at beginning and end" do
+      subject.cleanupTags(" foo ").should eq("foo")
+    end
+    
+    it "adds comma before hash tag" do
+      subject.cleanupTags(" foo #bar ").should eq("foo, #bar")
+      subject.cleanupTags(" #foo #bar ").should eq("#foo, #bar")
+    end
+    
+    it "handles initial space" do
+      subject.cleanupTags(" #tag").should eq("#tag")
+    end
+    
+    it "handles pound space quote" do
+      subject.cleanupTags("#foo   \"topic\" ").should eq("#foo, \"topic\"")
+      subject.cleanupTags("#foo \"topic\"").should eq("#foo, \"topic\"")
+    end
+    
+    it "handles already good content" do
+      subject.cleanupTags("#foo, \"topic\"").should eq("#foo, \"topic\"")
+      subject.cleanupTags("#foo, #bar").should eq("#foo, #bar")
+      subject.cleanupTags("\"topic\", #bar").should eq("\"topic\", #bar")
+      subject.cleanupTags("\"topic\", \"topic2\"").should eq("\"topic\", \"topic2\"")
+      subject.cleanupTags("foo, topic").should eq("foo, topic")
+    end
+    
+    it "handles just words" do
+      subject.cleanupTags("foo topic").should eq("foo topic")
+    end
+    
+    it "handles more cases" do
+      subject.cleanupTags(" #tag ").should eq("#tag")
+      subject.cleanupTags(" \"topic awesome\" #tag    ").should eq("\"topic awesome\", #tag")
+      subject.cleanupTags(" \"topic awesome\" #tag #bar").should eq("\"topic awesome\", #tag, #bar")
+      subject.cleanupTags("  #tag, \"foo\"").should eq("#tag, \"foo\"")
+      subject.cleanupTags("  #tag, \"foo\",   #bar").should eq("#tag, \"foo\", #bar")
+    end
+  end
 
 end

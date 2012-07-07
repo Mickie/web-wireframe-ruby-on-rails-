@@ -92,6 +92,8 @@ class TailgatesController < ApplicationController
       end
     end
 
+    @tailgate.topic_tags = cleanupTags(@tailgate.topic_tags)    
+
     respond_to do |format|
       if (@tailgate.user_id != current_user.id)
         format.html { render action: "new", notice: 'Cannot create a tailgate for another user.' }
@@ -146,5 +148,14 @@ class TailgatesController < ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+  
+  def cleanupTags(aTagString)
+    theInitialList = aTagString.strip.split(',')
+    theNewList = []
+    theInitialList.each do |aTag|
+      theNewList.push(aTag.strip.gsub(/([^,])\s*? #/, "\\1, #" ).gsub(/([^,])\s*? "/, "\\1, \"" ))
+    end
+    theNewList.join(', ')
   end
 end
