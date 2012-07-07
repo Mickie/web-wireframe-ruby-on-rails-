@@ -55,6 +55,12 @@ var TwitterView = function( anArrayOfHashTags,
       $(this.myControlsDivSelector + " #post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
     };
 
+    var theCurrentPostVal = getCookie("#postForm #post_content");
+    if (theCurrentPostVal)
+    {
+      setCookie("#postForm #post_content", "", 0);
+      $("#postForm #post_content").val(theCurrentPostVal);
+    }
   }
   else
   {
@@ -68,11 +74,29 @@ var TwitterView = function( anArrayOfHashTags,
       {
         $("#myLoginModal").modal("show"); 
       }
+      
+      return false;
     };
     this.onReplyTo = this.handleDisconnectStatus;
     this.onRetweet = this.handleDisconnectStatus;
     this.onFavorite = this.handleDisconnectStatus;
     this.updatePostForm = this.handleDisconnectStatus;
+    
+    this.disallowIfPostingToTwitter = function(e)
+    {
+      var theTwitterFlag = $("#postForm #post_twitter_flag").is(':checked');
+      if (theTwitterFlag)
+      {
+        var theCurrentPostVal = $("#postForm #post_content").val();
+        setCookie("#postForm #post_content", theCurrentPostVal, 1);
+        return this.handleDisconnectStatus();
+      }
+      else
+      {
+        return true;
+      }
+    };
+    $("#postForm #add_post").live('click', createDelegate(this, this.disallowIfPostingToTwitter ) );
   }
   
   

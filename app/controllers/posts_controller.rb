@@ -103,7 +103,10 @@ class PostsController < ApplicationController
     end
     
     def sendToTwitter( aPost )
-      if (current_user.twitter_user_token.empty? || current_user.twitter_user_secret.empty?)
+      if (current_user.twitter_user_token == nil ||
+          current_user.twitter_user_token.empty? ||
+          current_user.twitter_user_secret == nil ||
+          current_user.twitter_user_secret.empty?)
         Rails.logger.warn "Error posting to twitter: user not connected"
         return
       end
@@ -130,7 +133,7 @@ class PostsController < ApplicationController
     end
 
     def sendToFacebook( aPost )
-      if (current_user.facebook_access_token.empty? )
+      if (current_user.facebook_access_token == nil || current_user.facebook_access_token.empty? )
         Rails.logger.warn "Error posting to facebook: user not connected"
         return
       end
