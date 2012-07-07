@@ -156,7 +156,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   {
     var theInstagramId = $(e.currentTarget).attr("id");
     var theInstagram = this.myInstagrams[theInstagramId];
-    $(this.myInstagramModalDiv + " div#instagramImage").html("<img src='" + theInstagram.images.standard_resolution.url + "' width='612' height=612'/>");
+    $(this.myInstagramModalDiv + " div.instagramImage").html("<img src='" + theInstagram.images.low_resolution.url + "' width='306' height='306'/>");
+    $(this.myInstagramModalDiv + " div.instagramCaption").text(theInstagram.caption.text);
     $(this.myInstagramModalDiv + " div.modal-header h3").text(theInstagram.user.full_name);
     $(this.myInstagramModalDiv + " div.modal-header img").attr("src", theInstagram.caption.from.profile_picture);
 

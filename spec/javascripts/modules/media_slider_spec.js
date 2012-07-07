@@ -172,7 +172,7 @@ describe("MediaSlider", function()
     
     it("adds the correct image to the modal", function() 
     {
-      expect($("div#instagramImage img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].images.standard_resolution.url);
+      expect($("div.instagramImage img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].images.low_resolution.url);
     });
     
     it("adds the correct title to the modal", function() 
