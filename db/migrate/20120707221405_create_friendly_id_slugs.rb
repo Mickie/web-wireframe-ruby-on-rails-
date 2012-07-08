@@ -10,6 +10,8 @@ class CreateFriendlyIdSlugs < ActiveRecord::Migration
     add_index :friendly_id_slugs, :sluggable_id
     add_index :friendly_id_slugs, [:slug, :sluggable_type], :unique => true
     add_index :friendly_id_slugs, :sluggable_type
+    
+    Tailgate.find_each(&:save)    
   end
 
   def self.down
