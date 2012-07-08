@@ -5,7 +5,7 @@ class AddCachesToTailgate < ActiveRecord::Migration
 
     Tailgate.includes(:posts).all.each do |aTailgate|
       Tailgate.update_counters aTailgate.id, tailgate_followers_count: aTailgate.tailgate_followers.size
-      aTailgate.posts_updated_at = aTailgate.posts[0].updated_at
+      aTailgate.posts_updated_at = aTailgate.posts.any? ? aTailgate.posts[0].updated_at : aTailgate.update_at
       aTailgate.save
     end
   end
