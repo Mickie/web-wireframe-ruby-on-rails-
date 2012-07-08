@@ -16,11 +16,13 @@ class TailgatesController < ApplicationController
   # GET /tailgates.json
   def index
     if ( params[:filter] == "user" && current_user )
-      @tailgates = current_user.tailgates.includes(:posts) + current_user.followed_tailgates.includes(:posts)
+      @tailgates = current_user.tailgates.includes(:team, :posts => :user)
+      @tailgates += current_user.followed_tailgates.includes(:team, :posts => :user)
     else
-      @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").page(params[:page])
+      thePage = params[:page] ? params[:page] : 1
+      @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(thePage) 
     end
-
+    
     respond_to do |format|
       if (params[:noLayout])
         format.html { render layout: false }
@@ -35,7 +37,7 @@ class TailgatesController < ApplicationController
   # GET /tailgates/1
   # GET /tailgates/1.json
   def show
-    @tailgate = Tailgate.includes(:posts => :comments ).find(params[:id])
+    @tailgate = Tailgate.includes(:team, :posts => [ {:comments => :user}, :user ] ).find(params[:id])
     if request.path != tailgate_path(@tailgate)
       return redirect_to @tailgate, status: :moved_permanently
     end    
@@ -50,7 +52,7 @@ class TailgatesController < ApplicationController
       @currentCityState = "Kirkland, WA"
     end
     
-    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => :location).near(theCoordinates, 20);
+    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(theCoordinates, 20);
 
     respond_to do |format|
       if (params[:noLayout])

@@ -23,7 +23,7 @@
               <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
             <% end %>
           </div>
-          <div class="fan_count"><%= pluralize(@tailgate.followers.count + 1, "Fan") -%></div> 
+          <div class="fan_count"><%= pluralize(@tailgate.tailgate_followers.size + 1, "Fan") -%></div> 
         </div>
         
         <div class="banner_content">

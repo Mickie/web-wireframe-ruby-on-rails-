@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
   end
   
   def following?( aTailgate )
-    tailgate_followers.find_by_tailgate_id( aTailgate.id )
+    aTailgate.followers.include?(self)
   end
 
   def mine_or_following?( aTailgate )

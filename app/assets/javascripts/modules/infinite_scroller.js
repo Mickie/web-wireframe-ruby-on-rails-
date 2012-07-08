@@ -38,7 +38,7 @@ var InfiniteScroller = function()
     if(nearBottomOfPage()) 
     {
       this.myLoadingFlag = true;
-      this.myCurrentPage++;
+      this.myCurrentPage+=1;
       $.ajax({
         url: this.getUrlForCurrentPage(),
         type: 'get',

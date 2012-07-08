@@ -1,21 +1,21 @@
-<div class="span4 fanzoneTile" id="tailgate_<%= tailgate.id %>">
+<div class="span4 fanzoneTile" id="tailgate_<%= aTailgate.id %>">
   <div class="banner" 
-       onclick="loadData('<%= tailgate_path(id:tailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= tailgate.id -%>')"
-       style="background-color:<%= tailgate.color %>" >
+       onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_fanzone_<%= aTailgate.slug -%>')"
+       style="background-color:<%= aTailgate.color %>" >
     <div class="join_fanzone">
       <div class="fanzoneState">
         <% if signed_in? %>
-          <% if current_user.mine_or_following?( tailgate ) %>
-            <div class="myFanzone" style="border-bottom-color: <%= tailgate.light_color %>;"></div>
+          <% if current_user.mine_or_following?( aTailgate ) %>
+            <div class="myFanzone" style="border-bottom-color: <%= aTailgate.light_color %>;"></div>
           <% else %>
-            <%= render partial: "partials/follow_button", locals: { tailgate: tailgate } %>
+            <%= render partial: "partials/follow_button", locals: { tailgate: aTailgate } %>
           <% end %>
         <% else %>
           <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
         <% end %>
       </div>
     </div>
-    <% if tailgate.official %>
+    <% if aTailgate.official %>
       <div class="official">
         <span>Official</span>
       </div>
@@ -24,10 +24,10 @@
       <table>
         <tr>
           <td class="team_logo">
-            <%= teamLogo(tailgate.team, :small) %>      
+            <%= teamLogo(aTailgate.team, :small) %>      
           </td>
           <td class="fanzone_name">
-            <h3><%= tailgate.name %></h3>
+            <h3><%= aTailgate.name %></h3>
           </td>
         </tr>
       </table>
@@ -35,17 +35,17 @@
   </div>
   <div class="content">
     <div class="posts">
-      <% if tailgate.posts.any? %>
+      <% if aTailgate.posts.any? %>
         <% for i in 0..1 do %>
-          <% if i < tailgate.posts.length %>
+          <% if i < aTailgate.posts.length %>
             <div class="post">
               <div class="profile_pic">
-                <% if tailgate.posts[i].user.image %>
-                  <%= image_tag( tailgate.posts[i].user.image, size:"32x32") %>
+                <% if aTailgate.posts[i].user.image %>
+                  <%= image_tag( aTailgate.posts[i].user.image, size:"32x32") %>
                 <% end %>
               </div>
               <div class="post_content">
-                <strong><%= tailgate.posts[i].user.full_name %></strong> <span><%= raw handleNewlinesAndUrls(tailgate.posts[i].content) %></span>
+                <strong><%= aTailgate.posts[i].user.full_name %></strong> <span><%= raw handleNewlinesAndUrls(aTailgate.posts[i].content) %></span>
               </div>
             </div>
           <% end %>
@@ -56,11 +56,11 @@
     </div>
     <div class="stats">
       <span class="numFollowers">
-        <%= pluralize(tailgate.followers.count + 1, "fan") %>
+        <%= pluralize(aTailgate.tailgate_followers.size + 1, "fan") %>
       </span>
       <span class="lastUpdateDate">
-        <% if tailgate.posts.any? %>
-          Updated <%= time_ago_in_words(tailgate.posts[0].created_at) %> ago
+        <% if aTailgate.posts.any? %>
+          Updated <%= time_ago_in_words(aTailgate.posts[0].created_at) %> ago
         <% end %>
       </span>
     </div>
