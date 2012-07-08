@@ -32,7 +32,7 @@ function initializeFrameContent()
     else
     {
       var theTailgateId = getIdFromHash(theHash);
-      if (parseInt(theTailgateId) > 0)
+      if (theTailgateId)
       {
         loadData("/tailgates/" + theTailgateId + "?noLayout=true", theHash);
       }
@@ -58,7 +58,12 @@ function navToAllFanzones()
 function getIdFromHash( aHash )
 {
   var thePieces = aHash.split("_");
-  return thePieces[thePieces.length-1];
+  if (thePieces[0] == "#nav")
+  {
+    return thePieces[thePieces.length-1];
+  }
+  
+  return null;
 }
 
 function saveLocation()
@@ -129,6 +134,8 @@ function loadData(aPath, aNewActiveSelector)
   }
   
   InfiniteScroller.get().stop();
+  $("body").scrollTop(0);
+  $("#frameContent").html("<div style='height:700px;'><h1 style='text-align:center'><img src='/assets/loading.gif' style='margin:20px'/>Loading</h1></div>");
   
   
   $.ajax({

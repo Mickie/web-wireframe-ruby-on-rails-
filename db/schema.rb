@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706031420) do
+ActiveRecord::Schema.define(:version => 20120707221405) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(:version => 20120706031420) do
   add_index "events", ["home_team_id"], :name => "index_events_on_home_team_id"
   add_index "events", ["location_id"], :name => "index_events_on_location_id"
   add_index "events", ["visiting_team_id"], :name => "index_events_on_visiting_team_id"
+
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "game_watches", :force => true do |t|
     t.string   "name"
@@ -234,8 +245,10 @@ ActiveRecord::Schema.define(:version => 20120706031420) do
     t.boolean  "official",   :default => false
     t.string   "not_tags",   :default => ""
     t.string   "topic_tags", :default => ""
+    t.string   "slug"
   end
 
+  add_index "tailgates", ["slug"], :name => "index_tailgates_on_slug"
   add_index "tailgates", ["team_id"], :name => "index_tailgates_on_team_id"
   add_index "tailgates", ["user_id"], :name => "index_tailgates_on_user_id"
 

@@ -1,5 +1,5 @@
 <li class="fanzone" id="nav_fanzone_<%= aTailgate.id -%>">
-  <a href="#nav_fanzone_<%= aTailgate.id -%>" onclick="loadData('<%= tailgate_path(id:aTailgate.id, noLayout:true ) %>', '#nav_fanzone_<%= aTailgate.id -%>')">
+  <a href="#nav_<%= aTailgate.slug -%>" onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_<%= aTailgate.slug -%>')">
     <table>
       <tr>
         <td class="team_logo"><%= teamLogo(aTailgate.team, :small) -%></td>

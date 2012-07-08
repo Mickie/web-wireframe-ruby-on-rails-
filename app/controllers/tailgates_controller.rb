@@ -36,6 +36,10 @@ class TailgatesController < ApplicationController
   # GET /tailgates/1.json
   def show
     @tailgate = Tailgate.includes(:posts => :comments ).find(params[:id])
+    if request.path != tailgate_path(@tailgate)
+      return redirect_to @tailgate, status: :moved_permanently
+    end    
+    
     @post = Post.new(twitter_flag:true, facebook_flag:true)
     @currentCityState = request.location.state_code == "" ? request.location.city : "#{request.location.city}, #{request.location.state_code}"
     
