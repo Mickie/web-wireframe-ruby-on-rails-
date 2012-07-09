@@ -5,13 +5,13 @@
     <%= render partial: "partials/dialogs/change_location", locals: { aTeam: @tailgate.team } %>    
   </div>
   
-  <div id="tailgate_<%= @tailgate.id -%>">
+  <div class="tailgate_content" id="tailgate_<%= @tailgate.slug -%>">
     <div class="row-fluid">
       <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
   
         <div class="join_fanzone">
           <div class="fanzoneState">
-            <% if signed_in? %>
+            <% if user_signed_in? %>
               <% if current_user == @tailgate.user %>
                 <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
               <% elsif current_user.following?(@tailgate) %>
@@ -50,7 +50,7 @@
         <div id="postForm">
           <h4>Fanzone Posts</h4>
           <div class="profile_pic">
-            <% if signed_in? %>
+            <% if user_signed_in? %>
               <%= image_tag( current_user.image, size:"32x32" ) %>
             <% end %>
           </div>
@@ -122,8 +122,8 @@
                                         "tweets",
                                         "newTweets",
                                         "postForm",
-                                        <%= signed_in? && current_user.isConnectedToTwitter? %>,
-                                        <%= signed_in? ? current_user.id : 0 %>,
+                                        <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
+                                        <%= user_signed_in? ? current_user.id : 0 %>,
                                         <%= @tailgate.team.sport.id %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets();

@@ -26,7 +26,7 @@ FanzoSite::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtpout.secureserver.net",
     port: 80,
-    domain: "fanzo.co",
+    domain: "fanzo.me",
     authentication: "plain",
     user_name: ENV["FANZO_EMAIL_ACCOUNT"],
     password: ENV["FANZO_EMAIL_PASSWORD"]

@@ -120,8 +120,8 @@
                                         "tweets",
                                         "newTweets",
                                         "tweetControls",
-                                        <%= signed_in? && current_user.isConnectedToTwitter? %>,
-                                        <%= signed_in? ? current_user.id : 0 %>,
+                                        <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
+                                        <%= user_signed_in? ? current_user.id : 0 %>,
                                         <%= @team.sport.id %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets();

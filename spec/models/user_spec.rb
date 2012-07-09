@@ -170,7 +170,7 @@ describe User do
     describe "can find existing user via twitter" do
       before do
         thePassword = Devise.friendly_token[0,20]
-        @theUserToFind = User.create!( email: 'twitter_init@fanzo.co', 
+        @theUserToFind = User.create!( email: 'twitter_init@fanzo.me', 
                                       password: thePassword,
                                       password_confirmation: thePassword,
                                       twitter_user_id: '12345' )
@@ -227,7 +227,7 @@ describe User do
     describe "can find existing user via instagram" do
       before do
         thePassword = Devise.friendly_token[0,20]
-        @theUserToFind = User.create!( email: 'instagram_init@fanzo.co', 
+        @theUserToFind = User.create!( email: 'instagram_init@fanzo.me', 
                                       password: thePassword,
                                       password_confirmation: thePassword,
                                       instagram_user_id: '54321' )
@@ -291,7 +291,7 @@ describe User do
         theResult = User.where(facebook_user_id: '54321').first
         theResult.should be_valid
         theResult.should eq(@user)
-        theResult.email.should eq("facebook_init@fanzo.co")
+        theResult.email.should eq("facebook_init@fanzo.me")
         theResult.facebook_access_token.should eq("facebook_token")
         theResult.image.should eq("image url")
         theResult.last_name.should eq("last")
@@ -303,7 +303,7 @@ describe User do
     describe "can find existing user via facebook id" do
       before do
         thePassword = Devise.friendly_token[0,20]
-        @theUserToFind = User.create!( email: 'facebook_init@fanzo.co', 
+        @theUserToFind = User.create!( email: 'facebook_init@fanzo.me', 
                                       password: thePassword,
                                       password_confirmation: thePassword,
                                       facebook_user_id: '54321' )
@@ -322,7 +322,7 @@ describe User do
     describe "can find existing user via email" do
       before do
         thePassword = Devise.friendly_token[0,20]
-        @theUserToFind = User.create!( email: 'facebook_init@fanzo.co', 
+        @theUserToFind = User.create!( email: 'facebook_init@fanzo.me', 
                                       password: thePassword,
                                       password_confirmation: thePassword )
       end
@@ -399,7 +399,7 @@ describe User do
         theResult = User.where(foursquare_user_id: '54321').first
         theResult.should be_valid
         theResult.should eq(@user)
-        theResult.email.should eq("foursquare_init@fanzo.co")
+        theResult.email.should eq("foursquare_init@fanzo.me")
         theResult.foursquare_access_token.should eq("foursquare_token")
         theResult.image.should eq("image url")
         theResult.last_name.should eq("last")
@@ -411,7 +411,7 @@ describe User do
     describe "can find existing user via foursquare id" do
       before do
         thePassword = Devise.friendly_token[0,20]
-        @theUserToFind = User.create!( email: 'foursquare_init@fanzo.co', 
+        @theUserToFind = User.create!( email: 'foursquare_init@fanzo.me', 
                                       password: thePassword,
                                       password_confirmation: thePassword,
                                       foursquare_user_id: '54321' )
@@ -430,7 +430,7 @@ describe User do
     describe "can find existing user via email" do
       before do
         thePassword = Devise.friendly_token[0,20]
-        @theUserToFind = User.create!( email: 'foursquare_init@fanzo.co', 
+        @theUserToFind = User.create!( email: 'foursquare_init@fanzo.me', 
                                       password: thePassword,
                                       password_confirmation: thePassword )
       end

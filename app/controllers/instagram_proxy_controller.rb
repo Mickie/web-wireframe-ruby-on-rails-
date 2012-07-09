@@ -73,7 +73,7 @@ class InstagramProxyController < ApplicationController
   end
   
   def getClient
-    if signed_in? && current_user.instagram_user_token
+    if user_signed_in? && current_user.instagram_user_token
       return Instagram.client( access_token: current_user.instagram_user_token )
     else
       return Instagram.client()

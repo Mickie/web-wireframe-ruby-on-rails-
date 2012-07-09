@@ -23,7 +23,7 @@ describe "teams/show" do
     )
     @team = assign(:team, theStub)
     assign(:current_user, FactoryGirl.create(:user))
-    view.stub(:signed_in?).and_return(false);
+    view.stub(:user_signed_in?).and_return(false);
     
     @venue = FactoryGirl.build(:venue)
     @watch_site = FactoryGirl.build(:watch_site, team:@team, venue:@venue)

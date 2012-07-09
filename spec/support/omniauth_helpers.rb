@@ -32,7 +32,7 @@ module OmniAuthHelpers
     OmniAuth.config.mock_auth[:facebook] = { uid: '54321', 
                                             info: 
                                               { 
-                                                email: "facebook_init@fanzo.co",
+                                                email: "facebook_init@fanzo.me",
                                                 first_name: "first",
                                                 last_name: "last",
                                                 image: "image url",
@@ -47,7 +47,7 @@ module OmniAuthHelpers
     OmniAuth.config.mock_auth[:foursquare] = {  uid: '54321', 
                                                 info: 
                                                 { 
-                                                  email: "foursquare_init@fanzo.co",
+                                                  email: "foursquare_init@fanzo.me",
                                                   first_name: "first",
                                                   last_name: "last",
                                                   image: "image url",

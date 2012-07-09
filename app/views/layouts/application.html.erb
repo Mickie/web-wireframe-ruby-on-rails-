@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><%= yield(:title) %></title>
+		<title><%= content_for?(:title) ? yield(:title) : "FANZO - Where Fans Rule!" %></title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
 		<%= javascript_include_tag "application" %>
@@ -16,11 +16,14 @@
 	</head>
 	<body>
     <div id="fb-root"></div>
-		<div id="page_content">
-
-			<%= yield %>
-			
-			<%= debug(params) if Rails.env.development? %>
+    <div id="page_content">
+      <div>
+        <%= render partial: 'partials/left_nav', locals: { user: @user, } %>
+      </div>
+      
+      <div id="frameContent">
+        <%= yield %>
+      </div>    
 		</div>
 	</body>
 </html>

@@ -1,9 +1,13 @@
 require 'spec_helper'
 
 describe "static_pages/index" do
-  it "should welcome to FANZO" do
-    view.stub(:signed_in?).and_return(false);
+  before do
+    @tailgates = []
+    view.stub(:user_signed_in?).and_return(false);
+  end
+
+  it "should have a container of tiles" do
     render
-    rendered.should have_selector("span.brand", text:"FANZO")
+    rendered.should have_selector("div#allTiles")
   end
 end

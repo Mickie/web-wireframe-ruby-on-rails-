@@ -18,7 +18,7 @@
   
   <div class="post_comment_form">
     <div class="profile_pic">
-      <% if signed_in? %>
+      <% if user_signed_in? %>
         <%= image_tag( current_user.image, size:"32x32" ) %>
       <% end %>
     </div>

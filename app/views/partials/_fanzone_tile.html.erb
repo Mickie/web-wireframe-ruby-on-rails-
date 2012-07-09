@@ -4,7 +4,7 @@
        style="background-color:<%= aTailgate.color %>" >
     <div class="join_fanzone">
       <div class="fanzoneState">
-        <% if signed_in? %>
+        <% if user_signed_in? %>
           <% if current_user.mine_or_following?( aTailgate ) %>
             <div class="myFanzone" style="border-bottom-color: <%= aTailgate.light_color %>;"></div>
           <% else %>

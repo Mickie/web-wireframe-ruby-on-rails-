@@ -7,6 +7,7 @@ describe "tailgates/new" do
       :user => nil,
       :team => nil
     ).as_new_record)
+    view.stub(:user_signed_in?).and_return(false);
   end
 
   it "renders new tailgate form" do

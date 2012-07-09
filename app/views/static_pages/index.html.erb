@@ -1,12 +1,3 @@
 <%= provide(:title, 'FANZO - Where Fans Rule!') %>
 
-<div id="index">
-  <div>
-    <div>
-      <%= render partial: 'partials/left_nav', locals: { user: @user, } %>
-    </div>
-    
-    <div id="frameContent">
-    </div>    
-  </div>
-</div>
+<%= render "partials/all_fanzone_tiles" %>

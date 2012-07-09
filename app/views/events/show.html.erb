@@ -187,8 +187,8 @@
                                                  "tweetsVisiting", 
                                                  "newTweetsVisiting",
                                                  "visitingTweetControls",
-                                                  <%= signed_in? && current_user.isConnectedToTwitter? %>,
-                                                  <%= signed_in? ? current_user.id : 0 %>,
+                                                  <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
+                                                  <%= user_signed_in? ? current_user.id : 0 %>,
                                                  <%= @event.visiting_team.sport.id %>,
                                                  "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets();
@@ -199,8 +199,8 @@
                                               "tweetsHome", 
                                               "newTweetsHome",
                                               "homeTweetControls",
-                                              <%= signed_in? && current_user.isConnectedToTwitter? %>,
-                                              <%= signed_in? ? current_user.id : 0 %>,
+                                              <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
+                                              <%= user_signed_in? ? current_user.id : 0 %>,
                                               <%= @event.home_team.sport.id %>,
                                               "myHomeTeamTwitterView");
     myHomeTeamTwitterView.startLoadingTweets();

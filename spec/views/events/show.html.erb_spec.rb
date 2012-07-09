@@ -16,7 +16,7 @@ describe "events/show" do
     assign(:current_user, FactoryGirl.create(:user))
     assign(:homeHashTags, ["#seahawks"])
     assign(:visitingHashTags, ["#cowboys"])
-    view.stub(:signed_in?).and_return(false);
+    view.stub(:user_signed_in?).and_return(false);
     
     @venue = FactoryGirl.build(:venue)
     @home_watch_site = FactoryGirl.build(:watch_site, team:@event.home_team, venue:@venue)

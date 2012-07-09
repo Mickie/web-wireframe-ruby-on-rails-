@@ -43,10 +43,6 @@ function initializeFrameContent()
       }
     }
   }
-  else
-  {
-    navToAllFanzones();
-  }
 }
 
 function navToAllFanzones()
