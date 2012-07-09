@@ -1,4 +1,3 @@
-var MAX_TWEETS = 15;
 
 var TwitterView = function( anArrayOfHashTags, 
                             anArrayOfNotTags,
@@ -127,7 +126,8 @@ var TwitterView = function( anArrayOfHashTags,
       $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
       $(theNewDivSelector).slideDown(200);
       
-      if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets)
+      var theExtraTweetTemplateElement = 1;
+      if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets + theExtraTweetTemplateElement)
       {
         this.myFullyLoadedFlag = true;
       }
