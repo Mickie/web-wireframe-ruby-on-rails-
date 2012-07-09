@@ -137,20 +137,6 @@ div#tailgate_show
             
             #add_post, .quickTweetButton
             {
-              margin:0px;
-              padding: 2px 25px;
-              color: black;
-              font-family: 'Open Sans', sans-serif;  
-              font-size: 12px;
-              line-height: 1.5em;
-              font-weight: bold;
-              vertical-align:inherit;
-              background-color: $joinBackground;
-              border: $joinBorder solid 1px;
-              text-transform: uppercase;
-              @include border-radius(0);
-              @include box-shadow(none);
-              
               float:left;
             }
             

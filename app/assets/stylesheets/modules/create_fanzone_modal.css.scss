@@ -52,29 +52,6 @@ div#myCreateFanzoneModal
     .modal-footer
     {
       padding:10px;
-      
-      a, input#createFanzoneSubmit
-      {
-        margin:0px;
-        height: 23px;
-        padding: 2px 20px;
-        color: black;
-        font-family: 'Open Sans', sans-serif;  
-        font-size: 12px;
-        line-height: 1.5em;
-        font-weight: bold;
-        vertical-align:inherit;
-        background-color: $joinBackground;
-        border: $joinBorder solid 1px;
-        text-transform: uppercase;
-        @include border-radius(0);
-        @include box-shadow(none); 
-        
-        &:hover
-        {
-          text-decoration:none;
-        }
-      }
     }
     
     div#colorPicker

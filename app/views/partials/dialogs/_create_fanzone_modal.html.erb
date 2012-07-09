@@ -25,7 +25,7 @@
         </ul>
       </div>
       <div class="modal-footer">
-        <a href="#page2">Next &gt;</a>
+        <a href="#page2" class="fanzoButton">Next &gt;</a>
       </div>
     </div>
     <div id="page2">
@@ -38,8 +38,8 @@
         <%= f.select(:team_id, options_for_select( aTailgate.team ? [aTailgate.team.name, aTailgate.team.id ] : [], aTailgate.team_id)) %>
       </div>
       <div class="modal-footer">
-        <a href="#page1">&lt; Previous</a>
-        <a href="#page3">Next &gt;</a>
+        <a href="#page1" class="fanzoButton">&lt; Previous</a>
+        <a href="#page3" class="fanzoButton">Next &gt;</a>
       </div>
     </div>
     <div id="page3">
@@ -60,8 +60,8 @@
         </ul>
       </div>
       <div class="modal-footer">
-        <a href="#page2">&lt; Previous</a>
-        <a href="#page4">Next &gt;</a>
+        <a href="#page2" class="fanzoButton">&lt; Previous</a>
+        <a href="#page4" class="fanzoButton">Next &gt;</a>
       </div>
     </div>
     <div id="page4">
@@ -82,8 +82,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#page3">&lt; Previous</a>
-        <%= f.submit "Create!", id:"createFanzoneSubmit" %>
+        <a href="#page3" class="fanzoButton">&lt; Previous</a>
+        <%= f.submit "Create!", class:"fanzoButton" %>
       </div>
     </div>
   <% end %>

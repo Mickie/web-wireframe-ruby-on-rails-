@@ -43,6 +43,29 @@ a
   }
 }
 
+.fanzoButton
+{
+  color: $fanzoButtonText;
+  background-color: $fanzoButtonBackground;
+  border: $fanzoButtonBorder solid 1px;
+  padding: 2px 10px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;  
+  font-size: 12px;
+  line-height: 1.5em;
+  font-weight: bold;
+  margin:0px;
+  height: 23px;
+  vertical-align:inherit;
+  @include border-radius(0);
+  @include box-shadow(none);
+  
+  &:hover
+  {
+    text-decoration:none;
+    color:black;
+  }
+}
 
 .debug_dump 
 {
