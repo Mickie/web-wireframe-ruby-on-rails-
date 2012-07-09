@@ -6,9 +6,9 @@ FanzoSite::Application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   authenticated :user do
-    root to:'static_pages#index'
+    root to:'static_pages#home'
   end
-  root to:'static_pages#index'
+  root to:'static_pages#home'
 
   resources :users, only: :show do
     get 'connect_twitter', on: :member

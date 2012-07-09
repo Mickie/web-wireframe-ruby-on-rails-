@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  def index
+  def home
     @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1)
   end
 

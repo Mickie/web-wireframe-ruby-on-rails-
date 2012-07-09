@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "static_pages/index" do
+describe "static_pages/home" do
   before do
     @tailgates = []
     view.stub(:user_signed_in?).and_return(false);
