@@ -31,7 +31,7 @@ function createDelegate(anObject, aMethod)
     return aMethod.apply(anObject, arguments);
   }
   return theDelegate;
-};
+}; 
 
 function createExtendedDelegate(anObject, aMethod, anArgumentExtensionArray)
 {
