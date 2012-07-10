@@ -22,8 +22,8 @@ gem 'friendly_id'
 
 group :assets do
   gem 'jquery-rails'
-  gem 'rails3-jquery-autocomplete'
   gem 'jquery-ui-rails'
+  gem 'rails3-jquery-autocomplete'
   gem 'bootstrap-sass', '>= 2.0.0'
   gem 'sass-rails'
   gem 'uglifier', '>=1.2.4'
