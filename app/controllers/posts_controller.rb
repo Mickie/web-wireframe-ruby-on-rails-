@@ -145,11 +145,13 @@ class PostsController < ApplicationController
       theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
       
       begin
-#        theResult = theGraph.put_connections("me", "feed", :message => aPost.content)
-        theResult = theGraph.put_connections("me", "links", { message: aPost.content, 
+        theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
                                                               link: tailgate_url(aPost.tailgate),
                                                               name: aPost.tailgate.name,
-                                                              picture: logoPath(aPost.tailgate.team.slug, :medium) })
+                                                              picture: logoPath(aPost.tailgate.team.slug, :medium),
+                                                              description: "A fanzone about the #{aPost.tailgate.team.name}",
+                                                              caption: "FANZO fanzone" })
+
         
         aPost.facebook_id = theResult["id"]
       rescue Exception => e
