@@ -149,10 +149,9 @@ class PostsController < ApplicationController
                                                               link: tailgate_url(aPost.tailgate),
                                                               name: aPost.tailgate.name,
                                                               picture: logoPath(aPost.tailgate.team.slug, :medium),
-                                                              description: "A fanzone about the #{aPost.tailgate.team.name}",
-                                                              caption: "FANZO fanzone" })
+                                                              description: "Read more at FANZO",
+                                                              caption: "A fanzone about the #{aPost.tailgate.team.name}" })
 
-        
         aPost.facebook_id = theResult["id"]
       rescue Exception => e
         Rails.logger.warn "Error posting to facebook #{aPost.content} => #{e.to_s}"
