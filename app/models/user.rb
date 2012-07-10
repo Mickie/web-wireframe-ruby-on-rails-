@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
     theUserWithThisFacebookId = User.where( facebook_user_id: access_token.uid ).first
     
     if theUserWithThisFacebookId
+      theUserWithThisFacebookId.facebook_access_token = theToken
       return theUserWithThisFacebookId
     elsif aSignedInUser
       aSignedInUser.facebook_user_id = theId
