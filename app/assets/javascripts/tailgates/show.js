@@ -4,6 +4,6 @@ $(function()
   if (theIdAttribute && theIdAttribute.length > 0)
   {
     var theTailgateId = theIdAttribute.split('_')[1]
-    $("#nav_" + theId).addClass('active');
+    $("#nav_" + theTailgateId).addClass('active');
   }
 });
