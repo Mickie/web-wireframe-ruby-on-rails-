@@ -31,7 +31,7 @@ function createDelegate(anObject, aMethod)
     return aMethod.apply(anObject, arguments);
   }
   return theDelegate;
-}
+};
 
 function createExtendedDelegate(anObject, aMethod, anArgumentExtensionArray)
 {
@@ -43,7 +43,7 @@ function createExtendedDelegate(anObject, aMethod, anArgumentExtensionArray)
   }
 
   return theDelegate;
-}
+};
 
 function setCookie(aName, aValue, aNumberOfDaysTillExpire)
 {
@@ -58,7 +58,7 @@ function setCookie(aName, aValue, aNumberOfDaysTillExpire)
   var theCookieValue = escape(aValue) + theExpiration;
 
   document.cookie = aName + "=" + theCookieValue;
-}
+};
 
 function getCookie(aName)
 {
@@ -74,12 +74,12 @@ function getCookie(aName)
     }
   }
   return null;
-}
+};
 
 String.prototype.escapeQuotes = function() 
 { 
    return this.replace(/([\\"'])/g, "\\$1"); 
-}
+};
 
 $(function()
 {
