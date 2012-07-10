@@ -149,7 +149,7 @@ class PostsController < ApplicationController
                                                               link: tailgate_url(aPost.tailgate),
                                                               name: aPost.tailgate.name,
                                                               picture: logoPath(aPost.tailgate.team.slug, :medium),
-                                                              description: "Read more at FANZO",
+                                                              description: "Find this and other fanzones at FANZO.me",
                                                               caption: "A fanzone about the #{aPost.tailgate.team.name}" })
 
         aPost.facebook_id = theResult["id"]
