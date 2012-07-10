@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
+  include ApplicationHelper
+  
   before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
   before_filter :load_tailgate
+  
 
   def index
     @posts  = @tailgate.posts.all
