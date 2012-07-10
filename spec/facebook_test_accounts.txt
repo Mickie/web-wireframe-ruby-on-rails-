@@ -6,3 +6,10 @@ Staging:
 	"email"=>"hnmsfbr_occhinoson_1341897667@tfbnw.net", 
 	"password"=>"2013597281"
 }
+dev:
+{
+	"id"=>"100004015077440", 
+	"access_token"=>"AAAFSY6xPFu8BAA5piRK3smDpwNpwILHCY5ZBXtd13OdZB6cxs90VxevCvRse4pWrOfeO7n34YZB1VHoZAkcJ4voxDffMRs4099uQ2TnANto68ZCTfCz0t", 
+	"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004015077440&n=LbJ0YuTTg3i7RkZ", 
+	"email"=>"hnmsfbr_occhinoson_1341897667@tfbnw.net"
+} 
