@@ -19,10 +19,10 @@ gem 'faraday', '0.7.6'
 gem 'foursquare2'
 gem 'kaminari'
 gem 'friendly_id'
+gem 'jquery-ui-rails'
 
 group :assets do
   gem 'jquery-rails'
-  gem 'jquery-ui-rails'
   gem 'rails3-jquery-autocomplete'
   gem 'bootstrap-sass', '>= 2.0.0'
   gem 'sass-rails'
