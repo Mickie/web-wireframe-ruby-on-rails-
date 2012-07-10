@@ -1,0 +1,8 @@
+Staging:
+{
+	"id"=>"100004015077440", 
+	"access_token"=>"AAAE0rxwkxpsBAEnFQFCUd0idZAcO6r28vRHZAGJ5dyjZB3tiiBBArGNX0yOESsbeRVvHvHhbfPmAZCp1qMxHEVF00IVHCZAZCN7jdRscbTAlfD4YzqB4Dt", 
+	"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004015077440&n=Luh1P2xD57Us9u4", 
+	"email"=>"hnmsfbr_occhinoson_1341897667@tfbnw.net", 
+	"password"=>"2013597281"
+}
