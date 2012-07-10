@@ -146,7 +146,7 @@ class PostsController < ApplicationController
         theLink = tailgate_url(aPost.tailgate)
         theResult = theGraph.put_connections("me", "links", {message: aPost.content, link: theLink })
         
-        aPost.facebook_id = theResult.id
+        aPost.facebook_id = theResult["id"]
       rescue Exception => e
         Rails.logger.warn "Error posting to facebook #{aPost.content} => #{e.to_s}"
       end
