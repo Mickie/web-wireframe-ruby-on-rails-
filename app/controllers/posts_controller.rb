@@ -143,8 +143,10 @@ class PostsController < ApplicationController
       
       begin
 #        theResult = theGraph.put_connections("me", "feed", :message => aPost.content)
-        theLink = tailgate_url(aPost.tailgate)
-        theResult = theGraph.put_connections("me", "links", {message: aPost.content, link: theLink })
+        theResult = theGraph.put_connections("me", "links", { message: aPost.content, 
+                                                              link: tailgate_url(aPost.tailgate),
+                                                              name: aPost.tailgate.name,
+                                                              picture: logoPath(aPost.tailgate.team.slug, :large) })
         
         aPost.facebook_id = theResult["id"]
       rescue Exception => e
