@@ -1,5 +1,15 @@
 <%= provide(:title, @tailgate.name + "- FANZO") %>
 
+<%= provide(:head_open_graph, "prefix='og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# #{ENV["FANZO_FACEBOOK_NAMESPACE"]}: http://ogp.me/ns/fb/#{ENV["FANZO_FACEBOOK_NAMESPACE"]}#'" )%>
+
+<% provide :opengraph_meta_tags do %>
+  <meta property="fb:app_id" content="<%= ENV["FANZO_FACEBOOK_APP_ID"] -%>" /> 
+  <meta property="og:type"   content="<%= ENV["FANZO_FACEBOOK_NAMESPACE"] -%>:fanzone" /> 
+  <meta property="og:url"    content="<%= tailgate_url(@tailgate) -%>" /> 
+  <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
+  <meta property="og:image"  content="<%= logoPath(@tailgate.team.slug, :large) -%>" />    
+<% end %>
+
 <div id="tailgate_show">
   <div class="modals">
     <%= render partial: "partials/dialogs/change_location", locals: { aTeam: @tailgate.team } %>    

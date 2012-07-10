@@ -4,7 +4,7 @@ describe "tailgates/show" do
   before(:each) do
     @social_info = stub_model(SocialInfo, hash_tags: "#goirish", not_tags:"")
     @sport = stub_model(Sport, id:1)
-    @team = stub_model(Team, id:1, name:"Seahawks", social_info:@social_info, sport:@sport)
+    @team = stub_model(Team, id:1, name:"Seahawks", social_info:@social_info, sport:@sport, slug:"seahawks")
     @user = stub_model(User, email:"Joe@bar.com", id:1)
     @tailgate = assign(:tailgate, stub_model(Tailgate,
       :name => "Name",

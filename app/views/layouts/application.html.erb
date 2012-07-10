@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head <%= yield(:head_open_graph) if content_for?(:head_open_graph) -%>>
 		<title><%= content_for?(:title) ? yield(:title) : "FANZO - Where Fans Rule!" %></title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
@@ -12,6 +12,7 @@
       <%= javascript_include_tag params[:controller] + '/' + params[:action] %>
     <% end %>
     <%= csrf_meta_tags %>
+    <%= yield :opengraph_meta_tags %>
     <%= render 'layouts/shim' %>
 	</head>
 	<body>
