@@ -17,10 +17,10 @@ class Post < ActiveRecord::Base
                   :facebook_id
                   
   def shortened_content
-    if (self.content.length <= 120)
+    if (self.content.length < 120)
       return self.content
     end
     
-    return self.content[0, 117] + "..."
+    return self.content[0, 116] + "..."
   end                  
 end

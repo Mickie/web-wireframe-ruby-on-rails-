@@ -167,8 +167,11 @@ class PostsController < ApplicationController
     theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
     
     begin
+      theLink = getBitly(aPost.tailgate)
+      puts(theLink)
+      Rails.logger.warn "theLink = #{theLink}"
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
-                                                            link: getBitly(aPost.tailgate),
+                                                            link: theLink,
                                                             name: aPost.tailgate.name,
                                                             picture: logoPath(aPost.tailgate.team.slug, :medium),
                                                             description: "Find this and other fanzones at FANZO.me",

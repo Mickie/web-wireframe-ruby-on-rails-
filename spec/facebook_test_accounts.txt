@@ -1,10 +1,18 @@
+theTestApi = Koala::Facebook::TestUsers.new(:app_id => ENV["FANZO_FACEBOOK_APP_ID"], :secret => ENV["FANZO_FACEBOOK_APP_SECRET"])
+
+
 Staging:
 {
-	"id"=>"100004015077440", 
-	"access_token"=>"AAAE0rxwkxpsBAEnFQFCUd0idZAcO6r28vRHZAGJ5dyjZB3tiiBBArGNX0yOESsbeRVvHvHhbfPmAZCp1qMxHEVF00IVHCZAZCN7jdRscbTAlfD4YzqB4Dt", 
-	"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004015077440&n=Luh1P2xD57Us9u4", 
-	"email"=>"hnmsfbr_occhinoson_1341897667@tfbnw.net", 
-	"password"=>"2013597281"
+	{
+		"id"=>"100004099233288", 
+		"access_token"=>"AAAE0rxwkxpsBACDZCHGZB74rx11Y8WwkTv5moZCdGJNGcCCKIFrWjGhadEiZCFCGLK2JsHja535lw5IatiZBZAknYbhfjZASFkiYS0KRJDHhIEZAP0mRUVLv", 
+		"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004099233288&n=LVjwnjEpHfP763Y"
+	}, 
+	{
+		"id"=>"100004015077440", 
+		"access_token"=>"AAAE0rxwkxpsBALsQZB3Yh72zmkEsxwidRrWHxcEDBTCr3N4jZAc5O7gvxn3NZAPcodDL5bwpGcQxN6mmrpGwtpE51steaZBXAOe5CVB0sET2ZBwVpDTRu", 
+		"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004015077440&n=mOQICGsd0854poe"
+	}
 }
 dev:
 {
