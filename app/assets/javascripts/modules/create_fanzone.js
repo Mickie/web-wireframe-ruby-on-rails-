@@ -1,24 +1,23 @@
 $(function()
 {
-  initializeNavigation();
+  initializePositionHandler();
   initializeTopicPicker();
   initializeTeamPicker();
   initializeColorPicker();
 });
 
-function initializeNavigation()
+function initializePositionHandler()
 {
-  $("#myCreateFanzoneModal .current_page").show();
-  $("#myCreateFanzoneModal .page_link a").click(handleNavClick);
-  $("#myCreateFanzoneModal .modal-footer a").click(handleNavClick);
+  $(window).resize( handleResize );
+  handleResize();
 }
 
-function handleNavClick(e)
+function handleResize()
 {
-  $("#myCreateFanzoneModal .current_page").removeClass("current_page").slideUp(200);
-  var theNewPageSelector = $(e.target).attr("href");
-  $("#myCreateFanzoneModal " + theNewPageSelector ).addClass("current_page").slideDown(200);
-  return false;
+  var theWindowWidth = $(window).width();
+  var theModalWidth = $("#myCreateFanzoneModal").width();
+  thePosition = (theWindowWidth - theModalWidth)/2;
+  $("#myCreateFanzoneModal").css("left", thePosition + "px");
 }
 
 function initializeTeamPicker()

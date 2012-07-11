@@ -3,19 +3,17 @@
 
 div#myCreateFanzoneModal
 {
+  width: 920px;
+  left: 10%;
   
   .modal-header
   {
-    ul 
-    {
-      text-align: center;
-      list-style: none;
+    text-align:center;
 
-      li
-      {
-        padding: 0px 10px;
-        float:left;
-      }        
+    h2
+    {
+      color: $createFanzoneHeader;
+      font-weight:normal;
     }
   }
   
@@ -23,35 +21,84 @@ div#myCreateFanzoneModal
   {
     margin:0px;
     clear: both;
-  
-    .current_page
-    {
-      display:block;
-    }
-  
-    #page1
-    {
-      display:none;
-    }
-    
-    #page2
-    {
-      display:none;
-    }
 
-    #page3
-    {
-      display:none;
-    }
-
-    #page4
-    {
-      display:none;
-    }
   
     .modal-footer
     {
       padding:10px;
+    }
+    
+    .modal-body
+    {
+      margin:0px;
+      padding:0px;
+      width:920px;
+      max-height:700px;
+      
+      .row
+      {
+        padding:0px;
+        margin:0px;
+        width:920px;
+        border-top: $createFanzoneTopBorder solid 1px;
+        border-bottom: $createFanzoneBottomBorder solid 1px;
+        position:relative;
+        
+        input, select
+        {
+          @include box-shadow(none);
+          @include border-radius(0);
+          height:30px;
+        }
+        
+        [class*='span']
+        {
+          margin:0px;
+          padding:15px;
+        }
+        
+        .span3
+        {
+          width:200px;
+        }
+        
+        .span6
+        {
+          width:410px;
+        }
+        
+        .fanzoneLabel
+        {
+          position:absolute;
+          top:0;
+          bottom:0;
+          background-color: $createFanzoneLabelBackground;
+          text-align:right;
+          
+          h4
+          {
+            font-weight:normal;
+          }
+        }
+        
+        .fanzoneFields
+        {
+          padding-left:245px;
+        }
+        
+        .fanzoneExamples
+        {
+          h5
+          {
+            font-weight:normal;
+          }
+          
+          li
+          {
+            list-style-type: circle;
+          }
+        }
+      }
     }
     
     div#colorPicker
