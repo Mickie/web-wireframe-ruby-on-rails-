@@ -145,7 +145,7 @@ class PostsController < ApplicationController
       oauth_token_secret: current_user.twitter_user_secret
     )
     
-    theText = "#{aPost.shortened_content} #{getBitly(aPost.tailgate)}"
+    theText = "#{aPost.shortened_content} #{getTailgateBitly(aPost.tailgate)}"
 
     begin
       if aPost.twitter_retweet_id && !aPost.twitter_retweet_id.empty?
