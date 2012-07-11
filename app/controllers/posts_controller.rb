@@ -164,8 +164,8 @@ class PostsController < ApplicationController
                                                             link: theLink,
                                                             name: aPost.tailgate.name,
                                                             picture: thePicture,
-                                                            description: "Find this and other fanzones at FANZO.me",
-                                                            caption: "A fanzone about the #{aPost.tailgate.team.name}" })
+                                                            description: aPost.tailgate.description,
+                                                            caption: "A FANZO.me fanzone" })
 
       aPost.facebook_id = theResult["id"]
     rescue Exception => e
