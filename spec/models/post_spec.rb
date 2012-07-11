@@ -32,7 +32,7 @@ describe Post do
     it "should ellipsis long content" do
       @post.content = "123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 "
       theResult = @post.shortened_content
-      theResult.length.should eq(120)
+      theResult.length.should eq(119)
       theResult[theResult.length - 3, theResult.length - 1].should eq("...")
     end
 
