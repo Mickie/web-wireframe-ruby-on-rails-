@@ -168,7 +168,7 @@ class PostsController < ApplicationController
     
     begin
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
-                                                            link: tailgate_url(aPost.tailgate),
+                                                            link: getBitly(aPost.tailgate),
                                                             name: aPost.tailgate.name,
                                                             picture: logoPath(aPost.tailgate.team.slug, :medium),
                                                             description: "Find this and other fanzones at FANZO.me",
