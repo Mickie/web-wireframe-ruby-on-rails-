@@ -173,7 +173,6 @@ describe PostsController do
   end
 
   describe "getTailgateBitly" do
-
     it "should return cached value" do
       @tailgate.bitly = "http://bitly"
       subject.getTailgateBitly(@tailgate).should eq(@tailgate.bitly)

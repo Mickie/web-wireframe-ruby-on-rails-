@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   include ApplicationHelper
-  
+
   before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
   before_filter :load_tailgate
   
@@ -105,23 +105,6 @@ class PostsController < ApplicationController
     return aTailgate.bitly
   end
   
-  def getBitlyForUrl(aUrl)
-    Bitly.use_api_version_3
-    theClient = Bitly.new("paulingalls", "R_3448e4644415daf490d94e5ef0174509")
-    theBitly = nil
-    
-    begin
-      theUrlResult = theClient.shorten(aUrl)
-      theBitly = theUrlResult.short_url
-    rescue Exception => e
-      Rails.logger.warn "Error getting Foursquare ID: #{e.to_s}"
-      return nil
-    end
-    
-    return theBitly
-  end
-  
-  
   def sendToSocialNetworks( aPost )
     if (aPost.twitter_flag)
       sendToTwitter(aPost)
@@ -174,7 +157,7 @@ class PostsController < ApplicationController
     
     begin
       theLink = getTailgateBitly(aPost.tailgate)
-      thePicture = getBitlyForUrl(logoPath(aPost.tailgate.team.slug, :medium))
+      thePicture = aPost.tailgate.team.getLargeLogoBitly
       
       puts("theLink: #{theLink} thePicture: #{thePicture}")
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,

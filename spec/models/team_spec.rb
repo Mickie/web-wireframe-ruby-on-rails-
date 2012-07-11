@@ -28,7 +28,8 @@ describe Team do
   it { should respond_to(:slug) } 
   it { should respond_to(:short_name) } 
   it { should respond_to(:mascot) } 
-  it { should respond_to(:espn_team_name_id) } 
+  it { should respond_to(:espn_team_name_id) }
+  it { should respond_to(:large_logo_bitly) }
   it { should respond_to(:tailgates) } 
 
   it "should have a latitude and longitude in its location" do
@@ -93,4 +94,21 @@ describe Team do
     end
   end
   
+  describe "getLargeLogoBitly" do
+    it "should return cached value" do
+      @team.large_logo_bitly = "http://bitly"
+      @team.getLargeLogoBitly.should eq(@team.large_logo_bitly)
+    end
+    
+    it "should call bitly to get value if not cached, then cache it" do
+      theStubClient = double(Bitly::V3::Client)
+      Bitly.stub(:new).and_return(theStubClient)
+      theResponse = double(Bitly::V3::Url)
+      theResponse.stub(:short_url).and_return("http://bit.ly/foo")
+      
+      theStubClient.should_receive(:shorten).and_return(theResponse)
+      @team.getLargeLogoBitly.should eq("http://bit.ly/foo")
+      @team.large_logo_bitly.should eq("http://bit.ly/foo") 
+    end 
+  end
 end

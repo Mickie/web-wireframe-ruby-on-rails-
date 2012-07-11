@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710231236) do
+ActiveRecord::Schema.define(:version => 20120711053845) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20120710231236) do
     t.string   "short_name"
     t.string   "mascot"
     t.string   "espn_team_name_id"
+    t.string   "large_logo_bitly"
   end
 
   add_index "teams", ["affiliation_id"], :name => "index_teams_on_affiliation_id"

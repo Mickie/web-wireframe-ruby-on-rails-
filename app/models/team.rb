@@ -1,4 +1,6 @@
 class Team < ActiveRecord::Base
+  include ApplicationHelper
+
   belongs_to :sport, :inverse_of => :teams
   belongs_to :league, :inverse_of => :teams
   belongs_to :division, :inverse_of => :teams
@@ -39,5 +41,16 @@ class Team < ActiveRecord::Base
   def events
     theEvents = self.home_games + self.away_games
     theEvents.sort_by {|e| e[:event_date] }
+  end
+  
+  def getLargeLogoBitly
+    if (self.large_logo_bitly && self.large_logo_bitly.length > 0)
+      return self.large_logo_bitly
+    end
+    
+    self.large_logo_bitly = getBitlyForUrl(logoPath(self.slug, :large))
+    self.save
+    
+    return self.large_logo_bitly
   end
 end
