@@ -94,25 +94,31 @@ class PostsController < ApplicationController
     end
   end
   
-  def getBitly(aTailgate)
+  def getTailgateBitly(aTailgate)
     if aTailgate.bitly && aTailgate.bitly.length > 0
       return aTailgate.bitly
     end
+
+    aTailgate.bitly = getBitlyForUrl(tailgate_url(aTailgate))
+    aTailgate.save
     
+    return aTailgate.bitly
+  end
+  
+  def getBitlyForUrl(aUrl)
     Bitly.use_api_version_3
     theClient = Bitly.new("paulingalls", "R_3448e4644415daf490d94e5ef0174509")
+    theBitly = nil
     
     begin
-      theUrlResult = theClient.shorten(tailgate_url(aTailgate))
-    
-      aTailgate.bitly = theUrlResult.short_url
-      aTailgate.save
+      theUrlResult = theClient.shorten(aUrl)
+      theBitly = theUrlResult.short_url
     rescue Exception => e
       Rails.logger.warn "Error getting Foursquare ID: #{e.to_s}"
       return nil
     end
     
-    return aTailgate.bitly
+    return theBitly
   end
   
   
@@ -167,14 +173,14 @@ class PostsController < ApplicationController
     theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
     
     begin
-      theLink = getBitly(aPost.tailgate)
-      puts(theLink)
-      theLink = URI.escape(theLink)
-      puts(theLink)
+      theLink = getTailgateBitly(aPost.tailgate)
+      thePicture = getBitlyForUrl(logoPath(aPost.tailgate.team.slug, :medium))
+      
+      puts("theLink: #{theLink} thePicture: #{thePicture}")
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
-                                                            link: theLink.to_s,
+                                                            link: theLink,
                                                             name: aPost.tailgate.name,
-                                                            picture: logoPath(aPost.tailgate.team.slug, :medium),
+                                                            picture: thePicture,
                                                             description: "Find this and other fanzones at FANZO.me",
                                                             caption: "A fanzone about the #{aPost.tailgate.team.name}" })
 
