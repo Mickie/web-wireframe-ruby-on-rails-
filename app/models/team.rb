@@ -48,9 +48,15 @@ class Team < ActiveRecord::Base
       return self.large_logo_bitly
     end
     
-    self.large_logo_bitly = getBitlyForUrl(logoPath(self.slug, :large))
-    self.save
+    theLogoPath = logoPath(self.slug, :large)
+    theBitly = getBitlyForUrl(theLogoPath)
     
-    return self.large_logo_bitly
+    if (theBitly && theBitly.lenght > 0)
+      self.large_logo_bitly = theBitly
+      self.save
+      return self.large_logo_bitly
+    else
+      return theLogoPath
+    end
   end
 end

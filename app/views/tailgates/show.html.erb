@@ -7,7 +7,8 @@
   <meta property="og:type"   content="<%= ENV["FANZO_FACEBOOK_NAMESPACE"] -%>:fanzone" /> 
   <meta property="og:url"    content="<%= tailgate_url(@tailgate) -%>" /> 
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
-  <meta property="og:image"  content="<%= logoPath(@tailgate.team.slug, :large) -%>" />    
+  <meta property="og:description"  content="A fanzone about the <%= @tailgate.team.name -%>" /> 
+  <meta property="og:image"  content="<%= @tailgate.team.getLargeLogoBitly -%>" />    
 <% end %>
 
 <div id="tailgate_show">
