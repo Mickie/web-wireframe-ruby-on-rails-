@@ -94,71 +94,93 @@ class PostsController < ApplicationController
     end
   end
   
-  private
+  def getBitly(aTailgate)
+    if aTailgate.bitly && aTailgate.bitly.length > 0
+      return aTailgate.bitly
+    end
+    
+    Bitly.use_api_version_3
+    theClient = Bitly.new("paulingalls", "R_3448e4644415daf490d94e5ef0174509")
+    
+    begin
+      theUrlResult = theClient.shorten(tailgate_url(aTailgate))
+    
+      aTailgate.bitly = theUrlResult.short_url
+      aTailgate.save
+    rescue Exception => e
+      Rails.logger.warn "Error getting Foursquare ID: #{e.to_s}"
+      return nil
+    end
+    
+    return aTailgate.bitly
+  end
   
-    def sendToSocialNetworks( aPost )
-      if (aPost.twitter_flag)
-        sendToTwitter(aPost)
-      end
-      if (aPost.facebook_flag)
-        sendToFacebook(aPost)
-      end
+  
+  def sendToSocialNetworks( aPost )
+    if (aPost.twitter_flag)
+      sendToTwitter(aPost)
+    end
+    if (aPost.facebook_flag)
+      sendToFacebook(aPost)
+    end
+  end
+  
+  def sendToTwitter( aPost )
+    if (current_user.twitter_user_token == nil ||
+        current_user.twitter_user_token.empty? ||
+        current_user.twitter_user_secret == nil ||
+        current_user.twitter_user_secret.empty?)
+      Rails.logger.warn "Error posting to twitter: user not connected"
+      return
     end
     
-    def sendToTwitter( aPost )
-      if (current_user.twitter_user_token == nil ||
-          current_user.twitter_user_token.empty? ||
-          current_user.twitter_user_secret == nil ||
-          current_user.twitter_user_secret.empty?)
-        Rails.logger.warn "Error posting to twitter: user not connected"
-        return
+    theClient = Twitter::Client.new( 
+      oauth_token: current_user.twitter_user_token,
+      oauth_token_secret: current_user.twitter_user_secret
+    )
+    
+    theText = "#{aPost.shortened_content} #{getBitly(aPost.tailgate)}"
+
+    begin
+      if aPost.twitter_retweet_id && !aPost.twitter_retweet_id.empty?
+        theStatus = theClient.retweet(aPost.twitter_retweet_id)
+      elsif aPost.twitter_reply_id && !aPost.twitter_reply_id.empty?
+        theStatus = theClient.update(theText, {in_reply_to_status_id: aPost.twitter_reply_id})
+      else
+        theStatus = theClient.update(theText)
       end
       
-      theClient = Twitter::Client.new( 
-        oauth_token: current_user.twitter_user_token,
-        oauth_token_secret: current_user.twitter_user_secret
-      )
-
-      begin
-        if aPost.twitter_retweet_id && !aPost.twitter_retweet_id.empty?
-          theStatus = theClient.retweet(aPost.twitter_retweet_id)
-        elsif aPost.twitter_reply_id && !aPost.twitter_reply_id.empty?
-          theStatus = theClient.update(aPost.content, {in_reply_to_status_id: aPost.twitter_reply_id})
-        else
-          theStatus = theClient.update(aPost.content)
-        end
-        
-        aPost.twitter_id = theStatus.id_str
-      rescue Exception => e
-        Rails.logger.warn "Error posting to twitter: #{aPost.content} => #{e.to_s}"
-      end
-
+      aPost.twitter_id = theStatus.attrs['id_str']
+    rescue Exception => e
+      Rails.logger.warn "Error posting to twitter: #{aPost.content} => #{e.to_s}"
     end
 
-    def sendToFacebook( aPost )
-      if (current_user.facebook_access_token == nil || current_user.facebook_access_token.empty? )
-        Rails.logger.warn "Error posting to facebook: user not connected"
-        return
-      end
-      
-      
-      theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
-      
-      begin
-        theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
-                                                              link: tailgate_url(aPost.tailgate),
-                                                              name: aPost.tailgate.name,
-                                                              picture: logoPath(aPost.tailgate.team.slug, :medium),
-                                                              description: "Find this and other fanzones at FANZO.me",
-                                                              caption: "A fanzone about the #{aPost.tailgate.team.name}" })
+  end
 
-        aPost.facebook_id = theResult["id"]
-      rescue Exception => e
-        Rails.logger.warn "Error posting to facebook #{aPost.content} => #{e.to_s}"
-      end
+  def sendToFacebook( aPost )
+    if (current_user.facebook_access_token == nil || current_user.facebook_access_token.empty? )
+      Rails.logger.warn "Error posting to facebook: user not connected"
+      return
     end
     
-    def load_tailgate
-      @tailgate = Tailgate.find(params[:tailgate_id])
+    
+    theGraph = Koala::Facebook::API.new(current_user.facebook_access_token)
+    
+    begin
+      theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
+                                                            link: tailgate_url(aPost.tailgate),
+                                                            name: aPost.tailgate.name,
+                                                            picture: logoPath(aPost.tailgate.team.slug, :medium),
+                                                            description: "Find this and other fanzones at FANZO.me",
+                                                            caption: "A fanzone about the #{aPost.tailgate.team.name}" })
+
+      aPost.facebook_id = theResult["id"]
+    rescue Exception => e
+      Rails.logger.warn "Error posting to facebook #{aPost.content} => #{e.to_s}"
     end
+  end
+  
+  def load_tailgate
+    @tailgate = Tailgate.find(params[:tailgate_id])
+  end
 end

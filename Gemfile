@@ -19,6 +19,7 @@ gem 'faraday', '0.7.6'
 gem 'foursquare2'
 gem 'kaminari'
 gem 'friendly_id'
+gem 'bitly'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

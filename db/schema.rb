@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708155944) do
+ActiveRecord::Schema.define(:version => 20120710231236) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -248,6 +248,8 @@ ActiveRecord::Schema.define(:version => 20120708155944) do
     t.string   "slug"
     t.datetime "posts_updated_at"
     t.integer  "tailgate_followers_count", :default => 0,         :null => false
+    t.string   "description"
+    t.string   "bitly"
   end
 
   add_index "tailgates", ["slug"], :name => "index_tailgates_on_slug"

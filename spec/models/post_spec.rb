@@ -20,5 +20,21 @@ describe Post do
   it { should respond_to(:twitter_reply_id) }
   it { should respond_to(:facebook_flag) }
   it { should respond_to(:facebook_id) }
+  it { should respond_to(:shortened_content) }
 
+  describe "shortened_content" do
+    
+    it "should handle already short content" do
+      @post.content = "this is short"
+      @post.shortened_content.should eq(@post.content)
+    end
+  
+    it "should ellipsis long content" do
+      @post.content = "123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 "
+      theResult = @post.shortened_content
+      theResult.length.should eq(120)
+      theResult[theResult.length - 3, theResult.length - 1].should eq("...")
+    end
+
+  end
 end

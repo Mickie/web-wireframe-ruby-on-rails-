@@ -9,6 +9,8 @@ describe Tailgate do
   subject { @tailgate }
   
   it { should respond_to(:name) }
+  it { should respond_to(:description) }
+  it { should respond_to(:bitly) }
   it { should respond_to(:team) }
   it { should respond_to(:user) }
   it { should respond_to(:tailgate_venues) }
@@ -62,4 +64,5 @@ describe Tailgate do
       @tailgate.light_color.should eq("#bfbfbf")
     end
   end
+  
 end

@@ -26,10 +26,10 @@ class Venue < ActiveRecord::Base
     end
     
     begin 
-      theId = ENV["FANZO_FOURSQUARE_CLIENT_ID"]
+      theClientId = ENV["FANZO_FOURSQUARE_CLIENT_ID"]
       theSecret = ENV["FANZO_FOURSQUARE_CLIENT_SECRET"]
       
-      theClient = Foursquare2::Client.new(:client_id => theId, :client_secret => theSecret)
+      theClient = Foursquare2::Client.new(:client_id => theClientId, :client_secret => theSecret)
       
       theResponse = theClient.search_venues(ll: "#{self.location.latitude},#{self.location.longitude}", 
                                             query: self.name, 
