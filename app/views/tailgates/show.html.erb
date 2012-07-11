@@ -31,7 +31,7 @@
                 <%= render partial: "partials/follow_button", locals: { tailgate: @tailgate } %>
               <% end %>
             <% else %>
-              <a href="#myLoginModal" data-toggle="modal" class="follow_button">Follow</a>
+              <a href="#myLoginModal" data-toggle="modal" class="fanzoButton follow_button">Follow</a>
             <% end %>
           </div>
           <div class="fan_count"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></div> 
