@@ -32,7 +32,7 @@ module ApplicationHelper
   
   def getBitlyForUrl(aUrl)
     Bitly.use_api_version_3
-    theClient = Bitly.new("paulingalls", "R_3448e4644415daf490d94e5ef0174509")
+    theClient = Bitly.new(ENV["FANZO_BITLY_USERNAME"], ENV["FANZO_BITLY_API_KEY"])
     theBitly = nil
     
     begin
