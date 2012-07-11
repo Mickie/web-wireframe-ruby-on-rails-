@@ -1,6 +1,6 @@
-<div class="span4 fanzoneTile" id="tailgate_<%= aTailgate.id %>">
+<div class="span4 fanzoneTile" id="tailgate_<%= aTailgate.slug %>">
   <div class="banner" 
-       onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_fanzone_<%= aTailgate.slug -%>')"
+       onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_<%= aTailgate.slug -%>')"
        style="background-color:<%= aTailgate.color %>" >
     <div class="join_fanzone">
       <div class="fanzoneState">
