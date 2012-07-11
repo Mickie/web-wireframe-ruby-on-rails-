@@ -169,6 +169,8 @@ class PostsController < ApplicationController
     begin
       theLink = getBitly(aPost.tailgate)
       puts(theLink)
+      theLink = URI.escape(theLink)
+      puts(theLink)
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
                                                             link: theLink.to_s,
                                                             name: aPost.tailgate.name,
