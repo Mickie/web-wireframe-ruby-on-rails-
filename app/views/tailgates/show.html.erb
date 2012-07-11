@@ -7,7 +7,7 @@
   <meta property="og:type"   content="<%= ENV["FANZO_FACEBOOK_NAMESPACE"] -%>:fanzone" /> 
   <meta property="og:url"    content="<%= tailgate_url(@tailgate) -%>" /> 
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
-  <meta property="og:description"  content="<%= @tailgate.description %>" /> 
+  <meta property="og:description"  content="<%= @tailgate.description ? @tailgate.description : "A fanzone about the #{@tailgate.team.name} #{@tailgate.team.sport.name} Team."%>" /> 
   <meta property="og:image"  content="<%= @tailgate.team.getLargeLogoBitly -%>" />    
 <% end %>
 
@@ -42,7 +42,7 @@
             <%= teamLogo(@tailgate.team, :medium) %>      
           </div>
           <h1><%= @tailgate.name %></h1>
-          <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) %></p>
+          <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) if @tailgate.description %></p>
           <p class="owner">
             Created by <%= @tailgate.user.full_name %>
             <% if @tailgate.posts.any? %>
