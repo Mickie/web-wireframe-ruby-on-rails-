@@ -186,6 +186,17 @@ div#tailgate_show
             {
               font-weight:bold;
             }
+            
+            div.hide_post
+            {
+              float:right;
+              background-color: $background;
+              width:8px;
+              height:20px;
+              padding:0px 6px;
+              color: #808080;
+              @include border-radius(50%);
+            }
           }
           
           div.post_comments

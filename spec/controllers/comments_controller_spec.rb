@@ -139,6 +139,33 @@ describe CommentsController do
     end
   end
 
+  describe "POST up_vote" do
+    login_user
+    describe "with valid params" do
+      it "changes the fan_score on existing comment" do
+        aComment = @post.comments.create! valid_attributes
+        aComment.fan_score.should eq(0)
+        post "up_vote", { :id => aComment.to_param, post_id: @post.id, tailgate_id: @tailgate.id }
+        aComment.reload
+        aComment.fan_score.should eq(1)
+      end
+    end
+  end        
+
+  describe "POST down_vote" do
+    login_user
+    describe "with valid params" do
+      it "changes the fan_score on existing post" do
+        aComment = @post.comments.create! valid_attributes
+        aComment.fan_score.should eq(0)
+        post "down_vote", { :id => aComment.to_param, post_id: @post.id, tailgate_id: @tailgate.id }
+        aComment.reload
+        aComment.fan_score.should eq(-1)
+      end
+    end
+  end        
+
+
   describe "DELETE destroy" do
     login_user
     it "destroys the requested comment" do

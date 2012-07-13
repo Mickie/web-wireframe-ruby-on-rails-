@@ -17,8 +17,8 @@ When /^I pick a team for my tailgate$/ do
 end
 
 When /^I finish creating a new tailgate$/ do
-  fill_in "Name", with: @new_tailgate.name
-  click_button "commit"  
+  fill_in "tailgate_name", with: @new_tailgate.name
+  click_button "Create!"  
 end
 
 Then /^I should see the details of the new tailgate$/ do

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   include ApplicationHelper
 
-  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy, :up_vote, :down_vote] 
   before_filter :load_tailgate
   
 
@@ -80,6 +80,41 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  def up_vote
+    @post = @tailgate.posts.find(params[:id])
+    @post.fan_score += 1
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to @tailgate, notice: 'Post was successfully up voted.' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { render action: "show" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
+  def down_vote
+    @post = @tailgate.posts.find(params[:id])
+    @post.fan_score -= 1
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to @tailgate, notice: 'Post was successfully down voted.' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { render action: "show" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
 
   def destroy
     @post = @tailgate.posts.find(params[:id])

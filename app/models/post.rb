@@ -15,6 +15,8 @@ class Post < ActiveRecord::Base
                   :twitter_retweet_id, 
                   :facebook_flag, 
                   :facebook_id
+
+  scope :visible, where("fan_score > -3")  
                   
   def shortened_content
     if (self.content.length < 120)

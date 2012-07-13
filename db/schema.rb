@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120711053845) do
+ActiveRecord::Schema.define(:version => 20120713031823) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -44,8 +44,9 @@ ActiveRecord::Schema.define(:version => 20120711053845) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "fan_score",  :default => 0
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -159,9 +160,9 @@ ActiveRecord::Schema.define(:version => 20120711053845) do
   add_index "people", ["team_id"], :name => "index_people_on_team_id"
 
   create_table "posts", :force => true do |t|
-    t.text     "content",            :null => false
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.text     "content",                           :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "tailgate_id"
     t.integer  "user_id"
     t.string   "twitter_id"
@@ -170,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20120711053845) do
     t.string   "twitter_retweet_id"
     t.boolean  "facebook_flag"
     t.string   "facebook_id"
+    t.integer  "fan_score",          :default => 0
   end
 
   add_index "posts", ["tailgate_id"], :name => "index_posts_on_tailgate_id"

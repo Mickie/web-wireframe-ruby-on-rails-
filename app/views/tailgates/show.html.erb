@@ -72,8 +72,14 @@
           <div class="clearfix"></div>
         </div>
         <div id="posts">
-          <% @tailgate.posts.each do | aPost | %>
-            <%= render partial: "partials/post_with_comments", locals: {aPost: aPost}%>
+          <% if user_signed_in? && current_user.mine?(@tailgate)%>
+            <% @tailgate.posts.each do | aPost | %>
+              <%= render partial: "partials/post_with_comments", locals: {aPost: aPost}%>
+            <% end %>
+          <% else %>
+            <% @tailgate.posts.visible.each do | aPost | %>
+              <%= render partial: "partials/post_with_comments", locals: {aPost: aPost}%>
+            <% end %>
           <% end %>
         </div>
       </div>

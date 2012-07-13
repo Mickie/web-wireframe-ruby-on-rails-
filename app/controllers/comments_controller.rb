@@ -1,6 +1,6 @@
 
 class CommentsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy, :up_vote, :down_vote] 
   before_filter :load_post
   
   # GET /comments
@@ -73,6 +73,40 @@ class CommentsController < ApplicationController
       else
         format.html { redirect_to @post.tailgate, error: 'Unable to update comment' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def up_vote
+    @comment = @post.comments.find(params[:id])
+    @comment.fan_score += 1
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @post.tailgate, notice: 'Comment was successfully up voted.' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { render action: "show" }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
+  def down_vote
+    @comment = @post.comments.find(params[:id])
+    @comment.fan_score -= 1
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @post.tailgate, notice: 'Post was successfully down voted.' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { render action: "show" }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

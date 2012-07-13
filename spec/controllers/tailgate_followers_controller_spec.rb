@@ -10,9 +10,9 @@ describe TailgateFollowersController do
   describe "creating a tailgate_follower with Ajax" do
 
     it "should increment the TailgateFollower count" do
-      expect do
+      expect {
         xhr :post, :create, tailgate_follower: { tailgate_id: tailgate.id }
-      end.should change(TailgateFollower, :count).by(1)
+      }.to change(TailgateFollower, :count).by(1)
     end
 
     it "should respond with success" do
@@ -27,9 +27,9 @@ describe TailgateFollowersController do
     let(:tailgate_follower) { subject.current_user.tailgate_followers.find_by_tailgate_id(tailgate.id) }
 
     it "should decrement the tailgate_follower count" do
-      expect do
+      expect {
         xhr :delete, :destroy, id: tailgate_follower.id
-      end.should change(TailgateFollower, :count).by(-1)
+      }.to change(TailgateFollower, :count).by(-1)
     end
 
     it "should respond with success" do
