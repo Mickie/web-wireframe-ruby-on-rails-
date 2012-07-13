@@ -64,33 +64,6 @@ describe PostsController do
 
   end
   
-  describe "POST up_vote" do
-    login_user
-    describe "with valid params" do
-      it "changes the fan_score on existing post" do
-        aPost = @tailgate.posts.create! valid_attributes
-        aPost.fan_score.should eq(0)
-        post "up_vote", { :id => aPost.to_param, tailgate_id: @tailgate.id }
-        aPost.reload
-        aPost.fan_score.should eq(1)
-      end
-    end
-  end        
-
-  describe "POST down_vote" do
-    login_user
-    describe "with valid params" do
-      it "changes the fan_score on existing post" do
-        aPost = @tailgate.posts.create! valid_attributes
-        aPost.fan_score.should eq(0)
-        post "down_vote", { :id => aPost.to_param, tailgate_id: @tailgate.id }
-        aPost.reload
-        aPost.fan_score.should eq(-1)
-      end
-    end
-  end        
-  
-
   describe "POST create" do
     login_user
     describe "with valid params" do
@@ -182,6 +155,33 @@ describe PostsController do
       end
     end
   end
+  
+  describe "PUT up_vote" do
+    login_user
+    describe "with valid params" do
+      it "changes the fan_score on existing post" do
+        aPost = @tailgate.posts.create! valid_attributes
+        aPost.fan_score.should eq(0)
+        put "up_vote", { :id => aPost.to_param, tailgate_id: @tailgate.id }
+        aPost.reload
+        aPost.fan_score.should eq(1)
+      end
+    end
+  end        
+
+  describe "PUT down_vote" do
+    login_user
+    describe "with valid params" do
+      it "changes the fan_score on existing post" do
+        aPost = @tailgate.posts.create! valid_attributes
+        aPost.fan_score.should eq(0)
+        put "down_vote", { :id => aPost.to_param, tailgate_id: @tailgate.id }
+        aPost.reload
+        aPost.fan_score.should eq(-1)
+      end
+    end
+  end        
+  
 
   describe "DELETE destroy" do
     login_user

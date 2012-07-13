@@ -1,5 +1,7 @@
 var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector )
 {
+  this.SLIDE_INTERVAL = 5000;
+  
   this.myContainerDiv = aContainerDivSelector;
   this.myVideoModalDiv = aVideoModalDivSelector;
   this.myInstagramModalDiv = anInstagramModalDivSelector;
@@ -48,7 +50,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.startSliderTimer = function()
   {
     this.stopSliderTimer();
-    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), 10000);
+    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), this.SLIDE_INTERVAL);
   };
 
   this.stopSliderTimer = function()

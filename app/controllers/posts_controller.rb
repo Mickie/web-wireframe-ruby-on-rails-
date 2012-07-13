@@ -89,11 +89,11 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to @tailgate, notice: 'Post was successfully up voted.' }
         format.json { head :no_content }
-        format.js
+        format.js { render "vote" }
       else
         format.html { render action: "show" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render "vote" }
       end
     end
   end
@@ -106,11 +106,11 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to @tailgate, notice: 'Post was successfully down voted.' }
         format.json { head :no_content }
-        format.js
+        format.js { render "vote" }
       else
         format.html { render action: "show" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render "vote" }
       end
     end
   end

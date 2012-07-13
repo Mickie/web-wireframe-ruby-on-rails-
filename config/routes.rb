@@ -20,11 +20,11 @@ FanzoSite::Application.routes.draw do
   resources :tailgates do
     get 'search', on: :collection
     resources :posts do
-      post 'up_vote', on: :member
-      post 'down_vote', on: :member
+      put 'up_vote', on: :member
+      put 'down_vote', on: :member
       resources :comments do
-        post 'up_vote', on: :member
-        post 'down_vote', on: :member
+        put 'up_vote', on: :member
+        put 'down_vote', on: :member
       end
     end
   end

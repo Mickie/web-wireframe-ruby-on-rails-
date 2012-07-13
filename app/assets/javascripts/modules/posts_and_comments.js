@@ -6,6 +6,8 @@ $(function()
 function initializePostAndComments()
 {
   $("#posts #comment_content").live('keyup',submitComment);
+  $(".post_votes .vote_up i").live('click', submitVote);
+  $(".post_votes .vote_down i").live('click', submitVote);
 }
 
 function submitComment(e)
@@ -17,3 +19,7 @@ function submitComment(e)
   }
 }
 
+function submitVote(e)
+{
+  $(e.target.parentElement).submit();
+}

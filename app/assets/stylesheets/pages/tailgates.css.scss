@@ -199,6 +199,32 @@ div#tailgate_show
             }
           }
           
+          .post_votes
+          {
+            float:right;
+
+            i
+            {
+              margin-top:2px;
+              cursor: pointer;
+            }
+            
+            form
+            {
+              padding:0px;
+              margin:0px;
+            } 
+                       
+            .fan_score
+            {
+              text-align:center;
+              color: grey;
+              font-weight: bold;
+              font-size: 14px;
+            }
+            
+          }
+          
           div.post_comments
           {
             clear:both;
