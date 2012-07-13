@@ -194,7 +194,6 @@ class PostsController < ApplicationController
       theLink = getTailgateBitly(aPost.tailgate)
       thePicture = aPost.tailgate.team.getLargeLogoBitly
       
-      puts("theLink: #{theLink} thePicture: #{thePicture}")
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
                                                             link: theLink,
                                                             name: aPost.tailgate.name,

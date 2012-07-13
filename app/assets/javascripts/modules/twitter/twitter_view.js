@@ -27,6 +27,23 @@ var TwitterView = function( anArrayOfHashTags,
   this.myTwitterController = new TwitterController(this);
   this.myRefreshTweetsInterval;
 
+  var theCurrentPostVal = getCookie("#postForm #post_content");
+  if (theCurrentPostVal)
+  {
+    setCookie("#postForm #post_content", "", 0);
+    $("#postForm #post_content").val(theCurrentPostVal);
+  }
+
+  this.isLoggedIn = function()
+  {
+    return this.myUserId > 0;
+  }
+  
+  this.isConnectedToTwitter = function()
+  {
+    return this.myConnectedToTwitterFlag;
+  }
+
   this.startLoadingTweets = function()
   {
     this.myTwitterSearch = new TwitterSearch(createDelegate(this, this.onNewTweet), createDelegate(this, this.onError));
@@ -41,7 +58,7 @@ var TwitterView = function( anArrayOfHashTags,
     clearInterval(this.myRefreshTweetsInterval);
   };
   
-  if (this.myConnectedToTwitterFlag)
+  if (this.isConnectedToTwitter())
   {
     this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
     this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
@@ -53,49 +70,50 @@ var TwitterView = function( anArrayOfHashTags,
       $(this.myControlsDivSelector + " #post_twitter_reply_id").val(aReplyId ? aReplyId : "");
       $(this.myControlsDivSelector + " #post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
     };
-
-    var theCurrentPostVal = getCookie("#postForm #post_content");
-    if (theCurrentPostVal)
-    {
-      setCookie("#postForm #post_content", "", 0);
-      $("#postForm #post_content").val(theCurrentPostVal);
-    }
   }
   else
   {
-    this.handleDisconnectStatus = function()
+    this.saveData = function()
     {
-      if (this.myUserId > 0)
-      {
-        $("#myConnectTwitterModal").modal("show"); 
-      }
-      else
-      {
-        $("#myLoginModal").modal("show"); 
-      }
-      
-      return false;
+      var theCurrentPostVal = $("#postForm #post_content").val();
+      setCookie("#postForm #post_content", theCurrentPostVal, 1);
     };
-    this.onReplyTo = this.handleDisconnectStatus;
-    this.onRetweet = this.handleDisconnectStatus;
-    this.onFavorite = this.handleDisconnectStatus;
-    this.updatePostForm = this.handleDisconnectStatus;
     
-    this.disallowIfPostingToTwitter = function(e)
+    this.disallowIfPostingToTwitter = function()
     {
       var theTwitterFlag = $("#postForm #post_twitter_flag").is(':checked');
       if (theTwitterFlag)
       {
-        var theCurrentPostVal = $("#postForm #post_content").val();
-        setCookie("#postForm #post_content", theCurrentPostVal, 1);
-        return this.handleDisconnectStatus();
+        this.saveData()
+        $("#myConnectTwitterModal").modal("show"); 
+        return false;
       }
       else
       {
         return true;
       }
     };
-    $("#postForm #add_post").live('click', createDelegate(this, this.disallowIfPostingToTwitter ) );
+
+    this.handleDisconnectStatus = function()
+    {
+      if (this.isLoggedIn())
+      {
+        return this.disallowIfPostingToTwitter();
+      }
+      else
+      {
+        this.saveData();
+        $("#myLoginModal").modal("show");
+        return false; 
+      }
+    };
+    
+    this.onReplyTo = this.handleDisconnectStatus;
+    this.onRetweet = this.handleDisconnectStatus;
+    this.onFavorite = this.handleDisconnectStatus;
+    this.updatePostForm = this.handleDisconnectStatus;
+    
+    $("#postForm #add_post").live('click', createDelegate(this, this.handleDisconnectStatus ) );
   }
   
   
