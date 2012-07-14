@@ -57,19 +57,24 @@ var TwitterView = function( anArrayOfHashTags,
   {
     clearInterval(this.myRefreshTweetsInterval);
   };
+
+  this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
+  {
+    if (aForceTwitterFlag)
+    {
+      $(this.myControlsDivSelector + " #post_twitter_flag").prop("checked", true);
+    }
+
+    $(this.myControlsDivSelector + " #post_content").val(aDefaultText);
+    $(this.myControlsDivSelector + " #post_twitter_reply_id").val(aReplyId ? aReplyId : "");
+    $(this.myControlsDivSelector + " #post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
+  };
   
   if (this.isConnectedToTwitter())
   {
     this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
     this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
     this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
-
-    this.updatePostForm = function( aDefaultText, aReplyId, aRetweetId )
-    {
-      $(this.myControlsDivSelector + " #post_content").val(aDefaultText);
-      $(this.myControlsDivSelector + " #post_twitter_reply_id").val(aReplyId ? aReplyId : "");
-      $(this.myControlsDivSelector + " #post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
-    };
   }
   else
   {
@@ -79,19 +84,40 @@ var TwitterView = function( anArrayOfHashTags,
       setCookie("#postForm #post_content", theCurrentPostVal, 1);
     };
     
+    this.showTwitterModal = function()
+    {
+      this.saveData();
+      $("#myConnectTwitterModal").modal("show"); 
+    };
+    
+    this.showFacebookModal = function()
+    {
+      this.saveData();
+      $("#myLoginModal").modal("show");
+    };
+    
+    this.showCorrectModal = function()
+    {
+      if (this.isLoggedIn())
+      {
+        this.showTwitterModal();
+      }
+      else
+      {
+        this.showFacebookModal();
+      }
+    };
+    
     this.disallowIfPostingToTwitter = function()
     {
       var theTwitterFlag = $("#postForm #post_twitter_flag").is(':checked');
       if (theTwitterFlag)
       {
-        this.saveData()
-        $("#myConnectTwitterModal").modal("show"); 
+        this.showTwitterModal()
         return false;
       }
-      else
-      {
-        return true;
-      }
+      
+      return true;
     };
 
     this.handleDisconnectStatus = function()
@@ -100,18 +126,14 @@ var TwitterView = function( anArrayOfHashTags,
       {
         return this.disallowIfPostingToTwitter();
       }
-      else
-      {
-        this.saveData();
-        $("#myLoginModal").modal("show");
-        return false; 
-      }
+
+      this.showFacebookModal();
+      return false; 
     };
     
-    this.onReplyTo = this.handleDisconnectStatus;
-    this.onRetweet = this.handleDisconnectStatus;
-    this.onFavorite = this.handleDisconnectStatus;
-    this.updatePostForm = this.handleDisconnectStatus;
+    this.onReplyTo = this.showCorrectModal;
+    this.onRetweet = this.showCorrectModal;
+    this.onFavorite = this.showCorrectModal;
     
     $("#postForm #add_post").live('click', createDelegate(this, this.handleDisconnectStatus ) );
   }

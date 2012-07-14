@@ -56,7 +56,7 @@ var TwitterController = function(aTwitterView)
                                      * theArrayOfChoices.length );
     var theTweetText = theArrayOfChoices[theRandomIndex] + " " + this.myTwitterView.myHashTags;
   
-    this.myTwitterView.updatePostForm(theTweetText);
+    this.myTwitterView.updatePostForm(false, theTweetText);
     
   };
   
@@ -84,13 +84,13 @@ var TwitterController = function(aTwitterView)
   
   this.onReplyTo = function( aTweetId, aUser)
   {
-    this.myTwitterView.updatePostForm(aUser + " " + this.myTwitterView.myHashTags, aTweetId);
+    this.myTwitterView.updatePostForm(true, aUser + " " + this.myTwitterView.myHashTags, aTweetId);
     $("body").animate({scrollTop:0}, 400);
   };
   
   this.onRetweet = function( aTweetId, aTweetText )
   {
-    this.myTwitterView.updatePostForm(aTweetText, "", aTweetId);
+    this.myTwitterView.updatePostForm(true, aTweetText, "", aTweetId);
     $("body").animate({scrollTop:0}, 400);
   };
   

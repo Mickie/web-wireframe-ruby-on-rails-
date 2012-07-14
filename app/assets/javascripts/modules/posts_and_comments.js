@@ -20,7 +20,7 @@ function submitComment(e)
     }
     else
     {
-      myTwitterView.handleDisconnectStatus();
+      myTwitterView.showFacebookModal();
     }
     return false;
   }
@@ -34,7 +34,7 @@ function submitVote(e)
   }
   else
   {
-    myTwitterView.handleDisconnectStatus();
+    myTwitterView.showFacebookModal();
   }
 }
 

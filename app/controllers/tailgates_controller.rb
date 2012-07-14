@@ -42,7 +42,7 @@ class TailgatesController < ApplicationController
       return redirect_to @tailgate, status: :moved_permanently
     end    
     
-    @post = Post.new(twitter_flag:true, facebook_flag:true)
+    @post = Post.new(facebook_flag:true)
     @currentCityState = request.location.state_code == "" ? request.location.city : "#{request.location.city}, #{request.location.state_code}"
     
     
