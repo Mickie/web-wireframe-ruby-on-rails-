@@ -159,6 +159,35 @@ div#tailgate_show
                 border-right: transparent solid 5px;
               }
             }
+            
+            .dropdown-menu
+            {
+              width: 200px;
+              li.sectionHeader
+              {
+                &:hover
+                {
+                  background: inherit;
+                }
+              }
+              
+              li
+              {
+                cursor:pointer;
+                padding-left:5px;
+
+                &:hover
+                {
+                  background: $background;
+                }
+                
+                p
+                {
+                  margin:0px;
+                  padding-left: 5px;
+                }
+              }
+            }
           }
           
         }

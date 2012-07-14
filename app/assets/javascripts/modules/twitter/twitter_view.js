@@ -148,8 +148,8 @@ var TwitterView = function( anArrayOfHashTags,
   {
     this.myTwitterController.addQuickTweetButtons( $( this.myControlsDivSelector + " ul.dropdown-menu") );
     
-    $( this.myControlsDivSelector + " a" ).each( createDelegate(this.myTwitterController, 
-                                                                this.myTwitterController.addQuickTweetClick ));
+    $( this.myControlsDivSelector + " p" ).each( createDelegate( this.myTwitterController, 
+                                                                    this.myTwitterController.addQuickTweetClick ));
   };
   
   

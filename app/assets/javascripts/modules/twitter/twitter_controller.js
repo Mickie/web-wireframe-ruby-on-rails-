@@ -21,8 +21,7 @@ var TwitterController = function(aTwitterView)
   
   this.addQuickTweetClick = function( i, anAnchorElement )
   {
-      anAnchorElement.href = "#";
-      $( anAnchorElement ).click( createDelegate(this, this.onQuickTweetClick) );
+    $( anAnchorElement ).click( createDelegate(this, this.onQuickTweetClick) );
   };
   
   this.addQuickTweetButtons = function( aParentUL )
@@ -35,14 +34,14 @@ var TwitterController = function(aTwitterView)
     return {
       'div.happy li': {
         'tweetGroup <- happy':{
-          'a' : 'tweetGroup.name',
-          'a@data' : 'tweetGroup.name' 
+          'p' : 'tweetGroup.name',
+          'p@data' : 'tweetGroup.name' 
         }
       },
       'div.sad li': {
         'tweetGroup <- sad':{
-          'a' : 'tweetGroup.name',
-          'a@data' : 'tweetGroup.name' 
+          'p' : 'tweetGroup.name',
+          'p@data' : 'tweetGroup.name' 
         }
       }
     }
@@ -50,7 +49,7 @@ var TwitterController = function(aTwitterView)
   
   this.onQuickTweetClick = function( e )
   {
-    var theKey = e.target.attributes[1].nodeValue;
+    var theKey = e.target.attributes[0].nodeValue;
     var theArrayOfChoices = this.getQuickTweetChoices(theKey);
     var theRandomIndex = Math.floor( Math.random()
                                      * theArrayOfChoices.length );
