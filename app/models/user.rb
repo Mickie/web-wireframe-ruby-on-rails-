@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   
   has_many :tailgate_followers, inverse_of: :user, dependent: :delete_all
   has_many :followed_tailgates, through: :tailgate_followers, source: :tailgate 
+  
+  has_many :posts, inverse_of: :user, dependent: :destroy
+  has_many :comments, inverse_of: :user, dependent: :destroy
+  
+  has_many :user_post_votes, inverse_of: :user, dependent: :delete_all
+  has_many :user_comment_votes, inverse_of: :user, dependent: :delete_all
 
   attr_accessible :email,
                   :first_name,

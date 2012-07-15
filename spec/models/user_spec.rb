@@ -27,6 +27,8 @@ describe User do
   it { should respond_to(:description) }
   it { should respond_to(:teams) }
   it { should respond_to(:user_locations) }
+  it { should respond_to(:user_comment_votes) }
+  it { should respond_to(:user_post_votes) }
   it { should respond_to(:locations) }
   it { should respond_to(:tailgates) }
   it { should respond_to(:isConnectedToTwitter?)}

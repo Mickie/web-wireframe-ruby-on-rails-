@@ -84,6 +84,7 @@ class PostsController < ApplicationController
   def up_vote
     @post = @tailgate.posts.find(params[:id])
     @post.fan_score += 1
+    current_user.user_post_votes.create(post_id: @post.id)
 
     respond_to do |format|
       if @post.save
@@ -101,6 +102,7 @@ class PostsController < ApplicationController
   def down_vote
     @post = @tailgate.posts.find(params[:id])
     @post.fan_score -= 1
+    current_user.user_post_votes.create(post_id: @post.id, up_vote:false)
 
     respond_to do |format|
       if @post.save

@@ -80,6 +80,7 @@ class CommentsController < ApplicationController
   def up_vote
     @comment = @post.comments.find(params[:id])
     @comment.fan_score += 1
+    current_user.user_comment_votes.create(comment_id: @comment.id)
 
     respond_to do |format|
       if @comment.save
@@ -97,6 +98,7 @@ class CommentsController < ApplicationController
   def down_vote
     @comment = @post.comments.find(params[:id])
     @comment.fan_score -= 1
+    current_user.user_comment_votes.create(comment_id: @comment.id, up_vote:false)
 
     respond_to do |format|
       if @comment.save

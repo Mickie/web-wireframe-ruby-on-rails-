@@ -5,12 +5,13 @@ describe CommentsController do
   before do
     mock_geocoding!
     @tailgate = FactoryGirl.create(:tailgate)
-    @post = FactoryGirl.create(:post, tailgate: @tailgate, user:@tailgate.user)
+    @post = @tailgate.posts.create(user_id:@tailgate.user.id, content:"post content")
   end
 
   def valid_attributes
     {
-      content: "content"
+      content: "content",
+      user_id: @post.user_id
     }
   end
   
