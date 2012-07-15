@@ -1,0 +1,5 @@
+<%= form_for([aComment.post.tailgate, aComment.post, aComment], 
+              url: down_vote_tailgate_post_comment_path( aComment.post.tailgate, aComment.post, aComment ),
+              remote:true) do |f| %>
+  <i class="icon-thumbs-down"></i>
+<% end %>      

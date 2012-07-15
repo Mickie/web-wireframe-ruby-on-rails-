@@ -1,16 +1,30 @@
 <div class="post" id="post_<%= aPost.id %>">
   <div class="post_votes">
-    <div class="vote_up">
-      <%= form_for([aPost.tailgate, aPost], url: up_vote_tailgate_post_path( aPost.tailgate, aPost ),remote:true) do |f| %>
-        <i class="icon-thumbs-up"></i>
-      <% end %>      
-    </div>
-    <div class="fan_score"><%= aPost.fan_score %></div>
-    <div class="vote_down">
-      <%= form_for([aPost.tailgate, aPost], url: down_vote_tailgate_post_path( aPost.tailgate, aPost ),remote:true) do |f| %>
-        <i class="icon-thumbs-down"></i>
-      <% end %>      
-    </div>
+    <% if user_signed_in? && thePostVote = current_user.user_post_votes.find_by_post_id(aPost.id) %>
+      <div class="vote_up">
+        <% if thePostVote.up_vote %>
+          <i class="icon-thumbs-up icon-white disabled"></i>
+        <% else %>
+          <%= render partial: "partials/buttons/post_up_vote", locals: { aPost: aPost } %>
+        <% end %>      
+      </div>
+      <div class="fan_score"><%= aPost.fan_score %></div>
+      <div class="vote_down">
+        <% if thePostVote.up_vote %>
+          <%= render partial: "partials/buttons/post_down_vote", locals: { aPost: aPost } %>
+        <% else %>
+          <i class="icon-thumbs-down icon-white disabled"></i>
+        <% end %>      
+      </div>
+    <% else %>
+      <div class="vote_up">
+        <%= render partial: "partials/buttons/post_up_vote", locals: { aPost: aPost } %>
+      </div>
+      <div class="fan_score"><%= aPost.fan_score %></div>
+      <div class="vote_down">
+        <%= render partial: "partials/buttons/post_down_vote", locals: { aPost: aPost } %>
+      </div>
+    <% end %>
   </div>
 
   <div class="profile_pic">

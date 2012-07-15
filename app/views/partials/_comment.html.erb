@@ -1,4 +1,32 @@
-<div class="comment">
+<div class="comment" id="post_<%= aComment.post.id %>_comment_<%= aComment.id -%>">
+  <div class="comment_votes">
+    <% if user_signed_in? && theCommentVote = current_user.user_comment_votes.find_by_comment_id(aComment.id) %>
+      <div class="vote_up">
+        <% if theCommentVote.up_vote %>
+          <i class="icon-thumbs-up icon-white disabled"></i>
+        <% else %>
+          <%= render partial: "partials/buttons/comment_up_vote", locals: { aComment: aComment } %>
+        <% end %>      
+      </div>
+      <div class="fan_score"><%= aComment.fan_score %></div>
+      <div class="vote_down">
+        <% if theCommentVote.up_vote %>
+          <%= render partial: "partials/buttons/comment_down_vote", locals: { aComment: aComment } %>
+        <% else %>
+          <i class="icon-thumbs-down icon-white disabled"></i>
+        <% end %>      
+      </div>
+    <% else %>
+      <div class="vote_up">
+        <%= render partial: "partials/buttons/comment_up_vote", locals: { aComment: aComment } %>
+      </div>
+      <div class="fan_score"><%= aComment.fan_score %></div>
+      <div class="vote_down">
+        <%= render partial: "partials/buttons/comment_down_vote", locals: { aComment: aComment } %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="profile_pic">
     <% if aComment.user.image %>
       <%= image_tag( aComment.user.image, size:"32x32" ) %>

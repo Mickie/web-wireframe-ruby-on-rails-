@@ -80,17 +80,23 @@ class CommentsController < ApplicationController
   def up_vote
     @comment = @post.comments.find(params[:id])
     @comment.fan_score += 1
-    current_user.user_comment_votes.create(comment_id: @comment.id)
+
+    theInitialVote = current_user.user_comment_votes.find_by_comment_id(@comment.id)
+    if theInitialVote
+      theInitialVote.destroy
+    end
+
+    @vote = current_user.user_comment_votes.create(comment_id: @comment.id)
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post.tailgate, notice: 'Comment was successfully up voted.' }
         format.json { head :no_content }
-        format.js
+        format.js { render "vote" }
       else
         format.html { render action: "show" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render "vote" }
       end
     end
   end
@@ -98,17 +104,23 @@ class CommentsController < ApplicationController
   def down_vote
     @comment = @post.comments.find(params[:id])
     @comment.fan_score -= 1
-    current_user.user_comment_votes.create(comment_id: @comment.id, up_vote:false)
+
+    theInitialVote = current_user.user_comment_votes.find_by_comment_id(@comment.id)
+    if theInitialVote
+      theInitialVote.destroy
+    end
+
+    @vote = current_user.user_comment_votes.create(comment_id: @comment.id, up_vote:false)
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post.tailgate, notice: 'Post was successfully down voted.' }
         format.json { head :no_content }
-        format.js
+        format.js { render "vote" }
       else
         format.html { render action: "show" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render "vote" }
       end
     end
   end

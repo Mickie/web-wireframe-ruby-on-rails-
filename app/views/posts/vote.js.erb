@@ -1,1 +1,8 @@
 $("#post_<%= @post.id -%> .post_votes .fan_score").html("<%= @post.fan_score %>");
+<% if @vote.up_vote %>
+  $("#post_<%= @post.id -%> .post_votes .vote_up").html("<i class='icon-thumbs-up icon-white disabled'></i>");
+  $("#post_<%= @post.id -%> .post_votes .vote_down").html("<%= escape_javascript(render partial: "partials/buttons/post_down_vote", locals: { aPost: @post }) %>");
+<% else %>
+  $("#post_<%= @post.id -%> .post_votes .vote_down").html("<i class='icon-thumbs-down icon-white disabled'></i>");
+  $("#post_<%= @post.id -%> .post_votes .vote_up").html("<%= escape_javascript(render partial: "partials/buttons/post_up_vote", locals: { aPost: @post }) %>");
+<% end %>
