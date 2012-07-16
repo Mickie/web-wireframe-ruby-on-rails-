@@ -5,6 +5,5 @@
 
 #left_nav
 {
-  position: relative;
-  float: left;
+  position: absolute;
 }
