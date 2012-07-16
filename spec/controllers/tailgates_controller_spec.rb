@@ -233,10 +233,10 @@ describe TailgatesController do
         response.should redirect_to(tailgates_url)
       end
       
-      it "redirects to the users profile path if users don't match" do
+      it "redirects to the root path if users don't match" do
         tailgate = Tailgate.create! valid_attributes
         delete :destroy, {:id => tailgate.to_param}
-        response.should redirect_to(user_path(subject.current_user))
+        response.should redirect_to(root_path)
       end
     end
   end
