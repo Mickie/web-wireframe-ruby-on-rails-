@@ -34,7 +34,10 @@
               <a href="#myLoginModal" data-toggle="modal" class="fanzoButton follow_button">Follow</a>
             <% end %>
           </div>
-          <div class="fan_count"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></div> 
+          <div class="fan_count"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></div>
+          <% if admin_signed_in? %>
+            <div><%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure? No going back..." }, method: :delete, class: "fanzoButton" %></div>
+          <% end %>
         </div>
         
         <div class="banner_content">

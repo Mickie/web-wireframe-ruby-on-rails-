@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :tailgate, touch: :posts_updated_at
   belongs_to :user
   
-  has_many :comments, inverse_of: :post, dependent: :delete_all, order: "created_at"
+  has_many :comments, inverse_of: :post, dependent: :destroy, order: "created_at"
   
   has_many :user_post_votes, inverse_of: :post, dependent: :delete_all
   

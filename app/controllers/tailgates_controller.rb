@@ -141,13 +141,13 @@ class TailgatesController < ApplicationController
   def destroy
     @tailgate = Tailgate.find(params[:id])
     
-    if (@tailgate.user_id == current_user.id)
+    if (@tailgate.user_id == current_user.id || admin_signed_in?)
       @tailgate.destroy
     end
     
     respond_to do |format|
-      if (@tailgate.user_id != current_user.id)
-        format.html { redirect_to user_path(current_user), notice: 'Cannot delete a tailgate owned by another user.' }
+      if (@tailgate.user_id != current_user.id && !admin_signed_in?)
+        format.html { redirect_to root_path, notice: 'Cannot delete a tailgate owned by another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
       else
         format.html { redirect_to tailgates_url }
