@@ -55,7 +55,7 @@ FanzoSite::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += [ 'users/show.js', 'tailgates.js', 'static_pages/home.js', 'tailgates/new.js', 'tailgates/show.js' ]
+  config.assets.precompile += [ 'users/show.js', 'tailgates.js', 'static_pages/home.js', 'tailgates/new.js', 'tailgates/show.js', 'mobile.css' ]
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'fanzo.me' }
