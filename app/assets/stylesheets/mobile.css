@@ -1,0 +1,10 @@
+/* For mobile specific overrides
+ * 
+ *= require_self
+ */
+
+#left_nav
+{
+  position: relative;
+  float: left;
+}

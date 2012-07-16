@@ -20,6 +20,7 @@ gem 'foursquare2'
 gem 'kaminari'
 gem 'friendly_id'
 gem 'bitly'
+gem 'browser'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

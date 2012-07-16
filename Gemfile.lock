@@ -37,6 +37,7 @@ GEM
       httparty (>= 0.7.6)
       oauth2 (>= 0.1.1)
     bootstrap-sass (2.0.4.0)
+    browser (0.1.4)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -305,6 +306,7 @@ PLATFORMS
 DEPENDENCIES
   bitly
   bootstrap-sass (>= 2.0.0)
+  browser
   capybara (>= 1.1.2)
   coffee-rails
   cucumber-rails
