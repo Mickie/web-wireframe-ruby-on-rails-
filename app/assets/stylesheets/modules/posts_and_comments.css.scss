@@ -65,11 +65,12 @@
       .post_combo
       {
         float: right;
-        border: 1px solid $postButtonBorder;
+        border: 1px solid $fanzoButtonBorder;
         
         #add_post, .quickTweetButton
         {
           float:left;
+          border:none;
         }
         
         #add_post
@@ -80,7 +81,7 @@
         .quickTweetButton
         {
           padding: 6px 10px;
-          border-left: 1px solid $postButtonBorder;
+          border-left: 1px solid $fanzoButtonBorder;
         }
         
         .dropdown-menu
