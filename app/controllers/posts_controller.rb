@@ -141,6 +141,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tailgate_posts_url(@tailgate) }
       format.json { head :no_content }
+      format.js
     end
   end
   

@@ -1,5 +1,11 @@
-<%= form_for([aComment.post.tailgate, aComment.post, aComment], 
-              url: down_vote_tailgate_post_comment_path( aComment.post.tailgate, aComment.post, aComment ),
-              remote:true) do |f| %>
-  <i class="icon-remove"></i>
-<% end %>      
+<% if user_signed_in? && aComment.user_id == current_user.id %>
+  <%= link_to [aComment.post.tailgate, aComment.post, aComment], data: { confirm: "Delete your comment?" }, method: :delete, remote:true do %>
+    <i class="icon-remove mine"></i>
+  <% end %>
+<% else %>
+  <%= form_for([aComment.post.tailgate, aComment.post, aComment], 
+                url: down_vote_tailgate_post_comment_path( aComment.post.tailgate, aComment.post, aComment ),
+                remote:true) do |f| %>
+    <i class="icon-remove"></i>
+  <% end %>      
+<% end %>

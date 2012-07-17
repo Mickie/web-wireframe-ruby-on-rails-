@@ -40,6 +40,11 @@ function submitVote(e)
 
 function submitDownVote(e)
 {
+  if ($(e.target).hasClass('mine'))
+  {
+    return;
+  }
+  
   if (confirm("Mark this as spam or offensive?\n\nIt will be removed from your stream.\n\n"))
   {
     submitVote(e);

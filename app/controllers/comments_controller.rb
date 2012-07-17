@@ -134,6 +134,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tailgate_path(@post.tailgate) }
       format.json { head :no_content }
+      format.js
     end
   end
   

@@ -1,3 +1,9 @@
-<%= form_for([aPost.tailgate, aPost], url: down_vote_tailgate_post_path( aPost.tailgate, aPost ),remote:true) do |f| %>
-  <i class="icon-remove"></i>
+<% if user_signed_in? && aPost.user_id == current_user.id %>
+  <%= link_to [aPost.tailgate, aPost], data: { confirm: "Delete your post?" }, method: :delete, remote:true do %>
+    <i class="icon-remove mine"></i>
+  <% end %>
+<% else %>
+  <%= form_for([aPost.tailgate, aPost], url: down_vote_tailgate_post_path( aPost.tailgate, aPost ), remote:true) do |f| %>
+    <i class="icon-remove"></i>
+  <% end %>
 <% end %>      
