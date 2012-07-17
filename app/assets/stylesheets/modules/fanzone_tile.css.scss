@@ -47,8 +47,6 @@ div.fanzoneTile
       .team_logo
       {
         width:20%;
-        @include gradient-vertical(#FFFFFF, #E5E5E5);  
-        @include border-radius(50%);
         padding: 10px;
         min-width: 32px;
         

@@ -13,12 +13,12 @@ body
 
 h1 
 {
-  color: $navyBlue;
+  color: $h1;
 }
 
 h2, h3
 {
-  color: $darkBlue;
+  color: $h2-3;
 }
 
 a
@@ -36,11 +36,6 @@ a
   float:left;
   width:32px;
   height:32px;
-  
-  img
-  {
-    @include border_radius(5px);
-  }
 }
 
 .fanzoButton
@@ -65,6 +60,16 @@ a
     text-decoration:none;
     color:black;
   }
+}
+
+.drop_arrow
+{
+  margin: 0px;
+  width:0px;
+  height:0px;
+  border-top: $dropArrow solid 10px;
+  border-left: transparent solid 5px;
+  border-right: transparent solid 5px;
 }
 
 .debug_dump 

@@ -44,14 +44,16 @@
           <div class="team_logo">
             <%= teamLogo(@tailgate.team, :medium) %>      
           </div>
-          <h1><%= @tailgate.name %></h1>
-          <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) if @tailgate.description %></p>
-          <p class="owner">
-            Created by <%= @tailgate.user.full_name %>
-            <% if @tailgate.posts.any? %>
-              : Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago
-            <% end %>
-          </p>
+          <div class="fanzone_details">
+            <h1><%= @tailgate.name %></h1>
+            <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) if @tailgate.description %></p>
+            <p class="owner">
+              Created by <%= @tailgate.user.full_name %>
+              <% if @tailgate.posts.any? %>
+                : Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago
+              <% end %>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -61,7 +63,7 @@
     </div>
     
     <div id="fanzoneContent">
-      <div class="fanzonePosts">
+      <div id="fanzonePosts">
         <div id="postForm">
           <h4>Fanzone Posts</h4>
           <div class="profile_pic">

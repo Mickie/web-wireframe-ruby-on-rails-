@@ -1,0 +1,222 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#fanzonePosts
+{
+  float: left;
+  width: 66.6%;
+  background-color: white;
+  
+  textarea
+  {
+    @include border-radius(0);
+    @include box-shadow(none); 
+  }
+  
+
+  div#postForm
+  {
+    background-color: $fanzoneBackground;
+    padding:10px;
+    
+    h4
+    {
+      padding-top:0px;
+    }
+    
+    .profile_pic
+    {
+      margin-right:10px;
+    }
+
+    .post_fields
+    {
+      padding-left:42px;
+      
+      .social_controls
+      {
+        float:left;
+        
+        input
+        {
+          float:left;
+          margin:5px;
+        }
+        
+        div
+        {
+          float:left;
+          height:20px;
+          width:20px;
+        }
+        
+        .twitter_check
+        {
+          background: asset-url("fanzo-icons.png", image) 0px 0px no-repeat;
+          margin-right: 20px
+        }
+        
+        .facebook_check
+        {
+          background: asset-url("fanzo-icons.png", image) -20px 0px no-repeat;
+        }
+      }
+      
+      .post_combo
+      {
+        float: right;
+        border: 1px solid $postButtonBorder;
+        
+        #add_post, .quickTweetButton
+        {
+          float:left;
+        }
+        
+        #add_post
+        {
+          border-right: 1px solid white;
+        }
+        
+        .quickTweetButton
+        {
+          padding: 6px 10px;
+          border-left: 1px solid $postButtonBorder;
+        }
+        
+        .dropdown-menu
+        {
+          width: 200px;
+          li.sectionHeader
+          {
+            &:hover
+            {
+              background: inherit;
+            }
+          }
+          
+          li
+          {
+            cursor:pointer;
+            padding-left:5px;
+
+            &:hover
+            {
+              background: $background;
+            }
+            
+            p
+            {
+              margin:0px;
+              padding-left: 5px;
+            }
+          }
+        }
+      }
+      
+    }
+  }
+  
+  div#posts
+  {
+    .profile_pic
+    {
+      margin: 0px 10px 10px 0px;
+    }
+
+    div.post
+    {
+      background: white;
+      padding: 10px;
+      border-top: $fanzoneLightBorder solid 1px;
+      
+      
+      .post_content
+      {
+        margin-left: 42px;
+        
+        div
+        {
+          font-weight:bold;
+        }
+        
+      }
+      
+      .post_votes, .comment_votes
+      {
+        margin-left:10px;
+        margin-bottom:10px;
+        float:right;
+
+        i
+        {
+          margin-top:2px;
+          cursor: pointer;
+        }
+        
+        i.disabled
+        {
+          background-color: #CCCCCC;
+          @include border-radius(25%);
+          cursor: inherit;
+        }
+        
+        form
+        {
+          padding:0px;
+          margin:0px;
+        } 
+                   
+        .fan_score
+        {
+          text-align:center;
+          color: grey;
+          font-weight: bold;
+          font-size: 14px;
+        }
+        
+      }
+      
+      div.post_comments
+      {
+        clear:both;
+        padding-left: 42px;
+        
+        .comment
+        {
+          clear:both;
+          
+          .comment_content
+          {
+            padding-left: 42px;
+            div
+            {
+              font-weight:bold;
+            }
+          }
+        }
+      }
+      
+      .post_comment_form
+      {
+        clear:both;
+        padding-left:42px;
+        
+        .comment_form
+        {
+          padding-left:42px;
+          
+          .comment_submit
+          {
+            display:none;
+            padding: 3px 15px;
+            background: black;
+            color: white;
+            text-transform: uppercase;
+            float:right;
+          }
+        }
+      }
+    }
+  }
+
+}

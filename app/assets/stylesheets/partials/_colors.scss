@@ -1,33 +1,42 @@
 @import "bootstrap/variables";
 
-$grayMediumLight: #eaeaea;
-$navyBlue: #000066;
-$darkBlue: #000099;
+$h1: #000066;
+$h2-3: #000099;
 
 $borderColor: #CCCCCC;
 $background: #F0F0F0;
 
-$navLoginBackground: #E0EBCC;
-$navTextColor: #333333;
-$navBackgroundColor: white;
-$navBorderColorBottom: #EEEEEE;
-$navBorderColorTop: #DDDDDD;
+$dropArrow: white;
+
+$navLoginBackground: #F70000;
+
+$navLinkTextColor: #333333;
+$navBackgroundColor: #F0F0F0;
+
+$navBorderColorBottom: #CCCCCC;
+
+$navAccountLoginTextColor: white;
     
-$navActiveBackgroundColor: #3366CC;
-$navActiveBorderColorRightLeft: #3366CC;
-$navActiveBorderColorTopBottom: #2F5EBC;
-$navActiveTextColor: white;
+$navActiveBackgroundColor: #E9E9E9;
+$navActiveTextColor: #F70000;
 
-$fanzoButtonText: black;
-$fanzoButtonBackground: #E0EBCC;
-$fanzoButtonBorder: #A6AE99;
+$navTaglineColor: #CCCCCC;
 
-$fanzoneBorder: #999999;
-$fanzoneBackground: #F5F7FC;
+$fanzoButtonText: white;
+$fanzoButtonBackground: #F70000;
+$fanzoButtonBorder: #F73300;
+
+$fanzoneBorder: #CCCCCC;
+$fanzoneBackground: #EEEEEE;
 $fanzoneLightBorder: #EEEEEE;
 $fanzoneHeaderText: #666666;
-$ownerText: #FFFFFF;
-$linkColor: #003399;
+$fanzoneBannerLogoBackground: white;
+$fanzoneContentBackground: white;
+
+$postButtonBorder: #F73300;
+
+$ownerText: white;
+$linkColor: #F70000;
 
 $selectedBorder: #3366CC;
 

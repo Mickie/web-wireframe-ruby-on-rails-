@@ -3,68 +3,50 @@
 
 #left_nav
 {
-  padding-top: 20px;
   position: fixed;
-  width: 250px;
+  width: 220px;
   
   div#account
   {
-    width: 40%;
-
     #account_content
     {
-      height: 15px;
+      height: 32px;
       float:left;
       background-color: $navLoginBackground;
       text-transform: uppercase;
       font-weight: bold;
-      padding: 2px 20px;
       border-left: $borderColor solid 1px;
       border-top: $borderColor solid 1px;
       
       a
       {
-        color: black;
+        color: $navAccountLoginTextColor;
         
         &:hover
         {
           background-color: inherit;
         }
       }
-    }
-    
-    #tab
-    {
-      float:left;
-      position: relative;
       
-      #tab_inner
+      #users_name
       {
-        position: absolute;
-        left: 0px;
-        top: 1px;
-        z-index: 10;
-        width:0px;
-        height:0px;
-        padding:0px;
-        border-bottom: $navLoginBackground solid 19px;
-        border-right: transparent solid 20px;
-      }
-      
-      #tab_border
-      {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: 0;
-        width:0px;
-        height:0px;
-        padding:0px;
-        border-bottom: $borderColor solid 20px;
-        border-right: transparent solid 20px;
+        div
+        {
+          float:left;
+        }
+        
+        div.drop_arrow
+        {
+          margin:12px;
+        }
+        
+        div.name
+        {
+          padding: 8px;
+          padding-right: 0px;
+        }
       }
     }
-    
   }
   
   div#fanzone_nav
@@ -82,10 +64,9 @@
       
       a
       {
-        color:$navTextColor;
-        border-bottom-color: $navBorderColorBottom;
-        border-top-color: $navBorderColorTop;
-        text-align:center;
+        border: none;
+        border-bottom: 1px solid $navBorderColorBottom;
+        color:$navLinkTextColor;
         font-weight:bold;
         padding:10px;
 
@@ -103,13 +84,12 @@
       a
       {
         height: 42px;
-        text-align: left;
         font-weight:normal;
         padding:0px;
         
         .team_logo
         {
-          padding: 5px 10px;
+          padding: 5px;
           
           img
           {
@@ -161,35 +141,36 @@
     {
       color: $navActiveTextColor;
       background-color: $navActiveBackgroundColor;
+      @include box-shadow(inset 0px 5px 5px $navBorderColorBottom);
+      @include border-radius(2px 2px 0px 0px);
     }
+
+    #fanzone_search
+    {
+      display:none;
+
+      form
+      {
+        padding:20px 0px;
+        margin:0px;
+        .search_input
+        {
+          height:30px;
+          @include border-radius(15px);
+        }
+      }
+    }
+
     
     #allFanzones
     {
       text-transform: uppercase;
-      
-      #fanzone_search
-      {
-        display:none;
-        border-left: $borderColor solid 1px;
-        border-right: $borderColor solid 1px;
-        form
-        {
-          padding:10px;
-          margin:0px;
-          .search_input
-          {
-            height:30px;
-            @include border-radius(15px);
-          }
-        }
-      }
     }
     
     #myFanzones
     {
       a 
       {
-        text-align:left;
         div
         {
           width:32px;
@@ -206,8 +187,9 @@
     
     #createFanzone
     {
-      background-color: black;
+      background-color: $background;
       text-transform: uppercase;
+      text-align: center;
       
       a
       {
@@ -221,7 +203,7 @@
     #logo 
     {
       color:white;
-      background-color: black;
+      background-color: $background;
       
       a
       {
@@ -230,27 +212,17 @@
         
         div
         {
-          padding: 20px 0px 10px 0px;
-          color:white;
-          
-          .brand
-          {
-            font-weight: bold;
-            font-size: 3em;
-          }
-          
-          .tld
-          {
-            font-size: 2em;
-          }
+          padding: 30px 0px 10px 0px;
           
           .tagline
           {
-            padding-top:10px;
+            padding-top:5px;
             padding-left:3px;
-            color: grey;
-            font-size: 1.85em;
-            letter-spacing: 1px;  
+            color: $navTaglineColor;
+            font-size: 1.5em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            
           }
         }
       }

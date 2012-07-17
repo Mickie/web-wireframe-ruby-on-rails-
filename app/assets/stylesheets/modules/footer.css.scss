@@ -3,45 +3,31 @@
 
 footer 
 {
-  padding:5px;
-  color: white;
-  background-color: #CCCCCC;
+  padding:40px 0px 0px 0px;
   
   nav
   {
     div
     {
       clear:both;
-      text-align: center;
     }
     
-    a
+    .copyright
     {
-      color: white;
-      
-      &:hover
-      {
-        color:white;
-      }
+      color: $borderColor;
+    }
+    
+    .links
+    {
+      border-top: 1px solid $borderColor;
+      padding-top: 5px;
     }
     
     ul 
     {
       list-style: none;
-      margin:0px;
-      
-      li 
-      {
-        a 
-        {
-          color: $gray;
-          &:hover 
-          { 
-            color: $grayDarker;
-          }
-        } 
-      }
-      
+      margin:5px 0px;
+            
       #twitter_follow
       {
         float:right;
@@ -49,6 +35,8 @@ footer
       
       #facebook_like
       {
+        width: 89px;
+        overflow: hidden;
         float:left;
       }
       
