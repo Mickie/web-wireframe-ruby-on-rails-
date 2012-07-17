@@ -1,0 +1,12 @@
+<div id="createFanzoneTile" class="span4">
+  <h2>Find and connect with other fans of your passion,<br/>locally and globally.</h2>
+  <div class="createFanzone">
+    <% if user_signed_in? %>
+      <a href="#myCreateFanzoneModal" data-toggle="modal">
+    <% else %>
+      <a href="#myLoginModal" data-toggle="modal">
+    <% end %>
+      <span class="fanzoButton">+ &nbsp; Create a Fanzone</span>
+    </a>
+  </div>  
+</div>

@@ -1,0 +1,26 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+
+#createFanzoneTile
+{
+  margin:0px;
+  margin-bottom: 20px;
+  min-width: 215px;
+  max-width: 280px;
+  height: 303px;
+  float: left;
+  text-align:center;
+  border: 1px solid $borderColor;
+  padding: 10px;
+  
+  h2
+  {
+    color: inherit;
+    font-size: 1.5em;
+    line-spacing: 0px;
+    font-weight: normal;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+}
