@@ -20,7 +20,10 @@
   </div>
   
   <div class="comment_content">
-    <div><%= aComment.user.full_name %></div>
+    <div>
+      <span class="user_name"><%= aComment.user.full_name %></span>
+      <span class="timestamp"> - <%= time_ago_in_words(aComment.created_at) %> ago</span>
+    </div>
     <p><%= raw handleNewlinesAndUrls(aComment.content) %></p>
   </div>
 </div>

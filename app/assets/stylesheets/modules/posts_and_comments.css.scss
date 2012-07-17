@@ -130,15 +130,19 @@
       border-top: $fanzoneLightBorder solid 1px;
       
       
-      .post_content
+      .post_content, .comment_content
       {
         margin-left: 42px;
         
-        div
+        .user_name
         {
           font-weight:bold;
         }
         
+        .timestamp
+        {
+          color: $lightTextColor;
+        }
       }
       
       .post_votes, .comment_votes
@@ -191,15 +195,6 @@
         .comment
         {
           clear:both;
-          
-          .comment_content
-          {
-            padding-left: 42px;
-            div
-            {
-              font-weight:bold;
-            }
-          }
         }
       }
       

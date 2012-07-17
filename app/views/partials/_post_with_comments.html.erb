@@ -20,7 +20,10 @@
   </div>
   
   <div class="post_content">
-    <div><%= aPost.user.full_name %></div>
+    <div>
+      <span class="user_name"><%= aPost.user.full_name %></span>
+      <span class="timestamp"> - <%= time_ago_in_words(aPost.created_at) %> ago</span>
+    </div>
     <p><%= raw handleNewlinesAndUrls( aPost.content ) %></p>
   </div>
 
