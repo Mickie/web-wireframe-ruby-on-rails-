@@ -40,7 +40,7 @@ function submitVote(e)
 
 function submitDownVote(e)
 {
-  if (confirm("Are you sure you want to call the foul?\n\nThis will go down on their permanent record...\n\n"))
+  if (confirm("Mark this as spam or offensive?\n\nIt will be removed from your stream.\n\n"))
   {
     submitVote(e);
   }

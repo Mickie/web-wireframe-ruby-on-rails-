@@ -165,13 +165,20 @@
           padding:0px;
           margin:0px;
         } 
+
+        .vote_up, .vote_down
+        {
+          margin-top: 1px;
+          float: left;
+        }
                    
         .fan_score
         {
-          text-align:center;
-          color: grey;
+          float: left;
+          color: $lightTextColor;
           font-weight: bold;
           font-size: 14px;
+          padding: 0px 10px;
         }
         
       }

@@ -77,14 +77,14 @@
           <div class="clearfix"></div>
         </div>
         <div id="posts">
-          <% if user_signed_in? && current_user.mine?(@tailgate)%>
-            <% @tailgate.posts.each do | aPost | %>
-              <%= render partial: "partials/post_with_comments", locals: {aPost: aPost}%>
+          <% @tailgate.posts.visible.each do | aPost | %>
+            <% if user_signed_in? %>
+              <% thePostVote = current_user.user_post_votes.find_by_post_id(aPost.id) %>
+              <% if thePostVote && !thePostVote.up_vote %>
+                <% next %>
+              <% end %>
             <% end %>
-          <% else %>
-            <% @tailgate.posts.visible.each do | aPost | %>
-              <%= render partial: "partials/post_with_comments", locals: {aPost: aPost}%>
-            <% end %>
+            <%= render partial: "partials/post_with_comments", locals: {aPost: aPost, aPostVote: thePostVote}%>
           <% end %>
         </div>
       </div>
