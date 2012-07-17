@@ -1,0 +1,25 @@
+div#myLoginModal
+{
+  .modal-header
+  {
+    border:none;
+  }
+  
+  .modal-body
+  {
+    text-align: center;
+    padding: 100px;
+    
+    h3 
+    {
+      color: inherit;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }  
+
+    #facebookCreateAccount a:hover
+    {
+      color:white;
+    }
+  }  
+}

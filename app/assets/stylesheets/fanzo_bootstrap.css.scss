@@ -1,5 +1,11 @@
 @import "bootstrap";
 
+
+.modal-backdrop, .modal-backdrop.fade.in 
+{
+  opacity: 0.4;
+}
+
 .modal.fade.in
 {
   top:0px;
@@ -7,6 +13,7 @@
 
 .modal
 {
-  left:25%;
+  left:20%;
   margin:0px;
+  @include border-radius(0);
 }

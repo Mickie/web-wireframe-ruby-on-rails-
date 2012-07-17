@@ -28,6 +28,11 @@
         }
       }
       
+      .login
+      {
+        padding: 8px;
+      }
+      
       #users_name
       {
         div
@@ -65,7 +70,7 @@
       a
       {
         border: none;
-        border-bottom: 1px solid $navBorderColorBottom;
+        border-top: 1px solid $navBorderColorBottom;
         color:$navLinkTextColor;
         font-weight:bold;
         padding:10px;
@@ -96,17 +101,6 @@
             width:32px;
             height:32px;
           }
-        }
-        
-        .myFanzone
-        {
-          float:right;
-          width:0px;
-          height:0px;
-          margin:0px -1px 0px 0px;
-          padding:0px;
-          border-bottom: #CCCCCC solid 20px;
-          border-right: #F0F0F0 solid 20px;
         }
         
         .fanzone_name
@@ -147,8 +141,6 @@
 
     #fanzone_search
     {
-      display:none;
-
       form
       {
         padding:20px 0px;
@@ -160,28 +152,48 @@
         }
       }
     }
+    
+    #allFanzones, #myFanzones
+    {
+      a
+      {
+        padding: 7px 5px;
+
+        i
+        {
+          display: block;
+          width: 20px;
+          height: 20px;
+          margin: 0px 10px 0px 6px;
+        }
+        
+        p
+        {
+          margin: 0px;
+          text-transform:uppercase;
+        }
+      }
+    }
 
     
     #allFanzones
     {
-      text-transform: uppercase;
+      a
+      {
+        border:none;
+        
+        i
+        {
+          background: asset-url("fanzo-icons.png", image) 0px -20px no-repeat;
+        }
+      }
     }
     
     #myFanzones
     {
-      a 
+      i
       {
-        div
-        {
-          width:32px;
-          float: left;
-          margin-right: 10px;
-          margin-top: -7px;
-        }
-        span
-        {
-          text-transform:uppercase;
-        }
+        background: asset-url("fanzo-icons.png", image) -20px -20px no-repeat;
       }
     }
     
@@ -193,9 +205,6 @@
       
       a
       {
-        border-top-width:0px;
-        border-bottom-width:0px;
-        padding-bottom: 20px;
       }
     }
   
@@ -207,7 +216,7 @@
       
       a
       {
-        border-bottom-width:0px;
+        border: none;
         padding: 0px;
         
         div
@@ -222,7 +231,6 @@
             font-size: 1.5em;
             letter-spacing: 1px;
             text-transform: uppercase;
-            
           }
         }
       }

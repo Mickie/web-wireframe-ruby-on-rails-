@@ -35,7 +35,7 @@
               </ul>
             </li>
           <% else %>
-            <li>
+            <li class="login">
               <a href="#myLoginModal" data-toggle="modal">Log in</a>
             </li>
           <% end %>
@@ -53,15 +53,6 @@
             </div>
           </a>
         </li>
-        <li id="createFanzone">
-          <% if user_signed_in? %>
-            <a href="#myCreateFanzoneModal" data-toggle="modal">
-          <% else %>
-            <a href="#myLoginModal" data-toggle="modal">
-          <% end %>
-              <span class="fanzoButton">+ &nbsp; Create a Fanzone</span>
-            </a>
-        </li>  
 
         <li id="fanzone_search">
           <%= form_tag("/tailgates/search", :method => "get", remote: 'true',  class: "form-search") do %>
@@ -75,21 +66,30 @@
           <% end %>
         </li>
         
-        
         <li id="allFanzones">
           <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanzones')" href="#allFanzones">
-            <span>All Fanzones</span>
+            <table>
+              <tr>
+                <td class="team_logo"><i></i></td>
+                <td class="fanzone_name"><p>All Fanzones</p></td>
+              </tr>
+            </table>
           </a>
         </li>
         
         <li id="myFanzones">
           <%if user_signed_in? %>
             <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#myFanzones">
-              <span>My Fanzones</span>
-            </a>
           <% else %>
-            <a href="#myLoginModal" data-toggle="modal">My Fanzones</a>
+            <a href="#myLoginModal" data-toggle="modal">
           <% end %>
+            <table>
+              <tr>
+                <td class="team_logo"><i></i></td>
+                <td class="fanzone_name"><p>My Fanzones</p></td>
+              </tr>
+            </table>
+          </a>
         </li>
     
         <% if user_signed_in? %>
@@ -101,6 +101,16 @@
           <% end %>
         <% end %>
     
+        <li id="createFanzone">
+          <% if user_signed_in? %>
+            <a href="#myCreateFanzoneModal" data-toggle="modal">
+          <% else %>
+            <a href="#myLoginModal" data-toggle="modal">
+          <% end %>
+              <span class="fanzoButton">+ &nbsp; Create a Fanzone</span>
+            </a>
+        </li>  
+
       </ul>
     </div>
   </nav>

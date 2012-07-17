@@ -101,11 +101,6 @@ function onLoadDataComplete(aResult)
   if ($(".active").attr("id") == "allFanzones")
   {
     InfiniteScroller.get().handleScrollingForResource("/tailgates");
-    $("#fanzone_search").slideDown(400);
-  }
-  else
-  {
-    $("#fanzone_search").slideUp(400);
   }
   
 }
