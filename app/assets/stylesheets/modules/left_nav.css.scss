@@ -93,60 +93,31 @@
       
     }
     
-    .fanzone
+    #logo 
     {
+      color:white;
+      background-color: $background;
       
       a
       {
-        height: 42px;
-        font-weight:normal;
-        padding:0px;
+        border: none;
+        padding: 0px;
         
-        .team_logo
+        div
         {
-          padding: 5px;
+          padding: 30px 0px 10px 0px;
           
-          img
+          .tagline
           {
-            width:32px;
-            height:32px;
-          }
-        }
-        
-        .fanzone_name
-        {
-          width: 175px;
-          height: 40px;
-          overflow: hidden;
-          position: relative;
-          span
-          {
-            display:block;
-            position:absolute; 
-            top:0; 
-            bottom:0; 
-            left:0; 
-            right:0;
-            margin:auto; 
+            padding-top:5px;
+            padding-left:3px;
+            color: $navTaglineColor;
+            font-size: 1.5em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
           }
         }
       }
-    }
-  
-    .nav-tabs.nav-stacked > li
-    {
-       &:last-child > a, &:first-child > a
-       {
-          @include border-radius(0);
-       }
-    }
-  
-    .nav-tabs > .active > a
-    {
-      color: $navActiveTextColor;
-      background-color: $navActiveBackgroundColor;
-      @include box-shadow(inset 0px 5px 5px $navBorderColorBottom);
-      @include border-radius(2px 2px 0px 0px);
     }
 
     #fanzone_search
@@ -212,39 +183,64 @@
       background-color: $background;
       text-transform: uppercase;
       text-align: center;
-      
-      a
-      {
-      }
     }
-  
-    
-    #logo 
+
+    .fanzone
     {
-      color:white;
-      background-color: $background;
       
       a
       {
-        border: none;
-        padding: 0px;
+        height: 42px;
+        font-weight:normal;
+        padding:0px;
         
-        div
+        .team_logo
         {
-          padding: 30px 0px 10px 0px;
+          padding: 5px;
           
-          .tagline
+          img
           {
-            padding-top:5px;
-            padding-left:3px;
-            color: $navTaglineColor;
-            font-size: 1.5em;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            width:32px;
+            height:32px;
+          }
+        }
+        
+        .fanzone_name
+        {
+          width: 175px;
+          height: 40px;
+          overflow: hidden;
+          position: relative;
+          span
+          {
+            display:block;
+            position:absolute; 
+            top:0; 
+            bottom:0; 
+            left:0; 
+            right:0;
+            margin:auto; 
           }
         }
       }
     }
+  
+    .nav-tabs.nav-stacked > li
+    {
+       &:last-child > a, &:first-child > a
+       {
+          @include border-radius(0);
+       }
+    }
+  
+    .nav-tabs > .active > a
+    {
+      color: $navActiveTextColor;
+      background-color: $navActiveBackgroundColor;
+      @include box-shadow(inset 0px 5px 5px $navBorderColorBottom);
+      @include border-radius(2px 2px 0px 0px);
+    }
+    
   }
     
 }
