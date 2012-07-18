@@ -1,15 +1,24 @@
 @import "partials/colors";
 @import "bootstrap/mixins";
 
+div#allTiles
+{
+  & [class*="span"]
+  {
+    width:30%;
+    margin:0px 0px 20px 15px;
+  }
+}
+
 div#tailgate_show
 {
-  margin-right: 10px;
+  margin-left: 15px;
   
   #destroy_fanzone
   {
     position:absolute;
     top: 161px;
-    right: 11px;
+    right: 21px;
   }
   
   div.banner
@@ -141,14 +150,5 @@ div#tailgate_show
       {
       }
     }
-  }
-}
-
-div#allTiles
-{
-  & [class*="span"]
-  {
-    width:30%;
-    margin:0px 15px 20px 0px;
   }
 }

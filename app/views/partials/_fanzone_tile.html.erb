@@ -35,23 +35,24 @@
   </div>
   <div class="content">
     <div class="posts">
-      <% if aTailgate.posts.any? %>
+      <% if aTailgate.posts.visible.any? %>
         <% for i in 0..1 do %>
-          <% if i < aTailgate.posts.length %>
+          <% if i < aTailgate.posts.visible.length %>
+            <% thePost = aTailgate.posts.visible[i] %>
             <div class="post">
               <div class="profile_pic">
-                <% if aTailgate.posts[i].user.image %>
-                  <%= image_tag( aTailgate.posts[i].user.image, size:"32x32") %>
+                <% if thePost.user.image %>
+                  <%= image_tag( thePost.user.image, size:"32x32") %>
                 <% end %>
               </div>
               <div class="post_content">
-                <strong><%= aTailgate.posts[i].user.full_name %></strong> <span><%= raw handleNewlinesAndUrls(aTailgate.posts[i].content) %></span>
+                <strong><%= thePost.user.full_name %></strong> <span><%= raw handleNewlinesAndUrls(thePost.content) %></span>
               </div>
             </div>
           <% end %>
         <% end %>
       <% else %>
-        <tr class="post"><td class="profile_pic"></td><td class="post_content">No New Posts... </td></tr>
+        <div class="post"><div class="post_content">No New Posts... </div></div>
       <% end %>
     </div>
     <div class="stats">
