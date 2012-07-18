@@ -11,35 +11,33 @@
   <nav id="fanzo_navigation">
     <div id="account">
       <div id="account_content">
-        <ul id="account_nav" class="nav">
-          <% if user_signed_in? %>
-            <li class="dropdown" id="account_dropdown">
-              <a id="users_name" href="#account_dropdown" data-toggle="dropdown">
-                <div class="profile_pic">
-                  <% if current_user.image %>
-                    <%= image_tag( current_user.image, size:"32x32", alt:"#{current_user.full_name}") %>
-                  <% end %>
-                </div>
-                <div class="name"><%= current_user.first_name -%></div>
-                <div class="drop_arrow"></div>
-              </a>
-              <ul class="dropdown-menu">
-                <% if false %>
-                  <li><%= link_to "Profile", current_user %></li>
-                  <li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
-                  <li class="divider"></li>
+        <% if user_signed_in? %>
+          <div class="dropdown" id="account_dropdown">
+            <a id="users_name" href="#account_dropdown" data-toggle="dropdown">
+              <div class="profile_pic">
+                <% if current_user.image %>
+                  <%= image_tag( current_user.image, size:"32x32", alt:"#{current_user.full_name}") %>
                 <% end %>
-                <li>
-                  <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
-                </li>
-              </ul>
-            </li>
-          <% else %>
-            <li class="login">
-              <a href="#myLoginModal" data-toggle="modal">Log in</a>
-            </li>
-          <% end %>
-        </ul>
+              </div>
+              <div class="name"><%= current_user.first_name -%></div>
+              <div class="drop_arrow"></div>
+            </a>
+            <ul class="dropdown-menu">
+              <% if false %>
+                <li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
+                <li class="divider"></li>
+              <% end %>
+              <li>
+                <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="login">
+            <a href="#myLoginModal" data-toggle="modal">Log in</a>
+          </div>
+        <% end %>
       </div>
     </div>
     
