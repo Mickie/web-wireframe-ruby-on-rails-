@@ -17,13 +17,17 @@
   </div>
   
   <div class="tailgate_content" id="tailgate_<%= @tailgate.slug -%>">
+    <% if admin_signed_in? || (user_signed_in? && current_user.id == @tailgate.user_id ) %>
+      <div id="destroy_fanzone"><%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure? No going back..." }, method: :delete, class: "fanzoButton" %></div>
+    <% end %>
+    
     <div class="row-fluid">
       <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
   
         <div class="join_fanzone">
           <div class="fanzoneState">
             <% if user_signed_in? %>
-              <% if current_user == @tailgate.user %>
+              <% if current_user.id == @tailgate.user_id %>
                 <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
               <% elsif current_user.following?(@tailgate) %>
                 <%= render partial: "partials/unfollow_button", locals: { tailgate: @tailgate } %>
@@ -35,9 +39,6 @@
             <% end %>
           </div>
           <div class="fan_count"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></div>
-          <% if admin_signed_in? %>
-            <div><%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure? No going back..." }, method: :delete, class: "fanzoButton" %></div>
-          <% end %>
         </div>
         
         <div class="banner_content">
