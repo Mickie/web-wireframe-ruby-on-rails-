@@ -199,23 +199,4 @@ describe PostsController do
     end
   end
 
-  describe "getTailgateBitly" do
-    it "should return cached value" do
-      @tailgate.bitly = "http://bitly"
-      subject.getTailgateBitly(@tailgate).should eq(@tailgate.bitly)
-    end
-    
-    it "should call bitly to get value if not cached, then cache it" do
-      theStubClient = double(Bitly::V3::Client)
-      Bitly.stub(:new).and_return(theStubClient)
-      theResponse = double(Bitly::V3::Url)
-      theResponse.stub(:short_url).and_return("http://bit.ly/foo")
-      
-      theStubClient.should_receive(:shorten).and_return(theResponse)
-      subject.getTailgateBitly(@tailgate).should eq("http://bit.ly/foo")
-      @tailgate.bitly.should eq("http://bit.ly/foo") 
-    end 
-  end
-
-
 end

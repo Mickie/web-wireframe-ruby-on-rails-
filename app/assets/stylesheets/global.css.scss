@@ -4,8 +4,8 @@
 body
 {
   padding:0px 20px 40px 20px;
-  background-color: $background;
-  font-family: 'Open Sans', sans-serif;  
+  background-color: $backgroundColor;
+  font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5em;
   min-height: 750px;
@@ -13,17 +13,18 @@ body
 
 h1 
 {
-  color: $h1;
+  color: $header1Color;
 }
 
 h2, h3
 {
-  color: $h2-3;
+  color: $header2Color;
 }
 
 a
 {
   color: $linkColor;
+  text-decoration: none;
   
   &:hover
   {

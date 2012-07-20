@@ -1,0 +1,10 @@
+<%= @post.user.full_name -%> just posted on your fanzone, <%= @post.tailgate.name %>
+===============================================
+They said:
+ 
+<%= @post.content %>
+ 
+To reply, just follow this link: <%= getTailgateBitly(@post.tailgate) %>
+ 
+Thanks!
+  The Fanzo Team

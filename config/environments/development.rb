@@ -17,19 +17,20 @@ FanzoSite::Application.configure do
   #config.action_mailer.raise_delivery_errors = false
   
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'staging.fanzo.co' }
   config.action_mailer.delivery_method = :smtp
   # change to false to prevent email from being sent during development
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"  
   config.action_mailer.smtp_settings = {
-    address: "smtpout.secureserver.net",
-    port: 80,
-    domain: "fanzo.me",
-    authentication: "plain",
     user_name: ENV["FANZO_EMAIL_ACCOUNT"],
-    password: ENV["FANZO_EMAIL_PASSWORD"]
+    password: ENV["FANZO_EMAIL_PASSWORD"],
+    domain: "fanzo.me",
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: "plain",
+    enable_starttls_auto: true
   }
 
   # Print deprecation notices to the Rails logger

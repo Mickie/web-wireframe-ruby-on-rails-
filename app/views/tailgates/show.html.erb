@@ -8,7 +8,7 @@
   <meta property="og:url"    content="<%= tailgate_url(@tailgate) -%>" /> 
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
   <meta property="og:description"  content="<%= @tailgate.description ? @tailgate.description : "A fanzone about the #{@tailgate.team.name} #{@tailgate.team.sport.name} Team."%>" /> 
-  <meta property="og:image"  content="<%= @tailgate.team.getLargeLogoBitly -%>" />    
+  <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />    
 <% end %>
 
 <div id="tailgate_show">

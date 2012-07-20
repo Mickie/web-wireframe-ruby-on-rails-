@@ -51,4 +51,40 @@ module ApplicationHelper
       "<a href='#{a}' target='_blank'>#{a}</a>"
     }
   end
+  
+  def getTailgateBitly( aTailgate )
+    if aTailgate.bitly && aTailgate.bitly.length > 0
+      return aTailgate.bitly
+    end
+
+    theTailgateUrl = tailgate_url(aTailgate)
+    theBitly = getBitlyForUrl(theTailgateUrl)
+    
+    if (theBitly && theBitly.length > 0)
+      aTailgate.bitly = theBitly
+      aTailgate.save
+      return aTailgate.bitly
+    else
+      return theTailgateUrl
+    end
+  end
+  
+  def getLargeLogoBitly( aTeam )
+    if (aTeam.large_logo_bitly && aTeam.large_logo_bitly.length > 0)
+      return aTeam.large_logo_bitly
+    end
+    
+    theLogoPath = logoPath(aTeam.slug, :large)
+    theBitly = getBitlyForUrl(theLogoPath)
+    
+    if (theBitly && theBitly.length > 0)
+      aTeam.large_logo_bitly = theBitly
+      aTeam.save
+      return aTeam.large_logo_bitly
+    else
+      return theLogoPath
+    end
+  end
+  
+  
 end

@@ -1,10 +1,15 @@
 @import "bootstrap/variables";
 
-$h1: #000066;
-$h2-3: #000099;
+$header1Color: black;
+$header2Color: black;
+
+$textColor: black;
+$lightTextColor: #999999;
+$ownerText: white;
+$linkColor: #DF3507;
 
 $borderColor: #CCCCCC;
-$background: #F0F0F0;
+$backgroundColor: #F0F0F0;
 
 $dropArrow: white;
 
@@ -32,10 +37,6 @@ $fanzoneLightBorder: #EEEEEE;
 $fanzoneHeaderText: #666666;
 $fanzoneBannerLogoBackground: white;
 $fanzoneContentBackground: white;
-
-$lightTextColor: #999999;
-$ownerText: white;
-$linkColor: #DF3507;
 
 $selectedBorder: #3366CC;
 

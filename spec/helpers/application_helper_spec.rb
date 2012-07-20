@@ -33,4 +33,52 @@ describe ApplicationHelper do
     end
 
   end
+  
+  describe "#getTailgateBitly" do
+    let(:tailgate) { 
+      mock_geocoding! 
+      FactoryGirl.create( :tailgate ) 
+    }
+    
+    it "should return cached value" do
+      tailgate.bitly = "http://bitly"
+      helper.getTailgateBitly(tailgate).should eq(tailgate.bitly)
+    end
+    
+    it "should call bitly to get value if not cached, then cache it" do
+      theStubClient = double(Bitly::V3::Client)
+      Bitly.stub(:new).and_return(theStubClient)
+      theResponse = double(Bitly::V3::Url)
+      theResponse.stub(:short_url).and_return("http://bit.ly/foo")
+      
+      theStubClient.should_receive(:shorten).and_return(theResponse)
+      helper.getTailgateBitly(tailgate).should eq("http://bit.ly/foo")
+      tailgate.bitly.should eq("http://bit.ly/foo") 
+    end 
+  end
+
+  describe "#getLargeLogoBitly" do
+    let(:team) {
+      mock_geocoding! 
+      FactoryGirl.create(:team) 
+    }
+    
+    it "should return cached value" do
+      team.large_logo_bitly = "http://bitly"
+      helper.getLargeLogoBitly(team).should eq(team.large_logo_bitly)
+    end
+    
+    it "should call bitly to get value if not cached, then cache it" do
+      theStubClient = double(Bitly::V3::Client)
+      Bitly.stub(:new).and_return(theStubClient)
+      theResponse = double(Bitly::V3::Url)
+      theResponse.stub(:short_url).and_return("http://bit.ly/foo")
+      
+      theStubClient.should_receive(:shorten).and_return(theResponse)
+      helper.getLargeLogoBitly(team).should eq("http://bit.ly/foo")
+      team.large_logo_bitly.should eq("http://bit.ly/foo") 
+    end 
+  end
+  
+  
 end

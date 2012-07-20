@@ -22,6 +22,7 @@ gem 'friendly_id'
 gem 'bitly'
 gem 'browser'
 gem 'newrelic_rpm'
+gem 'roadie'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

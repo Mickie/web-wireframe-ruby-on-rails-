@@ -55,15 +55,31 @@ FanzoSite::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += [ 'users/show.js', 'tailgates.js', 'static_pages/home.js', 'tailgates/new.js', 'tailgates/show.js', 'mobile.css' ]
+  config.assets.precompile += [ 'users/show.js', 
+                                'tailgates.js', 
+                                'static_pages/home.js', 
+                                'tailgates/new.js', 
+                                'tailgates/show.js', 
+                                'mobile.css',
+                                'email.css' ]
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'fanzo.me' }
+  config.action_mailer.default_url_options = { :host => 'www.fanzo.me' }
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"  
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    user_name: ENV["FANZO_EMAIL_ACCOUNT"],
+    password: ENV["FANZO_EMAIL_PASSWORD"],
+    domain: "fanzo.me",
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
+    
 
   # Enable threaded mode
   # config.threadsafe!

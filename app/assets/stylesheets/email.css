@@ -1,0 +1,13 @@
+/*
+ * Styles for emails, leveraging the Roadie Gem
+ *
+ *= require_self
+ *= require_tree ./emails
+ *  
+ */
+
+p, h1, h2, h3
+{
+  margin:0px;
+  padding:0px;
+}

@@ -50,6 +50,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        UserMailer.new_fanzone_post(@post).deliver
+        
         format.html { redirect_to @tailgate, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
         format.js
@@ -145,17 +147,6 @@ class PostsController < ApplicationController
     end
   end
   
-  def getTailgateBitly(aTailgate)
-    if aTailgate.bitly && aTailgate.bitly.length > 0
-      return aTailgate.bitly
-    end
-
-    aTailgate.bitly = getBitlyForUrl(tailgate_url(aTailgate))
-    aTailgate.save
-    
-    return aTailgate.bitly
-  end
-  
   def sendToSocialNetworks( aPost )
     if (aPost.twitter_flag)
       sendToTwitter(aPost)
@@ -179,7 +170,7 @@ class PostsController < ApplicationController
       oauth_token_secret: current_user.twitter_user_secret
     )
     
-    theText = "#{aPost.shortened_content} #{getTailgateBitly(aPost.tailgate)}"
+    theText = "#{aPost.shortened_content} #{ getTailgateBitly(aPost.tailgate) }"
 
     begin
       if aPost.twitter_retweet_id && !aPost.twitter_retweet_id.empty?
@@ -208,7 +199,7 @@ class PostsController < ApplicationController
     
     begin
       theLink = getTailgateBitly(aPost.tailgate)
-      thePicture = aPost.tailgate.team.getLargeLogoBitly
+      thePicture = getLargeLogoBitly(aPost.tailgate.team)
       
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
                                                             link: theLink,

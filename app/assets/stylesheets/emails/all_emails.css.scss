@@ -1,0 +1,44 @@
+@import "partials/colors";
+
+body
+{
+  color: $textColor;
+}
+
+a
+{
+  color: $linkColor;
+  text-decoration: none;
+  
+  &:hover
+  {
+    color: $linkColor;
+  }
+}
+
+p
+{
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.header1
+{
+  font-size: 20px;
+  font-weight: bold;
+  color: $header1Color;
+}
+
+.header2
+{
+  font-size: 16px;
+  font-weight: bold;
+  color: $header2Color;
+}
+
+.header3
+{
+  font-size: 14px;
+  font-weight: bold;
+  color: $header2Color;
+}
