@@ -4,14 +4,15 @@
       <h2>Edit Your Fanzo Account</h2>
     </div>
   </div>
-  <%= form_for(current_user, :url => user_settings_update_path, :html => { :method => :put }) do |f| %>
+  <%= form_for(@user, :url => user_settings_update_path, :html => { :method => :put }) do |f| %>
     <div class="row-fluid">
       <div class="span7 registration_settings">
         <h3>Registration Information</h3>
-        <h4><%= flash[:notice] %></h4>
-        <% unless current_user.errors.empty? %>
+        <% unless @user.errors.empty? %>
           <h4>There were some problems with your changes:</h4>
-          <%= current_user.errors.full_messages.map { |msg| content_tag(:p, msg) }.join %>
+          <ul>
+            <%= raw @user.errors.full_messages.map { |msg| content_tag(:li, msg) }.join %>
+          </ul>
         <% end %>
         
         <%= f.hidden_field :id %>
@@ -29,28 +30,28 @@
         <div class="connection">
           <%= link_to "Connect To Facebook", omniauth_authorize_path(User, 'facebook'), 
                       id:"facebook-login-button", class:"zocial facebook" %>
-          <% if user_signed_in? && current_user.facebook_user_id %>
+          <% if @user.facebook_user_id %>
             <span class="connected">Already Connected</span>
           <% end %>                      
         </div>
         <div class="connection">
           <%= link_to "Connect To Twitter", omniauth_authorize_path(User, 'twitter'), 
                       id:"connect_twitter_link", class:"zocial twitter" %>
-          <% if user_signed_in? && current_user.twitter_user_id %>
+          <% if @user.twitter_user_id %>
             <span class="connected">Already Connected</span>
           <% end %>                      
         </div>
         <div class="connection">
           <%= link_to "Connect To Instagram", omniauth_authorize_path(User, 'instagram'), 
                       id: "sign-in-with-instagram", class:"zocial instagram" %>
-          <% if user_signed_in? && current_user.instagram_user_id %>
+          <% if @user.instagram_user_id %>
             <span class="connected">Already Connected</span>
           <% end %>                      
         </div>
         <div class="connection">
           <%= link_to "Connect To Foursquare", omniauth_authorize_path(User, 'foursquare'), 
                       id:"foursquare-login-button", class:"zocial foursquare" %>
-          <% if user_signed_in? && current_user.foursquare_user_id %>
+          <% if @user.foursquare_user_id %>
             <span class="connected">Already Connected</span>
           <% end %>                      
         </div>

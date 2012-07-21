@@ -17,6 +17,7 @@
     <%= csrf_meta_tags %>
     <%= yield :opengraph_meta_tags %>
     <%= render 'layouts/shim' %>
+    <%= favicon_link_tag %>
 	</head>
 	<body>
     <div id="fb-root"></div>
@@ -26,6 +27,25 @@
       </div>
       
       <div id="frameContent">
+        <% if flash[:notice] || flash[:error] %>
+          <div id="flash_alerts">
+            <% if flash[:notice] %>
+              <div class="alert alert-success notice">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Sweet!</h4>
+                <%= flash[:notice] %>
+              </div>
+            <% end %>
+            <% if flash[:error] %>
+              <div class="alert alert-error error">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Woops!</h4>
+                <%= flash[:error] %>
+              </div>
+            <% end %>
+          </div>  
+        <% end %>
+
         <%= yield %>
       </div>    
 		</div>

@@ -102,7 +102,7 @@ class TailgatesController < ApplicationController
 
     respond_to do |format|
       if (@tailgate.user_id != current_user.id)
-        format.html { render action: "new", notice: 'Cannot create a tailgate for another user.' }
+        format.html { render action: "new", error: 'Cannot create a tailgate for another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
         format.js { "alert('Cannot create a tailgate for another user');"}
       elsif @tailgate.save
@@ -124,7 +124,7 @@ class TailgatesController < ApplicationController
 
     respond_to do |format|
       if (@tailgate.user_id != current_user.id)
-        format.html { redirect_to user_path(current_user), notice: 'Cannot update a tailgate owned by another user.' }
+        format.html { redirect_to user_path(current_user), error: 'Cannot update a tailgate owned by another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
       elsif @tailgate.update_attributes(params[:tailgate])
         format.html { redirect_to @tailgate, notice: 'Tailgate was successfully updated.' }
@@ -147,7 +147,7 @@ class TailgatesController < ApplicationController
     
     respond_to do |format|
       if (@tailgate.user_id != current_user.id && !admin_signed_in?)
-        format.html { redirect_to root_path, notice: 'Cannot delete a tailgate owned by another user.' }
+        format.html { redirect_to root_path, error: 'Cannot delete a tailgate owned by another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
       else
         format.html { redirect_to tailgates_url }

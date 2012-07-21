@@ -1,7 +1,31 @@
 @import "partials/colors";
 
-div#frameContent
+div#page_content
 {
-  padding-top: 40px;
-  margin-left: 225px;
+  position:relative;
+  
+  div#frameContent
+  {
+    padding-top: 40px;
+    margin-left: 225px;
+
+    div#flash_alerts
+    {
+      display:none;
+      width: 100%;
+      text-align: center;
+      z-index: 100;
+      margin-left: 15px;
+      
+      .notice
+      {
+      }
+      
+      .error
+      {
+      }
+    }
+
+  }
 }
+
