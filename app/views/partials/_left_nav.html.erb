@@ -25,10 +25,10 @@
             <ul class="dropdown-menu">
               <% if false %>
                 <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
-                <li class="divider"></li>
               <% end %>
               <li>
+                <li><%= link_to "Settings", user_settings_edit_path %></li>
+                <li class="divider"></li>
                 <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
               </li>
             </ul>

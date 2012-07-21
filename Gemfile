@@ -23,6 +23,7 @@ gem 'bitly'
 gem 'browser'
 gem 'newrelic_rpm'
 gem 'roadie'
+gem 'bitfields'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

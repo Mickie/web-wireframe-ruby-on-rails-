@@ -1,7 +1,5 @@
 FanzoSite::Application.routes.draw do
 
-  resources :topics
-
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
@@ -16,6 +14,8 @@ FanzoSite::Application.routes.draw do
     resources :user_teams, only: [ :create, :destroy ] 
     resources :user_locations, only: [ :create, :destroy ]
   end
+  get "user_settings/edit"
+  put "user_settings/update"
 
   resources :tailgates do
     get 'search', on: :collection
@@ -63,6 +63,7 @@ FanzoSite::Application.routes.draw do
   resources :events
   resources :game_watches
   resources :quick_tweets
+  resources :topics
   resources :people
   resources :tailgate_venues
   resources :athlete, path: :people

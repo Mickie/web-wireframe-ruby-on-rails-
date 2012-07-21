@@ -8,7 +8,7 @@
           <% if current_user.mine_or_following?( aTailgate ) %>
             <div class="myFanzone" style="border-bottom-color: <%= aTailgate.light_color %>;"></div>
           <% else %>
-            <%= render partial: "partials/follow_button", locals: { tailgate: aTailgate } %>
+            <%= render partial: "partials/buttons/follow_button", locals: { tailgate: aTailgate } %>
           <% end %>
         <% else %>
           <a href="#myLoginModal" data-toggle="modal" class="follow_button fanzoButton">Follow</a>

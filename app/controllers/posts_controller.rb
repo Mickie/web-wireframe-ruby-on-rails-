@@ -50,7 +50,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        UserMailer.new_fanzone_post(@post).deliver
+        
+        UserMailer.new_fanzone_post(@post).deliver unless @post.tailgate.user.no_email_on_posts
         
         format.html { redirect_to @tailgate, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }

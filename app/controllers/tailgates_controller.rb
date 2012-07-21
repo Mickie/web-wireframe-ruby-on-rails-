@@ -15,7 +15,7 @@ class TailgatesController < ApplicationController
   # GET /tailgates
   # GET /tailgates.json
   def index
-    if ( params[:filter] == "user" && current_user )
+    if ( params[:filter] == "user" && user_signed_in? )
       @tailgates = current_user.tailgates.includes(:team, :posts => :user)
       @tailgates += current_user.followed_tailgates.includes(:team, :posts => :user)
     else

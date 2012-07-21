@@ -44,7 +44,7 @@ div#myCreateFanzoneModal
         border-bottom: $createFanzoneBottomBorder solid 1px;
         position:relative;
         
-        input, select
+        select
         {
           @include box-shadow(none);
           @include border-radius(0);

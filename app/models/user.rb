@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Bitfields
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -21,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :user_post_votes, inverse_of: :user, dependent: :delete_all
   has_many :user_comment_votes, inverse_of: :user, dependent: :delete_all
 
+  bitfield :email_bit_flags, 1 => :no_email_on_posts, 2 => :no_email_on_comments, 4 => :no_email_newsletter
+
   attr_accessible :email,
                   :first_name,
                   :last_name,
@@ -38,7 +42,10 @@ class User < ActiveRecord::Base
                   :foursquare_access_token,
                   :instagram_user_id,
                   :instagram_user_token,
-                  :instagram_username
+                  :instagram_username,
+                  :no_email_on_posts,
+                  :no_email_on_comments,
+                  :no_email_newsletter
                   
   def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)
   

@@ -30,9 +30,9 @@
               <% if current_user.id == @tailgate.user_id %>
                 <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
               <% elsif current_user.following?(@tailgate) %>
-                <%= render partial: "partials/unfollow_button", locals: { tailgate: @tailgate } %>
+                <%= render partial: "partials/buttons/unfollow_button", locals: { tailgate: @tailgate } %>
               <% else %>
-                <%= render partial: "partials/follow_button", locals: { tailgate: @tailgate } %>
+                <%= render partial: "partials/buttons/follow_button", locals: { tailgate: @tailgate } %>
               <% end %>
             <% else %>
               <a href="#myLoginModal" data-toggle="modal" class="fanzoButton follow_button">Follow</a>
