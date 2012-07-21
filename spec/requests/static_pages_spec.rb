@@ -12,7 +12,7 @@ describe "StaticPages" do
       response.status.should be(200)
     end
     
-    it { should have_selector('title', text: 'FANZO - Where Fans Rule!') }
+    it { should have_selector('title', text: 'Fanzo - Where Fans Rule!') }
     it { should have_selector('p.tagline', text: 'where fans rule') }
     
     describe "for guest" do

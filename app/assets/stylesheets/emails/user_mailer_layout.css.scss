@@ -1,7 +1,7 @@
 @import "bootstrap/mixins";
 @import "partials/colors";
 
-#new_fanzone_post
+#user_mailer_layout
 {
   width: 540px;
   margin: 0px auto;
@@ -103,13 +103,13 @@
             width: 32px;
           }
     
-          .notification_content
+          .user_name
           {
             width: 288px;
             padding: 10px;
           }
           
-          .post_content
+          .email_content
           {
             padding: 10px;
           }

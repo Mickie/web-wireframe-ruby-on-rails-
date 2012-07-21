@@ -125,8 +125,8 @@ function loadData(aPath, aNewActiveSelector)
   }
   
   InfiniteScroller.get().stop();
-  $("body").scrollTop(0);
   $("#frameContent").html("<div style='height:700px;'><h1 style='text-align:center'><img src='/assets/loading.gif' style='margin:20px'/>Loading</h1></div>");
+  $("body").scrollTop(0);
   
   
   $.ajax({

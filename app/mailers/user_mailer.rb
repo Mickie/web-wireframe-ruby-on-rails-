@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
   add_template_helper( ApplicationHelper )
 
-  default from: "notifications@fanzo.me", css: :email
+  default from: "Fanzo <notifications@fanzo.me>", css: :email
   
   def new_fanzone_post( aPost )
     @post = aPost

@@ -207,7 +207,7 @@ class PostsController < ApplicationController
                                                             name: aPost.tailgate.name,
                                                             picture: thePicture,
                                                             description: aPost.tailgate.description,
-                                                            caption: "A FANZO.me fanzone" })
+                                                            caption: "A Fanzo.me fanzone" })
 
       aPost.facebook_id = theResult["id"]
     rescue Exception => e

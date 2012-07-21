@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <div id="user_mailer_layout" align="center">
+      <table id="topper">
+        <tbody>
+          <tr>
+            <td class="preview" valign="top">
+              <%= yield :preview %>
+            </td>
+            <td class="email_link" valign="top">
+              <small>Email not displaying correctly?</small>
+              <%= yield :view_email_link %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table id="header">
+        <tbody>
+          <tr>
+            <td class="logo">
+                <%= link_to image_tag( attachments['fanzo-logo.png'].url, size:"200x50", alt:"Fanzo.me" ), root_url, title:"Fanzo.me" %>
+                <div class="tagline header2">where fans rule</div>
+            </td>
+            <td class="alert_text">
+              <div class="header1"><%= yield :main_header %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table id="content">
+        <tbody>
+          <tr class="main_body">
+            <td class="left_column">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="header3">Fanzo Tip</div>
+                      <%= yield :fanzo_tip %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="header3">Fun Fan Fact</div>
+                      <%= yield :fanzo_fun_fact %>
+                    </td>
+                  </tr>
+<!--                  <tr>
+                    <td>
+                      <div class="header3">Submit your own fan fact</div>
+                      <p>Go here</p>
+                    </td>
+                </tr> -->
+                </tbody>
+              </table>            
+            </td>
+            <td class="main_column" valign="top">
+              <table class="main_content">
+                <tbody>
+                  <tr>
+                    <td colspan="2">
+                      <div class="header2"><%= yield :content_header %></div>
+                   </td>
+                  </tr>
+                  <tr>
+                    <td class="profile_pic" valign="top">
+                      <%= yield :profile_pic %>
+                    </td>
+                    <td class="user_name">
+                      <div class="header3"><%= yield :user_name -%></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                      <p class="email_content"><%= yield :content -%></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <p class="menu">
+                        <%= yield :menu %>
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>            
+            </td>
+          </tr>
+        </tbody>
+        <tfoot class="footer">
+          <tr>
+            <td>
+              <p><small>Copyright &copy; 2012 Fanzo<br/>All Rights Reserved</small></p>
+            </td>
+            <td>
+              <p><small>Don't want these emails any more?  <%= link_to "Unsubscribe here", user_settings_edit_url %>.</small></p>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </body>
+</html>

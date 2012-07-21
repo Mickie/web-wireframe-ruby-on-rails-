@@ -1,7 +1,7 @@
 <%= provide(:title, "Connect Instagram To My Profile" ) %>
 <p><%= @user.email if @user.email %></p>
 
-<h1>To like or comment on Instagram photos, you need to connect your FANZO account to Instagram</h1>
+<h1>To like or comment on Instagram photos, you need to connect your Fanzo account to Instagram</h1>
 
 <div>
   <%= link_to "Connect to Instagram", omniauth_authorize_path(User, 'instagram'), id: "sign-in-with-instagram", class:"zocial instagram" %>

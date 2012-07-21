@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head <%= yield(:head_open_graph) if content_for?(:head_open_graph) -%>>
-		<title><%= content_for?(:title) ? yield(:title) : "FANZO - Where Fans Rule!" %></title>
+		<title><%= content_for?(:title) ? yield(:title) : "Fanzo - Where Fans Rule!" %></title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
 		<% if browser.mobile? %>
