@@ -1,0 +1,40 @@
+<% provide :preview do %>
+  <small>Score! Your post in the <%= @comment.post.tailgate.name -%> fanzone has a new comment!</small>
+<% end %>
+
+<% provide :view_email_link do %>
+  <p><small><%= link_to "Visit the fanzone", getTailgateBitly(@comment.post.tailgate) %>.</small></p>
+<% end %>
+
+<%= provide :main_header, "New Comment Alert" %>
+
+<% provide :fanzo_tip do %>
+  <p>
+    When you create a fanzone, you can pick any topic that interests you.  
+    If you're topic has multiple words, surround them with a quote(&quot;) to find the best social media.
+  </p>
+  <p>Examples: <br/>&quot;Jim Brown&quot; <br/> &quot;Cover 2 Defense&quot;</p>
+<% end %>
+
+<% provide :fanzo_fun_fact do %>
+  <p>
+    Did you know that Texas A&amp;M trademarked the term, "12th Man"? They sued the Seattle Seahawks and won!
+    You can learn more at <a href="http://en.wikipedia.org/wiki/12th_man_(football)">Wikipedia</a>
+  </p>
+<% end %>
+
+<%= provide :content_header, "New Comment In #{ @comment.post.tailgate.name }" %>
+
+<% provide :profile_pic do %>
+  <%= image_tag( @comment.user.image, size:"32x32", alt:"#{@comment.user.full_name}" ) %>
+<% end %>
+
+<%= provide :user_name, @comment.user.full_name %>
+
+<% provide :content do %>
+  <%= raw handleNewlinesAndUrls(@comment.content) %>
+<% end %>
+
+<% provide :menu do %>
+  <%= link_to "Reply", getTailgateBitly(@comment.post.tailgate) %>
+<% end %>

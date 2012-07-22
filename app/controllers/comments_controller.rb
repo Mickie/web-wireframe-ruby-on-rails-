@@ -50,6 +50,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        
+        UserMailer.new_post_comment(@comment).deliver unless @comment.post.user.no_email_on_comments
+        
         format.html { redirect_to @post.tailgate, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
         format.js
