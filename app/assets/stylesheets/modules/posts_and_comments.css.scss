@@ -99,11 +99,6 @@
           {
             cursor:pointer;
             padding-left:5px;
-
-            &:hover
-            {
-              background: $backgroundColor;
-            }
             
             p
             {
@@ -156,6 +151,12 @@
         {
           margin-top:2px;
           cursor: pointer;
+          opacity: 0.5;
+          
+          &:hover
+          {
+            opacity: 1;
+          }
         }
         
         i.disabled
@@ -181,9 +182,8 @@
         {
           float: left;
           color: $lightTextColor;
-          font-weight: bold;
-          font-size: 14px;
           padding: 0px 10px;
+          margin-top: 1px;
         }
         
       }
@@ -207,6 +207,17 @@
         .comment_form
         {
           padding-left:42px;
+        
+          form
+          {
+            margin:0px;
+            
+            #comment_content
+            {
+              height: 32px;
+              margin:0px;
+            }
+          }
           
           .comment_submit
           {

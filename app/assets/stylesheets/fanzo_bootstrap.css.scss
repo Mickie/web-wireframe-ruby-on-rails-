@@ -1,5 +1,5 @@
 @import "bootstrap";
-
+@import "partials/colors";
 
 .modal-backdrop, .modal-backdrop.fade.in 
 {
@@ -16,6 +16,22 @@
   left:20%;
   margin:0px;
   @include border-radius(0);
+}
+
+.dropdown-menu 
+{
+  @include border-radius(0);
+  padding: 10px;
+
+  li 
+  {
+    line-height: 23px;
+    
+    &:hover
+    {
+      background: $backgroundColor;
+    }
+  }
 }
 
 select,

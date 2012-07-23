@@ -5,25 +5,20 @@ $(function()
 
 function initializePostAndComments()
 {
-  $("#posts #comment_content").live('keyup',submitComment);
+  $("#posts #new_comment").live('ajax:before',checkStatus);
   $(".vote_up i:not(.disabled)").live('click', submitVote);
   $(".vote_down i:not(.disabled)").live('click', submitDownVote);
 }
 
-function submitComment(e)
+function checkStatus(e)
 {
-  if (e.keyCode === 13 && !e.ctrlKey) 
+  if (!myTwitterView.isLoggedIn())
   {
-    if (myTwitterView.isLoggedIn())
-    {
-      $(e.target.form).submit();
-    }
-    else
-    {
-      myTwitterView.showFacebookModal();
-    }
+    myTwitterView.showFacebookModal();
     return false;
   }
+  
+  return true;
 }
 
 function submitVote(e)
