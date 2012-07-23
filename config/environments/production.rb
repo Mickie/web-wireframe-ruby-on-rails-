@@ -64,7 +64,7 @@ FanzoSite::Application.configure do
                                 'email.css' ]
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'www.fanzo.me' }
+  config.action_mailer.default_url_options = { :host => ENV["FANZO_WEB_HOST"] }
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
