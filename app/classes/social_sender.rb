@@ -41,6 +41,7 @@ class SocialSender
       aPost.twitter_id = theStatus.attrs['id_str']
     rescue Exception => e
       Rails.logger.warn "Error posting to twitter: #{aPost.content} => #{e.to_s}"
+      raise e
     end
 
   end
@@ -68,6 +69,7 @@ class SocialSender
       aPost.facebook_id = theResult["id"]
     rescue Exception => e
       Rails.logger.warn "Error posting to facebook #{aPost.content} => #{e.to_s}"
+      raise e
     end
   end
   
