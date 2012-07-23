@@ -7,6 +7,16 @@ $(function(){
   initializeNavigationWatchers();
 });
 
+function isFacebookCallbackHash( aHash )
+{
+  return ( aHash == "_=_" );
+}
+
+function getLeftNavElement( aHash )
+{
+  return $("#fanzo_navigation " + aHash + ' a');
+}
+
 function initializeFrameContent()
 {
   var theHash = "";
@@ -23,11 +33,17 @@ function initializeFrameContent()
   
   if(theHash.length > 0)
   {
-    var theLeftNavElement = $("#fanzo_navigation " + theHash + ' a');
-    if (theLeftNavElement.length > 0)
+    var theElement = [];
+
+    if (isFacebookCallbackHash( theHash ))
     {
-      theLeftNavElement.click();
-      theLeftNavElement.addClass('active');
+      window.location.hash = ""
+      return;
+    }
+    else if ( theElement = getLeftNavElement( theHash ) && theElement.length > 0)
+    {
+      theElement.click();
+      theElement.addClass('active');
     }
     else
     {
@@ -54,7 +70,7 @@ function navToAllFanzones()
 function getIdFromHash( aHash )
 {
   var thePieces = aHash.split("_");
-  if (thePieces[0] == "#nav")
+  if (thePieces[0] == "#nav" || thePieces[0] == "#tailgate")
   {
     return thePieces[thePieces.length-1];
   }

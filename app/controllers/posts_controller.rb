@@ -1,8 +1,6 @@
 require 'social_sender' 
 
 class PostsController < ApplicationController
-  include ApplicationHelper
-
   before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy, :up_vote, :down_vote] 
   before_filter :load_tailgate
   

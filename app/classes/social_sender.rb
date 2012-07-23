@@ -1,4 +1,5 @@
 class SocialSender
+  include ApplicationHelper
 
   def sharePost( aPostId )
     thePost = Post.includes(:tailgate, :user).find_by_id(aPostId)
