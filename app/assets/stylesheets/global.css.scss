@@ -5,6 +5,9 @@ body
 {
   padding:0px 20px 40px 20px;
   background-color: $backgroundColor;
+  background-image: asset-url("fanzo-background-horn.png", image);
+  background-repeat: no-repeat;
+  background-position: 0px 90px;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5em;
