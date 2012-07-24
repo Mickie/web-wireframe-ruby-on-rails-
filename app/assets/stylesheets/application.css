@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery.ui.autocomplete 
  *= require fanzo_bootstrap
+ *= require fanzo_jquery_ui
  *= require_tree ./lib
  *= require global
  *= require scaffolds 

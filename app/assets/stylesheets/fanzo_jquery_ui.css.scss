@@ -1,0 +1,21 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+.ui-corner-all
+{
+  @include border-radius(0px);  
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+{
+  background: $backgroundColor;
+  border-color: $borderColor;
+}
+
+.ui-menu
+{
+  padding: 10px;
+}
