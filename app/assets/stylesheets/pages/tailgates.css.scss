@@ -13,6 +13,7 @@ div#allTiles
 div#tailgate_show
 {
   margin-left: 15px;
+  @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
   
   #destroy_fanzone
   {
@@ -24,8 +25,6 @@ div#tailgate_show
   div.banner
   {
     background-color: black;
-    border: $fanzoneBorder solid 1px;
-    border-bottom-width: 0px;
     
     .join_fanzone
     {
@@ -48,6 +47,7 @@ div#tailgate_show
         float:left;
         margin-right: 10px;
         background-color: $fanzoneBannerLogoBackground;
+        border-top: $fanzoneBorder solid 1px;
         padding: 30px;
       }
       
@@ -84,8 +84,6 @@ div#tailgate_show
 
   div#fanzoneContent
   {
-    border: $fanzoneBorder solid 1px;
-    border-top-width: 0px;
     background-color: $fanzoneContentBackground;
     
     h4
@@ -100,7 +98,7 @@ div#tailgate_show
     div.rightColumn
     {
       float: left;
-      width: 33.1%;
+      width: 33.33%;
       border-left: $fanzoneBorder solid 1px;
       
       .venues
