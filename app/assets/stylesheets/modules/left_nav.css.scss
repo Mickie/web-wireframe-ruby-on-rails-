@@ -40,10 +40,10 @@
       
       .login
       {
-        padding: 8px;
+        padding-right: 10px;
       }
       
-      #users_name
+      .users_name
       {
         div
         {
@@ -95,6 +95,7 @@
     #logo 
     {
       color:white;
+      padding: 30px 0px 10px 0px;
       
       a
       {
@@ -103,7 +104,6 @@
         
         div
         {
-          padding: 30px 0px 10px 0px;
           
           .tagline
           {
