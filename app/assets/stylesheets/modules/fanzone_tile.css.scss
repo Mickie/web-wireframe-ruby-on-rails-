@@ -71,9 +71,12 @@ div.fanzoneTile
     }
     
   }
+  
 
   .content
   {
+    font-size: 11px;
+    line-height: 1.4em; 
     background: white;
     height:220px;
     border: 1px solid #ccc; 
@@ -105,11 +108,11 @@ div.fanzoneTile
     
     .stats
     {
-      padding: 0px 5px;
+      padding: 2px 5px;
       height: 20px;
       border-top: #F3F3F3 solid 1px;
       border-bottom: #F3F3F3 solid 1px;
-      font-size: 11px;
+      font-size: 10px;
       color: #888;
          
       .numFollowers
