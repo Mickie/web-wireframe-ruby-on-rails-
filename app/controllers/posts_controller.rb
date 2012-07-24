@@ -47,7 +47,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         
-        UserMailer.delay.new_fanzone_post(@post.id) unless @post.tailgate.user.no_email_on_posts
+        if current_user.id != @tailgate.user_id
+          UserMailer.delay.new_fanzone_post(@post.id) unless @tailgate.user.no_email_on_posts
+        end
+        
         SocialSender.new.delay.sharePost(@post.id)
         
         format.html { redirect_to @tailgate, notice: 'Post was successfully created.' }
