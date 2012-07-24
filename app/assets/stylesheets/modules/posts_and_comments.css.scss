@@ -164,6 +164,7 @@
           background-color: #CCCCCC;
           @include border-radius(25%);
           cursor: inherit;
+          opacity: 1;
         }
         
         form
