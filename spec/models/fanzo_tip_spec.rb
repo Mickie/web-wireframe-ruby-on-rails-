@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe FanzoTip do
   before do
-    mock_geocoding!
     @fanzoTip = FanzoTip.create(content:"content", name:"name")
   end
 

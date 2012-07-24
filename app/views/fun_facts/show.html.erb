@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @fun_fact.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @fun_fact.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_fun_fact_path(@fun_fact) %> |
+<%= link_to 'Back', fun_facts_path %>
