@@ -94,18 +94,3 @@ input, textarea, select, .uneditable-input
   @include box_sizing(border-box);
 }
 
-.field_with_errors 
-{
-  @extend .control-group;
-  @extend .error;
-}
-
-.field
-{
-  margin-bottom:20px;
-  label
-  {
-    font-weight:bold;
-  }
-}
-

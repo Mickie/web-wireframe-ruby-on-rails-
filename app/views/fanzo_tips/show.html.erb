@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @fanzo_tip.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @fanzo_tip.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_fanzo_tip_path(@fanzo_tip) %> |
+<%= link_to 'Back', fanzo_tips_path %>

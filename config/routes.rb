@@ -66,6 +66,8 @@ FanzoSite::Application.routes.draw do
   resources :topics
   resources :people
   resources :tailgate_venues
+  resources :fanzo_tips
+
   resources :athlete, path: :people
   resources :coach, path: :people
   resources :journalist, path: :people

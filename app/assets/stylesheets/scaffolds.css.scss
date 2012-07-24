@@ -1,1 +1,22 @@
-// intentionally left blank
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+.field_with_errors 
+{
+  @extend .control-group;
+  @extend .error;
+}
+
+.field
+{
+  margin: 0px 0px 20px 20px;
+  label
+  {
+    font-weight:bold;
+  }
+}
+
+.actions
+{
+  margin-left: 20px;
+}
