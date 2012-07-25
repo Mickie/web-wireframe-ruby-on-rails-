@@ -5,10 +5,12 @@
 {
   width: 540px;
   margin: 0px auto;
+  background-color: $backgroundColor;
   
   table
   {
     border-collapse:collapse;
+    background-color: $fanzoneContentBackground;
   }
   
   small
@@ -25,6 +27,7 @@
   #topper
   {
     width: 540px;
+    background-color: $backgroundColor;
   
     .preview
     {
@@ -41,7 +44,6 @@
   
   #header
   {
-    background-color: $backgroundColor;
     width: 538px;
     border: solid 1px $borderColor;
   
@@ -63,7 +65,6 @@
   #content
   {
     width: 538px;
-    background-color: $backgroundColor;
     border-left: solid 1px $borderColor;
     border-right: solid 1px $borderColor;
     border-bottom: solid 1px $borderColor;
