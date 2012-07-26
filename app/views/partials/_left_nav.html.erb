@@ -74,7 +74,7 @@
             <table>
               <tr>
                 <td class="team_logo"><i></i></td>
-                <td class="fanzone_name"><p>All Fanzones</p></td>
+                <td class="fanzone_name"><p>All Fanzones <span class="count">( <%= Tailgate.all.count -%> )</span></p></td>
               </tr>
             </table>
           </a>
@@ -89,18 +89,21 @@
             <table>
               <tr>
                 <td class="team_logo"><i></i></td>
-                <td class="fanzone_name"><p>My Fanzones</p></td>
+                <td class="fanzone_name">
+                  <p>My Fanzones 
+                    <% if user_signed_in? %>
+                      <span class="count">( <%= current_user.tailgates.count + current_user.followed_tailgates.count -%> )</span>
+                    <% end %>
+                  </p>
+                </td>
               </tr>
             </table>
           </a>
         </li>
     
         <% if user_signed_in? %>
-          <% current_user.tailgates.each do | aTailgate |%>
+          <% current_user.myFanzones[0..5].each do | aTailgate |%>
             <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
-          <% end %>
-          <% current_user.followed_tailgates.each do | aTailgate | %>
-            <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate }%>
           <% end %>
         <% end %>
     

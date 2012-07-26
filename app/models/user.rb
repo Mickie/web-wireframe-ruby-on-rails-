@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
   has_many :user_locations, inverse_of: :user, dependent: :destroy
   has_many :locations, through: :user_locations
   
-  has_many :tailgates, inverse_of: :user, dependent: :destroy
+  has_many :tailgates, inverse_of: :user, dependent: :destroy, order:"posts_updated_at DESC"
   
   has_many :tailgate_followers, inverse_of: :user, dependent: :delete_all
-  has_many :followed_tailgates, through: :tailgate_followers, source: :tailgate 
+  has_many :followed_tailgates, through: :tailgate_followers, source: :tailgate, order:"posts_updated_at DESC" 
   
   has_many :posts, inverse_of: :user, dependent: :destroy
   has_many :comments, inverse_of: :user, dependent: :destroy
@@ -267,6 +267,10 @@ class User < ActiveRecord::Base
 
   def unfollow!( aTailgate )
     tailgate_followers.find_by_tailgate_id( aTailgate.id ).destroy
+  end
+  
+  def myFanzones
+    tailgates.all + followed_tailgates.all
   end
 end
 

@@ -99,6 +99,21 @@ describe User do
     it { should be_mine_or_following( followed_tailgate ) }
     it { should be_mine_or_following( owned_tailgate ) }
     it { should_not be_mine_or_following( not_followed_or_owned_tailgate ) }
+
+    describe "myFanzones" do
+      it "should contain followed tailgates" do
+        @user.myFanzones.should include( followed_tailgate )
+      end      
+
+      it "should contain owned tailgates" do
+        owned_tailgate.save
+        @user.myFanzones.should include( owned_tailgate )
+      end      
+
+      it "should not contain not_followed_or_owned_tailgate" do
+        @user.myFanzones.should_not include( not_followed_or_owned_tailgate )
+      end      
+    end
     
   end
   
@@ -491,7 +506,6 @@ describe User do
     
   end
 
-  
   describe "can add a team" do
     before do
       mock_geocoding!
