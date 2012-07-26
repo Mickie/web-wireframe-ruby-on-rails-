@@ -13,7 +13,7 @@
         </div>
         <div class="span6 fanzoneFields">
           <p>Be as creative as you&apos;d like, it&apos;s your pad!</p>
-          <%= f.text_field :name, placeholder:"eg. Tom's Tennessee Tailgate" %>
+          <%= f.text_field :name, placeholder:"eg. Tom's Tennessee Tailgate", required: true %>
           <p>Add a description so people catch the drift...</p>
           <%= f.text_field :description, placeholder:"eg. Let's talk Vols Offense! QB calls, running game, it's all good!" %>
         </div>
@@ -35,7 +35,7 @@
           <%= label_tag(:league_id, "First, pick a league:") %>
           <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
           <%= f.label :team_id, "Then pick a team:" %>
-          <%= f.select(:team_id, options_for_select( aTailgate.team ? [aTailgate.team.name, aTailgate.team.id ] : [], aTailgate.team_id)) %>
+          <%= f.select(:team_id, options_for_select( aTailgate.team ? [aTailgate.team.name, aTailgate.team.id ] : [], aTailgate.team_id), {include_blank:true}, {required:true}) %>
         </div>
         <div class="span3 fanzoneExamples">
           <p>Show your support for your team, and make it easier for people to find your fanzone.</p>
@@ -50,7 +50,7 @@
           <%= label_tag(:topic_tags, "Predefined topics:") %>
           <%= select_tag(:topic_data, options_for_select(Topic.visible.collect {|p| [ p.name, { hash_tags:p.hash_tags, not_tags:p.not_tags } ] }, aTailgate.topic_tags ), { prompt:"Pick a topic (optional)"} ) %>
           <p>Customize the topics to personalize your fanzone:</p>
-          <%= f.text_field :topic_tags, placeholder:'eg. #DCC, "Cowboy Cheerleaders"' %>
+          <%= f.text_field :topic_tags, placeholder:'eg. #DCC, "Cowboy Cheerleaders"', required: true %>
           <%= f.hidden_field :not_tags %>
           <p>Separate multiple topics with a comma like: #tag1, "two words"</p>
         </div>

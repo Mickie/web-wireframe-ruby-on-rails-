@@ -17,6 +17,7 @@ class Tailgate < ActiveRecord::Base
   has_many :followers, through: :tailgate_followers, source: :user
   
   validates :name, presence:true
+  validates :team_id, presence:true
   validates :user_id, presence:true
   validates :topic_tags, presence:true
 
