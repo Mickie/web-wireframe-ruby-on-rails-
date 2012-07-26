@@ -1,4 +1,4 @@
 $("#fanzone_nav ul").append("<%= escape_javascript(render partial:'partials/left_nav_tailgate', locals: { aTailgate: @tailgate_follower.tailgate }) %>");
 $("#fanzone_nav #nav_<%= @tailgate_follower.tailgate.slug -%>").addClass('active');
-$("#tailgate_<%= @tailgate_follower.tailgate.slug -%> .fanzoneState").html("<div class='myFanzone'></div>");
+$("#tailgate_<%= @tailgate_follower.tailgate.slug -%> .fanzoneState").html("<div class='myFanzone' style='border-bottom-color: <%= aTailgate.light_color %>;'></div>");
 $("#tailgate_<%= @tailgate_follower.tailgate.slug -%> .fan_count").html("<%= pluralize(@tailgate_follower.tailgate.followers.count + 1, "Fan") -%>");
