@@ -15,33 +15,23 @@ div#tailgate_show
   margin-left: 15px;
   @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
   
-  #destroy_fanzone
-  {
-    position:absolute;
-    top: 161px;
-    right: 21px;
-  }
   
   div.banner
   {
     background-color: black;
+    position:relative;
     
     .join_fanzone
     {
-      .fan_count
-      {
-        width:56px;
-        padding:10px;
-        clear:both;
-        color:white;
-        text-align:center;
-      }
+      top: -8px;
     }
 
     div.banner_content
     {
+      position:relative;
       height: 140px;
-      
+      color: $fanzoneBannerTextColor;
+
       div.team_logo
       {
         float:left;
@@ -53,28 +43,45 @@ div#tailgate_show
       
       div.fanzone_details
       {
-        padding:10px;
+        padding-left:10px;
+        
+        .official
+        {
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: $officialTextColor;
+          height: 15px;
+          width:100%;
+          @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
+        }
 
         h1
         {
-          color:white;
+          color: $fanzoneBannerTextColor;
           padding: 5px;
+          font-weight: normal;
         }
         
-        p.description
+        .description
         {
-          color: white;
           font-size: 14px;
         }
         
-        p.owner
+        .owner
         {
-          color: $ownerText;
+          position:absolute;
+          bottom: 0px;
+          right: 0px;
           
-          span.fan_count
+          p
           {
-            color: white;
-            text-transform: uppercase;
+            margin:0px;
+            padding: 0px 10px;
+          }
+          
+          .owner_details
+          {
+            float:left;
           }
         }
       }
@@ -100,10 +107,35 @@ div#tailgate_show
       float: left;
       width: 33.2%;
       border-left: $fanzoneBorder solid 1px;
+
+      h4
+      {
+        background-color: inherit;
+        color: $fanzoneBannerTextColor;
+      }
+      
+      .fans
+      {
+        .fan_pics
+        {
+          .profile_pic
+          {
+            margin-top: 5px;
+            margin-left: 5px;
+
+            &:last-child
+            {
+              margin-bottom: 5px;
+            }
+          }
+          
+        }
+      }
       
       .venues
       {
-       
+        clear: both;
+        
         .locationLabel
         {
           padding:10px;

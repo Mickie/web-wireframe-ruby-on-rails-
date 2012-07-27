@@ -17,16 +17,13 @@
   </div>
   
   <div class="tailgate_content" id="tailgate_<%= @tailgate.slug -%>">
-    <% if admin_signed_in? || (user_signed_in? && current_user.id == @tailgate.user_id ) %>
-      <div id="destroy_fanzone"><%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure? No going back..." }, method: :delete, class: "fanzoButton" %></div>
-    <% end %>
     
     <div class="row-fluid">
       <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
   
         <div class="fanzoneState">
-          <% if user_signed_in? && current_user.mine?( aTailgate ) %>
-            <div class="myFanzone" style="border-bottom-color: <%= @tailgate.light_color %>;"></div>
+          <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
+            <div id="destroy_fanzone" class="join_fanzone"><%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure? No going back..." }, method: :delete, class: "fanzoButton" %></div>
           <% else %>
             <div class="join_fanzone">
               <% if user_signed_in? %>
@@ -40,7 +37,6 @@
               <% end %>
             </div>
           <% end %>
-          <div class="fan_count"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></div>
         </div>
         
         <div class="banner_content">
@@ -48,14 +44,26 @@
             <%= teamLogo(@tailgate.team, :medium) %>      
           </div>
           <div class="fanzone_details">
+            <% if @tailgate.official %>
+              <div class="official">
+                <span>Official</span>
+              </div>
+            <% end %>
             <h1><%= @tailgate.name %></h1>
             <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) if @tailgate.description %></p>
-            <p class="owner">
-              Created by <%= @tailgate.user.full_name %>
-              <% if @tailgate.posts.any? %>
-                : Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago
+            <div class="owner">
+              <% if @tailgate.user.image %>
+                <div class="profile_pic">
+                  <%= image_tag( @tailgate.user.image, size:"32x32" ) %>
+                </div>
               <% end %>
-            </p>
+              <div class="owner_details">
+                <p>Created by <%= @tailgate.user.full_name %></p>
+                <% if @tailgate.posts.any? %>
+                  <p>Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago</p>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -93,9 +101,28 @@
       </div>
 
       <div class="rightColumn">
+        <div class="fans">
+          <div class="fan_count">
+            <h4 style="background-color: <%= @tailgate.color %>"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></h4>
+          </div>
+          <div class="fan_pics">
+            <% if @tailgate.user.image %>
+              <div class="profile_pic">
+                <%= image_tag( @tailgate.user.image, size:"32x32" ) %>
+              </div>
+            <% end %>
+            <% @tailgate.followers.limit(12).each do |aTailgateFollower| %>
+              <% if aTailgateFollower.image %>
+                <div class="profile_pic">
+                  <%= image_tag( aTailgateFollower.image, size:"32x32" ) %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
         <div class="venues">
           <div class="venueHeader">
-            <h4>Local <%= @tailgate.team.mascot -%> Venues</h4>
+            <h4 style="background-color: <%= @tailgate.color %>">Local <%= @tailgate.team.mascot -%> Venues</h4>
             <div class="locationLabel">
               <span>Location: <%= @currentCityState %></span>
               <a href="#myChangeLocationModal" data-toggle="modal">change</a>
@@ -107,7 +134,7 @@
         </div>
         <div class="twitterStream">
           <div class="controls" id="tweetControls">
-            <h4>Tweets</h4>
+            <h4 style="background-color: <%= @tailgate.color %>">Tweets</h4>
           </div>
               
           <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
