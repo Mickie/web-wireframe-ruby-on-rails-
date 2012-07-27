@@ -8,7 +8,7 @@ class Tailgate < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
 
-  has_many :posts, inverse_of: :tailgate, dependent: :destroy, order: "created_at DESC"
+  has_many :posts, inverse_of: :tailgate, dependent: :destroy, order: "updated_at DESC"
   
   has_many :tailgate_venues, inverse_of: :tailgate, dependent: :delete_all
   has_many :venues, through: :tailgate_venues 

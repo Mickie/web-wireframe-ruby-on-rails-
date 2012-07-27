@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
-  belongs_to :post
+  belongs_to :post, touch: :comments_updated_at
 
   has_many :user_comment_votes, inverse_of: :comment, dependent: :delete_all
   

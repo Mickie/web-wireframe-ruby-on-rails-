@@ -51,12 +51,12 @@
       <% end %>
     </div>
     <div class="stats">
-      <span class="numFollowers">
-        <%= pluralize(aTailgate.followers.size + 1, "fan") %>
+      <span class="fan_count">
+        <%= pluralize(aTailgate.tailgate_followers_count + 1, "fan") %>
       </span>
       <span class="lastUpdateDate">
         <% if aTailgate.posts.any? %>
-          Updated <%= time_ago_in_words(aTailgate.posts[0].created_at) %> ago
+          Updated <%= time_ago_in_words(aTailgate.posts_updated_at) %> ago
         <% end %>
       </span>
     </div>

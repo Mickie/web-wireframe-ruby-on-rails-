@@ -5,7 +5,7 @@ describe TailgateFollower do
     mock_geocoding!
     @tailgate = FactoryGirl.create(:tailgate)
     @user = FactoryGirl.create(:user)
-    @tailgate_follower = @user.tailgate_followers.build(tailgate_id: @tailgate.id)
+    @tailgate_follower = @user.tailgate_followers.create(tailgate_id: @tailgate.id)
   end
 
   subject { @tailgate_follower }
@@ -35,5 +35,21 @@ describe TailgateFollower do
         TailgateFollower.new(user_id: @user.id)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end    
-  end  
+  end 
+  
+  describe "counter_cache" do
+    it "should have set the count" do
+      @tailgate.reload.tailgate_followers_count.should eq(1)
+    end
+    
+    it "should increment with new follower" do
+      FactoryGirl.create(:user).tailgate_followers.create(tailgate_id: @tailgate.id)
+      @tailgate.reload.tailgate_followers_count.should eq(2)
+    end
+    
+    it "should decrement the count" do
+      @tailgate.tailgate_followers.delete(@tailgate_follower)
+      @tailgate.reload.tailgate_followers_count.should eq(0)
+    end
+  end 
 end

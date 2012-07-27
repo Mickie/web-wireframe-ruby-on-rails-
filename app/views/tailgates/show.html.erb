@@ -60,7 +60,7 @@
               <div class="owner_details">
                 <p>Created by <%= @tailgate.user.full_name %></p>
                 <% if @tailgate.posts.any? %>
-                  <p>Updated <%= time_ago_in_words(@tailgate.posts[0].created_at) %> ago</p>
+                  <p>Updated <%= time_ago_in_words(@tailgate.posts[0].updated_at) %> ago</p>
                 <% end %>
               </div>
             </div>
@@ -102,8 +102,8 @@
 
       <div class="rightColumn">
         <div class="fans">
-          <div class="fan_count">
-            <h4 style="background-color: <%= @tailgate.color %>"><%= pluralize(@tailgate.followers.size + 1, "Fan") -%></h4>
+          <div>
+            <h4 style="background-color: <%= @tailgate.color %>"><span class="fan_count"><%= pluralize(@tailgate.tailgate_followers_count + 1, "Fan") -%></span></h4>
           </div>
           <div class="fan_pics">
             <% if @tailgate.user.image %>
