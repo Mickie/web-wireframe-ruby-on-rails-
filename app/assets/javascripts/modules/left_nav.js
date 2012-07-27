@@ -14,7 +14,7 @@ function isFacebookCallbackHash( aHash )
 
 function getLeftNavElement( aHash )
 {
-  return $("#fanzo_navigation " + aHash + ' a');
+  return $("#fanzo_navigation " + aHash + " a");
 }
 
 function initializeFrameContent()
@@ -40,7 +40,7 @@ function initializeFrameContent()
       window.location.hash = ""
       return;
     }
-    else if ( theElement = getLeftNavElement( theHash ) && theElement.length > 0)
+    else if ( (theElement = getLeftNavElement( theHash ) ) && theElement.length > 0)
     {
       theElement.click();
       theElement.addClass('active');
