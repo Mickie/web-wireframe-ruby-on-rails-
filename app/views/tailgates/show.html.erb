@@ -60,7 +60,7 @@
               <div class="owner_details">
                 <p>Created by <%= @tailgate.user.full_name %></p>
                 <% if @tailgate.posts.any? %>
-                  <p>Updated <%= time_ago_in_words(@tailgate.posts[0].updated_at) %> ago</p>
+                  <p>Updated <%= time_ago_in_words(@tailgate.posts_updated_at) %> ago</p>
                 <% end %>
               </div>
             </div>
