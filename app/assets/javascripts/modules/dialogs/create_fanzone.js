@@ -1,41 +1,9 @@
 $(function()
 {
-  initializePositionHandler();
   initializeTopicPicker();
   initializeTeamPicker();
   initializeColorPicker();
 });
-
-var myOriginalHeight = 0;
-var myOriginalWidth = 920;
-
-function initializePositionHandler()
-{
-  myOriginalHeight = $("#myCreateFanzoneModal").height();
-  $(window).resize( handleResize );
-  handleResize();
-}
-
-
-function handleResize()
-{
-  if ($(window).height() <= myOriginalHeight )
-  {
-    $("#myCreateFanzoneModal").css("height", ($(window).height() - 10) + "px");
-    $("#myCreateFanzoneModal").css("width", (myOriginalWidth + 15) + "px");
-  }
-  else
-  {
-    $("#myCreateFanzoneModal").css("height", "auto");
-    $("#myCreateFanzoneModal").css("width", myOriginalWidth + "px");
-  }
-
-  var theWindowWidth = $(window).width();
-  var theModalWidth = $("#myCreateFanzoneModal").width();
-  thePosition = (theWindowWidth - theModalWidth)/2;
-  $("#myCreateFanzoneModal").css("left", thePosition + "px");
-  
-}
 
 function initializeTeamPicker()
 {
