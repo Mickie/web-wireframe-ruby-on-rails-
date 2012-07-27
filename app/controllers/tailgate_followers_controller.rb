@@ -22,7 +22,6 @@ class TailgateFollowersController < ApplicationController
     @tailgate = @tailgate_follower.tailgate
 
     current_user.unfollow!( @tailgate )
-    @tailgate_follower.destroy
 
     respond_to do |format|
       format.html { redirect_to root_path }
