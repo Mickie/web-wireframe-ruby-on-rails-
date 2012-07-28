@@ -163,6 +163,18 @@
           margin: 0px;
           text-transform:uppercase;
         }
+
+        .fanzone_name
+        {
+          width: 130px;
+        }
+
+        .count
+        {
+          width: 30px;
+          text-align: right;
+          color: $linkColor;
+        }
       }
     }
 

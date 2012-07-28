@@ -74,7 +74,12 @@
             <table>
               <tr>
                 <td class="team_logo"><i></i></td>
-                <td class="fanzone_name"><p>All Fanzones <span class="count">( <%= Tailgate.count -%> )</span></p></td>
+                <td class="fanzone_name">
+                  <p>All Fanzones</p>
+                </td>
+                <td class="count">
+                  <p><%= Tailgate.count -%></p>
+                </td>
               </tr>
             </table>
           </a>
@@ -90,9 +95,12 @@
               <tr>
                 <td class="team_logo"><i></i></td>
                 <td class="fanzone_name">
-                  <p>My Fanzones 
+                  <p>My Fanzones</p>
+                </td>
+                <td class="count">
+                  <p>
                     <% if user_signed_in? %>
-                      <span class="count">( <%= current_user.tailgates.size + current_user.followed_tailgates.size -%> )</span>
+                      <%= current_user.tailgates.size + current_user.followed_tailgates.size -%>
                     <% end %>
                   </p>
                 </td>
