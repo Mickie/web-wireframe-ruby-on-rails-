@@ -11,7 +11,7 @@ describe FunFactsController do
     it "assigns all fun_facts as @fun_facts" do
       fun_fact = FunFact.create! valid_attributes
       get :index, {}
-      assigns(:fun_facts).should eq([fun_fact])
+      assigns(:fun_facts).should include(fun_fact)
     end
   end
 

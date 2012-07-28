@@ -11,7 +11,7 @@ describe FanzoTipsController do
     it "assigns all fanzo_tips as @fanzo_tips" do
       fanzo_tip = FanzoTip.create! valid_attributes
       get :index, {}
-      assigns(:fanzo_tips).should eq([fanzo_tip])
+      assigns(:fanzo_tips).should include(fanzo_tip)
     end
   end
 
