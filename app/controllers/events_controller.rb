@@ -36,10 +36,7 @@ class EventsController < ApplicationController
       @visitingHashTags.push("#fanzo_" + @event.visiting_team.sport.name)
     end
     
-    theCoordinates = request.location.coordinates
-    if request.remote_ip == "127.0.0.1"
-      theCoordinates = "Northwest University, Kirkland WA"
-    end
+    theCoordinates = getCoordinatesFromRequest( request )
     
     @localHomeTeamWatchSites = [];
     @localVisitingTeamWatchSites = [];

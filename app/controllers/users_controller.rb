@@ -7,12 +7,8 @@ class UsersController < ApplicationController
     @user_location = @user.user_locations.build
     @user_location.build_location
     
-    theCoordinates = request.location.coordinates
-    theCityState = "#{request.location.city}, #{request.location.state_code}"
-    if request.remote_ip == "127.0.0.1"
-      theCoordinates = "Northwest University, Kirkland WA"
-      theCityState = "Kirkland, WA"
-    end
+    theCoordinates = getCoordinatesFromRequest( request )
+    theCityState = getCityStateFromRequest( request )
     
     @localWatchSites = WatchSite.near(theCoordinates, 60)
     

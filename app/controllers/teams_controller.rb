@@ -33,11 +33,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.includes(:social_info).find(params[:id])
     
-    theCoordinates = request.location.coordinates
-    if request.remote_ip == "127.0.0.1"
-      theCoordinates = "Northwest University, Kirkland WA"
-    end
-
+    theCoordinates = getCoordinatesFromRequest( request )
     @localTeamWatchSites = @team.watch_sites.includes(:venue => :location).near(theCoordinates, 20);
         
     respond_to do |format|
