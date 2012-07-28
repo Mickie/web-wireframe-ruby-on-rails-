@@ -54,6 +54,12 @@ class CommentsController < ApplicationController
         if current_user.id != @post.user_id
           UserMailer.delay.new_post_comment(@comment.id) unless @post.user.no_email_on_comments
         end
+        
+        @post.comments.each do |aComment|
+          if ( aComment.user.id != current_user.id && aComment.user.id != @post.user_id)
+            UserMailer.delay.also_commented(@comment.id, aComment.user.id) unless aComment.user.no_email_on_comments
+          end
+        end
               
         format.html { redirect_to @post.tailgate, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
