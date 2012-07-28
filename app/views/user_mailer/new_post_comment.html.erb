@@ -33,7 +33,7 @@
       <td>&nbsp;</td>
       <td>
         <div class="email_content">
-          <p><%= @comment.post.content -%></p>
+          <p><%= raw handleNewlinesAndUrls(@comment.post.content) -%></p>
         </div>
       </td>
     </tr>

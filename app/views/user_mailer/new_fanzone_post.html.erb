@@ -17,7 +17,7 @@
 <%= provide :user_name, @post.user.full_name %>
 
 <% provide :content do %>
-  <%= raw handleNewlinesAndUrls(@post.content) %>
+  <p><%= raw handleNewlinesAndUrls(@post.content) %></p>
 <% end %>
 
 <% provide :menu do %>

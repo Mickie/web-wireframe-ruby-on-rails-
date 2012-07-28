@@ -17,9 +17,11 @@
 <%= provide :user_name, @tailgateFollower.user.full_name %>
 
 <% provide :content do %>
-  Your fanzone, <%= @tailgateFollower.tailgate.name %>, has a new follower.  
-  Their name is <%= @tailgateFollower.user.first_name %>. 
-  You should give them a big fat "Welcome to the party!" post to get them fired up.  
+  <p>
+    Your fanzone, <%= @tailgateFollower.tailgate.name %>, has a new follower.  
+    Their name is <%= @tailgateFollower.user.first_name %>. 
+    You should give them a big fat "Welcome to the party!" post to get them fired up.
+  </p>
 <% end %>
 
 <% provide :menu do %>

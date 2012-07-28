@@ -17,7 +17,27 @@
 <%= provide :user_name, @comment.user.full_name %>
 
 <% provide :content do %>
-  <%= raw handleNewlinesAndUrls(@comment.content) %>
+  <p class="comment_content"><%= raw handleNewlinesAndUrls(@comment.content) %></p>
+
+  <p class="header4">The Original Post:</p>
+  <table>
+    <tr>
+      <td class="profile_pic" valign="top">
+        <%= image_tag( @comment.post.user.image, size:"32x32", alt:"#{@comment.post.user.full_name}" ) %>
+      </td>
+      <td class="user_name">
+        <div class="header3"><%= @comment.post.user.full_name -%></div>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <div class="email_content">
+          <p><%= raw handleNewlinesAndUrls(@comment.post.content) -%></p>
+        </div>
+      </td>
+    </tr>
+  </table>
 <% end %>
 
 <% provide :menu do %>
