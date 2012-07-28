@@ -21,7 +21,20 @@ League.create([
   {name: 'NBA', sport_id:basketball.id},
   {name: 'MLB', sport_id:baseball.id},
   {name: 'MLS', sport_id:soccer.id}
-]);
+])
+
+puts 'SETTING UP FANZO FUN FACTS'
+FunFact.delete_all
+FunFact.create([
+  {name: "UW Tailgating", content: "For the Washington Huskies, fans don't just tailgate, they \"sailgate\" -- or -- party on Lake Washington for game day. Bring on the boats and grilled salmon!" },
+  {name: "A Wisconsin Lei", content: "Tailgating with the Packers can include wearing a \"Wisconsin Lei\" -- or -- a necklace made of Bratwurst and cheese wedges. NFL fashion! " }
+])
+
+puts 'SETTING UP FANZO TIPS'
+FanzoTip.delete_all
+FanzoTip.create([
+  {name: "Multiword Topics", content: "When you create a fanzone, you can pick any topic that interests you. If you're topic has multiple words, surround them with a quote(\") to find the best social media." }
+])
 
 puts 'SETTING UP STATES'
 State.delete_all
