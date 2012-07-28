@@ -119,7 +119,12 @@
           
           .email_content
           {
-            padding: 10px;
+            padding: 0px 10px 20px 10px;
+            
+            p
+            {
+              padding-bottom: 10px;
+            }
           }
     
           .menu
@@ -128,6 +133,11 @@
             border-top: 1px solid #CCCCCC;
             padding-top: 10px;
             text-align: right;
+            
+            a
+            {
+              margin:5px;
+            }
           }
         }
       }

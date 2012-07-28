@@ -17,9 +17,30 @@
 <%= provide :user_name, @comment.user.full_name %>
 
 <% provide :content do %>
-  <%= raw handleNewlinesAndUrls(@comment.content) %>
+  <p class="comment_content"><%= raw handleNewlinesAndUrls(@comment.content) %></p>
+
+  <p class="header4">In Response To This Post:</p>
+  <table>
+    <tr>
+      <td class="profile_pic" valign="top">
+        <%= image_tag( @comment.post.user.image, size:"32x32", alt:"#{@comment.post.user.full_name}" ) %>
+      </td>
+      <td class="user_name">
+        <div class="header3"><%= @comment.post.user.full_name -%></div>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <div class="email_content">
+          <p><%= @comment.post.content -%></p>
+        </div>
+      </td>
+    </tr>
+  </table>
 <% end %>
 
 <% provide :menu do %>
+  <%= link_to "View", getTailgateBitly(@comment.post.tailgate), class: "fanzoButton" %>
   <%= link_to "Reply", getTailgateBitly(@comment.post.tailgate), class: "fanzoButton" %>
 <% end %>
