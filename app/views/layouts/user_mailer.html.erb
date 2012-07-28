@@ -39,14 +39,16 @@
                 <tbody>
                   <tr>
                     <td>
-                      <div class="header3">Fanzo Tip</div>
-                      <%= yield :fanzo_tip %>
+                      <div class="header3">Fanzo Tip:</div>
+                      <div class="tip_name"><%= @fanzo_tip.name -%></div>
+                      <p><%= @fanzo_tip.content -%></p>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <div class="header3">Fun Fan Fact</div>
-                      <%= yield :fanzo_fun_fact %>
+                      <div class="tip_name"><%= @fanzo_fact.name -%></div>
+                      <p><%= @fanzo_fact.content -%></p>
                     </td>
                   </tr>
 <!--                  <tr>

@@ -1,5 +1,5 @@
 <% provide :preview do %>
-  <small>Score! Your post in the <%= @comment.post.tailgate.name -%> fanzone has a new comment!</small>
+  <small>Score! <%= @comment.user.full_name -%> also commented on a post in <%= @comment.post.tailgate.name -%>!</small>
 <% end %>
 
 <% provide :view_email_link do %>

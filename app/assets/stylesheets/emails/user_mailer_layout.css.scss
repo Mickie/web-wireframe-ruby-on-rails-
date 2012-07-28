@@ -80,6 +80,12 @@
         padding: 10px;
         border-right: 1px solid #CCCCCC;
         
+        .tip_name
+        {
+          font-weight: bold;
+          text-decoration: italics;
+        }
+        
         p
         {
           padding-bottom: 10px;
