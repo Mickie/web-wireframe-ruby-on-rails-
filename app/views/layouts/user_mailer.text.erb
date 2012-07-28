@@ -6,7 +6,7 @@ They said:
  
 <%= yield :content %>
  
-To reply, just follow this link: <%= yield :reply_link %>
+To <%= content_for?(:link_text) ? yield(:link_text) : "reply" %>, just follow this link: <%= yield :reply_link %>
  
 Thanks!
   The Fanzo Team

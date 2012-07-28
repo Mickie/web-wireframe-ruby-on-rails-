@@ -1,0 +1,42 @@
+<% provide :preview do %>
+  <small>Score! Your fanzone, <%= @tailgateFollower.tailgate.name -%> has a new follower!</small>
+<% end %>
+
+<% provide :view_email_link do %>
+  <p><small><%= link_to "Visit the fanzone", getTailgateBitly(@tailgateFollower.tailgate) %>.</small></p>
+<% end %>
+
+<%= provide :main_header, "New Follower Alert" %>
+
+<% provide :fanzo_tip do %>
+  <p>
+    When you create a fanzone, you can pick any topic that interests you.  
+    If you're topic has multiple words, surround them with a quote(&quot;) to find the best social media.
+  </p>
+  <p>Examples: <br/>&quot;Jim Brown&quot; <br/> &quot;Cover 2 Defense&quot;</p>
+<% end %>
+
+<% provide :fanzo_fun_fact do %>
+  <p>
+    Did you know that Texas A&amp;M trademarked the term, "12th Man"? They sued the Seattle Seahawks and won!
+    You can learn more at <a href="http://en.wikipedia.org/wiki/12th_man_(football)">Wikipedia</a>
+  </p>
+<% end %>
+
+<%= provide :content_header, "#{ @tailgateFollower.tailgate.name } Has A New Follower" %>
+
+<% provide :profile_pic do %>
+  <%= image_tag( @tailgateFollower.user.image, size:"32x32", alt:"#{@tailgateFollower.user.full_name}" ) %>
+<% end %>
+
+<%= provide :user_name, @tailgateFollower.user.full_name %>
+
+<% provide :content do %>
+  Your fanzone, <%= @tailgateFollower.tailgate.name %>, has a new follower.  
+  Their name is <%= @tailgateFollower.user.first_name %>. 
+  You should give them a big fat "Welcome to the party!" post to get them fired up.  
+<% end %>
+
+<% provide :menu do %>
+  <%= link_to "Post", getTailgateBitly(@tailgateFollower.tailgate), class: "fanzoButton" %>
+<% end %>

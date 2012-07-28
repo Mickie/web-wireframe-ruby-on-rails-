@@ -61,11 +61,15 @@
         <h3>Email Settings</h3>
         <div class="check_and_label">
           <%= f.check_box :no_email_on_posts %>
-          <%= f.label :no_email_on_posts, "Don't notify me of new posts on my Fanzones" %>
+          <%= f.label :no_email_on_posts, "Don't notify me of new posts on my fanzones" %>
         </div>
         <div class="check_and_label">
           <%= f.check_box :no_email_on_comments %>
           <%= f.label :no_email_on_comments, "Don't notify me of new comments on my posts, or other posts I comment on" %>
+        </div>
+        <div class="check_and_label">
+          <%= f.check_box :no_email_on_follows %>
+          <%= f.label :no_email_on_follows, "Don't notify me when someone follows one of my fanzones" %>
         </div>
         <div class="check_and_label">
           <%= f.check_box :no_email_newsletter %>

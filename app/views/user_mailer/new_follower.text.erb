@@ -1,0 +1,13 @@
+<%= provide( :title, "#{ @tailgateFollower.user.first_name } just followed your fanzone" ) %>
+
+<% provide :content do %>
+Hey <%= @tailgateFollower.tailgate.user.first_name -%>,
+
+Your fanzone, <%= @tailgateFollower.tailgate.name -%>, has a new follower.  
+Their name is <%= @tailgateFollower.user.full_name %>.  You should give them
+a big fat "Welcome to the party!" post to get them fired up.
+
+<% end %>
+
+<%= provide( :link_text, "Welcome Them") %>
+<%= provide( :reply_link, getTailgateBitly(@tailgateFollower.tailgate) ) %>

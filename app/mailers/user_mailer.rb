@@ -29,4 +29,17 @@ class UserMailer < ActionMailer::Base
       mail( to: theToAddress, subject: theSubject )
     end
   end
+  
+  def new_follower( aTailgateFollowerId )
+    @tailgateFollower = TailgateFollower.includes(:user, :tailgate => :user).find_by_id(aTailgateFollowerId)
+    
+    theSubject = "Your #{@tailgateFollower.tailgate.name} fanzone has a new follower"
+    theToAddress = "#{@tailgateFollower.tailgate.user.full_name} <#{@tailgateFollower.tailgate.user.email}>"
+    attachments.inline['fanzo-logo.png'] = File.read(Rails.root.join("app", "assets", "images", "fanzo-logo.png"))
+    if Rails.env.development?
+      mail( to: "paulingalls@hotmail.com, paulingalls@gmail.com, paul_ingalls@yahoo.com", subject: theSubject )
+    else
+      mail( to: theToAddress, subject: theSubject )
+    end
+  end
 end

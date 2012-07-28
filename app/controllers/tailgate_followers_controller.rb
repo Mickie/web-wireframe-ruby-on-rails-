@@ -6,6 +6,9 @@ class TailgateFollowersController < ApplicationController
     
     respond_to do |format|
       if @tailgate_follower.save
+
+        UserMailer.delay.new_follower(@tailgate_follower.id) unless @tailgate_follower.tailgate.user.no_email_on_follows
+
         format.html { redirect_to root_path, notice: 'Successfully followed the fanzone' }
         format.json { render json: @tailgate_follower, status: :created, location: @user }
         format.js
