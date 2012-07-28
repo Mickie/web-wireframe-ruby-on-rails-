@@ -1,4 +1,4 @@
-<div id="myCreateFanzoneModal" class="modal hide fade">
+<div id="<%= aDialogId -%>" class="modal hide fade">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h2>Create a Fanzone</h2>
@@ -35,7 +35,7 @@
           <%= label_tag(:league_id, "First, pick a league:") %>
           <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
           <%= f.label :team_id, "Then pick a team:" %>
-          <%= f.select(:team_id, options_for_select( aTailgate.team ? [aTailgate.team.name, aTailgate.team.id ] : [], aTailgate.team_id), {include_blank:true}, {required:true}) %>
+          <%= f.select(:team_id, options_for_select( aTailgate.team ? [[  aTailgate.team.name, aTailgate.team.id ]] : [], aTailgate.team_id), {include_blank:true}, {required:true}) %>
         </div>
         <div class="span3 fanzoneExamples">
           <p>Show your support for your team, and make it easier for people to find your fanzone.</p>

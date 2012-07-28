@@ -59,6 +59,7 @@ FanzoSite::Application.configure do
                                 'tailgates.js', 
                                 'static_pages/home.js', 
                                 'tailgates/new.js', 
+                                'tailgates/edit.js', 
                                 'tailgates/show.js', 
                                 'mobile.css',
                                 'email.css' ]

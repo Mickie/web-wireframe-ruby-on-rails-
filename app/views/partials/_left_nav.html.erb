@@ -1,6 +1,6 @@
 <div id="modals">
   <% if user_signed_in? %>
-    <%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build } %>
+    <%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build, aDialogId:"myCreateFanzoneModal" } %>
     <%= render partial: "partials/dialogs/connect_twitter_modal" %>
   <% else %>
     <%= render partial: "partials/dialogs/login_modal" %>

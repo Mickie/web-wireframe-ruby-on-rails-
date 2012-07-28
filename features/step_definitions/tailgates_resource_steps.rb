@@ -18,6 +18,7 @@ end
 
 When /^I finish creating a new tailgate$/ do
   fill_in "tailgate_name", with: @new_tailgate.name
+  fill_in "tailgate_topic_tags", with: @new_tailgate.name
   click_button "Create!"  
 end
 

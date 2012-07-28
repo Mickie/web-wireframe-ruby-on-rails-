@@ -1,7 +1,7 @@
 @import "partials/colors";
 @import "bootstrap/mixins";
 
-div#myCreateFanzoneModal
+#myCreateFanzoneModal, #myEditFanzoneModal
 {
   width: 920px;
   left: 10%;
@@ -17,7 +17,7 @@ div#myCreateFanzoneModal
     }
   }
   
-  form#new_tailgate
+  form
   {
     margin:0px;
     clear: both;
