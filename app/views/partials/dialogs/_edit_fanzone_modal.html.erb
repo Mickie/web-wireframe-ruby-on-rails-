@@ -1,0 +1,10 @@
+<div id="myEditFanzoneModal" class="fanzoneFormView modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h2>Edit Your Fanzone</h2>
+  </div>
+  <%= render partial: "tailgates/form", locals:{ aTailgate: aTailgate } %>
+  <div id="destroy_fanzone">
+    <%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure you want to completely destroy this fanzone?\n\nIf you say OK, there is no going back..." }, method: :delete, class: "fanzoButton" %>
+  </div>
+</div>

@@ -1,13 +1,8 @@
-<h1>Editing tailgate</h1>
+<div class="fanzoneFormView">
+  <h1>Editing tailgate</h1>
 
-<%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: @tailgate, aDialogId:"myEditFanzoneModal" } %>
+  <%= render partial:"form", locals: { aTailgate: @tailgate }%>  
 
-<div class="action">
-  <a href="#myEditFanzoneModal" data-toggle="modal">
-    <span class="fanzoButton">+ &nbsp; Edit This Fanzone</span>
-  </a>
+  <%= link_to 'Show', @tailgate %> |
+  <%= link_to 'Back', tailgates_path %>
 </div>
-
-
-<%= link_to 'Show', @tailgate %> |
-<%= link_to 'Back', tailgates_path %>

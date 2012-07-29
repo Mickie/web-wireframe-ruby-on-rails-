@@ -1,49 +1,104 @@
-<%= form_for(@tailgate) do |f| %>
-  <% if @tailgate.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tailgate.errors.count, "error") %> prohibited this tailgate from being saved:</h2>
-
-      <ul>
-      <% @tailgate.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="hidden_field">
+<%= form_for( aTailgate, remote: aTailgate.new_record? ) do |f| %>
+  <div class="modal-body container">
     <%= f.hidden_field :user_id %>
-  </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+    <% if aTailgate.errors.any? %>
+      <div id="error_explanation" class="row">
+        <div class="span3">
+          <h4><%= pluralize(@tailgate.errors.count, "error") %> prohibited this tailgate from being saved:</h4>
+        </div>
+        <div class="span9">
+          <ul>
+            <% @tailgate.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= label_tag(:league_id, "Pick a League:") %>
-    <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
-  </div>
+    <div class="row fanzoneName">
+      <div class="span3 fanzoneLabel">
+        <h4>Fanzone Name:</h4>
+      </div>
+      <div class="span6 fanzoneFields">
+        <p>Be as creative as you&apos;d like, it&apos;s your pad!</p>
+        <%= f.text_field :name, placeholder:"eg. Tom's Tennessee Tailgate", required: true %>
+        <p>Add a description so people catch the drift...</p>
+        <%= f.text_field :description, placeholder:"eg. Let's talk Vols Offense! QB calls, running game, it's all good!" %>
+      </div>
+      <div class="span3 fanzoneExamples">
+        <h5>Example Names:</h5>
+        <ul>
+          <li>Famous Falcon Fans</li>
+          <li>Bozworth&apos;s Bozos</li>
+          <li>Mike Ditka's a God!</li>
+        </ul>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :team_id, "Then pick a team:" %>
-    <%= f.select(:team_id, options_for_select( @tailgate.team ? [@tailgate.team.name, @tailgate.team.id ] : [], @tailgate.team_id)) %>
+    <div class="row fanzoneTeam">
+      <div class="span3 fanzoneLabel">
+        <h4>Team:</h4>
+      </div>
+      <div class="span6 fanzoneFields">
+        <%= label_tag(:league_id, "First, pick a league:") %>
+        <%= select_tag(:league_id, options_for_select(League.visible.collect {|p| [ p.name, p.id ] } ), {id:"league_picker", prompt:"Select from this list"}) %>
+        <%= f.label :team_id, "Then pick a team:" %>
+        <%= f.select(:team_id, options_for_select( aTailgate.team ? [[  aTailgate.team.name, aTailgate.team.id ]] : [], aTailgate.team_id), {include_blank:true}, {required:true}) %>
+      </div>
+      <div class="span3 fanzoneExamples">
+        <p>Show your support for your team, and make it easier for people to find your fanzone.</p>
+      </div>
+    </div>
+    
+    <div class="row fanzoneTopic">
+      <div class="span3 fanzoneLabel">
+        <h4>Topic:</h4>
+      </div>
+      <div class="span6 fanzoneFields">
+        <%= label_tag(:topic_tags, "Predefined topics:") %>
+        <%= select_tag(:topic_data, options_for_select(Topic.visible.collect {|p| [ p.name, { hash_tags:p.hash_tags, not_tags:p.not_tags } ] }, aTailgate.topic_tags ), { prompt:"Pick a topic (optional)"} ) %>
+        <p>Customize the topics to personalize your fanzone:</p>
+        <%= f.text_field :topic_tags, placeholder:'eg. #DCC, "Cowboy Cheerleaders"', required: true %>
+        <%= f.hidden_field :not_tags %>
+        <p>Separate multiple topics with a comma like: #tag1, "two words"</p>
+      </div>
+      <div class="span3 fanzoneExamples">
+        <p>Crazy about Tim Tebow or think he's a tool? Love to talk about defense? Add a topic and go beyond just your team.</p>
+        <h5>Other examples:</h5>
+        <ul>
+          <li>"Mean Joe Greene"</li>
+          <li>#tebow, "Tim Tebow"</li>
+          <li>#dabears, #ditka</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="row fanzoneTheme">
+      <div class="span3 fanzoneLabel">
+        <h4>Theme:</h4>
+      </div>
+      <div class="span6 fanzoneFields">
+        <div id="colorPicker">
+          <%= f.label :color, "Personalize your fanzone with color:" %>
+          <%= f.hidden_field :color %>
+          <div class="color" data-color="#333333"></div>
+          <div class="color" data-color="#002A5C"></div>
+          <div class="color" data-color="#993333"></div>
+          <div class="color" data-color="#663366"></div>
+          <div class="color" data-color="#669999"></div>
+          <div class="color" data-color="#CC6600"></div>
+          <div class="color" data-color="#336633"></div>
+          <div class="color" data-color="#562B00"></div>
+        </div>
+      </div>
+      <div class="span3 fanzoneExamples">
+        <p>Set your fanzone apart from the crowd.</p>
+      </div>
+    </div>
   </div>
-  
-  <div id="colorPicker">
-    <%= f.label :color, "Pick your theme:" %>
-    <%= f.hidden_field :color %>
-    <div class="color" data-color="#333333"></div>
-    <div class="color" data-color="#002A5C"></div>
-    <div class="color" data-color="#993333"></div>
-    <div class="color" data-color="#663366"></div>
-    <div class="color" data-color="#669999"></div>
-    <div class="color" data-color="#CC6600"></div>
-    <div class="color" data-color="#336633"></div>
-    <div class="color" data-color="#562B00"></div>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit "Save", id:"commit" %>
+  <div class="modal-footer">
+    <%= f.submit( (aTailgate.new_record? ? "Create!" : "Save Changes!"), class:"fanzoButton") %>
   </div>
 <% end %>

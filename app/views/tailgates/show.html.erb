@@ -11,6 +11,10 @@
   <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />    
 <% end %>
 
+<% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
+  <%= render partial: "partials/dialogs/edit_fanzone_modal", locals: { aTailgate: @tailgate } %>
+<% end %>
+
 <div id="tailgate_show">
   <div class="modals">
     <%= render partial: "partials/dialogs/change_location", locals: { aTeam: @tailgate.team } %>    
@@ -23,7 +27,9 @@
   
         <div class="fanzoneState">
           <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
-            <div id="destroy_fanzone" class="join_fanzone"><%= link_to 'Destroy', @tailgate, data: { confirm: "Are you sure? No going back..." }, method: :delete, class: "fanzoButton" %></div>
+            <div id="edit_fanzone" class="join_fanzone">
+              <a href="#myEditFanzoneModal" data-toggle="modal" class="fanzoButton">Edit</a>
+            </div>
           <% else %>
             <div class="join_fanzone">
               <% if user_signed_in? %>
@@ -165,6 +171,7 @@
   var myTwitterView;
   var myFacebookView;
   var myTailgateMediaSlider;
+  var myEditFanzoneDialog;
   
   $(function()
   {
@@ -189,5 +196,7 @@
                                               "<%= @tailgate.team.sport.name %>", 
                                               <%= raw @tailgate.topic_tags.split(",") %> );
                                               
+    myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal");
+    myEditFanzoneDialog.initialize();
   });
 </script>
