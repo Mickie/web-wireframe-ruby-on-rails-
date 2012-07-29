@@ -1,6 +1,7 @@
-var FanzoneDialog = function( aDialogSelector )
+var FanzoneDialog = function( aDialogSelector, aNewFlag )
 {
   this.myDialogSelector = aDialogSelector;
+  this.myNewFlag = aNewFlag;
   this.myTeamHelper;
   
   
@@ -33,7 +34,20 @@ var FanzoneDialog = function( aDialogSelector )
     
     $(this.myDialogSelector + " #colorPicker .color").each( createDelegate(this, this.setupColor) );
 
-    this.pickRandomColorToStart();    
+    this.setInitialColor();
+  };
+  
+  this.setInitialColor = function()
+  {
+    if (this.myNewFlag)
+    {
+      var theInitialVal = $(this.myDialogSelector + " #colorPicker #tailgate_color").val();  
+      $(this.myDialogSelector + " #colorPicker" + " [ data-color='" + theInitialVal + "' ]").addClass('selected');      
+    }
+    else
+    {
+      this.pickRandomColorToStart();    
+    }
   };
   
   this.pickRandomColorToStart = function()

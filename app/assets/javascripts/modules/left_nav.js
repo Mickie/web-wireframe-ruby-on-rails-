@@ -2,6 +2,9 @@
 $(function(){
   initializeFrameContent();
   initializeNavigationWatchers();
+
+  var theCreateFanzoneDialog = new FanzoneDialog("#myCreateFanzoneModal", false);
+  theCreateFanzoneDialog.initialize();
 });
 
 function isFacebookCallbackHash( aHash )

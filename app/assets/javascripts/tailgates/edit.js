@@ -1,5 +1,5 @@
 $(function()
 {
-  var theEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneDialog");
+  var theEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneDialog", true);
   theEditFanzoneDialog.initialize();
 });
