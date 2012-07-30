@@ -86,6 +86,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     }
     
     $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));
+    $(this.myInstagramModalDiv + " #post_it").click(createDelegate(this, this.onPostInstagram));
     
     $(this.myContainerDiv).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
 
@@ -162,6 +163,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     $(this.myInstagramModalDiv + " div.instagramCaption").text(theInstagram.caption.text);
     $(this.myInstagramModalDiv + " div.modal-header h3").text(theInstagram.user.full_name);
     $(this.myInstagramModalDiv + " div.modal-header img").attr("src", theInstagram.caption.from.profile_picture);
+    $(this.myInstagramModalDiv + " #post_it").attr("data-id", theInstagramId);
 
     $(".modal").modal("hide");
     $(this.myInstagramModalDiv).modal("show");
@@ -249,6 +251,13 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     this.myPlayer.clearVideo();
   };
   
+  this.onPostInstagram = function(e)
+  {
+    var theId = $(e.target).attr("data-id");
+    var theInstagram = this.myInstagrams[theInstagramId];
+    var theUrl = theInstagram.images.low_resolution.url;
+    alert("theId: " + theUrl);
+  }
 
 };
 
