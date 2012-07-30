@@ -21,6 +21,8 @@ var TeamHelper = function(aLeagueSelectElementId, aTeamSelectElementId)
     {
       $(this.myTeamSelectElementId).append('<option value=' + aResult[i].id + '>' + aResult[i].name + '</option>');
     };
+    
+    $(this.myTeamSelectElementId).change();
   };
   
 }
