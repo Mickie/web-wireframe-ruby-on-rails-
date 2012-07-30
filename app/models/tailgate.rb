@@ -28,12 +28,18 @@ class Tailgate < ActiveRecord::Base
   
   def addInitialPost
     theFanzoUser = User.find_by_email("founders@fanzo.me")
-    theFanzoTailgate = theFanzoUser.tailgates.find_by_id(15)
-    theContent = "Hey #{self.user.first_name},\n\tCongratulations on your new fanzone, #{self.name}.  Here are the topic details for later reference: #{self.topic_tags}." +
-                  "\n\nYou can find people already talking about your topic in the twitter stream.  Feel free to invite them to your party!" +
-                  "\n\nWe hope you enjoy your new tailgate.  If you have any questions, feel free to reach out on The World's Largest Tailgate Party: ( #{getTailgateBitly(theFanzoTailgate)} )." +
-                  "\n\nThanks, \nThe Fanzo Team"
-    thePost = theFanzoUser.posts.create(tailgate_id: self.id, content: theContent )
+    
+    if theFanzoUser
+      theFanzoTailgate = theFanzoUser.tailgates.find_by_id(15)
+      
+      if theFanzoTailgate
+        theContent = "Hey #{self.user.first_name},\n\tCongratulations on your new fanzone, #{self.name}.  Here are the topic details for later reference: #{self.topic_tags}." +
+                      "\n\nYou can find people already talking about your topic in the twitter stream.  Feel free to invite them to your party!" +
+                      "\n\nWe hope you enjoy your new tailgate.  If you have any questions, feel free to reach out on The World's Largest Tailgate Party: ( #{getTailgateBitly(theFanzoTailgate)} )." +
+                      "\n\nThanks, \nThe Fanzo Team"
+        thePost = theFanzoUser.posts.create(tailgate_id: self.id, content: theContent )
+      end
+    end
   end
   
   def light_color
