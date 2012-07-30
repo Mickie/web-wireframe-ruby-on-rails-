@@ -33,21 +33,8 @@
         <div class="input-append">
           <textarea class="input-xlarge span10" rows="1"><%= raw @team.social_info.hash_tags %></textarea>
           <div class="btn-group">
-            <button href="#" class="btn btn-primary quickTweetButton">Update Social Status</button>
-            <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><strong>Booyah!!</strong></li>
-              <div class="happy">
-                <li><a href="#"></a></li>
-              </div>
-              <li class="divider"></li>
-              <li><strong>What!?!?</strong></li>
-              <div class="sad">
-                <li><a href="#"></a></li>
-              </div>
-            </ul>         
+            <button href="#" class="fanzoButton">Update Social Status</button>
+            <%= render partial: "partials/buttons/quick_tweet_button" %>
           </div>
         </div>
       </div>    
@@ -56,7 +43,6 @@
   <div class="row-fluid">
     <div class="span12">
       <%= render partial:"partials/twitter/tweet_modal" %>
-            
       
       <div id="tweetSuccessAlert" class='alert alert-info fade in' style='display:none'>
         <a class='close' data-dismiss='alert' href='#'>×</a>

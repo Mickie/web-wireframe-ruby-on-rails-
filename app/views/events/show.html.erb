@@ -113,21 +113,8 @@
       <div class="input-append">
         <textarea class="input-xlarge span4" rows="1"><%= raw  @visitingHashTags.join(' ') %></textarea>
         <div class="btn-group">
-          <button href="#" class="btn btn-primary quickTweetButton">Update Twitter Status</button>
-          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><strong>Booyah!!</strong></li>
-            <div class="happy">
-              <li><a href="#"></a></li>
-            </div>
-            <li class="divider"></li>
-            <li><strong>What!?!?</strong></li>
-            <div class="sad">
-              <li><a href="#"></a></li>
-            </div>
-          </ul>         
+          <button href="#" class="fanzoButton">Update Social Status</button>
+          <%= render partial: "partials/buttons/quick_tweet_button" %>
         </div>
       </div>
     </div>    
@@ -147,21 +134,8 @@
       <div class="input-append">
         <textarea class="input-xlarge span4" rows="1"><%= raw @homeHashTags.join(' ') %></textarea>
         <div class="btn-group">
-          <button href="#" class="btn btn-primary quickTweetButton">Update Twitter Status</button>
-          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><strong>Booyah!!</strong></li>
-            <div class="happy">
-              <li><a href="#"></a></li>
-            </div>
-            <li class="divider"></li>
-            <li><strong>What!?!?</strong></li>
-            <div class="sad">
-              <li><a href="#"></a></li>
-            </div>
-          </ul>         
+          <button href="#" class="fanzoButton">Update Social Status</button>
+          <%= render partial: "partials/buttons/quick_tweet_button" %>
         </div>
       </div>
     </div>    
