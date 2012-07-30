@@ -88,18 +88,21 @@ class TailgatesController < ApplicationController
       if ( @tailgate.team.social_info )
         @tailgate.topic_tags = @tailgate.team.social_info.hash_tags
       else
-        @tailgate.topic_tags = "##{@tailgate.team.mascot}"
+        @tailgate.topic_tags = "\"#{@tailgate.team.mascot}\""
       end
     end
 
-    @tailgate.topic_tags = cleanupTags(@tailgate.topic_tags)    
-
+    @tailgate.topic_tags = cleanupTags(@tailgate.topic_tags)
+    
     respond_to do |format|
       if (@tailgate.user_id != current_user.id)
         format.html { render action: "new", error: 'Cannot create a tailgate for another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
         format.js { "alert('Cannot create a tailgate for another user');"}
       elsif @tailgate.save
+
+        @tailgate.addInitialPost
+
         format.html { redirect_to @tailgate, notice: 'Tailgate was successfully created.' }
         format.json { render json: @tailgate, status: :created, location: @tailgate }
         format.js
