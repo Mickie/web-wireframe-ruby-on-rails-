@@ -57,7 +57,7 @@ module ApplicationHelper
       return aTailgate.bitly
     end
 
-    theTailgateUrl = tailgate_url(aTailgate)
+    theTailgateUrl = Rails.application.routes.url_helpers.tailgate_url(aTailgate, host: ENV["FANZO_WEB_HOST"])
     theBitly = getBitlyForUrl(theTailgateUrl)
     
     if (theBitly && theBitly.length > 0)
