@@ -221,7 +221,7 @@ var TwitterView = function( anArrayOfHashTags,
   this.generateTweetDiv = function(aTweet)
   {
     var theDiv = $("#template").clone().render(aTweet, this.getTweetDirective());
-    theDiv.find(".timestamp").timeago();
+    cleanupTimestamps();
     return theDiv;
   };
   
