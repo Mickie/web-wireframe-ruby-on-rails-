@@ -20,6 +20,8 @@ describe Post do
   it { should respond_to(:twitter_reply_id) }
   it { should respond_to(:facebook_flag) }
   it { should respond_to(:facebook_id) }
+  it { should respond_to(:image_url) }
+  it { should respond_to(:video_url) }
   it { should respond_to(:shortened_content) }
 
   describe "shortened_content" do

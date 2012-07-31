@@ -16,7 +16,9 @@ class Post < ActiveRecord::Base
                   :twitter_reply_id, 
                   :twitter_retweet_id, 
                   :facebook_flag, 
-                  :facebook_id
+                  :facebook_id,
+                  :image_url,
+                  :video_url
 
   scope :visible, where("fan_score > -3")  
                   

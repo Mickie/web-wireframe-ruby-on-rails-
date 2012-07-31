@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727013802) do
+ActiveRecord::Schema.define(:version => 20120731015637) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -202,7 +202,9 @@ ActiveRecord::Schema.define(:version => 20120727013802) do
     t.boolean  "facebook_flag"
     t.string   "facebook_id"
     t.integer  "fan_score",           :default => 0
-    t.datetime "comments_updated_at", :default => '2012-07-27 04:01:33'
+    t.datetime "comments_updated_at", :default => '2012-07-29 03:46:56'
+    t.string   "image_url"
+    t.string   "video_url"
   end
 
   add_index "posts", ["tailgate_id"], :name => "index_posts_on_tailgate_id"

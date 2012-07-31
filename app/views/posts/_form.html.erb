@@ -10,10 +10,15 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field :twitter_reply_id %>
-  <%= f.hidden_field :twitter_retweet_id %>
+  <div class="media_preview hide">
+    <%= f.hidden_field :image_url %>
+    <%= f.hidden_field :video_url %>
+    <div class="media_container"></div>
+  </div>
   <%= f.text_area :content, rows:3, placeholder:"What's up?" %>
   <div class="social_controls">
+    <%= f.hidden_field :twitter_reply_id %>
+    <%= f.hidden_field :twitter_retweet_id %>
     <%= f.check_box :twitter_flag %>
     <div class="twitter_check"></div>
     <%= f.check_box :facebook_flag %>

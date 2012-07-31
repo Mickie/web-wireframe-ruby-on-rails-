@@ -33,6 +33,12 @@
     {
       padding-left:42px;
       
+      .media_preview
+      {
+        text-align:center;
+        padding-bottom: 10px;
+      }
+      
       .social_controls
       {
         float:left;
@@ -140,6 +146,16 @@
         .timestamp
         {
           color: $lightTextColor;
+        }
+        
+        .post_media
+        {
+          text-align:center;
+          
+          .post_image
+          {
+            padding: 10px;
+          }
         }
       }
       

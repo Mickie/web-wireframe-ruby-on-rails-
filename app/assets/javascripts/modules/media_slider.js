@@ -253,9 +253,13 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.onPostInstagram = function(e)
   {
-    var theId = $(e.target).attr("data-id");
+    var theInstagramId = $(e.target).attr("data-id");
     var theInstagram = this.myInstagrams[theInstagramId];
     var theUrl = theInstagram.images.low_resolution.url;
+    
+    $("#postForm #post_image_url").val(theUrl);
+    $("#postForm .media_container").html("<img src='" + theUrl + "' width='306' height='306'/>");
+    $("#postForm .media_preview").slideDown(600);
   }
 
 };

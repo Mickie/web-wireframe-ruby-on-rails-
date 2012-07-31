@@ -24,6 +24,13 @@
       <span class="user_name"><%= aPost.user.full_name %></span>
       <span class="timestamp"> - <%= time_ago_in_words(aPost.created_at) %> ago</span>
     </div>
+    <div class="post_media">
+      <% if aPost.image_url %>
+        <div class="post_image">
+          <img src="<%= aPost.image_url -%>" width="306" height="306" />
+        </div>
+      <% end %>
+    </div>
     <p><%= raw handleNewlinesAndUrls( aPost.content ) %></p>
   </div>
 
