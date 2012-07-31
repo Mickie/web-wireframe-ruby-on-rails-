@@ -41,7 +41,13 @@
                 <% end %>
               </div>
               <div class="post_content">
-                <strong><%= thePost.user.full_name %></strong> <span><%= raw handleNewlinesAndUrls(thePost.content) %></span>
+                <strong><%= thePost.user.full_name %></strong>
+                <% if thePost.image_url %>
+                  <div class="post_image">
+                    <img src="<%= thePost.image_url -%>" width="153" height="153" />
+                  </div>
+                <% end %>
+                <span><%= raw handleNewlinesAndUrls(thePost.content) %></span>
               </div>
             </div>
           <% end %>
