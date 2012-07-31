@@ -19,15 +19,22 @@ class InstagramProxyController < ApplicationController
   end
 
   def media_for_tag
-    theMedia = []
+    theTag = params[:tag]
+    theTagKey = "media_for_" + theTag
 
-    theClient = getClient
-    begin
-      theMedia = theClient.tag_recent_media(params[:tag])
-    rescue Exception => e
-      Rails.logger.warn "Error getting instagram media for tag: #{params[:tag]} => #{e.to_s}"
+    theMedia = Rails.cache.read(theTagKey)
+    
+    if !theMedia
+      theClient = getClient
+      begin
+        theMedia = theClient.tag_recent_media(theTag)
+        Rails.cache.write(theTagKey, theMedia, expires_in: 5.minutes)
+      rescue Exception => e
+        theMedia = []
+        Rails.logger.warn "Error getting instagram media for tag: #{theTag} => #{e.to_s}"
+      end
     end
-
+    
     respond_to do |format|
       format.json { render json: theMedia }
     end
