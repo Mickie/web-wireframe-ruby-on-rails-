@@ -17,6 +17,11 @@
 <%= provide :user_name, @post.user.full_name %>
 
 <% provide :content do %>
+  <% if @post.image_url %>
+    <div class="post_image">
+      <img src="<%= @post.image_url -%>" width="204" height="204" />
+    </div>
+  <% end %>
   <p><%= raw handleNewlinesAndUrls(@post.content) %></p>
 <% end %>
 
