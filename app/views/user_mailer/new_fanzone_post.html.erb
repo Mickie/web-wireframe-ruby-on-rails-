@@ -17,7 +17,7 @@
 <%= provide :user_name, @post.user.full_name %>
 
 <% provide :content do %>
-  <% if @post.image_url %>
+  <% if @post.image_url && @post.image_url.length > 0 %>
     <div class="post_image">
       <img src="<%= @post.image_url -%>" width="204" height="204" />
     </div>

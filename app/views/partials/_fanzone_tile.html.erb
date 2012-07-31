@@ -42,7 +42,7 @@
               </div>
               <div class="post_content">
                 <strong><%= thePost.user.full_name %></strong>
-                <% if thePost.image_url %>
+                <% if thePost.image_url && thePost.image_url.length > 0 %>
                   <div class="post_image">
                     <img src="<%= thePost.image_url -%>" width="153" height="153" />
                   </div>

@@ -33,7 +33,7 @@
       <td>&nbsp;</td>
       <td>
         <div class="email_content">
-          <% if @comment.post.image_url %>
+          <% if @comment.post.image_url && @comment.post.image_url.length > 0 %>
             <div class="post_image">
               <img src="<%= @comment.post.image_url -%>" width="204" height="204" />
             </div>
