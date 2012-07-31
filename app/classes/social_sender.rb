@@ -58,7 +58,12 @@ class SocialSender
     
     begin
       theLink = getTailgateBitly(aPost.tailgate)
-      thePicture = getLargeLogoBitly(aPost.tailgate.team)
+      
+      if aPost.image_url
+        thePicture = getBitlyForUrl( aPost.image_url )
+      else
+        thePicture = getLargeLogoBitly(aPost.tailgate.team)
+      end
       
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
                                                             link: theLink,
