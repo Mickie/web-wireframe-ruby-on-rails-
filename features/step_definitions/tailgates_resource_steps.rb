@@ -27,13 +27,13 @@ Then /^I should see the details of the new tailgate$/ do
 end
 
 When /^I edit the tailgate$/ do
-  fill_in "Name", with: "Dave's killer tailgate"
+  fill_in "tailgate_description", with: "Dave's killer tailgate" 
   click_button "commit"  
 end
 
 Then /^the changes to the tailgate should be saved$/ do
   @edit_tailgate.reload
-  @edit_tailgate.name.should == "Dave's killer tailgate"
+  @edit_tailgate.description.should == "Dave's killer tailgate"
 end
 
 Then /^I should be able to associate a team with the tailgate$/ do
