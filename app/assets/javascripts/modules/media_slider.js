@@ -256,7 +256,6 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     var theId = $(e.target).attr("data-id");
     var theInstagram = this.myInstagrams[theInstagramId];
     var theUrl = theInstagram.images.low_resolution.url;
-    alert("theId: " + theUrl);
   }
 
 };
