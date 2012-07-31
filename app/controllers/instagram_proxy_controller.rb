@@ -38,14 +38,16 @@ class InstagramProxyController < ApplicationController
     
     theArrayOfTagArrays = []
 
-    begin
-      i = 0
-      aStringOfHashTags.split(",").each do |aHashTag|
-        theArrayOfTagArrays[i] = theClient.tag_search(aHashTag.gsub(/\s/, ""))
+    i = 0
+    aStringOfHashTags.split(",").each do |aHashTag|
+      theTag = aHashTag.gsub(/[\s,",#]/, "")
+      Rails.logger.warn theTag
+      begin
+        theArrayOfTagArrays[i] = theClient.tag_search(theTag)
         i += 1
+      rescue Exception => e
+        Rails.logger.warn "Error getting tags for #{theTag} from instagram: #{e.to_s}"
       end
-    rescue Exception => e
-      Rails.logger.warn "Error getting tags from instagram: #{e.to_s}"
     end
     
     return mergeTags( theArrayOfTagArrays )    
