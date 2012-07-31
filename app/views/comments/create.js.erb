@@ -1,2 +1,3 @@
 $("#post_<%= @comment.post.id -%> .comment_form #comment_content").val("");
 $("#post_<%= @comment.post.id -%>_comments").append("<%= escape_javascript(render partial:"partials/comment", locals:{ aComment:@comment, aCommentVote: nil }) %>");
+cleanupTimestamps();

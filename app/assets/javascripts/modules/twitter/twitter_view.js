@@ -51,7 +51,6 @@ var TwitterView = function( anArrayOfHashTags,
     this.initializeButtons();
     
     this.myRefreshTweetsInterval = setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 50000);
-    this.initializeTimeAgo();
   };
   
   this.destroy = function()
@@ -152,29 +151,6 @@ var TwitterView = function( anArrayOfHashTags,
     $( this.myControlsDivSelector + " p" ).each( createDelegate( this.myTwitterController, 
                                                                     this.myTwitterController.addQuickTweetClick ));
   };
-  
-  this.initializeTimeAgo = function()
-  {
-    jQuery.timeago.settings.strings = {
-      prefixAgo: null,
-      prefixFromNow: null,
-      suffixAgo: "",
-      suffixFromNow: "from now",
-      seconds: "%d s",
-      minute: "< 1 m",
-      minutes: "%d m",
-      hour: "~1 h",
-      hours: "%d h",
-      day: "~1 d",
-      days: "%d d",
-      month: "~1 m",
-      months: "%d m",
-      year: "1 y",
-      years: "%d y",
-      wordSeparator: " ",
-      numbers: []
-    }
-  }
   
   this.onNewTweet = function(anIndex, aTweet)
   {

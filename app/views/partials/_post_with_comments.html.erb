@@ -22,7 +22,7 @@
   <div class="post_content">
     <div>
       <span class="user_name"><%= aPost.user.full_name %></span>
-      <span class="timestamp"> - <%= time_ago_in_words(aPost.created_at) %> ago</span>
+      <span class="timestamp" title="<%= aPost.created_at.getutc.iso8601 -%>" ><%= aPost.created_at.to_s %></span>
     </div>
     <div class="post_media">
       <% if aPost.image_url %>

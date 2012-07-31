@@ -62,7 +62,9 @@
       </span>
       <span class="lastUpdateDate">
         <% if aTailgate.posts.any? %>
-          Updated <%= time_ago_in_words(aTailgate.posts_updated_at) %> ago
+          <span class="timestamp" title="<%= aTailgate.posts_updated_at.getutc.iso8601 -%>" >
+            <%= aTailgate.posts_updated_at.to_s %>
+          </span> 
         <% end %>
       </span>
     </div>

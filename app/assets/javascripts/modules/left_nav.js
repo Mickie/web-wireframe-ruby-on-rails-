@@ -118,7 +118,7 @@ function onLoadDataComplete(aResult)
   {
     InfiniteScroller.get().handleScrollingForResource("/tailgates");
   }
-  
+  cleanupTimestamps();
 }
 
 function onLoadError(anError)

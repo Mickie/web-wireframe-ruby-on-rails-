@@ -21,8 +21,8 @@
   
   <div class="comment_content">
     <div>
-      <span class="user_name"><%= aComment.user.full_name %></span>
-      <span class="timestamp"> - <%= time_ago_in_words(aComment.created_at) %> ago</span>
+      <span class="user_name"><%= aComment.user.full_name %> - </span>
+      <span class="timestamp" title="<%= aComment.created_at.getutc.iso8601 -%>" ><%= aComment.created_at.to_s %></span>
     </div>
     <p><%= raw handleNewlinesAndUrls(aComment.content) %></p>
   </div>

@@ -82,11 +82,38 @@ String.prototype.escapeQuotes = function()
    return this.replace(/([\\"'])/g, "\\$1"); 
 };
 
+function cleanupTimestamps()
+{
+  $(".timestamp").timeago();  
+}
+
 $(function()
 {
   setTimeout(function()
   {
     window.scrollTo(0, 1);
   }, 100);
+  
+  jQuery.timeago.settings.strings = {
+    prefixAgo: null,
+    prefixFromNow: null,
+    suffixAgo: "",
+    suffixFromNow: "from now",
+    seconds: "%d s",
+    minute: "< 1 m",
+    minutes: "%d m",
+    hour: "~1 h",
+    hours: "%d h",
+    day: "~1 d",
+    days: "%d d",
+    month: "~1 m",
+    months: "%d m",
+    year: "1 y",
+    years: "%d y",
+    wordSeparator: " ",
+    numbers: []
+  }
+  cleanupTimestamps();
+
 });
 
