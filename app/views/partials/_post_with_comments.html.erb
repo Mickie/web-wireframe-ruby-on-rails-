@@ -25,7 +25,7 @@
       <span class="timestamp" title="<%= aPost.created_at.getutc.iso8601 -%>" ><%= aPost.created_at.to_s %></span>
     </div>
     <div class="post_media">
-      <% if aPost.image_url %>
+      <% if aPost.image_url && aPost.image_url.length > 0 %>
         <div class="post_image">
           <img src="<%= aPost.image_url -%>" width="306" height="306" />
         </div>
