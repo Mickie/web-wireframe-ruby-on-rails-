@@ -33,6 +33,11 @@
       <td>&nbsp;</td>
       <td>
         <div class="email_content">
+          <% if @comment.post.image_url %>
+            <div class="post_image">
+              <img src="<%= @comment.post.image_url -%>" width="204" height="204" />
+            </div>
+          <% end %>
           <p><%= raw handleNewlinesAndUrls(@comment.post.content) -%></p>
         </div>
       </td>
