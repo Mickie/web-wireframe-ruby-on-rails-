@@ -1,6 +1,6 @@
 
 When /^I edit the event$/ do
-  fill_in "Name",    with: "Superbowl"
+  fill_in "event_name",    with: "Superbowl"
   click_button "commit"
 end
 

@@ -3,7 +3,7 @@ When /^I edit the venue$/ do
   @edit_venue.foursquare_id = '12345'
   @edit_venue.save
   
-  fill_in "Name",    with: "Pumphouse"
+  fill_in "venue_name", with: "Pumphouse"
   click_button "commit"
 end
 

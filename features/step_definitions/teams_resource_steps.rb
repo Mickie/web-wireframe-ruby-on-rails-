@@ -1,6 +1,6 @@
 
 When /^I edit the team$/ do
-  fill_in "Name",    with: "Sounders"
+  fill_in "team_name",    with: "Sounders"
   click_button "commit"
 end
 

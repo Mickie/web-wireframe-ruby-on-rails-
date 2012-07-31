@@ -28,7 +28,6 @@ Feature: Tailgates Resource
 			And I finish creating a new tailgate
 		Then I should see the details of the new tailgate
 	
-	@javascript
 	Scenario: I can edit a tailgate as the user who created it
 		Given I previously created a tailgate
 			And I sign in as user

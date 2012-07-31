@@ -19,7 +19,7 @@ end
 When /^I finish creating a new tailgate$/ do
   fill_in "tailgate_name", with: @new_tailgate.name
   fill_in "tailgate_topic_tags", with: @new_tailgate.name
-  click_button "Create!"  
+  click_button "submit_fanzone"  
 end
 
 Then /^I should see the details of the new tailgate$/ do
@@ -28,7 +28,7 @@ end
 
 When /^I edit the tailgate$/ do
   fill_in "tailgate_description", with: "Dave's killer tailgate" 
-  click_button "commit"  
+  click_button "submit_fanzone"  
 end
 
 Then /^the changes to the tailgate should be saved$/ do

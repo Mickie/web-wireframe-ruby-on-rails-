@@ -1,7 +1,7 @@
 
 When /^I edit the quick tweet$/ do
-  fill_in "Name",    with: "Nice!"
-  fill_in "Tweet", with: "that was a sweet play"
+  fill_in "quick_tweet_name",    with: "Nice!"
+  fill_in "quick_tweet_tweet", with: "that was a sweet play"
   click_button "commit"
 end
 
