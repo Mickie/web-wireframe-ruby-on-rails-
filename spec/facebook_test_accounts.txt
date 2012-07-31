@@ -1,3 +1,6 @@
+https://github.com/arsduo/koala/wiki/Test-Users
+
+
 theTestApi = Koala::Facebook::TestUsers.new(:app_id => ENV["FANZO_FACEBOOK_APP_ID"], :secret => ENV["FANZO_FACEBOOK_APP_SECRET"])
 theTestApi.list
 
