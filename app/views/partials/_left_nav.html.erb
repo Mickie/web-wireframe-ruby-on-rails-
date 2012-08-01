@@ -100,7 +100,7 @@
                 <td class="count">
                   <p>
                     <% if user_signed_in? %>
-                      <%= current_user.tailgates.size + current_user.followed_tailgates.size -%>
+                      <%= current_user.tailgates.size + current_user.followed_tailgates.size - 1 -%>
                     <% end %>
                   </p>
                 </td>

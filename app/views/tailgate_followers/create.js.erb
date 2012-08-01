@@ -1,3 +1,4 @@
+$("#myFanzones .count").html("<p><%= current_user.tailgates.size + current_user.followed_tailgates.size - 1 -%></p>");
 $("#fanzone_nav ul").append("<%= escape_javascript(render partial:'partials/left_nav_tailgate', locals: { aTailgate: @tailgate_follower.tailgate }) %>");
 $("#fanzone_nav #nav_<%= @tailgate_follower.tailgate.slug -%>").addClass('active');
 $("#tailgate_<%= @tailgate_follower.tailgate.slug -%> .fanzoneState").html("<div class='myFanzone' style='border-bottom-color: <%= @tailgate_follower.tailgate.light_color %>;'></div>");

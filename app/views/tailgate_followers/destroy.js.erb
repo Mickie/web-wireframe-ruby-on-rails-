@@ -1,3 +1,4 @@
+$("#myFanzones .count").html("<p><%= current_user.tailgates.size + current_user.followed_tailgates.size - 1 -%></p>");
 $("#fanzone_nav #nav_<%= @tailgate.slug -%>").remove();
 $("#tailgate_<%= @tailgate.slug -%> .fanzoneState").html("<div class='join_fanzone'><%= escape_javascript(render partial:'partials/buttons/follow_button', locals: { tailgate: @tailgate }) %></div>");
 $("#tailgate_<%= @tailgate.slug -%> .fan_count").html("<%= pluralize(@tailgate.tailgate_followers_count + 1, "Fan") -%>");
