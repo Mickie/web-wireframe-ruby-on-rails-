@@ -181,7 +181,8 @@ var TwitterView = function( anArrayOfHashTags,
   
   this.showNewTweetsAlert = function()
   {
-    $(this.myNewTweetDivSelector + " > p").html("<strong>" + this.myNewTweets.length + "</strong> new Tweets!");
+    var theNoun = this.myNewTweets.length > 1 ? "Tweets" : "Tweet";
+    $(this.myNewTweetDivSelector + " > p").html("<strong>" + this.myNewTweets.length + "</strong> new " + theNoun + "!");
     $(this.myNewTweetDivSelector).slideDown(600).click(createDelegate(this, this.showNewTweets));
   };
 
