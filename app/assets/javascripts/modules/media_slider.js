@@ -90,20 +90,53 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     
     $(this.myContainerDiv).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
 
+    this.setupNavigation();
     this.startSliderTimer();    
   };
   
+  this.setupNavigation = function()
+  {
+    $(this.myContainerDiv + " div#navigate_forward").click( createDelegate(this, this.slideLeft ) );
+    $(this.myContainerDiv + " div#navigate_backward").click( createDelegate(this, this.slideRight ) );
+  }
+  
   this.onSlideInterval = function()
   {
-    var theLeftMostDivImageWidth = $(this.myContainerDiv + " div#myMediaContent div:first img").attr("width");
+    this.slideLeft();
+  };
+
+  this.slideLeft = function()
+  {
     this.stopSliderTimer();
+    var theLeftMostDivImageWidth = $(this.myContainerDiv + " div#myMediaContent div:first img").attr("width");
     $(this.myContainerDiv + " div#myMediaContent").animate({ left:"-" + theLeftMostDivImageWidth + "px"}, 
                                                                 500, 
                                                                 'linear', 
-                                                                createDelegate(this, this.onTransitionComplete) );
+                                                                createDelegate(this, this.onSlideLeftComplete) );
   };
   
-  this.onTransitionComplete = function()
+  this.slideRight = function()
+  {
+    this.stopSliderTimer();
+    var theRightMostDiv = $(this.myContainerDiv + " div#myMediaContent div.mediaThumbnail:last").detach();
+    if (theRightMostDiv)
+    {
+      var theImageWidth = $(theRightMostDiv).find("img").attr("width");
+      $(this.myContainerDiv + " div#myMediaContent").prepend(theRightMostDiv);
+      $(this.myContainerDiv + " div#myMediaContent").css({left:"-" + theImageWidth + "px"});
+      $(this.myContainerDiv + " div#myMediaContent").animate({ left:"0px"}, 
+                                                                  500, 
+                                                                  'linear', 
+                                                                  createDelegate(this, this.onSlideRightComplete) );
+    }
+  };
+  
+  this.onSlideRightComplete = function()
+  {
+    this.startSliderTimer();    
+  }
+  
+  this.onSlideLeftComplete = function()
   {
     var theLeftMostDiv = $(this.myContainerDiv + " div#myMediaContent div:first").detach();
     if (theLeftMostDiv)
@@ -117,11 +150,15 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.onHoverStart = function(e)
   {
     this.stopSliderTimer();
+    $(this.myContainerDiv + " div#navigate_forward").fadeIn(500);
+    $(this.myContainerDiv + " div#navigate_backward").fadeIn(500);
   };
   
   this.onHoverEnd = function(e)
   {
     this.startSliderTimer();
+    $(this.myContainerDiv + " div#navigate_forward").fadeOut(500);
+    $(this.myContainerDiv + " div#navigate_backward").fadeOut(500);
   };
   
   this.onInstagramMediaLoaded = function(anArrayOfMedia)
