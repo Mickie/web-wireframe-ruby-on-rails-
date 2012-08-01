@@ -35,7 +35,6 @@
       
       .media_preview
       {
-        text-align:center;
         padding-bottom: 10px;
       }
       
@@ -150,11 +149,24 @@
         
         .post_media
         {
-          text-align:center;
+          position:relative;
+          width: 306px;
           
           .post_image
           {
-            padding: 10px;
+            padding: 10px 0px;
+          }
+          
+          .post_video
+          {
+            cursor: pointer;
+            padding: 10px 0px;
+            
+            .playButtonBackground
+            {
+              top:30%;
+              left:100px;
+            }
           }
         }
       }

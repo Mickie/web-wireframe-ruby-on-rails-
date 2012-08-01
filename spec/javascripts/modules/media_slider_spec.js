@@ -191,7 +191,7 @@ describe("MediaSlider", function()
   {
     beforeEach(function()
     {
-      myMediaSlider.myPlayer = { loadVideoById: function(){} };
+      myMediaSlider.myDialogPlayer = { loadVideoById: function(){} };
       myMediaSlider.onYouTubeMediaLoaded(YouTubeData.videoSearchResponse.feed.entry);
       myMediaSlider.onInstagramMediaLoaded([]);
       $("div#myMediaContent div.mediaThumbnail:first img.mediaImage").click();
