@@ -64,6 +64,14 @@ div#myMediaSlider
 div#myVideoModal 
 {
   width:680px;
+  
+  .modal-footer
+  {
+    .fanzoButton
+    {
+      margin-left: 15px;
+    }
+  }  
 }
 
 div#myInstagramModal 
