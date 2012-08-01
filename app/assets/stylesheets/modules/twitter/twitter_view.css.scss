@@ -5,9 +5,15 @@
 
 #newTweets
 {
-  margin:5px;
+  margin:0px;
   text-align: center;
   cursor: pointer;
+  border-radius: 0;
+  
+  p
+  {
+    margin:0px;
+  }
 }
 
 #tweetHolder
