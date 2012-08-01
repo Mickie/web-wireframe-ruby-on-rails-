@@ -139,6 +139,16 @@ div#tailgate_show
         .locationLabel
         {
           padding:10px;
+          
+          .city_state
+          {
+            font-weight: bold;
+          }
+          
+          .change_location
+          {
+            float: right;
+          }
         }
         
         .noVenues

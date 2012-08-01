@@ -133,8 +133,8 @@
           <div class="venueHeader">
             <h4 style="background-color: <%= @tailgate.color %>">Local <%= @tailgate.team.mascot -%> Venues</h4>
             <div class="locationLabel">
-              <span>Location: <%= @currentCityState %></span>
-              <a href="#myChangeLocationModal" data-toggle="modal">change</a>
+              <span class="city_state"><%= @currentCityState %></span>
+              <span class="change_location"><a href="#myChangeLocationModal" data-toggle="modal">change</a></span>
             </div>
           </div>
           <div class="venueList">
