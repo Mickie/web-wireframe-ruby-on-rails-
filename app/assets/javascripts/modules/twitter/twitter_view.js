@@ -240,8 +240,16 @@ var TwitterView = function( aMaxTweets,
   
   this.generateTweetDiv = function(aTweet)
   {
-    var theDiv = $("#template").clone().render(aTweet, this.getTweetDirective());
-    return theDiv;
+    try
+    {
+      var theDiv = $("#template").clone().render(aTweet, this.getTweetDirective());
+      return theDiv;
+    }
+    catch(anError)
+    {
+      console.log(anError);
+      return "<div></div>";    
+    }
   };
   
   this.makeInlineUrlsLinks = function(aText, anArrayOfUrls)

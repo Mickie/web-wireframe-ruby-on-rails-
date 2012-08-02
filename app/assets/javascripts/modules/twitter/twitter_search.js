@@ -12,12 +12,8 @@ var TwitterSearch = function( aListener )
 
     var theSearchQuery = this.getSearchQuery(anArrayOfHashTags, anArrayOfNotTags);
     var theQueryString = "?lang=en&include_entities=true&q=" + escape(theSearchQuery) + "&rpp=" + aNumberToGet;
-    $.ajax({
-             url: TWITTER_SEARCH_URL + theQueryString,
-             cache:false,
-             dataType: "jsonp",
-             success: createDelegate(this, this.onSearchComplete)
-           });
+
+    this.callTwitterAjax( theQueryString );
   };
   
   this.abort = function()
@@ -26,32 +22,15 @@ var TwitterSearch = function( aListener )
     this.myRefreshUrl = "";
   }
   
-  this.getSearchQuery = function( anArrayOfHashTags, anArrayOfNotTags )
-  {
-    var theQuery = $.trim(anArrayOfHashTags[0])
-    var i = 0;
-    
-    for (i=1; i < anArrayOfHashTags.length; i++) 
-    {
-      theQuery += " OR " + $.trim(anArrayOfHashTags[i]);
-    };
-    
-    for (i=0; i < anArrayOfNotTags.length; i++) 
-    {
-      theQuery += " -" + $.trim(anArrayOfNotTags[i]);
-    };
-    return theQuery;
-  };
-
   this.grabMoreTweets = function()
   {
     if (this.myAbortFlag)
     {
       return;
     }
-    $.getJSON(TWITTER_SEARCH_URL + this.myRefreshUrl + "&callback=?", 
-              createDelegate(this, this.onSearchComplete));
-  }
+    
+    this.callTwitterAjax( this.myRefreshUrl );
+  };
   
   this.onSearchComplete = function(aJSON, aTextStatus, aJqHR)
   {
@@ -74,6 +53,41 @@ var TwitterSearch = function( aListener )
       console.log(aJqHR);
       this.myListener.onError("Woops! There was a problem getting tweets from Twitter: " + aTextStatus );
     }
-  }
+  };
+  
+  this.getSearchQuery = function( anArrayOfHashTags, anArrayOfNotTags )
+  {
+    var theQuery = $.trim(anArrayOfHashTags[0])
+    var i = 0;
+    
+    for (i=1; i < anArrayOfHashTags.length; i++) 
+    {
+      theQuery += " OR " + $.trim(anArrayOfHashTags[i]);
+    };
+    
+    for (i=0; i < anArrayOfNotTags.length; i++) 
+    {
+      theQuery += " -" + $.trim(anArrayOfNotTags[i]);
+    };
+    return theQuery;
+  };
 
+  this.callTwitterAjax = function( aUrl )
+  {
+    try
+    {
+      $.ajax(
+      {
+        url: TWITTER_SEARCH_URL + aUrl,
+        cache:false,
+        dataType: "jsonp",
+        success: createDelegate(this, this.onSearchComplete)
+      });
+    }
+    catch(anError)
+    {
+      console.log(anError);
+      this.myListener.onError("Woops! There was a problem getting tweets from Twitter: " + anError );
+    }
+  };
 }
