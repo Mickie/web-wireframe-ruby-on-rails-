@@ -82,7 +82,7 @@ String.prototype.escapeQuotes = function()
    return this.replace(/([\\"'])/g, "\\$1"); 
 };
 
-function cleanupTimestamps()
+function updateTimestamps()
 {
   $(".timestamp").timeago();  
 }
@@ -113,7 +113,9 @@ $(function()
     wordSeparator: " ",
     numbers: []
   }
-  cleanupTimestamps();
+
+  updateTimestamps();
+  setInterval(updateTimestamps, 60000);
 
 });
 

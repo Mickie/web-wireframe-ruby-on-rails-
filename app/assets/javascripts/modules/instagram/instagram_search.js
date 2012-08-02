@@ -3,6 +3,7 @@ var InstagramSearch = function()
   this.myMediaResponseCount = 0;
   this.myCompleteCallback;
   this.myMedia = [];
+  this.myAbortFlag = false;
   
   this.loadMediaForTeam = function( aTeamId, aCompleteCallback )
   {
@@ -15,6 +16,12 @@ var InstagramSearch = function()
     this.myCompleteCallback = aCompleteCallback;
     this.getTagsForFanzone(aFanzoneId);
   };
+  
+  this.abort = function()
+  {
+    this.myCompleteCallback = null;
+    this.myAbortFlag = true;
+  }
   
   this.getTagsForTeam = function(aTeamId)
   {
@@ -30,6 +37,11 @@ var InstagramSearch = function()
   
   this.onGetTagsComplete = function(aResult)
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.myTags = aResult;
     
     if (!this.myTags || this.myTags.length == 0)
@@ -52,6 +64,11 @@ var InstagramSearch = function()
   
   this.onGetMediaForTagComplete = function(aResult, aTextStatus, aJQXHR, aTag)
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.myMedia = this.myMedia.concat(aResult.data);
     
     this.myMediaResponseCount++;

@@ -17,6 +17,7 @@ var YouTubeSearch = function( aShortName,
   this.myMaxVideos = aMaxVideos;
   this.myLoadCompleteCallback = null;
   this.mySearchResults = null;
+  this.myAbortFlag = false;
 
   this.loadSDK = function()
   {
@@ -29,6 +30,10 @@ var YouTubeSearch = function( aShortName,
   
   this.onApiReady = function()
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
     this.startVideoSearch();
   };
   
@@ -43,6 +48,12 @@ var YouTubeSearch = function( aShortName,
     {
       this.loadSDK();
     }
+  };
+  
+  this.abort = function()
+  {
+    this.myAbortFlag = true;
+    this.myLoadCompleteCallback = null;
   };
 
   this.startVideoSearch = function()
@@ -60,6 +71,11 @@ var YouTubeSearch = function( aShortName,
 
   this.onSearchComplete = function( aResult )
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.mySearchResults = aResult;
     
     var theEntries = aResult.feed.entry || [];

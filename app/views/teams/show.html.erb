@@ -100,9 +100,7 @@
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = TwitterView.create( <%= raw @team.social_info.hash_tags.split(",") %>,
-                                        <%= raw @team.social_info.not_tags.split(",") %>,
-                                        20,
+    myTwitterView = TwitterView.create( 20,
                                         "tweets",
                                         "newTweets",
                                         "tweetControls",
@@ -110,7 +108,9 @@
                                         <%= user_signed_in? ? current_user.id : 0 %>,
                                         <%= @team.sport.id %>,
                                         "myTwitterView");
-    myTwitterView.startLoadingTweets();
+    myTwitterView.startLoadingTweets( <%= raw @team.social_info.hash_tags.split(",") %>,
+                                      <%= raw @team.social_info.not_tags.split(",") %>
+                                      );
     
 
     myTeamMediaSlider = MediaSlider.create( "div#team_show div#myMediaSlider", 

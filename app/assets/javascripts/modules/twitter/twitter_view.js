@@ -1,7 +1,5 @@
 
-var TwitterView = function( anArrayOfHashTags, 
-                            anArrayOfNotTags,
-                            aMaxTweets, 
+var TwitterView = function( aMaxTweets, 
                             aTweetDivId, 
                             aNewTweetDivId,
                             aControlsDivId, 
@@ -10,8 +8,6 @@ var TwitterView = function( anArrayOfHashTags,
                             aSportId,
                             aTwitterViewVariableName)
 {
-  this.myHashTags = anArrayOfHashTags;
-  this.myNotTags = anArrayOfNotTags;
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
@@ -21,10 +17,12 @@ var TwitterView = function( anArrayOfHashTags,
   this.mySportId = aSportId;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
   
+  this.myHashTags = {};
+  this.myNotTags = {};
   this.myNewTweets = new Array();
   this.myFullyLoadedFlag = false;
-  this.myTwitterSearch = null;
   this.myTwitterController = new TwitterController(this);
+  this.myTwitterSearch = new TwitterSearch(this);
   this.myRefreshTweetsInterval;
 
   var theCurrentPostVal = getCookie("#postForm #post_content");
@@ -44,18 +42,26 @@ var TwitterView = function( anArrayOfHashTags,
     return this.myConnectedToTwitterFlag;
   }
 
-  this.startLoadingTweets = function()
+  this.startLoadingTweets = function( anArrayOfHashTags, anArrayOfNotTags )
   {
-    this.myTwitterSearch = new TwitterSearch(createDelegate(this, this.onNewTweet), createDelegate(this, this.onError));
+    this.myHashTags = anArrayOfHashTags;
+    this.myNotTags = anArrayOfNotTags;
+    
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
     this.initializeButtons();
     
-    this.myRefreshTweetsInterval = setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 50000);
+    this.myRefreshTweetsInterval = setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
+  
+    $(this.myNewTweetDivSelector).click(createDelegate(this, this.showNewTweets));
   };
   
-  this.destroy = function()
+  this.reset = function()
   {
     clearInterval(this.myRefreshTweetsInterval);
+    this.myNewTweets = new Array();
+    this.myFullyLoadedFlag = false;
+    this.myTwitterController.abort();
+    this.myTwitterSearch.abort();
   };
 
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
@@ -170,6 +176,7 @@ var TwitterView = function( anArrayOfHashTags,
       {
         this.myFullyLoadedFlag = true;
       }
+      updateTimestamps();
     }
 
   };
@@ -183,7 +190,7 @@ var TwitterView = function( anArrayOfHashTags,
   {
     var theNoun = this.myNewTweets.length > 1 ? "Tweets" : "Tweet";
     $(this.myNewTweetDivSelector + " > p").html("<strong>" + this.myNewTweets.length + "</strong> new " + theNoun + "!");
-    $(this.myNewTweetDivSelector).slideDown(600).click(createDelegate(this, this.showNewTweets));
+    $(this.myNewTweetDivSelector).slideDown(600);
   };
 
   this.showNewTweets = function()
@@ -196,6 +203,17 @@ var TwitterView = function( anArrayOfHashTags,
 
   this.chopOffOldestTweetsSoWeShowOnlyTheLatest = function()
   {
+    this.myNewTweets.sort(function(a,b)
+    {
+      if (a.created_at == b.created_at)
+      {
+        return 0;
+      }
+      
+      var theFirstDate = new Date(a.created_at);
+      var theSecondDate = new Date(b.created_at);
+      return theFirstDate > theSecondDate ? 1 : -1;
+    });
     if (this.myNewTweets.length > this.myMaxTweets)
     {
       this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets);    
@@ -212,6 +230,7 @@ var TwitterView = function( anArrayOfHashTags,
     var theNewDivSelector = "#" + aTweet.id_str;
     $(this.myTweetDivSelector).prepend(this.generateTweetDiv(aTweet));
     $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
+    updateTimestamps();
   };
   
   this.onAddComplete = function()
@@ -222,7 +241,6 @@ var TwitterView = function( anArrayOfHashTags,
   this.generateTweetDiv = function(aTweet)
   {
     var theDiv = $("#template").clone().render(aTweet, this.getTweetDirective());
-    cleanupTimestamps();
     return theDiv;
   };
   
@@ -338,9 +356,7 @@ var TwitterView = function( anArrayOfHashTags,
 }
 
 var myCurrentTwitterViews = {};
-TwitterView.create = function(anArrayOfHashTags, 
-                              anArrayOfNotTags,
-                              aMaxTweets, 
+TwitterView.create = function(aMaxTweets, 
                               aTweetDivId, 
                               aNewTweetDivId,
                               aControlsDivId, 
@@ -351,11 +367,11 @@ TwitterView.create = function(anArrayOfHashTags,
 {
   if (myCurrentTwitterViews[aTwitterViewVariableName])
   {
-    myCurrentTwitterViews[aTwitterViewVariableName].destroy();
+    myCurrentTwitterViews[aTwitterViewVariableName].reset();
+    return myCurrentTwitterViews[aTwitterViewVariableName];
   }
-  myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView( anArrayOfHashTags, 
-                                                                    anArrayOfNotTags,
-                                                                    aMaxTweets, 
+  
+  myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView(aMaxTweets, 
                                                                     aTweetDivId, 
                                                                     aNewTweetDivId,
                                                                     aControlsDivId, 

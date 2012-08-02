@@ -3,19 +3,38 @@ var TwitterController = function(aTwitterView)
 {
   this.myTwitterView = aTwitterView;
   this.myButtonsLoadedCallback;
-  this.myTweetHash = {};
+  this.myQuickTweets = {};
+  this.myAbortFlag = false;
   
   
   this.loadButtonData = function (aSportId, aButtonsLoadedCallback)
   {
+    this.myAbortFlag = false;
     this.myButtonsLoadedCallback = aButtonsLoadedCallback;
-    $.getJSON("/quick_tweets.json?sport_id=" + aSportId, 
-              createDelegate(this, this.onQuickTweetsComplete));
+    if (this.myQuickTweets.happy)
+    {
+      this.myButtonsLoadedCallback();
+    }
+    else
+    {
+      $.getJSON("/quick_tweets.json?sport_id=" + aSportId, 
+                createDelegate(this, this.onQuickTweetsComplete));
+    }
   };
+  
+  this.abort = function()
+  {
+    this.myAbortFlag = true;
+    this.myButtonsLoadedCallback = null;
+  }
   
   this.onQuickTweetsComplete = function(aResult)
   {
-    this.myTweetHash = aResult;
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    this.myQuickTweets = aResult;
     this.myButtonsLoadedCallback();
   };
   
@@ -26,7 +45,7 @@ var TwitterController = function(aTwitterView)
   
   this.addQuickTweetButtons = function( aParentUL )
   {
-    aParentUL.render( this.myTweetHash, this.getQuickTweetButtonsDirective() );
+    aParentUL.render( this.myQuickTweets, this.getQuickTweetButtonsDirective() );
   };
   
   this.getQuickTweetButtonsDirective = function()
@@ -61,10 +80,10 @@ var TwitterController = function(aTwitterView)
   
   this.getQuickTweetChoices = function( aKey )
   {
-    var theChoice = this.findChoices(aKey, this.myTweetHash.happy);
+    var theChoice = this.findChoices(aKey, this.myQuickTweets.happy);
     if( !theChoice )
     {
-      theChoice = this.findChoices(aKey, this.myTweetHash.sad);
+      theChoice = this.findChoices(aKey, this.myQuickTweets.sad);
     }
     return theChoice;
   };

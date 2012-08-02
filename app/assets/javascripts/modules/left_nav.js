@@ -1,7 +1,8 @@
 
 $(function(){
-  initializeFrameContent();
+  updateFrameFromHash();
   initializeNavigationWatchers();
+  window.onhashchange = updateFrameFromHash;
 
   var theCreateFanzoneDialog = new FanzoneDialog("#myCreateFanzoneModal", false);
   theCreateFanzoneDialog.initialize();
@@ -17,7 +18,7 @@ function getLeftNavElement( aHash )
   return $("#fanzo_navigation " + aHash + " a");
 }
 
-function initializeFrameContent()
+function updateFrameFromHash()
 {
   var theHash = "";
   var theLocationCookie = getCookie("myCurrentLocationHash");
@@ -118,7 +119,7 @@ function onLoadDataComplete(aResult)
   {
     InfiniteScroller.get().handleScrollingForResource("/tailgates");
   }
-  cleanupTimestamps();
+  updateTimestamps();
 }
 
 function onLoadError(anError)
@@ -137,7 +138,11 @@ function loadData(aPath, aNewActiveSelector)
   if (aNewActiveSelector)
   {
     addActiveToCurrentNavItem(aNewActiveSelector);
-    window.location.hash = aNewActiveSelector;
+    if (window.location.hash != aNewActiveSelector)
+    {
+      window.location.hash = aNewActiveSelector;
+      return;
+    }
   }
   
   InfiniteScroller.get().stop();

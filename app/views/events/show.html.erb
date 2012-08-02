@@ -155,9 +155,7 @@
   var myHomeTeamTwitterView;
   $(function()
   {
-    myVisitingTeamTwitterView = new TwitterView( <%= raw @visitingHashTags %>,
-                                                 <%= raw @event.visiting_team.social_info ? @event.visiting_team.social_info.not_tags.split(" ") : [] %>, 
-                                                 20, 
+    myVisitingTeamTwitterView = TwitterView.create( 20, 
                                                  "tweetsVisiting", 
                                                  "newTweetsVisiting",
                                                  "visitingTweetControls",
@@ -165,11 +163,11 @@
                                                   <%= user_signed_in? ? current_user.id : 0 %>,
                                                  <%= @event.visiting_team.sport.id %>,
                                                  "myVisitingTeamTwitterView");
-    myVisitingTeamTwitterView.startLoadingTweets();
+    myVisitingTeamTwitterView.startLoadingTweets(<%= raw @visitingHashTags %>,
+                                                 <%= raw @event.visiting_team.social_info ? @event.visiting_team.social_info.not_tags.split(" ") : [] %> 
+                                                 );
 
-    myHomeTeamTwitterView = new TwitterView(  <%= raw @homeHashTags %>, 
-                                              <%= raw @event.home_team.social_info ? @event.home_team.social_info.not_tags.split(" ") : [] %>, 
-                                              20, 
+    myHomeTeamTwitterView = TwitterView.create(  20, 
                                               "tweetsHome", 
                                               "newTweetsHome",
                                               "homeTweetControls",
@@ -177,7 +175,9 @@
                                               <%= user_signed_in? ? current_user.id : 0 %>,
                                               <%= @event.home_team.sport.id %>,
                                               "myHomeTeamTwitterView");
-    myHomeTeamTwitterView.startLoadingTweets();
+    myHomeTeamTwitterView.startLoadingTweets( <%= raw @homeHashTags %>, 
+                                              <%= raw @event.home_team.social_info ? @event.home_team.social_info.not_tags.split(" ") : [] %> 
+                                              );
   })
 </script>
 

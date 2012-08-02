@@ -179,9 +179,7 @@
   $(function()
   {
     myFacebookView = new FacebookView();
-    myTwitterView = TwitterView.create( <%= raw @tailgate.topic_tags.split(",") %>,
-                                        <%= raw @tailgate.not_tags.split(",") %>,
-                                        15,
+    myTwitterView = TwitterView.create( 15,
                                         "tweets",
                                         "newTweets",
                                         "postForm",
@@ -189,7 +187,9 @@
                                         <%= user_signed_in? ? current_user.id : 0 %>,
                                         <%= @tailgate.team.sport.id %>,
                                         "myTwitterView");
-    myTwitterView.startLoadingTweets();
+    myTwitterView.startLoadingTweets( <%= raw @tailgate.topic_tags.split(",") %>,
+                                      <%= raw @tailgate.not_tags.split(",") %>
+                                      );
 
     myTailgateMediaSlider = MediaSlider.create( "div#tailgate_show div#myMediaSlider", 
                                                 "div#tailgate_show div#myVideoModal",
