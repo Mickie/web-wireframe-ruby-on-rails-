@@ -9,8 +9,6 @@ var FanzoNavigator = function()
     this.updateFrameFromHash();
     this.initializeNavigationWatchers();
     this.myCreateFanzoneDialog.initialize();
-    
-    window.onhashchange = createDelegate(this, this.updateFrameFromHash);
   };
   
   this.notifySearchComplete = function()
@@ -34,6 +32,7 @@ var FanzoNavigator = function()
 
   this.initializeNavigationWatchers = function()
   {
+    window.onhashchange = createDelegate(this, this.updateFrameFromHash);
     $('#myLoginModal').on('shown', createDelegate(this, this.saveLocation) );
     $('#myLoginModal').on('hidden', createDelegate(this, this.clearLocation) );  
     $('#myConnectTwitterModal').on('shown', createDelegate(this, this.saveLocation) );
