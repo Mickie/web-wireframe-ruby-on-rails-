@@ -5,9 +5,7 @@ describe("TwitterView", function()
   beforeEach(function()
   {
     
-    myTwitterView = new TwitterView(["notredame"],
-                                    [], 
-                                    1,
+    myTwitterView = new TwitterView(1,
                                     "tweets",
                                     "newTweets",
                                     "controls",
@@ -24,7 +22,6 @@ describe("TwitterView", function()
     
     beforeEach(function()
     {
-      $('div#newTweets').hide();
       myTwitterView.myNewTweets = [1,2];
       myTwitterView.showNewTweetsAlert();
     });
@@ -36,7 +33,7 @@ describe("TwitterView", function()
     
     it("displays the correct text", function() 
     {
-      expect($('div#newTweets > p')).toHaveHtml( "<strong>2</strong> new Tweets!" ); 
+      expect($('div#newTweets > p')).toContainHtml( "<strong>2</strong> new Tweets!" ); 
     });
   });
     

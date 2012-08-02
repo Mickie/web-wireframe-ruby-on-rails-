@@ -9,7 +9,12 @@ describe("TwitterSearch", function()
     onTweet = jasmine.createSpy('onTweet');
     onError = jasmine.createSpy('onError');
     
-    myTwitterSearch = new TwitterSearch(onTweet, onError);
+    var theListener = {
+      "onNewTweet" : onTweet,
+      "onError" : onError
+    };
+    
+    myTwitterSearch = new TwitterSearch(theListener);
   });
   
   describe("getSearchQuery", function()
@@ -61,7 +66,6 @@ describe("TwitterSearch", function()
     it("calls onTweet with an array of tweets", function() 
     {
       expect(onTweet).toHaveBeenCalled();
-      expect(onError).wasNotCalled();
  
       var theArgs = onTweet.mostRecentCall.args;
 
