@@ -10,7 +10,12 @@ $(function(){
 
 function isFacebookCallbackHash( aHash )
 {
-  return ( aHash == "_=_" );
+  return ( aHash == "#_=_" );
+}
+
+function isSearchHash( aHash )
+{
+  return ( aHash == "#search" );
 }
 
 function getLeftNavElement( aHash )
@@ -18,6 +23,7 @@ function getLeftNavElement( aHash )
   return $("#fanzo_navigation " + aHash + " a");
 }
 
+var myCurrentHash = window.location.hash;
 function updateFrameFromHash()
 {
   var theHash = "";
@@ -34,12 +40,26 @@ function updateFrameFromHash()
   
   if(theHash.length > 0)
   {
+    myCurrentHash = theHash;
     var theElement = [];
 
     if (isFacebookCallbackHash( theHash ))
     {
-      window.location.hash = ""
+      window.location.hash = "";
       return;
+    }
+    else if ( isSearchHash( theHash ) )
+    {
+      if (mySearchSubmitInProcessFlag)
+      {
+        return;
+      }
+      else
+      {
+        var theCurrentSearchVal = getCookie("myCurrentSearchVal");
+        $("#fanzone_search #team_id").val(theCurrentSearchVal);
+        $('#fanzone_search form').submit();
+      }
     }
     else if ( (theElement = getLeftNavElement( theHash ) ) && theElement.length > 0)
     {
@@ -55,10 +75,13 @@ function updateFrameFromHash()
       }
       else
       {
-        window.location.hash = "";
         navToAllFanzones();
       }
     }
+  }
+  else if (myCurrentHash != theHash)
+  {
+    navToAllFanzones();
   }
 }
 
@@ -89,10 +112,13 @@ function clearLocation()
   setCookie("myCurrentLocationHash", "");
 }
 
+var mySearchSubmitInProcessFlag = false;
 function handleSearchSubmit()
 {
-  window.location.hash = "";
+  mySearchSubmitInProcessFlag = true;
+  setCookie( "myCurrentSearchVal", $("#fanzone_search #team_id").val(), 5);
   InfiniteScroller.get().stop();
+  window.location.hash = "#search";
 }
 
 function handleSearchSelect()
