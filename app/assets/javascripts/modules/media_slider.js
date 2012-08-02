@@ -333,7 +333,10 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.onVideoDismiss = function(e)
   {
     this.myDialogPlayer.stopVideo();
-    this.myDialogPlayer.clearVideo();
+    if (this.myDialogPlayer.clearVideo)
+    {
+      this.myDialogPlayer.clearVideo();
+    }
   };
   
   this.onPostInstagram = function(e)
