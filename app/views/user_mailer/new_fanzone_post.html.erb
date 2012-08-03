@@ -11,7 +11,7 @@
 <%= provide :content_header, "New Post on #{ @post.tailgate.name }" %>
 
 <% provide :profile_pic do %>
-  <%= image_tag( @post.user.image, size:"32x32", alt:"#{@post.user.full_name}" ) %>
+  <%= link_to image_tag( @post.user.image, size:"32x32", alt:"#{@post.user.full_name}" ), user_url(@post.user) %>
 <% end %>
 
 <%= provide :user_name, @post.user.full_name %>

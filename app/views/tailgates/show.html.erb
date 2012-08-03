@@ -60,7 +60,7 @@
             <div class="owner">
               <% if @tailgate.user.image %>
                 <div class="profile_pic">
-                  <%= image_tag( @tailgate.user.image, size:"32x32" ) %>
+                  <%= link_to image_tag( @tailgate.user.image, size:"32x32" ), user_path(@tailgate.user) %>
                 </div>
               <% end %>
               <div class="owner_details">
@@ -88,7 +88,7 @@
           <h4>Fanzone Posts</h4>
           <div class="profile_pic">
             <% if user_signed_in? %>
-              <%= image_tag( current_user.image, size:"32x32" ) %>
+              <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
             <% end %>
           </div>
           <div class="post_fields">
@@ -117,7 +117,7 @@
           <div class="fan_pics">
             <% if @tailgate.user.image %>
               <div class="profile_pic">
-                <%= image_tag( @tailgate.user.image, size:"32x32" ) %>
+                <%= link_to image_tag( @tailgate.user.image, size:"32x32" ), user_path(@tailgate.user) %>
               </div>
             <% end %>
             <% @tailgate.followers.limit(12).each do |aTailgateFollower| %>

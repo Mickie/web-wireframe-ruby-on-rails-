@@ -37,7 +37,7 @@
             <div class="post">
               <div class="profile_pic">
                 <% if thePost.user.image %>
-                  <%= image_tag( thePost.user.image, size:"32x32") %>
+                  <%= link_to image_tag( thePost.user.image, size:"32x32"), user_path(thePost.user) %>
                 <% end %>
               </div>
               <div class="post_content">

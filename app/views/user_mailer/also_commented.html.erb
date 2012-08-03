@@ -11,7 +11,7 @@
 <%= provide :content_header, "New Comment In #{ @comment.post.tailgate.name }" %>
 
 <% provide :profile_pic do %>
-  <%= image_tag( @comment.user.image, size:"32x32", alt:"#{@comment.user.full_name}" ) %>
+  <%= link_to image_tag( @comment.user.image, size:"32x32", alt:"#{@comment.user.full_name}" ), user_url(@comment.user) %>
 <% end %>
 
 <%= provide :user_name, @comment.user.full_name %>
@@ -23,7 +23,7 @@
   <table>
     <tr>
       <td class="profile_pic" valign="top">
-        <%= image_tag( @comment.post.user.image, size:"32x32", alt:"#{@comment.post.user.full_name}" ) %>
+        <%= link_to image_tag( @comment.post.user.image, size:"32x32", alt:"#{@comment.post.user.full_name}" ), user_url(@comment.post.user) %>
       </td>
       <td class="user_name">
         <div class="header3"><%= @comment.post.user.full_name -%></div>
