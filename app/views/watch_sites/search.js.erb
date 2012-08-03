@@ -1,6 +1,8 @@
 $(".modal").modal("hide");
 $("#myChangeLocationModal #location_query").val("");
-$(".current_location_venues").html(<%= escape_javascript( render partial: "partials/venue_locations", 
-                                                                  locals: { aCurrentLocationFlag: true, 
+$(".current_location_venues").html("<%= escape_javascript( render partial: "partials/venue_locations", 
+                                                                  locals: { aCurrentLocationFlag: true,
+                                                                            aLocationTextColor: "black", 
+                                                                            aLocationBackgroundColor: "white", 
                                                                             aLocationString: @locationQuery, 
-                                                                            aWatchSiteList: @watch_sites } )%>)
+                                                                            aWatchSiteList: @watch_sites } )%>")

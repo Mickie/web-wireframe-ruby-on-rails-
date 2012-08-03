@@ -135,7 +135,9 @@
           </div>
           <div class="current_location_venues">
             <%= render partial: "partials/venue_locations", 
-                       locals: { aCurrentLocationFlag: true, 
+                       locals: { aCurrentLocationFlag: true,
+                                 aLocationBackgroundColor: "white", 
+                                 aLocationTextColor: "black", 
                                  aLocationString: @currentCityState, 
                                  aWatchSiteList: @localTeamWatchSites }%>
           </div>
@@ -143,7 +145,10 @@
             <% if user_signed_in? %>
               <% current_user.user_locations.each do | aUserLocation | %>
                 <%= render partial: "partials/venue_locations", 
-                           locals: { aCurrentLocationFlag: false, 
+                           locals: { aCurrentLocationFlag: false,
+                                     aUserLocation: aUserLocation,
+                                     aLocationBackgroundColor: @tailgate.light_color,
+                                     aLocationTextColor: @tailgate.color, 
                                      aLocationString: aUserLocation.location_query, 
                                      aWatchSiteList: @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(aUserLocation.location_query, 50) }%>
 

@@ -7,7 +7,7 @@
     <div class="modal-body">
       <%= hidden_field_tag(:team_id, aTeam.id) %>
       <%= label_tag(:location_query, "Location:") %>
-      <%= text_field_tag :location_query, placeholder:"eg. Kirkland, WA", required: true %>      
+      <%= text_field_tag :location_query, nil, placeholder:"eg. Kirkland, WA", required: true %>      
     </div>
     <div class="modal-footer">
       <%= submit_tag("Update", class:"fanzoButton") %>

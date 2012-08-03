@@ -1,4 +1,4 @@
-$("#edit_user .saved_locations ul li#user_location_<%= @user_location.id -%>").remove();
+$("#user_location_<%= @user_location.id -%>").remove();
 <% if current_user.user_locations.length == 0 %>
   $("#edit_user .saved_locations ul").append("<li class='no_locations'>No Locations</li>");
 <% end %>
