@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803183511) do
+ActiveRecord::Schema.define(:version => 20120803234049) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -400,6 +400,7 @@ ActiveRecord::Schema.define(:version => 20120803183511) do
     t.string   "image"
     t.string   "description"
     t.integer  "email_bit_flags",         :default => 0,  :null => false
+    t.string   "slug"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -407,6 +408,7 @@ ActiveRecord::Schema.define(:version => 20120803183511) do
   add_index "users", ["foursquare_user_id"], :name => "index_users_on_foursquare_user_id", :unique => true
   add_index "users", ["instagram_user_id"], :name => "index_users_on_instagram_user_id", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["twitter_user_id"], :name => "index_users_on_twitter_user_id", :unique => true
   add_index "users", ["twitter_user_token"], :name => "index_users_on_twitter_user_token", :unique => true
 

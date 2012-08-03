@@ -1,10 +1,13 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
   include Bitfields
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  friendly_id :full_name, use: :slugged
 
   has_many :user_teams, inverse_of: :user, dependent: :delete_all
   has_many :teams, through: :user_teams
