@@ -8,7 +8,7 @@ describe UserLocationsController do
   end
 
   def valid_attributes
-    {}
+    { location_query: "Seattle, WA" }
   end
 
   describe "POST create" do
@@ -51,14 +51,14 @@ describe UserLocationsController do
 
   describe "DELETE destroy" do
     it "destroys the requested user_location" do
-      user_location = UserLocation.create! valid_attributes
+      user_location = @user.user_locations.create! valid_attributes
       expect {
         delete :destroy, {:id => user_location.to_param, :user_id => @user.id}
       }.to change(UserLocation, :count).by(-1)
     end
 
     it "redirects to the user" do
-      user_location = UserLocation.create! valid_attributes
+      user_location = @user.user_locations.create! valid_attributes
       delete :destroy, {:id => user_location.to_param, :user_id => @user.id}
       response.should redirect_to(user_path(@user))
     end

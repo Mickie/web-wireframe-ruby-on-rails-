@@ -1,0 +1,11 @@
+<div class="venue_locations">
+  <div class="locationLabel">
+    <span class="city_state"><%= aLocationString %></span>
+    <% if aCurrentLocationFlag %>
+      <span class="change_location"><a href="#myChangeLocationModal" data-toggle="modal">change</a></span>
+    <% end %>
+  </div>
+  <div class="venueList">
+    <%= render partial:"partials/watch_site_venue_list", locals:{ aWatchSiteList: aWatchSiteList, aLocationString: aLocationString } %>
+  </div>
+</div>

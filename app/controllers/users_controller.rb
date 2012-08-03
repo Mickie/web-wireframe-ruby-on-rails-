@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def getWatchSitesForLocation( aUser, anAddress )
     theLocalTeamWatchSites = []
     if (@user.teams.length > 0)
-      WatchSite.near(anAddress).each do | aWatchSite |
+      WatchSite.near(anAddress, 50).each do | aWatchSite |
         @user.teams.each do | aTeam |
           if aWatchSite.team.id == aTeam.id
             theLocalTeamWatchSites.push(aWatchSite)

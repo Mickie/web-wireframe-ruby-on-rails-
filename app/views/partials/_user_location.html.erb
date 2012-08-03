@@ -1,0 +1,4 @@
+<%= link_to user_user_location_path(aUserLocation.user, aUserLocation), data: { confirm: "Delete this location?" }, method: :delete, remote:true do %>
+  <i class="icon-remove mine"></i>
+<% end %>
+<span class="location_text"><%= aUserLocation.location_query -%></span>

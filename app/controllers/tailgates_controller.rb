@@ -46,7 +46,7 @@ class TailgatesController < ApplicationController
     @currentCityState = getCityStateFromRequest( request )
     theCoordinates = getCoordinatesFromRequest( request )
     
-    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(theCoordinates, 20);
+    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(theCoordinates, 50);
 
     respond_to do |format|
       if (params[:noLayout])

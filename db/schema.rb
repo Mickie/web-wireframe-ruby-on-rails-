@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801054428) do
+ActiveRecord::Schema.define(:version => 20120803183511) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -342,12 +342,11 @@ ActiveRecord::Schema.define(:version => 20120801054428) do
 
   create_table "user_locations", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "location_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "location_query", :null => false
   end
 
-  add_index "user_locations", ["location_id"], :name => "index_user_locations_on_location_id"
   add_index "user_locations", ["user_id"], :name => "index_user_locations_on_user_id"
 
   create_table "user_post_votes", :force => true do |t|

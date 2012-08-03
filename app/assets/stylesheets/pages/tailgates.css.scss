@@ -135,56 +135,64 @@ div#tailgate_show
       .venues
       {
         clear: both;
-        
-        .locationLabel
+
+        .venue_locations
         {
-          padding:10px;
+          border-bottom: $fanzoneLightBorder solid 1px;
           
-          .city_state
+          .locationLabel
           {
-            font-weight: bold;
-          }
-          
-          .change_location
-          {
-            float: right;
-          }
-        }
-        
-        .noVenues
-        {
-          border-top: $fanzoneLightBorder solid 1px;
-          background-color: white;
-          padding: 10px;
-        }
-        .venue
-        {
-          border-top: $fanzoneLightBorder solid 1px;
-          background-color: white;
-          padding: 10px;
-          
-          .venue_image
-          {
-            float: left;
-            width:32px;
-            height:32px;
-            background-color: #F0F0F0;
-          }
-          
-          .venue_content
-          {
-            margin-left: 42px;
-            .venue_name
+            padding:10px;
+            
+            .city_state
             {
-              font-weight:bold;
+              font-weight: bold;
             }
-            .venue_address
+            
+            .change_location
             {
-              
+              float: right;
             }
           }
+          
+          .noVenues
+          {
+            border-top: $fanzoneLightBorder solid 1px;
+            background-color: white;
+            padding: 10px;
+          }
+          
+          .venue
+          {
+            border-top: $fanzoneLightBorder solid 1px;
+            background-color: white;
+            padding: 10px;
+            
+            .venue_image
+            {
+              float: left;
+              width:32px;
+              height:32px;
+              background-color: #F0F0F0;
+            }
+            
+            .venue_content
+            {
+              margin-left: 42px;
+              .venue_name
+              {
+                font-weight:bold;
+              }
+              .venue_address
+              {
+                
+              }
+            }
+          }
         }
+
       }
+      
       
       .twitterStream
       {

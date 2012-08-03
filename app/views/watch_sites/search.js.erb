@@ -1,6 +1,6 @@
 $(".modal").modal("hide");
-$("#myChangeLocationModal #city").val("");
-$("#myChangeLocationModal #state").val("");
-$(".venueHeader .city_state").html("<%= @currentCityState %>");
-$(".venueList").html("<%= escape_javascript( render partial:"partials/watch_site_venue_list", 
-                                                    locals:{ aWatchSiteList: @watch_sites, aCityState: @currentCityState } ) %>");
+$("#myChangeLocationModal #location_query").val("");
+$(".current_location_venues").html(<%= escape_javascript( render partial: "partials/venue_locations", 
+                                                                  locals: { aCurrentLocationFlag: true, 
+                                                                            aLocationString: @locationQuery, 
+                                                                            aWatchSiteList: @watch_sites } )%>)

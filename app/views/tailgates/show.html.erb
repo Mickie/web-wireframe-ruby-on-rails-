@@ -132,13 +132,24 @@
         <div class="venues">
           <div class="venueHeader">
             <h4 style="background-color: <%= @tailgate.color %>">Local <%= @tailgate.team.mascot -%> Venues</h4>
-            <div class="locationLabel">
-              <span class="city_state"><%= @currentCityState %></span>
-              <span class="change_location"><a href="#myChangeLocationModal" data-toggle="modal">change</a></span>
-            </div>
           </div>
-          <div class="venueList">
-            <%= render partial:"partials/watch_site_venue_list", locals:{ aWatchSiteList: @localTeamWatchSites, aCityState: @currentCityState } %>
+          <div class="current_location_venues">
+            <%= render partial: "partials/venue_locations", 
+                       locals: { aCurrentLocationFlag: true, 
+                                 aLocationString: @currentCityState, 
+                                 aWatchSiteList: @localTeamWatchSites }%>
+          </div>
+          <div class="user_location_venues">
+            <% if user_signed_in? %>
+              <% current_user.user_locations.each do | aUserLocation | %>
+                <%= render partial: "partials/venue_locations", 
+                           locals: { aCurrentLocationFlag: false, 
+                                     aLocationString: aUserLocation.location_query, 
+                                     aWatchSiteList: @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(aUserLocation.location_query, 50) }%>
+
+                
+              <% end %>
+            <% end %>
           </div>
         </div>
         <div class="twitterStream">

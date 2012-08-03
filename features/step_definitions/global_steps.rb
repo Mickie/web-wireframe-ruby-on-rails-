@@ -7,7 +7,7 @@ Before do
   
   @sport = FactoryGirl.create(:sport)
   @league = FactoryGirl.create(:league, visible:true)
-  @conference = FactoryGirl.create(:conference)
+  @conference = FactoryGirl.create(:conference, league:@league)
   @division = FactoryGirl.create(:division)
   @team = FactoryGirl.create(:team)
   @affiliation = FactoryGirl.create(:affiliation)

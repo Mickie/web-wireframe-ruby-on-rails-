@@ -34,7 +34,7 @@ class TeamsController < ApplicationController
     @team = Team.includes(:social_info).find(params[:id])
     
     theCoordinates = getCoordinatesFromRequest( request )
-    @localTeamWatchSites = @team.watch_sites.includes(:venue => :location).near(theCoordinates, 20);
+    @localTeamWatchSites = @team.watch_sites.includes(:venue => :location).near(theCoordinates, 50);
         
     respond_to do |format|
       if (params[:noLayout])

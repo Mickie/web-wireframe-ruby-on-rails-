@@ -40,7 +40,7 @@ class EventsController < ApplicationController
     
     @localHomeTeamWatchSites = [];
     @localVisitingTeamWatchSites = [];
-    WatchSite.near(theCoordinates, 20).each do | aWatchSite |
+    WatchSite.near(theCoordinates, 50).each do | aWatchSite |
       if aWatchSite.team.id == @event.home_team.id
         @localHomeTeamWatchSites.push(aWatchSite)
       end
