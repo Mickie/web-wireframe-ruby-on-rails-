@@ -1,28 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!  
+  before_filter :authenticate_user!, except: [:show]  
   
   def show
     @user = User.find(params[:id])
-    @user_team = @user.user_teams.build
-    @user_location = @user.user_locations.build
-    @user_location.build_location
-    
-    theCoordinates = getCoordinatesFromRequest( request )
-    theCityState = getCityStateFromRequest( request )
-    
-    @localWatchSites = WatchSite.near(theCoordinates, 60)
-    
-    
-    @locationsWithTailgateVenues = [ { locationName: "#{theCityState}", tailgateVenueList: TailgateVenue.near(theCoordinates, 30) } ]
-    @locationsWithTeamWatchSites = [ { locationName: "#{theCityState}", localTeamWatchSiteList: getWatchSitesForLocation(@user, theCoordinates)}]
-    
-    @user.locations.each do |aLocation|
-      @locationsWithTailgateVenues.push( { locationName: "#{aLocation.city}, #{aLocation.state.abbreviation}",
-                                           tailgateVenueList: TailgateVenue.near(aLocation.one_line_address )})
-      @locationsWithTeamWatchSites.push( { locationName: "#{aLocation.city}, #{aLocation.state.abbreviation}",
-                                           localTeamWatchSiteList: getWatchSitesForLocation(@user, aLocation.one_line_address)})
-    end
-    
   end
   
   def connect_twitter

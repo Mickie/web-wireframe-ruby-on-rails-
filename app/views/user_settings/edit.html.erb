@@ -1,4 +1,32 @@
+<%= provide(:title, "Edit My Profile" ) %>
+
+
 <div id="edit_user" class="container-fluid">
+
+  <div id="myAddTeamModal" class="modal hide fade" style="display: none;">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>Add a team:</h3>
+    </div>
+    <%= render :partial => 'partials/team_picker' %>
+  </div>
+
+  <div id="myAddLocationModal" class="modal hide fade" style="display: none;">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>Add a location:</h3>
+    </div>
+    <%= form_for(@user_location, url: user_user_locations_path(@user, @user_location) ) do |f| %>
+    <div class="modal-body">
+      <%= render :partial => 'partials/location', :locals => { :f => f, :location => @user_location.location } %>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit("Add", id:"commit", class:"btn") %>
+    </div>
+    <% end %>
+  </div>
+
+
   <div class="row-fluid">
     <div class="span12 edit_header">
       <h2>Edit Your Fanzo Account</h2>

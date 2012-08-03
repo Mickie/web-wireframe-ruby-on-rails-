@@ -3,6 +3,9 @@ class UserSettingsController < ApplicationController
 
   def edit
     @user = current_user
+    @user_team = @user.user_teams.build
+    @user_location = @user.user_locations.build
+    @user_location.build_location
   end
 
   def update

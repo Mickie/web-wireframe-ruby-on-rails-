@@ -47,6 +47,65 @@ class User < ActiveRecord::Base
                   :no_email_on_comments,
                   :no_email_newsletter
                   
+  def isConnectedToTwitter?
+    return twitter_user_token? && twitter_user_secret?
+  end
+  
+  def followDefaultTailgate
+    theDefaultTailgate = Tailgate.find_by_name("The World's Largest Tailgate Party!")
+    if (theDefaultTailgate)
+      follow!(theDefaultTailgate)
+    end
+  end
+  
+  def full_name
+    if name && name.length > 0
+      return name
+    elsif ( first_name && first_name.length > 0 ) && ( last_name && last_name.length > 0)
+      return "#{first_name} #{last_name}"
+    elsif ( first_name && first_name.length > 0 ) && !( last_name && last_name.length > 0)
+      return first_name
+    elsif !( first_name && first_name.length > 0 ) && ( last_name && last_name.length > 0)
+      return last_name
+    elsif twitter_username && twitter_username.length > 0 
+      return twitter_username
+    elsif twitter_username && twitter_username.length > 0 
+      return twitter_username
+    elsif instagram_username && instagram_username.length > 0 
+      return instagram_username
+    else
+      return email
+    end 
+  end
+  
+  def mine?( aTailgate )
+    tailgates.include?( aTailgate )
+  end
+  
+  def following?( aTailgate )
+    aTailgate.followers.include?(self)
+  end
+
+  def mine_or_following?( aTailgate )
+    mine?(aTailgate) || following?( aTailgate )
+  end
+
+  def follow!( aTailgate )
+    tailgate_followers.create!( tailgate_id: aTailgate.id)
+  end  
+
+  def unfollow!( aTailgate )
+    tailgate_followers.find_by_tailgate_id( aTailgate.id ).destroy
+  end
+  
+  def myFanzones
+    tailgates.all + followed_tailgates.all
+  end
+  
+  def large_profile_pic
+    "https://graph.facebook.com/#{facebook_user_id}/picture?type=large"
+  end
+  
   def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)
   
     theId = access_token.uid
@@ -216,62 +275,7 @@ class User < ActiveRecord::Base
         user.email = data["email"]
       end
     end
-  end
-
-  def isConnectedToTwitter?
-    return twitter_user_token? && twitter_user_secret?
-  end
-  
-  def followDefaultTailgate
-    theDefaultTailgate = Tailgate.find_by_name("The World's Largest Tailgate Party!")
-    if (theDefaultTailgate)
-      follow!(theDefaultTailgate)
-    end
-  end
-  
-  def full_name
-    if name && name.length > 0
-      return name
-    elsif ( first_name && first_name.length > 0 ) && ( last_name && last_name.length > 0)
-      return "#{first_name} #{last_name}"
-    elsif ( first_name && first_name.length > 0 ) && !( last_name && last_name.length > 0)
-      return first_name
-    elsif !( first_name && first_name.length > 0 ) && ( last_name && last_name.length > 0)
-      return last_name
-    elsif twitter_username && twitter_username.length > 0 
-      return twitter_username
-    elsif twitter_username && twitter_username.length > 0 
-      return twitter_username
-    elsif instagram_username && instagram_username.length > 0 
-      return instagram_username
-    else
-      return email
-    end 
-  end
-  
-  def mine?( aTailgate )
-    tailgates.include?( aTailgate )
-  end
-  
-  def following?( aTailgate )
-    aTailgate.followers.include?(self)
-  end
-
-  def mine_or_following?( aTailgate )
-    mine?(aTailgate) || following?( aTailgate )
-  end
-
-  def follow!( aTailgate )
-    tailgate_followers.create!( tailgate_id: aTailgate.id)
   end  
-
-  def unfollow!( aTailgate )
-    tailgate_followers.find_by_tailgate_id( aTailgate.id ).destroy
-  end
-  
-  def myFanzones
-    tailgates.all + followed_tailgates.all
-  end
 end
 
 
