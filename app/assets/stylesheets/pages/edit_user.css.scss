@@ -100,14 +100,20 @@
       margin: 0px;
       list-style:none;
       
-      i
+      li
       {
-        margin-top:2px;
+        padding: 5px 0px;
+        
+        i
+        {
+          margin-top:2px;
+        }
+        .location_text
+        {
+          margin-left: 5px;
+        }
       }
-      .location_text
-      {
-        margin-left: 5px;
-      }
+      
     }
     
     .add_location
