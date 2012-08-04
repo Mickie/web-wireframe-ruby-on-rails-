@@ -37,6 +37,8 @@ class Team < ActiveRecord::Base
                   
   default_scope order: "name"
   
+  scope :visible, joins(:league).where("leagues.visible = 't'")
+  
   def events
     theEvents = self.home_games + self.away_games
     theEvents.sort_by {|e| e[:event_date] }
