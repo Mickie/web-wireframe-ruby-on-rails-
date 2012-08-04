@@ -32,7 +32,7 @@ function createDelegate(anObject, aMethod)
     return aMethod.apply(anObject, arguments);
   }
   return theDelegate;
-}; 
+};
 
 function createExtendedDelegate(anObject, aMethod, anArgumentExtensionArray)
 {
@@ -71,20 +71,38 @@ function getCookie(aName)
     theCurrentName = theCurrentName.replace(/^\s+|\s+$/g, "");
     if (theCurrentName == aName)
     {
-      return unescape( theCurrentValue );
+      return unescape(theCurrentValue);
     }
   }
   return null;
 };
 
-String.prototype.escapeQuotes = function() 
-{ 
-   return this.replace(/([\\"'])/g, "\\$1"); 
+String.prototype.escapeQuotes = function()
+{
+  return this.replace(/([\\"'])/g, "\\$1");
 };
+
+function enableTextAreaMaxLength()
+{
+  var ignore = [8, 9, 13, 33, 34, 35, 36, 37, 38, 39, 40, 46];
+  var eventName = 'keypress';
+
+  $('textarea[maxlength]').live(eventName, function(event)
+  {
+    var self = $(this), maxlength = self.attr('maxlength'), code = $.data(this, 'keycode');
+    if (maxlength && maxlength > 0)
+    {
+      return (self.val().length < maxlength || $.inArray(code, ignore) !== -1 );
+    }
+  }).live('keydown', function(event)
+  {
+    $.data(this, 'keycode', event.keyCode || event.which);
+  });
+}
 
 function updateTimestamps()
 {
-  $(".timestamp").timeago();  
+  $(".timestamp").timeago();
 }
 
 $(function()
@@ -93,26 +111,29 @@ $(function()
   {
     window.scrollTo(0, 1);
   }, 100);
-  
-  jQuery.timeago.settings.strings = {
-    prefixAgo: null,
-    prefixFromNow: null,
-    suffixAgo: "",
-    suffixFromNow: "from now",
-    seconds: "%d s",
-    minute: "< 1 m",
-    minutes: "%d m",
-    hour: "~1 h",
-    hours: "%d h",
-    day: "~1 d",
-    days: "%d d",
-    month: "~1 m",
-    months: "%d m",
-    year: "1 y",
-    years: "%d y",
-    wordSeparator: " ",
-    numbers: []
-  }
+
+  jQuery.timeago.settings.strings =
+  {
+    prefixAgo : null,
+    prefixFromNow : null,
+    suffixAgo : "",
+    suffixFromNow : "from now",
+    seconds : "%d s",
+    minute : "< 1 m",
+    minutes : "%d m",
+    hour : "~1 h",
+    hours : "%d h",
+    day : "~1 d",
+    days : "%d d",
+    month : "~1 m",
+    months : "%d m",
+    year : "1 y",
+    years : "%d y",
+    wordSeparator : " ",
+    numbers : []
+  };
+
+  enableTextAreaMaxLength();
 
   updateTimestamps();
   setInterval(updateTimestamps, 60000);
