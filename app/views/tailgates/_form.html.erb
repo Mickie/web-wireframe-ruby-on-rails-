@@ -25,7 +25,7 @@
         <p>Be as creative as you&apos;d like, it&apos;s your pad!</p>
         <%= f.text_field :name, placeholder:"eg. Tom's Tennessee Tailgate", required: true %>
         <p>Add a description so people catch the drift...</p>
-        <%= f.text_field :description, placeholder:"eg. Let's talk Vols Offense! QB calls, running game, it's all good!" %>
+        <%= f.text_field :description, placeholder:"eg. Let's talk Vols Offense! QB calls, running game, it's all good!", maxlength:160 %>
       </div>
       <div class="span3 fanzoneExamples">
         <h5>Example Names:</h5>
@@ -54,18 +54,18 @@
     
     <div class="row fanzoneTopic">
       <div class="span3 fanzoneLabel">
-        <h4>Topic:</h4>
+        <h4>Keywords:</h4>
       </div>
       <div class="span6 fanzoneFields">
-        <%= label_tag(:topic_tags, "Predefined topics:") %>
+        <%= label_tag(:topic_tags, "Predefined Keywords:") %>
         <%= select_tag(:topic_data, options_for_select(Topic.visible.collect {|p| [ p.name, { hash_tags:p.hash_tags, not_tags:p.not_tags } ] }, aTailgate.topic_tags ), { prompt:"Pick a topic (optional)"} ) %>
-        <p>Customize the topics to personalize your fanzone:</p>
+        <p>Customize the keywords to personalize your fanzone:</p>
         <%= f.text_field :topic_tags, placeholder:'eg. #DCC, "Cowboy Cheerleaders"', required: true %>
         <%= f.hidden_field :not_tags %>
-        <p>Separate multiple topics with a comma like: #tag1, "two words"</p>
+        <p>Separate multiple keywords with a comma like: #tag1, "two words"</p>
       </div>
       <div class="span3 fanzoneExamples">
-        <p>Crazy about Tim Tebow or think he's a tool? Love to talk about defense? Add a topic and go beyond just your team.</p>
+        <p>Love quarterbacks? Love to talk about defense? Add a keyword and go beyond just your team. Fanzo will use these to find people talking about your passion.</p>
         <h5>Other examples:</h5>
         <ul>
           <li>"Mean Joe Greene"</li>
