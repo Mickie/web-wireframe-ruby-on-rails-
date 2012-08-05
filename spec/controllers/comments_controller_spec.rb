@@ -183,4 +183,46 @@ describe CommentsController do
     end
   end
 
+  describe "send comment notifications" do
+    
+    before do
+      @second_user = FactoryGirl.create( :user )
+      @third_user = FactoryGirl.create( :user )
+      @comment_by_post_user = @post.comments.create! valid_attributes
+      @comment_by_second_user  = @post.comments.create!( user_id: @second_user.id, content: "I am second user")
+      @comment_by_third_user  = @post.comments.create!( user_id: @third_user.id, content: "I am third user")
+      @second_comment_by_second_user  = @post.comments.create!( user_id: @second_user.id, content: "I am second user's second comment")
+      @theMailerDouble = double("UserMailer")
+    end
+
+    it "sends new comment notification to poster" do
+      UserMailer.stub(:delay).and_return(@theMailerDouble)
+      @theMailerDouble.should_receive(:new_post_comment).once.with( @second_comment_by_second_user.id )
+      @theMailerDouble.should_receive(:also_commented).once
+      subject.sendCommentNotifications( @second_comment_by_second_user )
+    end
+
+    it "doesn't send new comment notification if the commenter was original poster" do
+      UserMailer.stub(:delay).and_return(@theMailerDouble)
+      @theMailerDouble.should_not_receive(:new_post_comment)
+      @theMailerDouble.should_receive(:also_commented).twice
+      subject.sendCommentNotifications( @comment_by_post_user )
+    end
+    
+    it "sends also commented notification to correct group" do
+      fourthUser = FactoryGirl.create( :user )
+      @post.comments.create!( user_id: fourthUser.id, content: "I am fourth user, comment 1")
+      @post.comments.create!( user_id: fourthUser.id, content: "I am fourth user, comment 2")
+      @post.comments.create!( user_id: fourthUser.id, content: "I am fourth user, comment 3")
+      @post.comments.create!( user_id: fourthUser.id, content: "I am fourth user, comment 4")
+      UserMailer.stub(:delay).and_return(@theMailerDouble)
+      @theMailerDouble.should_receive(:also_commented).once.with( @comment_by_post_user.id, @second_user.id)
+      @theMailerDouble.should_receive(:also_commented).once.with( @comment_by_post_user.id, @third_user.id)
+      @theMailerDouble.should_receive(:also_commented).once.with( @comment_by_post_user.id, fourthUser.id)
+      @theMailerDouble.should_not_receive(:also_commented).with( @comment_by_post_user.id, @post.user.id)
+      
+      subject.sendCommentNotifications( @comment_by_post_user )
+    end
+
+  end
 end

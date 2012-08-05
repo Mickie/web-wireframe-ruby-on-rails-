@@ -50,16 +50,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        
-        if current_user.id != @post.user_id
-          UserMailer.delay.new_post_comment(@comment.id) unless @post.user.no_email_on_comments
-        end
-        
-        @post.comments.each do |aComment|
-          if ( aComment.user.id != current_user.id && aComment.user.id != @post.user_id)
-            UserMailer.delay.also_commented(@comment.id, aComment.user.id) unless aComment.user.no_email_on_comments
-          end
-        end
+
+        self.sendCommentNotifications(@comment)
               
         format.html { redirect_to @post.tailgate, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
@@ -146,6 +138,20 @@ class CommentsController < ApplicationController
       format.html { redirect_to tailgate_path(@post.tailgate) }
       format.json { head :no_content }
       format.js
+    end
+  end
+  
+  def sendCommentNotifications( aNewComment )
+    if aNewComment.user_id != aNewComment.post.user_id
+      UserMailer.delay.new_post_comment(aNewComment.id) unless aNewComment.post.user.no_email_on_comments
+    end
+    
+    theAllReadyMailedArray = [ aNewComment.user_id, aNewComment.post.user_id ]
+    aNewComment.post.comments.each do | anExistingComment |
+      if !theAllReadyMailedArray.include?(anExistingComment.user_id)
+        UserMailer.delay.also_commented(aNewComment.id, anExistingComment.user.id) unless anExistingComment.user.no_email_on_comments
+        theAllReadyMailedArray << anExistingComment.user.id
+      end
     end
   end
   
