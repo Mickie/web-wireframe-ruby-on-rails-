@@ -123,7 +123,7 @@
             <% @tailgate.followers.limit(12).each do |aTailgateFollower| %>
               <% if aTailgateFollower.image %>
                 <div class="profile_pic">
-                  <%= link_to image_tag( aTailgateFollower.image, size:"32x32" ), user_path(aTailgateFollower.user) %>
+                  <%= link_to image_tag( aTailgateFollower.image, size:"32x32" ), user_path(aTailgateFollower) %>
                 </div>
               <% end %>
             <% end %>
