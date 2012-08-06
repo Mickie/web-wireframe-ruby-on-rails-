@@ -27,7 +27,7 @@ Feature: Sports Resource
 
 	Scenario: The name of a sport should be unique
 		Given I sign in as admin
-			And I have added 2 sports
+			And I have added 2 sports with names
 		When I visit the edit sport page
 			And I edit the sport with duplicate name
 		Then the changes to the sport should not be saved
@@ -35,13 +35,13 @@ Feature: Sports Resource
 		
 	Scenario: I can see all the sports as an admin
 		Given I sign in as admin
-			And I have added 3 sports
+			And I have added 3 sports with names
 		When I visit the sports page
-		Then I should see 3 sports
+		Then I should see 3 sports with names
 
 	Scenario: I can see all the leagues for a sport
 		Given I sign in as admin
-			And I have added 2 leagues
+			And I have added 2 leagues with names
 			And I associate all leagues with a sport
 		When I visit the sport page
-		Then I should see 2 leagues
+		Then I should see 2 leagues with names

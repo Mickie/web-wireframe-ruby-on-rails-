@@ -27,13 +27,13 @@ Feature: Divisions Resource
 		
 	Scenario: I can see all the divisions as an admin
 		Given I sign in as admin
-			And I have added 3 divisions
+			And I have added 3 divisions with names
 		When I visit the divisions page
-		Then I should see 3 divisions
+		Then I should see 3 divisions with names
 
 	Scenario: I can associate a league with the division
 		Given I sign in as admin
-			And I have added 2 leagues
-			And I have added 2 divisions
+			And I have added 2 leagues with names
+			And I have added 2 divisions with names
 		When I visit the edit division page
 		Then I should be able to associate a league with the division

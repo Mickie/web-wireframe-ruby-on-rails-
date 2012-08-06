@@ -11,6 +11,7 @@ Before do
   @division = FactoryGirl.create(:division)
   @team = FactoryGirl.create(:team)
   @affiliation = FactoryGirl.create(:affiliation)
+  @brag = FactoryGirl.create(:brag)
   @venue_type = FactoryGirl.create(:venue_type)
   @venue = FactoryGirl.create(:venue)
   @event = FactoryGirl.create(:event)
@@ -27,6 +28,7 @@ Before do
   @new_division = FactoryGirl.build(:division)
   @new_team = FactoryGirl.build(:team)
   @new_affiliation = FactoryGirl.build(:affiliation)
+  @new_brag = FactoryGirl.build(:brag)
   @new_venue_type = FactoryGirl.build(:venue_type)
   @new_venue = FactoryGirl.build(:venue)
   @new_event = FactoryGirl.build(:event)
@@ -44,6 +46,7 @@ Before do
   @edit_division = FactoryGirl.create(:division)
   @edit_team = FactoryGirl.create(:team)
   @edit_affiliation = FactoryGirl.create(:affiliation)
+  @edit_brag = FactoryGirl.create(:brag)
   @edit_venue_type = FactoryGirl.create(:venue_type)
   @edit_venue = FactoryGirl.create(:venue)
   @edit_event = FactoryGirl.create(:event)
@@ -101,16 +104,16 @@ Then /^I should be redirected to the (.*) page$/ do |aPageName|
   step %Q(I should be on the #{aPageName} page)
 end
 
-Given /^I have added (\d+) ([\w ]+)s$/ do |aNumberOfObjects, anObjectType|
+Given /^I have added (\d+) ([\w ]+)s with ([\w ]+)s$/ do |aNumberOfObjects, anObjectType, aPropertyName|
   i = 0;
   theObjectType = anObjectType.downcase.gsub(' ', '_')
   begin
-    FactoryGirl.create(eval(":#{theObjectType}"), name:"#{anObjectType}#{i}")
+    eval("FactoryGirl.create(:#{theObjectType}, #{aPropertyName}:\"#{anObjectType}#{i}\")")
     i += 1
   end while i < aNumberOfObjects.to_i
 end
 
-Then /^I should see (\d+) ([\w ]+)s$/ do |aNumberOfObjects, anObjectType|
+Then /^I should see (\d+) ([\w ]+)s with ([\w ]+)s$/ do |aNumberOfObjects, anObjectType, aPropertyName|
   i = 0;
   begin
     page.should have_content("#{anObjectType}#{i}")

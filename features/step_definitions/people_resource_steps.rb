@@ -26,15 +26,15 @@ Then /^I should be able to associate a team with a person$/ do
  page.should have_selector("#person_team_id")
 end
 
-Given /^I have added (\d+) people$/ do |aNumberOfObjects|
+Given /^I have added (\d+) people with names$/ do |aNumberOfObjects|
   i = 0;
   begin
-    FactoryGirl.create(eval(":person"), first_name:"person#{i}")
+    FactoryGirl.create(:person, first_name:"person#{i}")
     i += 1
   end while i < aNumberOfObjects.to_i
 end
 
-Then /^I should see (\d+) people$/ do |aNumberOfObjects|
+Then /^I should see (\d+) people with names$/ do |aNumberOfObjects|
   i = 0;
   begin
     page.should have_content("person#{i}")

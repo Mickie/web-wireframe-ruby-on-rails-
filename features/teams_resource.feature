@@ -28,18 +28,18 @@ Feature: Team Resource
 		
 	Scenario: I can see all the teams as a user
 		Given I sign in as user 
-			And I have added 3 teams
+			And I have added 3 teams with names
 		When I visit the teams page
-		Then I should see 3 teams
+		Then I should see 3 teams with names
 
 	Scenario: I can associate other resources with the team
 		Given I sign in as admin
-			And I have added 2 sports
-			And I have added 2 leagues
-			And I have added 2 divisions
-			And I have added 2 conferences
-			And I have added 2 locations
-			And I have added 2 affiliations
-			And I have added 2 teams
+			And I have added 2 sports with names
+			And I have added 2 leagues with names
+			And I have added 2 divisions with names
+			And I have added 2 conferences with names
+			And I have added 2 locations with names
+			And I have added 2 affiliations with names
+			And I have added 2 teams with names
 		When I visit the edit team page
 		Then I should be able to associate other resources with the team

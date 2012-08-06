@@ -25,13 +25,13 @@ Feature: QuickTweets Resource
 		
 	Scenario: I can see all the quick tweets as a user
 		Given I sign in as user
-			And I have added 3 quick tweets
+			And I have added 3 quick tweets with names
 		When I visit the quick tweets page
-		Then I should see 3 quick tweets
+		Then I should see 3 quick tweets with names
 
 	Scenario: I can associate a sport with the quick tweet
 		Given I sign in as admin
-			And I have added 2 sports
-			And I have added 2 quick tweets
+			And I have added 2 sports with names
+			And I have added 2 quick tweets with names
 		When I visit the edit quick tweet page
 		Then I should be able to associate a sport with the quick tweet

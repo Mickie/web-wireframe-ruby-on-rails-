@@ -1,0 +1,23 @@
+<h1>Listing brags</h1>
+
+<table>
+  <tr>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @brags.each do |brag| %>
+  <tr>
+    <td><%= brag.content %></td>
+    <td><%= link_to 'Show', brag %></td>
+    <td><%= link_to 'Edit', edit_brag_path(brag) %></td>
+    <td><%= link_to 'Destroy', brag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Brag', new_brag_path %>

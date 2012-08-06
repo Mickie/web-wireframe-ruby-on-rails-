@@ -27,13 +27,13 @@ Feature: VenueTypes Resource
 
 	Scenario: The name of a venue type should be unique
 		Given I sign in as admin
-			And I have added 2 venue types
+			And I have added 2 venue types with names
 		When I visit the edit venue type page
 			And I edit the venue type with duplicate name
 		Then the changes to the venue type should not be saved
 	
 	Scenario: I can see all the venue types as an admin
 		Given I sign in as admin
-			And I have added 3 venue types
+			And I have added 3 venue types with names
 		When I visit the venue types page
-		Then I should see 3 venue types
+		Then I should see 3 venue types with names

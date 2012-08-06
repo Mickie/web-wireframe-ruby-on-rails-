@@ -53,29 +53,21 @@ Then /^I should see an add a location link$/ do
 end
 
 When /^I click the add a location link$/ do
-  click_link "Local Fanzones"
   click_link "Add Location"
 end
 
 Then /^I should see a location form$/ do
-  page.should have_selector("#user_location_location_attributes_name")
+  page.should have_selector("#user_location_location_query")
 end
 
 When /^I fill in the location form$/ do
-  fill_in "user_location_location_attributes_name", with: @new_venue.location.name
-  fill_in "user_location_location_attributes_address1", with: @new_venue.location.address1
-  fill_in "user_location_location_attributes_address2", with: @new_venue.location.address2
-  fill_in "user_location_location_attributes_city", with: @new_venue.location.city
-  fill_in "user_location_location_attributes_postal_code", with: @new_venue.location.postal_code
-  select @new_venue.location.state.name, from: 'user_location[location_attributes][state_id]'
-  select @new_venue.location.country.name, from: 'user_location[location_attributes][country_id]'
+  fill_in "user_location_location_query", with: "Space Needle"
 
   click_button "commit"
 end
 
 Then /^I should see my location data$/ do  
-  find("#localTailgateList").should have_content(@new_venue.location.city)
-  find("#localTailgateList").should have_content(@new_venue.location.state.abbreviation)
+  find(".saved_locations").should have_content("Space Needle")
 end
 
 Then /^I should see team data$/ do

@@ -27,14 +27,14 @@ Feature: Game Watch Resource
 		
 	Scenario: I can see all the game watches as an admin
 		Given I sign in as admin
-			And I have added 3 game watchs
+			And I have added 3 game watchs with names
 		When I visit the game watches page
-		Then I should see 3 game watchs	
+		Then I should see 3 game watchs with names
 
 	Scenario: I can associate other resources with the game watch
 		Given I sign in as admin
 			And I have added two users
-			And I have added 2 venues
-			And I have added 2 events
+			And I have added 2 venues with names
+			And I have added 2 events with names
 		When I visit the edit game watch page
 		Then I should be able to associate other resources with the game watch

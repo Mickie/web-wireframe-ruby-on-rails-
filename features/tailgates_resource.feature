@@ -14,9 +14,9 @@ Feature: Tailgates Resource
 		Then I should be redirected to the new user session page
 
 	Scenario: Seeing the list of tailgates doesn't require user access
-		Given I have added 3 tailgates
+		Given I have added 3 tailgates with names
 		When I visit the tailgates page
-		Then I should see 3 tailgates 
+		Then I should see 3 tailgates with names 
 	
 	@javascript	
 	Scenario: I can add a tailgate as a user and see the details when complete
@@ -43,13 +43,13 @@ Feature: Tailgates Resource
 
 	Scenario: I can see all the tailgates as a user
 		Given I sign in as user
-			And I have added 3 tailgates
+			And I have added 3 tailgates with names
 		When I visit the tailgates page
-		Then I should see 3 tailgates
+		Then I should see 3 tailgates with names
 
 	Scenario: I can associate a team with the tailgate 
 		Given I previously created a tailgate
-			And I have added 2 teams
+			And I have added 2 teams with names
 			And I sign in as user
 		When I visit the edit tailgate page
 		Then I should be able to associate a team with the tailgate

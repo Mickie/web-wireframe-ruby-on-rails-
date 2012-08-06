@@ -27,13 +27,13 @@ Feature: Conferences Resource
 		
 	Scenario: I can see all the conferences as an admin
 		Given I sign in as admin
-			And I have added 3 conferences
+			And I have added 3 conferences with names
 		When I visit the conferences page
-		Then I should see 3 conferences
+		Then I should see 3 conferences with names
 
 	Scenario: I can associate a sport with the conference
 		Given I sign in as admin
-			And I have added 2 sports
-			And I have added 2 conferences
+			And I have added 2 sports with names
+			And I have added 2 conferences with names
 		When I visit the edit conference page
 		Then I should be able to associate a sport with the conference

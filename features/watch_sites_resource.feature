@@ -27,13 +27,13 @@ Feature: Watch site Resource
 		
 	Scenario: I can see all the watch sites as an admin
 		Given I sign in as admin
-			And I have added 3 watch sites
+			And I have added 3 watch sites with names
 		When I visit the watch sites page
-		Then I should see 3 watch sites
+		Then I should see 3 watch sites with names
 
 	Scenario: I can associate other resources with the watch site
 		Given I sign in as admin
-			And I have added 2 venues
-			And I have added 2 teams
+			And I have added 2 venues with names
+			And I have added 2 teams with names
 		When I visit the edit watch site page
 		Then I should be able to associate other resources with the watch site

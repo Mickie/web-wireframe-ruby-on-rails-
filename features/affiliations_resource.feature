@@ -27,6 +27,6 @@ Feature: Affiliation Resource
 		
 	Scenario: I can see all the affiliations as an admin
 		Given I sign in as admin
-			And I have added 3 affiliations
+			And I have added 3 affiliations with names
 		When I visit the affiliations page
-		Then I should see 3 affiliations
+		Then I should see 3 affiliations with names

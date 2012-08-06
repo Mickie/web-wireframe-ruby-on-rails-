@@ -28,14 +28,14 @@ Feature: Event Resource
 		
 	Scenario: I can see all the events as a user
 		Given I sign in as user
-			And I have added 3 events
+			And I have added 3 events with names
 		When I visit the events page
-		Then I should see 3 events	
+		Then I should see 3 events with names
 
 	Scenario: I can associate other resources with the event
 		Given I sign in as admin
-			And I have added 2 locations
-			And I have added 2 teams
-			And I have added 2 events
+			And I have added 2 locations with names
+			And I have added 2 teams with names
+			And I have added 2 events with names
 		When I visit the edit event page
 		Then I should be able to associate other resources with the event
