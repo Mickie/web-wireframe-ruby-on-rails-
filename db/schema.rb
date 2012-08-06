@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806210634) do
+ActiveRecord::Schema.define(:version => 20120806223011) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -336,6 +336,17 @@ ActiveRecord::Schema.define(:version => 20120806210634) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  create_table "user_brags", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "brag_id"
+    t.integer  "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_brags", ["brag_id"], :name => "index_user_brags_on_brag_id"
+  add_index "user_brags", ["user_id"], :name => "index_user_brags_on_user_id"
 
   create_table "user_comment_votes", :force => true do |t|
     t.integer  "user_id",                      :null => false

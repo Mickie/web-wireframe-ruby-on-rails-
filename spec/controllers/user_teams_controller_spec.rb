@@ -5,7 +5,7 @@ describe UserTeamsController do
   
   before do
     mock_geocoding!
-    @user = FactoryGirl.create(:user)
+    @user = subject.current_user
     @team = FactoryGirl.create(:team)
   end
 

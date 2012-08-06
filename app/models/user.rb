@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   
   has_many :user_locations, inverse_of: :user, dependent: :destroy
   has_many :locations, through: :user_locations
+
+  has_many :user_teams, inverse_of: :user, dependent: :delete_all
+  has_many :teams, through: :user_teams
+  
+  has_many :user_brags, inverse_of: :user, dependent: :delete_all
+  has_many :brags, through: :user_brags
   
   has_many :tailgates, inverse_of: :user, dependent: :destroy, order:"posts_updated_at DESC"
   
