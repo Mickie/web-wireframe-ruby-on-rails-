@@ -13,34 +13,34 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required:true %>
   </div>
   
   <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
   
   <div class="field">
     <%= f.label :sport %>
-    <%= f.select(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] }, @team.sport_id )) %>
+    <%= f.select(:sport_id, options_for_select(Sport.all.collect {|p| [ p.name, p.id ] }, @team.sport_id ), {required:true}) %>
   </div>
 
   <div class="field">
     <%= f.label :league %>
-    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] }, @team.league_id )) %>
+    <%= f.select(:league_id, options_for_select(League.all.collect {|p| [ p.name, p.id ] }, @team.league_id ), {required:true}) %>
   </div>
   
   <div class="field">
     <%= f.label :division %>
-    <%= f.select(:division_id, options_for_select(Division.all.collect {|p| [ p.name, p.id ] }, @team.division_id )) %>
+    <%= f.select(:division_id, options_for_select(Division.all.collect {|p| [ p.name, p.id ] }, @team.division_id ), {include_blank:true}) %>
   </div>
   
   <div class="field">
     <%= f.label :conference %>
-    <%= f.select(:conference_id, options_for_select(Conference.all.collect {|p| [ p.name, p.id ] }, @team.conference_id )) %>
+    <%= f.select(:conference_id, options_for_select(Conference.all.collect {|p| [ p.name, p.id ] }, @team.conference_id ), {include_blank:true}) %>
   </div>
 
   <div class="field">
     <%= f.label :affiliation %>
-    <%= f.select(:affiliation_id, options_for_select(Affiliation.all.collect {|p| [ p.name, p.id ] }, @team.affiliation_id )) %>
+    <%= f.select(:affiliation_id, options_for_select(Affiliation.all.collect {|p| [ p.name, p.id ] }, @team.affiliation_id ), {include_blank:true}) %>
   </div>
 
   <div class="field">
