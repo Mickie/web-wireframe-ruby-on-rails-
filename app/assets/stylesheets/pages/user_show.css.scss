@@ -52,6 +52,8 @@ div#userShow
   
   .created_fanzones, .followed_fanzones, .brags, #user_teams
   {
+    padding-bottom: 15px;
+
     h2
     {
       font-weight:normal;
@@ -76,7 +78,6 @@ div#userShow
   
   #user_teams
   {
-    padding: 15px 0px;
     background-color: $userProfileUserTeamsBackgroundColor;
 
     .user_team
