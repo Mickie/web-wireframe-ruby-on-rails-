@@ -50,7 +50,7 @@ div#userShow
     }
   }
   
-  .created_fanzones, .followed_fanzones
+  .created_fanzones, .followed_fanzones, .brags, #user_teams
   {
     h2
     {
@@ -61,6 +61,33 @@ div#userShow
       text-transform: uppercase;
       font-size: 16px; 
       line-height: 16px; 
+    }
+  }
+  
+  .brags
+  {
+    background-color: $userProfileUserBragsBackgroundColor;
+    
+    ul
+    {
+      padding-left: 10px;
+    } 
+  }
+  
+  #user_teams
+  {
+    padding: 15px 0px;
+    background-color: $userProfileUserTeamsBackgroundColor;
+
+    .user_team
+    {
+      float:left;
+      padding: 15px;
+      margin-left: 15px;
+      margin-bottom: 15px;
+      text-align:center;
+      background-color: $userProfileUserTeamBackgroundColor;
+      border: 1px solid $borderColor;
     }
   }
   
