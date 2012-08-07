@@ -4,4 +4,6 @@ class UserLocation < ActiveRecord::Base
   validates :location_query, presence: true
 
   attr_accessible :location_query
+  
+  default_scope order('created_at DESC')
 end

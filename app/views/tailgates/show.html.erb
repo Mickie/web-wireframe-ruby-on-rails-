@@ -133,14 +133,6 @@
           <div class="venueHeader">
             <h4 style="background-color: <%= @tailgate.color %>">Local <%= @tailgate.team.mascot -%> Venues</h4>
           </div>
-          <div class="current_location_venues">
-            <%= render partial: "partials/venue_locations", 
-                       locals: { aCurrentLocationFlag: true,
-                                 aLocationBackgroundColor: "white", 
-                                 aLocationTextColor: "black", 
-                                 aLocationString: @currentCityState, 
-                                 aWatchSiteList: @localTeamWatchSites }%>
-          </div>
           <div class="user_location_venues">
             <% if user_signed_in? %>
               <% current_user.user_locations.each do | aUserLocation | %>
@@ -155,6 +147,14 @@
                 
               <% end %>
             <% end %>
+          </div>
+          <div class="current_location_venues">
+            <%= render partial: "partials/venue_locations", 
+                       locals: { aCurrentLocationFlag: true,
+                                 aLocationBackgroundColor: "white", 
+                                 aLocationTextColor: "black", 
+                                 aLocationString: @currentCityState, 
+                                 aWatchSiteList: @localTeamWatchSites }%>
           </div>
         </div>
         <div class="twitterStream">
