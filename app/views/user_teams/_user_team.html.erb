@@ -1,0 +1,6 @@
+<span class="team_delete">
+  <%= link_to user_user_team_path(aUserTeam.user, aUserTeam), data: { confirm: "Delete this team?" }, method: :delete, remote:true do %>
+    <i class="icon-remove"></i>
+  <% end %>
+</span>
+<span class="team_text"><%= aUserTeam.team.name -%></span>

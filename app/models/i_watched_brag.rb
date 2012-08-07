@@ -1,0 +1,2 @@
+class IWatchedBrag < UserBrag
+end

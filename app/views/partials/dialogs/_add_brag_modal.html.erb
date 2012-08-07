@@ -1,0 +1,19 @@
+<div id="<%= aDialogId -%>" class="modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Add A Shout</h3>
+  </div>
+  <%= form_for(aUserBrag, as: :user_brag, url: user_user_brags_path(aUser, aUserBrag), remote:true ) do |f| %>
+    <div class="modal-body">
+      <%= f.hidden_field :brag_id %>
+      <%= f.hidden_field :type %>    
+      <%= f.fields_for :brag do |b|%>
+        <%= b.label :content, raw(aContentLabel) %>
+        <%= b.text_field :content, placeholder: aPlaceholder, required: true %>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit("Add", id:"commit", class:"fanzoButton") %>
+    </div>
+  <% end %>
+</div>

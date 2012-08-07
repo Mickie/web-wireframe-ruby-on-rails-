@@ -1,0 +1,10 @@
+$("#user_brag_<%= @user_brag.id -%>").remove();
+<% if current_user.i_was_there_brags.length == 0 %>
+  $("#edit_user #IWasThereBrag_list ul").html("<li class='no_brags'>No &quot;I was there&quot; shouts</li>");
+<% end %>
+<% if current_user.i_watched_brags.length == 0 %>
+  $("#edit_user #IWatchedBrag_list ul").html("<li class='no_brags'>No &quot;I watched&quot; shouts</li>");
+<% end %>
+<% if current_user.i_wish_brags.length == 0 %>
+  $("#edit_user #IWishBrag_list ul").html("<li class='no_brags'>No &quot;I wish&quot; shouts</li>");
+<% end %>

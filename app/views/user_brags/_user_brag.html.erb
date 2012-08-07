@@ -1,0 +1,6 @@
+<span class="brag_delete">
+  <%= link_to user_user_brag_path(aUserBrag.user, aUserBrag), data: { confirm: "Delete this shout?" }, method: :delete, remote:true do %>
+    <i class="icon-remove"></i>
+  <% end %>
+</span>
+<span class="brag_text"><%= aUserBrag.brag.content -%></span>

@@ -8,9 +8,11 @@ class UserTeamsController < ApplicationController
       if @user_team.save
         format.html { redirect_to current_user, notice: 'Team was successfully added.' }
         format.json { render json: @user_team, status: :created, location: current_user }
+        format.js
       else
         format.html { redirect_to current_user, error: 'Unable to add team.' }
         format.json { render json: @user_team.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -22,6 +24,7 @@ class UserTeamsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_path(current_user) }
       format.json { head :no_content }
+      format.js
     end
   end
   

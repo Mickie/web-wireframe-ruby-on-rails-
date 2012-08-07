@@ -18,8 +18,9 @@ class User < ActiveRecord::Base
   has_many :user_teams, inverse_of: :user, dependent: :delete_all
   has_many :teams, through: :user_teams
   
-  has_many :user_brags, inverse_of: :user, dependent: :delete_all
-  has_many :brags, through: :user_brags
+  has_many :i_was_there_brags, inverse_of: :user, dependent: :delete_all
+  has_many :i_watched_brags, inverse_of: :user, dependent: :delete_all
+  has_many :i_wish_brags, inverse_of: :user, dependent: :delete_all
   
   has_many :tailgates, inverse_of: :user, dependent: :destroy, order:"posts_updated_at DESC"
   

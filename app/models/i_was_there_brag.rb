@@ -1,0 +1,2 @@
+class IWasThereBrag < UserBrag
+end

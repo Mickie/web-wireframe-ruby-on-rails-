@@ -1,4 +1,4 @@
 $(".modal").modal("hide");
-$("#edit_user .saved_locations ul").append("<li id='user_location_<%= @user_location.id -%>'><%= escape_javascript( render partial:"partials/user_location", locals: {aUserLocation: @user_location } ) %></li>");
-$("#edit_user .saved_locations ul li.no_locations").remove();
 $("#myAddLocationModal #user_location_location_query").val("");
+$("#edit_user .saved_locations ul").append("<li id='user_location_<%= @user_location.id -%>'><%= escape_javascript( render partial:"user_locations/user_location", locals: {aUserLocation: @user_location } ) %></li>");
+$("#edit_user .saved_locations ul li.no_locations").remove();

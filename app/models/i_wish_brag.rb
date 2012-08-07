@@ -1,0 +1,2 @@
+class IWishBrag < UserBrag
+end

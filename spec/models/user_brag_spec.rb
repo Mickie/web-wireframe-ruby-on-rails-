@@ -4,7 +4,8 @@ describe UserBrag do
   before do
     @user = FactoryGirl.create(:user)
     @brag = FactoryGirl.create(:brag)
-    @user_brag = @user.user_brags.build( brag_id: @brag.id, type:1 )
+    @user_brag = UserBrag.new( brag_id: @brag.id)
+    @user_brag.user_id = @user.id
   end
 
   subject { @user_brag }

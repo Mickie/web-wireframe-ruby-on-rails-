@@ -1,0 +1,6 @@
+$(".modal").modal("hide");
+$("#myAdd<%= @user_brag.type -%>Modal #user_brag_brag_attributes_content").val("");
+$("#myAdd<%= @user_brag.type -%>Modal #user_brag_brag_id").val("");
+$("#edit_user #<%= @user_brag.type -%>_list ul").append("<li id='user_brag_<%= @user_brag.id -%>'><%= escape_javascript( render partial:"user_brags/user_brag", locals: {aUserBrag: @user_brag } ) %></li>");
+$("#edit_user #<%= @user_brag.type -%>_list ul li.no_brags").remove();
+

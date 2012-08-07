@@ -17,14 +17,29 @@ describe "user_settings/edit" do
                             stub_model(UserLocation,
                                       :user_id => 1
                             ))
+    @brag = stub_model(Brag, content: "Brag")
 
+    @iWasThereBrag = assign(:iWasThereBrag,
+                            stub_model(IWasThereBrag, 
+                                        user_id: 1,
+                                        brag: @brag))
+
+    @iWatchedBrag = assign(:iWatchedBrag,
+                            stub_model(IWatchedBrag, 
+                                       user_id: 1,
+                                       brag: @brag))
+
+    @iWishBrag = assign(:iWishBrag,
+                          stub_model(IWishBrag, 
+                                      user_id: 1,
+                                      brag: @brag))
   end
 
   describe "partials" do
 
-    it "should show team picker for new user" do 
+    it "should have rendered the add brag modal" do 
       render
-      view.should render_template(partial:"_team_picker")
+      view.should render_template(partial:"_add_brag_modal")
     end
 
   end

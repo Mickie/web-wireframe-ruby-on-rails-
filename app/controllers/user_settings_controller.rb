@@ -5,18 +5,21 @@ class UserSettingsController < ApplicationController
     @user = current_user
     @user_team = @user.user_teams.build
     @user_location = @user.user_locations.build
+    @iWasThereBrag = @user.i_was_there_brags.build
+    @iWasThereBrag.build_brag
+    @iWatchedBrag = @user.i_watched_brags.build
+    @iWatchedBrag.build_brag
+    @iWishBrag = @user.i_wish_brags.build
+    @iWishBrag.build_brag
   end
 
   def update
-    @user = User.find(params[:user][:id])
+    @user = current_user
     
     respond_to do |format|
-      if (current_user.id != @user.id)
-        format.html { redirect_to user_settings_edit_path, error: 'Cannot update a different user.' }
-        format.json { render json: current_user.errors, status: :unprocessable_entity }
-      elsif @user.update_without_password(params[:user])
+      if @user.update_without_password(params[:user])
         sign_in @user, :bypass => true
-        format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { 

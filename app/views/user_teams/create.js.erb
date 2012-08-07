@@ -1,0 +1,6 @@
+$(".modal").modal("hide");
+$("#myAddTeamModal #league_picker").val("");
+$("#myAddTeamModal #user_team_tam_id").val("");
+$("#edit_user .saved_teams ul").append("<li id='user_team_<%= @user_team.id -%>'><%= escape_javascript( render partial:"user_teams/user_team", locals: {aUserTeam: @user_team } ) %></li>");
+$("#edit_user .saved_teams ul li.no_teams").remove();
+

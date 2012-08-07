@@ -31,6 +31,26 @@ describe UserBragsController do
         post :create, {:user_brag => valid_attributes, :user_id => @user.id}
         response.should redirect_to(@user)
       end
+      
+      it "handles attributes for brag when no brag id" do
+        theBrag = Brag.new(content: "brag content")
+        theAttributes = {
+          brag_attributes: accessible_attributes(Brag, theBrag),
+        }
+        post :create, {:user_brag => theAttributes, :user_id => @user.id}
+        assigns(:user_brag).brag.content.should eq("brag content")
+      end
+
+      it "handles attributes for brag when there is a brag" do
+        theBrag = Brag.new(content: "brag content")
+        theAttributes = {
+          brag_id:@brag.id,
+          brag_attributes: accessible_attributes(Brag, theBrag),
+        }
+        post :create, {:user_brag => theAttributes, :user_id => @user.id}
+        assigns(:user_brag).brag_id.should eq(@brag.id)
+      end
+      
     end
 
     describe "with invalid params" do
@@ -51,16 +71,20 @@ describe UserBragsController do
   end
 
   describe "DELETE destroy" do
+    before do
+      @user_brag = UserBrag.create! valid_attributes
+      @user_brag.user_id = @user.id
+      @user_brag.save
+    end
+
     it "destroys the requested user_brag" do
-      user_brag = @user.user_brags.create! valid_attributes
       expect {
-        delete :destroy, {:id => user_brag.to_param, :user_id => @user.id}
+        delete :destroy, {:id => @user_brag.to_param, :user_id => @user.id}
       }.to change(UserBrag, :count).by(-1)
     end
 
     it "redirects to the user_brags list" do
-      user_brag = @user.user_brags.create! valid_attributes
-      delete :destroy, {:id => user_brag.to_param, :user_id => @user.id}
+      delete :destroy, {:id => @user_brag.to_param, :user_id => @user.id}
       response.should redirect_to(@user)
     end
   end

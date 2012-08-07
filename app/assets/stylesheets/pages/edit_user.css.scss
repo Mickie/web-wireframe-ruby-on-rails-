@@ -12,7 +12,26 @@
     margin-bottom: 10px;
   }
   
-  .edit_header
+  form
+  {
+    margin: 0px;
+  }
+  
+  #myAddLocationModal, #myAddTeamModal, #myAddIWasThereBragModal, #myAddIWatchedBragModal, #myAddIWishBragModal
+  {
+    h3
+    {
+      margin:0px;
+    }
+
+    .modal-body
+    {
+      min-width: 440px;
+      padding: 30px;
+    }
+  }
+  
+  #edit_header
   {
     @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
     border-bottom: 1px solid $borderColor;
@@ -30,71 +49,70 @@
     }
   }
   
-  .registration_settings
+  #first_column
   {
-    margin: 0px;
-    padding: 20px;
-  } 
-  
-  .email_settings
-  {
-    margin: 0px;
-    padding: 20px;
+    padding: 20px 10px 20px 20px;
     
-    .check_and_label
+    .registration_settings
     {
-      clear: both;
-      padding: 10px 0px;
+      margin: 0px;
+      margin-bottom: 20px;
+    } 
+    
+    .email_settings
+    {
+      margin: 0px;
+      margin-bottom: 20px;
       
-      label, input
+      .check_and_label
       {
-        float:left;
+        clear: both;
+        padding: 10px 0px;
+        
+        label, input
+        {
+          float:left;
+        }
+        
+        label
+        {
+          width: 85%;
+          padding: 0px 5px;
+        }
+        
+        input
+        {
+          padding: 5px;
+        }
       }
-      
-      label
-      {
-        width: 85%;
-        padding: 0px 5px;
-      }
-      
-      input
-      {
-        padding: 5px;
-      }
-    }
-  } 
-  
-  .connections
-  {
-    margin: 0px;
-    padding: 20px;
+    } 
 
-    .connection
+    .edit_buttons
     {
       border-top: 1px solid $borderColor;
       clear: both;
       padding: 10px;
       
-      .connected
+      .save_button
       {
-        float: right;
-        padding-top: 5px;
-        padding-left: 10px;
-        font-weight: bold;
-      }
-      
-      a
-      {
-        width: 185px;
+        float:right;
       }
     }
   }
   
-  .locations
+  #second_column
   {
-    margin: 0px;
     padding: 20px;
-    
+    border-left: 1px solid $borderColor;
+
+    .add_item
+    {
+      margin: 0px;
+      padding: 0px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
     ul
     {
       margin: 0px;
@@ -113,36 +131,33 @@
           margin-left: 5px;
         }
       }
+    }
+    
+    .connections
+    {
+      border-bottom: 1px solid $borderColor;
+      margin-bottom: 10px;
       
+      .connection
+      {
+        border-top: 1px solid $borderColor;
+        clear: both;
+        padding: 10px;
+        
+        .connected
+        {
+          float: right;
+          padding-top: 5px;
+          padding-left: 10px;
+          font-weight: bold;
+        }
+        
+        a
+        {
+          width: 185px;
+        }
+      }
     }
-    
-    .add_location
-    {
-      margin-top:5px;
-    }
-  }
-
-  .edit_buttons
-  {
-    border-top: 1px solid $borderColor;
-    clear: both;
-    padding: 10px;
-    
-    .save_button
-    {
-      float:right;
-    }
-  }
-  
-  #myAddLocationModal, #myAddTeamModal
-  {
-    min-width: 300px;
-   
-    form, h3
-    {
-      margin:0px;
-    }
-    
     
   }
 }
