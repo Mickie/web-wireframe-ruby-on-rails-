@@ -9,7 +9,11 @@
       <%= f.hidden_field :type %>    
       <%= f.fields_for :brag do |b|%>
         <%= b.label :content, raw(aContentLabel) %>
-        <%= b.text_field :content, placeholder: aPlaceholder, required: true %>
+        <%= b.autocomplete_field :content, 
+                                    autocomplete_brag_content_brags_path, 
+                                    id_element: "##{aDialogId} #user_brag_brag_id",
+                                    placeholder: aPlaceholder,
+                                    required: true %>
       <% end %>
     </div>
     <div class="modal-footer">

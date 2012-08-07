@@ -34,6 +34,10 @@ FanzoSite::Application.routes.draw do
     get :autocomplete_team_name, on: :collection
   end
   
+  resources :brags do
+    get :autocomplete_brag_content, on: :collection
+  end
+  
   resources :tailgate_followers, only: [ :create, :destroy ]
   
   resources :watch_sites do
@@ -69,7 +73,6 @@ FanzoSite::Application.routes.draw do
   resources :tailgate_venues
   resources :fanzo_tips
   resources :fun_facts
-  resources :brags
 
   resources :athlete, path: :people
   resources :coach, path: :people

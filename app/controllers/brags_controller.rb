@@ -1,5 +1,9 @@
+require 'rails3-jquery-autocomplete'
+
 class BragsController < ApplicationController
-  before_filter :authenticate_admin!
+  before_filter :authenticate_admin!, except: [:autocomplete_brag_content]
+  
+  autocomplete :brag, :content, full: true
 
   # GET /brags
   # GET /brags.json
