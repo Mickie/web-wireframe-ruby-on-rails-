@@ -20,9 +20,9 @@
     </div>
   </div>
 
-  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} was there when:", aListOfBrags: @user.i_was_there_brags } %>
-  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} watched when:", aListOfBrags: @user.i_watched_brags } %>
-  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} wished to see when:", aListOfBrags: @user.i_wish_brags } %>
+  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} was at:", aListOfBrags: @user.i_was_there_brags } %>
+  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} watched:", aListOfBrags: @user.i_watched_brags } %>
+  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} wishes:", aListOfBrags: @user.i_wish_brags } %>
 
   <% if @user.teams.length > 0 %>
     <div id="user_teams" class="clearfix">
