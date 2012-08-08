@@ -1,5 +1,10 @@
 <%= provide( :title, "#{ @comment.user.full_name } also commented on a post in the #{ @comment.post.tailgate.name } fanzone" ) %>
 
-<%= provide( :content, @comment.content ) %>
+<% provide :content do %>
+  They said:
+  
+    <%= @comment.content %>
+    
+<% end %>
 
 <%= provide( :reply_link, getTailgateBitly(@comment.post.tailgate) ) %>

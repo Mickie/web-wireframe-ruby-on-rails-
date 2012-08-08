@@ -1,0 +1,17 @@
+<%= provide( :title, "Fanzones you follow have new activity" ) %>
+
+<% provide :content do %>
+
+Hey <%= @user.first_name -%>,
+
+Your fanzones are hopping.  
+  
+These fanzones have new posts or comments:
+<% @tailgateDetailsMap.keys.each do |aTailgate| %>
+  * <%= aTailgate.name %>
+<% end %>
+
+<% end %>
+
+<%= provide( :link_text, "Visit You Fanzones at Fanzo") %>
+<%= provide( :reply_link, getBitlyForUrl("http://www.fanzo.me/#myFanzones") ) %>

@@ -1,5 +1,10 @@
 <%= provide( :title, "#{ @post.user.full_name } just posted on your fanzone, #{ @post.tailgate.name }" ) %>
 
-<%= provide( :content, @post.content ) %>
+<% provide :content do %>
+  They said:
+  
+    <%= @post.content %>
+    
+<% end %>
 
 <%= provide( :reply_link, getTailgateBitly(@post.tailgate) ) %>
