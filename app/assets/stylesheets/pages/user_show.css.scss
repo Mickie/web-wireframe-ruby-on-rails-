@@ -8,8 +8,16 @@ div#userShow
   
   div.banner
   {
+    position: relative;
     color: white;
     @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
+    
+    .edit_setting
+    {
+      position: absolute;
+      top: -10px;
+      right: 0px;
+    }
     
     .banner_content
     {
@@ -58,7 +66,7 @@ div#userShow
     {
       font-weight:normal;
       margin:0px;
-      padding: 10px;
+      padding: 10px 10px 20px 10px;
       color:$lightTextColor;
       text-transform: uppercase;
       font-size: 16px; 

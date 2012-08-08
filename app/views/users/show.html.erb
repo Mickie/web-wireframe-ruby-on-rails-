@@ -1,7 +1,13 @@
 <%= provide(:title, "My Profile" ) %>
 
 <div id="userShow" >
+  
   <div class="banner">
+    <% if user_signed_in? && current_user.id == @user.id %>
+      <div class="edit_setting">
+        <%= link_to "Edit", user_settings_edit_path, class:"fanzoButton" %>
+      </div>
+    <% end %>
     <div class="banner_content row-fluid">
       <div class="profile_details">
         <div class="big_profile_pic">
