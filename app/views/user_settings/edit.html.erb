@@ -108,9 +108,15 @@
           <%= f.label :no_email_on_follows, "Don't notify me when someone follows one of my fanzones" %>
         </div>
         <div class="check_and_label">
+          <%= f.check_box :no_email_summary_of_followed_tailgates %>
+          <%= f.label :no_email_summary_of_followed_tailgates, "Don't send me the daily update of fanzones I follow" %>
+        </div>
+        <div class="check_and_label">
           <%= f.check_box :no_email_newsletter %>
           <%= f.label :no_email_newsletter, "Don't send me the Fanzo Newsletter" %>
         </div>
+        
+        
       </div>
 
       <div class="edit_buttons">

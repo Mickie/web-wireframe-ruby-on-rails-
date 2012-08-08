@@ -12,6 +12,39 @@ class SocialSender
     end
   end
   
+  def self.sendFollowersTheirUpdates
+#    User.all.each do |aUser|
+    User.where(name:"Paul Ingalls").each do |aUser|
+      puts "checking #{aUser.full_name}"
+      
+      theTailgateDetailsMap = {}
+      aUser.followed_tailgates.where("posts_updated_at > ?", 24.hours.ago).each do | aTailgate |
+        theNewPosts = []
+        thePostsWithNewComments = []
+        
+        aTailgate.posts.where("updated_at > ?", 24.hours.ago).each do | aPost |
+          if aPost.created_at > 24.hours.ago
+            theNewPosts << aPost
+            puts "found new post by user: #{aPost.user.name}"
+          elsif aPost.comments_updated_at > 24.hours.ago
+            thePostsWithNewComments << aPost 
+            puts "found old post with new comment: #{aPost.comments.count}"
+          end
+        end
+        
+        theTailgateDetailsMap[aTailgate] = {}
+        theTailgateDetailsMap[aTailgate][:newPosts] = theNewPosts
+        theTailgateDetailsMap[aTailgate][:postsWithNewComments] = thePostsWithNewComments
+      end
+      
+      if theTailgateDetailsMap.length > 0
+        puts "Sending mail"
+        UserMailer.updates_on_followed_fanzones( aUser, theTailgateDetailsMap ).deliver
+      end
+    end
+
+  end
+  
   private
   
   def sendToTwitter( aPost )

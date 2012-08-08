@@ -1,0 +1,87 @@
+<% provide :preview do %>
+  <small>Hey <%= @user.first_name -%>, fanzones you follow have had activity.  Check it out...</small>
+<% end %>
+
+<% provide :view_email_link do %>
+  <p><small><%= link_to "Visit your fanzones at Fanzo", getBitlyForUrl("http://www.fanzo.me/#myFanzones") %>.</small></p>
+<% end %>
+
+<%= provide :main_header, "Fanzone Activity Alert" %>
+
+<%= provide :content_header, "Fanzones you follow are hopping!" %>
+
+<% provide :profile_pic do %>
+<% end %>
+
+<% provide :content_table do %>
+  <td colspan="2">
+<% end %>
+
+<% provide :content do %>
+
+  <% @tailgateDetailsMap.keys.each do |aTailgate| %>
+    <table class="tailgate_details">
+      <%= link_to tailgate_url(aTailgate) do %>
+        <tr class="banner">
+          <td class="tailgate_logo">
+            <%= teamLogo(aTailgate.team, :small)%>
+          </td>
+          <td class="tailgate_name" valign="center" style="background-color:<%= aTailgate.color %>">
+            <p class="header3"><%= aTailgate.name %></p>
+          </td>
+        </tr>
+      <% end %>
+      
+      <% if @tailgateDetailsMap[aTailgate][:newPosts].length > 0 %>
+        <tr class="activity">
+          <td colspan="2">
+            <p class="header3">New posts by:</p>            
+          </td>
+        </tr>
+
+        <% @tailgateDetailsMap[aTailgate][:newPosts].each do | aPost | %>        
+          <tr class="activity">
+            <td class="profile_pic" valign="top">
+              <%= link_to image_tag( aPost.user.image, size:"32x32", alt:"#{aPost.user.full_name}" ), user_url(aPost.user) %>
+            </td>
+            <td class="user_name" valign="top">
+              <div class="header3"><%= aPost.user.full_name -%></div>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+
+      <% if @tailgateDetailsMap[aTailgate][:postsWithNewComments].length > 0 %>
+        <tr class="activity">
+          <td colspan="2">
+            <p class="header3">New comments by:</p>            
+          </td>
+        </tr>
+
+        <% @tailgateDetailsMap[aTailgate][:postsWithNewComments].each do | aPost | %>
+          <% aPost.comments.where("created_at > ?", 24.hours.ago ).each do | aComment | %>
+            <tr class="activity">
+              <td class="profile_pic" valign="top">
+                <%= link_to image_tag( aComment.user.image, size:"32x32", alt:"#{aComment.user.full_name}" ), user_url(aComment.user) %>
+              </td>
+              <td class="user_name" valign="top">
+                <div class="header3"><%= aComment.user.full_name -%></div>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+      
+      <tr class="visit_tailgate">
+        <td colspan="2" valign="bottom">
+          <%= link_to "Visit Fanzone", getTailgateBitly(aTailgate), class: "fanzoButton" %>
+        </td>
+      </tr>
+
+    </table>
+  <% end %>
+  
+<% end %>
+
+<% provide :menu do %>
+<% end %>

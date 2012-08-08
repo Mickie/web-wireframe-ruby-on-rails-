@@ -1,0 +1,88 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#user_mailer_layout
+{
+  .email_content
+  {
+    .tailgate_details
+    {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      margin-left:  30px;
+      width: 220px;
+      min-height: 300px;
+      border: 1px solid $borderColor;
+      @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
+
+      .banner
+      {
+        width: 220px;
+        height: 50px;
+        border-bottom: 1px solid $borderColor;
+
+        .tailgate_logo
+        {
+          width: 50px;
+          height: 50px;
+          border-right: 1px solid $borderColor;
+          
+          img
+          {
+            margin-top: 9px;
+            margin-left: 9px;
+            margin-bottom: 9px;
+            margin-right: 9px;
+            width: 32px;
+            height: 32px;
+          }
+        }
+        
+        .tailgate_name
+        {
+          p
+          {
+            padding: 10px;
+            color:white;
+          }
+        }
+      }
+      
+      .activity
+      {
+        height: 50px;
+        
+        td
+        {
+          height: 50px;
+        }
+
+        .header3
+        {
+          padding:0px 10px;
+        }
+        
+        img
+        {
+          margin-top: 9px;
+          margin-left: 9px;
+          margin-bottom: 9px;
+          margin-right: 9px;
+          width: 32px;
+          height: 32px;
+        }
+      }
+      
+      .visit_tailgate
+      {
+        height: 50px;
+        td
+        {
+          height: 50px;
+          text-align: right;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

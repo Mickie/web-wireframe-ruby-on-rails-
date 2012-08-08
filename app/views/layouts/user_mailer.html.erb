@@ -68,17 +68,23 @@
                       <div class="header2"><%= yield :content_header %></div>
                    </td>
                   </tr>
+                  <% if content_for?(:profile_pic) && content_for?(:user_name) %>
+                    <tr>
+                      <td class="profile_pic" valign="top">
+                        <%= yield :profile_pic %>
+                      </td>
+                      <td class="user_name">
+                        <div class="header3"><%= yield :user_name -%></div>
+                      </td>
+                    </tr>
+                  <% end %>
                   <tr>
-                    <td class="profile_pic" valign="top">
-                      <%= yield :profile_pic %>
-                    </td>
-                    <td class="user_name">
-                      <div class="header3"><%= yield :user_name -%></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>
+                    <% if content_for?(:content_table) %> 
+                      <%= yield :content_table %> 
+                    <% else %>
+                      <td>&nbsp;</td>
+                      <td>
+                    <% end %>
                       <div class="email_content"><%= yield :content -%></div>
                     </td>
                   </tr>

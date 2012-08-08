@@ -52,6 +52,15 @@ class UserMailer < ActionMailer::Base
     end
   end
   
+  def updates_on_followed_fanzones( aUser, aTailgateDetailsMap )
+    @user = aUser
+    @tailgateDetailsMap = aTailgateDetailsMap
+
+    theSubject = "Your Fanzo activity report"
+    theToAddress = "#{@user.full_name} <#{@user.email}>"
+    createMail( theToAddress, theSubject )
+  end
+  
   private
   
   def createMail( aToAddress, aSubject )
