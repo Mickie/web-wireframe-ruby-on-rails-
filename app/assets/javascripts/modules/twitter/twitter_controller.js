@@ -5,6 +5,7 @@ var TwitterController = function(aTwitterView)
   this.myButtonsLoadedCallback;
   this.myQuickTweets = {};
   this.myAbortFlag = false;
+  this.myTwitterInviteDialog = new TwitterInviteDialog();
   
   
   this.loadButtonData = function (aSportId, aButtonsLoadedCallback)
@@ -112,13 +113,10 @@ var TwitterController = function(aTwitterView)
     $("body").animate({scrollTop:0}, 400);
   };
   
-  this.onFavorite = function( aTweetId )
+  this.onInvite = function( aTweetId, aUser )
   {
-    console.log("TODO: need to handle");
-    $.post( "/twitter_proxy/favorite", 
-            { favoriteId : aTweetId }, 
-            createDelegate(this.myTwitterView, this.myTwitterView.onFavoriteComplete), 
-            "json"); 
+    var theMessage = aUser + ", I've got a conversation going about this on my fanzone, interested? " + this.myTwitterView.myHashTags;
+    this.myTwitterInviteDialog.showDialog( theMessage, aTweetId );
   };
   
    

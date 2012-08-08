@@ -46,18 +46,22 @@ var TwitterView = function( aMaxTweets,
   {
     this.myHashTags = anArrayOfHashTags;
     this.myNotTags = anArrayOfNotTags;
-    
-    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
-    this.initializeButtons();
-    
-    this.myRefreshTweetsInterval = setInterval(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), 5000);
-  
+
     $(this.myNewTweetDivSelector).click(createDelegate(this, this.showNewTweets));
+    this.initializeButtons();
+  
+    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
+  };
+  
+  this.scheduleMoreTweetsToLoad = function( aTimerDuration )
+  {
+    clearTimeout(this.myRefreshTweetsInterval);
+    this.myRefreshTweetsInterval = setTimeout(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), aTimerDuration);
   };
   
   this.reset = function()
   {
-    clearInterval(this.myRefreshTweetsInterval);
+    clearTimeout(this.myRefreshTweetsInterval);
     this.myNewTweets = new Array();
     this.myFullyLoadedFlag = false;
     this.myTwitterController.abort();
@@ -80,7 +84,7 @@ var TwitterView = function( aMaxTweets,
   {
     this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
     this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
-    this.onFavorite = createDelegate(this.myTwitterController, this.myTwitterController.onFavorite);
+    this.onInvite = createDelegate(this.myTwitterController, this.myTwitterController.onInvite);
   }
   else
   {
@@ -139,7 +143,7 @@ var TwitterView = function( aMaxTweets,
     
     this.onReplyTo = this.showCorrectModal;
     this.onRetweet = this.showCorrectModal;
-    this.onFavorite = this.showCorrectModal;
+    this.onInvite = this.showCorrectModal;
     
     $("#postForm #add_post").live('click', createDelegate(this, this.handleDisconnectStatus ) );
   }
@@ -175,15 +179,23 @@ var TwitterView = function( aMaxTweets,
       if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets + theExtraTweetTemplateElement)
       {
         this.myFullyLoadedFlag = true;
+        this.scheduleMoreTweetsToLoad(5000);    
       }
       updateTimestamps();
     }
 
   };
+  
+  this.onSuccess = function()
+  {
+    $("#tweetError").slideUp(600);
+    this.scheduleMoreTweetsToLoad(5000);   
+  };
 
   this.onError = function(aMessage)
   {
-    console.log("Error getting tweets: " + aMessage);
+    $("#tweetError").slideDown(600);
+    this.scheduleMoreTweetsToLoad(30000);
   };
   
   this.showNewTweetsAlert = function()
@@ -304,10 +316,11 @@ var TwitterView = function( aMaxTweets,
         var theText = anItem.context.text;
         return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', \"" + theText.escapeQuotes() + "\")";
       },
-      "a#favorite@href" : function(anItem)
+      "a#invite@href" : function(anItem)
       {
         var theId = anItem.context.id_str;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onFavorite('" + theId + "')";
+        var theUser = anItem.context.from_user;
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onInvite('" + theId + "', '@" + theUser + "')";
       },
       "div.alert > p@id" : function(anItem)
       {
@@ -317,37 +330,11 @@ var TwitterView = function( aMaxTweets,
     }
   };
   
-  this.onTweetComplete = function(aResponse, aSource)
-  {
-    $(this.myControlsDivSelector + " textarea").val(this.myHashTags);
-    $("#tweetSuccessAlert div.messageHolder").append('<p><strong>Success!</strong> Your ' + aSource + ' status was updated</p>');
-    $("#tweetSuccessAlert").slideDown(600);
-    setTimeout(createDelegate(this, this.hideTweetSuccess), 5000);
-  };
-  
-  this.hideTweetSuccess = function()
-  {
-    $("#tweetSuccessAlert").slideUp(600, createDelegate(this, this.onHideComplete));
-  }
-  
-  this.onHideComplete = function()
-  {
-    $("#tweetSuccessAlert div.messageHolder").empty();    
-  }
-    
-  this.onRetweetComplete = function(aResponse)
+  this.onInviteComplete = function(aResponse)
   {
     if (aResponse)
     {
-      this.showAlertWithHtml( aResponse.retweeted_status.id_str, "<strong>Success!</strong><br/>Your retweet succeeded");
-    }
-  };
-  
-  this.onFavoriteComplete = function(aResponse)
-  {
-    if (aResponse)
-    {
-      this.showAlertWithHtml( aResponse.id_str, "<strong>Success!</strong><br/>You added a Favorite");
+      this.showAlertWithHtml( aResponse.id_str, "<strong>Success!</strong><br/>You added a Invite");
     }
   };
   
