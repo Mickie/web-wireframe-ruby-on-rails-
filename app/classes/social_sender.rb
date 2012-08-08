@@ -13,9 +13,14 @@ class SocialSender
   end
   
   def self.sendFollowersTheirUpdates
-#    User.all.each do |aUser|
-    User.where(name:"Paul Ingalls").each do |aUser|
-      puts "checking #{aUser.full_name}"
+    if Rails.env.development?
+      theListOfUsers = User.where(name:"Paul Ingalls")
+    else
+      theListOfUsers = User.all
+    end
+    
+    theListOfUsers.each do |aUser|
+      Rails.logger.info "checking #{aUser.full_name}"
       
       theTailgateDetailsMap = {}
       aUser.followed_tailgates.where("posts_updated_at > ?", 24.hours.ago).each do | aTailgate |
@@ -25,10 +30,10 @@ class SocialSender
         aTailgate.posts.where("updated_at > ?", 24.hours.ago).each do | aPost |
           if aPost.created_at > 24.hours.ago
             theNewPosts << aPost
-            puts "found new post by user: #{aPost.user.name}"
+            Rails.logger.info "found new post by user: #{aPost.user.name}"
           elsif aPost.comments_updated_at > 24.hours.ago
             thePostsWithNewComments << aPost 
-            puts "found old post with new comment: #{aPost.comments.count}"
+            Rails.logger.info "found old post with new comment: #{aPost.comments.count}"
           end
         end
         
@@ -38,7 +43,7 @@ class SocialSender
       end
       
       if theTailgateDetailsMap.length > 0
-        puts "Sending mail"
+        Rails.logger.info "Sending mail"
         UserMailer.updates_on_followed_fanzones( aUser, theTailgateDetailsMap ).deliver
       end
     end
