@@ -116,7 +116,7 @@ div#tailgate_show
       
       .fans
       {
-        .fan_pics
+        .fanPics
         {
           .profile_pic
           {
@@ -128,7 +128,17 @@ div#tailgate_show
               margin-bottom: 5px;
             }
           }
-          
+        }
+        
+        .facebookSharing
+        {
+          clear: both;
+          padding: 5px;
+          padding-bottom: 15px;
+          p
+          {
+            font-weight: bold;
+          }
         }
       }
       

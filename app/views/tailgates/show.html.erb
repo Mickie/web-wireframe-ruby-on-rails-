@@ -8,7 +8,8 @@
   <meta property="og:url"    content="<%= tailgate_url(@tailgate) -%>" /> 
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
   <meta property="og:description"  content="<%= @tailgate.description ? @tailgate.description : "A fanzone about the #{@tailgate.team.name} #{@tailgate.team.sport.name} Team."%>" /> 
-  <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />    
+  <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />
+  <meta property="fb:admins" content="690891536" />     
 <% end %>
 
 <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
@@ -120,19 +121,29 @@
           <div>
             <h4 style="background-color: <%= @tailgate.color %>"><span class="fan_count"><%= pluralize(@tailgate.tailgate_followers_count + 1, "Fan") -%></span></h4>
           </div>
-          <div class="fan_pics">
+          <div class="fanPics">
             <% if @tailgate.user.image %>
               <div class="profile_pic">
                 <%= link_to image_tag( @tailgate.user.image, size:"32x32" ), user_path(@tailgate.user) %>
               </div>
             <% end %>
-            <% @tailgate.followers.limit(12).each do |aTailgateFollower| %>
+            <% @tailgate.followers.limit(24).each do |aTailgateFollower| %>
               <% if aTailgateFollower.image %>
                 <div class="profile_pic">
                   <%= link_to image_tag( aTailgateFollower.image, size:"32x32" ), user_path(aTailgateFollower) %>
                 </div>
               <% end %>
             <% end %>
+          </div>
+          <div class="facebookSharing clearfix">
+            <p>Share this fanzone with your friends:</p>
+            <div class="fb-like" 
+                 data-layout="button_count" 
+                 data-href="<%= tailgate_url(@tailgate)-%>" 
+                 data-send="true" 
+                 data-font="verdana" 
+                 data-ref="fanzone">
+            </div>
           </div>
         </div>
         <div class="venues">
@@ -176,7 +187,7 @@
                 <strong>5</strong> new Tweets!
               </p>
             </div>
-            <div id="tweetError" class='alert alert-error fade in'>
+            <div id="tweetError" class='alert alert-error fade in hide'>
               <a class='close' data-dismiss='alert' href='#'>×</a>
               <p>
                 Twitter has called timeout<br/>We'll try again in 30 seconds
