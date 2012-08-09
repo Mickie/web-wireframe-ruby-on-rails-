@@ -12,6 +12,30 @@ class SocialSender
     end
   end
   
+  def shareJoin( aUserId, aTailgateId ) 
+    theUser = User.find_by_id(aUserId)
+    theTailgate = Tailgate.find_by_id(aTailgateId)
+    
+    if (theUser.facebook_access_token == nil || theUser.facebook_access_token.empty? )
+      Rails.logger.warn "Error sharing join: user not connected"
+      return
+    end
+    
+    
+    theGraph = Koala::Facebook::API.new(theUser.facebook_access_token)
+    
+    begin
+      theConnectionType = "#{ENV["FANZO_FACEBOOK_NAMESPACE"]}:join"
+      
+      theResult = theGraph.put_connections("me", 
+                                            theConnectionType, 
+                                            { fanzone: getTailgateBitly(theTailgate) })
+    rescue Exception => e
+      Rails.logger.warn "Error sharing join to facebook => #{e.to_s}"
+      raise e
+    end
+  end
+  
   def self.sendFollowersTheirUpdates
     if Rails.env.development?
       theListOfUsers = User.where(name:"Paul Ingalls")
