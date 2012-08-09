@@ -149,6 +149,7 @@ var FanzoNavigator = function()
       InfiniteScroller.get().handleScrollingForResource("/tailgates");
     }
     updateTimestamps();
+    window.fbAsyncInit();
   };
 
   this.onLoadError = function(anError)
