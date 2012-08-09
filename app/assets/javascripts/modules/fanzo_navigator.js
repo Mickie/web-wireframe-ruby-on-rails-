@@ -149,7 +149,7 @@ var FanzoNavigator = function()
       InfiniteScroller.get().handleScrollingForResource("/tailgates");
     }
     updateTimestamps();
-    window.fbAsyncInit();
+    FB.XFBML.parse();
   };
 
   this.onLoadError = function(anError)
