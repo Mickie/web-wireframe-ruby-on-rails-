@@ -1,50 +1,80 @@
 <%= provide(:title, 'The Fanzo Team') %>
 
-<div id="fanzo_team">
-  <h1>#FANZO</h1>
-  <h3>Our West Coast Crew</h3>
-  <dl>
-    <dt>Paul Ingalls, CEO</dt>
-      <dd>
-        Experienced business builder and company leader who gave it all up to chase a dream.  
-        Previously co-founder &amp; CTO at Smilebox, Inc. where he defined the culture and led the product team
-        that built a service that touched hundreds of millions of people, which led to a successful exit for
-        the investors.  Prior to Smilebox, Paul worked with the amazing team that built RealArcade at RealNetworks,
-        redefining the casual games business.  A graduate of the University of Notre Dame, Paul is a huge sports fan.
-        Paul lives in Kirkland with his wife and three amazing daughters. Go Irish!
-      </dd>
-    <dt>Dana Dyksterhuis, Chief Community Officer</dt>
-      <dd>
-        Husker country (Omaha) gal to Seattle, in love with this gorgeous city and everything about it. 
-        Abandoned my safe, comfort zone of PR to pursue this dream of Fanzo and blown away by everyone’s unending 
-        support to make it happen with us. Met Paul after giving 15-second pitch (while shaking in my boots) at a 
-        Lean Startup event featuring Dan Shapiro. Prior path includes working with the Seahawks while 
-        at Qwest and CenturyLink, VP of Calgary Flames’ AHL team and PR Manager at Qwest Center Omaha (now CenturyLink Center Omaha). 
-        Crazy for the English Premier League and everything European football.
-      </dd>
-    <dt>Frank Lee, Creative Director</dt>
-      <dd>
-        Mozilla Corporation UX Designer, Kinzin Creative Director, Smilebox Designer, Microsoft Program Manager, 
-        Interaction Designer, User Interface Designer, Software Engineer, Photographer, NHL fan!
-      </dd>
-    <dt>KJ Hiramoto</dt>  
-      <dd>
-        We can’t forget our Intern here in Seattle who has helped us with everything from the grunt work 
-        feeding of the hungry database, to social media. His time and talents have been an enormous help.
-      </dd>
-  </dl>
-  <h3>"Who represents you back east?" (girl to Mikey in Swingers)</h3>
-  <dl>
-    <dt>Matt Creatore, East Coast Strategic Director</dt>
-    <dt>Javier Sandoval, East Coast Business Development Director</dt>
-    <dd>
-      Matt and Javi are brilliant, up-and-coming, A-game players out of North Carolina that we are so fortunate to have. 
-      They have been rockin’ it with business development, fan engagement and strategic, creative ideas to implement. 
-    </dd>
-  </dl>
-  <blockquote>
-    <p>The law of serendipity equals moments of opportunity.</p> 
-    <small>Brian Wong, Kiip Founder</small>
-  </blockquote>
-  <p>This is the real story of how Fanzo came to be… we are grateful and thrilled that you’ve joined us in our journey!</p>
+<div id="fanzo_team" >
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="headShot">
+        <%= image_tag( "paul.png", alt:"Paul Ingalls") %>
+      </div>
+      <div class="about">
+        <h2>Paul Ingalls</h2>
+        <h3>CEO</h3>
+        <p>
+          Previously co-founder & CTO at Smilebox, leading product team through sale to Incredimail (now Perion) for $40 million.  
+          Dev Manager at RealNetworks where he helped create the casual games business, leading and later managing the technical 
+          team that built RealArcade, the first app store. Agile Team Coach, Notre Dame Alum, Microsoft Kinect Accelerator Mentor
+        </p>
+      </div>
+    </div>
+  
+    <div class="span4">
+      <div class="headShot">
+        <%= image_tag( "dana.png", alt:"Dana Dyksterhuis") %>
+      </div>
+      <div class="about">
+        <h2>Dana Dyksterhuis </h2>
+        <h3>Chief Community Officer</h3>
+        <p>
+          CenturyLink PR Manager, (Qwest Field to CenturyLink Field announcement with Seahawks), 
+          VP of Calgary Flames’ AHL team, Qwest Center Omaha Arena PR Manager 
+          (helped promote Olympic Swim Trials, NCAA Championships, Harlem Globetrotters, WWE), 
+          Former WOWT Broadcast News Reporter, Omaha Native, Husker and English Premier League Fan
+        </p>
+      </div>
+    </div>
+  
+    <div class="span4">
+      <div class="headShot">
+        <%= image_tag( "frank.png", alt:"Frank Lee") %>
+      </div>
+      <div class="about">
+        <h2>Frank Lee</h2>
+        <h3>Creative Directory</h3>
+        <p>
+          UX Designer at Mozilla Corporation (Firefox OS, Mozilla Marketplace), Creative Director at Kinzin, 
+          Designer at Smilebox, UX Program Manager at Microsoft Corporation 
+          (Original team member that created Microsoft Outlook, MSN Premium, 
+          Consumer Incubation), Software Engineer, Photographer, Filmmaker, and NHL fan.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+      <dl>
+        <h4>"Who represents you back east?" (girl to Mikey in Swingers)</h4>
+        
+        <dt>Matt Creatore, East Coast Strategic Director</dt>
+        <dt>Javier Sandoval, East Coast Business Development Director</dt>
+        <dd>
+          Matt and Javi are brilliant, up-and-coming, A-game players out of North Carolina that we are so fortunate to have. 
+          They have been rockin’ it with business development, fan engagement and strategic, creative ideas to implement. 
+        </dd>
+        
+        <h4>The Person who gets the real work done</h4>
+        <dt>KJ Hiramoto</dt>  
+        <dd>
+          We can’t forget our Intern here in Seattle who has helped us with everything from the grunt work 
+          feeding of the hungry database, to social media. His time and talents have been an enormous help.
+        </dd>
+      </dl>
+      <blockquote>
+        <p>The law of serendipity equals moments of opportunity.</p> 
+        <small>Brian Wong, Kiip Founder</small>
+      </blockquote>
+      <p>This is the real story of how Fanzo came to be… we are grateful and thrilled that you’ve joined us in our journey!</p>
+    </div>
+  </div>
+  
 </div>
