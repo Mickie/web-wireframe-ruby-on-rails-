@@ -115,7 +115,7 @@ var TwitterController = function(aTwitterView)
   
   this.onInvite = function( aTweetId, aUser )
   {
-    var theMessage = aUser + ", I've got a conversation going about this on my fanzone, interested? " + this.myTwitterView.myHashTags;
+    var theMessage = aUser + ", I've got a conversation going about this on my @FanzoFans fanzone, interested? " + this.myTwitterView.myHashTags;
     this.myTwitterInviteDialog.showDialog( theMessage, aTweetId );
   };
   
