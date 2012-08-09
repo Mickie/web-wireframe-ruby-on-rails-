@@ -144,6 +144,13 @@
                  data-font="verdana" 
                  data-ref="fanzone">
             </div>
+            <div class="pin_button">
+              <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(@tailgate) -%>&media=<%=u logoPath(@tailgate.team.slug, :large)-%>&description=<%=u @tailgate.description -%>" 
+                 class="pin-it-button" 
+                 count-layout="horizontal">
+                <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+              </a>
+            </div>
           </div>
         </div>
         <div class="venues">
