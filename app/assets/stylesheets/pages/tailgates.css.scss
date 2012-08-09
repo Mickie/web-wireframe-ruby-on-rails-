@@ -134,7 +134,7 @@ div#tailgate_show
         {
           clear: both;
           padding: 5px;
-          padding-bottom: 15px;
+
           p
           {
             font-weight: bold;
@@ -143,12 +143,25 @@ div#tailgate_show
           .fb-like
           {
             float:left;
+            margin-bottom: 5px;
+          }
+
+          .pinTweet
+          {
+            float:left;
+
+            .pinButton
+            {
+              float:left;
+              margin-right: 7px;
+            }
+            
+            .tweetThis
+            {
+              float:left;
+            }
           }
           
-          .pin_button
-          {
-            float: left;
-          }
         }
       }
       

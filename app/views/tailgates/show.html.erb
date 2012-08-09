@@ -144,12 +144,24 @@
                  data-font="verdana" 
                  data-ref="fanzone">
             </div>
-            <div class="pin_button">
-              <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(@tailgate) -%>&media=<%=u logoPath(@tailgate.team.slug, :large)-%>&description=<%=u @tailgate.description -%>" 
-                 class="pin-it-button" 
-                 count-layout="horizontal">
-                <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
-              </a>
+            <div class="pinTweet">
+              <div class="pinButton">
+                <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(@tailgate) -%>&media=<%=u logoPath(@tailgate.team.slug, :large)-%>&description=<%=u @tailgate.description -%>" 
+                   class="pin-it-button" 
+                   count-layout="horizontal">
+                  <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                </a>
+              </div>
+              <div class="tweetThis">
+                <a  href="https://twitter.com/share" 
+                    class="twitter-share-button"
+                    data-url="<%= getTailgateBitly( @tailgate )-%>" 
+                    data-counturl="<%= tailgate_url(@tailgate) -%>" 
+                    data-text="Check out this fanzone about <%= @tailgate.topic_tags.split(",").join(" and") -%>" 
+                    data-via="fanzofans" 
+                    data-related="fanzofans" 
+                    data-hashtags="fanzo">Tweet</a>
+              </div>
             </div>
           </div>
         </div>

@@ -150,6 +150,7 @@ var FanzoNavigator = function()
     }
     updateTimestamps();
     FB.XFBML.parse();
+    twttr.widgets.load();
   };
 
   this.onLoadError = function(anError)
