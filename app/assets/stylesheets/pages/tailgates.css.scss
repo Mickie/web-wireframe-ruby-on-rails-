@@ -18,6 +18,8 @@ div#tailgate_show
   
   div.banner
   {
+    background-image: asset-url("white-gradient-140.png", image);
+    background-repeat: repeat-x;
     background-color: black;
     position:relative;
     
