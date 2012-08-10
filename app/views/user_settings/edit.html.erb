@@ -143,6 +143,7 @@
             <span class="connected">Connected</span>
           <% end %>                      
         </div>
+<!--
         <div class="connection">
           <%= link_to "Connect To Instagram", omniauth_authorize_path(User, 'instagram'), 
                       id: "sign-in-with-instagram", class:"zocial instagram" %>
@@ -156,6 +157,29 @@
           <% if @user.foursquare_user_id %>
             <span class="connected">Connected</span>
           <% end %>                      
+        </div>
+-->
+      </div>
+
+      <div class="teams">
+        <h3>Your teams</h3>
+        <div class="saved_teams">
+          <ul>
+            <% if @user.user_teams.length > 1 %>
+              <% @user.user_teams.each do |aUserTeam| %>
+                <%  unless aUserTeam.new_record? %>
+                  <li id="user_team_<%= aUserTeam.id -%>">
+                    <%= render partial: "user_teams/user_team", locals: { aUserTeam: aUserTeam } %>
+                  </li>
+                <% end %>
+              <% end %>
+            <% else %>
+              <li class="no_teams">No teams</li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="add_item">
+          <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
         </div>
       </div>
 
@@ -223,30 +247,6 @@
 
       </div>
       
-      
-      <div class="teams">
-        <h3>Your teams</h3>
-        <div class="saved_teams">
-          <ul>
-            <% if @user.user_teams.length > 1 %>
-              <% @user.user_teams.each do |aUserTeam| %>
-                <%  unless aUserTeam.new_record? %>
-                  <li id="user_team_<%= aUserTeam.id -%>">
-                    <%= render partial: "user_teams/user_team", locals: { aUserTeam: aUserTeam } %>
-                  </li>
-                <% end %>
-              <% end %>
-            <% else %>
-              <li class="no_teams">No teams</li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="add_item">
-          <a href="#myAddTeamModal" data-toggle="modal">Add Team</a>
-        </div>
-      </div>
-      
-
       <div class="locations">
         <h3>Your saved locations</h3>
         <div class="saved_locations">
