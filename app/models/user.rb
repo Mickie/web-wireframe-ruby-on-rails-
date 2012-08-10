@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
                   :first_name,
                   :last_name,
                   :image,
+                  :description,
                   :password,
                   :password_confirmation,
                   :remember_me,
@@ -55,7 +56,9 @@ class User < ActiveRecord::Base
                   :instagram_username,
                   :no_email_on_posts,
                   :no_email_on_comments,
-                  :no_email_newsletter
+                  :no_email_newsletter,
+                  :no_email_on_follows,
+                  :no_email_summary_of_followed_tailgates
                   
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
