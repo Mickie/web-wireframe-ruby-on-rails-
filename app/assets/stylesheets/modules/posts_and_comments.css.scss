@@ -155,6 +155,18 @@
           .post_image
           {
             padding: 10px 0px;
+            
+            img
+            {
+              padding-bottom: 20px;
+            }
+            .pinButton
+            {
+              position:absolute;
+              right: 0px;
+              bottom: 0px;
+              margin-top: 10px;
+            }
           }
           
           .post_video
