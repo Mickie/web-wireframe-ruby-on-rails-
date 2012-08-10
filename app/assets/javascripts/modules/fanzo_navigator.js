@@ -151,6 +151,7 @@ var FanzoNavigator = function()
     updateTimestamps();
     FB.XFBML.parse();
     twttr.widgets.load();
+    gapi.plusone.go();
   };
 
   this.onLoadError = function(anError)
