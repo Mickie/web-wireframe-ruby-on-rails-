@@ -119,7 +119,7 @@ $(function()
     suffixFromNow : "from now",
     seconds : "%d s",
     minute : "< 1 m",
-    minutes : "%d mi",
+    minutes : "%d m",
     hour : "~1 h",
     hours : "%d h",
     day : "~1 d",
