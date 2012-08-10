@@ -111,8 +111,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.setupNavigation = function()
   {
-    $(this.myContainerDiv + " div#navigate_forward").click( createDelegate(this, this.slideLeft ) );
-    $(this.myContainerDiv + " div#navigate_backward").click( createDelegate(this, this.slideRight ) );
+    $(this.myContainerDiv + " div#navigate_forward").click( createDelegate(this, this.slideRight ) );
+    $(this.myContainerDiv + " div#navigate_backward").click( createDelegate(this, this.slideLeft ) );
   }
   
   this.onSlideInterval = function()
