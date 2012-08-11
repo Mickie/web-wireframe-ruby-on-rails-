@@ -73,11 +73,8 @@ var FanzoneDialog = function( aDialogSelector, aNewFlag )
   
   this.handleTeamLoaded = function( aTeam )
   {
-    if ( $(this.myDialogSelector + " #tailgate_topic_tags").val().length == 0 )
-    {
-       $(this.myDialogSelector + " #tailgate_topic_tags").val(aTeam.social_info.hash_tags);
-       $(this.myDialogSelector + " #tailgate_not_tags").val(aTeam.social_info.not_tags);
-    }
+     $(this.myDialogSelector + " #tailgate_topic_tags").val(aTeam.social_info.hash_tags);
+     $(this.myDialogSelector + " #tailgate_not_tags").val(aTeam.social_info.not_tags);
   };
   
   this.handleTeamPicked = function(e)
