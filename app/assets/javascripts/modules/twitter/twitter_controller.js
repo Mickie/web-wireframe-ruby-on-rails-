@@ -107,9 +107,9 @@ var TwitterController = function(aTwitterView)
     $("body").animate({scrollTop:0}, 400);
   };
   
-  this.onRetweet = function( aTweetId, aTweetText )
+  this.onRetweet = function( aTweetId, aTweetText, aUser )
   {
-    this.myTwitterView.updatePostForm(true, aTweetText, "", aTweetId);
+    this.myTwitterView.updatePostForm(true, "RT " + aUser + ": " + aTweetText, "", aTweetId);
     $("body").animate({scrollTop:0}, 400);
   };
   

@@ -314,7 +314,8 @@ var TwitterView = function( aMaxTweets,
       {
         var theId = anItem.context.id_str;
         var theText = anItem.context.text;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', \"" + theText.escapeQuotes() + "\")";
+        var theUser = anItem.context.from_user;
+        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', \"" + theText.escapeQuotes() + "\", '@" + theUser + "')";
       },
       "a#invite@href" : function(anItem)
       {
