@@ -25,3 +25,15 @@ dev:
 	"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004015077440&n=LbJ0YuTTg3i7RkZ", 
 	"email"=>"hnmsfbr_occhinoson_1341897667@tfbnw.net"
 } 
+
+Join:
+1. Go to www.fanzo.me and login (top left) with your facebook account
+2a. Click the follow button on a fanzone
+2b. OR Click a fanzone banner to open the fanzone, and then click the follow button
+3. Follow action is posted to facebook
+
+Create:
+1. Go to www.fanzo.me and login (top left) with your facebook account
+2. Click "Create a Fanzone" on the bottom left
+3. Fill out the form, then submit
+4. Fanzone is created, action is posted to facebook
