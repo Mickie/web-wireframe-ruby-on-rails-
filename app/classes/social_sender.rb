@@ -12,7 +12,7 @@ class SocialSender
     end
   end
   
-  def shareJoin( aUserId, aTailgateId ) 
+  def shareFollow( aUserId, aTailgateId ) 
     theConnectionType = "#{ENV["FANZO_FACEBOOK_NAMESPACE"]}:join"
     addTailgateActionToGraph( aUserId, aTailgateId, theConnectionType )
   end
