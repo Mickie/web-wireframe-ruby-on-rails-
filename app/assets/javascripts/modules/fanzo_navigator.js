@@ -139,6 +139,20 @@ var FanzoNavigator = function()
     return theHash;
   };
   
+  this.updatePinterestButtons = function()
+  {
+    $('script[src*="assets.pinterest.com/js/pinit.js"]').remove();
+    $.ajax({ url: 'http://assets.pinterest.com/js/pinit.js', dataType: 'script', cache:true});
+  };
+  
+  this.updateSocialButtons = function()
+  {
+    FB.XFBML.parse();
+    twttr.widgets.load();
+    gapi.plusone.go();
+    this.updatePinterestButtons();
+  };
+  
   this.onLoadDataComplete = function(aResult)
   {
     $("#frameContent").html(aResult);
@@ -148,10 +162,9 @@ var FanzoNavigator = function()
     {
       InfiniteScroller.get().handleScrollingForResource("/tailgates");
     }
+    
+    this.updateSocialButtons();
     updateTimestamps();
-    FB.XFBML.parse();
-    twttr.widgets.load();
-    gapi.plusone.go();
   };
 
   this.onLoadError = function(anError)
