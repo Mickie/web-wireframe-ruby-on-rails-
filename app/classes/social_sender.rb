@@ -13,28 +13,15 @@ class SocialSender
   end
   
   def shareJoin( aUserId, aTailgateId ) 
-    theUser = User.find_by_id(aUserId)
-    theTailgate = Tailgate.find_by_id(aTailgateId)
-    
-    if (theUser.facebook_access_token == nil || theUser.facebook_access_token.empty? )
-      Rails.logger.warn "Error sharing join: user not connected"
-      return
-    end
-    
-    
-    theGraph = Koala::Facebook::API.new(theUser.facebook_access_token)
-    
-    begin
-      theConnectionType = "#{ENV["FANZO_FACEBOOK_NAMESPACE"]}:join"
-      
-      theResult = theGraph.put_connections("me", 
-                                            theConnectionType, 
-                                            { fanzone: getTailgateBitly(theTailgate) })
-    rescue Exception => e
-      Rails.logger.warn "Error sharing join to facebook => #{e.to_s}"
-      raise e
-    end
+    theConnectionType = "#{ENV["FANZO_FACEBOOK_NAMESPACE"]}:join"
+    addTailgateActionToGraph( aUserId, aTailgateId, theConnectionType )
   end
+
+  def shareCreate( aUserId, aTailgateId ) 
+    theConnectionType = "#{ENV["FANZO_FACEBOOK_NAMESPACE"]}:create"
+    addTailgateActionToGraph( aUserId, aTailgateId, theConnectionType )
+  end
+
   
   def self.sendFollowersTheirUpdates
     if Rails.env.development?
@@ -75,6 +62,29 @@ class SocialSender
   end
   
   private
+  
+  def addTailgateActionToGraph( aUserId, aTailgateId, aConnectionType )
+    theUser = User.find_by_id(aUserId)
+    theTailgate = Tailgate.find_by_id(aTailgateId)
+    
+    if (theUser.facebook_access_token == nil || theUser.facebook_access_token.empty? )
+      Rails.logger.warn "Error sharing #{ aConnectionType } => user not connected"
+      return
+    end
+    
+    
+    theGraph = Koala::Facebook::API.new(theUser.facebook_access_token)
+    
+    begin
+      theResult = theGraph.put_connections("me", 
+                                            aConnectionType, 
+                                            { fanzone: getTailgateBitly(theTailgate) })
+    rescue Exception => e
+      Rails.logger.warn "Error sharing #{ aConnectionType } to facebook => #{e.to_s}"
+      raise e
+    end
+    
+  end
   
   def sendToTwitter( aPost )
     if (aPost.user.twitter_user_token == nil ||

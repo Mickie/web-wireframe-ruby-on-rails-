@@ -102,6 +102,7 @@ class TailgatesController < ApplicationController
       elsif @tailgate.save
 
         @tailgate.addInitialPost
+        SocialSender.new.delay.shareCreate(current_user.id, @tailgate.id)
 
         format.html { redirect_to @tailgate, notice: 'Tailgate was successfully created.' }
         format.json { render json: @tailgate, status: :created, location: @tailgate }
