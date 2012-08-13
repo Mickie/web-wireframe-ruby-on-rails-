@@ -210,37 +210,26 @@
       
       a
       {
-        height: 42px;
+        height: 30px;
         font-weight:normal;
-        padding:0px;
+        padding:0px 0px 0px 2px;
         
         .team_logo
         {
-          padding: 5px;
+          padding: 5px 10px;
           
           img
           {
-            width:32px;
-            height:32px;
+            width:20px;
+            height:20px;
           }
         }
         
         .fanzone_name
         {
           width: 175px;
-          height: 40px;
+          height: 30px;
           overflow: hidden;
-          position: relative;
-          span
-          {
-            display:block;
-            position:absolute; 
-            top:0; 
-            bottom:0; 
-            left:0; 
-            right:0;
-            margin:auto; 
-          }
         }
       }
     }

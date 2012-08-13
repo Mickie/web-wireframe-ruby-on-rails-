@@ -3,7 +3,7 @@
     <table>
       <tr>
         <td class="team_logo"><%= teamLogo(aTailgate.team, :small) -%></td>
-        <td class="fanzone_name"><%= aTailgate.name -%></td>
+        <td class="fanzone_name"><%= aTailgate.name.length < 27 ? aTailgate.name : aTailgate.name[0, 23] + "..." -%></td>
       </tr>
     </table>
   </a>
