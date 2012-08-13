@@ -1,0 +1,98 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+
+#welcome
+{
+  margin-left: 15px;
+  height: 140px;
+  padding: 40px;
+  background-color: $welcomeBackgroundColor;
+  background-image: asset-url("white-gradient-140.png", image);
+  background-repeat: repeat-x;
+  
+  h2
+  {
+    color:white;
+    font-weight: normal;
+    
+    a
+    {
+      color:white;
+      text-decoration:underline;
+      
+      &:hover
+      {
+        color:white;
+      }
+    }
+  }
+
+  .searchOrCreate
+  {
+    padding-top: 20px;
+    
+    .teamSearch
+    {
+      position: relative;
+      form
+      {
+        padding:0px;
+        margin:0px;
+        
+        #team
+        {
+          font-size: 18px;
+          line-height: 20px;
+          width: 100%;
+          padding-left: 25px;
+          height:40px;
+          @include border-radius(20px);
+        }
+      }
+      
+      i
+      {
+        position:absolute;
+        left: 5px;
+        top: 13px;
+        opacity: 0.5;
+      }
+    }
+    
+    .or
+    {
+    }
+
+    .createFanzone
+    {
+      margin:0px;
+      
+      a
+      {
+        padding-left: 15px;
+        .fanzoButton
+        {
+          margin-top:1px;
+          text-align: center;
+          font-size: 18px;
+          font-weight: normal;
+          line-height: 20px;
+          padding-top: 8px;
+          width: 100%;
+          height: 27px;
+          border: 1px solid white;
+          position: relative;
+          
+          span
+          {
+            position:absolute;
+            left: 10px;
+            font-size: 20px;
+            font-weight: bold;
+          }
+        }
+      }
+    }  
+  }
+
+}

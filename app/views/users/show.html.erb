@@ -1,55 +1,55 @@
 <%= provide(:title, "My Profile" ) %>
 
 <div id="userShow" >
-  
-  <div class="banner">
-    <% if user_signed_in? && current_user.id == @user.id %>
-      <div class="edit_setting">
-        <%= link_to "Edit", user_settings_edit_path, class:"fanzoButton" %>
-      </div>
-    <% end %>
-    <div class="banner_content row-fluid">
-      <div class="profile_details">
-        <div class="big_profile_pic">
-          <%= image_tag( @user.large_profile_pic ) %>
-        </div>
-        <h1><%= @user.full_name -%></h1>
-        <p class="user_description"><%= @user.description -%></p>
-        <p class="fan_since">Fan since <%= @user.created_at.strftime("%B %e, %Y") -%></p>
-      </div>
-    </div>
-  </div>
-
-  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} was there:", aListOfBrags: @user.i_was_there_brags } %>
-  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} watched:", aListOfBrags: @user.i_watched_brags } %>
-  <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} wants to:", aListOfBrags: @user.i_wish_brags } %>
-
-  <% if @user.teams.length > 0 %>
-    <div id="user_teams" class="clearfix">
-      <h2><%= @user.first_name -%> is a fan of these teams</h2>
-      <% @user.teams.includes(:sport).each do |aTeam| %>
-        <div class="user_team">
-          <%= teamLogo(aTeam, :large) %>
-          <h4><%= aTeam.name -%></h4>
-          <h4><%= aTeam.sport.name -%></h4>
+  <div id="userContent">
+    <div class="banner">
+      <% if user_signed_in? && current_user.id == @user.id %>
+        <div class="edit_setting">
+          <%= link_to "Edit", user_settings_edit_path, class:"fanzoButton" %>
         </div>
       <% end %>
+      <div class="banner_content row-fluid">
+        <div class="profile_details">
+          <div class="big_profile_pic">
+            <%= image_tag( @user.large_profile_pic ) %>
+          </div>
+          <h1><%= @user.full_name -%></h1>
+          <p class="user_description"><%= @user.description -%></p>
+          <p class="fan_since">Fan since <%= @user.created_at.strftime("%B %e, %Y") -%></p>
+        </div>
+      </div>
     </div>
-  <% end %>
   
-  <div class="created_fanzones clearfix">
-    <h2><%= @user.first_name -%> hosts these fanzones</h2>
-    <% @user.tailgates.each do |aTailgate| %>
-      <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate }%>  
+    <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} was there:", aListOfBrags: @user.i_was_there_brags } %>
+    <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} watched:", aListOfBrags: @user.i_watched_brags } %>
+    <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} wants to:", aListOfBrags: @user.i_wish_brags } %>
+  
+    <% if @user.teams.length > 0 %>
+      <div id="user_teams" class="clearfix">
+        <h2><%= @user.first_name -%> is a fan of these teams</h2>
+        <% @user.teams.includes(:sport).each do |aTeam| %>
+          <div class="user_team">
+            <%= teamLogo(aTeam, :large) %>
+            <h4><%= aTeam.name -%></h4>
+            <h4><%= aTeam.sport.name -%></h4>
+          </div>
+        <% end %>
+      </div>
     <% end %>
+    
+    <div class="created_fanzones clearfix">
+      <h2><%= @user.first_name -%> hosts these fanzones</h2>
+      <% @user.tailgates.each do |aTailgate| %>
+        <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate }%>  
+      <% end %>
+    </div>
+  
+    <div class="followed_fanzones clearfix">
+      <h2><%= @user.first_name -%> follows these fanzones</h2>
+      <% @user.followed_tailgates.each do |aTailgate| %>
+        <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate }%>  
+      <% end %>
+    </div>
   </div>
-
-  <div class="followed_fanzones clearfix">
-    <h2><%= @user.first_name -%> follows these fanzones</h2>
-    <% @user.followed_tailgates.each do |aTailgate| %>
-      <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate }%>  
-    <% end %>
-  </div>
-
 </div>
 

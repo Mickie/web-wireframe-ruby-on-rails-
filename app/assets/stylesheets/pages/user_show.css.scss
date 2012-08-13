@@ -3,113 +3,118 @@
 
 div#userShow
 {
+  padding-top: 40px;
   margin-left: 15px;
-  @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
   
-  div.banner
+  #userContent  
   {
-    position: relative;
-    color: white;
-    @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
+    @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
     
-    .edit_setting
+    div.banner
     {
-      position: absolute;
-      top: -10px;
-      right: 0px;
-    }
-    
-    .banner_content
-    {
-      .big_profile_pic
+      position: relative;
+      color: white;
+      @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
+      
+      .edit_setting
       {
-        float:left;
-        margin-right: 15px;
+        position: absolute;
+        top: -10px;
+        right: 0px;
       }
       
-      .profile_details
+      .banner_content
       {
-        min-width:200px;
-        
-        h1, p
+        .big_profile_pic
         {
-          padding:0px;
-          margin:0px;
-          color:white;
+          float:left;
+          margin-right: 15px;
         }
         
-        h1
+        .profile_details
         {
-          padding: 10px 0px;
-          font-weight:normal;
-        }
-        
-        .user_description
-        {
-          font-weight: bold;
-          padding-bottom: 5px;
-        }
-        
-        .fan_since
-        {
-          font-size:11px;
+          min-width:200px;
+          
+          h1, p
+          {
+            padding:0px;
+            margin:0px;
+            color:white;
+          }
+          
+          h1
+          {
+            padding: 10px 0px;
+            font-weight:normal;
+          }
+          
+          .user_description
+          {
+            font-weight: bold;
+            padding-bottom: 5px;
+          }
+          
+          .fan_since
+          {
+            font-size:11px;
+          }
         }
       }
     }
-  }
-  
-  .created_fanzones, .followed_fanzones, .brags, #user_teams
-  {
-    padding-bottom: 15px;
-
-    h2
-    {
-      font-weight:normal;
-      margin:0px;
-      padding: 10px 10px 20px 10px;
-      color:$lightTextColor;
-      text-transform: uppercase;
-      font-size: 16px; 
-      line-height: 16px; 
-    }
-  }
-  
-  .brags
-  {
-    background-color: $userProfileUserBragsBackgroundColor;
     
-    ul
+    .created_fanzones, .followed_fanzones, .brags, #user_teams
     {
-      padding-left: 10px;
-    } 
-  }
+      padding-bottom: 15px;
   
-  #user_teams
-  {
-    background-color: $userProfileUserTeamsBackgroundColor;
-
-    .user_team
-    {
-      float:left;
-      width: 190px;
-      height: 190px;
-      padding: 15px;
-      margin-left: 18px;
-      margin-bottom: 18px;
-      text-align:center;
-      background-color: $userProfileUserTeamBackgroundColor;
-      border-top: 1px solid $borderColor;
-      @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
+      h2
+      {
+        font-weight:normal;
+        margin:0px;
+        padding: 10px 10px 20px 10px;
+        color:$lightTextColor;
+        text-transform: uppercase;
+        font-size: 16px; 
+        line-height: 16px; 
+      }
     }
-  }
+    
+    .brags
+    {
+      background-color: $userProfileUserBragsBackgroundColor;
+      
+      ul
+      {
+        padding-left: 10px;
+      } 
+    }
+    
+    #user_teams
+    {
+      background-color: $userProfileUserTeamsBackgroundColor;
   
-  .created_fanzones
-  {
-    background-color: $userProfileCreatedFanzonesBackgroundColor;
-  }
-  
-  .followed_fanzones
-  {
-    background-color: $userProfileFollowedFanzonesBackgroundColor;
+      .user_team
+      {
+        float:left;
+        width: 190px;
+        height: 190px;
+        padding: 15px;
+        margin-left: 18px;
+        margin-bottom: 18px;
+        text-align:center;
+        background-color: $userProfileUserTeamBackgroundColor;
+        border-top: 1px solid $borderColor;
+        @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
+      }
+    }
+    
+    .created_fanzones
+    {
+      background-color: $userProfileCreatedFanzonesBackgroundColor;
+    }
+    
+    .followed_fanzones
+    {
+      background-color: $userProfileFollowedFanzonesBackgroundColor;
+    }
   }
 }

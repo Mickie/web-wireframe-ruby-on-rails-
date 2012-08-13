@@ -1,3 +1,7 @@
+<% if !user_signed_in? %>
+  <%= render partial: 'partials/welcome' %>
+<% end %>
+
 <div id="allTiles" class="row-fluid">
   <%= render partial: "partials/create_fanzone_tile" %>
   <%= render "partials/tailgate_rows" %>

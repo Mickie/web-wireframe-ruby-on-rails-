@@ -56,15 +56,7 @@
         </li>
 
         <li id="fanzone_search">
-          <%= form_tag("/tailgates/search", :method => "get", remote: 'true',  class: "form-search") do %>
-            <%= hidden_field_tag :team_id %>
-            <%= autocomplete_field_tag 'team', 
-                                        '', 
-                                        autocomplete_team_name_teams_path, 
-                                        id_element: '#team_id',
-                                        placeholder: 'Search for your team' %>
-          <% end %>
-          <i class="icon-search"></i>
+          <%= render partial:"partials/team_search" %>
         </li>
         
         <li id="allFanzones">
