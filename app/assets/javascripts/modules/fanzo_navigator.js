@@ -44,12 +44,12 @@ var FanzoNavigator = function()
   
   this.onAccountHoverStart = function(e)
   {
-    $('#account_content .users_name').dropdown('toggle');
+    $('#account_dropdown .users_name').dropdown('toggle');
   };
   
   this.onAccountHoverEnd = function(e)
   {
-    $('#account_content .users_name').dropdown('toggle');
+    $('#account_dropdown .users_name').dropdown('toggle');
   };
 
   this.loadData = function(aPath, aNewActiveSelector)
