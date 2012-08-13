@@ -32,7 +32,7 @@ var TwitterSearch = function( aListener )
     this.callTwitterAjax( this.myRefreshUrl );
   };
   
-  this.onSearchComplete = function(aJSON, aTextStatus, aJqHR)
+  this.onSearchSuccess = function(aJSON, aTextStatus, aJqHR)
   {
     if (this.myAbortFlag)
     {
@@ -80,14 +80,12 @@ var TwitterSearch = function( aListener )
     }
     else
     {
-      console.log(aTextStatus);
-      this.myListener.onError("Woops! There was a problem getting tweets from Twitter: " + aTextStatus );
+      this.myListener.onError("Woops! There was a problem getting tweets from Twitter: " + aTextStatus ); 
     }
   };
   
   this.onError = function(aJqXHR, aTextStatus, anErrorThrown)
   {
-    console.log(aTextStatus);
     console.log(anErrorThrown);
     this.myListener.onError("Woops! There was a problem getting tweets from Twitter: " + aTextStatus );
   };
@@ -101,7 +99,7 @@ var TwitterSearch = function( aListener )
         url: TWITTER_SEARCH_URL + aUrl,
         cache:false,
         dataType: "jsonp",
-        success: createDelegate(this, this.onSearchComplete),
+        success: createDelegate(this, this.onSearchSuccess),
         complete: createDelegate(this, this.onComplete),
         error: createDelegate(this, this.onError )
       });

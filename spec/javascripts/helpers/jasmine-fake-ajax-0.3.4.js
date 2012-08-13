@@ -221,8 +221,22 @@
         real.error.call(real.context, {responseText: fake.errorMessage})
       }
 
+      console.log("real.complete: " + real.complete)
       if (real.complete) {
-        real.complete.call(real.context)
+        if (fake.success)
+        {
+          handleFunctionOrArrayCallbacks('complete', function(realCompleteCallback, fakeComplete) {
+            realCompleteCallback.call(real.context, fakeComplete.xhr, fakeComplete.status)
+          })
+        }
+        else if (fake.error)
+        {
+          real.complete.call(real.context, fakeError.xhr, fakeError.status)
+        }
+        else
+        {
+          real.complete.call(real.context)
+        }
       }
     }
 

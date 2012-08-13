@@ -1,17 +1,19 @@
 describe("TwitterSearch", function()  
 {
   var myTwitterSearch;
-  var onTweet, onError;
+  var onTweet, onError, onSuccess;
   var THE_SEARCH_URL = 'http://search.twitter.com/search.json?lang=en&include_entities=true&q=notredame%20-dakota&rpp=1';
   
   beforeEach(function()
   {
     onTweet = jasmine.createSpy('onTweet');
     onError = jasmine.createSpy('onError');
+    onSuccess = jasmine.createSpy('onSuccess');
     
     var theListener = {
       "onNewTweet" : onTweet,
-      "onError" : onError
+      "onError" : onError,
+      "onSuccess" : onSuccess
     };
     
     myTwitterSearch = new TwitterSearch(theListener);
@@ -57,7 +59,14 @@ describe("TwitterSearch", function()
       registerFakeAjax(
       { 
         url: THE_SEARCH_URL,
-        successData: TwitterData.searchResponses.success
+        success: {
+          data: TwitterData.searchResponses.success,
+          status: 'success'
+        },
+        complete:
+        {
+          status: 'success'
+        }
       })
 
       myTwitterSearch.getLatestTweetsForTerm( ['notredame'], ['dakota'], 1); 
@@ -72,6 +81,12 @@ describe("TwitterSearch", function()
       expect(theArgs[0]).toEqual(0);
       expect(theArgs[1].id).toEqual(202854280347127809);
     });
+    
+    it ("calls onSuccess when done", function()
+    {
+      expect(onSuccess).toHaveBeenCalled();
+      expect(onError).wasNotCalled();
+    });
   });
 
   describe("on error", function()
@@ -85,6 +100,10 @@ describe("TwitterSearch", function()
         {
           data: TwitterData.searchResponses.error,
           status: 'bad error'
+        },
+        complete:
+        {
+          status: 'bad error'
         }
       })
 
@@ -93,6 +112,7 @@ describe("TwitterSearch", function()
 
     it("calls onError with error message", function() 
     {
+      expect(onSuccess).wasNotCalled();
       expect(onTweet).wasNotCalled();
       expect(onError).toHaveBeenCalled();
  
