@@ -39,6 +39,8 @@ var FanzoNavigator = function()
     $('#myConnectTwitterModal').on('hidden', createDelegate(this, this.clearLocation) );
     $('#fanzone_search form').on('submit', createDelegate(this, this.onSearchSubmit) );
     $('#fanzone_search').on('railsAutocomplete.select', createDelegate(this, this.onSearchSelect) );
+    $('#welcome .teamSearch form').on('submit', createDelegate(this, this.onSearchSubmit) );
+    $('#welcome .teamSearch').on('railsAutocomplete.select', createDelegate(this, this.onSearchSelect) );
     $('#account_content').hover(createDelegate(this, this.onAccountHoverStart), createDelegate(this, this.onAccountHoverEnd));
   };
   

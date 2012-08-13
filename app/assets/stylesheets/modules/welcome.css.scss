@@ -4,11 +4,17 @@
 #welcome
 {
   margin-left: 15px;
-  height: 140px;
+  height: 190px;
   padding: 40px;
   background-color: $welcomeBackgroundColor;
   background-image: asset-url("white-gradient-140.png", image);
   background-repeat: repeat-x;
+  
+  h1
+  {
+    color:white;
+    padding-bottom: 10px;
+  }
   
   h2
   {
