@@ -39,8 +39,19 @@ var FanzoNavigator = function()
     $('#myConnectTwitterModal').on('hidden', createDelegate(this, this.clearLocation) );
     $('#fanzone_search form').on('submit', createDelegate(this, this.onSearchSubmit) );
     $('#fanzone_search').on('railsAutocomplete.select', createDelegate(this, this.onSearchSelect) );
+    $('#account_content').hover(createDelegate(this, this.onAccountHoverStart), createDelegate(this, this.onAccountHoverEnd));
   };
   
+  this.onAccountHoverStart = function(e)
+  {
+    $('#account_content .users_name').dropdown('toggle');
+  };
+  
+  this.onAccountHoverEnd = function(e)
+  {
+    $('#account_content .users_name').dropdown('toggle');
+  };
+
   this.loadData = function(aPath, aNewActiveSelector)
   {
     if (window.location.hash != aNewActiveSelector)
