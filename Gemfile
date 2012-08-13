@@ -25,6 +25,7 @@ gem 'newrelic_rpm'
 gem 'roadie'
 gem 'bitfields'
 gem 'delayed_job_active_record'
+gem 'oj'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
