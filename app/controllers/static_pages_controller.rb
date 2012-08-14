@@ -8,6 +8,9 @@ class StaticPagesController < ApplicationController
 
   def fanzo_team
   end
+
+  def contact
+  end
   
   def channel
     cache_expire = 1.year
