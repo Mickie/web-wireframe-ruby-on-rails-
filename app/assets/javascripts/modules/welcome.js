@@ -6,7 +6,7 @@ function showWelcomeIfNewUser()
 {
   var theVisitedCookie = getCookie("fanzo-visited");
   
-  if(true || !theVisitedCookie)
+  if(!theVisitedCookie)
   {
     $("#welcome").slideDown(600);
   }
