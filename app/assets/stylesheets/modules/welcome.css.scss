@@ -3,6 +3,7 @@
 
 #welcome
 {
+  position:relative;
   margin-left: 15px;
   height: 190px;
   padding: 40px;
@@ -31,6 +32,13 @@
         color:white;
       }
     }
+  }
+  
+  .horn
+  {
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
   }
 
   .searchOrCreate

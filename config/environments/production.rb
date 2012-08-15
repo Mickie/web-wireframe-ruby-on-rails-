@@ -58,6 +58,7 @@ FanzoSite::Application.configure do
   config.assets.precompile += [ 'user_settings/edit.js', 
                                 'tailgates.js', 
                                 'static_pages/home.js', 
+                                'static_pages/about.js', 
                                 'tailgates/new.js', 
                                 'tailgates/edit.js', 
                                 'tailgates/show.js', 

@@ -1,26 +1,27 @@
 <%= provide(:title, 'About Fanzo') %>
 
 <div id="static_about">
-  <div id="aboutContent">
-    <div class="banner">
-      <h1>About Fanzo</h1>
-      <ul class="aboutNav">
-        <li class="active">
-          <%= link_to "What is Fanzo?", about_path %>
-        </li>
-        <li>|</li>
-        <li>
-          <%= link_to "The Team", fanzo_team_path %>
-        </li>
-        <li>|</li>
-        <li>
-          <%= link_to "Contact Us", contact_path %>
-        </li>
-      </ul>
-      <div class="horn">
-        <%= image_tag("about/fanzo-horn-bg-01.png") %>
-      </div>
+  <div class="banner">
+    <h1>About Fanzo</h1>
+    <ul class="aboutNav">
+      <li>
+        <%= link_to "What is Fanzo?", "#", id: "about", class: "active" %>
+      </li>
+      <li>|</li>
+      <li>
+        <%= link_to "The Team", "#", id: "team" %>
+      </li>
+      <li>|</li>
+      <li>
+        <%= link_to "Contact Us", "#", id: "contact" %>
+      </li>
+    </ul>
+    <div class="horn">
+      <%= image_tag("fanzo-horn-bg.png") %>
     </div>
+  </div>
+  
+  <div id="aboutContent">
     <div id="whatIsFanzo">
       <h1>Fanzo is a social network for sports fans, by sports fans.</h1>
       <h2>Create your online tailgate, invite your friends, share your passion for the game and get sponsored like the athletes.</h2>
@@ -91,4 +92,92 @@
       </div>
     </div>
   </div>
+  
+  <div id="fanzoTeamContent" class="hide">
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-paul-01.jpg", alt:"Paul Ingalls") %>
+      </div>
+      <div class="rowContent">
+        <h2>Paul Ingalls</h2>
+        <h3>CEO</h3>
+        <p>
+          Previously co-founder & CTO at Smilebox, leading product team through sale to Incredimail (now Perion) for $40 million.  
+          Dev Manager at RealNetworks where he helped create the casual games business, leading and later managing the technical 
+          team that built RealArcade, the first app store. Agile Team Coach, Notre Dame Alum, Microsoft Kinect Accelerator Mentor
+        </p>
+      </div>
+    </div>
+    <div class="aboutRow">    
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-dana-01.jpg", alt:"Dana Dyksterhuis") %>
+      </div>
+      <div class="rowContent">
+        <h2>Dana Dyksterhuis </h2>
+        <h3>Chief Community Officer</h3>
+        <p>
+          CenturyLink PR Manager, (Qwest Field to CenturyLink Field announcement with Seahawks), 
+          VP of Calgary Flames’ AHL team, Qwest Center Omaha Arena PR Manager 
+          (helped promote Olympic Swim Trials, NCAA Championships, Harlem Globetrotters, WWE), 
+          Former WOWT Broadcast News Reporter, Omaha Native, Husker and English Premier League Fan
+        </p>
+      </div>
+    </div>
+    
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-flee-01.jpg", alt:"Frank Lee") %>
+      </div>
+      <div class="rowContent">
+        <h2>Frank Lee</h2>
+        <h3>Creative Director</h3>
+        <p>
+          UX Designer at Mozilla Corporation (Firefox OS, Mozilla Marketplace), Creative Director at Kinzin, 
+          Designer at Smilebox, UX Program Manager at Microsoft Corporation 
+          (Original team member that created Microsoft Outlook, MSN Premium, 
+          Consumer Incubation), Software Engineer, Photographer, Filmmaker, and NHL fan.
+        </p>
+      </div>
+    </div>
+
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-matt-01.jpg", alt:"Matt Creatore") %>
+      </div>
+      <div class="rowContent">
+        <h2>Matt Creatore</h2>
+        <h3>East Coast Strategic Director</h3>
+        <p>
+        </p>
+      </div>
+    </div>
+
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-javier-01.jpg", alt:"Javier Sandoval") %>
+      </div>
+      <div class="rowContent">
+        <h2>Javier Sandoval</h2>
+        <h3>East Coast Business Development Director</h3>
+        <p>
+        </p>
+      </div>
+    </div>
+
+    <div class="aboutRow">
+      <blockquote>
+        <p>The law of serendipity equals moments of opportunity.</p> 
+        <small>Brian Wong, Kiip Founder</small>
+      </blockquote>
+    </div>
+  </div>
+  
+  <div id="contactContent" class="hide">
+    <h2>Find us</h2>
+    <ul>
+      <li>Twitter: <a href="http://www.twitter.com/fanzofans">@FanzoFans </a></li>
+      <li>Facebook: <a href="http://www.facebook.com/fanzofans">FanzoFans</a></li>
+    </ul>
+  </div>
+  
 </div>
