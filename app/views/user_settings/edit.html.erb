@@ -229,7 +229,7 @@
           </div>
   
           <div id="IWishBrag_list">
-            <h4>I wish I'd seen...</h4>
+            <h4>I want to...</h4>
             <ul>
               <% if @user.i_wish_brags.length > 1 %>
                 <% @user.i_wish_brags.each do |aUserBrag| %>
@@ -240,12 +240,12 @@
                   <% end %>
                 <% end %>
               <% else %>
-                <li class="no_brags">No &quot;I wish&quot; shouts</li>
+                <li class="no_brags">No &quot;I want to&quot; shouts</li>
               <% end %>
             </ul>
           </div>
           <div class="add_item">
-            <a href="#myAddIWishBragModal" data-toggle="modal">Add &quot;I wish&quot; Shout</a>
+            <a href="#myAddIWishBragModal" data-toggle="modal">Add &quot;I want to&quot; Shout</a>
           </div>
   
         </div>
