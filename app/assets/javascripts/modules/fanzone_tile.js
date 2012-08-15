@@ -4,7 +4,7 @@ $(function(){
 
 function initializeTileHover()
 {
-  $('.fanzoneTile').live('mouseenter', onTileHoverStart).live('mouseleave', onTileHoverEnd);
+  $('#frameContent').on('mouseenter', ".fanzoneTile", onTileHoverStart).on('mouseleave', ".fanzoneTile", onTileHoverEnd);
 }
 
 function onTileHoverStart(e)
