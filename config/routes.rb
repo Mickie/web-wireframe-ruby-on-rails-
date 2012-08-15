@@ -46,7 +46,6 @@ FanzoSite::Application.routes.draw do
   
 
   match '/about',   to: 'static_pages#about'
-  match '/fanzo_team', to: 'static_pages#fanzo_team'
   match '/channel', to: 'static_pages#channel'
 
   post "twitter_proxy/update_status"

@@ -1,69 +1,183 @@
 <%= provide(:title, 'About Fanzo') %>
 
 <div id="static_about">
-  <div id="aboutContent">
-    <div class="banner">
-      <h1>About Fanzo</h1>
+  <div class="banner">
+    <h1>About Fanzo</h1>
+    <ul class="aboutNav">
+      <li>
+        <%= link_to "What is Fanzo?", "#", id: "about", class: "active" %>
+      </li>
+      <li>|</li>
+      <li>
+        <%= link_to "The Team", "#", id: "team" %>
+      </li>
+      <li>|</li>
+      <li>
+        <%= link_to "Contact Us", "#", id: "contact" %>
+      </li>
+    </ul>
+    <div class="horn">
+      <%= image_tag("fanzo-horn-bg.png") %>
     </div>
+  </div>
+  
+  <div id="aboutContent">
     <div id="whatIsFanzo">
-      <h2>What is Fanzo</h2>
-      <p>
-        Fanzo is a social network for sports fans, by sports fans.  
-        Create your online tailgate, invite your friends, share your passion for the game and get sponsored like the athletes.
-      </p>
+      <h1>Fanzo is a social network for sports fans, by sports fans.</h1>
+      <h2>Create your online tailgate, invite your friends, share your passion for the game and get sponsored like the athletes.</h2>
     </div>
     <div id="usingFanzo">
-      <h2>What can you do with Fanzo?</h2>
-      <ul>
-        <li>
+      <div class="aboutRow clearfix">
+        <div class="rowImage">
+          <%= image_tag("about/thumbnail-fanzone.jpg", alt: "Start a fanzone", size:"300x200") %>
+        </div>
+        <div class="rowContent">
           <h3>Start a fanzone</h3>
           <p>
             Create a fanzone and organize your own online tailgate decked out with fans, photos, videos and comments. 
             Invite friends and other fans to join your party. It’s your tailgate… be a fun party host and get conversations 
             going about your favorite sports moments, share content and prove your fan worthiness!
           </p>
-        </li>
-        <li>
+        </div>
+      </div>
+      <div class="aboutRow clearfix">
+        <div class="rowImage">
+          <%= image_tag("about/thumbnail-fans.jpg", alt: "Find your people", size:"300x150") %>
+        </div>
+        <div class="rowContent">
           <h3>Find your people</h3>
           <p>
             You know who they are.  The others that sit on the edge of their seat watching your team, dreaming of the same victory.
             They have watched the same games, experienced the same highs and suffered through the same lows.  They are your people,
             connected by your shared passion.  Fanzo makes it easy for you to find them so you can share the love.
           </p>
-        </li>
-        <li>
+        </div>
+      </div>
+      <div class="aboutRow clearfix">
+        <div class="rowImage">
+          <%= image_tag("about/thumbnail-venues.jpg", alt: "Find official watch sites", size:"300x200") %>
+        </div>
+        <div class="rowContent">
           <h3>Find official watch sites</h3>
           <p>
             Where better to watch the game than with fans of your team?  But where do they get together to watch?  Fanzo has the
             answer.  Have you just moved, or are you traveling on game day? Check out a fanzone for your team and find out where you
             can hang with your peeps.
           </p>
-        </li>
-        <li>
+        </div>
+      </div>
+      <div class="aboutRow clearfix">
+        <div class="rowImage">
+          <%= image_tag("about/thumbnail-fanzone.jpg", alt: "Fan Resume", size:"300x200") %>
+        </div>
+        <div class="rowContent">
           <h3>You’ve got fan swagger - show it off</h3>
           <p>
             You’ve been to every Rose Bowl since 1985, have autographs from ten professional athletes, 
             a photo with a Heisman Trophy winner and went streaking during World Cup; you are an insane fan. 
             Fill out your Fan Resume and tell other fans all about it!
           </p>
-        </li>
-        <li>
+        </div>
+      </div>
+      <div class="aboutRow clearfix">
+        <div class="rowImage">
+          <%= image_tag("about/thumbnail-fanzone.jpg", alt: "Get Sponsored like the athletes", size:"300x200") %>
+        </div>
+        <div class="rowContent">
           <h3>Get sponsored like the athletes</h3>
           <p>
             Coming soon!
           </p>
-        </li>
-      </ul>
-    </div>
-    <div id="contact">
-      <h2>Find us</h2>
-      <ul>
-        <li>Twitter: <a href="http://www.twitter.com/fanzofans">@FanzoFans </a></li>
-        <li>Facebook: <a href="http://www.facebook.com/fanzofans">FanzoFans</a></li>
-      </ul>
-      <div class="team_link">
-        <%= link_to "The Fanzo Team", fanzo_team_path, class: "fanzoButton "%>
+        </div>
       </div>
     </div>
   </div>
+  
+  <div id="fanzoTeamContent" class="hide">
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-paul-01.jpg", alt:"Paul Ingalls") %>
+      </div>
+      <div class="rowContent">
+        <h2>Paul Ingalls</h2>
+        <h3>CEO</h3>
+        <p>
+          Previously co-founder & CTO at Smilebox, leading product team through sale to Incredimail (now Perion) for $40 million.  
+          Dev Manager at RealNetworks where he helped create the casual games business, leading and later managing the technical 
+          team that built RealArcade, the first app store. Agile Team Coach, Notre Dame Alum, Microsoft Kinect Accelerator Mentor
+        </p>
+      </div>
+    </div>
+    <div class="aboutRow">    
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-dana-01.jpg", alt:"Dana Dyksterhuis") %>
+      </div>
+      <div class="rowContent">
+        <h2>Dana Dyksterhuis </h2>
+        <h3>Chief Community Officer</h3>
+        <p>
+          CenturyLink PR Manager, (Qwest Field to CenturyLink Field announcement with Seahawks), 
+          VP of Calgary Flames’ AHL team, Qwest Center Omaha Arena PR Manager 
+          (helped promote Olympic Swim Trials, NCAA Championships, Harlem Globetrotters, WWE), 
+          Former WOWT Broadcast News Reporter, Omaha Native, Husker and English Premier League Fan
+        </p>
+      </div>
+    </div>
+    
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-flee-01.jpg", alt:"Frank Lee") %>
+      </div>
+      <div class="rowContent">
+        <h2>Frank Lee</h2>
+        <h3>Creative Director</h3>
+        <p>
+          UX Designer at Mozilla Corporation (Firefox OS, Mozilla Marketplace), Creative Director at Kinzin, 
+          Designer at Smilebox, UX Program Manager at Microsoft Corporation 
+          (Original team member that created Microsoft Outlook, MSN Premium, 
+          Consumer Incubation), Software Engineer, Photographer, Filmmaker, and NHL fan.
+        </p>
+      </div>
+    </div>
+
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-matt-01.jpg", alt:"Matt Creatore") %>
+      </div>
+      <div class="rowContent">
+        <h2>Matt Creatore</h2>
+        <h3>East Coast Strategic Director</h3>
+        <p>
+        </p>
+      </div>
+    </div>
+
+    <div class="aboutRow">
+      <div class="rowImage">
+        <%= image_tag( "about/fanzo-javier-01.jpg", alt:"Javier Sandoval") %>
+      </div>
+      <div class="rowContent">
+        <h2>Javier Sandoval</h2>
+        <h3>East Coast Business Development Director</h3>
+        <p>
+        </p>
+      </div>
+    </div>
+
+    <div class="aboutRow">
+      <blockquote>
+        <p>The law of serendipity equals moments of opportunity.</p> 
+        <small>Brian Wong, Kiip Founder</small>
+      </blockquote>
+    </div>
+  </div>
+  
+  <div id="contactContent" class="hide">
+    <h2>Find us</h2>
+    <ul>
+      <li>Twitter: <a href="http://www.twitter.com/fanzofans">@FanzoFans </a></li>
+      <li>Facebook: <a href="http://www.facebook.com/fanzofans">FanzoFans</a></li>
+    </ul>
+  </div>
+  
 </div>

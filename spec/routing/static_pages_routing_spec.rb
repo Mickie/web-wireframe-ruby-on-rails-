@@ -7,10 +7,6 @@ describe StaticPagesController do
       get("/about").should route_to("static_pages#about")
     end
 
-    it "routes to #fanzo_team" do
-      get("/fanzo_team").should route_to("static_pages#fanzo_team")
-    end
-
     it "routes to #channel" do
       get("/channel").should route_to("static_pages#channel")
     end

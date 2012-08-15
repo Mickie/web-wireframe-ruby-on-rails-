@@ -16,13 +16,6 @@ describe StaticPagesController do
     end
   end
 
-  describe "GET 'fanzo_team'" do
-    it "returns http success" do
-      get 'fanzo_team'
-      response.should be_success
-    end
-  end
-
   describe "GET 'channel'" do
     it "returns http success" do
       get 'channel'

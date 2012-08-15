@@ -3,51 +3,126 @@
 
 #static_about
 {
-  padding-top: 40px;
   margin-left: 15px;
+  @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
 
-  #aboutContent
+  .banner
+  {
+    position:relative;
+    background-color: $aboutBackgroundColor;
+    padding: 60px 20px 0px 20px;
+    height: 80px;
+    background-image: asset-url("white-gradient-140.png", image);
+    background-repeat: repeat-x;
+    
+    h1
+    {
+      color: white;
+      font-weight: normal;
+    }
+    
+    ul
+    {
+      margin:0px;
+      list-style: none;
+
+      li
+      {
+        padding: 5px;
+        float:left;
+        color:white;
+        font-size: 16px;
+        
+        &:first-child
+        {
+          padding-left: 0px;
+        }
+        
+        a
+        {
+          color:white;
+        }
+        
+        a.active
+        {
+          font-weight:bold;
+        }
+      }
+    }
+    
+    .horn
+    {
+      position:absolute;
+      right: 0px;
+      bottom: 0px;
+    }
+  }
+
+  #whatIsFanzo
+  {
+    padding: 20px 50px;
+    text-align:center;
+    h1
+    {
+      font-weight:normal;
+      padding-bottom: 20px;
+    }
+    h2
+    {
+      font-weight:normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: $lightTextColor;
+      padding-bottom: 20px;
+    }
+  }  
+
+  .aboutRow
+  {
+    clear: both;
+    border-top: 1px solid $borderColor;
+    
+    .rowImage
+    {
+      float:left;
+      padding-bottom: 20px;
+    }
+    
+    .rowContent
+    {
+      padding: 15px;
+      margin-left: 300px;
+      
+      h3
+      {
+        font-weight:normal;
+        font-size: 20px;
+        padding-bottom: 10px;
+      }
+      
+      p
+      {
+        color: $lightTextColor;
+      }
+    }
+  }
+  
+  #fanzoTeamContent
+  {
+    .rowContent
+    {
+      margin-left: 200px;
+    }
+    
+    blockquote
+    {
+      padding: 20px;
+    }
+  }
+
+
+  #aboutContent, #fanzoTeamContent, #contactContent
   {
     background-color: white;
-    @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
-    
-    
-    .banner
-    {
-      padding: 30px 20px;
-      @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
-      border-bottom: 1px solid $borderColor;
-      
-      h1
-      {
-        color: white;
-      }
-    }
-    
-    #whatIsFanzo, #usingFanzo, #contact
-    {
-      padding: 10px 20px;
-    }  
-    
-    #usingFanzo, #contact
-    {
-      ul
-      {
-        list-style:none;
-      }
-    }
-    
-    #contact
-    {
-      position:relative;
-      
-      .team_link
-      {
-        margin: 10px;
-        position:absolute;
-        bottom: 0px;
-        right: 0px;
-      }
-    }
   }
 }
