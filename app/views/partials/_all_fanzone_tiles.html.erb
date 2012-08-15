@@ -3,6 +3,8 @@
 <% end %>
 
 <div id="allTiles" class="row-fluid">
-  <%= render partial: "partials/create_fanzone_tile" %>
+  <% if user_signed_in? %>
+    <%= render partial: "partials/create_fanzone_tile" %>
+  <% end %>
   <%= render "partials/tailgate_rows" %>
 </div>

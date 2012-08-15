@@ -1,7 +1,7 @@
 <div class="fanzoneTile" id="tailgate_<%= aTailgate.slug %>">
   <div class="banner" 
        onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_<%= aTailgate.slug -%>')" >
-    <div class="fanzoneState">
+    <div class="<%= browser.mobile? ? "fanzoneState" : "fanzoneState hide" -%>" >
       <% if user_signed_in? && current_user.mine_or_following?( aTailgate ) %>
         <div class="myFanzone" style="border-bottom-color: <%= aTailgate.light_color %>;"></div>
       <% else %>
