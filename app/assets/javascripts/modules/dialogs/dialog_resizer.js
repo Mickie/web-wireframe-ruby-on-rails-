@@ -6,8 +6,8 @@ var DialogResizer = function()
 
   this.initialize = function()
   {
-    $(".modal").live('show', createDelegate(this, this.onShow) );
-    $(".modal").live('hidden', createDelegate(this, this.onHidden) );
+    $("div#page_content").on('show', ".modal", createDelegate(this, this.onShow) );
+    $("div#page_content").on('hidden', ".modal", createDelegate(this, this.onHidden) );
   };
   
   this.onShow = function(e)

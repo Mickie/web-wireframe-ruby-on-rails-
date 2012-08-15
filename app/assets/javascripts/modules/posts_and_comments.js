@@ -5,9 +5,9 @@ $(function()
 
 function initializePostAndComments()
 {
-  $("#posts #new_comment").live('ajax:before',checkStatus);
-  $(".vote_up i:not(.disabled)").live('click', submitVote);
-  $(".vote_down i:not(.disabled)").live('click', submitDownVote);
+  $("#frameContent").on('ajax:before', ".new_comment", checkStatus);
+  $("#frameContent").on('click', ".vote_up i:not(.disabled)", submitVote);
+  $("#frameContent").on('click', ".vote_down i:not(.disabled)", submitDownVote);
 }
 
 function checkStatus(e)

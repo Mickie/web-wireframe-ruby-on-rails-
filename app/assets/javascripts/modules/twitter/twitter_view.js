@@ -145,7 +145,7 @@ var TwitterView = function( aMaxTweets,
     this.onRetweet = this.showCorrectModal;
     this.onInvite = this.showCorrectModal;
     
-    $("#postForm #add_post").live('click', createDelegate(this, this.handleDisconnectStatus ) );
+    $("div#frameContent").on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
   }
   
   

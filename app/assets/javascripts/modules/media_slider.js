@@ -101,7 +101,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     $(this.myVideoModalDiv + " #post_video_button").click(createDelegate(this, this.onPostYouTube));
     $(this.myInstagramModalDiv + " #post_image_button").click(createDelegate(this, this.onPostInstagram));
     
-    $(".post_video").live( "click", createDelegate(this, this.onYouTubeClick) );
+    $("#myMediaContent").on( "click", ".post_video", createDelegate(this, this.onYouTubeClick) );
     
     $(this.myContainerDiv).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
 
