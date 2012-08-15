@@ -9,12 +9,12 @@ div.fanzoneTile
   width: 220px;
   height: 300px;
   float: left;
+  cursor: pointer;
   @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
 
   .banner
   {
     background-color: #002A5C;
-    cursor: pointer;
     position:relative;
     height: 50px;
     
