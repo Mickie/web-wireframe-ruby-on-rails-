@@ -4,7 +4,7 @@ $(function(){
 
 function initializeTileHover()
 {
-  $('.fanzoneTile').hover(createDelegate(this, this.onTileHoverStart), createDelegate(this, this.onTileHoverEnd));
+  $('.fanzoneTile').live('mouseenter', onTileHoverStart).live('mouseleave', onTileHoverEnd);
 }
 
 function onTileHoverStart(e)
