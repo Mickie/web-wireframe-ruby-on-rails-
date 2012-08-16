@@ -13,12 +13,12 @@
         </div>
       <% end %>
     </div>
-    <% if aTailgate.official %>
-      <div class="official">
-        <span>Official</span>
-      </div>
-    <% end %>
     <div class="banner_content">
+      <% if aTailgate.official %>
+        <div class="official">
+          <span>Official</span>
+        </div>
+      <% end %>
       <div class="team_logo">
         <%= teamLogo(aTailgate.team, :small) %>      
       </div>

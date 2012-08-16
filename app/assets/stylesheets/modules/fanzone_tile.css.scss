@@ -15,35 +15,34 @@ div.fanzoneTile
   .banner
   {
     background-color: #002A5C;
-    position:relative;
     height: 50px;
-    
-    .official
-    {
-      position:absolute;
-      top: 0px;
-      left: 0px;
-      margin-left: 50px;
-      padding-left: 5px;
-      width:165px;
-      height:10px;
-      line-height:8px;
-      z-index: 1;
-      @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
-      
-      span
-      {
-        height:10px;
-        line-height:8px;
-        font-size:9px;
-        text-transform: uppercase;
-        color: $officialTextColor;
-      }
-    }
-    
+    position: relative;
     
     .banner_content
     {
+      position: relative;
+
+      .official
+      {
+        position:absolute;
+        top: 0px;
+        right: 0px;
+        padding-left: 5px;
+        width:165px;
+        height:10px;
+        line-height:8px;
+        @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
+        
+        span
+        {
+          height:10px;
+          line-height:8px;
+          font-size:9px;
+          text-transform: uppercase;
+          color: $officialTextColor;
+        }
+      }
+
       .team_logo
       {
         float:left;
@@ -64,7 +63,6 @@ div.fanzoneTile
 
       .fanzone_name
       {
-        position:relative;
         background-image: asset-url("white-gradient-50.png", image);
         background-repeat: repeat-x;
         float:left;
