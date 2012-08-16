@@ -7,20 +7,69 @@ div#myLoginModal
   
   .modal-body
   {
-    min-width: 250px;
-    text-align: center;
-    padding: 100px;
-    
+    width: 465px;
+    max-height: inherit;
+
     h3 
     {
       color: inherit;
       font-size: 16px;
-      margin-bottom: 20px;
     }  
-
-    #facebookCreateAccount a:hover
+    
+    .loginDetails
     {
-      color:white;
+      width: 310px;
+      padding: 30px 70px;
+      text-align: center;
+
+      h3
+      {
+        margin-bottom: 20px;
+      }
+
+      #facebookCreateAccount a:hover
+      {
+        color:white;
+      }
     }
+
+    .whyFacebook
+    {
+      width: 430px;
+      text-align: right;
+    }
+    
+    .explanation
+    {
+      width: 430px;
+      padding-left: 10px;
+      
+      .explanationTabs
+      {
+        h3
+        {
+          float: left;
+          font-weight:normal;
+          margin:5px;
+        }
+        
+        .active
+        {
+          font-weight:bold;
+        }
+      }
+      
+      dl
+      {
+        clear:both;
+
+        dt
+        {
+          margin-top: 10px;
+        }
+      }
+
+    }
+
   }  
 }

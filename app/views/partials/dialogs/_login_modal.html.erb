@@ -3,8 +3,62 @@
     <a class="close" data-dismiss="modal">×</a>
   </div>
   <div class="modal-body">
-    <h3>To continue<br/>Please log in with your<br/>Facebook account:</h3>
-    <%= render partial: "partials/buttons/facebook_login_button", locals:{resource_name:"user"} %>
+    <div class="loginDetails">
+      <h3>To continue<br/>Please log in with your<br/>Facebook account:</h3>
+      <%= render partial: "partials/buttons/facebook_login_button", locals:{resource_name:"user"} %>
+    </div>
+    <div class="whyFacebook">
+      <%= link_to "Why only Facebook?", "#", class:"showExplanation" %>
+    </div>
+    <div class="explanation hide">
+      <div class="explanationTabs clearfix">
+        <h3>
+          <%= link_to "Why only Facebook?", "#", class:"showOnlyFacebook active" %>
+        </h3>
+        <h3>|</h3>
+        <h3>
+          <%= link_to "Using Facebook with Fanzo", "#", class:"showUseFacebook" %>
+        </h3>
+      </div>
+      <dl class="onlyFacebook">
+        <dt>Limits Spam</dt>
+        <dd>
+          Anyone who watches ESPN knows how much Viagra & Cialis love sports fans.  
+          Facebook login helps limit the number of users who will happily post the wonders of ED drugs
+          or other types of spam on the site.
+        </dd>
+        <dt>Keeps it Clean</dt>
+        <dd>
+          We are all passionate about our teams, and love the charged discussions.  
+          Sometimes, however, these can degrade into pissing matches,
+          and no-one enjoys that.  Too many cool communities degrade into middle 
+          school playgrounds because common social rules are easily averted
+          through anonymity. Facebook login helps keep the games clean.
+        </dd>
+        <dt>It&apos;s easy!</dt>
+        <dd>
+          Who wants to fill out yet another profile? Most of the info is already on Facebook, 
+          so let&apos;s just use that and keep Fanzo as simple as possible.
+        </dd>
+      </dl>
+      <dl class="useFacebook hide">
+        <dt>Share your posts</dt>
+        <dd>
+          If you select the Facebook check when you add a post, then we'll 
+          make a copy for you on Facebook so your friends can also see your brilliance, 
+          and tell you what they think about it. 
+        </dd>
+        <dt>Show your pride</dt>
+        <dd>
+          Build a list of fanzones you created or you follow on Facebook.  Fanzo makes it easy!
+        </dd>
+        <dt>Control</dt>
+        <dd>
+          You have complete control. Easily change how Fanzo interacts with your Facebook account
+          from within your user settings control panel.
+        </dd>
+      </dl>
+    </div>
   </div>
 </div>
 

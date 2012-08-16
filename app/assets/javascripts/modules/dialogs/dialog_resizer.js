@@ -21,6 +21,13 @@ var DialogResizer = function()
     trackEvent("Dialog", "show", $(this.myCurrentDialog).attr("id"));
   };
   
+  this.refreshDimensions = function()
+  {
+    this.myOriginalHeight = $(this.myCurrentDialog).height();
+    this.myOriginalWidth = $(this.myCurrentDialog).width();
+    this.onResize();
+  };
+  
   this.onResize = function(e)
   {
     this.updateHeight();
@@ -74,9 +81,11 @@ var DialogResizer = function()
   };
 }
 
+var myDialogResizer;
+
 $(function()
 {
-  var theResizer = new DialogResizer();
-  theResizer.initialize();
+  myDialogResizer = new DialogResizer();
+  myDialogResizer.initialize();
 });
 
