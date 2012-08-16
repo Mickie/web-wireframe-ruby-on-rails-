@@ -45,6 +45,7 @@ var InfiniteScroller = function()
         dataType: 'script',
         complete: createDelegate(this, this.onLoadNextPageComplete)
       });
+      trackEvent("InfiniteScroller", "loading_new_page", this.myResourceUrl, this.myCurrentPage);    
     }
   
   };

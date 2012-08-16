@@ -1,7 +1,7 @@
-var FanzoneDialog = function( aDialogSelector, aNewFlag )
+var FanzoneDialog = function( aDialogSelector, anEditFlag )
 {
   this.myDialogSelector = aDialogSelector;
-  this.myNewFlag = aNewFlag;
+  this.myEditFlag = anEditFlag;
   this.myTeamHelper;
   
   
@@ -39,7 +39,7 @@ var FanzoneDialog = function( aDialogSelector, aNewFlag )
   
   this.setInitialColor = function()
   {
-    if (this.myNewFlag)
+    if (this.myEditFlag)
     {
       var theInitialVal = $(this.myDialogSelector + " #colorPicker #tailgate_color").val();  
       $(this.myDialogSelector + " #colorPicker" + " [ data-color='" + theInitialVal + "' ]").addClass('selected');      
@@ -68,7 +68,7 @@ var FanzoneDialog = function( aDialogSelector, aNewFlag )
   {
     $(this.myDialogSelector + " #colorPicker .selected").removeClass('selected');
     $(e.target).addClass('selected');
-    $(this.myDialogSelector + " #colorPicker #tailgate_color").val($(e.target).data("color"));  
+    $(this.myDialogSelector + " #colorPicker #tailgate_color").val($(e.target).data("color"));
   };
   
   this.handleTeamLoaded = function( aTeam )
@@ -86,6 +86,7 @@ var FanzoneDialog = function( aDialogSelector, aNewFlag )
              dataType: "json",
              success: createDelegate( this, this.handleTeamLoaded )
            });
+    trackEvent("CreateFanzone", "team_picked", theId);    
   };
   
   this.handleTopicPicked = function(e)
@@ -95,6 +96,7 @@ var FanzoneDialog = function( aDialogSelector, aNewFlag )
     var theNotTags = $(this.myDialogSelector + " [ value='" + theCurrentChoice + "' ]").attr("not_tags");
     $(this.myDialogSelector + " #tailgate_topic_tags").val(theHashTags);
     $(this.myDialogSelector + " #tailgate_not_tags").val(theNotTags);
+    trackEvent("CreateFanzone", "topic_picked", theCurrentChoice);    
   }
   
   this.handleTopicChanged = function(e)

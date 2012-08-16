@@ -7,3 +7,10 @@ $(function(){
   gapi.plusone.go();  
 })
 
+function trackEvent( aCategory, anAction, aLabel, aValue, aCountFlag )
+{
+  var _gaq = _gaq || [];
+  _gaq.push(['_trackEvent', aCategory, anAction, aLabel, aValue, aCountFlag]);
+  
+//  console.log("trackEvent - aCategory: " + aCategory + " anAction: " + anAction + " aLabel: " + aLabel + " aValue: " + aValue);
+}

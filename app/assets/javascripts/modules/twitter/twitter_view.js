@@ -110,10 +110,12 @@ var TwitterView = function( aMaxTweets,
     {
       if (this.isLoggedIn())
       {
+        trackEvent("Twitter", "not_connected_click");    
         this.showTwitterModal();
       }
       else
       {
+        trackEvent("Twitter", "not_logged_in_click");    
         this.showFacebookModal();
       }
     };
@@ -123,6 +125,7 @@ var TwitterView = function( aMaxTweets,
       var theTwitterFlag = $("#postForm #post_twitter_flag").is(':checked');
       if (theTwitterFlag)
       {
+        trackEvent("Twitter", "not_connected_click");    
         this.showTwitterModal()
         return false;
       }
@@ -137,7 +140,9 @@ var TwitterView = function( aMaxTweets,
         return this.disallowIfPostingToTwitter();
       }
 
+
       this.showFacebookModal();
+      trackEvent("Twitter", "not_logged_in_click");    
       return false; 
     };
     
@@ -207,6 +212,7 @@ var TwitterView = function( aMaxTweets,
 
   this.showNewTweets = function()
   {
+    trackEvent("Twitter", "show_new_tweets", undefined, this.myNewTweets.length);    
     $(this.myNewTweetDivSelector).slideUp(600);
     this.chopOffOldestTweetsSoWeShowOnlyTheLatest();
     $.each(this.myNewTweets, createDelegate(this, this.showTweet));

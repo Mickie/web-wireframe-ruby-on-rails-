@@ -16,6 +16,7 @@ function onAboutClick(e)
   $("#fanzoTeamContent").hide();
   $("#contactContent").hide();
   $("#aboutContent").slideDown(600);
+  trackEvent("About", "visit_about");    
 }
 
 function onTeamClick(e)
@@ -25,6 +26,7 @@ function onTeamClick(e)
   $("#contactContent").hide();
   $("#aboutContent").hide();
   $("#fanzoTeamContent").slideDown(600);
+  trackEvent("About", "visit_team");    
 }
 
 function onContactClick(e)
@@ -34,4 +36,5 @@ function onContactClick(e)
   $("#fanzoTeamContent").hide();
   $("#aboutContent").hide();
   $("#contactContent").slideDown(600);
+  trackEvent("About", "visit_contact");    
 }

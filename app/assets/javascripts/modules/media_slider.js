@@ -111,13 +111,25 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.setupNavigation = function()
   {
-    $(this.myContainerDiv + " div#navigate_forward").click( createDelegate(this, this.slideRight ) );
-    $(this.myContainerDiv + " div#navigate_backward").click( createDelegate(this, this.slideLeft ) );
+    $(this.myContainerDiv + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
+    $(this.myContainerDiv + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
   }
   
   this.onSlideInterval = function()
   {
     this.slideLeft();
+  };
+  
+  this.onNavRight = function(e)
+  {
+    this.slideRight();
+    trackEvent("MediaSlider", "navRight");    
+  };
+
+  this.onNavLeft = function(e)
+  {
+    this.slideLeft();
+    trackEvent("MediaSlider", "navLeft");    
   };
 
   this.slideLeft = function()
@@ -219,6 +231,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
 
     $(".modal").modal("hide");
     $(this.myInstagramModalDiv).modal("show");
+
+    trackEvent("MediaSlider", "instagram_click", theInstagramId);    
   };
 
   this.onYouTubeMediaLoaded = function(anArrayOfMedia)
@@ -318,6 +332,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
 
     $(".modal").modal("hide");
     $(this.myVideoModalDiv).modal("show");
+    
+    trackEvent("MediaSlider", "youtube_click", theVideoId);    
   };
   
   this.onPlayerReady = function()
@@ -349,6 +365,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     $("#postForm #post_video_id").val("");
     $("#postForm .media_container").html("<img src='" + theUrl + "' width='306' height='306'/>");
     $("#postForm .media_preview").slideDown(600);
+    
+    trackEvent("MediaSlider", "post_instagram", theInstagramId);    
   };
   
   this.onPostYouTube = function(e)
@@ -356,20 +374,22 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     var theVideoId = $(e.target).attr("data-id");
     var theVideo = this.myYouTubeVideos[theVideoId];
     
-    var theUrl = theVideo.media$group.media$thumbnail[0].url
+    var theThumbnailUrl = theVideo.media$group.media$thumbnail[0].url
     for (var i = 0; i < theVideo.media$group.media$thumbnail.length; i++)
     {
       if ( theVideo.media$group.media$thumbnail[i].yt$name == "hqdefault" )
       {
-        theUrl = theVideo.media$group.media$thumbnail[i].url;
+        theThumbnailUrl = theVideo.media$group.media$thumbnail[i].url;
       }
     }
     
     $("#postForm #post_video_id").val(theVideoId);
-    $("#postForm #post_image_url").val(theUrl);
+    $("#postForm #post_image_url").val(theThumbnailUrl);
     $("#postForm .media_container").html("<div id='post_youtube'></div>");
     this.loadYouTubeInPost(theVideoId);
     $("#postForm .media_preview").slideDown(600);
+    
+    trackEvent("MediaSlider", "post_youtube", theVideoId);    
   };
 
 };

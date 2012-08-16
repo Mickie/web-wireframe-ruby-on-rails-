@@ -77,6 +77,7 @@ var TwitterController = function(aTwitterView)
   
     this.myTwitterView.updatePostForm(false, theTweetText);
     
+    trackEvent("Twitter", "quick_tweet_click", theKey);    
   };
   
   this.getQuickTweetChoices = function( aKey )
@@ -105,18 +106,21 @@ var TwitterController = function(aTwitterView)
   {
     this.myTwitterView.updatePostForm(true, aUser + " " + this.myTwitterView.myHashTags, aTweetId);
     $("body").animate({scrollTop:0}, 400);
+    trackEvent("Twitter", "reply_click");    
   };
   
   this.onRetweet = function( aTweetId, aTweetText, aUser )
   {
     this.myTwitterView.updatePostForm(true, "RT " + aUser + ": " + aTweetText, "", aTweetId);
     $("body").animate({scrollTop:0}, 400);
+    trackEvent("Twitter", "retweet_click");    
   };
   
   this.onInvite = function( aTweetId, aUser )
   {
     var theMessage = aUser + ", I've got a conversation going about this on my @FanzoFans fanzone, interested? " + this.myTwitterView.myHashTags;
     this.myTwitterInviteDialog.showDialog( theMessage, aTweetId );
+    trackEvent("Twitter", "invite_click");    
   };
   
    

@@ -17,7 +17,8 @@ var TwitterInviteDialog = function()
     $.post( "/twitter_proxy/update_status", 
             { statusText : theTweetText + " " + theBitly, replyId : theReplyId }, 
             createDelegate(this, this.onTweetComplete), 
-            "json" );  
+            "json" );
+    trackEvent("TwitterInvite", "send_picked", theTweetText);    
   };
   
   this.onTweetComplete = function(aResponse)

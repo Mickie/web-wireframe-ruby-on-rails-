@@ -6,7 +6,7 @@ $(function()
 function initializePostAndComments()
 {
   $("#frameContent").on('ajax:before', ".new_comment", checkStatus);
-  $("#frameContent").on('click', ".vote_up i:not(.disabled)", submitVote);
+  $("#frameContent").on('click', ".vote_up i:not(.disabled)", submitUpVote);
   $("#frameContent").on('click', ".vote_down i:not(.disabled)", submitDownVote);
 }
 
@@ -33,6 +33,11 @@ function submitVote(e)
   }
 }
 
+function submitUpVote(e)
+{
+  submitVote(e);
+}
+
 function submitDownVote(e)
 {
   if ($(e.target).hasClass('mine'))
@@ -44,4 +49,9 @@ function submitDownVote(e)
   {
     submitVote(e);
   }
+  else
+  {
+    trackEvent("PostAndComments", "cancel_down_vote", $(e.target.parentElement).attr("id"));    
+  }
+  
 }

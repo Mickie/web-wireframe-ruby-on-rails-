@@ -4,6 +4,5 @@ $(function()
   {
     $('#allFanzones').addClass('active');
     InfiniteScroller.get().handleScrollingForResource("/tailgates");
-    $("#fanzone_search").slideDown(400);
   }
 });

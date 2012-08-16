@@ -66,7 +66,9 @@ var FanzoNavigator = function()
 
     this.addActiveToCurrentNavItem(aNewActiveSelector);
     this.displayLoading();
-    this.getDataFromServer( aPath );    
+    this.getDataFromServer( aPath );
+
+    trackEvent("Navigator", "loadData", aNewActiveSelector);
   };
   
   
@@ -160,9 +162,18 @@ var FanzoNavigator = function()
   
   this.updateSocialButtons = function()
   {
-    FB.XFBML.parse();
-    twttr.widgets.load();
-    gapi.plusone.go();
+    if (typeof FB !== 'undefined')
+    {
+      FB.XFBML.parse();
+    }
+    if (typeof twttr !== 'undefined')
+    {
+      twttr.widgets.load();
+    }
+    if (typeof gapi !== 'undefined')
+    {
+      gapi.plusone.go();
+    }
     this.updatePinterestButtons();
   };
   
@@ -188,9 +199,12 @@ var FanzoNavigator = function()
   this.onSearchSubmit = function()
   {
     this.mySearchSubmitInProcessFlag = true;
-    setCookie( "myCurrentSearchVal", $("#fanzone_search #team_id").val(), 5);
+    var theTeamId = $("#fanzone_search #team_id").val();
+    setCookie( "myCurrentSearchVal", theTeamId, 5);
     InfiniteScroller.get().stop();
     window.location.hash = "#search";
+
+    trackEvent("Navigator", "search_submit", $("#fanzone_search #team").val(), theTeamId);    
   }
   
   this.onSearchSelect = function()
