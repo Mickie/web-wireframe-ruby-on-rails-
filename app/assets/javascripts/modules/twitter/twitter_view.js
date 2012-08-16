@@ -1,3 +1,6 @@
+var NORMAL_TWEET_RELOAD_SCHEDULE = 5000;
+var DELAYED_TWEET_RELOAD_SCHEDULE = 30000;
+
 
 var TwitterView = function( aMaxTweets, 
                             aTweetDivId, 
@@ -8,6 +11,8 @@ var TwitterView = function( aMaxTweets,
                             aSportId,
                             aTwitterViewVariableName)
 {
+  
+  
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
@@ -184,7 +189,7 @@ var TwitterView = function( aMaxTweets,
       if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets + theExtraTweetTemplateElement)
       {
         this.myFullyLoadedFlag = true;
-        this.scheduleMoreTweetsToLoad(5000);    
+        this.scheduleMoreTweetsToLoad(NORMAL_TWEET_RELOAD_SCHEDULE);    
       }
       updateTimestamps();
     }
@@ -194,13 +199,13 @@ var TwitterView = function( aMaxTweets,
   this.onSuccess = function()
   {
     $("#tweetError").slideUp(600);
-    this.scheduleMoreTweetsToLoad(5000);   
+    this.scheduleMoreTweetsToLoad(NORMAL_TWEET_RELOAD_SCHEDULE);   
   };
 
   this.onError = function(aMessage)
   {
     $("#tweetError").slideDown(600);
-    this.scheduleMoreTweetsToLoad(30000);
+    this.scheduleMoreTweetsToLoad(DELAYED_TWEET_RELOAD_SCHEDULE);
   };
   
   this.showNewTweetsAlert = function()
