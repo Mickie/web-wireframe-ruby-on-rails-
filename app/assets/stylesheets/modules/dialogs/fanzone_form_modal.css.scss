@@ -26,6 +26,13 @@
     .modal-footer
     {
       padding:10px;
+      
+      #destroy_fanzone
+      {
+        margin-top:3px;
+        float:left;
+      }  
+      
     }
     
     .modal-body
@@ -120,10 +127,4 @@
     }    
   }
   
-  #destroy_fanzone
-  {
-    position:absolute;
-    bottom: 10px;
-    left: 10px;
-  }  
 }
