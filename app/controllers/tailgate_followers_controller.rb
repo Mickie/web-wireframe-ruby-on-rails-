@@ -7,9 +7,13 @@ class TailgateFollowersController < ApplicationController
     respond_to do |format|
       if @tailgate_follower.save
 
-        SocialSender.new.delay.shareFollow(current_user.id, @tailgate_follower.tailgate.id)
+        unless current_user.no_fb_share_on_follow_tailgate
+          SocialSender.new.delay.shareFollow(current_user.id, @tailgate_follower.tailgate.id) 
+        end
 
-        UserMailer.delay.new_follower(@tailgate_follower.id) unless @tailgate_follower.tailgate.user.no_email_on_follows
+        unless @tailgate_follower.tailgate.user.no_email_on_follows
+          UserMailer.delay.new_follower(@tailgate_follower.id)
+        end
 
         format.html { redirect_to root_path, notice: 'Successfully followed the fanzone' }
         format.json { render json: @tailgate_follower, status: :created, location: @user }
