@@ -38,6 +38,9 @@ var DialogResizer = function()
   this.onHidden = function(e)
   {
     $(window).off('resize');
+    $(this.myCurrentDialog).css("height", "auto");
+    $(this.myCurrentDialog).css("width", "auto");
+
     trackEvent("Dialog", "hidden", $(this.myCurrentDialog).attr("id"));
   };
   
