@@ -94,7 +94,7 @@
           <%= f.text_area :description, rows:6, maxlength:160 %>
         </div>
   
-        <div class="email_settings">
+        <div class="email_settings clearfix">
           <h3>Email Settings</h3>
           <div class="check_and_label">
             <%= f.check_box :no_email_on_posts %>
@@ -116,8 +116,18 @@
             <%= f.check_box :no_email_newsletter %>
             <%= f.label :no_email_newsletter, "Don't send me the Fanzo Newsletter" %>
           </div>
-          
-          
+        </div>
+        
+        <div class="facebook_settings clearfix">
+          <h3>Facebook Settings</h3>
+          <div class="check_and_label">
+            <%= f.check_box :no_fb_share_on_create_tailgate %>
+            <%= f.label :no_fb_share_on_create_tailgate, "Don't share the fanzones I create with Facebook" %>
+          </div>
+          <div class="check_and_label">
+            <%= f.check_box :no_fb_share_on_follow_tailgate %>
+            <%= f.label :no_fb_share_on_follow_tailgate, "Don't share the fanzones I follow with Facebook" %>
+          </div>
         </div>
   
         <div class="edit_buttons">

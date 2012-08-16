@@ -33,7 +33,13 @@ class User < ActiveRecord::Base
   has_many :user_post_votes, inverse_of: :user, dependent: :delete_all
   has_many :user_comment_votes, inverse_of: :user, dependent: :delete_all
 
-  bitfield :email_bit_flags, 1 => :no_email_on_posts, 2 => :no_email_on_comments, 4 => :no_email_newsletter, 8 => :no_email_on_follows, 16 => :no_email_summary_of_followed_tailgates
+  bitfield :email_bit_flags, 1 => :no_email_on_posts, 
+                             2 => :no_email_on_comments, 
+                             4 => :no_email_newsletter, 
+                             8 => :no_email_on_follows, 
+                             16 => :no_email_summary_of_followed_tailgates,
+                             32 => :no_fb_share_on_create_tailgate,
+                             64 => :no_fb_share_on_follow_tailgate
 
   attr_accessible :email,
                   :first_name,
@@ -58,7 +64,9 @@ class User < ActiveRecord::Base
                   :no_email_on_comments,
                   :no_email_newsletter,
                   :no_email_on_follows,
-                  :no_email_summary_of_followed_tailgates
+                  :no_email_summary_of_followed_tailgates,
+                  :no_fb_share_on_create_tailgate,
+                  :no_fb_share_on_follow_tailgate
                   
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
