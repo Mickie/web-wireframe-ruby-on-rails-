@@ -23,7 +23,7 @@ div#myMediaSlider
   
   div#myMediaControls
   {
-    div
+    .outer
     {
       position:absolute;
       top: 50px;
@@ -38,18 +38,46 @@ div#myMediaSlider
       border-bottom: transparent solid 30px;
     }
 
+    .innerControl
+    {
+      position:absolute;
+      top: -28px;
+      left: 3px;
+      width:0px;
+      height:0px;
+      padding:0px;
+      margin:0px;
+      -webkit-background-clip: padding-box; /* for Safari */
+      background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+      border-top: transparent solid 28px;
+      border-bottom: transparent solid 28px;      
+    }
+
     #navigate_backward
     {
       right: 15px;
-      border-left: 50px solid $fanzoButtonBackground;
-      border-left: 50px solid rgba(223, 53, 7, .9);
+      border-left: 50px solid white;
+      border-left: 50px solid rgba(255, 255, 255, .9);
+      
+      .innerControl
+      {
+        left: -49px;
+        border-left: 46px solid $fanzoButtonBackground;
+        border-left: 46px solid rgba(223, 53, 7, .9);
+      }
     }
 
     #navigate_forward
     {
       left: 15px;
-      border-right: 50px solid $fanzoButtonBackground;
-      border-right: 50px solid rgba(223, 53, 7, .9);
+      border-right: 50px solid white;
+      border-right: 50px solid rgba(255, 255, 255, .9);
+
+      .innerControl
+      {
+        border-right: 46px solid $fanzoButtonBackground;
+        border-right: 46px solid rgba(223, 53, 7, .9);
+      }
     }
   }
   
