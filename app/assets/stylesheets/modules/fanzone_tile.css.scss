@@ -28,7 +28,7 @@ div.fanzoneTile
       width:165px;
       height:10px;
       line-height:8px;
-      z-index: 50;
+      z-index: 1;
       @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
       
       span
