@@ -123,8 +123,8 @@ class User < ActiveRecord::Base
     tailgates.all + followed_tailgates.all
   end
   
-  def large_profile_pic
-    "https://graph.facebook.com/#{facebook_user_id}/picture?type=large"
+  def large_profile_pic( aWidth, aHeight )
+    "https://graph.facebook.com/#{facebook_user_id}/picture?type=large&width=#{aWidth}&height=#{aHeight}"
   end
   
   def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)

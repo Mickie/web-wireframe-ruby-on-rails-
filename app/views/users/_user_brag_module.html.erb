@@ -1,12 +1,18 @@
 <% if aListOfBrags.length > 0 %>
-  <div class="brags clearfix">
-    <h2><%= aTitle -%></h2>
-    <ul>
-      <% aListOfBrags.includes(:brag).each do |aUserBrag| %>
-        <li class="user_brag">
-          <%= aUserBrag.brag.content %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="brags row-fluid">
+    <div class="contentContainer">
+      <div class="contentTitle clearfix">
+        <h2><%= aTitle -%></h2>
+      </div>
+      <div class="userContent clearfix">
+        <ul>
+          <% aListOfBrags.includes(:brag).each do |aUserBrag| %>
+            <li class="userBrag">
+              <%= aUserBrag.brag.content %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 <% end %>
