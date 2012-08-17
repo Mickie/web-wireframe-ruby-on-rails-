@@ -1,17 +1,17 @@
 describe("TwitterSearch", function()  
 {
   var myTwitterSearch;
-  var onTweet, onError, onSuccess;
+  var onNewTweet, onError, onSuccess;
   var THE_SEARCH_URL = 'http://search.twitter.com/search.json?lang=en&include_entities=true&q=notredame%20-dakota&rpp=1';
   
   beforeEach(function()
   {
-    onTweet = jasmine.createSpy('onTweet');
+    onNewTweet = jasmine.createSpy('onNewTweet');
     onError = jasmine.createSpy('onError');
     onSuccess = jasmine.createSpy('onSuccess');
     
     var theListener = {
-      "onNewTweet" : onTweet,
+      "onNewTweet" : onNewTweet,
       "onError" : onError,
       "onSuccess" : onSuccess
     };
@@ -72,11 +72,11 @@ describe("TwitterSearch", function()
       myTwitterSearch.getLatestTweetsForTerm( ['notredame'], ['dakota'], 1); 
     });
 
-    it("calls onTweet with an array of tweets", function() 
+    it("calls onNewTweet with a tweet", function() 
     {
-      expect(onTweet).toHaveBeenCalled();
+      expect(onNewTweet).toHaveBeenCalled();
  
-      var theArgs = onTweet.mostRecentCall.args;
+      var theArgs = onNewTweet.mostRecentCall.args;
 
       expect(theArgs[0]).toEqual(0);
       expect(theArgs[1].id).toEqual(202854280347127809);
@@ -113,7 +113,7 @@ describe("TwitterSearch", function()
     it("calls onError with error message", function() 
     {
       expect(onSuccess).wasNotCalled();
-      expect(onTweet).wasNotCalled();
+      expect(onNewTweet).wasNotCalled();
       expect(onError).toHaveBeenCalled();
  
       var theArgs = onError.mostRecentCall.args;

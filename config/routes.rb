@@ -32,6 +32,7 @@ FanzoSite::Application.routes.draw do
 
   resources :teams do
     get :autocomplete_team_name, on: :collection
+    get :bing_search_results, on: :member
   end
   
   resources :brags do

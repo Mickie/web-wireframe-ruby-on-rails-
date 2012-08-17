@@ -6,9 +6,6 @@ class TeamsController < ApplicationController
 
   autocomplete :team, :name, full: true, scopes: [:visible]
 
-
-  # GET /teams
-  # GET /teams.json
   def index
     if params[:sport_id]
       @teams = Team.includes(:social_info, :league, :sport, :location => :state).where("sport_id = ?", params[:sport_id])
@@ -28,8 +25,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # GET /teams/1
-  # GET /teams/1.json
   def show
     @team = Team.includes(:social_info).find(params[:id])
     
@@ -46,8 +41,15 @@ class TeamsController < ApplicationController
     end
   end
 
-  # GET /teams/new
-  # GET /teams/new.json
+  def bing_search_results
+    @team = Team.find(params[:id])
+
+    respond_to do |format|
+      format.html { render action: "show" }
+      format.json { render json: @team.bing_search_results }
+    end
+  end
+  
   def new
     @team = Team.new
     @team.build_location
@@ -59,14 +61,11 @@ class TeamsController < ApplicationController
     end
   end
 
-  # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
     @team.build_social_info unless @team.social_info
   end
 
-  # POST /teams
-  # POST /teams.json
   def create
     @team = Team.new(params[:team])
 
@@ -81,8 +80,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PUT /teams/1
-  # PUT /teams/1.json
   def update
     @team = Team.find(params[:id])
 
@@ -97,8 +94,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
   def destroy
     @team = Team.find(params[:id])
     @team.destroy

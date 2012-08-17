@@ -15,6 +15,10 @@ describe TeamsController do
       get("/teams/1").should route_to("teams#show", :id => "1")
     end
 
+    it "routes to #bing_search_results" do
+      get("/teams/1/bing_search_results").should route_to("teams#bing_search_results", :id => "1")
+    end
+
     it "routes to #edit" do
       get("/teams/1/edit").should route_to("teams#edit", :id => "1")
     end
