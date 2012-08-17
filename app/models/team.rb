@@ -18,6 +18,8 @@ class Team < ActiveRecord::Base
    
   has_many :watch_sites, inverse_of: :team, :dependent => :delete_all
   has_many :venues, through: :watch_sites 
+  
+  has_one :bing_search_results, class_name: "BingSearchResultsForTeam", inverse_of: :team, :dependent => :destroy
    
   validates :name, presence:true
   validates :sport_id, presence:true

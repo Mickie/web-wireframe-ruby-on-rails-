@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807032438) do
+ActiveRecord::Schema.define(:version => 20120816234931) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20120807032438) do
 
   add_index "affiliations", ["location_id"], :name => "index_affiliations_on_location_id"
   add_index "affiliations", ["social_info_id"], :name => "index_affiliations_on_social_info_id"
+
+  create_table "bing_search_results_for_teams", :force => true do |t|
+    t.text     "search_result"
+    t.integer  "team_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "bing_search_results_for_teams", ["team_id"], :name => "index_bing_search_results_for_teams_on_team_id"
 
   create_table "brags", :force => true do |t|
     t.string   "content"
