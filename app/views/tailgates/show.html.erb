@@ -242,10 +242,10 @@
     myTailgateMediaSlider = MediaSlider.create( "div#tailgate_show div#myMediaSlider", 
                                                 "div#tailgate_show div#myVideoModal",
                                                 "div#tailgate_show div#myInstagramModal");
-    myTailgateMediaSlider.createSliderForFanzone(<%= @tailgate.id %>,
-                                              "<%= @tailgate.team.short_name %>",
-                                              "<%= @tailgate.team.sport.name %>", 
-                                              <%= raw @tailgate.topic_tags.split(",") %> );
+    myTailgateMediaSlider.createSlider( "<%= @tailgate.team.short_name %>",
+                                        "<%= @tailgate.team.sport.name %>", 
+                                        <%= raw @tailgate.topic_tags.split(",") %>,
+                                        <%= raw @tailgate.instagram_tags.to_json %> );
                                               
     myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal", true);
     myEditFanzoneDialog.initialize();

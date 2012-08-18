@@ -13,31 +13,17 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.myYouTubeVideos = {};
   this.myApiResponses = 0;
   
-  this.createSliderForTeam = function( aTeamId, 
-                                        aShortName,
-                                        aSport, 
-                                        anArrayOfHashTags )
+  this.createSlider = function( aShortName,
+                                aSport, 
+                                anArrayOfHashTags,
+                                anArrayOfInstagramTags )
   {
     this.myInstagramSearch = new InstagramSearch();
     this.myYouTubeSearch = new YouTubeSearch( aShortName,
                                               aSport, 
                                               anArrayOfHashTags,
                                               15);
-    this.myInstagramSearch.loadMediaForTeam(aTeamId, createDelegate(this, this.onInstagramMediaLoaded));
-    this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
-  };
-  
-  this.createSliderForFanzone = function( aFanzoneId,
-                                        aShortName,
-                                        aSport, 
-                                        anArrayOfHashTags )
-  {
-    this.myInstagramSearch = new InstagramSearch();
-    this.myYouTubeSearch = new YouTubeSearch( aShortName,
-                                              aSport, 
-                                              anArrayOfHashTags,
-                                              15);
-    this.myInstagramSearch.loadMediaForFanzone(aFanzoneId, createDelegate(this, this.onInstagramMediaLoaded));
+    this.myInstagramSearch.loadMediaForTags(anArrayOfInstagramTags, createDelegate(this, this.onInstagramMediaLoaded));
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };
   

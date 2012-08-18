@@ -109,10 +109,10 @@
     myTeamMediaSlider = MediaSlider.create( "div#team_show div#myMediaSlider", 
                                             "div#team_show div#myVideoModal",
                                             "div#tailgate_show div#myInstagramModal");
-    myTeamMediaSlider.createSliderForTeam(<%= @team.id %>,
-                                          "<%= @team.short_name %>",
-                                          "<%= @team.sport.name %>", 
-                                          <%= raw @team.social_info.hash_tags.split(",") %> );
+    myTeamMediaSlider.createSlider( "<%= @team.short_name %>",
+                                    "<%= @team.sport.name %>", 
+                                    <%= raw @team.social_info.hash_tags.split(",") %>,
+                                    <%= raw @team.instagram_tags.to_json %> );
   });
 </script>
 <% end %>

@@ -46,5 +46,12 @@ class Tailgate < ActiveRecord::Base
     theStyle = Sass.compile(".style { color: mix(#FFFFFF, #{color}, 75%);}")
     theStyle.match("color: (.*);")[1]
   end
+  
+  def instagram_tags
+    theWrapper = InstagramWrapper.new(nil)
+    theTags = theWrapper.getSortedInstagramTags(topic_tags)
+    
+    return theTags.slice(0,2)
+  end
 
 end

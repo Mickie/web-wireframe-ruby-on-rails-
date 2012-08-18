@@ -46,4 +46,11 @@ class Team < ActiveRecord::Base
     theEvents.sort_by {|e| e[:event_date] }
   end
   
+  def instagram_tags
+    theWrapper = InstagramWrapper.new(nil)
+    theTags = theWrapper.getSortedInstagramTags(self.social_info.hash_tags)
+    
+    return theTags.slice(0,2)
+  end  
+  
 end

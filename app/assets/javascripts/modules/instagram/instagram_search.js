@@ -3,47 +3,14 @@ var InstagramSearch = function()
   this.myMediaResponseCount = 0;
   this.myCompleteCallback;
   this.myMedia = [];
+  this.myTags;
   this.myAbortFlag = false;
   
-  this.loadMediaForTeam = function( aTeamId, aCompleteCallback )
+  this.loadMediaForTags = function( anArrayOfTags, aCompleteCallback )
   {
     this.myCompleteCallback = aCompleteCallback;
-    this.getTagsForTeam(aTeamId);
-  };
+    this.myTags = anArrayOfTags;
 
-  this.loadMediaForFanzone = function( aFanzoneId, aCompleteCallback )
-  {
-    this.myCompleteCallback = aCompleteCallback;
-    this.getTagsForFanzone(aFanzoneId);
-  };
-  
-  this.abort = function()
-  {
-    this.myCompleteCallback = null;
-    this.myAbortFlag = true;
-  }
-  
-  this.getTagsForTeam = function(aTeamId)
-  {
-    $.getJSON("/instagram_proxy/find_tags_for_team.json?team_id=" + aTeamId, 
-              createDelegate(this, this.onGetTagsComplete));
-  };
-
-  this.getTagsForFanzone = function(aFanzoneId)
-  {
-    $.getJSON("/instagram_proxy/find_tags_for_fanzone.json?fanzone_id=" + aFanzoneId, 
-              createDelegate(this, this.onGetTagsComplete));
-  };
-  
-  this.onGetTagsComplete = function(aResult)
-  {
-    if (this.myAbortFlag)
-    {
-      return;
-    }
-    
-    this.myTags = aResult;
-    
     if (!this.myTags || this.myTags.length == 0)
     {
       this.myCompleteCallback([]);
@@ -55,6 +22,12 @@ var InstagramSearch = function()
       this.getMediaForTag(this.myTags[i].name);
     };
   };
+  
+  this.abort = function()
+  {
+    this.myCompleteCallback = null;
+    this.myAbortFlag = true;
+  }
   
   this.getMediaForTag = function( aTag )
   {
