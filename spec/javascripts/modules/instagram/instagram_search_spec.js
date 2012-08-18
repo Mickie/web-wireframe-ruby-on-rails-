@@ -7,53 +7,12 @@ describe("InstagramSearch", function()
     myInstagramSearch = new InstagramSearch();
   });
 
-  describe("getTagsForTeam", function()
-  {
-    beforeEach(function()
-    {
-      registerFakeAjax(
-      { 
-        url: "/instagram_proxy/find_tags_for_team.json?team_id=1",
-        successData: InstagramData.tagsResponse
-      })
-
-      myInstagramSearch.onGetTagsComplete = jasmine.createSpy('onGetTagsComplete');
-      myInstagramSearch.getTagsForTeam(1); 
-    });
-
-    it("calls onGetTagsComplete with results", function() 
-    {
-      expect(myInstagramSearch.onGetTagsComplete).toHaveBeenCalledWith(InstagramData.tagsResponse);
-    });
-  });
-
-  describe("getTagsForFanzone", function()
-  {
-    beforeEach(function()
-    {
-      registerFakeAjax(
-      { 
-        url: "/instagram_proxy/find_tags_for_fanzone.json?fanzone_id=1",
-        successData: InstagramData.tagsResponse
-      })
-
-      myInstagramSearch.onGetTagsComplete = jasmine.createSpy('onGetTagsComplete');
-      myInstagramSearch.getTagsForFanzone(1); 
-    });
-
-    it("calls onGetTagsComplete with results", function() 
-    {
-      expect(myInstagramSearch.onGetTagsComplete).toHaveBeenCalledWith(InstagramData.tagsResponse);
-    });
-  });
-
-  
-  describe("onGetTagsComplete", function()
+  describe("loadMediaForTags", function()
   {
     beforeEach(function()
     {
       myInstagramSearch.getMediaForTag = jasmine.createSpy('getMediaForTag');
-      myInstagramSearch.onGetTagsComplete(InstagramData.tagsResponse); 
+      myInstagramSearch.loadMediaForTags(InstagramData.tagsResponse); 
     });
     
     it("gets media for tags", function()
