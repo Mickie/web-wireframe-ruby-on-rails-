@@ -54,6 +54,9 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     this.myYouTubeSearch.abort();
     this.myYouTubeSearch = null;
     
+    this.myDialogPlayer = null;
+    this.myPostPlayer = null;
+
     this.myInstagrams = {};
     this.myYouTubeVideos = {};
     this.myApiResponses = 0;
