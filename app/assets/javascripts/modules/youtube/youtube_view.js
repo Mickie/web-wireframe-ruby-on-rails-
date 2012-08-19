@@ -11,7 +11,7 @@ var YoutubeView = function(aContainerDivSelector,
   
   this.myYoutubeSearch = null;
   this.myYouTubeVideos = {};
-  this.myElements = {};
+  this.myElements = new Array();
   
   this.beginLoading = function(aShortName, aSport, anArrayOfHashTags)
   {
@@ -54,24 +54,30 @@ var YoutubeView = function(aContainerDivSelector,
   
   this.createThumbnail = function(anIndex, anElement )
   {
-    var theThumbnail = new YoutubeThumbnail(this);
-    theThumbnail.initialize( this.myYouTubeVideos[anIndex], anElement );
+    if (anIndex < this.myYouTubeVideos.length)
+    {
+      var theThumbnail = new YoutubeThumbnail(this);
+      theThumbnail.initialize( this.myYouTubeVideos[anIndex], anElement );
+    }
   };
   
   this.onPostedVideoClick = function(e)
   {
     var theVideoId = $(e.currentTarget).attr("id");
-    this.showDialog(theVideoId);
+    this.loadYouTubeInDialog(theVideoId);
+    $(".modal").modal("hide");
+    this.myDialogDiv.find("#post_video_button").hide();
+    this.myDialogDiv.modal("show");
   };  
   
   this.showDialog = function( aYoutubeVideo )
   {
     var theVideoId = aYoutubeVideo.media$group.yt$videoid.$t;
-    this.loadYouTubeInDialog(theVideoId);
     
     this.myDialogDiv.find("div.modal-header h3").text(aYoutubeVideo.title.$t);
     this.myDialogDiv.find("#post_video_button").data("youtubeVideo", aYoutubeVideo).show();
     
+    this.loadYouTubeInDialog(theVideoId);
     $(".modal").modal("hide");
     this.myDialogDiv.modal("show");
     
@@ -106,7 +112,7 @@ var YoutubeView = function(aContainerDivSelector,
   {
     if (!this.myPostPlayer)
     {
-      this.myPostPlayer = new YT.Player(this.myPostDiv.attr("id"), 
+      this.myPostPlayer = new YT.Player('post_youtube', 
                                         {
                                           height: '195',
                                           width: '320',
@@ -128,7 +134,7 @@ var YoutubeView = function(aContainerDivSelector,
   {
     if (!this.myDialogPlayer)
     {
-      this.myDialogPlayer = new YT.Player(this.myDialogDiv.attr("id"), 
+      this.myDialogPlayer = new YT.Player('player', 
                                           {
                                             height: '390',
                                             width: '640',
@@ -146,22 +152,29 @@ var YoutubeView = function(aContainerDivSelector,
     }
   };
   
+  this.cleanupPlayer = function(aPlayer)
+  {
+    if (aPlayer)
+    {
+      if( aPlayer.getPlayerState() > 0 )
+      {
+        aPlayer.stopVideo();
+      }
+      if (aPlayer.clearVideo)
+      {
+        aPlayer.clearVideo();
+      }
+    } 
+  };
+  
   this.cleanupDialogPlayer = function()
   {
-    this.myDialogPlayer.stopVideo();
-    if (this.myDialogPlayer.clearVideo)
-    {
-      this.myDialogPlayer.clearVideo();
-    }
+    this.cleanupPlayer(this.myDialogPlayer)
   };
 
   this.cleanupPostPlayer = function()
   {
-    this.myPostPlayer.myPostPlayer();
-    if (this.myPostPlayer.clearVideo)
-    {
-      this.myPostPlayer.clearVideo();
-    }
+    this.cleanupPlayer(this.myPostPlayer)
   };
   
 

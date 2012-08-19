@@ -30,6 +30,7 @@ var YoutubeThumbnail = function( aYoutubeView )
                           / anItem.context.media$group.media$thumbnail[0].height;
           return theWidth.toString()
         },
+      "div.media img@style" : function(anItem){return "";},
       "div.media img@height" : function(anItem){return "150";},
       "div.mediaAnnotation" : function(anItem){ return "<div class='playButton'></div>";},
       "div.mediaAnnotation@class" : function(anItem){ return "mediaAnnotation playButtonBackground";}

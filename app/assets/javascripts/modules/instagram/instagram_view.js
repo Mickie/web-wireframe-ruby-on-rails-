@@ -1,11 +1,11 @@
 var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDivSelector )
 {
   this.myContainerDiv = $(aContainerDivSelector);
-  this.myDialogDiv = $(aModalDivSelector);
+  this.myDialogDiv = $(aDialogDivSelector);
   this.myPostDiv = $(aPostDivSelector);
 
   this.myInstagrams = {};
-  this.myElements = {};
+  this.myElements = new Array();
 
   this.beginLoading = function( anArrayOfInstagramTags )
   {
@@ -36,8 +36,11 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
   
   this.createThumbnail = function(anIndex, anElement )
   {
-    var theThumbnail = new InstagramThumbnail(this);
-    theThumbnail.initialize( this.myInstagrams[anIndex], anElement );
+    if (anIndex < this.myInstagrams.length)
+    {
+      var theThumbnail = new InstagramThumbnail(this);
+      theThumbnail.initialize( this.myInstagrams[anIndex], anElement );
+    }
   };
   
   this.showImageDialog = function( anInstagram )

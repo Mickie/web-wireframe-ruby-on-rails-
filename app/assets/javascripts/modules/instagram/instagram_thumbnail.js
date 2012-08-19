@@ -28,6 +28,7 @@ var InstagramThumbnail = function( anInstagramView )
   {
     return {
       ".@id" : "id",
+      "div.media img@style" : function(anItem){return "";},
       "div.media img@src" : "images.thumbnail.url",
       "div.media img@width" : "images.thumbnail.width",
       "div.media img@height" : "images.thumbnail.height"

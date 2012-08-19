@@ -239,7 +239,7 @@
                                       <%= raw @tailgate.not_tags.split(",") %>
                                       );
 
-    myTailgateMediaSlider = MediaSlider.create( "div#myMediaSlider", 
+    myTailgateMediaSlider = MediaSliderNew.create( "div#myMediaSlider", 
                                                 "div#myVideoModal",
                                                 "div#myInstagramModal");
     myTailgateMediaSlider.createSlider( "<%= @tailgate.team.short_name %>",
