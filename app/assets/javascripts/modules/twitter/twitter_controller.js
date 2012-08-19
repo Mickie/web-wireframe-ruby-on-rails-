@@ -46,7 +46,14 @@ var TwitterController = function(aTwitterView)
   
   this.addQuickTweetButtons = function( aParentUL )
   {
-    aParentUL.render( this.myQuickTweets, this.getQuickTweetButtonsDirective() );
+    try
+    {
+      aParentUL.render( this.myQuickTweets, this.getQuickTweetButtonsDirective() );
+    }
+    catch(e)
+    {
+      console.log("error adding quick tweet buttons: " + e);
+    }
   };
   
   this.getQuickTweetButtonsDirective = function()

@@ -1,15 +1,14 @@
-var InstagramSearch = function()
+var InstagramSearch = function( anArrayOfTags )
 {
+  this.myTags = anArrayOfTags;
   this.myMediaResponseCount = 0;
   this.myCompleteCallback;
   this.myMedia = [];
-  this.myTags;
   this.myAbortFlag = false;
   
-  this.loadMediaForTags = function( anArrayOfTags, aCompleteCallback )
+  this.loadMediaForTags = function( aCompleteCallback )
   {
     this.myCompleteCallback = aCompleteCallback;
-    this.myTags = anArrayOfTags;
 
     if (!this.myTags || this.myTags.length == 0)
     {

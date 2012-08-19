@@ -239,9 +239,9 @@
                                       <%= raw @tailgate.not_tags.split(",") %>
                                       );
 
-    myTailgateMediaSlider = MediaSlider.create( "div#tailgate_show div#myMediaSlider", 
-                                                "div#tailgate_show div#myVideoModal",
-                                                "div#tailgate_show div#myInstagramModal");
+    myTailgateMediaSlider = MediaSlider.create( "div#myMediaSlider", 
+                                                "div#myVideoModal",
+                                                "div#myInstagramModal");
     myTailgateMediaSlider.createSlider( "<%= @tailgate.team.short_name %>",
                                         "<%= @tailgate.team.sport.name %>", 
                                         <%= raw @tailgate.topic_tags.split(",") %>,

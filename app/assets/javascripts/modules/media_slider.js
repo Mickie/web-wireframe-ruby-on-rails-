@@ -18,12 +18,12 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
                                 anArrayOfHashTags,
                                 anArrayOfInstagramTags )
   {
-    this.myInstagramSearch = new InstagramSearch();
+    this.myInstagramSearch = new InstagramSearch(anArrayOfInstagramTags);
     this.myYouTubeSearch = new YouTubeSearch( aShortName,
                                               aSport, 
                                               anArrayOfHashTags,
                                               15);
-    this.myInstagramSearch.loadMediaForTags(anArrayOfInstagramTags, createDelegate(this, this.onInstagramMediaLoaded));
+    this.myInstagramSearch.loadMediaForTags(createDelegate(this, this.onInstagramMediaLoaded));
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };
   
@@ -90,7 +90,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     $(this.myVideoModalDiv + " #post_video_button").click(createDelegate(this, this.onPostYouTube));
     $(this.myInstagramModalDiv + " #post_image_button").click(createDelegate(this, this.onPostInstagram));
     
-    $("#myMediaContent").on( "click", ".post_video", createDelegate(this, this.onYouTubeClick) );
+    $("#posts").on( "click", ".post_video", createDelegate(this, this.onYouTubeClick) );
     
     $(this.myContainerDiv).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
 
@@ -193,8 +193,17 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.generateMediaDivFromInstagram = function( anInstagram ) 
   {
-    var theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( anInstagram, this.getInstagramDirective());
-    theDiv.click(createDelegate(this, this.onInstagramClick));
+    var theDiv;
+    try
+    {
+      theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( anInstagram, this.getInstagramDirective());
+      theDiv.click(createDelegate(this, this.onInstagramClick));
+    }
+    catch(e)
+    {
+      console.log(e);      
+      theDiv = $("<div></div>")
+    }
     return theDiv; 
   };
 
@@ -240,8 +249,17 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.generateMediaDivFromYouTube = function( aYouTubeVideo ) 
   {
-    var theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( aYouTubeVideo, this.getYouTubeDirective());
-    theDiv.click(createDelegate(this, this.onYouTubeClick));
+    var theDiv;
+    try
+    {
+      theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( aYouTubeVideo, this.getYouTubeDirective());
+      theDiv.click(createDelegate(this, this.onYouTubeClick));
+    }
+    catch(e)
+    {
+      console.log(e);      
+      theDiv = $("<div></div>")
+    }
     return theDiv; 
   };
   

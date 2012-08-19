@@ -161,6 +161,42 @@ describe("MediaSlider", function()
     
   });
   
+  describe("generateMediaDivFromBingVideo", function()
+  {
+    var theResult;
+    var theData = BingSearchData.d.results[0].Video[0];
+        
+    beforeEach(function()
+    {
+      theResult = myMediaSlider.generateMediaDivFromBingVideo(theData);
+    });
+    
+    it("creates a div with correct id and class", function() 
+    {
+      expect(theResult).toBeDefined(); 
+      expect(theResult).toHaveId(theData.ID); 
+      expect(theResult).toHaveClass("mediaThumbnail"); 
+    });
+
+    it("puts an image with correct url in the div", function() 
+    {
+      expect(theResult.find("img.mediaImage")).toHaveAttr("src", theData.Thumbnail.MediaUrl); 
+    });
+    
+    it("gives the image the correct dimensions", function() 
+    {
+      expect(theResult.find("img.mediaImage")).toHaveAttr("width", "160"); 
+      expect(theResult.find("img.mediaImage")).toHaveAttr("height", "120"); 
+    });
+
+    it("gives the div a click handler", function() 
+    {
+      expect(theResult).toHandle("click");
+    });
+    
+  });
+
+  
   describe("onInstagramClick", function()
   {
     beforeEach(function()
