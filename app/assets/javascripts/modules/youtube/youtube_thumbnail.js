@@ -1,26 +1,8 @@
 var YoutubeThumbnail = function( aYoutubeView )
 {
-  this.myYoutubeView = aYoutubeView;
-  this.myElement;
-  this.myData;
-  
-  this.initialize = function( aData, anElement )
-  {
-    this.myData = aData;
-    this.myElement = anElement;
-    
-    try
-    {
-      this.myElement = anElement.render( this.myData, this.getYoutubeDirective() );
-      this.myElement.click( createDelegate(this, this.onClick ) );
-    }
-    catch(anError)
-    {
-      console.log(anError);      
-    }
-  };
-  
-  this.getYoutubeDirective = function()
+  BaseThumbnail.apply(this, arguments);
+
+  this.getRenderDirective = function()
   {
     return {
       ".@id" : "media$group.yt$videoid.$t",
@@ -39,13 +21,6 @@ var YoutubeThumbnail = function( aYoutubeView )
     }    
   };
   
-  this.onClick = function(e)
-  {
-    this.myYoutubeView.showDialog(this.myData);
-  };
-  
-  
-  
-  
-  
 }
+YoutubeThumbnail.subclass(BaseThumbnail);
+

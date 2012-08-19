@@ -3,6 +3,7 @@ var FanzoNavigator = function()
   this.myCurrentHash = window.location.hash;
   this.myCreateFanzoneDialog = new FanzoneDialog("#myCreateFanzoneModal", false);
   this.mySearchSubmitInProcessFlag = false;
+  this.myLoadInProgress = false;
   
   this.initialize = function()
   {
@@ -10,6 +11,11 @@ var FanzoNavigator = function()
     this.initializeNavigationWatchers();
     this.myCreateFanzoneDialog.initialize();
   };
+  
+  this.isLoadInProgress = function()
+  {
+    return this.myLoadInProgress || this.mySearchSubmitInProcessFlag;
+  }
   
   this.notifySearchComplete = function()
   {
@@ -62,7 +68,14 @@ var FanzoNavigator = function()
       return;
     }
     
+    this.myLoadInProgress = true;
+    
     InfiniteScroller.get().stop();
+
+    if (typeof myCurrentMediaSlider !== undefined && myCurrentMediaSlider)
+    {
+      myCurrentMediaSlider.reset();
+    }
 
     this.addActiveToCurrentNavItem(aNewActiveSelector);
     this.displayLoading();
@@ -162,15 +175,15 @@ var FanzoNavigator = function()
   
   this.updateSocialButtons = function()
   {
-    if (typeof FB !== 'undefined')
+    if (typeof FB !== 'undefined' && FB.XFBML)
     {
       FB.XFBML.parse();
     }
-    if (typeof twttr !== 'undefined')
+    if (typeof twttr !== 'undefined' && twttr.widgets)
     {
       twttr.widgets.load();
     }
-    if (typeof gapi !== 'undefined')
+    if (typeof gapi !== 'undefined' && gapi.plusone)
     {
       gapi.plusone.go();
     }
@@ -179,6 +192,8 @@ var FanzoNavigator = function()
   
   this.onLoadDataComplete = function(aResult)
   {
+    this.myLoadInProgress = false;
+    
     $("#frameContent").html(aResult);
     window.scrollTo( 0, 1 );
     
@@ -193,6 +208,7 @@ var FanzoNavigator = function()
 
   this.onLoadError = function(anError)
   {
+    this.myLoadInProgress = false;
     console.log(anError);  
   };
 

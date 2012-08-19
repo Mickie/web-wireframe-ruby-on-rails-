@@ -12,6 +12,8 @@ var YoutubeView = function(aContainerDivSelector,
   this.myYoutubeSearch = null;
   this.myYouTubeVideos = {};
   this.myElements = new Array();
+  this.myThumbnails = new Array();
+  this.myAbortFlag = false;
   
   this.beginLoading = function(aShortName, aSport, anArrayOfHashTags)
   {
@@ -29,6 +31,7 @@ var YoutubeView = function(aContainerDivSelector,
   
   this.cleanup = function()
   {
+    this.myAbortFlag = true;
     this.cleanupDialogPlayer();
     this.myDialogPlayer = null;
 
@@ -37,12 +40,19 @@ var YoutubeView = function(aContainerDivSelector,
 
     this.myYouTubeSearch.abort();
     this.myYouTubeSearch = null;
+    
+    this.cleanupThumbnails();
 
     this.myYouTubeVideos = {};
   };
   
   this.onYouTubeMediaLoaded = function(anArrayOfMedia)
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.myYouTubeVideos = anArrayOfMedia;
     $(this.myElements).each(createDelegate(this, this.createThumbnail));
     
@@ -56,10 +66,19 @@ var YoutubeView = function(aContainerDivSelector,
   {
     if (anIndex < this.myYouTubeVideos.length)
     {
-      var theThumbnail = new YoutubeThumbnail(this);
-      theThumbnail.initialize( this.myYouTubeVideos[anIndex], anElement );
+      this.myThumbnails[anIndex] = new YoutubeThumbnail(this);
+      this.myThumbnails[anIndex].initialize( this.myYouTubeVideos[anIndex], anElement );
     }
   };
+  
+  this.cleanupThumbnails = function()
+  {
+    for(var i=0,j=this.myThumbnails.length; i<j; i++)
+    {
+      this.myThumbnails[i].cleanup();
+    };
+    this.myThumbnails = new Array();
+  }
   
   this.onPostedVideoClick = function(e)
   {

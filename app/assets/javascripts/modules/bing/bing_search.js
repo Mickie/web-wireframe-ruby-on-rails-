@@ -24,20 +24,7 @@ var BingSearch = function( aListener )
   
   this.parseResults = function (aResultsObject)
   {
-    if (aResultsObject.Video.length > 0)
-    {
-      $.each(aResultsObject.Video, createDelegate( this.myListener, this.myListener.onBingVideo ) );
-    }
-    
-    if (aResultsObject.Image.length > 0)
-    {
-      $.each(aResultsObject.Image, createDelegate( this.myListener, this.myListener.onBingImage ) );
-    }
-
-    if (aResultsObject.News.length > 0)
-    {
-      $.each(aResultsObject.News, createDelegate( this.myListener, this.myListener.onBingNewsItem ) );
-    }
+    this.myListener.bingResultsReady( aResultsObject.Video, aResultsObject.Image, aResultsObject.News );
   };
   
   this.onResultsReady = function(aJSON, aTextStatus, aJqHR)

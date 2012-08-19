@@ -1,32 +1,8 @@
 var InstagramThumbnail = function( anInstagramView )
 {
-  this.myView = anInstagramView;
-  this.myData;
-  this.myElement;
+  BaseThumbnail.apply(this, arguments);
   
-  this.initialize = function( aData, anElement )
-  {
-    this.myData = aData;
-    this.myElement = anElement;
-    
-    try
-    {
-      this.myElement = anElement.render( this.myData, this.getInstagramDirective() );
-      this.myElement.click( createDelegate(this, this.onClick ) );
-    }
-    catch(anError)
-    {
-      console.log(anError);
-    }
-
-  };
-  
-  this.onClick = function()
-  {
-    this.myView.showImageDialog(this.myData);
-  }
-  
-  this.getInstagramDirective = function()
+  this.getRenderDirective = function()
   {
     return {
       ".@id" : "id",
@@ -39,3 +15,4 @@ var InstagramThumbnail = function( anInstagramView )
   };
   
 }
+InstagramThumbnail.subclass(BaseThumbnail);

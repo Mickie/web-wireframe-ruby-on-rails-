@@ -226,6 +226,11 @@
   
   $(function()
   {
+    if (myNavigator.isLoadInProgress())
+    {
+      return;
+    }
+    
     myFacebookView = new FacebookView();
     myTwitterView = TwitterView.create( 15,
                                         "tweets",

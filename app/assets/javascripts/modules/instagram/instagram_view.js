@@ -6,6 +6,8 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
 
   this.myInstagrams = {};
   this.myElements = new Array();
+  this.myThumbnails = new Array();
+  this.myAbortFlag = false;
 
   this.beginLoading = function( anArrayOfInstagramTags )
   {
@@ -20,14 +22,26 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
   
   this.cleanup = function()
   {
-    this.myInstagramSearch.abort();
-    this.myInstagramSearch = null;
+    this.myAbortFlag = true;
+    
+    if (this.myInstagramSearch)
+    {
+      this.myInstagramSearch.abort();
+      this.myInstagramSearch = null;
+    }
+    
+    this.cleanupThumbnails();
 
     this.myInstagrams = {};
   };
   
   this.onInstagramMediaLoaded = function(anArrayOfMedia)
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.myInstagrams = anArrayOfMedia;
     $(this.myElements).each(createDelegate(this, this.createThumbnail));
 
@@ -38,10 +52,19 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
   {
     if (anIndex < this.myInstagrams.length)
     {
-      var theThumbnail = new InstagramThumbnail(this);
-      theThumbnail.initialize( this.myInstagrams[anIndex], anElement );
+      this.myThumbnails[anIndex] = new InstagramThumbnail(this);
+      this.myThumbnails[anIndex].initialize( this.myInstagrams[anIndex], anElement );
     }
   };
+
+  this.cleanupThumbnails = function()
+  {
+    for(var i=0,j=this.myThumbnails.length; i<j; i++)
+    {
+      this.myThumbnails[i].cleanup();
+    };
+    this.myThumbnails = new Array();
+  }
   
   this.showImageDialog = function( anInstagram )
   {

@@ -37,11 +37,17 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     $(this.myContainerDivSelector + " div#myMediaContent").clearQueue();
     $(this.myContainerDivSelector + " div#myMediaContent").stop();
 
-    this.myInstagramView.cleanup();
-    this.myInstagramView = null;
-    
-    this.myYoutubeView.cleanup();
-    this.myYoutubeView = null;
+    if (this.myInstagramView)
+    {
+      this.myInstagramView.cleanup();
+      this.myInstagramView = null;
+    }
+
+    if (this.myYoutubeView)
+    {
+      this.myYoutubeView.cleanup();
+      this.myYoutubeView = null;
+    }
   };
   
   this.createMediaContainers = function()
@@ -164,20 +170,20 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
 };
 
-var myOnlyMediaSlider = null;
+var myCurrentMediaSlider = null;
 MediaSlider.create = function()
 {
-  if (myOnlyMediaSlider)
+  if (myCurrentMediaSlider)
   {
-    myOnlyMediaSlider.reset();
-    return myOnlyMediaSlider;
+    myCurrentMediaSlider.reset();
+    return myCurrentMediaSlider;
   }
   
-  myOnlyMediaSlider = new MediaSlider( "div#myMediaSlider", 
+  myCurrentMediaSlider = new MediaSlider( "div#myMediaSlider",
                                           "div#myVideoModal",
                                           "div#myInstagramModal",
                                           "div#postForm");
   
-  return myOnlyMediaSlider;
+  return myCurrentMediaSlider;
 };
 
