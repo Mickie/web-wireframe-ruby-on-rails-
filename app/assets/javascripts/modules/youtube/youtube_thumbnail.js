@@ -11,7 +11,8 @@ var YoutubeThumbnail = function( aYoutubeView )
     
     try
     {
-      this.myElement.render( this.myData, this.getYoutubeDirective() ).click( createDelegate(this, this.onClick ) );
+      this.myElement = anElement.render( this.myData, this.getYoutubeDirective() );
+      this.myElement.click( createDelegate(this, this.onClick ) );
     }
     catch(anError)
     {
@@ -23,6 +24,7 @@ var YoutubeThumbnail = function( aYoutubeView )
   {
     return {
       ".@id" : "media$group.yt$videoid.$t",
+      "div.media img@alt" : "title.$t",
       "div.media img@src" : function(anItem){ return anItem.context.media$group.media$thumbnail[0].url; },
       "div.media img@width" : function(anItem)
         { 

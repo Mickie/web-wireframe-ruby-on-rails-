@@ -11,12 +11,14 @@ var InstagramThumbnail = function( anInstagramView )
     
     try
     {
-      this.myElement.render( this.myData, this.getInstagramDirective() ).click( createDelegate(this, this.onClick ) );
+      this.myElement = anElement.render( this.myData, this.getInstagramDirective() );
+      this.myElement.click( createDelegate(this, this.onClick ) );
     }
     catch(anError)
     {
       console.log(anError);
     }
+
   };
   
   this.onClick = function()
@@ -29,6 +31,7 @@ var InstagramThumbnail = function( anInstagramView )
     return {
       ".@id" : "id",
       "div.media img@style" : function(anItem){return "";},
+      "div.media img@alt" : "caption.text",
       "div.media img@src" : "images.thumbnail.url",
       "div.media img@width" : "images.thumbnail.width",
       "div.media img@height" : "images.thumbnail.height"

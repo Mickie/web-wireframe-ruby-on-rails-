@@ -18,7 +18,7 @@ var YoutubeView = function(aContainerDivSelector,
     this.myYouTubeSearch = new YouTubeSearch( aShortName,
                                               aSport, 
                                               anArrayOfHashTags,
-                                              15);
+                                              this.myElements.length);
     this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
   };
   

@@ -4,7 +4,7 @@ describe("InstagramSearch", function()
 
   beforeEach(function()
   {
-    myInstagramSearch = new InstagramSearch();
+    myInstagramSearch = new InstagramSearch(InstagramData.tagsResponse);
   });
 
   describe("loadMediaForTags", function()
@@ -12,7 +12,7 @@ describe("InstagramSearch", function()
     beforeEach(function()
     {
       myInstagramSearch.getMediaForTag = jasmine.createSpy('getMediaForTag');
-      myInstagramSearch.loadMediaForTags(InstagramData.tagsResponse); 
+      myInstagramSearch.loadMediaForTags(); 
     });
     
     it("gets media for tags", function()
