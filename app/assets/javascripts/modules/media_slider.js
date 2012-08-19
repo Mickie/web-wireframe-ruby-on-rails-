@@ -1,57 +1,75 @@
-var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector )
+var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector, aPostDivSelector )
 {
-  this.SLIDE_INTERVAL = 5000;
+  var SLIDE_INTERVAL = 5000;
+  var NUMBER_OF_VIEW_TYPES = 2;
+  var TOTAL_CONTAINERS = NUMBER_OF_VIEW_TYPES*20;
   
-  this.myContainerDiv = aContainerDivSelector;
-  this.myVideoModalDiv = aVideoModalDivSelector;
-  this.myInstagramModalDiv = anInstagramModalDivSelector;
-  this.myDialogPlayer = null;
-  this.myPostPlayer = null;
-  this.myInstagramSearch = null;
-  this.myYouTubeSearch = null;
-  this.myInstagrams = {};
-  this.myYouTubeVideos = {};
-  this.myApiResponses = 0;
+  this.myContainerDivSelector = aContainerDivSelector;
+  this.myVideoModalDivSelector = aVideoModalDivSelector;
+  this.myInstagramModalDivSelector = anInstagramModalDivSelector;
+  this.myPostDivSelector = aPostDivSelector;
   
+  this.mySlideInterval = null;
+  this.myElementArray = {};
+
   this.createSlider = function( aShortName,
                                 aSport, 
                                 anArrayOfHashTags,
                                 anArrayOfInstagramTags )
   {
-    this.myInstagramSearch = new InstagramSearch(anArrayOfInstagramTags);
-    this.myYouTubeSearch = new YouTubeSearch( aShortName,
-                                              aSport, 
-                                              anArrayOfHashTags,
-                                              15);
-    this.myInstagramSearch.loadMediaForTags(createDelegate(this, this.onInstagramMediaLoaded));
-    this.myYouTubeSearch.loadVideos(createDelegate(this, this.onYouTubeMediaLoaded));
+    this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myInstagramModalDivSelector, this.myPostDivSelector);
+    this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
+
+    this.createMediaContainers();
+    this.queueContainerLoads();
+
+    this.myInstagramView.beginLoading(anArrayOfInstagramTags);
+    this.myYoutubeView.beginLoading(aShortName, aSport, anArrayOfHashTags);
+    
+    this.setupNavigation();
+    this.startSliderTimer();    
   };
   
   this.reset = function()
   {
     this.stopSliderTimer();
     
-    $(this.myContainerDiv + " div#myMediaContent").clearQueue();
-    $(this.myContainerDiv + " div#myMediaContent").stop();
-    
-    this.myInstagramSearch.abort();
-    this.myInstagramSearch = null;
-    
-    this.myYouTubeSearch.abort();
-    this.myYouTubeSearch = null;
-    
-    this.myDialogPlayer = null;
-    this.myPostPlayer = null;
+    $(this.myContainerDivSelector + " div#myMediaContent").clearQueue();
+    $(this.myContainerDivSelector + " div#myMediaContent").stop();
 
-    this.myInstagrams = {};
-    this.myYouTubeVideos = {};
-    this.myApiResponses = 0;
+    this.myInstagramView.cleanup();
+    this.myInstagramView = null;
+    
+    this.myYoutubeView.cleanup();
+    this.myYoutubeView = null;
   };
+  
+  this.createMediaContainers = function()
+  {
+    var theParentDiv = $(this.myContainerDivSelector + " div#myMediaContent");
+
+    for (var i = 0; i < TOTAL_CONTAINERS; i++)
+    {
+      var theElement = $(this.myContainerDivSelector + " div#myMediaTemplate").clone().attr("id", "");
+      theParentDiv.append(theElement);
+      this.myElementArray[i] = theElement;
+    }
+  };
+  
+  this.queueContainerLoads = function()
+  {
+    var i = 0;
+    while(i < TOTAL_CONTAINERS)
+    {
+      this.myInstagramView.queueContainerLoad(this.myElementArray[i++]);
+      this.myYoutubeView.queueContainerLoad(this.myElementArray[i++]);
+    }
+  }
   
   this.startSliderTimer = function()
   {
     this.stopSliderTimer();
-    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), this.SLIDE_INTERVAL);
+    this.mySlideInterval = setInterval(createDelegate(this, this.onSlideInterval), SLIDE_INTERVAL);
   };
 
   this.stopSliderTimer = function()
@@ -63,45 +81,12 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     this.mySlideInterval = null;
   };
   
-  this.onAllMediaLoaded = function()
-  {
-    var theParentDiv = $(this.myContainerDiv + " div#myMediaContent");
-    var theInstagramIds = _.keys(this.myInstagrams);
-    var theYouTubeIds = _.keys(this.myYouTubeVideos);
-    for (var i=0, y=0; i < theInstagramIds.length;) 
-    {
-      theParentDiv.append(this.generateMediaDivFromInstagram(this.myInstagrams[theInstagramIds[i++]]));
-      if (i < theInstagramIds.length)
-      {
-        theParentDiv.append(this.generateMediaDivFromInstagram(this.myInstagrams[theInstagramIds[i++]]));
-      }
-      if (y < theYouTubeIds.length)
-      {
-        theParentDiv.append(this.generateMediaDivFromYouTube(this.myYouTubeVideos[theYouTubeIds[y++]]));     
-      }
-    };
-    
-    while(y < theYouTubeIds.length)
-    {
-      theParentDiv.append(this.generateMediaDivFromYouTube(this.myYouTubeVideos[theYouTubeIds[y++]]));     
-    }
-    
-    $(this.myVideoModalDiv + " a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));
-    $(this.myVideoModalDiv + " #post_video_button").click(createDelegate(this, this.onPostYouTube));
-    $(this.myInstagramModalDiv + " #post_image_button").click(createDelegate(this, this.onPostInstagram));
-    
-    $("#posts").on( "click", ".post_video", createDelegate(this, this.onYouTubeClick) );
-    
-    $(this.myContainerDiv).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
-
-    this.setupNavigation();
-    this.startSliderTimer();    
-  };
   
   this.setupNavigation = function()
   {
-    $(this.myContainerDiv + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
-    $(this.myContainerDiv + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
+    $(this.myContainerDivSelector).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
+    $(this.myContainerDivSelector + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
+    $(this.myContainerDivSelector + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
   }
   
   this.onSlideInterval = function()
@@ -124,8 +109,8 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.slideLeft = function()
   {
     this.stopSliderTimer();
-    var theLeftMostDivImageWidth = $(this.myContainerDiv + " div#myMediaContent div:first img").attr("width");
-    $(this.myContainerDiv + " div#myMediaContent").animate({ left:"-" + theLeftMostDivImageWidth + "px"}, 
+    var theLeftMostDivImageWidth = $(this.myContainerDivSelector + " div#myMediaContent div:first img").attr("width");
+    $(this.myContainerDivSelector + " div#myMediaContent").animate({ left:"-" + theLeftMostDivImageWidth + "px"}, 
                                                                 500, 
                                                                 'linear', 
                                                                 createDelegate(this, this.onSlideLeftComplete) );
@@ -134,13 +119,13 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.slideRight = function()
   {
     this.stopSliderTimer();
-    var theRightMostDiv = $(this.myContainerDiv + " div#myMediaContent div.mediaThumbnail:last").detach();
+    var theRightMostDiv = $(this.myContainerDivSelector + " div#myMediaContent div.mediaThumbnail:last").detach();
     if (theRightMostDiv)
     {
       var theImageWidth = $(theRightMostDiv).find("img").attr("width");
-      $(this.myContainerDiv + " div#myMediaContent").prepend(theRightMostDiv);
-      $(this.myContainerDiv + " div#myMediaContent").css({left:"-" + theImageWidth + "px"});
-      $(this.myContainerDiv + " div#myMediaContent").animate({ left:"0px"}, 
+      $(this.myContainerDivSelector + " div#myMediaContent").prepend(theRightMostDiv);
+      $(this.myContainerDivSelector + " div#myMediaContent").css({left:"-" + theImageWidth + "px"});
+      $(this.myContainerDivSelector + " div#myMediaContent").animate({ left:"0px"}, 
                                                                   500, 
                                                                   'linear', 
                                                                   createDelegate(this, this.onSlideRightComplete) );
@@ -154,11 +139,11 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.onSlideLeftComplete = function()
   {
-    var theLeftMostDiv = $(this.myContainerDiv + " div#myMediaContent div:first").detach();
+    var theLeftMostDiv = $(this.myContainerDivSelector + " div#myMediaContent div:first").detach();
     if (theLeftMostDiv)
     {
-      $(this.myContainerDiv + " div#myMediaContent").append(theLeftMostDiv);
-      $(this.myContainerDiv + " div#myMediaContent").css({left:"0px"});
+      $(this.myContainerDivSelector + " div#myMediaContent").append(theLeftMostDiv);
+      $(this.myContainerDivSelector + " div#myMediaContent").css({left:"0px"});
       this.startSliderTimer();    
     }
   };
@@ -166,252 +151,33 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.onHoverStart = function(e)
   {
     this.stopSliderTimer();
-    $(this.myContainerDiv + " div#navigate_forward").fadeIn(500);
-    $(this.myContainerDiv + " div#navigate_backward").fadeIn(500);
+    $(this.myContainerDivSelector + " div#navigate_forward").fadeIn(500);
+    $(this.myContainerDivSelector + " div#navigate_backward").fadeIn(500);
   };
   
   this.onHoverEnd = function(e)
   {
     this.startSliderTimer();
-    $(this.myContainerDiv + " div#navigate_forward").fadeOut(500);
-    $(this.myContainerDiv + " div#navigate_backward").fadeOut(500);
+    $(this.myContainerDivSelector + " div#navigate_forward").fadeOut(500);
+    $(this.myContainerDivSelector + " div#navigate_backward").fadeOut(500);
   };
   
-  this.onInstagramMediaLoaded = function(anArrayOfMedia)
-  {
-    for (var i=0; i < anArrayOfMedia.length; i++) 
-    {
-      this.myInstagrams[anArrayOfMedia[i].id] = anArrayOfMedia[i];
-    };
-
-    this.myApiResponses++;
-    if (this.myApiResponses >= 2)
-    {
-      this.onAllMediaLoaded();
-    }
-  };
-  
-  this.generateMediaDivFromInstagram = function( anInstagram ) 
-  {
-    var theDiv;
-    try
-    {
-      theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( anInstagram, this.getInstagramDirective());
-      theDiv.click(createDelegate(this, this.onInstagramClick));
-    }
-    catch(e)
-    {
-      console.log(e);      
-      theDiv = $("<div></div>")
-    }
-    return theDiv; 
-  };
-
-  this.getInstagramDirective = function()
-  {
-    return {
-      ".@id" : "id",
-      "div.media img@src" : "images.thumbnail.url",
-      "div.media img@width" : "images.thumbnail.width",
-      "div.media img@height" : "images.thumbnail.height"
-    }    
-  };
-  
-  this.onInstagramClick = function(e)
-  {
-    var theInstagramId = $(e.currentTarget).attr("id");
-    var theInstagram = this.myInstagrams[theInstagramId];
-    $(this.myInstagramModalDiv + " div.instagramImage").html("<img src='" + theInstagram.images.low_resolution.url + "' width='306' height='306'/>");
-    $(this.myInstagramModalDiv + " div.instagramCaption").text(theInstagram.caption.text);
-    $(this.myInstagramModalDiv + " div.modal-header h3").text(theInstagram.user.full_name);
-    $(this.myInstagramModalDiv + " div.modal-header img").attr("src", theInstagram.caption.from.profile_picture);
-    $(this.myInstagramModalDiv + " #post_image_button").attr("data-id", theInstagramId);
-
-    $(".modal").modal("hide");
-    $(this.myInstagramModalDiv).modal("show");
-
-    trackEvent("MediaSlider", "instagram_click", theInstagramId);    
-  };
-
-  this.onYouTubeMediaLoaded = function(anArrayOfMedia)
-  {
-    for (var i=0; i < anArrayOfMedia.length; i++) 
-    {
-      this.myYouTubeVideos[anArrayOfMedia[i].media$group.yt$videoid.$t] = anArrayOfMedia[i];
-    };
-
-    this.myApiResponses++;
-    if (this.myApiResponses >= 2)
-    {
-      this.onAllMediaLoaded();
-    }
-  };
-  
-  this.generateMediaDivFromYouTube = function( aYouTubeVideo ) 
-  {
-    var theDiv;
-    try
-    {
-      theDiv = $(this.myContainerDiv + " div#myMediaTemplate").clone().render( aYouTubeVideo, this.getYouTubeDirective());
-      theDiv.click(createDelegate(this, this.onYouTubeClick));
-    }
-    catch(e)
-    {
-      console.log(e);      
-      theDiv = $("<div></div>")
-    }
-    return theDiv; 
-  };
-  
-  this.getYouTubeDirective = function()
-  {
-    return {
-      ".@id" : "media$group.yt$videoid.$t",
-      "div.media img@src" : function(anItem){ return anItem.context.media$group.media$thumbnail[0].url; },
-      "div.media img@width" : function(anItem)
-        { 
-          var theWidth =  anItem.context.media$group.media$thumbnail[0].width * 150 
-                          / anItem.context.media$group.media$thumbnail[0].height;
-          return theWidth.toString()
-        },
-      "div.media img@height" : function(anItem){return "150";},
-      "div.mediaAnnotation" : function(anItem){ return "<div class='playButton'></div>";},
-      "div.mediaAnnotation@class" : function(anItem){ return "mediaAnnotation playButtonBackground";}
-    }    
-  };
-  
-  this.loadYouTubeInPost = function( aVideoId )
-  {
-    if (!this.myPostPlayer)
-    {
-      this.myPostPlayer = new YT.Player('post_youtube', {
-                                    height: '195',
-                                    width: '320',
-                                    videoId: aVideoId,
-                                    events: {
-                                      'onReady': createDelegate(this, this.onPlayerReady),
-                                      'onStateChange': createDelegate(this, this.onPlayerStateChange)
-                                    }
-                                  });
-    }
-    else
-    {
-      this.myPostPlayer.loadVideoById(aVideoId);
-    }
-  };
-  
-  this.loadYouTubeInDialog = function( aVideoId )
-  {
-    if (!this.myDialogPlayer)
-    {
-      this.myDialogPlayer = new YT.Player('player', {
-                                    height: '390',
-                                    width: '640',
-                                    videoId: aVideoId,
-                                    events: {
-                                      'onReady': createDelegate(this, this.onPlayerReady),
-                                      'onStateChange': createDelegate(this, this.onPlayerStateChange)
-                                    }
-                                  });
-    }
-    else
-    {
-      this.myDialogPlayer.loadVideoById(aVideoId);
-    }
-  };
-  
-  this.onYouTubeClick = function(e)
-  {
-    var theVideoId = $(e.currentTarget).attr("id");
-    this.loadYouTubeInDialog(theVideoId);
-    
-    var theVideo = this.myYouTubeVideos[theVideoId];
-    if (theVideo)
-    {
-      $(this.myVideoModalDiv + " div.modal-header h3").text(theVideo.title.$t);
-      $(this.myVideoModalDiv + " #post_video_button").attr("data-id", theVideoId).show();
-    }
-    else
-    {
-      $(this.myVideoModalDiv + " #post_video_button").hide();
-    }
-    
-
-    $(".modal").modal("hide");
-    $(this.myVideoModalDiv).modal("show");
-    
-    trackEvent("MediaSlider", "youtube_click", theVideoId);    
-  };
-  
-  this.onPlayerReady = function()
-  {
-    
-  };
-  
-  this.onPlayerStateChange = function()
-  {
-    
-  };
-  
-  this.onVideoDismiss = function(e)
-  {
-    this.myDialogPlayer.stopVideo();
-    if (this.myDialogPlayer.clearVideo)
-    {
-      this.myDialogPlayer.clearVideo();
-    }
-  };
-  
-  this.onPostInstagram = function(e)
-  {
-    var theInstagramId = $(e.target).attr("data-id");
-    var theInstagram = this.myInstagrams[theInstagramId];
-    var theUrl = theInstagram.images.low_resolution.url;
-    
-    $("#postForm #post_image_url").val(theUrl);
-    $("#postForm #post_video_id").val("");
-    $("#postForm .media_container").html("<img src='" + theUrl + "' width='306' height='306'/>");
-    $("#postForm .media_preview").slideDown(600);
-    
-    trackEvent("MediaSlider", "post_instagram", theInstagramId);    
-  };
-  
-  this.onPostYouTube = function(e)
-  {
-    var theVideoId = $(e.target).attr("data-id");
-    var theVideo = this.myYouTubeVideos[theVideoId];
-    
-    var theThumbnailUrl = theVideo.media$group.media$thumbnail[0].url
-    for (var i = 0; i < theVideo.media$group.media$thumbnail.length; i++)
-    {
-      if ( theVideo.media$group.media$thumbnail[i].yt$name == "hqdefault" )
-      {
-        theThumbnailUrl = theVideo.media$group.media$thumbnail[i].url;
-      }
-    }
-    
-    $("#postForm #post_video_id").val(theVideoId);
-    $("#postForm #post_image_url").val(theThumbnailUrl);
-    $("#postForm .media_container").html("<div id='post_youtube'></div>");
-    this.loadYouTubeInPost(theVideoId);
-    $("#postForm .media_preview").slideDown(600);
-    
-    trackEvent("MediaSlider", "post_youtube", theVideoId);    
-  };
-
 };
 
-
-var myCurrentMediaSlider = null;
-MediaSlider.create = function(aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector)
+var myOnlyMediaSlider = null;
+MediaSlider.create = function()
 {
-  if (myCurrentMediaSlider)
+  if (myOnlyMediaSlider)
   {
-    myCurrentMediaSlider.reset();
-    return myCurrentMediaSlider;
+    myOnlyMediaSlider.reset();
+    return myOnlyMediaSlider;
   }
   
-  myCurrentMediaSlider = new MediaSlider(aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector);
+  myOnlyMediaSlider = new MediaSlider( "div#myMediaSlider", 
+                                          "div#myVideoModal",
+                                          "div#myInstagramModal",
+                                          "div#postForm");
   
-  return myCurrentMediaSlider;
+  return myOnlyMediaSlider;
 };
+
