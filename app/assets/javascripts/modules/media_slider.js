@@ -6,7 +6,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   
   this.myContainerDivSelector = aContainerDivSelector;
   this.myVideoModalDivSelector = aVideoModalDivSelector;
-  this.myInstagramModalDivSelector = anInstagramModalDivSelector;
+  this.myImageModalDivSelector = anInstagramModalDivSelector;
   this.myPostDivSelector = aPostDivSelector;
   
   this.mySlideInterval = null;
@@ -18,7 +18,7 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
                                 anArrayOfInstagramTags,
                                 aTeamId )
   {
-    this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myInstagramModalDivSelector, this.myPostDivSelector);
+    this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myImageModalDivSelector, this.myPostDivSelector);
     this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
     this.myBingView = new BingView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
 
@@ -193,7 +193,7 @@ MediaSlider.create = function()
   
   myCurrentMediaSlider = new MediaSlider( "div#myMediaSlider",
                                           "div#myVideoModal",
-                                          "div#myInstagramModal",
+                                          "div#myImageModal",
                                           "div#postForm");
   
   return myCurrentMediaSlider;
