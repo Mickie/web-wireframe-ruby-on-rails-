@@ -6,7 +6,7 @@ describe("YoutubeView", function()
   {
     loadJasmineFixture('media_slider');
     myYoutubeView = new YoutubeView("div#myMediaSlider",
-                                        "div#myVideoModal",
+                                        "div#myMediaModal",
                                         "div#postForm");
   });
   
@@ -35,7 +35,7 @@ describe("YoutubeView", function()
     
     it("adds the correct title to the modal", function() 
     {
-      expect($("div#myVideoModal div.modal-header h3")).toHaveText(YouTubeData.videoSearchResponse.feed.entry[0].title.$t);
+      expect($("div#myMediaModal div.modal-header h3")).toHaveText(YouTubeData.videoSearchResponse.feed.entry[0].title.$t);
     });
     
   });

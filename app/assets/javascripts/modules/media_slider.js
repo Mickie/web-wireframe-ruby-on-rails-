@@ -1,12 +1,11 @@
-var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector, aPostDivSelector )
+var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSelector )
 {
   var SLIDE_INTERVAL = 5000000;
   var NUMBER_OF_VIEW_TYPES = 5;
   var TOTAL_CONTAINERS = NUMBER_OF_VIEW_TYPES*15;
   
   this.myContainerDivSelector = aContainerDivSelector;
-  this.myVideoModalDivSelector = aVideoModalDivSelector;
-  this.myImageModalDivSelector = anInstagramModalDivSelector;
+  this.myMediaModalDivSelector = aModalDivSelector;
   this.myPostDivSelector = aPostDivSelector;
   
   this.mySlideInterval = null;
@@ -18,9 +17,9 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
                                 anArrayOfInstagramTags,
                                 aTeamId )
   {
-    this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myImageModalDivSelector, this.myPostDivSelector);
-    this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
-    this.myBingView = new BingView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
+    this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
+    this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
+    this.myBingView = new BingView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
 
     this.createMediaContainers();
     this.queueContainerLoads();
@@ -192,8 +191,7 @@ MediaSlider.create = function()
   }
   
   myCurrentMediaSlider = new MediaSlider( "div#myMediaSlider",
-                                          "div#myVideoModal",
-                                          "div#myImageModal",
+                                          "div#myMediaModal",
                                           "div#postForm");
   
   return myCurrentMediaSlider;

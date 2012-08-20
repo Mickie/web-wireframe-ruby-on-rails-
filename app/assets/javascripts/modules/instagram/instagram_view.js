@@ -45,7 +45,7 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
     this.myInstagrams = anArrayOfMedia;
     $(this.myElements).each(createDelegate(this, this.createThumbnail));
 
-    this.myDialogDiv.find("#post_image_button").click(createDelegate(this, this.onPostInstagram));
+    this.myDialogDiv.find("#post_media_button").click(createDelegate(this, this.onPostInstagram));
   };
   
   this.createThumbnail = function(anIndex, anElement )
@@ -72,7 +72,10 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
     this.myDialogDiv.find("div.instagramCaption").text(anInstagram.caption.text);
     this.myDialogDiv.find("div.modal-header h3").text(anInstagram.user.full_name);
     this.myDialogDiv.find("div.modal-header img").attr("src", anInstagram.caption.from.profile_picture);
-    this.myDialogDiv.find("#post_image_button").data("instagram", anInstagram);
+    this.myDialogDiv.find("#post_media_button").data("instagram", anInstagram);
+
+    this.myDialogDiv.find("#mediaImageData").show();
+    this.myDialogDiv.find("#mediaVideoData").hide();
 
     $(".modal").modal("hide");
     this.myDialogDiv.modal("show");

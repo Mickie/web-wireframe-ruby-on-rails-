@@ -61,7 +61,7 @@ var YoutubeView = function(aContainerDivSelector,
     $(this.myElements).each(createDelegate(this, this.createThumbnail));
     
     this.myDialogDiv.find("a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));
-    this.myDialogDiv.find("#post_video_button").click(createDelegate(this, this.onPostYouTube));
+    this.myDialogDiv.find("#post_media_button").click(createDelegate(this, this.onPostYouTube));
 
     $("#posts").on( "click", ".post_video", createDelegate(this, this.onPostedVideoClick) );
   };
@@ -89,7 +89,7 @@ var YoutubeView = function(aContainerDivSelector,
     var theVideoId = $(e.currentTarget).attr("id");
     this.loadYouTubeInDialog(theVideoId);
     $(".modal").modal("hide");
-    this.myDialogDiv.find("#post_video_button").hide();
+    this.myDialogDiv.find("#post_media_button").hide();
     this.myDialogDiv.modal("show");
   };  
   
@@ -98,9 +98,13 @@ var YoutubeView = function(aContainerDivSelector,
     var theVideoId = aYoutubeVideo.media$group.yt$videoid.$t;
     
     this.myDialogDiv.find("div.modal-header h3").text(aYoutubeVideo.title.$t);
-    this.myDialogDiv.find("#post_video_button").data("youtubeVideo", aYoutubeVideo).show();
+    this.myDialogDiv.find("#post_media_button").data("youtubeVideo", aYoutubeVideo).show();
     
     this.loadYouTubeInDialog(theVideoId);
+    
+    this.myDialogDiv.find("#mediaImageData").hide();
+    this.myDialogDiv.find("#mediaVideoData").show();
+
     $(".modal").modal("hide");
     this.myDialogDiv.modal("show");
     

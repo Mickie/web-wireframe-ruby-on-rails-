@@ -1,17 +1,4 @@
-<div id="myVideoModal" class="modal hide fade">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Video Title</h3>
-  </div>
-  <div class="modal-body">
-    <div id="player"></div>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="fanzoButton" id="post_video_button" data-dismiss="modal">Add To New Post</a>
-    <a href="#" class="fanzoButton" data-dismiss="modal">Done</a>
-  </div>
-</div>
-<div id="myImageModal" class="modal hide fade">
+<div id="myMediaModal" class="modal hide fade">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <div>
@@ -20,11 +7,16 @@
     </div>
   </div>
   <div class="modal-body">
-    <div class="instagramImage"></div>
-    <div class="instagramCaption"></div>
+    <div id="mediaImageData">
+      <div class="instagramImage"></div>
+      <div class="instagramCaption"></div>
+    </div>
+    <div id="mediaVideoData">
+      <div id="player"></div>
+    </div>
   </div>
   <div class="modal-footer">
-    <a href="#" class="fanzoButton" id="post_image_button" data-dismiss="modal">Add To New Post</a>
+    <a href="#" class="fanzoButton" id="post_media_button" data-dismiss="modal">Add To New Post</a>
     <a href="#" class="fanzoButton" data-dismiss="modal">Done</a>
   </div>
 </div>

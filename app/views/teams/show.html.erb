@@ -112,8 +112,8 @@
     
 
     myTeamMediaSlider = MediaSlider.create( "div#myMediaSlider", 
-                                            "div#myVideoModal",
-                                            "div#myImageModal");
+                                            "div#myMediaModal",
+                                            "div#myMediaModal");
     myTeamMediaSlider.createSlider( "<%= @team.short_name %>",
                                     "<%= @team.sport.name %>", 
                                     <%= raw @team.social_info.hash_tags.split(",") %>,

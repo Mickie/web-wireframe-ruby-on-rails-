@@ -95,7 +95,10 @@ var BingView = function(aContainerDivSelector,
   this.showDialog = function( aBingItem )
   {
     this.myDialogDiv.find("div.modal-header h3").text(aBingItem.Title);
-    this.myDialogDiv.find("#post_image_button").data("bingItem", aBingItem).show();
+    this.myDialogDiv.find("#post_media_button").data("bingItem", aBingItem).show();
+    
+    this.myDialogDiv.find("#mediaImageData").hide();
+    this.myDialogDiv.find("#mediaVideoData").hide();    
     
     $(".modal").modal("hide");
     this.myDialogDiv.modal("show");
