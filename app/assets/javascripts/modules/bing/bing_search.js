@@ -41,7 +41,7 @@ var BingSearch = function( aListener )
     else
     {
       console.log(aJqHR);
-      this.myListener.onError("Woops! There was a problem getting tweets from Twitter: " + aTextStatus );
+      this.myListener.onError("Woops! There was a problem getting results from Bing: " + aTextStatus );
     }
   };
 
