@@ -1,159 +1,186 @@
-var BingSearchData = 
+var BingSearchData =
 {
-  "d":{"results":[
+  "d" :
   {
-    "__metadata" :
-    {
-      "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/Composite?Sources=\u0027image+video+news\u0027&Query=\u0027notre dame football\u0027&Market=\u0027en-US\u0027&VideoSortBy=\u0027Relevance\u0027&NewsCategory=\u0027rt_Sports\u0027&NewsSortBy=\u0027Date\u0027&$skip=0&$top=1",
-      "type" : "ExpandableSearchResult"
-    },
-    "ID" : "e4cdb2b3-c9a6-4492-9075-1488113e6d90",
-    "WebTotal" : "",
-    "WebOffset" : "",
-    "ImageTotal" : "134000",
-    "ImageOffset" : "0",
-    "VideoTotal" : "11300",
-    "VideoOffset" : "0",
-    "NewsTotal" : "22500",
-    "NewsOffset" : "0",
-    "SpellingSuggestionsTotal" : "",
-    "AlteredQuery" : "",
-    "AlterationOverrideQuery" : "",
-    "Web" : [],
-    "Image" : [
+    "results" : [
     {
       "__metadata" :
       {
-        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e4cdb2b3-c9a6-4492-9075-1488113e6d90\u0027)/Image?$skip=0&$top=1",
-        "type" : "ImageResult"
+        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/Composite?Sources=\u0027web+image+video+news\u0027&Query=\u0027Latest news on Notre Dame Fighting Irish Football\u0027&VideoSortBy=\u0027Date\u0027&NewsCategory=\u0027rt_Sports\u0027&NewsSortBy=\u0027Date\u0027&$skip=0&$top=1",
+        "type" : "ExpandableSearchResult"
       },
-      "ID" : "ab00aa5f-39ee-4c4f-a89d-dbe03876ade9",
-      "Title" : "Notre Dame Football Notre Dame Football – United States Online News",
-      "MediaUrl" : "http://usspost.com/wp-content/uploads/2010/09/Notre-Dame-Football2.jpg",
-      "SourceUrl" : "http://usspost.com/notre-dame-football-3-17050/notre-dame-football-4/",
-      "DisplayUrl" : "usspost.com/notre-dame-football-3-17050/notre-dame-football-4",
-      "Width" : "442",
-      "Height" : "407",
-      "FileSize" : "26561",
-      "ContentType" : "image/jpeg",
-      "Thumbnail" :
+      "ID" : "e82b8eaf-376b-473b-b908-d8933dcc6827",
+      "WebTotal" : "522000",
+      "WebOffset" : "0",
+      "ImageTotal" : "8280",
+      "ImageOffset" : "0",
+      "VideoTotal" : "113",
+      "VideoOffset" : "0",
+      "NewsTotal" : "14300",
+      "NewsOffset" : "0",
+      "SpellingSuggestionsTotal" : "",
+      "AlteredQuery" : "",
+      "AlterationOverrideQuery" : "",
+      "Web" : [
       {
         "__metadata" :
         {
-          "type" : "Bing.Thumbnail"
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/Web?$skip=0&$top=1",
+          "type" : "WebResult"
         },
-        "MediaUrl" : "http://ts3.mm.bing.net/images/thumbnail.aspx?q=4622686861591334&id=20362046e0a596234911cfb1ad5be7ba",
-        "ContentType" : "image/jpg",
-        "Width" : "160",
-        "Height" : "147",
-        "FileSize" : "4511"
-      }
-    },
-    {
-      "__metadata" :
-      {
-        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e4cdb2b3-c9a6-4492-9075-1488113e6d90\u0027)/Image?$skip=1&$top=1",
-        "type" : "ImageResult"
+        "ID" : "ab432ba9-288d-4437-b93f-137c9185fa89",
+        "Title" : "Notre Dame Fighting Irish | College Football Schedule, Stats, News ...",
+        "Description" : "... page for Notre Dame Fighting Irish news ... Russell Notre Dame Fighting Irish Navy Blue Football ... LATEST NEWS FROM YARDBARKER #25 Notre Dame Fighting Irish...",
+        "DisplayUrl" : "msn.foxsports.com/collegefootball/team/notre-dame-fighting-irish...",
+        "Url" : "http://msn.foxsports.com/collegefootball/team/notre-dame-fighting-irish-football/86126?q=notre-dame-fighting-irish-football"
       },
-      "ID" : "a82a5b6e-ba0d-4603-9623-c35cfa2d6d38",
-      "Title" : "Notre Dame | NCAA Football Review",
-      "MediaUrl" : "http://thegonzothinktank.files.wordpress.com/2007/11/notre-dame-football.jpg",
-      "SourceUrl" : "http://ncaafootballreview.com/2009/04/10/notre-dame/",
-      "DisplayUrl" : "ncaafootballreview.com/2009/04/10/notre-dame",
-      "Width" : "450",
-      "Height" : "325",
-      "FileSize" : "27556",
-      "ContentType" : "image/jpeg",
-      "Thumbnail" :
       {
         "__metadata" :
         {
-          "type" : "Bing.Thumbnail"
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/Web?$skip=1&$top=1",
+          "type" : "WebResult"
         },
-        "MediaUrl" : "http://ts3.mm.bing.net/images/thumbnail.aspx?q=4755594611982854&id=b5f4a229f5aee7e2511c9e3dbaa08b8b",
-        "ContentType" : "image/jpg",
-        "Width" : "160",
-        "Height" : "115",
-        "FileSize" : "6095"
-      }
-    }],
-    "Video" : [
-    {
-      "__metadata" :
-      {
-        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e4cdb2b3-c9a6-4492-9075-1488113e6d90\u0027)/Video?$skip=0&$top=1",
-        "type" : "VideoResult"
-      },
-      "ID" : "b896fe3c-c192-406d-9cd4-6a65a019d6e4",
-      "Title" : "Notre Dame Vs. USC",
-      "MediaUrl" : "http://www.hulu.com/watch/102999",
-      "DisplayUrl" : "http://www.bing.com/videos/search?mkt=en-US&q=&FORM=MONITR&id=D776B12F6FD2D7217779D776B12F6FD2D7217779&view=detail",
-      "RunTime" : "2326000",
-      "Thumbnail" :
+        "ID" : "794f0436-5e4a-4c79-b397-fd1936c9a709",
+        "Title" : "Notre Dame Fighting Irish | College Football Schedule, Stats, News ...",
+        "Description" : "Notre Dame Fighting Irish team center, home page for Notre Dame Fighting Irish news, videos ... LATEST NEWS FROM YARDBARKER. NCAA Football: Irish QB situation taking... All ...",
+        "DisplayUrl" : "msn.foxsports.com/collegefootball/team/notre%20dame-fighting...",
+        "Url" : "http://msn.foxsports.com/collegefootball/team/notre%20dame-fighting%20irish-football/86126?q=notre%20dame-fighting%20irish-football"
+      }],
+      "Image" : [
       {
         "__metadata" :
         {
-          "type" : "Bing.Thumbnail"
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/Image?$skip=0&$top=1",
+          "type" : "ImageResult"
         },
-        "MediaUrl" : "http://ts2.mm.bing.net/videos/thumbnail.aspx?q=5035630778581065&id=baf8a0916e67216eacaa2327452a613a&bid=eXch19JvL7F21w&bn=Thumb&url=http%3a%2f%2fwww.hulu.com%2fwatch%2f102999",
-        "ContentType" : "image/jpg",
-        "Width" : "160",
-        "Height" : "90",
-        "FileSize" : "7981"
-      }
-    },
-    {
-      "__metadata" :
-      {
-        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e4cdb2b3-c9a6-4492-9075-1488113e6d90\u0027)/Video?$skip=1&$top=1",
-        "type" : "VideoResult"
+        "ID" : "a110c58d-a373-4086-9a62-516023880518",
+        "Title" : " ... today - Notre Dame Fighting Irish - CBSSports.com RapidReports",
+        "MediaUrl" : "http://www.cbssports.com/images/collegefootball/notredamegloves.jpeg",
+        "SourceUrl" : "http://www.cbssports.com/collegefootball/rapid-reports/post/19654975",
+        "DisplayUrl" : "www.cbssports.com/collegefootball/rapid-reports/post/19654975",
+        "Width" : "600",
+        "Height" : "402",
+        "FileSize" : "26696",
+        "ContentType" : "image/jpeg",
+        "Thumbnail" :
+        {
+          "__metadata" :
+          {
+            "type" : "Bing.Thumbnail"
+          },
+          "MediaUrl" : "http://ts1.mm.bing.net/images/thumbnail.aspx?q=4541756812100916&id=606a6f6a3954f905a40b578c2909ee43",
+          "ContentType" : "image/jpg",
+          "Width" : "160",
+          "Height" : "107",
+          "FileSize" : "2994"
+        }
       },
-      "ID" : "912aa204-41e1-4158-b784-f945cbc24a6a",
-      "Title" : "125 Years of Notre Dame Football",
-      "MediaUrl" : "http://www.youtube.com/watch?v=32WECdLLWaw",
-      "DisplayUrl" : "http://www.bing.com/videos/search?mkt=en-US&q=&FORM=MONITR&id=7FDE86EAB46E243B3A727FDE86EAB46E243B3A72&view=detail",
-      "RunTime" : "0",
-      "Thumbnail" :
       {
         "__metadata" :
         {
-          "type" : "Bing.Thumbnail"
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/Image?$skip=1&$top=1",
+          "type" : "ImageResult"
         },
-        "MediaUrl" : "http://ts1.mm.bing.net/videos/thumbnail.aspx?q=4719143242235988&id=1ba3a03f9c0ca0291a1333d76230b31b&bid=cjo7JG606obefw&bn=Thumb&url=http%3a%2f%2fwww.youtube.com%2fwatch%3fv%3d32WECdLLWaw",
-        "ContentType" : "image/jpg",
-        "Width" : "160",
-        "Height" : "120",
-        "FileSize" : "7752"
-      }
-    }],
-    "News" : [
-    {
-      "__metadata" :
+        "ID" : "9d915547-4024-45ac-b5f4-506a9286891d",
+        "Title" : "1978 Notre Dame Fighting Irish Football Team Research Materials",
+        "MediaUrl" : "http://images.footballfanatics.com/productImages/_117000/FF_117904_xl.jpg",
+        "SourceUrl" : "http://explow.com/1978_Notre_Dame_Fighting_Irish_football_team",
+        "DisplayUrl" : "explow.com/1978_Notre_Dame_Fighting_Irish_football_team",
+        "Width" : "500",
+        "Height" : "500",
+        "FileSize" : "44044",
+        "ContentType" : "image/jpeg",
+        "Thumbnail" :
+        {
+          "__metadata" :
+          {
+            "type" : "Bing.Thumbnail"
+          },
+          "MediaUrl" : "http://ts4.mm.bing.net/images/thumbnail.aspx?q=4983786223109383&id=356a764bfaa648c082dc3f80a712046b",
+          "ContentType" : "image/jpg",
+          "Width" : "160",
+          "Height" : "160",
+          "FileSize" : "3733"
+        }
+      }],
+      "Video" : [
       {
-        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e4cdb2b3-c9a6-4492-9075-1488113e6d90\u0027)/News?$skip=0&$top=1",
-        "type" : "NewsResult"
+        "__metadata" :
+        {
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/Video?$skip=0&$top=1",
+          "type" : "VideoResult"
+        },
+        "ID" : "ec7f3249-260b-4011-8569-e61b941e87f1",
+        "Title" : "FOX Sports Next - WR James Onwualu",
+        "MediaUrl" : "http://www.bing.com/videos/watch/video/fox-sports-next-wr-james-onwualu/12kyo34o",
+        "DisplayUrl" : "http://www.bing.com/videos/search?mkt=en-US&q=&FORM=MONITR&id=C0EA8AC31E9414F7B462C0EA8AC31E9414F7B462&view=detail",
+        "RunTime" : "202000",
+        "Thumbnail" :
+        {
+          "__metadata" :
+          {
+            "type" : "Bing.Thumbnail"
+          },
+          "MediaUrl" : "http://ts2.mm.bing.net/videos/thumbnail.aspx?q=413190390781&id=10781878e1bc90b0cbb547804758dec1&bid=YrT3FJQew4rqwA&bn=Thumb&url=http%3a%2f%2fwww.bing.com%2fvideos%2fwatch%2fvideo%2ffox-sports-next-wr-james-onwualu%2f12kyo34o",
+          "ContentType" : "image/jpg",
+          "Width" : "160",
+          "Height" : "120",
+          "FileSize" : "8724"
+        }
       },
-      "ID" : "b9d9c089-cf71-4c45-9e60-89ce39cff2ed",
-      "Title" : "Notre Dame Football: Tough Schedule Will Keep Irish out of BCS Bowl",
-      "Url" : "http://bleacherreport.com/articles/1300773-notre-dame-football-tough-schedule-will-keep-irish-out-of-bcs-bowl",
-      "Source" : "Bleacherreport.com",
-      "Description" : "Notre Dame is not the football program it wants you to think it is. Yes it does have tradition, but these days the Irish haven’t lived up to its name in a long time. With the continuous coaching rotisserie to the uncertainty at the quarterback position ...",
-      "Date" : "2012-08-16T22:39:30Z"
-    },
-    {
-      "__metadata" :
       {
-        "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e4cdb2b3-c9a6-4492-9075-1488113e6d90\u0027)/News?$skip=1&$top=1",
-        "type" : "NewsResult"
+        "__metadata" :
+        {
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/Video?$skip=1&$top=1",
+          "type" : "VideoResult"
+        },
+        "ID" : "1f60ca4e-f601-411d-8a11-e0e6df32bccc",
+        "Title" : "FOX Sports Next - #74 LT John Montelus",
+        "MediaUrl" : "http://www.bing.com/videos/watch/video/fox-sports-next-74-lt-john-montelus/12c00ozk",
+        "DisplayUrl" : "http://www.bing.com/videos/search?mkt=en-US&q=&FORM=MONITR&id=36EBEB311310BF081D8D36EBEB311310BF081D8D&view=detail",
+        "RunTime" : "240000",
+        "Thumbnail" :
+        {
+          "__metadata" :
+          {
+            "type" : "Bing.Thumbnail"
+          },
+          "MediaUrl" : "http://ts4.mm.bing.net/videos/thumbnail.aspx?q=344462918955&id=2257b225cd0f8edffb2e1538fdbbe3e3&bid=jR0IvxATMevrNg&bn=Thumb&url=http%3a%2f%2fwww.bing.com%2fvideos%2fwatch%2fvideo%2ffox-sports-next-74-lt-john-montelus%2f12c00ozk",
+          "ContentType" : "image/jpg",
+          "Width" : "160",
+          "Height" : "90",
+          "FileSize" : "7469"
+        }
+      }],
+      "News" : [
+      {
+        "__metadata" :
+        {
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/News?$skip=0&$top=1",
+          "type" : "NewsResult"
+        },
+        "ID" : "2dfb64ca-a582-4d24-93e3-3186d4d5108c",
+        "Title" : "Notre Dame Football: Most Vital Defensive Players on the Fighting Irish Roster",
+        "Url" : "http://bleacherreport.com/articles/1303431-notre-dame-football-most-vital-defensive-players-on-the-fighting-irish-roster",
+        "Source" : "Bleacherreport.com",
+        "Description" : "He\u0027s racked up 320 tackles through his first three collegiate seasons, and his presence is a given on the Notre Dame defense. Outside of Te\u0027o\u0027s formidable abilities, the Fighting Irish have some question marks. That\u0027s not to say their defense isn\u0027t ...",
+        "Date" : "2012-08-20T02:03:32Z"
       },
-      "ID" : "e3b90390-e0e8-47da-82f4-047eb912cc4e",
-      "Title" : "Notre Dame Football: Twitter Reacts to Irish\u0027s 2012 Shamrock Series Uniforms",
-      "Url" : "http://bleacherreport.com/articles/1300583-notre-dame-football-twitter-reacts-to-irishs-2012-shamrock-series-uniforms",
-      "Source" : "Bleacherreport.com",
-      "Description" : "The Notre Dame Fighting Irish and Miami Hurricanes will add to its historic rivalry this season when they play in the first week of October. Notre Dame decided that the two historic programs playing against one another simply weren’t enough, and will ...",
-      "Date" : "2012-08-16T22:03:43Z"
-    }],
-    "RelatedSearch" : [],
-    "SpellingSuggestions" : []
-  }]
-}}
+      {
+        "__metadata" :
+        {
+          "uri" : "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/ExpandableSearchResultSet(guid\u0027e82b8eaf-376b-473b-b908-d8933dcc6827\u0027)/News?$skip=1&$top=1",
+          "type" : "NewsResult"
+        },
+        "ID" : "20e93174-b937-4735-8f12-0c4ff6fe4bcb",
+        "Title" : "Notre Dame RBs Wood, Riddick, Atkinson will be involved in passing game",
+        "Url" : "http://www.suntimes.com/sports/colleges/14558599-419/notre-dame-rbs-wood-riddick-atkinson-will-be-involved-in-passing-game.html",
+        "Source" : "Chicago Sun-Times",
+        "Description" : "Theo Riddick started his Notre Dame career as a running back ... “There’s not a whole lot to buy into,” said Martin, in his first year as the Irish offensive coordinator after coaching the secondary the last two seasons.",
+        "Date" : "2012-08-20T03:29:26Z"
+      }],
+      "RelatedSearch" : [],
+      "SpellingSuggestions" : []
+    }]
+  }
+}

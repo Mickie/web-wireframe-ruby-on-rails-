@@ -12,13 +12,13 @@ class BingSearcher
     theConnection.basic_auth("", "QxHn05Z96oTB5U46PZ/zbJ6hJeSztC2uhhmWDTGK6lQ=")
     
     theResponse = theConnection.get "/Data.ashx/Bing/Search/v1/Composite" do | aRequest |
-      aRequest.params["Sources"] = "'image+video+news'"
-      aRequest.params["Query"] = "'#{theTeam.name} #{theTeam.sport.name}'"
+      aRequest.params["Sources"] = "'web+image+video+news'"
+      aRequest.params["Query"] = "'Latest news on #{theTeam.name} #{theTeam.sport.name}'"
       aRequest.params["Market"] = "'en-US'"
       aRequest.params["VideoSortBy"] = "'Date'"
       aRequest.params["NewsCategory"] = "'rt_Sports'"
       aRequest.params["NewsSortBy"] = "'Date'"
-      aRequest.params["$top"] = "50"
+      aRequest.params["$top"] = "25"
       aRequest.params["$format"] = "JSON"
     end
 
@@ -26,10 +26,11 @@ class BingSearcher
     if (theResponse.status == 200)
       if theTeam.bing_search_results
         theTeam.bing_search_results.search_result = theResponse.body
+        theTeam.bing_search_results.save
       else
         theTeam.create_bing_search_results( search_result: theResponse.body )
+        theTeam.save
       end
-      theTeam.save
     else
       Rails.logger.error("Failed to load bing search results")
     end
