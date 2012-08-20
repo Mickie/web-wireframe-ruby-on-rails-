@@ -84,29 +84,35 @@ var YoutubeView = function(aContainerDivSelector,
     this.myThumbnails = new Array();
   };
   
-  this.onPostedVideoClick = function(e)
+  this.showVideoDialog = function( aVideoId, aTitle )
   {
-    var theVideoId = $(e.currentTarget).attr("id");
-    this.loadYouTubeInDialog(theVideoId);
-    $(".modal").modal("hide");
-    this.myDialogDiv.find("#post_media_button").hide();
-    this.myDialogDiv.modal("show");
-  };  
-  
-  this.showDialog = function( aYoutubeVideo )
-  {
-    var theVideoId = aYoutubeVideo.media$group.yt$videoid.$t;
+    this.myDialogDiv.find("div.modal-header h3").text( aTitle );
+    this.myDialogDiv.find("div.modal-header img").hide();
     
-    this.myDialogDiv.find("div.modal-header h3").text(aYoutubeVideo.title.$t);
-    this.myDialogDiv.find("#post_media_button").data("youtubeVideo", aYoutubeVideo).show();
-    
-    this.loadYouTubeInDialog(theVideoId);
+    this.loadYouTubeInDialog(aVideoId);
     
     this.myDialogDiv.find("#mediaImageData").hide();
     this.myDialogDiv.find("#mediaVideoData").show();
 
     $(".modal").modal("hide");
     this.myDialogDiv.modal("show");
+  };
+  
+  this.onPostedVideoClick = function(e)
+  {
+    // TODO get data via odata
+    var theVideoId = $(e.currentTarget).attr("id");
+    this.myDialogDiv.find("#post_media_button").hide();
+    this.showVideoDialog( theVideoId, "" );
+
+    trackEvent("PostAndComments", "youtube_click", theVideoId);    
+  };  
+  
+  this.showDialog = function( aYoutubeVideo )
+  {
+    var theVideoId = aYoutubeVideo.media$group.yt$videoid.$t;
+    this.myDialogDiv.find("#post_media_button").data("youtubeVideo", aYoutubeVideo).show();
+    this.showVideoDialog( theVideoId, aYoutubeVideo.title.$t );
     
     trackEvent("MediaSlider", "youtube_click", theVideoId);    
   };

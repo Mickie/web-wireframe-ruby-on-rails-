@@ -105,30 +105,21 @@ div#myMediaSlider
 
 div#myMediaModal 
 {
-  width:680px;
-  
-  .modal-footer
-  {
-    .fanzoButton
-    {
-      margin-left: 15px;
-    }
-  }  
-}
-
-div#myMediaModal 
-{
   top: 0px;
   margin: 0px;
-  max-width:680px;
+  width:670px;
 
   .modal-header 
   {
     height: 27px;
+    width: 640px;
     
     h3
     {
       float: left;
+      width: 580px;
+      height: 27px;
+      overflow: hidden;
     }
     .profile_pic
     {
@@ -139,16 +130,29 @@ div#myMediaModal
   .modal-body
   {
     clear: both;
+    max-height: inherit;
+    width: 640px;
     
-    .instagramImage
+    .mediaImage
     {
-      width: 306px;
-      margin: 0px auto;
+      width: 640px;
+      text-align:center;
     }
-    .instagramCaption
+    .mediaCaption
     {
-      margin-top: 10px;
+      width: 640px;
       text-align: center;
+      margin-top: 10px;
+      
+      .bingNews
+      {
+        text-align: left;
+        
+        h4
+        {
+          margin-bottom: 10px;
+        }
+      }
     }
   }
   

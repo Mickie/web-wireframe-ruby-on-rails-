@@ -19,7 +19,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   {
     this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
     this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
-    this.myBingView = new BingView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
+    this.myBingView = new BingView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector, this.myYoutubeView);
 
     this.createMediaContainers();
     this.queueContainerLoads();

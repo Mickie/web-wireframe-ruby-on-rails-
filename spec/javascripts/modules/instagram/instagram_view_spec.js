@@ -34,7 +34,7 @@ describe("InstagramView", function()
     
     it("adds the correct image to the modal", function() 
     {
-      expect($("div#myMediaModal div.instagramImage img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].images.low_resolution.url);
+      expect($("div#myMediaModal div.mediaImage img")).toHaveAttr("src", InstagramData.mediaResponse.data[0].images.low_resolution.url);
     });
     
     it("adds the correct title to the modal", function() 

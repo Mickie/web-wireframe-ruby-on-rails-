@@ -6,12 +6,12 @@ describe("BingSearch", function()
   
   beforeEach(function()
   {
-    bingResultsReady = jasmine.createSpy('bingResultsReady');
+    onBingResultsReady = jasmine.createSpy('onBingResultsReady');
     onError = jasmine.createSpy('onError');
     onSuccess = jasmine.createSpy('onSuccess');
     
     var theListener = {
-      "bingResultsReady" : bingResultsReady,
+      "onBingResultsReady" : onBingResultsReady,
       "onError" : onError,
       "onSuccess" : onSuccess
     };
@@ -54,29 +54,29 @@ describe("BingSearch", function()
       myBingSearch.getSearchResultsForTeam( "1" ); 
     });
 
-    it("calls bingResultsReady with an array of videos", function() 
+    it("calls onBingResultsReady with an array of videos", function() 
     {
-      expect(bingResultsReady).toHaveBeenCalled();
+      expect(onBingResultsReady).toHaveBeenCalled();
  
-      var theArgs = bingResultsReady.mostRecentCall.args;
+      var theArgs = onBingResultsReady.mostRecentCall.args;
 
       expect(theArgs[0][1].ID).toEqual("912aa204-41e1-4158-b784-f945cbc24a6a");
     });
     
-    it("calls bingResultsReady with an array of images", function() 
+    it("calls onBingResultsReady with an array of images", function() 
     {
-      expect(bingResultsReady).toHaveBeenCalled();
+      expect(onBingResultsReady).toHaveBeenCalled();
  
-      var theArgs = bingResultsReady.mostRecentCall.args;
+      var theArgs = onBingResultsReady.mostRecentCall.args;
 
       expect(theArgs[1][1].ID).toEqual("a82a5b6e-ba0d-4603-9623-c35cfa2d6d38");
     });
     
-    it("calls bingResultsReady with an array of news items", function() 
+    it("calls onBingResultsReady with an array of news items", function() 
     {
-      expect(bingResultsReady).toHaveBeenCalled();
+      expect(onBingResultsReady).toHaveBeenCalled();
  
-      var theArgs = bingResultsReady.mostRecentCall.args;
+      var theArgs = onBingResultsReady.mostRecentCall.args;
 
       expect(theArgs[2][1].ID).toEqual("e3b90390-e0e8-47da-82f4-047eb912cc4e");
     });
@@ -112,7 +112,7 @@ describe("BingSearch", function()
     it("calls onError with error message", function() 
     {
       expect(onSuccess).wasNotCalled();
-      expect(bingResultsReady).wasNotCalled();
+      expect(onBingResultsReady).wasNotCalled();
       expect(onError).toHaveBeenCalled();
  
       var theArgs = onError.mostRecentCall.args;

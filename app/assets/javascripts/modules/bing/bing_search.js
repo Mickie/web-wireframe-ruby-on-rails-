@@ -24,7 +24,7 @@ var BingSearch = function( aListener )
   
   this.parseResults = function (aResultsObject)
   {
-    this.myListener.bingResultsReady( aResultsObject.Video, aResultsObject.Image, aResultsObject.News );
+    this.myListener.onBingResultsReady( aResultsObject.Video, aResultsObject.Image, aResultsObject.News );
   };
   
   this.onResultsReady = function(aJSON, aTextStatus, aJqHR)
