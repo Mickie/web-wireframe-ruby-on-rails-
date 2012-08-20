@@ -204,7 +204,7 @@ var YoutubeView = function(aContainerDivSelector,
   {
     if (aPlayer)
     {
-      if( aPlayer.getPlayerState() > 0 )
+      if( aPlayer.getPlayerState && aPlayer.getPlayerState() > 0 )
       {
         aPlayer.stopVideo();
       }

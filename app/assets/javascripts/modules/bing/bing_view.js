@@ -133,7 +133,10 @@ var BingView = function(aContainerDivSelector,
       this.myDialogDiv.find("div.modal-header img").hide();
       
       this.myDialogDiv.find("#mediaImageData").show();
-      this.myDialogDiv.find("#mediaVideoData").hide();    
+      this.myDialogDiv.find("#mediaVideoData").hide();
+
+      $(".modal").modal("hide");
+      this.myDialogDiv.modal("show");
     }
   };
   
@@ -154,7 +157,11 @@ var BingView = function(aContainerDivSelector,
     
     this.myDialogDiv.find("#mediaImageData").show();
     this.myDialogDiv.find("#mediaVideoData").hide();
+    
     updateTimestamps();   
+
+    $(".modal").modal("hide");
+    this.myDialogDiv.modal("show");
   };
   
   this.loadBingImage = function( anImageItem )
@@ -167,6 +174,9 @@ var BingView = function(aContainerDivSelector,
 
     this.myDialogDiv.find("#mediaImageData").show();
     this.myDialogDiv.find("#mediaVideoData").hide();
+
+    $(".modal").modal("hide");
+    this.myDialogDiv.modal("show");
   };
 
   this.showDialog = function( aBingItem )
@@ -186,10 +196,6 @@ var BingView = function(aContainerDivSelector,
     {
       this.loadBingImage( aBingItem );
     }
-    
-    
-    $(".modal").modal("hide");
-    this.myDialogDiv.modal("show");
     
     trackEvent("MediaSlider", "bing_item_click", aBingItem.__metadata.type);    
   };
