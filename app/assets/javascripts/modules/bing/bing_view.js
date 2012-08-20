@@ -204,7 +204,7 @@ var BingView = function(aContainerDivSelector,
     var theBingItem = $(e.target).data("bingItem");
     if (theBingItem)
     {
-      
+      alert("todo");
       trackEvent("MediaSlider", "post_bingItem", theBingItem.__metadata.type);    
     }
   };
