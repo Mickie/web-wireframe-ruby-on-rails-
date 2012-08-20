@@ -6,16 +6,12 @@ describe("BingSearch", function()
   
   beforeEach(function()
   {
-    onBingVideo = jasmine.createSpy('onBingVideo');
-    onBingImage = jasmine.createSpy('onBingImage');
-    onBingNewsItem = jasmine.createSpy('onBingNewsItem');
+    bingResultsReady = jasmine.createSpy('bingResultsReady');
     onError = jasmine.createSpy('onError');
     onSuccess = jasmine.createSpy('onSuccess');
     
     var theListener = {
-      "onBingVideo" : onBingVideo,
-      "onBingImage" : onBingImage,
-      "onBingNewsItem" : onBingNewsItem,
+      "bingResultsReady" : bingResultsReady,
       "onError" : onError,
       "onSuccess" : onSuccess
     };
@@ -58,34 +54,31 @@ describe("BingSearch", function()
       myBingSearch.getSearchResultsForTeam( "1" ); 
     });
 
-    it("calls onBingVideo with a video", function() 
+    it("calls bingResultsReady with an array of videos", function() 
     {
-      expect(onBingVideo).toHaveBeenCalled();
+      expect(bingResultsReady).toHaveBeenCalled();
  
-      var theArgs = onBingVideo.mostRecentCall.args;
+      var theArgs = bingResultsReady.mostRecentCall.args;
 
-      expect(theArgs[0]).toEqual(1);
-      expect(theArgs[1].ID).toEqual("912aa204-41e1-4158-b784-f945cbc24a6a");
+      expect(theArgs[0][1].ID).toEqual("912aa204-41e1-4158-b784-f945cbc24a6a");
     });
     
-    it("calls onBingImage with an array of images", function() 
+    it("calls bingResultsReady with an array of images", function() 
     {
-      expect(onBingImage).toHaveBeenCalled();
+      expect(bingResultsReady).toHaveBeenCalled();
  
-      var theArgs = onBingImage.mostRecentCall.args;
+      var theArgs = bingResultsReady.mostRecentCall.args;
 
-      expect(theArgs[0]).toEqual(1);
-      expect(theArgs[1].ID).toEqual("a82a5b6e-ba0d-4603-9623-c35cfa2d6d38");
+      expect(theArgs[1][1].ID).toEqual("a82a5b6e-ba0d-4603-9623-c35cfa2d6d38");
     });
     
-    it("calls onBingNewsItem with an array of news items", function() 
+    it("calls bingResultsReady with an array of news items", function() 
     {
-      expect(onBingNewsItem).toHaveBeenCalled();
+      expect(bingResultsReady).toHaveBeenCalled();
  
-      var theArgs = onBingNewsItem.mostRecentCall.args;
+      var theArgs = bingResultsReady.mostRecentCall.args;
 
-      expect(theArgs[0]).toEqual(1);
-      expect(theArgs[1].ID).toEqual("e3b90390-e0e8-47da-82f4-047eb912cc4e");
+      expect(theArgs[2][1].ID).toEqual("e3b90390-e0e8-47da-82f4-047eb912cc4e");
     });
     
     it ("calls onSuccess when done", function()
@@ -119,9 +112,7 @@ describe("BingSearch", function()
     it("calls onError with error message", function() 
     {
       expect(onSuccess).wasNotCalled();
-      expect(onBingVideo).wasNotCalled();
-      expect(onBingImage).wasNotCalled();
-      expect(onBingNewsItem).wasNotCalled();
+      expect(bingResultsReady).wasNotCalled();
       expect(onError).toHaveBeenCalled();
  
       var theArgs = onError.mostRecentCall.args;
