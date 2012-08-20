@@ -1,6 +1,6 @@
 var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSelector )
 {
-  var SLIDE_INTERVAL = 5000000;
+  var SLIDE_INTERVAL = 5000;
   var NUMBER_OF_VIEW_TYPES = 5;
   var TOTAL_CONTAINERS = NUMBER_OF_VIEW_TYPES*15;
   

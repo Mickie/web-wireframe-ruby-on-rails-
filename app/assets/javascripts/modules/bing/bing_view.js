@@ -53,6 +53,9 @@ var BingView = function(aContainerDivSelector,
       this.createImageThumbnail(this.myBingImages[i], this.myElements[j++]);
       this.createVideoThumbnail(this.myBingVideos[i], this.myElements[j++]);
     };
+    
+    this.myDialogDiv.find("#post_media_button").click(createDelegate(this, this.onPostBingItem));
+    this.myDialogDiv.on('hidden', createDelegate(this, this.onDialogHidden));    
   };
   
   this.onError = function(anError)
@@ -133,6 +136,38 @@ var BingView = function(aContainerDivSelector,
       this.myDialogDiv.find("#mediaVideoData").hide();    
     }
   };
+  
+  this.loadBingNews = function( aNewsItem )
+  {
+    var theHtml = "<div class='bingNews'>";
+    theHtml += "<h4>" + aNewsItem.Description + "</h4>";
+    if (aNewsItem.Source)
+    {
+      theHtml += "<p>Source : " + aNewsItem.Source + "</p>";
+    }
+    theHtml += "<p>Link : <a href='" + aNewsItem.Url + "' target='blank'>" + aNewsItem.Url + "</a></p>";
+    theHtml += "<p>When : <span class='timestamp' title='" + aNewsItem.Date + "'>" + aNewsItem.Date + "</span></p>";
+    theHtml += "</div>";
+    this.myDialogDiv.find("div.mediaImage").html("");
+    this.myDialogDiv.find("div.mediaCaption").html(theHtml);
+    this.myDialogDiv.find("div.modal-header img").hide();
+    
+    this.myDialogDiv.find("#mediaImageData").show();
+    this.myDialogDiv.find("#mediaVideoData").hide();
+    updateTimestamps();   
+  };
+  
+  this.loadBingImage = function( anImageItem )
+  {
+    var theImageTag = "<img src='" + anImageItem.MediaUrl + "' width='" + anImageItem.Width + "' height='" + anImageItem.Height + "'/>";
+    var theAnchorTag = "Source: <a href='" + anImageItem.SourceUrl + "' target='_blank'>" + anImageItem.DisplayUrl + "</a>";
+    this.myDialogDiv.find("div.mediaImage").html(theImageTag);
+    this.myDialogDiv.find("div.mediaCaption").html(theAnchorTag);
+    this.myDialogDiv.find("div.modal-header img").hide();
+
+    this.myDialogDiv.find("#mediaImageData").show();
+    this.myDialogDiv.find("#mediaVideoData").hide();
+  };
 
   this.showDialog = function( aBingItem )
   {
@@ -141,44 +176,36 @@ var BingView = function(aContainerDivSelector,
     
     if (aBingItem.__metadata.type == "NewsResult")
     {
-      var theHtml = "<div class='bingNews'>";
-      theHtml += "<h4>" + aBingItem.Description + "</h4>";
-      if (aBingItem.Source)
-      {
-        theHtml += "<p>Source : " + aBingItem.Source + "</p>";
-      }
-      theHtml += "<p>Link : <a href='" + aBingItem.Url + "' target='blank'>" + aBingItem.Url + "</a></p>";
-      theHtml += "<p>When : <span class='timestamp' title='" + aBingItem.Date + "'>" + aBingItem.Date + "</span></p>";
-      theHtml += "</div>";
-      this.myDialogDiv.find("div.mediaImage").html("");
-      this.myDialogDiv.find("div.mediaCaption").html(theHtml);
-      this.myDialogDiv.find("div.modal-header img").hide();
-      
-      this.myDialogDiv.find("#mediaImageData").show();
-      this.myDialogDiv.find("#mediaVideoData").hide();
-      updateTimestamps();   
+      this.loadBingNews( aBingItem );
     }
     else if (aBingItem.__metadata.type == "VideoResult")
     {
-      this.loadBingVideo(aBingItem);
+      this.loadBingVideo( aBingItem );
     }
     else
     {
-      var theImageTag = "<img src='" + aBingItem.MediaUrl + "' width='" + aBingItem.Width + "' height='" + aBingItem.Height + "'/>";
-      var theAnchorTag = "Source: <a href='" + aBingItem.SourceUrl + "' target='_blank'>" + aBingItem.DisplayUrl + "</a>";
-      this.myDialogDiv.find("div.mediaImage").html(theImageTag);
-      this.myDialogDiv.find("div.mediaCaption").html(theAnchorTag);
-      this.myDialogDiv.find("div.modal-header img").hide();
-
-      this.myDialogDiv.find("#mediaImageData").show();
-      this.myDialogDiv.find("#mediaVideoData").hide();
+      this.loadBingImage( aBingItem );
     }
     
     
     $(".modal").modal("hide");
     this.myDialogDiv.modal("show");
     
-    trackEvent("MediaSlider", "bing_item_click", aBingItem.ID);    
+    trackEvent("MediaSlider", "bing_item_click", aBingItem.__metadata.type);    
   };
   
+  this.onDialogHidden = function(e)
+  {
+    this.myDialogDiv.find("#post_media_button").data("bingItem", null).hide();
+  };
+  
+  this.onPostBingItem = function(e)
+  {
+    var theBingItem = $(e.target).data("bingItem");
+    if (theBingItem)
+    {
+      
+      trackEvent("MediaSlider", "post_bingItem", theBingItem.__metadata.type);    
+    }
+  };
 }

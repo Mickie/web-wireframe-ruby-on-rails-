@@ -46,6 +46,7 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
     $(this.myElements).each(createDelegate(this, this.createThumbnail));
 
     this.myDialogDiv.find("#post_media_button").click(createDelegate(this, this.onPostInstagram));
+    this.myDialogDiv.on('hidden', createDelegate(this, this.onDialogHidden));
   };
   
   this.createThumbnail = function(anIndex, anElement )
@@ -83,18 +84,26 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
     trackEvent("MediaSlider", "instagram_click", anInstagram.id);    
   };
   
+  this.onDialogHidden = function(e)
+  {
+    this.myDialogDiv.find("#post_media_button").data("instagram", null).hide();
+  }
+  
   this.onPostInstagram = function(e)
   {
     var theInstagram = $(e.target).data("instagram");
-    var theInstagramId = theInstagram.id;
-    var theUrl = theInstagram.images.low_resolution.url;
-    
-    this.myPostDiv.find("#post_image_url").val(theUrl);
-    this.myPostDiv.find("#post_video_id").val("");
-    this.myPostDiv.find(".media_container").html("<img src='" + theUrl + "' width='306' height='306'/>");
-    this.myPostDiv.find(".media_preview").slideDown(600);
-    
-    trackEvent("MediaSlider", "post_instagram", theInstagramId);    
+    if (theInstagram)
+    {
+      var theInstagramId = theInstagram.id;
+      var theUrl = theInstagram.images.low_resolution.url;
+      
+      this.myPostDiv.find("#post_image_url").val(theUrl);
+      this.myPostDiv.find("#post_video_id").val("");
+      this.myPostDiv.find(".media_container").html("<img src='" + theUrl + "' width='306' height='306'/>");
+      this.myPostDiv.find(".media_preview").slideDown(600);
+      
+      trackEvent("MediaSlider", "post_instagram", theInstagramId);    
+    }
   };
   
 }

@@ -60,8 +60,8 @@ var YoutubeView = function(aContainerDivSelector,
     this.myYouTubeVideos = anArrayOfMedia;
     $(this.myElements).each(createDelegate(this, this.createThumbnail));
     
-    this.myDialogDiv.find("a[data-dismiss]").click(createDelegate(this, this.onVideoDismiss));
     this.myDialogDiv.find("#post_media_button").click(createDelegate(this, this.onPostYouTube));
+    this.myDialogDiv.on('hidden', createDelegate(this, this.onDialogHidden));
 
     $("#posts").on( "click", ".post_video", createDelegate(this, this.onPostedVideoClick) );
   };
@@ -98,6 +98,14 @@ var YoutubeView = function(aContainerDivSelector,
     this.myDialogDiv.modal("show");
   };
   
+  this.onDialogHidden = function(e)
+  {
+    this.myDialogDiv.find("#post_media_button").data("youtubeVideo", null).hide();
+    this.cleanupDialogPlayer();
+  };
+
+  
+  
   this.onPostedVideoClick = function(e)
   {
     // TODO get data via odata
@@ -120,24 +128,27 @@ var YoutubeView = function(aContainerDivSelector,
   this.onPostYouTube = function(e)
   {
     var theVideo = $(e.target).data("youtubeVideo");
-    var theVideoId = theVideo.media$group.yt$videoid.$t;
-    
-    var theThumbnailUrl = theVideo.media$group.media$thumbnail[0].url
-    for (var i = 0; i < theVideo.media$group.media$thumbnail.length; i++)
+    if (theVideo)
     {
-      if ( theVideo.media$group.media$thumbnail[i].yt$name == "hqdefault" )
+      var theVideoId = theVideo.media$group.yt$videoid.$t;
+      
+      var theThumbnailUrl = theVideo.media$group.media$thumbnail[0].url
+      for (var i = 0; i < theVideo.media$group.media$thumbnail.length; i++)
       {
-        theThumbnailUrl = theVideo.media$group.media$thumbnail[i].url;
+        if ( theVideo.media$group.media$thumbnail[i].yt$name == "hqdefault" )
+        {
+          theThumbnailUrl = theVideo.media$group.media$thumbnail[i].url;
+        }
       }
+      
+      this.myPostDiv.find("#post_video_id").val(theVideoId);
+      this.myPostDiv.find("#post_image_url").val(theThumbnailUrl);
+      this.myPostDiv.find(".media_container").html("<div id='post_youtube'></div>");
+      this.loadYouTubeInPost(theVideoId);
+      this.myPostDiv.find(".media_preview").slideDown(600);
+      
+      trackEvent("MediaSlider", "post_youtube", theVideoId);    
     }
-    
-    this.myPostDiv.find("#post_video_id").val(theVideoId);
-    this.myPostDiv.find("#post_image_url").val(theThumbnailUrl);
-    this.myPostDiv.find(".media_container").html("<div id='post_youtube'></div>");
-    this.loadYouTubeInPost(theVideoId);
-    this.myPostDiv.find(".media_preview").slideDown(600);
-    
-    trackEvent("MediaSlider", "post_youtube", theVideoId);    
   };
   
   
@@ -210,11 +221,6 @@ var YoutubeView = function(aContainerDivSelector,
     this.cleanupPlayer(this.myPostPlayer)
   };
   
-
-  this.onVideoDismiss = function(e)
-  {
-    this.cleanupDialogPlayer();
-  };
 
   this.onPlayerReady = function()
   {
