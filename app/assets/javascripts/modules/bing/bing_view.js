@@ -125,7 +125,8 @@ var BingView = function(aContainerDivSelector,
                         + "' height='" + aVideo.Thumbnail.Height + "'/>";
 
       var theHtml = "<div class='bingVideo'>";
-      theHtml += "<p><a href='" + aVideo.MediaUrl + "' target='blank'>Watch</a></p>";
+      theHtml += "<p><a href='" + aVideo.MediaUrl + "' target='_blank'>Watch: " + aVideo.Title + "</a></p>";
+      theHtml += "<p>Location: " + aVideo.MediaUrl +  "</p>";
       theHtml += "</div>";
 
       this.myDialogDiv.find("div.mediaImage").html(theImageTag);
