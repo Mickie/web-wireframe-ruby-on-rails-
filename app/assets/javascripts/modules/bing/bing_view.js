@@ -204,8 +204,53 @@ var BingView = function(aContainerDivSelector,
     var theBingItem = $(e.target).data("bingItem");
     if (theBingItem)
     {
-      alert("todo");
+      if (theBingItem.__metadata.type == "NewsResult")
+      {
+        this.addBingNewsToPost( theBingItem );
+      }
+      else if (theBingItem.__metadata.type == "VideoResult")
+      {
+        this.addBingVideoToPost( theBingItem );
+      }
+      else
+      {
+        this.addBingImageToPost( theBingItem );
+      }
+      
       trackEvent("MediaSlider", "post_bingItem", theBingItem.__metadata.type);    
     }
   };
+  
+  this.addBingNewsToPost = function( aBingNews )
+  {
+    var theBody = aBingNews.Description + "...\n\n" + aBingNews.Url;
+    var theHeader = "Cool article from " + aBingNews.Source + "\n\n";
+    
+    this.myPostDiv.find("#post_content").val( theHeader + theBody );
+  };
+
+  this.addBingVideoToPost = function( aBingVideo )
+  {
+    if (this.isYoutubeVideo( aBingVideo.MediaUrl ))
+    {
+      var theVideoId = this.getIdFromYoutubeUrl( aBingVideo.MediaUrl );
+      var theThumbnailUrl = aBingVideo.Thumbnail.MediaUrl;
+          
+      this.myYoutubeView.addYoutubeToPost( theVideoId, theThumbnailUrl );  
+    }
+    else
+    {
+      
+    }
+    
+  };
+
+  this.addBingImageToPost = function( aBingImage )
+  {
+    this.myPostDiv.find("#post_image_url").val(aBingImage.MediaUrl);
+    this.myPostDiv.find("#post_video_id").val("");
+    this.myPostDiv.find(".media_container").html("<img src='" + aBingImage.MediaUrl + "' width='306'/>");
+    this.myPostDiv.find(".media_preview").slideDown(600);
+  };
+
 }

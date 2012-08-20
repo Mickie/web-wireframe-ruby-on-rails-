@@ -140,17 +140,21 @@ var YoutubeView = function(aContainerDivSelector,
           theThumbnailUrl = theVideo.media$group.media$thumbnail[i].url;
         }
       }
-      
-      this.myPostDiv.find("#post_video_id").val(theVideoId);
-      this.myPostDiv.find("#post_image_url").val(theThumbnailUrl);
-      this.myPostDiv.find(".media_container").html("<div id='post_youtube'></div>");
-      this.loadYouTubeInPost(theVideoId);
-      this.myPostDiv.find(".media_preview").slideDown(600);
+
+      this.addYoutubeVideoToPost(theVideoId, theThumbnailUrl);      
       
       trackEvent("MediaSlider", "post_youtube", theVideoId);    
     }
   };
   
+  this.addYoutubeVideoToPost = function( aVideoId, aThumbnailUrl )
+  {
+    this.myPostDiv.find("#post_video_id").val(aVideoId);
+    this.myPostDiv.find("#post_image_url").val(aThumbnailUrl);
+    this.myPostDiv.find(".media_container").html("<div id='post_youtube'></div>");
+    this.loadYouTubeInPost(aVideoId);
+    this.myPostDiv.find(".media_preview").slideDown(600);
+  };
   
   this.loadYouTubeInPost = function( aVideoId )
   {
