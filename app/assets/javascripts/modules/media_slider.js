@@ -1,8 +1,8 @@
 var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anInstagramModalDivSelector, aPostDivSelector )
 {
-  var SLIDE_INTERVAL = 5000;
-  var NUMBER_OF_VIEW_TYPES = 2;
-  var TOTAL_CONTAINERS = NUMBER_OF_VIEW_TYPES*20;
+  var SLIDE_INTERVAL = 5000000;
+  var NUMBER_OF_VIEW_TYPES = 5;
+  var TOTAL_CONTAINERS = NUMBER_OF_VIEW_TYPES*15;
   
   this.myContainerDivSelector = aContainerDivSelector;
   this.myVideoModalDivSelector = aVideoModalDivSelector;
@@ -15,16 +15,19 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
   this.createSlider = function( aShortName,
                                 aSport, 
                                 anArrayOfHashTags,
-                                anArrayOfInstagramTags )
+                                anArrayOfInstagramTags,
+                                aTeamId )
   {
     this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myInstagramModalDivSelector, this.myPostDivSelector);
     this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
+    this.myBingView = new BingView(this.myContainerDivSelector, this.myVideoModalDivSelector, this.myPostDivSelector);
 
     this.createMediaContainers();
     this.queueContainerLoads();
 
     this.myInstagramView.beginLoading(anArrayOfInstagramTags);
     this.myYoutubeView.beginLoading(aShortName, aSport, anArrayOfHashTags);
+    this.myBingView.beginLoading(aTeamId);
     
     this.setupNavigation();
     this.startSliderTimer();    
@@ -48,6 +51,12 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
       this.myYoutubeView.cleanup();
       this.myYoutubeView = null;
     }
+
+    if (this.myBingView)
+    {
+      this.myBingView.cleanup();
+      this.myBingView = null;
+    }
   };
   
   this.createMediaContainers = function()
@@ -69,6 +78,9 @@ var MediaSlider = function( aContainerDivSelector, aVideoModalDivSelector, anIns
     {
       this.myInstagramView.queueContainerLoad(this.myElementArray[i++]);
       this.myYoutubeView.queueContainerLoad(this.myElementArray[i++]);
+      this.myBingView.queueContainerLoad(this.myElementArray[i++]);
+      this.myBingView.queueContainerLoad(this.myElementArray[i++]);
+      this.myBingView.queueContainerLoad(this.myElementArray[i++]);
     }
   }
   

@@ -9,6 +9,7 @@ var BingView = function(aContainerDivSelector,
   this.myBingVideos = {};
   this.myBingImages = {};
   this.myBingNews = {};
+  this.myThumbnails = new Array();
   this.myElements = new Array();
   
   this.beginLoading = function(aTeamId)
@@ -19,10 +20,17 @@ var BingView = function(aContainerDivSelector,
   
   this.cleanup = function()
   {
-    this.myBingSearch.abort();
-    this.myBingSearch = null;
+    if (this.myBingSearch)
+    {
+      this.myBingSearch.abort();
+      this.myBingSearch = null;
+    }
 
-    this.myYouTubeVideos = {};
+    this.cleanupThumbnails();
+
+    this.myBingVideos = {};
+    this.myBingImages = {};
+    this.myBingNews = {};
   };
   
   this.queueContainerLoad = function( anElement )
@@ -43,20 +51,56 @@ var BingView = function(aContainerDivSelector,
       this.createVideoThumbnail(this.myBingVideos[i], this.myElements[j++]);
     };
   };
+  
+  this.onError = function(anError)
+  {
+    console.log(anError);
+  };
+
+  this.onSuccess = function()
+  {
+    
+  };
 
   this.createNewsThumbnail = function(aNewsItem, anElement)
   {
-    
+    var theThumbnail = new BingNewsThumbnail(this);
+    theThumbnail.initialize( aNewsItem, anElement );
+    this.myThumbnails.push(theThumbnail);
   };  
 
   this.createImageThumbnail = function(anImageItem, anElement)
   {
-    
+    var theThumbnail = new BingImageThumbnail(this);
+    theThumbnail.initialize( anImageItem, anElement );
+    this.myThumbnails.push(theThumbnail);
   };  
 
   this.createVideoThumbnail = function(aVideoItem, anElement)
   {
-    
+    var theThumbnail = new BingNewsThumbnail(this);
+    theThumbnail.initialize( aVideoItem, anElement );
+    this.myThumbnails.push(theThumbnail);
   };  
 
+  this.cleanupThumbnails = function()
+  {
+    for(var i=0,j=this.myThumbnails.length; i<j; i++)
+    {
+      this.myThumbnails[i].cleanup();
+    };
+    this.myThumbnails = new Array();
+  };
+
+  this.showDialog = function( aBingItem )
+  {
+    this.myDialogDiv.find("div.modal-header h3").text(aBingItem.Title);
+    this.myDialogDiv.find("#post_image_button").data("bingItem", aBingItem).show();
+    
+    $(".modal").modal("hide");
+    this.myDialogDiv.modal("show");
+    
+    trackEvent("MediaSlider", "bing_item_click", aBingItem.ID);    
+  };
+  
 }

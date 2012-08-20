@@ -117,7 +117,8 @@
     myTeamMediaSlider.createSlider( "<%= @team.short_name %>",
                                     "<%= @team.sport.name %>", 
                                     <%= raw @team.social_info.hash_tags.split(",") %>,
-                                    <%= raw @team.instagram_tags.to_json %> );
+                                    <%= raw @team.instagram_tags.to_json %>,
+                                    <%= @team.id %> );
   });
 </script>
 <% end %>

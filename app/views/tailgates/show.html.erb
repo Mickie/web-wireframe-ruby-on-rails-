@@ -244,13 +244,12 @@
                                       <%= raw @tailgate.not_tags.split(",") %>
                                       );
 
-    myTailgateMediaSlider = MediaSlider.create( "div#myMediaSlider", 
-                                                "div#myVideoModal",
-                                                "div#myInstagramModal");
+    myTailgateMediaSlider = MediaSlider.create();
     myTailgateMediaSlider.createSlider( "<%= @tailgate.team.short_name %>",
                                         "<%= @tailgate.team.sport.name %>", 
                                         <%= raw @tailgate.topic_tags.split(",") %>,
-                                        <%= raw @tailgate.instagram_tags.to_json %> );
+                                        <%= raw @tailgate.instagram_tags.to_json %>,
+                                        <%= @tailgate.team.id %> );
                                               
     myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal", true);
     myEditFanzoneDialog.initialize();

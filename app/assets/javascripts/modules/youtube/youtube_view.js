@@ -32,14 +32,18 @@ var YoutubeView = function(aContainerDivSelector,
   this.cleanup = function()
   {
     this.myAbortFlag = true;
+    
     this.cleanupDialogPlayer();
     this.myDialogPlayer = null;
 
     this.cleanupPostPlayer();
     this.myPostPlayer = null;
 
-    this.myYouTubeSearch.abort();
-    this.myYouTubeSearch = null;
+    if (this.myYouTubeSearch)
+    {
+      this.myYouTubeSearch.abort();
+      this.myYouTubeSearch = null;
+    }
     
     this.cleanupThumbnails();
 
@@ -78,7 +82,7 @@ var YoutubeView = function(aContainerDivSelector,
       this.myThumbnails[i].cleanup();
     };
     this.myThumbnails = new Array();
-  }
+  };
   
   this.onPostedVideoClick = function(e)
   {

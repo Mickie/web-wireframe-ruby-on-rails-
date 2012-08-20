@@ -66,7 +66,7 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
     this.myThumbnails = new Array();
   }
   
-  this.showImageDialog = function( anInstagram )
+  this.showDialog = function( anInstagram )
   {
     this.myDialogDiv.find("div.instagramImage").html("<img src='" + anInstagram.images.low_resolution.url + "' width='306' height='306'/>");
     this.myDialogDiv.find("div.instagramCaption").text(anInstagram.caption.text);

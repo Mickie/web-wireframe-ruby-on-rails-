@@ -1,7 +1,7 @@
 require 'rails3-jquery-autocomplete'
 
 class TeamsController < ApplicationController
-  before_filter :authenticate_admin!, except: [:index, :show, :autocomplete_team_name]
+  before_filter :authenticate_admin!, except: [:index, :show, :autocomplete_team_name, :bing_search_results]
   before_filter :authenticate_user!, only: [:index, :show] 
 
   autocomplete :team, :name, full: true, scopes: [:visible]
@@ -46,7 +46,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       format.html { render action: "show" }
-      format.json { render json: @team.bing_search_results }
+      format.json { render json: @team.bing_search_results.search_result }
     end
   end
   

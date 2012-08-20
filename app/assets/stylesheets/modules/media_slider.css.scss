@@ -19,6 +19,20 @@ div#myMediaSlider
   {
     float:left;
     position:relative;
+    
+    .bingNewsItem
+    {
+      height: 150px;
+      width: 200px;
+      padding: 10px;
+      color: white;
+      background-color: black;
+      
+      h3
+      {
+        color:white;
+      }
+    }
   }
   
   div#myMediaControls

@@ -35,7 +35,7 @@ var BaseThumbnail = function( aView )
   
   this.onClick = function()
   {
-    this.myView.showImageDialog(this.myData);
+    this.myView.showDialog(this.myData);
   };
   
   this.getRenderDirective = function()
