@@ -36,7 +36,7 @@ describe("BingView", function()
     
     it("should correctly id a youtube video", function()
     {
-      expect(myBingView.isYoutubeVideo(BingSearchData.d.results[0].Video[1].MediaUrl)).toBeTruthy();
+      expect(myBingView.isYoutubeVideo("http://www.youtube.com/watch?v=12345")).toBeTruthy();
     });
   });
   
@@ -44,7 +44,7 @@ describe("BingView", function()
   {
     it("should return the id", function()
     {
-      expect(myBingView.getIdFromYoutubeUrl(BingSearchData.d.results[0].Video[1].MediaUrl)).toEqual("32WECdLLWaw");
+      expect(myBingView.getIdFromYoutubeUrl("http://www.youtube.com/watch?v=12345")).toEqual("12345");
     });
     
   });
@@ -53,17 +53,17 @@ describe("BingView", function()
   {
     beforeEach(function()
     {
-      myBingView.showDialog(BingSearchData.d.results[0].Image[0]);
+      myBingView.showDialog(BingSearchData.d.results[0].Image[1]);
     });
     
     it("adds the correct image to the modal", function() 
     {
-      expect($("div#myMediaModal div.mediaImage img")).toHaveAttr("src", BingSearchData.d.results[0].Image[0].MediaUrl);
+      expect($("div#myMediaModal div.mediaImage img")).toHaveAttr("src", BingSearchData.d.results[0].Image[1].MediaUrl);
     });
     
     it("adds the correct title to the modal", function() 
     {
-      expect($("div#myMediaModal div.modal-header h3")).toHaveText(BingSearchData.d.results[0].Image[0].Title);
+      expect($("div#myMediaModal div.modal-header h3")).toHaveText(BingSearchData.d.results[0].Image[1].Title);
     });
   });
   

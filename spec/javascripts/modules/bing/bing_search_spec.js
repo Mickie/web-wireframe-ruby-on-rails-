@@ -60,7 +60,7 @@ describe("BingSearch", function()
  
       var theArgs = onBingResultsReady.mostRecentCall.args;
 
-      expect(theArgs[0][1].ID).toEqual("912aa204-41e1-4158-b784-f945cbc24a6a");
+      expect(theArgs[0][1].ID).toEqual(BingSearchData.d.results[0].Video[1].ID);
     });
     
     it("calls onBingResultsReady with an array of images", function() 
@@ -69,7 +69,7 @@ describe("BingSearch", function()
  
       var theArgs = onBingResultsReady.mostRecentCall.args;
 
-      expect(theArgs[1][1].ID).toEqual("a82a5b6e-ba0d-4603-9623-c35cfa2d6d38");
+      expect(theArgs[1][1].ID).toEqual(BingSearchData.d.results[0].Image[1].ID);
     });
     
     it("calls onBingResultsReady with an array of news items", function() 
@@ -78,7 +78,7 @@ describe("BingSearch", function()
  
       var theArgs = onBingResultsReady.mostRecentCall.args;
 
-      expect(theArgs[2][1].ID).toEqual("e3b90390-e0e8-47da-82f4-047eb912cc4e");
+      expect(theArgs[2][1].ID).toEqual(BingSearchData.d.results[0].News[1].ID);
     });
     
     it ("calls onSuccess when done", function()
