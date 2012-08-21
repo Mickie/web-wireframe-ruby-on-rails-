@@ -9,7 +9,7 @@ class SitemapPinger
     SitemapLogger.info Time.now
     SEARCH_ENGINES.each do |name, url|
       theRequestUrl = url % CGI.escape("http://#{ENV['FANZO_WEB_HOST']}/sitemap.xml")  
-      SitemapLogger.info "  Pinging #{name} with #{request}"
+      SitemapLogger.info "  Pinging #{name} with #{theRequestUrl}"
       if Rails.env == "production"
         theResponse = Faraday.get theRequestUrl
         SitemapLogger.info "    Status: #{theResponse.status}"
