@@ -5,22 +5,22 @@
   <div class="row-fluid">
     <div class="span12">
       <h2>
-        Welcome! Find and connect with other fans of your passion, locally and globally. 
+        Create a Fanzone and start your online Tailgate party.<br/>Follow your team. Find other fans. 
         <%= link_to "Learn more", about_path %>
       </h2>
     </div>
   </div>
   <div class="row-fluid searchOrCreate">
-    <div class="span6 teamSearch">
-      <%= render partial:"partials/team_search" %>
+    <div class="span4 createFanzone">
+      <a href="#myLoginModal" data-toggle="modal">
+        <div class="fanzoButton"><span>+</span> &nbsp; Create a Fanzone</div>
+      </a>
     </div>
     <div class="span1 or">
       <h2>or</h2>
     </div>
-    <div class="span5 createFanzone">
-      <a href="#myLoginModal" data-toggle="modal">
-        <div class="fanzoButton"><span>+</span> &nbsp; Create a Fanzone</div>
-      </a>
+    <div class="span6 teamSearch">
+      <%= render partial:"partials/team_search" %>
     </div>
   </div>
 </div>
