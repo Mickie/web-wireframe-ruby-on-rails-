@@ -2,7 +2,7 @@ class SitemapSweeper < ActionController::Caching::Sweeper
   observe Tailgate
 
   def sweep( aTailgate )
-    expire_action(controller: SitemapController, action: :show )
+    expire_action(controller: "sitemap", action: :show )
   end
 
   alias_method :after_create, :sweep
