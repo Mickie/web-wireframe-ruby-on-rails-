@@ -243,7 +243,7 @@ var BingView = function(aContainerDivSelector,
       var theVideoId = this.getIdFromYoutubeUrl( aBingVideo.MediaUrl );
       var theThumbnailUrl = aBingVideo.Thumbnail.MediaUrl;
           
-      this.myYoutubeView.addYoutubeToPost( theVideoId, theThumbnailUrl );  
+      this.myYoutubeView.addYoutubeVideoToPost( theVideoId, theThumbnailUrl );  
     }
     else
     {
