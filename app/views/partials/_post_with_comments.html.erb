@@ -33,7 +33,7 @@
           </div>
         <% else %>
           <div class="post_image">
-            <img src="<%= aPost.image_url -%>" width="306" height="306" />
+            <img src="<%= aPost.image_url -%>" width="306" />
             <div class="pinButton">
               <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(aPost.tailgate) -%>&media=<%=u aPost.image_url -%>&description=<%=u aPost.content -%>" 
                  class="pin-it-button" 
