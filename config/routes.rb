@@ -45,7 +45,8 @@ FanzoSite::Application.routes.draw do
     get 'search', on: :collection
   end
   
-  get "sitemap.xml", to: "sitemap#show", as: "sitemap", defaults: { format: "xml" }
+  get 'sitemap.xml', to: "sitemap#show", as: "sitemap", defaults: { format: "xml" }
+  get 'robots.txt', to: "sitemap#index", as: "robots", defaults: { format: "txt" }
   get 'about',   to: 'static_pages#about'
   get 'channel', to: 'static_pages#channel'
 
