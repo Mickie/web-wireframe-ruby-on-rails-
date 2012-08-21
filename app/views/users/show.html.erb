@@ -35,11 +35,13 @@
           </div>
           <div class="userContent clearfix">
             <% @user.teams.includes(:sport).each do |aTeam| %>
-              <div class="user_team">
-                <%= teamLogo(aTeam, :large) %>
-                <h4><%= aTeam.name -%></h4>
-                <h4><%= aTeam.sport.name -%></h4>
-              </div>
+              <%= link_to Tailgate.where(official:true).where(team_id:aTeam.id).first do %>
+                <div class="user_team">
+                  <%= teamLogo(aTeam, :large) %>
+                  <h4><%= aTeam.name -%></h4>
+                  <h4><%= aTeam.sport.name -%></h4>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
