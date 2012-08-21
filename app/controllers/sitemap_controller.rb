@@ -1,5 +1,5 @@
 class SitemapController < ApplicationController
-  caches_page :show
+  caches_action :show
 
   def show
     @static_paths = [{path: root_path, change_rate: "daily"}, {path: about_path, change_rate: "weekly"}]
