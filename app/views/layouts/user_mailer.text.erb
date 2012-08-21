@@ -1,10 +1,8 @@
-<%= yield :title %>
-
-===============================================
-
+<%= yield :title %><%= "\r\n" %>
+===============================================<%= "\r\n" %>
+<%= "\r\n" %>
 <%= yield :content %>
- 
-To <%= content_for?(:link_text) ? yield(:link_text) : "reply" %>, just follow this link: <%= yield :reply_link %>
- 
-Thanks!
+<%= "\r\n" %>
+To <%= content_for?(:link_text) ? yield(:link_text) : "reply" %>, just follow this link: <%= yield :reply_link %><%= "\r\n" %>
+Thanks!<%= "\r\n" %>
   The Fanzo Team
