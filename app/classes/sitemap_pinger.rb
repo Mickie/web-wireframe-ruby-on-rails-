@@ -14,7 +14,7 @@ class SitemapPinger
         theConnection = Faraday.new( aUrlMap[:base_url] )
         
         theResponse = theConnection.get aUrlMap[:path] do | aRequest |
-          aRequest.params[ aUrlMap[:param] ] = "http://#{ENV['FANZO_WEB_HOST']}/sitemap.xml"
+          aRequest.params[ aUrlMap[:param] ] = CGI.escape "http://#{ENV['FANZO_WEB_HOST']}/sitemap.xml"
         end
         SitemapLogger.info "    Status: #{theResponse.status}"
         SitemapLogger.info "    Body: #{theResponse.body}"
