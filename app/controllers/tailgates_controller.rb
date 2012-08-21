@@ -1,5 +1,6 @@
 class TailgatesController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy] 
+  cache_sweeper :sitemap_sweeper 
 
   # GET /tailgates/search.js
   def search

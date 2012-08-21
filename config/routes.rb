@@ -45,9 +45,9 @@ FanzoSite::Application.routes.draw do
     get 'search', on: :collection
   end
   
-
-  match '/about',   to: 'static_pages#about'
-  match '/channel', to: 'static_pages#channel'
+  get "sitemap.xml", to: "sitemap#show", as: "sitemap", defaults: { format: "xml" }
+  get 'about',   to: 'static_pages#about'
+  get 'channel', to: 'static_pages#channel'
 
   post "twitter_proxy/update_status"
   post "twitter_proxy/retweet"

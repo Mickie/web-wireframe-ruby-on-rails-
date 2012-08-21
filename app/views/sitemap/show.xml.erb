@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<% base_url = "http://#{request.host_with_port}" %>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <% @static_paths.each do | aPath | %>
+    <url>
+      <loc><%= "#{base_url}#{aPath[:path]}" -%></loc>
+      <changefreq><%= aPath[:change_rate] -%></changefreq>
+      <priority>1</priority>
+    </url>
+  <% end %>
+  
+  <% @tailgates.each do | aTailgate | %>
+    <url>
+      <loc><%= "#{base_url}#{tailgate_path(aTailgate)}" -%></loc>
+      <lastmod><%= aTailgate.posts_updated_at.iso8601 -%></lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+    </url>
+  <% end %>
+
+  <% @users.each do | aUser | %>
+    <url>
+      <loc><%= "#{base_url}#{user_path(aUser)}" -%></loc>
+      <lastmod><%= aUser.updated_at.iso8601 -%></lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  <% end %>
+
+</urlset>
