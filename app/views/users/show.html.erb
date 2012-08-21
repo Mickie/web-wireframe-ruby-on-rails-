@@ -23,10 +23,11 @@
       <% end %>
     </div>
   
-    <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} was there:", aListOfBrags: @user.i_was_there_brags } %>
-    <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} watched:", aListOfBrags: @user.i_watched_brags } %>
-    <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} wants to:", aListOfBrags: @user.i_wish_brags } %>
-  
+    <div id="allBrags">
+      <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} was there:", aListOfBrags: @user.i_was_there_brags } %>
+      <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} watched:", aListOfBrags: @user.i_watched_brags } %>
+      <%= render partial: "user_brag_module", locals: { aTitle: "#{@user.first_name} wants to:", aListOfBrags: @user.i_wish_brags } %>
+    </div>  
     <% if @user.teams.length > 0 %>
       <div id="userTeams" class="row-fluid">
         <div class="contentContainer">

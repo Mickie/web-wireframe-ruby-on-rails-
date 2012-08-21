@@ -29,7 +29,7 @@ div#userShow
         .big_profile_pic
         {
           float:left;
-          margin-right: 15px;
+          margin-right: 20px;
         }
         
         .profile_details
@@ -51,8 +51,10 @@ div#userShow
           
           .user_description
           {
+            margin-right: 20px;
+            padding-bottom: 8px;
             font-size: 16px;
-            padding-bottom: 5px;
+            line-height: 1.5em;
           }
           
           .fan_since
@@ -87,7 +89,7 @@ div#userShow
             font-weight:normal;
             margin:0px;
             font-size: 14px; 
-            line-height: 14px;
+            line-height: 1.5em;
             text-align: right;
           }
         }
@@ -107,19 +109,34 @@ div#userShow
     {
       border-top: 1px solid $borderColor;
     }
-    
-    .brags
+
+    #allBrags
     {
-      .contentTitle
+      .brags
       {
-        margin-top:2px;
+        .userContent
+        {
+          ul
+          {
+            padding-top: 3px;
+            li
+            {
+              padding-bottom: 10px;
+            }
+          }          
+        }
       }
       
-      .userContent
+      .brags:first-child
       {
-        li
+        .contentTitle
         {
-          padding-bottom: 10px;
+          padding-top:20px;
+        }
+        
+        .userContent
+        {
+          padding-top:20px;
         }
       }
     }
