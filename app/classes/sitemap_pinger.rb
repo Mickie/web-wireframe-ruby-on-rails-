@@ -1,7 +1,6 @@
 class SitemapPinger 
   SEARCH_ENGINES = {
     google: "http://www.google.com/webmasters/tools/ping?sitemap=%s",
-    ask: "http://submissions.ask.com/ping?sitemap=%s",
     bing: "http://www.bing.com/webmaster/ping.aspx?siteMap=%s"
   }
 
