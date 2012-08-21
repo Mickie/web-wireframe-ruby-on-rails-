@@ -10,9 +10,13 @@ class SitemapPinger
       theRequestUrl = url % CGI.escape("http://#{ENV['FANZO_WEB_HOST']}/sitemap.xml")  
       SitemapLogger.info "  Pinging #{name} with #{theRequestUrl}"
       if Rails.env == "production"
-        theResponse = Faraday.get theRequestUrl
-        SitemapLogger.info "    Status: #{theResponse.status}"
-        SitemapLogger.info "    Body: #{theResponse.body}"
+        begin
+          theResponse = Faraday.get theRequestUrl
+          SitemapLogger.info "    Status: #{theResponse.status}"
+          SitemapLogger.info "    Body: #{theResponse.body}"
+        rescue Exception => e
+          Rails.logger.error("sitemap ping exception:  #{e.to_s}")
+        end      
       end
     end
   end

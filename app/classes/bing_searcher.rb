@@ -27,13 +27,17 @@ class BingSearcher
     theConnection = Faraday.new('https://api.datamarket.azure.com', ssl:{ ca_path: "/usr/lib/ssl/certs/ca-certificates.crt"})
     theConnection.basic_auth("", ENV["FANZO_BING_KEY"])
     
-    theResponse = theConnection.get "/Data.ashx/Bing/Search/v1/Composite" do | aRequest |
-      aRequest.params["Sources"] = "'web+image+video+news'"
-      aRequest.params["Query"] = aQuery
-      aRequest.params["NewsCategory"] = "'rt_Sports'"
-      aRequest.params["$top"] = "25"
-      aRequest.params["$format"] = "JSON"
-    end
+    begin
+      theResponse = theConnection.get "/Data.ashx/Bing/Search/v1/Composite" do | aRequest |
+        aRequest.params["Sources"] = "'web+image+video+news'"
+        aRequest.params["Query"] = aQuery
+        aRequest.params["NewsCategory"] = "'rt_Sports'"
+        aRequest.params["$top"] = "25"
+        aRequest.params["$format"] = "JSON"
+      end
+    rescue Exception => e
+      Rails.logger.error("bing search exception:  #{e.to_s}")
+    end      
   end
 
   def saveResponseToTeam( aResponse, aTeam )
