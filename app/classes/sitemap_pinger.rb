@@ -1,19 +1,23 @@
 class SitemapPinger 
   SEARCH_ENGINES = {
-    google: "http://www.google.com/webmasters/tools/ping?sitemap=%s",
-    ask: "http://submissions.ask.com/ping?sitemap=%s",
-    bing: "http://www.bing.com/webmaster/ping.aspx?siteMap=%s"
+    google: { base_url: "http://www.google.com", path:"/webmasters/tools/ping", param:"sitemap" },
+    ask: { base_url: "http://submissions.ask.com", path:"/ping", param:"sitemap" },
+    bing: { base_url: "http://www.bing.com", path:"/webmasters/ping.aspx", param:"siteMap" }
   }
 
   def self.ping
     SitemapLogger.info Time.now
-    SEARCH_ENGINES.each do |name, url|
-      request = url % CGI.escape("http://#{ENV['FANZO_WEB_HOST']}/sitemap.xml")  
-      SitemapLogger.info "  Pinging #{name} with #{request}"
+    SEARCH_ENGINES.each do |name, aUrlMap|
+      SitemapLogger.info "  Pinging #{name}"
+
       if Rails.env == "production"
-        response = Net::HTTP.get_response(URI.parse(request))
-        SitemapLogger.info "    #{response.code}: #{response.message}"
-        SitemapLogger.info "    Body: #{response.body}"
+        theConnection = Faraday.new( aUrlMap[:base_url] )
+        
+        theResponse = theConnection.get aUrlMap[:path] do | aRequest |
+          aRequest.params[ aUrlMap[:param] ] = "http://#{ENV['FANZO_WEB_HOST']}/sitemap.xml"
+        end
+        SitemapLogger.info "    Status: #{theResponse.status}"
+        SitemapLogger.info "    Body: #{theResponse.body}"
       end
     end
   end
