@@ -33,6 +33,11 @@
     }
   }
   
+  .welcomeMessage
+  {
+    text-align: center;
+  }
+  
   .horn
   {
     position:absolute;
@@ -42,6 +47,9 @@
 
   .searchOrCreate
   {
+    width: 510px;
+    margin: 0px auto;
+    
     .teamSearch
     {
       padding-top: 20px;
@@ -76,7 +84,7 @@
     {
       padding-top: 20px;
       width: 30px;
-      text-align: right;
+      text-align: center;
     }
 
     .createFanzone
