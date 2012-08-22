@@ -2,7 +2,7 @@ class SitemapObserver < ActiveRecord::Observer
   observe Tailgate
 
   def ping(aTailgate)
-    SitemapPinger.ping
+    SitemapPinger.ping if Rails.env.production?
   end
 
   alias_method :after_create, :ping
