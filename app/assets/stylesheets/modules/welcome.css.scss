@@ -42,10 +42,10 @@
 
   .searchOrCreate
   {
-    padding-top: 20px;
-    
     .teamSearch
     {
+      padding-top: 20px;
+      width: 220px;
       position: relative;
       form
       {
@@ -67,19 +67,23 @@
       {
         position:absolute;
         left: 5px;
-        top: 13px;
+        top: 33px;
         opacity: 0.5;
       }
     }
     
     .or
     {
+      padding-top: 20px;
+      width: 30px;
       text-align: right;
     }
 
     .createFanzone
     {
+      padding-top: 20px;
       margin:0px;
+      width: 220px;
       
       a
       {
@@ -91,7 +95,6 @@
           font-weight: normal;
           line-height: 20px;
           padding-top: 8px;
-          width: 100%;
           height: 27px;
           border: 1px solid white;
           position: relative;

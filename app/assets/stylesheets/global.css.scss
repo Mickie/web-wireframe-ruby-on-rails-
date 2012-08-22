@@ -4,6 +4,9 @@
 body
 {
   padding:0px 20px 40px 20px;
+  min-height: 750px;
+  max-width: 1225px;
+  margin: 0px auto;
   background-color: $backgroundColor;
   background-image: asset-url("fanzo-background-horn.png", image);
   background-repeat: repeat-y;
@@ -11,7 +14,6 @@ body
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5em;
-  min-height: 750px;
 }
 
 h1 
