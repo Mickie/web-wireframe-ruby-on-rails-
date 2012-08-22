@@ -8,4 +8,5 @@ $(function(){
 function loadData(aPath, aNewActiveSelector)
 {
   myNavigator.loadData( aPath, aNewActiveSelector );
+  return false;
 }

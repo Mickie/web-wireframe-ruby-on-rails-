@@ -1,5 +1,6 @@
 $(function(){
   initializeTileHover();
+  stopAnchorFromNavigation();
 });
 
 function initializeTileHover()
@@ -15,4 +16,16 @@ function onTileHoverStart(e)
 function onTileHoverEnd(e)
 {
   $(e.currentTarget).find(".fanzoneState").hide();
+}
+
+function stopAnchorFromNavigation()
+{
+  $('.fanzoneTile').on('click', 'a', onAnchorClick);
+}
+
+function onAnchorClick(e)
+{
+  e.stopPropagation();
+  e.preventDefault();
+  return false;
 }

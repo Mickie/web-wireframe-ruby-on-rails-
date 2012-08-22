@@ -23,7 +23,7 @@
         <%= teamLogo(aTailgate.team, :small) %>      
       </div>
       <div class="fanzone_name" style="background-color:<%= aTailgate.color %>">
-        <h3><%= aTailgate.name %></h3>
+          <h3><%= link_to aTailgate.name, aTailgate, alt: "#{aTailgate.name}" %></h3>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
                 <strong><%= thePost.user.full_name %></strong>
                 <% if thePost.image_url && thePost.image_url.length > 0 %>
                   <div class="post_image">
-                    <img src="<%= thePost.image_url -%>" width="153" height="153" />
+                    <img src="<%= thePost.image_url -%>" width="153" />
                   </div>
                 <% end %>
                 <span><%= raw handleNewlinesAndUrls(thePost.content) %></span>

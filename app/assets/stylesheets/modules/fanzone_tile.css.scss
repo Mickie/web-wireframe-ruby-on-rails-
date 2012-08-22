@@ -73,8 +73,17 @@ div.fanzoneTile
         {
           font-size: 1em;
           line-height: 1.3em;
-          color: white;
           padding-left: 3%;
+          
+          a
+          {
+            color: white;
+            
+            &:hover
+            {
+              text-decoration:none;
+            }
+          }
         }
       }
     }
