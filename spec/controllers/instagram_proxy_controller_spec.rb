@@ -3,6 +3,7 @@ require 'spec_helper'
 describe InstagramProxyController do
   
   before do
+    Rails.cache.clear
     mock_geocoding!
     @myTeam = FactoryGirl.create(:team)
 
