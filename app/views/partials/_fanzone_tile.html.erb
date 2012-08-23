@@ -1,11 +1,11 @@
 <div class="fanzoneTile" id="tailgate_<%= aTailgate.slug %>" onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_<%= aTailgate.slug -%>')">
   <div class="banner">
     <div class="<%= browser.mobile? ? "fanzoneState" : "fanzoneState hide" -%>" >
-      <% if user_signed_in? && current_user.mine_or_following?( aTailgate ) %>
+      <% if aUserSignedInFlag && current_user.mine_or_following?( aTailgate ) %>
         <div class="myFanzone" style="border-bottom-color: <%= aTailgate.light_color %>;"></div>
       <% else %>
         <div class="join_fanzone">
-          <% if user_signed_in? %>
+          <% if aUserSignedInFlag %>
             <%= render partial: "partials/buttons/follow_button", locals: { tailgate: aTailgate } %>
           <% else %>
             <a href="#myLoginModal" data-toggle="modal" class="follow_button fanzoButton">Follow</a>

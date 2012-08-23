@@ -31,7 +31,6 @@ class BingSearcher
       theResponse = theConnection.get "/Data.ashx/Bing/Search/v1/Composite" do | aRequest |
         aRequest.params["Sources"] = "'web+image+video+news'"
         aRequest.params["Query"] = aQuery
-        aRequest.params["NewsCategory"] = "'rt_Sports'"
         aRequest.params["$top"] = "25"
         aRequest.params["$format"] = "JSON"
       end

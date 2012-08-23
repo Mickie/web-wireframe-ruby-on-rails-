@@ -1,9 +1,11 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include Devise::Controllers::Rememberable
   
   def facebook
     @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
+      remember_me(@user)
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
       sign_in_and_redirect @user, event: :authentication
     else
@@ -16,6 +18,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
 
     if @user
+      remember_me(@user)
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Twitter"
       sign_in_and_redirect @user, event: :authentication
     else
@@ -34,6 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_instagram_oauth(request.env["omniauth.auth"], current_user)
 
     if @user
+      remember_me(@user)
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Instagram"
       sign_in_and_redirect @user, event: :authentication
     else
@@ -46,6 +50,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_foursquare_oauth(request.env["omniauth.auth"], current_user)
 
     if @user
+      remember_me(@user)
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Foursquare"
       sign_in_and_redirect @user, event: :authentication
     else

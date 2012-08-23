@@ -1,5 +1,7 @@
+<% aUserSignedInFlag = user_signed_in? %>
+
 <div id="modals">
-  <% if user_signed_in? %>
+  <% if aUserSignedInFlag %>
     <%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build } %>
     <%= render partial: "partials/dialogs/connect_twitter_modal" %>
   <% else %>
@@ -11,7 +13,7 @@
   <nav id="fanzo_navigation">
     <div id="account">
       <div id="account_content">
-        <% if user_signed_in? %>
+        <% if aUserSignedInFlag %>
           <div class="dropdown" id="account_dropdown">
             <a class="users_name" href="#account_dropdown" data-toggle="dropdown">
               <div class="profile_pic">
@@ -89,7 +91,7 @@
                 </td>
                 <td class="count">
                   <p>
-                    <% if user_signed_in? %>
+                    <% if aUserSignedInFlag %>
                       <%= current_user.tailgates.size + current_user.followed_tailgates.size - 1 -%>
                     <% end %>
                   </p>
@@ -99,7 +101,7 @@
           </a>
         </li>
     
-        <% if user_signed_in? %>
+        <% if aUserSignedInFlag %>
           <% current_user.myFanzones[0..5].each do | aTailgate |%>
             <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
           <% end %>
@@ -110,7 +112,7 @@
     <div id="fanzone_create">
       <ul class="nav nav-tabs nav-stacked">
         <li id="createFanzone">
-          <% if user_signed_in? %>
+          <% if aUserSignedInFlag %>
             <a href="#myCreateFanzoneModal" data-toggle="modal">
           <% else %>
             <a href="#myLoginModal" data-toggle="modal">

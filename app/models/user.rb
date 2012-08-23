@@ -141,6 +141,7 @@ class User < ActiveRecord::Base
     
     if theUserWithThisFacebookId
       theUserWithThisFacebookId.facebook_access_token = theToken
+      theUserWithThisFacebookId.save!
       return theUserWithThisFacebookId
     elsif aSignedInUser
       aSignedInUser.facebook_user_id = theId
@@ -148,7 +149,6 @@ class User < ActiveRecord::Base
       aSignedInUser.first_name = theFirstName unless aSignedInUser.first_name
       aSignedInUser.last_name = theLastName unless aSignedInUser.last_name
       aSignedInUser.image = theImage unless aSignedInUser.image
-      aSignedInUser.remember_me = true
       aSignedInUser.save!
       return aSignedInUser
     elsif theUserWithThisEmail = User.where( email: theEmail ).first
@@ -157,7 +157,6 @@ class User < ActiveRecord::Base
       theUserWithThisEmail.first_name = theFirstName unless theUserWithThisEmail.first_name
       theUserWithThisEmail.last_name = theLastName unless theUserWithThisEmail.last_name
       theUserWithThisEmail.image = theImage unless theUserWithThisEmail.image
-      theUserWithThisEmail.remember_me = true
       theUserWithThisEmail.save!
       return theUserWithThisEmail
     else
@@ -189,6 +188,8 @@ class User < ActiveRecord::Base
     theUserWithThisFoursquareId = User.where( foursquare_user_id: theId).first
 
     if theUserWithThisFoursquareId
+      theUserWithThisFoursquareId.foursquare_access_token = theToken
+      theUserWithThisFoursquareId.save!
       return theUserWithThisFoursquareId
     elsif aSignedInUser
       aSignedInUser.foursquare_user_id = theId
@@ -196,7 +197,6 @@ class User < ActiveRecord::Base
       aSignedInUser.first_name = theFirstName unless aSignedInUser.first_name
       aSignedInUser.last_name = theLastName unless aSignedInUser.last_name
       aSignedInUser.image = theImage unless aSignedInUser.image
-      aSignedInUser.remember_me = true
       aSignedInUser.save!
       return aSignedInUser
     elsif theUserWithThisEmail = User.where( email: theEmail ).first
@@ -205,7 +205,6 @@ class User < ActiveRecord::Base
       theUserWithThisEmail.first_name = theFirstName unless theUserWithThisEmail.first_name
       theUserWithThisEmail.last_name = theLastName unless theUserWithThisEmail.last_name
       theUserWithThisEmail.image = theImage unless theUserWithThisEmail.image
-      theUserWithThisEmail.remember_me = true
       theUserWithThisEmail.save!
       return theUserWithThisEmail
     else
@@ -240,8 +239,12 @@ class User < ActiveRecord::Base
 
     if aSignedInUser
       if theUserWithThisTwitterId && aSignedInUser.id != theUserWithThisTwitterId.id
+        theUserWithThisTwitterId.twitter_user_token = theToken
+        theUserWithThisTwitterId.save!
         return theUserWithThisTwitterId
       elsif aSignedInUser.twitter_user_id
+        aSignedInUser.twitter_user_token = theToken
+        aSignedInUser.save!
         return aSignedInUser
       else
         aSignedInUser.twitter_user_id = theId
@@ -271,8 +274,12 @@ class User < ActiveRecord::Base
 
     if aSignedInUser
       if aSignedInUser == theUserWithThisInstagramId
+        aSignedInUser.instagram_user_token = theToken
+        aSignedInUser.save!
         return aSignedInUser
       elsif theUserWithThisInstagramId
+        theUserWithThisTwitterId.twitter_user_token = theToken
+        theUserWithThisTwitterId.save!
         return theUserWithThisInstagramId
       else
         aSignedInUser.instagram_user_id = theId
