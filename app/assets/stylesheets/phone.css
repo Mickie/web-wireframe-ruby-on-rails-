@@ -9,9 +9,5 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery.ui.autocomplete 
- *= require_tree ./lib
- *= require_tree ./partials
- *= require_tree ./web
- *= require scaffolds 
+ *= require_tree ./phone
 */
