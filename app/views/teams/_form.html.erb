@@ -13,7 +13,22 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, required:true %>
+    <%= f.text_field :name, placeholder:"eg. Notre Dame Fighting Irish",  required:true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :short_name %>
+    <%= f.text_field :short_name, placeholder:"eg. Notre Dame",  required:true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :short_name %>
+    <%= f.text_field :short_name, placeholder:"eg. Notre Dame",  required:true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :mascot %>
+    <%= f.text_field :mascot, placeholder:"eg. Fighting Irish",  required:true %>
   </div>
   
   <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
