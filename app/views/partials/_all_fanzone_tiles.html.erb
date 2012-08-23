@@ -1,10 +1,10 @@
-<% if !user_signed_in? %>
+<% if !aUserSignedInFlag %>
   <%= render partial: 'partials/welcome' %>
 <% end %>
 
 <div id="allTiles" class="row-fluid">
-  <% if user_signed_in? %>
-    <%= render partial: "partials/create_fanzone_tile" %>
+  <% if aUserSignedInFlag %>
+    <%= render partial: "partials/create_fanzone_tile", locals: { aUserSignedInFlag: aUserSignedInFlag } %>
   <% end %>
-  <%= render "partials/tailgate_rows" %>
+  <%= render partial: "partials/tailgate_rows", locals: { aUserSignedInFlag: aUserSignedInFlag}  %>
 </div>
