@@ -1,4 +1,7 @@
 class Team < ActiveRecord::Base
+  extend FriendlyId
+
+  friendly_id :name, use: :slugged
 
   belongs_to :sport, :inverse_of => :teams
   belongs_to :league, :inverse_of => :teams
