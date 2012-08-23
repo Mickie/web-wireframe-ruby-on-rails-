@@ -26,7 +26,6 @@ Before do
   @new_league = FactoryGirl.build(:league, visible:true)
   @new_conference = FactoryGirl.build(:conference)
   @new_division = FactoryGirl.build(:division)
-  @new_team = FactoryGirl.build(:team)
   @new_affiliation = FactoryGirl.build(:affiliation)
   @new_brag = FactoryGirl.build(:brag)
   @new_venue_type = FactoryGirl.build(:venue_type)
