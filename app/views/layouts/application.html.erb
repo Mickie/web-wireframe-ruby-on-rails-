@@ -59,9 +59,6 @@
       _gaq.push(['_setDomainName', '<%= ENV["FANZO_DOMAIN"] %>']);
       _gaq.push(['_setCustomVar', 1, 'first_impression_date', '<%= Time.now.strftime("%Y%m%d") %>', 1]);
       _gaq.push(['_setCustomVar', 2, 'logged_in', '<%= current_user.blank? ? "false" : "true" %>', 2]);
-      _gaq.push(['_setCustomVar', 3, 'join_day', '<%= current_user.blank? ? "0" : "#{current_user.created_at.day}" %>', 2]);
-      _gaq.push(['_setCustomVar', 4, 'join_month', '<%= current_user.blank? ? "0" : "#{current_user.created_at.month}" %>', 2]);
-      _gaq.push(['_setCustomVar', 5, 'join_year', '<%= current_user.blank? ? "0" : "#{current_user.created_at.year}" %>', 2]);
       _gaq.push(['_trackPageview']);
       _gaq.push(['_trackPageLoadTime']);
 
