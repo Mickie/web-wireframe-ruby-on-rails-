@@ -33,5 +33,6 @@
     <div class="field">
       <%= l.label :country %>
       <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] }, location.country_id )) %>
+    </div>
   <%end%>
 </div>
