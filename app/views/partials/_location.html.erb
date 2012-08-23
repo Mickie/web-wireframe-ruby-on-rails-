@@ -18,8 +18,13 @@
       <%= l.text_field :city %>
     </div>
     <div class="field">
-      <%= l.label :state %>
+      <%= l.label :state, "US State" %>
       <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] }, location.state_id ), {include_blank:true}) %>
+    </div>
+    <div class="field">
+      <strong>OR</strong>
+      <%= l.label :region, "International Region, County, Administrative Area etc." %>
+      <%= l.text_field :region %>
     </div>
     <div class="field">
       <%= l.label :postal_code %>
