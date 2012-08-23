@@ -31,7 +31,9 @@ class Team < ActiveRecord::Base
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
   
-  attr_accessible :name, 
+  attr_accessible :name,
+                  :short_name,
+                  :mascot,
                   :sport_id, 
                   :league_id, 
                   :division_id, 
