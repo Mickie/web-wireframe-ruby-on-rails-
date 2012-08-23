@@ -279,8 +279,7 @@ jasmine.JQuery.matchersClass = {};
     },
 
     toHandle: function(event) {
-
-      var events = this.actual.data('events')
+      var events = $._data($(this.actual).get(0), "events")
 
       if(!events || !event || typeof event !== "string") {
         return false
