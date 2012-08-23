@@ -14,6 +14,7 @@ describe Location do
     it { should respond_to(:address2) }
     it { should respond_to(:city) }
     it { should respond_to(:state) }
+    it { should respond_to(:region) }
     it { should respond_to(:postal_code) }
     it { should respond_to(:country) }
     it { should respond_to(:latitude) }
@@ -24,12 +25,23 @@ describe Location do
   describe "one_line_address" do
   
     it "should return correctly formatted address" do
-      @location.one_line_address.should == "12 Seahawks Way, Renton, WA 98056"
+      @location.one_line_address.should == "12 Seahawks Way, Renton, WA 98056, US"
     end
     
     it "should handle empty string in address2" do
-      @location.address2 = ""
-      @location.one_line_address.should == "12 Seahawks Way, Renton, WA 98056"
+      @location.address2 = "Go Hawks"
+      @location.one_line_address.should == "12 Seahawks Way, Go Hawks, Renton, WA 98056, US"
+    end
+    
+    it "should handle international addresses" do
+      theCountry = Country.find_by_name("United Kingdom")
+      theInternationalLocation = Location.new(name:"Emirates Stadium",
+                                              address1: "75 Drayton Park",
+                                              city: "London",
+                                              region: "Greater London",
+                                              postal_code:"N5 1BU",
+                                              country_id: theCountry.id)
+      theInternationalLocation.one_line_address.should == "75 Drayton Park, London, Greater London N5 1BU, UK"
     end
     
   end  
@@ -40,10 +52,31 @@ describe Location do
       @location.one_line_address_changed?.should be_false
     end
 
-    it "should return true when no element changes" do
+    it "should return true when an element changes" do
       @location.city = "Bellevue"
       @location.one_line_address_changed?.should be_true
     end
+
+    it "should return true when region changes" do
+      @location.region = "Northwest"
+      @location.one_line_address_changed?.should be_true
+    end
+
+    it "should return true when country changes" do
+      @location.country_id = 7
+      @location.one_line_address_changed?.should be_true
+    end
+
+    it "should handle null state" do
+      @location.state_id = nil
+      @location.one_line_address_changed?.should be_true
+      @location.save
+      @location.one_line_address_changed?.should be_false
+      @location.region = "Northwest"
+      @location.one_line_address_changed?.should be_true
+    end
+
+    
     
   end
   
