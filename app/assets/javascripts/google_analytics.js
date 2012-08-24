@@ -1,7 +1,4 @@
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', '<%= ENV["GOOGLE_ANALYTICS_ACCOUNT"] %>']);
-_gaq.push(['_setDomainName', '<%= ENV["FANZO_DOMAIN"] %>']);
-_gaq.push(['_trackPageview']);
 
 $(function(){
   gapi.plusone.go();  

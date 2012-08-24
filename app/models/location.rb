@@ -5,14 +5,14 @@ class Location < ActiveRecord::Base
   geocoded_by :one_line_address
   after_validation :geocode, :if => :one_line_address_changed?
   
-  attr_accessible :name, :address1, :address2, :city, :state_id, :postal_code, :country_id
+  attr_accessible :name, :address1, :address2, :city, :state_id, :region, :postal_code, :country_id
   
   def one_line_address
-    "#{address1}, #{address2}#{address2 && !address2.empty? ? ", " : ""}#{city}, #{state.abbreviation} #{postal_code}"
+    "#{address1}, #{address2}#{address2 && !address2.empty? ? ", " : ""}#{city}, #{state_id? ? state.abbreviation : region} #{postal_code}, #{country.abbreviation}"
   end
   
   def one_line_address_changed?
-    return address1_changed? || address2_changed? || city_changed? || state.changed? || postal_code_changed?
+    return address1_changed? || address2_changed? || city_changed? || region_changed? || state_id_changed? || postal_code_changed? || country_id_changed?
   end
   
   def isSimilarAddress?(aStreetAddress, aPostalCode)

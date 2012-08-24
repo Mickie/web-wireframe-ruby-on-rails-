@@ -13,10 +13,18 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, required:true %>
+    <%= f.text_field :name, placeholder:"eg. Notre Dame Fighting Irish",  required:true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :short_name %>
+    <%= f.text_field :short_name, placeholder:"eg. Notre Dame",  required:true %>
   </div>
   
-  <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
+  <div class="field">
+    <%= f.label :mascot %>
+    <%= f.text_field :mascot, placeholder:"eg. Fighting Irish",  required:true %>
+  </div>
   
   <div class="field">
     <%= f.label :sport %>
@@ -43,10 +51,8 @@
     <%= f.select(:affiliation_id, options_for_select(Affiliation.all.collect {|p| [ p.name, p.id ] }, @team.affiliation_id ), {include_blank:true}) %>
   </div>
 
-  <div class="field">
-    <%= f.label :location %>
-    <%= render :partial => 'partials/location', :locals => { :f => f, :location => @team.location } %>
-  </div>
+  <%= render :partial => 'partials/social_info', :locals => { :f => f } %>
+  <%= render :partial => 'partials/location', :locals => { :f => f, :location => @team.location } %>
 
   <div class="actions">
     <%= f.submit "Save", id:"commit" %>

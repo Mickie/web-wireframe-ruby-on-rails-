@@ -1,16 +1,38 @@
-<%= f.fields_for :location do |l|%>
-  <%= l.label :name %>
-  <%= l.text_field :name %>
-  <%= l.label :address1 %>
-  <%= l.text_field :address1 %>
-  <%= l.label :address2 %>
-  <%= l.text_field :address2 %>
-  <%= l.label :city %>
-  <%= l.text_field :city %>
-  <%= l.label :state %>
-  <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] }, location.state_id )) %>
-  <%= l.label :postal_code %>
-  <%= l.text_field :postal_code %>
-  <%= l.label :country %>
-  <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] }, location.country_id )) %>
-<%end%>
+<div class="field">
+  <%= f.label :location %>
+  <%= f.fields_for :location do |l|%>
+    <div class="field">
+      <%= l.label :name %>
+      <%= l.text_field :name %>
+    </div>
+    <div class="field">
+      <%= l.label :address1 %>
+      <%= l.text_field :address1 %>
+    </div>
+    <div class="field">
+      <%= l.label :address2 %>
+      <%= l.text_field :address2 %>
+    </div>
+    <div class="field">
+      <%= l.label :city %>
+      <%= l.text_field :city %>
+    </div>
+    <div class="field">
+      <%= l.label :state, "US State" %>
+      <%= l.select(:state_id, options_for_select(State.all.collect {|p| [ p.name, p.id ] }, location.state_id ), {include_blank:true}) %>
+    </div>
+    <div class="field">
+      <strong>OR</strong>
+      <%= l.label :region, "International Region, County, Administrative Area etc." %>
+      <%= l.text_field :region %>
+    </div>
+    <div class="field">
+      <%= l.label :postal_code %>
+      <%= l.text_field :postal_code %>
+    </div>
+    <div class="field">
+      <%= l.label :country %>
+      <%= l.select(:country_id, options_for_select(Country.all.collect {|p| [ p.name, p.id ] }, location.country_id )) %>
+    </div>
+  <%end%>
+</div>
