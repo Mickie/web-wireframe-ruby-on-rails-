@@ -27,6 +27,6 @@ describe "affiliations/index" do
     assert_select "tr>td", :text => @social_info.facebook_page_url, :count => 2
     assert_select "tr>td", :text => @social_info.web_url, :count => 2
     assert_select "tr>td", :text => @location.city, :count => 2
-    assert_select "tr>td", :text => @location.state.abbreviation, :count => 2
+    assert_select "tr>td", :text => @location.state.name, :count => 2
   end
 end

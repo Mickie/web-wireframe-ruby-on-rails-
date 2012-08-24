@@ -7,6 +7,14 @@ class Location < ActiveRecord::Base
   
   attr_accessible :name, :address1, :address2, :city, :state_id, :region, :postal_code, :country_id
   
+  def stateNameOrRegion
+    if state_id
+      return state.name
+    else
+      return region
+    end
+  end
+  
   def one_line_address
     "#{address1}, #{address2}#{address2 && !address2.empty? ? ", " : ""}#{city}, #{state_id? ? state.abbreviation : region} #{postal_code}, #{country.abbreviation}"
   end

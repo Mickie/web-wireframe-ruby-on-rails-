@@ -20,7 +20,7 @@
     <td><%= affiliation.social_info.facebook_page_url %></td>
     <td><%= affiliation.social_info.web_url %></td>
     <td><%= affiliation.location.city %></td>
-    <td><%= affiliation.location.state.abbreviation %></td>
+    <td><%= affiliation.location.stateNameOrRegion %></td>
     <td><%= link_to 'Show', affiliation %></td>
     <td><%= link_to 'Edit', edit_affiliation_path(affiliation) %></td>
     <td><%= link_to 'Destroy', affiliation, data: { confirm: "Are you sure?" }, method: :delete %></td>
