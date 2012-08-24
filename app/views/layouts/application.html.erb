@@ -59,6 +59,7 @@
       _gaq.push(['_setDomainName', '<%= ENV["FANZO_DOMAIN"] %>']);
       _gaq.push(['_setCustomVar', 1, 'first_impression_date', '<%= Time.now.strftime("%Y%m%d") %>', 1]);
       _gaq.push(['_setCustomVar', 2, 'logged_in', '<%= current_user.blank? ? "false" : "true" %>', 2]);
+      _gaq.push(['_setCustomVar', 3, 'mobile', 'false', 2]);
       _gaq.push(['_trackPageview']);
       _gaq.push(['_trackPageLoadTime']);
 
