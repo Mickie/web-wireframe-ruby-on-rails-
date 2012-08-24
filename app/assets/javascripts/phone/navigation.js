@@ -4,7 +4,7 @@ var PhoneNavigator = function()
   
   this.initializeTopNav = function()
   {
-    $("#showLeftNav").click( createDelegate(this, this.onToggleLeftNav) );
+    $("#showLeftNavButton").click( createDelegate(this, this.onToggleLeftNav) );
   }
   
   this.onToggleLeftNav = function(e)

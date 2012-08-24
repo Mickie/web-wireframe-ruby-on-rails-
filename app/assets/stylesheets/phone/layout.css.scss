@@ -68,7 +68,7 @@ body
       background-color: $userProfileBannerGradientTop;
       @include gradient-vertical($phoneTopNavGradientTop, $phoneTopNavGradientBottom);
       
-      #showLeftNav
+      #showLeftNavButton
       {
         margin: 8px;
         float:left;
