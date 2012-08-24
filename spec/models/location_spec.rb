@@ -20,6 +20,21 @@ describe Location do
     it { should respond_to(:latitude) }
     it { should respond_to(:longitude) } 
     it { should respond_to(:one_line_address) }
+    it { should respond_to(:stateNameOrRegion) }
+  end
+  
+  describe "stateNameOrRegion" do
+    
+    it "should return state name when available" do
+      @location.stateNameOrRegion.should eq(@location.state.name)
+    end
+    
+    it "should return region if no state" do
+      @location.state_id = nil
+      @location.region = "test"
+      @location.stateNameOrRegion.should eq("test")
+    end
+    
   end
   
   describe "one_line_address" do
