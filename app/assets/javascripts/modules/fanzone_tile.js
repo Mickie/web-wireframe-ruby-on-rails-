@@ -20,7 +20,7 @@ function onTileHoverEnd(e)
 
 function stopAnchorFromNavigation()
 {
-  $('.fanzoneTile').on('click', 'a', onAnchorClick);
+  $('#frameContent').on('click', '.fanzoneTile a', onAnchorClick);
 }
 
 function onAnchorClick(e)
