@@ -38,17 +38,10 @@ body
   height: 416px;
   position: relative;
   
-  #phoneLeftNav
+
+  #phoneViewport.open
   {
-    height: 416px;
-    width: 260px;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: -1;
-    background-color: red;
-    
-    
+    left: 260px;
   }
   
   #phoneViewport
@@ -57,6 +50,9 @@ body
     height: 416px;
     top:0px;
     left:0px;
+    z-index: 1;
+    
+    @include transition(left .2s);
     
     #phoneTopNav
     {

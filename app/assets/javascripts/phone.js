@@ -12,6 +12,8 @@
 //
 // update config/environments/production.rb with other files you want to also include in addition to this one
 //
+//= require_tree ./phoneLib
 //= require globals
+//= require_tree ./facebook
 //= require_tree ./phone
 //= require google_analytics

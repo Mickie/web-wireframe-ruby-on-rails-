@@ -13,12 +13,10 @@ window.fbAsyncInit = function()
     xfbml      : true  // parse XFBML
   });
 
-  if (typeof myFacebookView !== 'undefined')
+  if (typeof myPhoneNavigator !== 'undefined')
   {
-    myFacebookView.initialize();
+    myPhoneNavigator.onFacebookReady();
   }
-
-
 };
 
 function initFacebookJSSDK()

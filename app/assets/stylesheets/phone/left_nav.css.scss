@@ -1,0 +1,72 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#phoneLeftNav
+{
+  height: 406px;
+  width: 250px;
+  padding: 5px;
+  overflow: auto;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 0;
+  background-color: $navBackgroundColor;
+  
+  .login
+  {
+    width: 250px;
+    height: 32px;
+    
+    a
+    {
+      text-decoration:none;
+    }
+    
+    .logoSquare
+    {
+      width:32px;
+      height: 32px;
+      background-color: $navLoginBackground;
+      float:left;
+    }
+    .loginText
+    {
+      width: 200px;
+      height: 22px;
+      padding: 5px;
+      
+      float:left;
+      background-color: $navLoginBackground;
+      color:white;
+      font-size: 16px;
+    }
+  }
+  
+  .userProfile
+  {
+    display: none;
+    width: 250px;
+    height: 32px;
+
+    .profilePic
+    {
+      width:32px;
+      height: 32px;
+      background-color: $navLoginBackground;
+      float:left;
+    }
+    
+    .userName
+    {
+      width: 200px;
+      height: 22px;
+      padding: 5px;
+      
+      float:left;
+      background-color: $navLoginBackground;
+      color:white;
+      font-size: 16px;
+    }
+  }
+}

@@ -15,13 +15,21 @@
     <div id="fb-root"></div>
     <div id="phoneUI">
       <div id="phoneLeftNav">
-        <div class="login">
-          <a class="loginAnchor">
-            <div class="profile_pic">
-              <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
+        <div class="leftNavContent">
+          <div class="login">
+            <%= link_to omniauth_authorize_path("user", 'facebook') do %>
+              <div class="logoSquare">
+                <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
+              </div>
+              <div class="loginText">Log in with Facebook</div>
+            <% end %>
+          </div>
+          <div class="userProfile">
+            <div class="profilePic">
+              <img/>
             </div>
-            <div class="name">Log in</div>
-          </a>
+            <div class="userName">Filler</div>
+          </div>
         </div>
       </div>
       <div id="phoneViewport">
