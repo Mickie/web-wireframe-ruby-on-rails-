@@ -12,8 +12,6 @@
 //
 // update config/environments/production.rb with other files you want to also include in addition to this one
 //
-//= require jquery
-//= require jquery_ujs
-//= require_tree ./lib
 //= require globals
 //= require_tree ./phone
+//= require google_analytics
