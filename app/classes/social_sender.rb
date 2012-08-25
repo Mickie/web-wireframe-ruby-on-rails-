@@ -22,19 +22,13 @@ class SocialSender
     addTailgateActionToGraph( aUserId, aTailgateId, theConnectionType )
   end
 
-  
-  def self.sendFollowersTheirUpdates
-    if Rails.env.development?
-      theListOfUsers = User.where(name:"Paul Ingalls")
-    else
-      theListOfUsers = User.all
-    end
-    
-    theListOfUsers.each do |aUser|
-      Rails.logger.info "checking #{aUser.full_name}"
+  def sendFollowerTheirUpdate( aUserId )
+    theUser = User.find(aUserId)
+    if theUser
+      Rails.logger.info "checking #{theUser.full_name}"
       
       theTailgateDetailsMap = {}
-      aUser.followed_tailgates.where("posts_updated_at > ?", 24.hours.ago).each do | aTailgate |
+      theUser.followed_tailgates.where("posts_updated_at > ?", 24.hours.ago).each do | aTailgate |
         theNewPosts = []
         thePostsWithNewComments = []
         
@@ -55,8 +49,21 @@ class SocialSender
       
       if theTailgateDetailsMap.length > 0
         Rails.logger.info "Sending mail"
-        UserMailer.updates_on_followed_fanzones( aUser, theTailgateDetailsMap ).deliver
+        UserMailer.updates_on_followed_fanzones( theUser, theTailgateDetailsMap ).deliver
       end
+    end
+  end
+  
+  def self.sendFollowersTheirUpdates
+    if Rails.env.development?
+      theListOfUsers = User.where(name:"Paul Ingalls")
+    else
+      theListOfUsers = User.all
+    end
+    
+    theSender = SocialSender.new
+    theListOfUsers.each do |aUser|
+      theSender.delay.sendFollowerTheirUpdate(aUser.id)
     end
 
   end
