@@ -13,6 +13,7 @@ var InfiniteScroller = function()
   this.handleScrollingForResource = function(aResourceUrl)
   {
     this.myResourceUrl = aResourceUrl;
+    this.myCurrentPage = 1;
     this.myOnScrollDelegate = createDelegate( this, this.onScroll );
     $(window).on("scroll", this.myOnScrollDelegate);
   };
