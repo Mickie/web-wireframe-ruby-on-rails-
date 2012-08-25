@@ -56,7 +56,7 @@
         </div>
         <div class="userContent clearfix">
           <% @user.tailgates.each do |aTailgate| %>
-            <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate }%>  
+            <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
           <% end %>
         </div>
       </div>
@@ -69,7 +69,7 @@
         </div>
         <div class="userContent clearfix">
           <% @user.followed_tailgates.each do |aTailgate| %>
-            <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate }%>  
+            <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
           <% end %>
         </div>
       </div>
