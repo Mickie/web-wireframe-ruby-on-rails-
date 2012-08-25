@@ -99,6 +99,7 @@ div#tailgate_show
     div#fanzoneContent
     {
       background-color: $fanzoneContentBackground;
+      @include clearfix;
       
       h4
       {

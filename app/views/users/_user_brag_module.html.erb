@@ -1,10 +1,10 @@
 <% if aListOfBrags.length > 0 %>
   <div class="brags row-fluid">
     <div class="contentContainer">
-      <div class="contentTitle clearfix">
+      <div class="contentTitle">
         <h2><%= aTitle -%></h2>
       </div>
-      <div class="userContent clearfix">
+      <div class="userContent">
         <ul>
           <% aListOfBrags.includes(:brag).each do |aUserBrag| %>
             <li class="userBrag">

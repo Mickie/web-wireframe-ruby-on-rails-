@@ -83,6 +83,7 @@ div#userShow
           width: 120px;
           padding:10px;
           float:left;
+          @include clearfix;
 
           h2
           {
@@ -101,6 +102,7 @@ div#userShow
           margin-left: 140px;
           line-height: 14px;
           font-size: 14px; 
+          @include clearfix;
         }
       }
     }

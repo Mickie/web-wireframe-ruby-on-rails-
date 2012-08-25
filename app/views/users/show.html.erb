@@ -31,10 +31,10 @@
     <% if @user.teams.length > 0 %>
       <div id="userTeams" class="row-fluid">
         <div class="contentContainer">
-          <div class="contentTitle clearfix">
+          <div class="contentTitle">
             <h2><%= @user.first_name -%> is a fan of:</h2>
           </div>
-          <div class="userContent clearfix">
+          <div class="userContent">
             <% @user.teams.includes(:sport).each do |aTeam| %>
               <%= link_to Tailgate.where(official:true).where(team_id:aTeam.id).first do %>
                 <div class="user_team">
@@ -51,10 +51,10 @@
     
     <div id="createdFanzones" class="row-fluid">
       <div class="contentContainer">
-        <div class="contentTitle clearfix">
+        <div class="contentTitle">
           <h2><%= @user.first_name -%> hosts these Fanzones:</h2>
         </div>
-        <div class="userContent clearfix">
+        <div class="userContent">
           <% @user.tailgates.each do |aTailgate| %>
             <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
           <% end %>
@@ -64,10 +64,10 @@
   
     <div id="followedFanzones" class="row-fluid">
       <div class="contentContainer">
-        <div class="contentTitle clearfix">
+        <div class="contentTitle">
           <h2><%= @user.first_name -%> follows these Fanzones:</h2>
         </div>
-        <div class="userContent clearfix">
+        <div class="userContent">
           <% @user.followed_tailgates.each do |aTailgate| %>
             <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
           <% end %>
