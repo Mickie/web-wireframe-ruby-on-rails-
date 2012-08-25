@@ -170,6 +170,33 @@ describe User do
     end
   end
 
+  describe "can add a team" do
+    before do
+      mock_geocoding!
+      @team = FactoryGirl.create(:team)
+    end
+    
+    it "and it should save properly" do
+      theOriginalCount = UserTeam.all.count
+      @user.teams.push(@team)
+      @user.save
+      UserTeam.all.count.should eq(theOriginalCount + 1)
+    end
+  end
+  
+  describe "isConnectedToTwitter?" do
+    it "should return false when not connected to twitter" do
+      theUser = FactoryGirl.create(:user)
+      theUser.isConnectedToTwitter?.should be_false 
+    end
+    
+    it "should return true when connected to twitter" do
+      theUser = User.create(email:"joe@server.co", password:"please", password_confirmation: "please", twitter_user_token:'token', twitter_user_secret:'secret')
+      theUser.isConnectedToTwitter?.should be_true
+    end
+  end
+
+
   describe "twitter integration" do
     before do
       @theHash = twitter_auth
@@ -506,29 +533,41 @@ describe User do
     
   end
 
-  describe "can add a team" do
+  describe "findOrCreateUserFromFacebookId" do
+    let(:theExistingUser){ FactoryGirl.create(:user, facebook_user_id: "12345")}
+    let(:theNewUser){ FactoryGirl.create(:user)}
+
+    it "should find an existing user" do
+      theExistingUser.save
+      User.findOrCreateUserFromFacebookId("12345", "54321").should eq(theExistingUser)     
+    end
+
+    it "should create a new user if not found" do
+      User.should_receive(:createUserFromProfile).once.with("12345", "54321").and_return(theNewUser)
+      User.findOrCreateUserFromFacebookId("12345", "54321").should eq(theNewUser)     
+    end
+
+  end
+
+  describe "createUserFromProfile" do
+    
     before do
-      mock_geocoding!
-      @team = FactoryGirl.create(:team)
+      theFacebookDouble = double(Koala::Facebook::API)
+      Koala::Facebook::API.stub(:new).and_return(theFacebookDouble)
+      theFakeResponse = MultiJson.load('{ "email":"foo@bar.com", "first_name":"foo", "last_name":"bar", "name":"baz" }')
+      theFacebookDouble.should_receive(:get_object).once.with("me").and_return(theFakeResponse)    
     end
     
-    it "and it should save properly" do
-      theOriginalCount = UserTeam.all.count
-      @user.teams.push(@team)
-      @user.save
-      UserTeam.all.count.should eq(theOriginalCount + 1)
-    end
-  end
-  
-  describe "isConnectedToTwitter?" do
-    it "should return false when not connected to twitter" do
-      theUser = FactoryGirl.create(:user)
-      theUser.isConnectedToTwitter?.should be_false 
+    it "should create a new user with data from facebook" do
+      theUser = User.createUserFromProfile("12345", "54321")
+      theUser.first_name.should eq("foo")
+      theUser.last_name.should eq("bar")
+      theUser.name.should eq("baz")
+      theUser.email.should eq("foo@bar.com")
+      theUser.facebook_user_id.should eq("12345")
+      theUser.facebook_access_token.should eq("54321")
     end
     
-    it "should return true when connected to twitter" do
-      theUser = User.create(email:"joe@server.co", password:"please", password_confirmation: "please", twitter_user_token:'token', twitter_user_secret:'secret')
-      theUser.isConnectedToTwitter?.should be_true
-    end
   end
+
 end

@@ -15,5 +15,9 @@ describe UsersController do
       get("/users/1/connect_instagram").should route_to("users#connect_instagram", id: "1")
     end
 
+    it "routes to #client_facebook_login" do
+      post("/users/client_facebook_login.json").should route_to("users#client_facebook_login", format: "json")
+    end
+
   end
 end

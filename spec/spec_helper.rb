@@ -28,8 +28,8 @@ Spork.prefork do
     config.extend DeviseHelpers, :type => :controller
     
     config.include AttributeHelpers
-    
     config.include OmniAuthHelpers
+    config.include XHRHelpers
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction

@@ -147,17 +147,20 @@ class User < ActiveRecord::Base
     end    
 
     thePassword = Devise.friendly_token[0,20]
-    theNewUser = User.create!( email: theProfile[:email],
+    theImage = "http://graph.facebook.com/#{aFacebookId}/picture?type=square"
+    theNewUser = User.create!( email: theProfile["email"],
                                 password: thePassword,
                                 password_confirmation: thePassword,
                                 facebook_user_id: aFacebookId,
                                 facebook_access_token: aFacebookToken,
-                                first_name: theProfile[:first_name],
-                                last_name: theProfile[:last_name],
+                                first_name: theProfile["first_name"],
+                                last_name: theProfile["last_name"],
                                 image: theImage,
                                 remember_me: true)
+    theNewUser.name = theProfile["name"]                                
     theNewUser.followDefaultTailgate
     
+    return theNewUser
   end
   
   def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)

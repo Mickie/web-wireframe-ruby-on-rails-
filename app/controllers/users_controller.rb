@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]  
+  before_filter :authenticate_user!, except: [:show, :client_facebook_login]  
   
   def show
     @user = User.find(params[:id])
@@ -20,9 +20,13 @@ class UsersController < ApplicationController
   end
   
   def client_facebook_login
-    @user = User.findAndPopulateUserFromFacebookId(params[:facebook_user_id], params[:facebook_access_token])   
+    @user = User.findOrCreateUserFromFacebookId(params[:facebook_user_id], params[:facebook_access_token])   
     if (@user)
       sign_in("user", @user)
+    end
+    
+    respond_to do |format|
+      format.json { render json: @user }
     end
   end
 
