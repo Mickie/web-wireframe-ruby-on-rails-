@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include Devise::Controllers::Rememberable
+  
   before_filter :authenticate_user!, except: [:show, :client_facebook_login]  
   
   def show
@@ -23,6 +25,7 @@ class UsersController < ApplicationController
     @user = User.findOrCreateUserFromFacebookId(params[:facebook_user_id], params[:facebook_access_token])   
     if (@user)
       sign_in("user", @user)
+      remember_me(@user)
     end
     
     respond_to do |format|
