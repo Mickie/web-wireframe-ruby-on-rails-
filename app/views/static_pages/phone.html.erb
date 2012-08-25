@@ -16,19 +16,24 @@
     <div id="phoneUI">
       <div id="phoneLeftNav">
         <div class="leftNavContent">
-          <div class="login">
-            <%= link_to omniauth_authorize_path("user", 'facebook') do %>
-              <div class="logoSquare">
-                <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
-              </div>
-              <div class="loginText">Log in with Facebook</div>
-            <% end %>
+          <div class="login" onclick="myPhoneNavigator.showLogin()">
+            <div class="logoSquare">
+              <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
+            </div>
+            <div class="loginText">Log in with Facebook</div>
           </div>
           <div class="userProfile">
-            <div class="profilePic">
-              <img/>
-            </div>
-            <div class="userName">Filler</div>
+            <% if user_signed_in? %>
+              <div class="profilePic">
+                <%= image_tag( current_user.image, size:"32x32", alt:"#{current_user.full_name}") %>
+              </div>
+              <div class="userName"><%= current_user.name -%></div>
+            <% else %>
+              <div class="profilePic">
+                <img class="userPic" src="" width="32" height="32"/>
+              </div>
+              <div class="userName"></div>
+            <% end %>
           </div>
         </div>
       </div>

@@ -22,16 +22,30 @@ var PhoneNavigator = function()
       $("#phoneViewport").removeClass("open");
     }
   }
+  
+  this.showLogin = function()
+  {
+    this.myFacebookController.showLogin();
+  }
 
   this.onFacebookReady = function()
   {
     this.myFacebookController.initialize(this);
   }
   
-  this.onLoggedIn = function()
+  this.onLoginComplete = function(aFacebookModel)
   {
+    $("#phoneLeftNav .userPic").attr("src", aFacebookModel.getProfilePicUrl());
+    $("#phoneLeftNav .userName").html(aFacebookModel.name);
     $("#phoneLeftNav .login").hide();
     $("#phoneLeftNav .userProfile").show();
+    
+  }
+  
+  this.onLoggedOut = function()
+  {
+    $("#phoneLeftNav .login").show();
+    $("#phoneLeftNav .userProfile").hide();
   }
   
 
