@@ -17,23 +17,24 @@
       <div id="phoneLeftNav">
         <div class="leftNavContent">
           <div class="login" onclick="myPhoneNavigator.showLogin()">
-            <div class="logoSquare">
+            <div class="navIcon">
               <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
             </div>
-            <div class="loginText">Log in with Facebook</div>
+            <div class="navText">Log in with Facebook</div>
           </div>
           <div class="userProfile">
-            <% if user_signed_in? %>
-              <div class="profilePic">
-                <%= image_tag( current_user.image, size:"32x32", alt:"#{current_user.full_name}") %>
-              </div>
-              <div class="userName"><%= current_user.name -%></div>
-            <% else %>
-              <div class="profilePic">
-                <img class="userPic" src="" width="32" height="32"/>
-              </div>
-              <div class="userName"></div>
-            <% end %>
+            <div class="navIcon">
+              <img id="leftNavUserPic" src="" width="32" height="32"/>
+            </div>
+            <div id="leftNavUserName" class="navText"></div>
+          </div>
+          <div class="allFanzones" onclick="myPhoneNavigator.showAllFanzones()">
+            <div class="navIcon"><i></i></div>
+            <div class="navText">All Fanzones</div>
+          </div>
+          <div class="myFanzones" onclick="myPhoneNavigator.showMyFanzones()">
+            <div class="navIcon"><i></i></div>
+            <div class="navText">My Fanzones</div>
           </div>
         </div>
       </div>
@@ -47,7 +48,7 @@
           <h1 id="phoneTitle">Fanzo</h1>
         </div>
         <div id="phoneContent">
-          <h1>Hello</h1>
+          <div id="frameContent"></div>
         </div>
         <div id="phoneFooterNav">
         </div>

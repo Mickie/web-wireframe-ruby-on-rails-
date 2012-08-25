@@ -16,4 +16,5 @@
 //= require globals
 //= require_tree ./facebook
 //= require_tree ./phone
+//= require ./modules/infinite_scroller
 //= require google_analytics

@@ -13,60 +13,82 @@
   z-index: 0;
   background-color: $navBackgroundColor;
   
-  .login
+  .leftNavContent
   {
-    width: 250px;
-    height: 32px;
-    
-    a
+    & > div
     {
-      text-decoration:none;
-    }
-    
-    .logoSquare
-    {
-      width:32px;
+      border-bottom: 1px solid $borderColor;
+      width: 250px;
       height: 32px;
-      background-color: $navLoginBackground;
-      float:left;
-    }
-    .loginText
-    {
-      width: 200px;
-      height: 22px;
-      padding: 5px;
       
-      float:left;
-      background-color: $navLoginBackground;
-      color:white;
-      font-size: 16px;
+      .navIcon
+      {
+        width:32px;
+        height: 32px;
+        float:left;
+
+        i
+        {
+          display:block;
+          margin:5px;
+          width: 20px;
+          height: 20px;
+        }        
+      }
+      
+      .navText
+      {
+        width: 208px;
+        height: 22px;
+        padding: 5px;
+        
+        float:left;
+        color: $navLinkTextColor;
+        font-size: 16px;
+      }
     }
+    
+    .login
+    {
+      a
+      {
+        text-decoration:none;
+      }
+      
+      .navText
+      {
+        background-color: $navLoginBackground;
+        color: white;
+      }
+    }
+    
+    .userProfile
+    {
+      display: none;
+
+      .navText
+      {
+        background-color: $navLoginBackground;
+        color: white;
+      }
+    }
+    
+    .allFanzones
+    {
+      i
+      {
+        background: asset-url("fanzo-icons.png", image) 0px -20px no-repeat;
+      }
+    }
+  
+    .myFanzones
+    {
+      i
+      {
+        background: asset-url("fanzo-icons.png", image) -20px -20px no-repeat;
+      }
+    }
+    
   }
   
-  .userProfile
-  {
-    display: none;
-    width: 250px;
-    height: 32px;
-
-    .profilePic
-    {
-      width:32px;
-      height: 32px;
-      background-color: $navLoginBackground;
-      float:left;
-    }
-    
-    .userName
-    {
-      width: 200px;
-      height: 22px;
-      padding: 5px;
-      
-      float:left;
-      background-color: $navLoginBackground;
-      color:white;
-      font-size: 16px;
-    }
-  }
 }

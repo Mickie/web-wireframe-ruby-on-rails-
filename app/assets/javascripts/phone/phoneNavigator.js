@@ -27,6 +27,39 @@ var PhoneNavigator = function()
   {
     this.myFacebookController.showLogin();
   }
+  
+  this.showAllFanzones = function()
+  {
+    this.getDataFromServer("/tailgates?noLayout=true")
+    InfiniteScroller.get().handleScrollingForResource("/tailgates");
+  }
+  
+  this.showMyFanzones = function()
+  {
+    this.getDataFromServer("/tailgates?filter=user&noLayout=true")
+  }
+  
+  this.getDataFromServer = function( aPath )
+  {
+    var theToken = $('meta[name=csrf-token]').attr('content');
+    $.ajax({
+             url: aPath + "&authenticity_token=" + theToken,
+             cache:false,
+             dataType: "html",
+             success: createDelegate(this, this.onLoadDataComplete ),
+             error: createDelegate(this, this.onLoadError )
+           });
+  }
+  
+  this.onLoadDataComplete = function(aResult)
+  {
+    $("#frameContent").html(aResult);
+  };
+
+  this.onLoadError = function(anError)
+  {
+    console.log(anError);  
+  };
 
   this.onFacebookReady = function()
   {
@@ -35,8 +68,8 @@ var PhoneNavigator = function()
   
   this.onLoginComplete = function(aFacebookModel)
   {
-    $("#phoneLeftNav .userPic").attr("src", aFacebookModel.getProfilePicUrl());
-    $("#phoneLeftNav .userName").html(aFacebookModel.name);
+    $("#leftNavUserPic").attr("src", aFacebookModel.getProfilePicUrl());
+    $("#leftNavUserName").html(aFacebookModel.name);
     $("#phoneLeftNav .login").hide();
     $("#phoneLeftNav .userProfile").show();
     

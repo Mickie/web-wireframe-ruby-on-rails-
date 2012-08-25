@@ -18,6 +18,13 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
   end
+  
+  def client_facebook_login
+    @user = User.findAndPopulateUserFromFacebookId(params[:facebook_user_id], params[:facebook_access_token])   
+    if (@user)
+      sign_in("user", @user)
+    end
+  end
 
   private
     

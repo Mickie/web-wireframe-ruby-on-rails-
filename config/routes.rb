@@ -11,6 +11,7 @@ FanzoSite::Application.routes.draw do
   resources :users, only: :show do
     get 'connect_twitter', on: :member
     get 'connect_instagram', on: :member
+    get 'client_facebook_login', on: :collection
     resources :user_teams, only: [ :create, :destroy ] 
     resources :user_locations, only: [ :create, :destroy ]
     resources :user_brags, only: [ :create, :destroy ]
