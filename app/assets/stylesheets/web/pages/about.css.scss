@@ -85,6 +85,7 @@
 
   .aboutRow
   {
+    @include clearfix;
     clear: both;
     border-top: 1px solid $borderColor;
     

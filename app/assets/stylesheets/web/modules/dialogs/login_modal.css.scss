@@ -1,3 +1,5 @@
+@import "bootstrap/mixins";
+
 div#myLoginModal
 {
   .modal-header
@@ -46,6 +48,7 @@ div#myLoginModal
       
       .explanationTabs
       {
+        @include clearfix;
         h3
         {
           float: left;

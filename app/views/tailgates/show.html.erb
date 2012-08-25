@@ -101,7 +101,6 @@
           <div class="post_fields">
             <%= render "/posts/form"%>
           </div>
-          <div class="clearfix"></div>
         </div>
         <div id="posts">
           <% @tailgate.posts.visible.each do | aPost | %>
@@ -135,7 +134,7 @@
               <% end %>
             <% end %>
           </div>
-          <div class="facebookSharing clearfix">
+          <div class="facebookSharing">
             <div class="tweetGoogle">
               <div class="googleButton">
                 <div class="g-plusone" data-annotation="none" data-size="medium" data-href="<%= tailgate_url(@tailgate) -%>"></div>

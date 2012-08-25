@@ -42,6 +42,7 @@
     #first_column
     {
       padding: 20px 10px 20px 20px;
+      border-right: 1px solid $borderColor;
       
       .registration_settings
       {
@@ -53,6 +54,8 @@
       {
         margin: 0px;
         margin-bottom: 20px;
+        @include clearfix;
+        
         
         h3
         {
@@ -98,7 +101,6 @@
     #second_column
     {
       padding: 20px;
-      border-left: 1px solid $borderColor;
   
       .add_item
       {
