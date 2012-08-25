@@ -127,6 +127,39 @@ class User < ActiveRecord::Base
     "https://graph.facebook.com/#{facebook_user_id}/picture?type=large&width=#{aWidth}&height=#{aHeight}"
   end
   
+  def self.findOrCreateUserFromFacebookId(aFacebookId, aFacebookToken)
+    
+    theUser = User.find_by_facebook_user_id(aFacebookId)
+    if theUser
+      return theUser      
+    else
+      return User.createUserFromProfile( aFacebookId, aFacebookToken)
+    end
+  end 
+  
+  def self.createUserFromProfile( aFacebookId, aFacebookToken )
+    theGraph = Koala::Facebook::API.new(aFacebookToken)
+    
+    begin
+      theProfile = theGraph.get_object("me")
+    rescue Exception => e
+      Rails.logger.warn "Error getting info from facebook => #{e.to_s}"  
+    end    
+
+    thePassword = Devise.friendly_token[0,20]
+    theNewUser = User.create!( email: theProfile[:email],
+                                password: thePassword,
+                                password_confirmation: thePassword,
+                                facebook_user_id: aFacebookId,
+                                facebook_access_token: aFacebookToken,
+                                first_name: theProfile[:first_name],
+                                last_name: theProfile[:last_name],
+                                image: theImage,
+                                remember_me: true)
+    theNewUser.followDefaultTailgate
+    
+  end
+  
   def self.find_for_facebook_oauth(access_token, aSignedInUser=nil)
   
     theId = access_token.uid
