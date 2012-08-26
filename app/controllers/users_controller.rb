@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
   
   def client_facebook_login
-    @user = User.findOrCreateUserFromFacebookId(params[:facebook_user_id], params[:facebook_access_token])   
+    @user = UserFinder.findOrCreateUserFromFacebookId(params[:facebook_user_id], params[:facebook_access_token])   
     if (@user)
       sign_in("user", @user)
       remember_me(@user)

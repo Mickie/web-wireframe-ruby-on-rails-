@@ -63,7 +63,7 @@ describe UsersController do
     let(:existing_user) { FactoryGirl.create(:user, facebook_user_id: "1234")}
     
     before do
-      User.should_not_receive(:createUserFromProfile)
+      UserFinder.should_not_receive(:createUserFromProfile)
       add_xhr_headers
       post :client_facebook_login, { facebook_user_id: existing_user.facebook_user_id, facebook_access_token: "54321" }, format: :json
     end
@@ -83,7 +83,7 @@ describe UsersController do
     let(:new_user) { FactoryGirl.create(:user) }   
    
     before do
-      User.should_receive(:createUserFromProfile).once.with("12345", "54321").and_return(new_user)
+      UserFinder.should_receive(:createUserFromProfile).once.with("12345", "54321").and_return(new_user)
       add_xhr_headers
       post :client_facebook_login, { facebook_user_id: "12345", facebook_access_token: "54321" }, format: :json
     end

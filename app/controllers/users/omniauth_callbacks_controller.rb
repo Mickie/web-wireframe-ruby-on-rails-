@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Devise::Controllers::Rememberable
   
   def facebook
-    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+    @user = UserFinder.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
       remember_me(@user)
@@ -15,7 +15,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end 
   
   def twitter
-    @user = User.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
+    @user = UserFinder.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
 
     if @user
       remember_me(@user)
@@ -34,7 +34,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end 
   
   def instagram
-    @user = User.find_for_instagram_oauth(request.env["omniauth.auth"], current_user)
+    @user = UserFinder.find_for_instagram_oauth(request.env["omniauth.auth"], current_user)
 
     if @user
       remember_me(@user)
@@ -47,7 +47,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def foursquare
-    @user = User.find_for_foursquare_oauth(request.env["omniauth.auth"], current_user)
+    @user = UserFinder.find_for_foursquare_oauth(request.env["omniauth.auth"], current_user)
 
     if @user
       remember_me(@user)
