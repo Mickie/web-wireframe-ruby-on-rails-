@@ -1,0 +1,106 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+@import "web/modules/fanzone_tile";
+
+div#createFanzoneTile
+{
+  display:none;
+}
+
+div.fanzoneTile
+{
+  margin-bottom: 12px;
+  margin-left: 12px;
+  width: 140px;
+  height: 200px;
+
+  .banner
+  {
+    height: 30px;
+    
+    .banner_content
+    {
+
+      .official
+      {
+        width:105px;
+        height: 8px;
+        line-height: .6em;
+        font-size: .55em;
+      }
+
+      .team_logo
+      {
+        height: 29px;
+        width: 29px;
+        
+        img
+        {
+          margin-left:3px;
+          margin-top:3px;
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .fanzone_name
+      {
+        padding-top:10px;
+        height: 20px;
+        width: 110px;
+        h3
+        {
+          font-size: .75em;
+          line-height: 1em;
+          padding-left: 3%;
+        }
+      }
+    }
+    
+  }
+  
+
+  .content
+  {
+    font-size: 9px;
+    height: 169px;
+    
+    .posts
+    { 
+      height: 154px;
+      overflow: hidden;
+      
+      .post 
+      {
+        clear:both;
+        
+        .profile_pic
+        {
+          float:left;
+          padding:3px;
+          
+          img
+          {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        
+        .post_content
+        {
+          padding: 3px 4px 0px 35px;
+        }
+      }
+    }
+    
+    .stats
+    {
+      padding: 2px 5px;
+      height: 10px;
+      font-size: 9px;
+      line-height: 10px;
+    }
+    
+  }
+}
+

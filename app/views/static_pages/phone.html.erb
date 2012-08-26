@@ -1,3 +1,5 @@
+<% aUserSignedInFlag = user_signed_in? %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,17 +18,22 @@
     <div id="phoneUI">
       <div id="phoneLeftNav">
         <div class="leftNavContent">
-          <div class="login" onclick="myPhoneNavigator.showLogin()">
+          <div class="login" 
+               onclick="myPhoneNavigator.showLogin()" 
+               style="display:<%= aUserSignedInFlag ? "none" : "block" -%>;">
             <div class="navIcon">
               <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
             </div>
             <div class="navText">Log in with Facebook</div>
           </div>
-          <div class="userProfile">
+          <div class="userProfile"
+               style="display:<%= aUserSignedInFlag ? "block" : "none" -%>;">
             <div class="navIcon">
-              <img id="leftNavUserPic" src="" width="32" height="32"/>
+              <img id="leftNavUserPic" src="<%= aUserSignedInFlag ? current_user.image : ""-%>" width="32" height="32"/>
             </div>
-            <div id="leftNavUserName" class="navText"></div>
+            <div id="leftNavUserName" class="navText">
+              <%= aUserSignedInFlag ? current_user.full_name : "" %>
+            </div>
           </div>
           <div class="allFanzones" onclick="myPhoneNavigator.showAllFanzones()">
             <div class="navIcon"><i></i></div>
@@ -48,7 +55,9 @@
           <h1 id="phoneTitle">Fanzo</h1>
         </div>
         <div id="phoneContent">
-          <div id="frameContent"></div>
+          <div id="frameContent">
+            <%= render partial: "partials/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } %>
+          </div>
         </div>
         <div id="phoneFooterNav">
         </div>
