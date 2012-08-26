@@ -5,10 +5,17 @@
 {
   position:relative;
   margin-left: 15px;
-  padding: 20px 40px 30px 30px;
   background-color: $welcomeBackgroundColor;
   background-image: asset-url("white-gradient-140.png", image);
   background-repeat: repeat-x;
+  
+  .welcomeContent
+  {
+    padding: 20px 40px 30px 30px;
+    background-image: asset-url("fanzo-horn-bg.png", image);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+  }
   
   h1
   {
@@ -38,13 +45,6 @@
     text-align: center;
   }
   
-  .horn
-  {
-    position:absolute;
-    right: 0px;
-    bottom: 0px;
-  }
-
   .searchOrCreate
   {
     width: 510px;

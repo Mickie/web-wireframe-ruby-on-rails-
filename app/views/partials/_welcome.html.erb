@@ -1,26 +1,25 @@
 <div id="welcome">
-  <div class="horn">
-    <%= image_tag("fanzo-horn-bg.png") %>
-  </div>
-  <div class="row-fluid">
-    <div class="span12 welcomeMessage">
-      <h2>
-        Create a Fanzone and start your online Tailgate party.<br/>Follow your team. Find other fans. 
-        <%= link_to "Learn more", about_path %>
-      </h2>
+  <div class="welcomeContent">
+    <div class="row-fluid">
+      <div class="span12 welcomeMessage">
+        <h2>
+          Create a Fanzone and start your online Tailgate party.<br/>Follow your team. Find other fans. 
+          <%= link_to "Learn more", about_path %>
+        </h2>
+      </div>
     </div>
-  </div>
-  <div class="row searchOrCreate">
-    <div class="span4 createFanzone">
-      <a href="#myLoginModal" data-toggle="modal">
-        <div class="fanzoButton"><span>+</span> &nbsp; Create a Fanzone</div>
-      </a>
-    </div>
-    <div class="span1 or">
-      <h2>or</h2>
-    </div>
-    <div class="span6 teamSearch">
-      <%= render partial:"partials/team_search" %>
+    <div class="row searchOrCreate">
+      <div class="span4 createFanzone">
+        <a href="#myLoginModal" data-toggle="modal">
+          <div class="fanzoButton"><span>+</span> &nbsp; Create a Fanzone</div>
+        </a>
+      </div>
+      <div class="span1 or">
+        <h2>or</h2>
+      </div>
+      <div class="span6 teamSearch">
+        <%= render partial:"partials/team_search" %>
+      </div>
     </div>
   </div>
 </div>
