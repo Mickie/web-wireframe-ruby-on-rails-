@@ -17,4 +17,6 @@
 //= require_tree ./facebook
 //= require_tree ./phone
 //= require ./modules/infinite_scroller
+//= require ./lib/jquery.timeago
+//= require ./utilities/timestamps
 //= require google_analytics
