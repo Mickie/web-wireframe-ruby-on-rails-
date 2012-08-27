@@ -718,7 +718,8 @@ $p.libs = {
 				return $p(this).compile(this._pure_d || directive, ctxt);
 			},
 			render:function(ctxt, directive){
-				return jQuery( $p( this ).render( ctxt, this._pure_d || directive ) );
+			  $p( this ).render( ctxt, this._pure_d || directive );
+				return this;
 			},
 			autoRender:function(ctxt, directive){
 				return jQuery( $p( this ).autoRender( ctxt, this._pure_d || directive ) );

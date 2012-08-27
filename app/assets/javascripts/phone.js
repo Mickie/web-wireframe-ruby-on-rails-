@@ -18,5 +18,6 @@
 //= require_tree ./phone
 //= require ./modules/infinite_scroller
 //= require ./lib/jquery.timeago
+//= require ./lib/pure
 //= require ./utilities/timestamps
 //= require google_analytics

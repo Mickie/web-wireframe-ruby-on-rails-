@@ -1,6 +1,7 @@
 var PhoneNavigator = function()
 {
   this.myFacebookController = new FacebookController();
+  this.myFanzoneView = new FanzoneView();
   this.myLeftNavOpenFlag = false;
   
   this.initialize = function()
@@ -59,21 +60,8 @@ var PhoneNavigator = function()
   
   this.loadTailgate = function( aPath )
   {
-    var thePath = aPath + ".json";
-    this.loadTailgateIntoFanzoneView( thePath );
+    this.myFanzoneView.loadTailgate( aPath )
     this.showFanzone();
-  }
-  
-  this.loadTailgateIntoFanzoneView = function( aPath )
-  {
-    var theToken = $('meta[name=csrf-token]').attr('content');
-    $.ajax({
-             url: aPath + "?authenticity_token=" + theToken,
-             cache:false,
-             dataType: "json",
-             success: createDelegate(this, this.onTailgateLoadComplete ),
-             error: createDelegate(this, this.onLoadError )
-           });
   }
   
   this.loadTilesIntoFrameContent = function( aPath )
@@ -144,11 +132,6 @@ var PhoneNavigator = function()
     $("#frameContent").html(aResult);
   };
   
-  this.onTailgateLoadComplete = function( aResult )
-  {
-    console.log(aResult);
-  };
-
   this.onLoadError = function(anError)
   {
     console.log(anError);  
