@@ -53,6 +53,26 @@ var PhoneNavigator = function()
     $("#phoneFanzoneContent").width(theViewportWidth).height(theViewportHeight - 70);
     $("#phoneFanzoneFooterNav").width(theViewportWidth);
 
+    $("#phoneLeftNav").show();
+    $("#phoneFanzoneViewport").show()
+  }
+  
+  this.loadTailgate = function( aPath )
+  {
+    this.showFanzone();
+    console.log("loading: " + aPath)
+  }
+  
+  this.getDataFromServer = function( aPath )
+  {
+    var theToken = $('meta[name=csrf-token]').attr('content');
+    $.ajax({
+             url: aPath + "&authenticity_token=" + theToken,
+             cache:false,
+             dataType: "html",
+             success: createDelegate(this, this.onLoadDataComplete ),
+             error: createDelegate(this, this.onLoadError )
+           });
   }
   
   this.showLogin = function()
@@ -71,51 +91,33 @@ var PhoneNavigator = function()
     this.getDataFromServer("/tailgates?filter=user&noLayout=true")
   }
   
-  this.loadTailgate = function( aPath )
-  {
-    this.showFanzone();
-    console.log("loading: " + aPath)
-  }
-  
   this.showFanzone = function()
   {
-    $("#phoneTileViewport").addClass("closed");
-    $("#phoneFanzoneViewport").show().addClass("open");
+    var theWidth = window.outerWidth;
+    $("#phoneTileViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
+    $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
   }
-  
-  this.getDataFromServer = function( aPath )
+
+  this.onBackToTiles = function(e)
   {
-    var theToken = $('meta[name=csrf-token]').attr('content');
-    $.ajax({
-             url: aPath + "&authenticity_token=" + theToken,
-             cache:false,
-             dataType: "html",
-             success: createDelegate(this, this.onLoadDataComplete ),
-             error: createDelegate(this, this.onLoadError )
-           });
+    $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
+    $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
   }
-  
+
   this.onToggleLeftNav = function(e)
   {
     this.myLeftNavOpenFlag = !this.myLeftNavOpenFlag;
     
     if(this.myLeftNavOpenFlag)
     {
-      $("#phoneLeftNav").show();
-      $("#phoneTileViewport").addClass("open");
+      $("#phoneTileViewport").css("-webkit-transform", "translate3d(260px, 0px, 0px)");
     }
     else
     {
-      $("#phoneTileViewport").removeClass("open");
+      $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     }
     
     return false;
-  }
-  
-  this.onBackToTiles = function(e)
-  {
-    $("#phoneTileViewport").removeClass("closed");
-    $("#phoneFanzoneViewport").removeClass("open");
   }
   
   this.onGapReady = function()

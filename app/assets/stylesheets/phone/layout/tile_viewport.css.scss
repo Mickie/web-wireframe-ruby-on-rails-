@@ -6,11 +6,6 @@
   @include translate3d(260px, 0px, 0px)
 }
 
-#phoneTileViewport.closed
-{
-  @include translate3d(-400px, 0px, 0px)
-}
-
 #phoneTileViewport
 {
   left:0px;
