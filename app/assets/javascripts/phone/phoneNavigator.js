@@ -14,6 +14,7 @@ var PhoneNavigator = function()
   this.registerHandlers = function( anEvent )
   {
     $("#showLeftNavButton").on( anEvent, createDelegate(this, this.onToggleLeftNav) );
+    $("#backToTilesButton").on( anEvent, createDelegate(this, this.onBackToTiles) );
     $('#frameContent').on( anEvent, '.fanzoneTile a', createDelegate(this, this.killEvent));
   }
   
@@ -107,6 +108,14 @@ var PhoneNavigator = function()
     {
       $("#phoneTileViewport").removeClass("open");
     }
+    
+    return false;
+  }
+  
+  this.onBackToTiles = function(e)
+  {
+    $("#phoneTileViewport").removeClass("closed");
+    $("#phoneFanzoneViewport").removeClass("open");
   }
   
   this.onGapReady = function()
