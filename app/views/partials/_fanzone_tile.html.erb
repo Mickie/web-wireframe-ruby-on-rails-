@@ -1,4 +1,4 @@
-<div class="fanzoneTile" id="tailgate_<%= aTailgate.slug %>" onclick="loadData('<%= tailgate_path(aTailgate, noLayout:true ) %>', '#nav_<%= aTailgate.slug -%>')">
+<div class="fanzoneTile" id="tailgate_<%= aTailgate.slug %>" onclick="loadData('<%= tailgate_path( aTailgate ) %>', '#nav_<%= aTailgate.slug -%>')">
   <div class="banner">
     <div class="<%= browser.mobile? ? "fanzoneState" : "fanzoneState hide" -%>" >
       <% if aUserSignedInFlag && current_user.mine_or_following?( aTailgate ) %>

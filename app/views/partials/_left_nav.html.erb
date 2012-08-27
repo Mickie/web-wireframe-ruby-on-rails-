@@ -62,7 +62,7 @@
         </li>
         
         <li id="allFanzones">
-          <a onclick="loadData('<%= tailgates_path(noLayout:true ) %>', '#allFanzones')" href="#allFanzones">
+          <a onclick="loadData('<%= tailgates_path %>', '#allFanzones')" href="#allFanzones">
             <table>
               <tr>
                 <td class="team_logo"><i></i></td>
@@ -79,7 +79,7 @@
         
         <li id="myFanzones">
           <%if user_signed_in? %>
-            <a onclick="loadData('<%= tailgates_path(filter:"user", noLayout:true ) %>', '#myFanzones')" href="#myFanzones">
+            <a onclick="loadData('<%= tailgates_path( filter:"user" ) %>', '#myFanzones')" href="#myFanzones">
           <% else %>
             <a href="#myLoginModal" data-toggle="modal">
           <% end %>

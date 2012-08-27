@@ -79,6 +79,7 @@ var FanzoNavigator = function()
 
     this.addActiveToCurrentNavItem(aNewActiveSelector);
     this.displayLoading();
+    
     this.getDataFromServer( aPath );
 
     trackEvent("Navigator", "loadData", aNewActiveSelector);
@@ -121,8 +122,18 @@ var FanzoNavigator = function()
   this.getDataFromServer = function( aPath )
   {
     var theToken = $('meta[name=csrf-token]').attr('content');
+    var thePath;
+    if (aPath.indexOf('?') != -1)
+    {
+      thePath = aPath + "&noLayout=true&authenticity_token=" + theToken;
+    }
+    else
+    {
+      thePath = aPath + "?noLayout=true&authenticity_token=" + theToken;
+    }
+    
     $.ajax({
-             url: aPath + "&authenticity_token=" + theToken,
+             url: thePath,
              cache:false,
              dataType: "html",
              success: createDelegate(this, this.onLoadDataComplete ),
