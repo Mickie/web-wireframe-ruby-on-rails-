@@ -42,7 +42,7 @@ a
   }
 }
 
-hide
+.hide
 {
   display: none;
 }
@@ -67,7 +67,7 @@ hide
     .phoneTopNav
     {
       width:320px;
-      height: 40px;
+      height: 30px;
       position:absolute;
       top:0px;
       left:0px;
@@ -80,7 +80,7 @@ hide
       width:320px;
       height: 346px;
       position: absolute;
-      top: 40px;
+      top: 30px;
       overflow: auto;
       background-color: $navBackgroundColor;
     }
