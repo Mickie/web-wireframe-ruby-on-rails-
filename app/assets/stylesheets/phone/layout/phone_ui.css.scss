@@ -42,6 +42,11 @@ a
   }
 }
 
+hide
+{
+  display: none;
+}
+
 #phoneUI
 {
   width:320px;
@@ -49,24 +54,17 @@ a
   position: relative;
   overflow: hidden;
   
-
-  #phoneViewport.open
-  {
-    @include translate3d(260px, 0px, 0px)
-  }
-  
-  #phoneViewport
+  .phoneViewport
   {
     position: relative;
     height: 416px;
     top:0px;
-    left:0px;
     z-index: 1;
-    
+
     @include transition(all 0.3s ease-in-out);
     @include backface-visibility(hidden);
-    
-    #phoneTopNav
+
+    .phoneTopNav
     {
       width:320px;
       height: 40px;
@@ -75,39 +73,9 @@ a
       left:0px;
       background-color: $userProfileBannerGradientTop;
       @include gradient-vertical($phoneTopNavGradientTop, $phoneTopNavGradientBottom);
-      
-      #showLeftNavButton
-      {
-        margin: 8px;
-        float:left;
-
-        .icon-bar 
-        {
-          display: block;
-          width: 18px;
-          height: 2px;
-          background-color: #f5f5f5;
-          @include border-radius(1px);
-          @include box-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
-        }
-        
-        .icon-bar + .icon-bar 
-        {
-          margin-top: 3px;
-        }        
-      }
-      
-      #phoneTitle
-      {
-        width: 192px;
-        padding: 8px;
-        float: left;
-        text-align: center;
-        color:white;
-      }
     }
     
-    #phoneContent
+    .phoneContent
     {
       width:320px;
       height: 346px;
@@ -115,22 +83,6 @@ a
       top: 40px;
       overflow: auto;
       background-color: $navBackgroundColor;
-
-      #frameContent
-      {
-        padding-top:10px;
-      }
-    }
-    
-    #phoneFooterNav
-    {
-      width:320px;
-      height: 30px;
-      position: absolute;
-      bottom: 0px;
-      left: 0px;
-      
-      background-color: grey;
     }
   }
 }

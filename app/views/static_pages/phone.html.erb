@@ -16,7 +16,7 @@
   <body>
     <div id="fb-root"></div>
     <div id="phoneUI">
-      <div id="phoneLeftNav">
+      <div id="phoneLeftNav" class="hide">
         <div class="leftNavContent">
           <div class="login" 
                onclick="myPhoneNavigator.showLogin()" 
@@ -45,8 +45,8 @@
           </div>
         </div>
       </div>
-      <div id="phoneViewport">
-        <div id="phoneTopNav">
+      <div id="phoneTileViewport" class="phoneViewport">
+        <div id="phoneTileTopNav" class="phoneTopNav">
           <button id="showLeftNavButton" class="fanzoButton">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -54,12 +54,20 @@
           </button>
           <h1 id="phoneTitle">Fanzo</h1>
         </div>
-        <div id="phoneContent">
+        <div id="phoneTileContent" class="phoneContent">
           <div id="frameContent">
             <%= render partial: "partials/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } %>
           </div>
         </div>
-        <div id="phoneFooterNav">
+      </div>
+      <div id="phoneFanzoneViewport" class="phoneViewport hide">
+        <div id="phoneFanzoneTopNav" class="phoneTopNav">
+          
+        </div>
+        <div id="phoneFanzoneContent" class="phoneContent">
+          
+        </div>
+        <div id="phoneFanzoneFooterNav">
         </div>
       </div>
     </div>

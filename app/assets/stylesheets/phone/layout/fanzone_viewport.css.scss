@@ -1,0 +1,31 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#phoneFanzoneViewport.open
+{
+  @include translate3d(-320px, 0px, 0px)
+}
+
+#phoneFanzoneViewport
+{
+  background-color: $navBackgroundColor;
+  z-index: 2;
+
+  #phoneFanzoneTopNav
+  {
+  }
+  
+  #phoneFanzoneContent
+  {
+  }
+
+  #phoneFanzoneFooterNav
+  {
+    width:320px;
+    height: 30px;
+    position: absolute;
+    bottom: 0px;
+    
+    background-color: grey;
+  }
+}

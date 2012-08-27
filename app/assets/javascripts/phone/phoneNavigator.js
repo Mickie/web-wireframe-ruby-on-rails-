@@ -42,10 +42,16 @@ var PhoneNavigator = function()
     
     $("#phoneUI").width(theViewportWidth).height(theViewportHeight);
     $("#phoneLeftNav").height(theViewportHeight);
-    $("#phoneTopNav").width(theViewportWidth);
-    $("#phoneFooterNav").width(theViewportWidth);
-    $("#phoneViewport").width(theViewportWidth).height(theViewportHeight);
-    $("#phoneContent").width(theViewportWidth).height(theViewportHeight - 70);
+    
+    $("#phoneTileViewport").width(theViewportWidth).height(theViewportHeight);
+    $("#phoneTileTopNav").width(theViewportWidth);
+    $("#phoneTileContent").width(theViewportWidth).height(theViewportHeight - 40);
+
+    $("#phoneFanzoneViewport").width(theViewportWidth).height(theViewportHeight).css("position", "absolute").css("left", theViewportWidth + "px");
+    $("#phoneFanzoneTopNav").width(theViewportWidth);
+    $("#phoneFanzoneContent").width(theViewportWidth).height(theViewportHeight - 70);
+    $("#phoneFanzoneFooterNav").width(theViewportWidth);
+
   }
   
   this.showLogin = function()
@@ -66,7 +72,14 @@ var PhoneNavigator = function()
   
   this.loadTailgate = function( aPath )
   {
+    this.showFanzone();
     console.log("loading: " + aPath)
+  }
+  
+  this.showFanzone = function()
+  {
+    $("#phoneTileViewport").addClass("closed");
+    $("#phoneFanzoneViewport").show().addClass("open");
   }
   
   this.getDataFromServer = function( aPath )
@@ -87,11 +100,12 @@ var PhoneNavigator = function()
     
     if(this.myLeftNavOpenFlag)
     {
-      $("#phoneViewport").addClass("open");
+      $("#phoneLeftNav").show();
+      $("#phoneTileViewport").addClass("open");
     }
     else
     {
-      $("#phoneViewport").removeClass("open");
+      $("#phoneTileViewport").removeClass("open");
     }
   }
   

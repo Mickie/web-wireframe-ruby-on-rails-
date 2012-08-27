@@ -1,0 +1,58 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#phoneTileViewport.open
+{
+  @include translate3d(260px, 0px, 0px)
+}
+
+#phoneTileViewport.closed
+{
+  @include translate3d(-400px, 0px, 0px)
+}
+
+#phoneTileViewport
+{
+  left:0px;
+    
+  #phoneTileTopNav
+  {
+    #showLeftNavButton
+    {
+      margin: 8px;
+      float:left;
+
+      .icon-bar 
+      {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background-color: #f5f5f5;
+        @include border-radius(1px);
+        @include box-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+      }
+      
+      .icon-bar + .icon-bar 
+      {
+        margin-top: 3px;
+      }        
+    }
+    
+    #phoneTitle
+    {
+      width: 192px;
+      padding: 8px;
+      float: left;
+      text-align: center;
+      color:white;
+    }
+  }
+  
+  #phoneTileContent
+  {
+    #frameContent
+    {
+      padding-top:10px;
+    }
+  }
+}
