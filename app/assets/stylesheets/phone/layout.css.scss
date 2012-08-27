@@ -47,11 +47,12 @@ a
   width:320px;
   height: 416px;
   position: relative;
+  overflow: hidden;
   
 
   #phoneViewport.open
   {
-    left: 260px;
+    @include translate3d(260px, 0px, 0px)
   }
   
   #phoneViewport
@@ -62,7 +63,8 @@ a
     left:0px;
     z-index: 1;
     
-    @include transition(left .2s);
+    @include transition(all 0.3s ease-in-out);
+    @include backface-visibility(hidden);
     
     #phoneTopNav
     {

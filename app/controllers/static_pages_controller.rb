@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1)
+    @device = params[:device]
     
     if browser.mobile? && !browser.tablet?
       render :phone, layout: false
