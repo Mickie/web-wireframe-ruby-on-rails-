@@ -73,6 +73,16 @@ a
       left:0px;
       background-color: $userProfileBannerGradientTop;
       @include gradient-vertical($phoneTopNavGradientTop, $phoneTopNavGradientBottom);
+        
+      .phoneTitle
+      {
+        width: 150px;
+        padding: 5px;
+        float: left;
+        text-align: center;
+        color:white;
+      }
+      
     }
     
     .phoneContent

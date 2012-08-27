@@ -48,8 +48,8 @@ class TailgatesController < ApplicationController
   # GET /tailgates/1
   # GET /tailgates/1.json
   def show
-    @tailgate = Tailgate.includes(:team, :posts => [ {:comments => :user}, :user ] ).find(params[:id])
-    if request.path != tailgate_path(@tailgate)
+    @tailgate = Tailgate.includes(:user, :team, :posts => [ {:comments => :user}, :user ] ).find(params[:id])
+    if !request.path.include?( tailgate_path(@tailgate) )
       return redirect_to @tailgate, status: :moved_permanently
     end    
     
@@ -65,7 +65,7 @@ class TailgatesController < ApplicationController
       else
         format.html # show.html.erb
       end
-      format.json { render json: @tailgate }
+      format.json { render json: @tailgate.to_json(include: [:user, :team, :posts => { include: [ :user, :comments => { include: :user } ] } ]) }
     end
   end
 

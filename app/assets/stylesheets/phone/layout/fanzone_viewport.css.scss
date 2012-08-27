@@ -8,7 +8,7 @@
 
   #phoneFanzoneTopNav
   {
-    #backToTilesButton
+    #backToTilesButton, #checkInButton
     {
       margin: 3px;
       float:left;
@@ -25,7 +25,33 @@
     height: 40px;
     position: absolute;
     bottom: 0px;
+    background-color: $phoneBottomNavColor;
     
-    background-color: grey;
+    
+    ul
+    {
+      list-style: none;
+      width: 300px;
+      margin: 0px auto;
+      padding: 0px;
+      
+      li
+      {
+        width: 79px;
+        padding: 10px;
+        float: left;
+        color: white;
+        font-size: 1.3em;
+        font-weight: bold;
+        text-align: center;
+      
+        border-right: 1px solid white;
+      }
+      
+      li:last-child
+      {
+        border: none;
+      }
+    }
   }
 }

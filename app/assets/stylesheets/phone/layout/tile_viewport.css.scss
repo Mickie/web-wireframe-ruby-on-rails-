@@ -1,11 +1,6 @@
 @import "bootstrap/mixins";
 @import "partials/colors";
 
-#phoneTileViewport.open
-{
-  @include translate3d(260px, 0px, 0px)
-}
-
 #phoneTileViewport
 {
   left:0px;
@@ -31,15 +26,6 @@
       {
         margin-top: 3px;
       }        
-    }
-    
-    #phoneTitle
-    {
-      width: 192px;
-      padding: 5px;
-      float: left;
-      text-align: center;
-      color:white;
     }
   }
   

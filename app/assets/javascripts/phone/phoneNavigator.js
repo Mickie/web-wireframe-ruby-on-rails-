@@ -59,18 +59,31 @@ var PhoneNavigator = function()
   
   this.loadTailgate = function( aPath )
   {
+    var thePath = aPath + ".json";
+    this.loadTailgateIntoFanzoneView( thePath );
     this.showFanzone();
-    console.log("loading: " + aPath)
   }
   
-  this.getDataFromServer = function( aPath )
+  this.loadTailgateIntoFanzoneView = function( aPath )
+  {
+    var theToken = $('meta[name=csrf-token]').attr('content');
+    $.ajax({
+             url: aPath + "?authenticity_token=" + theToken,
+             cache:false,
+             dataType: "json",
+             success: createDelegate(this, this.onTailgateLoadComplete ),
+             error: createDelegate(this, this.onLoadError )
+           });
+  }
+  
+  this.loadTilesIntoFrameContent = function( aPath )
   {
     var theToken = $('meta[name=csrf-token]').attr('content');
     $.ajax({
              url: aPath + "&authenticity_token=" + theToken,
              cache:false,
              dataType: "html",
-             success: createDelegate(this, this.onLoadDataComplete ),
+             success: createDelegate(this, this.onTileLoadComplete ),
              error: createDelegate(this, this.onLoadError )
            });
   }
@@ -82,13 +95,13 @@ var PhoneNavigator = function()
   
   this.showAllFanzones = function()
   {
-    this.getDataFromServer("/tailgates?noLayout=true")
+    this.loadTilesIntoFrameContent("/tailgates?noLayout=true")
     InfiniteScroller.get().handleScrollingForResource("/tailgates");
   }
   
   this.showMyFanzones = function()
   {
-    this.getDataFromServer("/tailgates?filter=user&noLayout=true")
+    this.loadTilesIntoFrameContent("/tailgates?filter=user&noLayout=true")
   }
   
   this.showFanzone = function()
@@ -126,9 +139,14 @@ var PhoneNavigator = function()
     alert("device:" + typeof window.device);
   }  
   
-  this.onLoadDataComplete = function(aResult)
+  this.onTileLoadComplete = function(aResult)
   {
     $("#frameContent").html(aResult);
+  };
+  
+  this.onTailgateLoadComplete = function( aResult )
+  {
+    console.log(aResult);
   };
 
   this.onLoadError = function(anError)
