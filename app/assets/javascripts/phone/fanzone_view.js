@@ -38,6 +38,12 @@ var FanzoneView = function()
   {
     var theThis = this;
     return {
+      ".fanzoneName": "name",
+      ".description" : "description",
+      ".profile_pic img@src" : "user.image",
+      ".owner_name" : "user.first_name",
+      ".timestamp@title" : "created_at",
+      ".timestamp" : "created_at",
       ".team_logo img@src" : function(anItem)
       {
         var theSlug = anItem.context.team.slug;
@@ -51,12 +57,14 @@ var FanzoneView = function()
       {
         return "background-color:" + anItem.context.color;
       },
-      ".fanzoneName": "name",
-      ".description" : "description",
-      ".profile_pic img@src" : "user.image",
-      ".owner_name" : "user.first_name",
-      ".timestamp@title" : "created_at",
-      ".timestamp" : "created_at"
+      "#postForm .profile_pic": function(anItem)
+      {
+        return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' />";
+      },
+      "#new_post@action" : function(anItem)
+      {
+        return "/tailgates/" + anItem.context.slug + "/posts";
+      }
     }
   };
   

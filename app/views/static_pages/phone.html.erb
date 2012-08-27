@@ -97,7 +97,28 @@
             </div>
           </div>
 
-
+          <div class="postsAndComments">
+            <% @tailgate = Tailgate.first %>
+            <% @post = @tailgate.posts.build %>
+            <div id="postForm">
+              <h4>Fanzone Posts</h4>
+              <div class="profile_pic">
+                <% if user_signed_in? %>
+                  <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
+                <% end %>
+              </div>
+              <div class="post_fields">
+                <%= render "/posts/form"%>
+              </div>
+            </div>
+            <div id="postTemplate" class="hide">
+              <%= render partial: "partials/post_with_comments", locals: {aPost: @tailgate.posts.first, aPostVote: nil}%>
+            </div>
+            <div id="posts">
+              
+            </div>
+            
+          </div>
 
         </div>
         <div id="phoneFanzoneFooterNav">

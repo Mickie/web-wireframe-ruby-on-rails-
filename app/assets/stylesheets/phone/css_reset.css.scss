@@ -19,3 +19,10 @@ body
 h1, h2, h3, h4, h5, h6, p { margin: 0; }
 
 img { border: 0; max-width: 100%; }
+
+button, input[type="button"], input[type="reset"], input[type="submit"] 
+{
+  cursor: pointer; // Cursors on all buttons applied consistently
+  -webkit-appearance: button; // Style clickable inputs in iOS
+}
+

@@ -1,0 +1,85 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#phoneFanzoneContent
+{
+  .banner_content
+  {
+    position:relative;
+    height: 140px;
+    color: $fanzoneBannerTextColor;
+    @include clearfix;
+
+    div.team_logo
+    {
+      float:left;
+      background-color: $fanzoneBannerLogoBackground;
+      border-top: $fanzoneBorder solid 1px;
+      padding: 10px;
+    }
+    
+    div.fanzone_details
+    {
+      padding-left:110px;
+      
+      .official
+      {
+        display:none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9em;
+        color: $officialTextColor;
+        height: 12px;
+        width:100%;
+        @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
+      }
+
+      h1
+      {
+        color: $fanzoneBannerTextColor;
+        margin:0px;
+        padding: 5px 0px;
+        font-weight: normal;
+        font-size: 1.4em;
+      }
+      
+      .description
+      {
+        font-size: 1.0em;
+      }
+      
+      .owner
+      {
+        position:absolute;
+        bottom: 0px;
+        left: 0px;
+        padding: 5px;
+        
+        .profile_pic
+        {
+          width: 24px;
+          height: 24px;
+          img
+          {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        
+        .owner_details
+        {
+          float:left;
+
+          p
+          {
+            font-size: 0.7em;
+            line-height: 1.2em;
+            margin:0px;
+            padding-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  
+}

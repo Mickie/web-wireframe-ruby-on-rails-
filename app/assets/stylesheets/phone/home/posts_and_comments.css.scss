@@ -1,0 +1,34 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+@import "web/modules/post_form";
+
+#phoneFanzoneContent
+{
+  .postsAndComments
+  {
+    .drop_arrow
+    {
+      width:0px;
+      height: 0px;
+      margin:0px;
+      border-top: white solid 10px;
+      border-left: transparent solid 5px;
+      border-right: transparent solid 5px;
+    }
+    
+    .dropdown-menu
+    {
+      position:absolute;
+      top:100%;
+      z-index: 100;
+      display: none;
+      float: left;
+      width: 160px;
+      padding: 10px;
+      list-style: none;
+      background-color: white;
+      @include box-shadow(0 5px 10px);
+      @include background-clip(padding-box);
+    }
+  }
+}
