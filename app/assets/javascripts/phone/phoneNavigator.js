@@ -5,23 +5,30 @@ var PhoneNavigator = function()
   
   this.initialize = function()
   {
-    $("#showLeftNavButton").on( "click", createDelegate(this, this.onToggleLeftNav) );
-    //$("#showLeftNavButton").on( "tap", createDelegate(this, this.onToggleLeftNav) );
+    this.registerHandlers("click");
+    //this.registerHandlers("tap");
     
     this.adjustForDimensions();
   }
   
-  this.onGapReady = function()
+  this.registerHandlers = function( anEvent )
   {
-    console.log("*************** yes ")
-    alert("device:" + typeof window.device);
+    $("#showLeftNavButton").on( anEvent, createDelegate(this, this.onToggleLeftNav) );
+    $('#frameContent').on( anEvent, '.fanzoneTile a', createDelegate(this, this.killEvent));
   }
+  
+  this.killEvent = function(e)
+  {
+    e.stopPropagation();
+    e.preventDefault();
+    return false;
+  }  
   
   this.adjustForDimensions = function()
   {
     if (typeof window.device !== "undefined" )
     {
-      onGapReady();
+      this.onGapReady();
     }
     else
     {
@@ -57,6 +64,11 @@ var PhoneNavigator = function()
     this.getDataFromServer("/tailgates?filter=user&noLayout=true")
   }
   
+  this.loadTailgate = function( aPath )
+  {
+    console.log("loading: " + aPath)
+  }
+  
   this.getDataFromServer = function( aPath )
   {
     var theToken = $('meta[name=csrf-token]').attr('content');
@@ -82,6 +94,12 @@ var PhoneNavigator = function()
       $("#phoneViewport").removeClass("open");
     }
   }
+  
+  this.onGapReady = function()
+  {
+    console.log("*************** yes ")
+    alert("device:" + typeof window.device);
+  }  
   
   this.onLoadDataComplete = function(aResult)
   {
@@ -117,6 +135,13 @@ var PhoneNavigator = function()
 }
 
 var myPhoneNavigator = new PhoneNavigator();
+
+function loadData(aPath, aNewActiveSelector)
+{
+  myPhoneNavigator.loadTailgate( aPath );
+  return false;
+}
+
 
 $(function()
 {
