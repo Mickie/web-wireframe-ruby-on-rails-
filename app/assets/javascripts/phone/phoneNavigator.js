@@ -53,15 +53,12 @@ var PhoneNavigator = function()
     $("#phoneFanzoneTopNav").width(theViewportWidth);
     $("#phoneFanzoneContent").width(theViewportWidth).height(theViewportHeight - 70);
     $("#phoneFanzoneFooterNav").width(theViewportWidth);
-
-    $("#phoneLeftNav").show();
-    $("#phoneFanzoneViewport").show()
   }
   
   this.loadTailgate = function( aPath )
   {
-    this.myFanzoneView.loadTailgate( aPath )
     this.showFanzone();
+    this.myFanzoneView.loadTailgate( aPath );
   }
   
   this.loadTilesIntoFrameContent = function( aPath )
@@ -96,6 +93,9 @@ var PhoneNavigator = function()
   
   this.showFanzone = function()
   {
+    $("#phoneFanzoneContent").hide();
+    $("#phoneFanzoneLoading").show();
+
     var theWidth = window.outerWidth;
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
@@ -113,7 +113,7 @@ var PhoneNavigator = function()
     
     if(this.myLeftNavOpenFlag)
     {
-      $("#phoneTileViewport").css("-webkit-transform", "translate3d(260px, 0px, 0px)");
+      $("#phoneTileViewport").css("-webkit-transform", "translate3d(260px, 0px, 0px)").show();
     }
     else
     {

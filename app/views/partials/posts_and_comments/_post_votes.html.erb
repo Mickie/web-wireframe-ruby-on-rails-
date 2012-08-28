@@ -1,0 +1,13 @@
+  <div class="post_votes">
+    <div class="vote_up">
+      <% if aPostVote && aPostVote.up_vote %>
+        <i class="icon-thumbs-up icon-white disabled"></i>
+      <% else %>
+        <%= render partial: "partials/buttons/post_up_vote", locals: { aPost: aPost } %>
+      <% end %>      
+    </div>
+    <div class="fan_score"><%= aPost.fan_score %></div>
+    <div class="vote_down">
+      <%= render partial: "partials/buttons/post_down_vote", locals: { aPost: aPost } %>
+    </div>
+  </div>

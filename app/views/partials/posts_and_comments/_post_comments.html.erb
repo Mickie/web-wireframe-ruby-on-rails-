@@ -1,0 +1,11 @@
+<div class="post_comments" id="post_<%= aPost.id %>_comments">
+  <% aPost.comments.visible.each do |aComment| %>
+    <% if user_signed_in? %>
+      <% theCommentVote = current_user.user_comment_votes.find_by_comment_id(aComment.id) %>
+      <% if theCommentVote && !theCommentVote.up_vote %>
+        <% next %>
+      <% end %>
+    <% end %>
+    <%= render partial: "partials/posts_and_comments/comment", locals: { aComment: aComment, aCommentVote: theCommentVote } %>
+  <% end %>
+</div>

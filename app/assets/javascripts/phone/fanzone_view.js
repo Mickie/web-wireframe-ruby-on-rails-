@@ -25,9 +25,41 @@ var FanzoneView = function()
     this.myTailgateModel = aResult;
     console.log(this.myTailgateModel);
     
+    $("#phoneFanzoneContent").show();
+    $("#phoneFanzoneLoading").hide();
+
     $("#phoneFanzoneContent").render(this.myTailgateModel, this.getFanzoneDirective());
     updateTimestamps();
+    
+    
+    //setTimeout(createDelegate(this, this.renderPosts), 10);
   };
+  
+  this.renderPosts = function()
+  {
+    console.log(this.myTailgateModel.posts[0]);
+    return;
+    
+    for(var i=0,j=this.myTailgateModel.posts.length; i<j; i++)
+    {
+      $("#posts").append(this.generatePostDiv(this.myTailgateModel.posts[i]));
+    }
+    
+  }
+
+  this.generatePostDiv = function( aPost )
+  {
+    try
+    {
+      var theDiv = $("#postTemplate").clone().render(aPost, this.getPostDirective());
+      return theDiv;
+    }
+    catch(anError)
+    {
+      console.log(anError);
+      return "<div></div>";    
+    }
+  }
 
   this.onLoadError = function(anError)
   {
@@ -59,7 +91,7 @@ var FanzoneView = function()
       },
       "#postForm .profile_pic": function(anItem)
       {
-        return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' />";
+        return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' width='24' height='24' />";
       },
       "#new_post@action" : function(anItem)
       {
@@ -68,5 +100,44 @@ var FanzoneView = function()
     }
   };
   
+  this.getFanzoneDirective = function()
+  {
+    var theThis = this;
+    return {
+      ".@class" : function() { return "" },
+      ".fan_score" : "fan_score",
+      ".timestamp@title" : "created_at",
+      ".timestamp" : "created_at",
+      ".vote_up form.edit_post@action": function(anItem)
+      {
+        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/up_vote";
+      },
+      ".vote_down form.edit_post@action": function(anItem)
+      {
+        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/down_vote";
+      },
+      ".profile_pic": function(anItem)
+      {
+        return "<img src='" + anItem.context.user.image + "' width='24' height='24' />";
+      },
+      ".post_media": function(anItem)
+      {
+        return theThis.getMediaHtml(anItem.context);
+      }
+    }
+  }  
   
+  this.getMediaHtml = function(aPost)
+  {
+    if (aPost.image_url && aPost.image_url.length > 0)
+    {
+      if (aPost.video_id && aPost.video_id.length > 0)
+      {
+      }
+      else
+      {
+      }
+      
+    }
+  }
 }

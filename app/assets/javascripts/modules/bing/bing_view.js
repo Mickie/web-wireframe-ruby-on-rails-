@@ -54,7 +54,7 @@ var BingView = function(aContainerDivSelector,
       this.createVideoThumbnail(this.myBingVideos[i], this.myElements[j++]);
     };
     
-    this.myDialogDiv.find("#post_media_button").click(createDelegate(this, this.onPostBingItem));
+    this.myDialogDiv.on("click", "#post_media_button", createDelegate(this, this.onPostBingItem));
     this.myDialogDiv.on('hidden', createDelegate(this, this.onDialogHidden));    
   };
   

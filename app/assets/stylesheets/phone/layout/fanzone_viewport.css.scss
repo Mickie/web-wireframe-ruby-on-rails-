@@ -15,6 +15,29 @@
     }
   }
   
+  #phoneFanzoneLoading
+  {
+    width: 220px;
+    height: 300px;
+    padding: 70px 40px;
+    margin: 0 auto;
+    text-align: center;
+
+    h1
+    {
+      height: 20px;
+      padding: 20px 10px;
+      vertical-align: center;
+      float: left;
+    }
+
+    img
+    {
+      float: left;
+    }
+    
+  }
+  
   #phoneFanzoneContent
   {
   }

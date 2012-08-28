@@ -1,0 +1,8 @@
+<div class="post_comment_form">
+  <div class="profile_pic">
+    <% if user_signed_in? %>
+      <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
+    <% end %>
+  </div>
+  <%= render "/comments/form", post:aPost, comment:aPost.comments.build %>
+</div>

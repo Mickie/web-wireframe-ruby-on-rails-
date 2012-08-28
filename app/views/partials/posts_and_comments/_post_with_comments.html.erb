@@ -1,0 +1,6 @@
+<div class="post" id="post_<%= aPost.id %>">
+  <%= render partial: "partials/posts_and_comments/post_votes", locals: {aPost: aPost, aPostVote: aPostVote }%>
+  <%= render partial: "partials/posts_and_comments/post", locals: { aPost: aPost } %>
+  <%= render partial: "partials/posts_and_comments/post_comments", locals: { aPost: aPost }%>
+  <%= render partial: "partials/posts_and_comments/post_comment_form", locals: { aPost: aPost }%>
+</div>
