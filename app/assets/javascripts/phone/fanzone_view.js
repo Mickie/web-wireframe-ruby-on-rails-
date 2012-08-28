@@ -28,12 +28,23 @@ var FanzoneView = function()
     $("#phoneFanzoneContent").show();
     $("#phoneFanzoneLoading").hide();
 
-    $("#phoneFanzoneContent").render(this.myTailgateModel, this.getFanzoneDirective());
+    this.renderBanner();    
+    this.renderPostForm();    
     updateTimestamps();
     
     
     //setTimeout(createDelegate(this, this.renderPosts), 10);
   };
+  
+  this.renderBanner = function()
+  {
+    $("#phoneFanzoneBanner").render(this.myTailgateModel, this.getFanzoneDirective());
+  }
+  
+  this.renderPostForm = function()
+  {
+    $("#postForm").render(this.myTailgateModel, this.getPostFormDirective());
+  }
   
   this.renderPosts = function()
   {
@@ -88,7 +99,13 @@ var FanzoneView = function()
       ".banner_content@style": function(anItem)
       {
         return "background-color:" + anItem.context.color;
-      },
+      }
+    }
+  };
+  
+  this.getPostFormDirective = function()
+  {
+    return {
       "#postForm .profile_pic": function(anItem)
       {
         return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' width='24' height='24' />";
@@ -96,11 +113,11 @@ var FanzoneView = function()
       "#new_post@action" : function(anItem)
       {
         return "/tailgates/" + anItem.context.slug + "/posts";
-      }
+      }      
     }
-  };
+  }
   
-  this.getFanzoneDirective = function()
+  this.getPostDirective = function()
   {
     var theThis = this;
     return {

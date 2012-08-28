@@ -70,38 +70,40 @@
             follow
           </button>
         </div>
-        <div id="phoneFanzoneLoading">
+        <div id="phoneFanzoneLoading" class="hide">
           <div>
             <img src='/assets/loading.gif' />
             <h1>Loading...</h1>
           </div>;
         </div>
-        <div id="phoneFanzoneContent" class="phoneContent hide">
-          <div class="banner_content">
-            <div class="team_logo">
-              <img />
-            </div>
-            <div class="fanzone_details">
-              <div class="official">
-                <span>Official</span>
+        <div id="phoneFanzoneContent" class="phoneContent">
+          <div id="phoneFanzoneBanner">
+            <div class="banner_content">
+              <div class="team_logo">
+                <img />
               </div>
-              <h1 class="fanzoneName"></h1>
-              <p class="description"></p>
-              <div class="owner">
-                <div class="profile_pic">
-                  <img />
+              <div class="fanzone_details">
+                <div class="official">
+                  <span>Official</span>
                 </div>
-                <div class="owner_details">
-                  <p>Created by <span class="owner_name"></span></p>
-                  <p>
-                    Updated: 
-                    <span class="timestamp" title="" ></span>
-                  </p>
+                <h1 class="fanzoneName"></h1>
+                <p class="description"></p>
+                <div class="owner">
+                  <div class="profile_pic">
+                    <img />
+                  </div>
+                  <div class="owner_details">
+                    <p>Created by <span class="owner_name"></span></p>
+                    <p>
+                      Updated: 
+                      <span class="timestamp" title="" ></span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
+          
           <div class="postsAndComments">
             <% @tailgate = Tailgate.first %>
             <% @post = @tailgate.posts.build %>

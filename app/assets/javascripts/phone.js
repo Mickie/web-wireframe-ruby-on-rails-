@@ -12,7 +12,7 @@
 //
 // update config/environments/production.rb with other files you want to also include in addition to this one
 //
-//= require_tree ./phoneLib
+//= require jquery
 //= require jquery_ujs
 //= require ./lib/jquery.timeago
 //= require ./lib/pure

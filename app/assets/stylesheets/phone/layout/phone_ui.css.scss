@@ -68,7 +68,7 @@ a
     top:0px;
     z-index: 1;
 
-    @include transition(all 0.3s ease-in-out);
+    @include transition(left 0.3s ease-in-out);
     @include backface-visibility(hidden);
 
     .phoneTopNav
