@@ -20,5 +20,15 @@ function addMissingStuffWeNeedToZepto()
       $.fn[theKey] = aGroupOfFunctions[theKey];
     }
   }
+  
+  $._data = function(anElement, aType)
+  {
+    console.log("_data called!")
+    return [];
+  }
+  
+  $.ajaxPrefilter = function() {}
+  
+  $.support = { submitBubbles: true }
 }
 addMissingStuffWeNeedToZepto();

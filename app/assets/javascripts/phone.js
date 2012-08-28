@@ -16,8 +16,12 @@
 //= require globals
 //= require_tree ./facebook
 //= require_tree ./phone
-//= require ./modules/infinite_scroller
+//= require jquery_ujs
 //= require ./lib/jquery.timeago
 //= require ./lib/pure
+//= require ./modules/infinite_scroller
 //= require ./utilities/timestamps
 //= require google_analytics
+//= require_self
+
+$.rails.fileInputSelector = "input[type=file]"
