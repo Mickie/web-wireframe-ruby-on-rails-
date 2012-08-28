@@ -93,6 +93,7 @@ var PhoneNavigator = function()
   
   this.showFanzone = function()
   {
+    $("#phoneFanzoneViewport").show();
     $("#phoneFanzoneContent").hide();
     $("#phoneFanzoneLoading").show();
 
@@ -113,7 +114,8 @@ var PhoneNavigator = function()
     
     if(this.myLeftNavOpenFlag)
     {
-      $("#phoneTileViewport").css("-webkit-transform", "translate3d(260px, 0px, 0px)").show();
+      $("#phoneLeftNav").show();
+      $("#phoneTileViewport").css("-webkit-transform", "translate3d(260px, 0px, 0px)");
     }
     else
     {
