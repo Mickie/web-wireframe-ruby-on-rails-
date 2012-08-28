@@ -80,8 +80,14 @@ var FanzoneView = function()
 
   this.renderCommentIntoDiv = function( aComment, aPost, aDiv )
   {
-      var theCommentDiv = $("#postCommentTemplate .comment").clone().render(aComment, this.getPostCommentDirective(aPost));
-      aDiv.find(".postComments").append(theCommentDiv);
+    var theCommentDiv = $("#postCommentTemplate .comment").clone().render(aComment, this.getPostCommentDirective(aPost));
+    aDiv.find(".postComments").append(theCommentDiv);
+  }
+  
+  this.renderCommentsFormIntoDiv = function( aPost, aDiv )
+  {
+    var theCommentFormDiv = $("#postCommentFormTemplate .post_comment_form").clone().render(aPost, this.getPostCommentFormDirective());
+    aDiv.find(".postComments").append(theCommentFormDiv);
   }
   
   this.renderCommentsIntoDiv = function( aPost, aDiv )
@@ -90,6 +96,7 @@ var FanzoneView = function()
     {
       this.renderCommentIntoDiv( aPost.comments[i], aPost, aDiv )
     };
+    this.renderCommentsFormIntoDiv( aPost, aDiv );
   }
 
   this.generatePostDiv = function( aPost )
@@ -199,6 +206,20 @@ var FanzoneView = function()
       {
         return "<img src='" + anItem.context.user.image + "' width='24' height='24' />";
       },
+    }
+  }
+  
+  this.getPostCommentFormDirective = function()
+  {
+    return {
+      "form@action" : function(anItem)
+      {
+        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/comments";
+      },
+      ".profile_pic" : function(anItem)
+      {
+        return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' width='24' height='24' />";
+      }
     }
   }
 
