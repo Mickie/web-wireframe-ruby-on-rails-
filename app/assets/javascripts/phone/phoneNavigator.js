@@ -85,11 +85,13 @@ var PhoneNavigator = function()
   {
     this.loadTilesIntoFrameContent("/tailgates?noLayout=true")
     InfiniteScroller.get().handleScrollingForResource("/tailgates");
+    this.onToggleLeftNav();
   }
   
   this.showMyFanzones = function()
   {
     this.loadTilesIntoFrameContent("/tailgates?filter=user&noLayout=true")
+    this.onToggleLeftNav();
   }
   
   this.showFanzone = function()
@@ -130,6 +132,7 @@ var PhoneNavigator = function()
   this.onTileLoadComplete = function(aResult)
   {
     $("#frameContent").html(aResult);
+    updateTimestamps();
   };
   
   this.onLoadError = function(anError)

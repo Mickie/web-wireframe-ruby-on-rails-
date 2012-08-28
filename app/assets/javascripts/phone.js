@@ -13,15 +13,12 @@
 // update config/environments/production.rb with other files you want to also include in addition to this one
 //
 //= require_tree ./phoneLib
-//= require globals
-//= require_tree ./facebook
-//= require_tree ./phone
 //= require jquery_ujs
 //= require ./lib/jquery.timeago
 //= require ./lib/pure
+//= require globals
+//= require_tree ./phone
 //= require ./modules/infinite_scroller
 //= require ./utilities/timestamps
 //= require google_analytics
-//= require_self
-
-$.rails.fileInputSelector = "input[type=file]"
+//= require_tree ./facebook
