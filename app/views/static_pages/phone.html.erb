@@ -105,8 +105,8 @@
           </div>
           
           <div class="postsAndComments">
-            <% @tailgate = Tailgate.first %>
-            <% @post = @tailgate.posts.build %>
+            <% @tailgate = Tailgate.find(15) %>
+            <% @post = Post.new %>
             <div id="postForm">
               <h4>Fanzone Posts</h4>
               <div class="profile_pic">
@@ -118,10 +118,15 @@
                 <%= render "/posts/form" %>
               </div>
             </div>
+            
             <div id="phoneFanzoneTemplates" class="hide">
               <div id="postTemplate">
-                <%= render partial: "partials/posts_and_comments/post_votes", locals: {aPost: @tailgate.posts.first, aPostVote: nil }%>
-                <%= render partial: "partials/posts_and_comments/post", locals: {aPost: @tailgate.posts.first}%>
+                <%= render partial: "partials/posts_and_comments/post_votes", locals: {aPost: @tailgate.posts.last, aPostVote: nil }%>
+                <%= render partial: "partials/posts_and_comments/post", locals: {aPost: @tailgate.posts.last}%>
+                <div class="postComments"></div>
+              </div>
+              <div id="postCommentTemplate">
+                <%= render partial: "partials/posts_and_comments/comment", locals: { aComment: @tailgate.posts.last.comments.first, aCommentVote: nil } %>
               </div>
               <div id="postVideoTemplate">
                 <div class="post_video" id="">

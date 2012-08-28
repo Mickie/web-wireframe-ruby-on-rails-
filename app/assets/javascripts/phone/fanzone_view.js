@@ -5,6 +5,7 @@ var FanzoneView = function()
   this.loadTailgate = function( aPath )
   {
     var thePath = aPath + ".json";
+    this.clearContents();
     this.loadTailgateIntoFanzoneView( thePath );
   }
   
@@ -18,6 +19,11 @@ var FanzoneView = function()
              success: createDelegate(this, this.onTailgateLoadComplete ),
              error: createDelegate(this, this.onLoadError )
            });
+  }
+
+  this.clearContents = function()
+  {
+    $("#phoneFanzoneContent #posts").empty();
   }
 
   this.onTailgateLoadComplete = function( aResult )
@@ -55,7 +61,7 @@ var FanzoneView = function()
     updateTimestamps();
   }
   
-  this.renderPostMediaIntoDiv = function(aPost, aDiv)
+  this.renderPostMediaIntoDiv = function( aPost, aDiv )
   {
     if (aPost.image_url && aPost.image_url.length > 0)
     {
@@ -72,12 +78,27 @@ var FanzoneView = function()
     }
   }
 
+  this.renderCommentIntoDiv = function( aComment, aPost, aDiv )
+  {
+      var theCommentDiv = $("#postCommentTemplate .comment").clone().render(aComment, this.getPostCommentDirective(aPost));
+      aDiv.find(".postComments").append(theCommentDiv);
+  }
+  
+  this.renderCommentsIntoDiv = function( aPost, aDiv )
+  {
+    for (var i=0; i < aPost.comments.length; i++) 
+    {
+      this.renderCommentIntoDiv( aPost.comments[i], aPost, aDiv )
+    };
+  }
+
   this.generatePostDiv = function( aPost )
   {
     try
     {
       var theDiv = $("#postTemplate").clone().render(aPost, this.getPostDirective());
       this.renderPostMediaIntoDiv(aPost, theDiv);
+      this.renderCommentsIntoDiv(aPost, theDiv);
       return theDiv;
     }
     catch(anError)
@@ -157,6 +178,30 @@ var FanzoneView = function()
     }
   }  
 
+  this.getPostCommentDirective = function( aPost )
+  {
+    return {
+      ".@id": "id",
+      ".fan_score" : "fan_score",
+      ".timestamp@title" : "created_at",
+      ".timestamp" : "created_at",
+      ".user_name" : "user.name",
+      "p": "content",
+      ".vote_up form.edit_comment@action": function(anItem)
+      {
+        return "/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "/up_vote";
+      },
+      ".vote_down form.edit_comment@action": function(anItem)
+      {
+        return "/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "/down_vote";
+      },
+      ".profile_pic": function(anItem)
+      {
+        return "<img src='" + anItem.context.user.image + "' width='24' height='24' />";
+      },
+    }
+  }
+
   this.getPostVideoDirective = function()
   {
     return {
@@ -170,5 +215,6 @@ var FanzoneView = function()
     return {
       "img@src": "image_url"
     };
-  }  
+  }
+  
 }
