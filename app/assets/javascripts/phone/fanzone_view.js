@@ -81,13 +81,13 @@ var FanzoneView = function()
   this.renderCommentIntoDiv = function( aComment, aPost, aDiv )
   {
     var theCommentDiv = $("#postCommentTemplate .comment").clone().render(aComment, this.getPostCommentDirective(aPost));
-    aDiv.find(".postComments").append(theCommentDiv);
+    aDiv.find(".post_comments").append(theCommentDiv);
   }
   
   this.renderCommentsFormIntoDiv = function( aPost, aDiv )
   {
     var theCommentFormDiv = $("#postCommentFormTemplate .post_comment_form").clone().render(aPost, this.getPostCommentFormDirective());
-    aDiv.find(".postComments").append(theCommentFormDiv);
+    aDiv.append(theCommentFormDiv);
   }
   
   this.renderCommentsIntoDiv = function( aPost, aDiv )
@@ -165,10 +165,14 @@ var FanzoneView = function()
     var theThis = this;
     return {
       ".@id" : "id",
+      ".@class" : function(){ return "post"; },
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
-      ".user_name" : "user.name",
+      ".user_name" : function(anItem)
+      {
+        return anItem.context.user.first_name + " " + anItem.context.user.last_name;
+      },
       "p": "content",
       ".vote_up form.edit_post@action": function(anItem)
       {
@@ -192,7 +196,10 @@ var FanzoneView = function()
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
-      ".user_name" : "user.name",
+      ".user_name" : function(anItem)
+      {
+        return anItem.context.user.first_name + " " + anItem.context.user.last_name;
+      },
       "p": "content",
       ".vote_up form.edit_comment@action": function(anItem)
       {

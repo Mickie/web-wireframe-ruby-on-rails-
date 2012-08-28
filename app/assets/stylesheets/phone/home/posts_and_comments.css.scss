@@ -1,11 +1,14 @@
 @import "bootstrap/mixins";
 @import "partials/colors";
-@import "web/modules/post_form";
+@import "web/modules/posts_and_comments/post_form";
+@import "web/modules/posts_and_comments/posts";
 
 #phoneFanzoneContent
 {
   .postsAndComments
   {
+    background-color: white;
+
     .drop_arrow
     {
       width:0px;
@@ -29,6 +32,22 @@
       background-color: white;
       @include box-shadow(0 5px 10px);
       @include background-clip(padding-box);
+    }
+    
+    .post_content, .comment_content
+    {
+      margin-left: 32px;
+      
+      .post_media
+      {
+        width: 200px;
+      }
+
+    }
+    
+    div#posts div.post .post_comment_form .comment_form form #comment_content
+    {
+      height: 24px;
     }
   }
 }

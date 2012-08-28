@@ -1,0 +1,16 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+
+#fanzonePosts
+{
+  float: left;
+  width: 66.6%;
+  background-color: white;
+  
+  textarea
+  {
+    @include border-radius(0);
+    @include box-shadow(none); 
+  }
+
+}
