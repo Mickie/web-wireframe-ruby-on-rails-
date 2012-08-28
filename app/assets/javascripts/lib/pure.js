@@ -7,7 +7,7 @@
 	Copyright (c) 2012 Michael Cvilic - BeeBole.com
 
 	Thanks to Rog Peppe for the functional JS jump
-	revision: 2.74
+	revision: 2.76
 */
 
 var $p, pure = $p = function(){
@@ -144,24 +144,32 @@ $p.core = function(sel, ctxt, plugins){
 			var strs = [ parts[ 0 ] ],
 				n = parts.length,
 				fnVal, pVal, attLine, pos;
+			try{
+				for(var i = 1; i < n; i++){
+					fnVal = fns[i].call( this, ctxt );
+					pVal = parts[i];
 
-			for(var i = 1; i < n; i++){
-				fnVal = fns[i].call( this, ctxt );
-				pVal = parts[i];
-
-				// if the value is empty and attribute, remove it
-				if(fnVal === ''){
-					attLine = strs[ strs.length - 1 ];
-					if( ( pos = attLine.search( /[^\s]+=\"?$/ ) ) > -1){
-						strs[ strs.length - 1 ] = attLine.substring( 0, pos );
-						pVal = pVal.substr( 1 );
+					// if the value is empty and attribute, remove it
+					if(fnVal === ''){
+						attLine = strs[ strs.length - 1 ];
+						if( ( pos = attLine.search( /[^\s]+=\"?$/ ) ) > -1){
+							strs[ strs.length - 1 ] = attLine.substring( 0, pos );
+							pVal = pVal.substr( 1 );
+						}
 					}
-				}
 
-				strs[ strs.length ] = fnVal;
-				strs[ strs.length ] = pVal;
+					strs[ strs.length ] = fnVal;
+					strs[ strs.length ] = pVal;
+				}
+				return strs.join('');
+			}catch(e){
+				if(console && console.log){
+					console.log( e.stack ? 
+						e.stack : 
+						e.message + ' (' + e.type + ', ' + e.arguments.join('-') + '). Use Firefox or Chromium/Chrome to get a full stack of the error. ' );
+				}
+				return '';
 			}
-			return strs.join('');
 		};
 	}
 
@@ -325,6 +333,8 @@ $p.core = function(sel, ctxt, plugins){
 						//replace node with s
 						pn.insertBefore(document.createTextNode(s), node.nextSibling);
 						pn.removeChild(node);
+					}else{
+						error('The template root, can\'t be looped.');
 					}
 				};
 			} else {
@@ -642,6 +652,10 @@ $p.core = function(sel, ctxt, plugins){
 			ep.appendChild(elm);
 		}
 		switch (elm.tagName) {
+			case 'BODY': //thanks to milan.adamovsky@gmail.com
+				ep.removeChild(elm);
+				ep.innerHTML += html;
+				return ep.getElementsByTagName('BODY')[0];
 			case 'TBODY': case 'THEAD': case 'TFOOT':
 				html = '<TABLE>' + html + '</TABLE>';
 				depth = 1;
@@ -718,8 +732,7 @@ $p.libs = {
 				return $p(this).compile(this._pure_d || directive, ctxt);
 			},
 			render:function(ctxt, directive){
-			  $p( this ).render( ctxt, this._pure_d || directive );
-				return this;
+				return jQuery( $p( this ).render( ctxt, this._pure_d || directive ) );
 			},
 			autoRender:function(ctxt, directive){
 				return jQuery( $p( this ).autoRender( ctxt, this._pure_d || directive ) );
