@@ -29,7 +29,6 @@ var FanzoneView = function()
   this.onTailgateLoadComplete = function( aResult )
   {
     this.myTailgateModel = aResult;
-    console.log(this.myTailgateModel);
     
     $("#phoneFanzoneContent").show();
     $("#phoneFanzoneLoading").hide();
@@ -37,7 +36,6 @@ var FanzoneView = function()
     this.renderBanner();    
     this.renderPostForm();    
     updateTimestamps();
-    
     
     setTimeout(createDelegate(this, this.renderPosts), 10);
   };

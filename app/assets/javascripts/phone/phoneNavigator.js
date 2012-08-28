@@ -100,12 +100,15 @@ var PhoneNavigator = function()
     var theWidth = window.outerWidth;
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
+
+    window.scrollTo(0, 1);
   }
 
   this.onBackToTiles = function(e)
   {
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
+    window.scrollTo(0, 1);
   }
 
   this.onToggleLeftNav = function(e)
@@ -121,6 +124,8 @@ var PhoneNavigator = function()
     {
       $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     }
+
+    window.scrollTo(0, 1);
     
     return false;
   }
