@@ -33,7 +33,7 @@ var FanzoneView = function()
     updateTimestamps();
     
     
-    //setTimeout(createDelegate(this, this.renderPosts), 10);
+    setTimeout(createDelegate(this, this.renderPosts), 10);
   };
   
   this.renderBanner = function()
@@ -48,14 +48,28 @@ var FanzoneView = function()
   
   this.renderPosts = function()
   {
-    console.log(this.myTailgateModel.posts[0]);
-    return;
-    
     for(var i=0,j=this.myTailgateModel.posts.length; i<j; i++)
     {
       $("#posts").append(this.generatePostDiv(this.myTailgateModel.posts[i]));
     }
-    
+    updateTimestamps();
+  }
+  
+  this.renderPostMediaIntoDiv = function(aPost, aDiv)
+  {
+    if (aPost.image_url && aPost.image_url.length > 0)
+    {
+      if (aPost.video_id && aPost.video_id.length > 0)
+      {
+        var theVideoDiv = $("#postVideoTemplate .post_video").clone().render(aPost, this.getPostVideoDirective());
+        aDiv.find(".post_media").append(theVideoDiv);
+      }
+      else
+      {
+        var theImageDiv = $("#postImageTemplate .post_image").clone().render(aPost, this.getPostImageDirective());
+        aDiv.find(".post_media").append(theImageDiv);
+      }
+    }
   }
 
   this.generatePostDiv = function( aPost )
@@ -63,6 +77,7 @@ var FanzoneView = function()
     try
     {
       var theDiv = $("#postTemplate").clone().render(aPost, this.getPostDirective());
+      this.renderPostMediaIntoDiv(aPost, theDiv);
       return theDiv;
     }
     catch(anError)
@@ -121,10 +136,12 @@ var FanzoneView = function()
   {
     var theThis = this;
     return {
-      ".@class" : function() { return "" },
+      ".@id" : "id",
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
+      ".user_name" : "user.name",
+      "p": "content",
       ".vote_up form.edit_post@action": function(anItem)
       {
         return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/up_vote";
@@ -137,24 +154,21 @@ var FanzoneView = function()
       {
         return "<img src='" + anItem.context.user.image + "' width='24' height='24' />";
       },
-      ".post_media": function(anItem)
-      {
-        return theThis.getMediaHtml(anItem.context);
-      }
     }
   }  
-  
-  this.getMediaHtml = function(aPost)
+
+  this.getPostVideoDirective = function()
   {
-    if (aPost.image_url && aPost.image_url.length > 0)
-    {
-      if (aPost.video_id && aPost.video_id.length > 0)
-      {
-      }
-      else
-      {
-      }
-      
-    }
-  }
+    return {
+      ".@id": "video_id",
+      "img@src": "image_url"
+    };
+  }  
+
+  this.getPostImageDirective = function()
+  {
+    return {
+      "img@src": "image_url"
+    };
+  }  
 }
