@@ -18,7 +18,7 @@ var BaseThumbnail = function( aView )
     try
     {
       this.myElement = anElement.render( this.myData, this.getRenderDirective() );
-      this.myElement.on("click", createDelegate(this, this.onClick ) );
+      this.myElement.click( createDelegate(this, this.onClick ) );
     }
     catch(anError)
     {
