@@ -28,6 +28,7 @@ var TwitterView = function( aMaxTweets,
   this.myFullyLoadedFlag = false;
   this.myTwitterController = new TwitterController(this);
   this.myTwitterSearch = new TwitterSearch(this);
+  this.myQuickTweetView = new QuickTweetView( this.myControlsDivSelector );
   this.myRefreshTweetsInterval;
 
   var theCurrentPostVal = getCookie("#postForm #post_content");
@@ -53,7 +54,7 @@ var TwitterView = function( aMaxTweets,
     this.myNotTags = anArrayOfNotTags;
 
     $(this.myNewTweetDivSelector).click(createDelegate(this, this.showNewTweets));
-    this.initializeButtons();
+    this.myQuickTweetView.initializeButtons( this.mySportId );
   
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
   };
@@ -69,8 +70,8 @@ var TwitterView = function( aMaxTweets,
     clearTimeout(this.myRefreshTweetsInterval);
     this.myNewTweets = new Array();
     this.myFullyLoadedFlag = false;
-    this.myTwitterController.abort();
     this.myTwitterSearch.abort();
+    this.myQuickTweetView.abort();
   };
 
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
@@ -158,19 +159,6 @@ var TwitterView = function( aMaxTweets,
     $("div#frameContent").on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
   }
   
-  
-  this.initializeButtons = function()
-  {
-    this.myTwitterController.loadButtonData(this.mySportId, createDelegate(this, this.onButtonDataLoaded));
-  };
-  
-  this.onButtonDataLoaded = function()
-  {
-    this.myTwitterController.addQuickTweetButtons( $( this.myControlsDivSelector + " ul.dropdown-menu") );
-    
-    $( this.myControlsDivSelector + " p" ).each( createDelegate( this.myTwitterController, 
-                                                                    this.myTwitterController.addQuickTweetClick ));
-  };
   
   this.onNewTweet = function(anIndex, aTweet)
   {
