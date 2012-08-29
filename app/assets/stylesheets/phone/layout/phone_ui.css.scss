@@ -68,7 +68,7 @@ a
     top:0px;
     z-index: 1;
 
-    @include transition(left 0.3s ease-in-out);
+    @include transition(all 0.3s ease-in-out);
     @include backface-visibility(hidden);
 
     .phoneTopNav
@@ -98,7 +98,8 @@ a
       height: 346px;
       position: absolute;
       top: 30px;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
       background-color: $navBackgroundColor;
     }
   }

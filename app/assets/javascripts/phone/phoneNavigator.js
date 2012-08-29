@@ -1,14 +1,20 @@
 var PhoneNavigator = function()
 {
+  var LEFT_NAV_OPEN = 1;
+  var TILES_OPEN = 2;
+  var FANZONE_OPEN = 3;
+  
   this.myFacebookController = new FacebookController();
   this.myFanzoneView = new FanzoneView();
-  this.myLeftNavOpenFlag = false;
+  this.myCurrentState = TILES_OPEN;
   
   this.initialize = function()
   {
     this.registerHandlers("click");
     //this.registerHandlers("tap");
     
+    this.connectToPhoneGap();
+    this.handleOrientationChanges();
     this.adjustForDimensions();
   }
   
@@ -24,9 +30,14 @@ var PhoneNavigator = function()
     e.stopPropagation();
     e.preventDefault();
     return false;
-  }  
+  }
   
-  this.adjustForDimensions = function()
+  this.handleOrientationChanges = function()
+  {
+    window.onorientationchange = createDelegate(this, this.adjustForDimensions);
+  }
+  
+  this.connectToPhoneGap = function()
   {
     if (typeof window.device !== "undefined" )
     {
@@ -36,9 +47,42 @@ var PhoneNavigator = function()
     {
       document.addEventListener('deviceready', createDelegate(this, this.onGapReady), false);
     }
+  }
+  
+  this.getDimensions = function()
+  {
+    var theViewportWidth;
+    var theViewportHeight;
     
-    var theViewportWidth = window.outerWidth;
-    var theViewportHeight = window.outerHeight;
+    switch(window.orientation) 
+    {
+      case -90:
+      case 90:
+      {
+        theViewportWidth = 480;
+        theViewportHeight = 270;
+        break;
+      }
+      default:
+      {
+        theViewportWidth = 320;
+        theViewportHeight = 416;
+        break;
+      }
+    }
+    
+    return {
+      "width": theViewportWidth,
+      "height": theViewportHeight
+    }
+  }
+  
+  
+  this.adjustForDimensions = function()
+  {
+    var theDimensions = this.getDimensions();
+    var theViewportWidth = theDimensions.width;
+    var theViewportHeight = theDimensions.height;
     
     console.log("width: " + theViewportWidth + " height: " + theViewportHeight);
     
@@ -53,6 +97,12 @@ var PhoneNavigator = function()
     $("#phoneFanzoneTopNav").width(theViewportWidth);
     $("#phoneFanzoneContent").width(theViewportWidth).height(theViewportHeight - 70);
     $("#phoneFanzoneFooterNav").width(theViewportWidth);
+    $("#phoneFanzoneFooterNav").css("top", (theViewportHeight - 40) + "px");
+    
+    if (this.myCurrentState == FANZONE_OPEN)
+    {
+      this.positionFanzone();
+    }
   }
   
   this.loadTailgate = function( aPath )
@@ -97,31 +147,39 @@ var PhoneNavigator = function()
     $("#phoneFanzoneContent").hide();
     $("#phoneFanzoneLoading").show();
 
-    var theWidth = window.outerWidth;
+    this.positionFanzone();
+    window.scrollTo(0, 1);
+
+    this.myCurrentState = FANZONE_OPEN;
+  }
+  
+  this.positionFanzone = function()
+  {
+    var theWidth = this.getDimensions().width;
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
-
-    window.scrollTo(0, 1);
   }
-
+  
   this.onBackToTiles = function(e)
   {
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     window.scrollTo(0, 1);
+    
+    this.myCurrentState = TILES_OPEN;
   }
 
   this.onToggleLeftNav = function(e)
   {
-    this.myLeftNavOpenFlag = !this.myLeftNavOpenFlag;
-    
-    if(this.myLeftNavOpenFlag)
+    if(this.myCurrentState == TILES_OPEN)
     {
+      this.myCurrentState = LEFT_NAV_OPEN;
       $("#phoneLeftNav").show();
       $("#phoneTileViewport").css("-webkit-transform", "translate3d(260px, 0px, 0px)");
     }
     else
     {
+      this.myCurrentState = TILES_OPEN;
       $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     }
 
