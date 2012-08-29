@@ -162,11 +162,18 @@ var FanzoneView = function()
   {
     var theThis = this;
     return {
-      ".@id" : "id",
-      ".@class" : function(){ return "post"; },
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
+      ".@class" : function(){ return "post"; },
+      ".@id" : function(anItem)
+      {
+        return "post_" + anItem.context.id;
+      },
+      ".post_comments@id" : function(anItem)
+      {
+        return "post_" + anItem.context.id + "_comments";
+      },
       ".user_name" : function(anItem)
       {
         return anItem.context.user.first_name + " " + anItem.context.user.last_name;
@@ -190,10 +197,13 @@ var FanzoneView = function()
   this.getPostCommentDirective = function( aPost )
   {
     return {
-      ".@id": "id",
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
+      ".@id" : function(anItem)
+      {
+        return "post_" + aPost.id + "_comment_" + anItem.context.id;
+      },
       ".user_name" : function(anItem)
       {
         return anItem.context.user.first_name + " " + anItem.context.user.last_name;
