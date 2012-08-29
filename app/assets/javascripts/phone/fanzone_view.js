@@ -45,7 +45,7 @@ var FanzoneView = function()
     this.renderPostForm();    
     updateTimestamps();
     
-    this.myQuickTweetView.initializeButtons(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
+    this.myQuickTweetView.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
     $("#new_post ul").addClass("pull-right");
     
     setTimeout(createDelegate(this, this.renderPosts), 10);

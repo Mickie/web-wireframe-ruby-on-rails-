@@ -1,11 +1,11 @@
-var QuickTweetView = function( aControlsDivSelector, aListener )
+var QuickTweetView = function( aContainerSelector, aListener )
 {
-  this.myControlsDivSelector = aControlsDivSelector;
+  this.myContainerSelector = aContainerSelector;
   this.myListener = aListener;
   this.myController = new QuickTweetController(this);
   this.myHashTags = {};
   
-  this.initializeButtons = function( aSportId, aHashTags )
+  this.initialize = function( aSportId, aHashTags )
   {
     this.myHashTags = aHashTags;
     this.myController.loadButtonData( aSportId );
@@ -13,10 +13,10 @@ var QuickTweetView = function( aControlsDivSelector, aListener )
   
   this.onButtonDataLoaded = function()
   {
-    this.myController.addQuickTweetButtons( $( this.myControlsDivSelector + " ul.dropdown-menu") );
+    this.myController.addQuickTweetButtons( $( this.myContainerSelector + " ul.dropdown-menu") );
     
-    $( this.myControlsDivSelector + " p" ).each( createDelegate( this.myController, 
-                                                                 this.myController.addQuickTweetClick ));
+    $( this.myContainerSelector + " p" ).each( createDelegate( this.myController,
+                                                               this.myController.addQuickTweetClick ));
   };
   
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText )
@@ -24,22 +24,4 @@ var QuickTweetView = function( aControlsDivSelector, aListener )
     this.myListener.updatePostForm( aForceTwitterFlag, aDefaultText + " " + this.myHashTags);
   }
   
-  this.abort = function()
-  {
-    this.myController.abort();
-  }
-  
-}
-
-var mySingletonQuickTweetView;
-QuickTweetView.create = function(aControlsDivSelector, aListener)
-{
-  if (mySingletonQuickTweetView)
-  {
-    mySingletonQuickTweetView.abort();
-    return mySingletonQuickTweetView;
-  }
-  
-  mySingletonQuickTweetView = new QuickTweetView(aControlsDivSelector, aListener);
-  return mySingletonQuickTweetView;
 }

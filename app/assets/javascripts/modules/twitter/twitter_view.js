@@ -5,7 +5,7 @@ var DELAYED_TWEET_RELOAD_SCHEDULE = 60000;
 var TwitterView = function( aMaxTweets, 
                             aTweetDivId, 
                             aNewTweetDivId,
-                            aControlsDivId, 
+                            aFanzonePostView, 
                             aConnectedToTwitterFlag,
                             aUserId,
                             aTwitterViewVariableName)
@@ -15,7 +15,7 @@ var TwitterView = function( aMaxTweets,
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
-  this.myControlsDivSelector = "#" + aControlsDivId;
+  this.myFanzonePostView = aFanzonePostView;
   this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
   this.myUserId = aUserId;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
@@ -71,14 +71,7 @@ var TwitterView = function( aMaxTweets,
 
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
   {
-    if (aForceTwitterFlag)
-    {
-      $(this.myControlsDivSelector + " #post_twitter_flag").prop("checked", true);
-    }
-
-    $(this.myControlsDivSelector + " #post_content").val(aDefaultText);
-    $(this.myControlsDivSelector + " #post_twitter_reply_id").val(aReplyId ? aReplyId : "");
-    $(this.myControlsDivSelector + " #post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
+    this.myFanzonePostView.updatePostForm( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId );
   };
   
   if (this.isConnectedToTwitter())
@@ -349,10 +342,9 @@ var myCurrentTwitterViews = {};
 TwitterView.create = function(aMaxTweets, 
                               aTweetDivId, 
                               aNewTweetDivId,
-                              aControlsDivId, 
+                              aFanzonePostView, 
                               aConnectedToTwitterFlag,
                               aUserId,
-                              aSportId,
                               aTwitterViewVariableName)
 {
   if (myCurrentTwitterViews[aTwitterViewVariableName])
@@ -364,10 +356,9 @@ TwitterView.create = function(aMaxTweets,
   myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView(aMaxTweets, 
                                                                     aTweetDivId, 
                                                                     aNewTweetDivId,
-                                                                    aControlsDivId, 
+                                                                    aFanzonePostView, 
                                                                     aConnectedToTwitterFlag,
                                                                     aUserId,
-                                                                    aSportId,
                                                                     aTwitterViewVariableName);
   
   return myCurrentTwitterViews[aTwitterViewVariableName];

@@ -93,22 +93,24 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h3>What people are saying about the game:</h3>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span6">
-    <div class="controls" id="visitingTweetControls">
+    <h3>Say something about the game:</h3>
+    <div class="controls" id="tweetControls">
       <div class="input-append">
-        <textarea class="input-xlarge span4" rows="1"><%= raw  @visitingHashTags.join(' ') %></textarea>
+        <textarea class="input-xlarge span4" rows="1"></textarea>
         <div class="btn-group">
           <button href="#" class="fanzoButton">Update Social Status</button>
           <%= render partial: "partials/buttons/quick_tweet_button" %>
         </div>
       </div>
-    </div>    
-    
+    </div>
+  </div>    
+  <div class="span12">
+    <h3>What other people are saying about the game:</h3>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6">
     <div id="tweetHolder">
       <h4><%= @event.visiting_team.name %> tweet stream:</h4>
       <div id="newTweetsVisiting" class='alert alert-info fade in' style='display:none'>
@@ -120,22 +122,14 @@
     </div>
   </div>
   <div class="span6">
-    <div class="controls" id="homeTweetControls">
-      <div class="input-append">
-        <textarea class="input-xlarge span4" rows="1"><%= raw @homeHashTags.join(' ') %></textarea>
-        <div class="btn-group">
-          <button href="#" class="fanzoButton">Update Social Status</button>
-          <%= render partial: "partials/buttons/quick_tweet_button" %>
-        </div>
-      </div>
-    </div>    
-
     <div id="tweetHolder">
       <h4><%= @event.home_team.name %> tweet stream:</h4>
       <div id="newTweetsHome" class='alert alert-info fade in' style='display:none'>
         <a class='close' data-dismiss='alert' href='#'>×</a><p><strong>5</strong> new Tweets!</p>
       </div>
-      <div id="tweetsHome"></div>
+      <div id="tweetsHome">
+        <%= render partial: "/partials/twitter/tweet_template" %>
+      </div>
     </div>
   </div>
 </div>
@@ -143,15 +137,22 @@
 <script language="JavaScript">
   var myVisitingTeamTwitterView;
   var myHomeTeamTwitterView;
+  var myFanzonePostView;
+  
   $(function()
   {
+    myFanzonePostView = FanzonePostView.create("#tweetControls");
+    myFanzonePostView.initialize( <%= @event.home_team.sport.id %>, 
+                          <%= raw (@visitingHashTags + @homeHashTags) %>);                                      
+
+    
     myVisitingTeamTwitterView = TwitterView.create( 20, 
-                                                 "tweetsVisiting", 
-                                                 "newTweetsVisiting",
-                                                 "visitingTweetControls",
+                                                  "tweetsVisiting", 
+                                                  "newTweetsVisiting",
+                                                  myFanzonePostView,
                                                   <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
                                                   <%= user_signed_in? ? current_user.id : 0 %>,
-                                                 "myVisitingTeamTwitterView");
+                                                  "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets(<%= raw @visitingHashTags %>,
                                                  <%= raw @event.visiting_team.social_info ? @event.visiting_team.social_info.not_tags.split(" ") : [] %> 
                                                  );
@@ -159,7 +160,7 @@
     myHomeTeamTwitterView = TwitterView.create(  20, 
                                               "tweetsHome", 
                                               "newTweetsHome",
-                                              "homeTweetControls",
+                                              myFanzonePostView,
                                               <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
                                               <%= user_signed_in? ? current_user.id : 0 %>,
                                               "myHomeTeamTwitterView");

@@ -2,34 +2,24 @@ var QuickTweetController = function( aListener )
 {
   this.myListener = aListener;
   this.myQuickTweets = {};
-  this.myAbortFlag = false;
+  this.mySportId;
   
   this.loadButtonData = function (aSportId)
   {
-    this.myAbortFlag = false;
-    if (this.myQuickTweets.happy)
+    if (this.myQuickTweets.happy && this.mySportId == aSportId)
     {
       this.myListener.onButtonDataLoaded();
     }
     else
     {
+      this.mySportId = aSportId;
       $.getJSON("/quick_tweets.json?sport_id=" + aSportId, 
                 createDelegate(this, this.onQuickTweetsComplete));
     }
   };
   
-  this.abort = function()
-  {
-    this.myAbortFlag = true;
-    this.myListener = null;
-  }
-  
   this.onQuickTweetsComplete = function(aResult)
   {
-    if (this.myAbortFlag)
-    {
-      return;
-    }
     this.myQuickTweets = aResult;
     this.myListener.onButtonDataLoaded();
   };

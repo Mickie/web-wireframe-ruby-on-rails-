@@ -218,7 +218,7 @@
 
 <script language="JavaScript">
   var myTwitterView;
-  var myQuickTweetView;
+  var myFanzonePostView;
   var myTailgateMediaSlider;
   var myEditFanzoneDialog;
   
@@ -228,11 +228,15 @@
     {
       return;
     }
+
+    myFanzonePostView = FanzonePostView.create("#postForm");
+    myFanzonePostView.initialize( <%= @tailgate.team.sport.id %>, 
+                          '<%= @tailgate.topic_tags %>');                                      
     
     myTwitterView = TwitterView.create( 15,
                                         "tweets",
                                         "newTweets",
-                                        "postForm",
+                                        myFanzonePostView,
                                         <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
                                         <%= user_signed_in? ? current_user.id : 0 %>,
                                         "myTwitterView");
@@ -240,9 +244,6 @@
                                       <%= raw @tailgate.not_tags.split(",") %>
                                       );
                                       
-    myQuickTweetView = QuickTweetView.create("#postForm", myTwitterView);
-    myQuickTweetView.initializeButtons( <%= @tailgate.team.sport.id %>, 
-                                        '<%= @tailgate.topic_tags %>');                                      
 
     myTailgateMediaSlider = MediaSlider.create();
     myTailgateMediaSlider.createSlider( "<%= @tailgate.team.short_name %>",
