@@ -16,6 +16,7 @@ var PhoneNavigator = function()
     this.connectToPhoneGap();
     this.handleOrientationChanges();
     this.adjustForDimensions();
+    this.myFanzoneView.initialize();
   }
   
   this.registerHandlers = function( anEvent )

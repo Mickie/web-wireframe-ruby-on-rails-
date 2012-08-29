@@ -2,6 +2,12 @@ var FanzoneView = function()
 {
   this.myTailgateModel = {};
   
+  this.initialize = function()
+  {
+    $("#posts").on('click', ".vote_up i:not(.disabled)", createDelegate(this, this.submitUpVote) );
+    $("#posts").on('click', ".vote_down i:not(.disabled)", createDelegate(this, this.submitDownVote) );
+  }
+  
   this.loadTailgate = function( aPath )
   {
     var thePath = aPath + ".json";
@@ -39,6 +45,33 @@ var FanzoneView = function()
     
     setTimeout(createDelegate(this, this.renderPosts), 10);
   };
+  
+  this.submitVote = function(e)
+  {
+    $(e.target.parentElement).submit();
+  }
+  
+  this.submitUpVote = function(e)
+  {
+    this.submitVote(e);
+  }
+  
+  this.submitDownVote = function(e)
+  {
+    if ($(e.target).hasClass('mine'))
+    {
+      return;
+    }
+    
+    if (confirm("Mark this as spam or offensive?\n\nIt will be removed from your stream.\n\n"))
+    {
+      this.submitVote(e);
+    }
+    else
+    {
+      trackEvent("PostAndComments", "cancel_down_vote", $(e.target.parentElement).attr("id"));    
+    }
+  }  
   
   this.renderBanner = function()
   {

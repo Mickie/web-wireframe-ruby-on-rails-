@@ -18,7 +18,7 @@
 //= require ./lib/pure
 //= require globals
 //= require_tree ./phone
-//= require ./modules/infinite_scroller
 //= require ./utilities/timestamps
 //= require google_analytics
 //= require_tree ./facebook
+//= require ./modules/infinite_scroller
