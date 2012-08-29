@@ -17,8 +17,10 @@
 //= require ./lib/jquery.timeago
 //= require ./lib/pure
 //= require globals
-//= require_tree ./phone
 //= require ./utilities/timestamps
 //= require google_analytics
-//= require_tree ./facebook
 //= require ./modules/infinite_scroller
+//= require bootstrap-dropdown
+//= require_tree ./facebook
+//= require_tree ./modules/quick_tweet
+//= require_tree ./phone

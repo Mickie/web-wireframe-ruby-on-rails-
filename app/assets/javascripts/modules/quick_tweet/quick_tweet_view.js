@@ -1,11 +1,14 @@
-var QuickTweetView = function( aControlsDivSelector )
+var QuickTweetView = function( aControlsDivSelector, aListener )
 {
   this.myControlsDivSelector = aControlsDivSelector;
-  this.myController = new QuickTweetController();
+  this.myListener = aListener;
+  this.myController = new QuickTweetController(this);
+  this.myHashTags = {};
   
-  this.initializeButtons = function( aSportId )
+  this.initializeButtons = function( aSportId, aHashTags )
   {
-    this.myController.loadButtonData(aSportId, this);
+    this.myHashTags = aHashTags;
+    this.myController.loadButtonData( aSportId );
   };
   
   this.onButtonDataLoaded = function()
@@ -15,6 +18,11 @@ var QuickTweetView = function( aControlsDivSelector )
     $( this.myControlsDivSelector + " p" ).each( createDelegate( this.myController, 
                                                                  this.myController.addQuickTweetClick ));
   };
+  
+  this.updatePostForm = function( aForceTwitterFlag, aDefaultText )
+  {
+    this.myListener.updatePostForm( aForceTwitterFlag, aDefaultText + " " + this.myHashTags);
+  }
   
   this.abort = function()
   {

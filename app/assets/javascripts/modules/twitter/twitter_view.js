@@ -28,7 +28,7 @@ var TwitterView = function( aMaxTweets,
   this.myFullyLoadedFlag = false;
   this.myTwitterController = new TwitterController(this);
   this.myTwitterSearch = new TwitterSearch(this);
-  this.myQuickTweetView = new QuickTweetView( this.myControlsDivSelector );
+  this.myQuickTweetView = new QuickTweetView( this.myControlsDivSelector, this );
   this.myRefreshTweetsInterval;
 
   var theCurrentPostVal = getCookie("#postForm #post_content");
@@ -54,7 +54,7 @@ var TwitterView = function( aMaxTweets,
     this.myNotTags = anArrayOfNotTags;
 
     $(this.myNewTweetDivSelector).click(createDelegate(this, this.showNewTweets));
-    this.myQuickTweetView.initializeButtons( this.mySportId );
+    this.myQuickTweetView.initializeButtons( this.mySportId, this.myHashTags );
   
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
   };

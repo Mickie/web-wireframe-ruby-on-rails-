@@ -1,6 +1,7 @@
 var FanzoneView = function()
 {
   this.myTailgateModel = {};
+  this.myQuickTweetView = new QuickTweetView("#new_post");
   
   this.initialize = function()
   {
@@ -30,6 +31,7 @@ var FanzoneView = function()
   this.clearContents = function()
   {
     $("#phoneFanzoneContent #posts").empty();
+    this.myQuickTweetView.abort();
   }
 
   this.onTailgateLoadComplete = function( aResult )
@@ -42,6 +44,9 @@ var FanzoneView = function()
     this.renderBanner();    
     this.renderPostForm();    
     updateTimestamps();
+    
+    this.myQuickTweetView.initializeButtons(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
+    $("#new_post ul").addClass("pull-right");
     
     setTimeout(createDelegate(this, this.renderPosts), 10);
   };

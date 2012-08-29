@@ -1,13 +1,12 @@
-var QuickTweetController = function()
+var QuickTweetController = function( aListener )
 {
-  this.myListener;
+  this.myListener = aListener;
   this.myQuickTweets = {};
   this.myAbortFlag = false;
   
-  this.loadButtonData = function (aSportId, aListener)
+  this.loadButtonData = function (aSportId)
   {
     this.myAbortFlag = false;
-    this.myListener = aListener;
     if (this.myQuickTweets.happy)
     {
       this.myListener.onButtonDataLoaded();
