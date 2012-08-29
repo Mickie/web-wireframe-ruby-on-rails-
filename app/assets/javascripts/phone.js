@@ -14,13 +14,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require globals
 //= require ./lib/jquery.timeago
 //= require ./lib/pure
-//= require globals
 //= require ./utilities/timestamps
 //= require google_analytics
-//= require ./modules/infinite_scroller
 //= require bootstrap-dropdown
+//= require ./modules/infinite_scroller
+//= require ./modules/fanzone_post_view
 //= require_tree ./facebook
 //= require_tree ./modules/quick_tweet
 //= require_tree ./phone
