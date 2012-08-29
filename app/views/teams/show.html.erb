@@ -88,6 +88,7 @@
 <script language="JavaScript">
   var myTwitterView;
   var myTeamMediaSlider;
+  var myQuickTweetView;
   
   $(function()
   {
@@ -102,11 +103,14 @@
                                         "tweetControls",
                                         <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
                                         <%= user_signed_in? ? current_user.id : 0 %>,
-                                        <%= @team.sport.id %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets( <%= raw @team.social_info.hash_tags.split(",") %>,
                                       <%= raw @team.social_info.not_tags.split(",") %>
                                       );
+
+    myQuickTweetView = QuickTweetView.create("#tweetControls", myTwitterView);
+    myQuickTweetView.initializeButtons( <%= @team.sport.id %>, 
+                                        '<%= @team.social_info.hash_tags %>');                                      
     
 
     myTeamMediaSlider = MediaSlider.create( "div#myMediaSlider", 

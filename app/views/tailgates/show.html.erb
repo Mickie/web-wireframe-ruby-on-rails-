@@ -218,6 +218,7 @@
 
 <script language="JavaScript">
   var myTwitterView;
+  var myQuickTweetView;
   var myTailgateMediaSlider;
   var myEditFanzoneDialog;
   
@@ -234,11 +235,14 @@
                                         "postForm",
                                         <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
                                         <%= user_signed_in? ? current_user.id : 0 %>,
-                                        <%= @tailgate.team.sport.id %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets( <%= raw @tailgate.topic_tags.split(",") %>,
                                       <%= raw @tailgate.not_tags.split(",") %>
                                       );
+                                      
+    myQuickTweetView = QuickTweetView.create("#postForm", myTwitterView);
+    myQuickTweetView.initializeButtons( <%= @tailgate.team.sport.id %>, 
+                                        '<%= @tailgate.topic_tags %>');                                      
 
     myTailgateMediaSlider = MediaSlider.create();
     myTailgateMediaSlider.createSlider( "<%= @tailgate.team.short_name %>",

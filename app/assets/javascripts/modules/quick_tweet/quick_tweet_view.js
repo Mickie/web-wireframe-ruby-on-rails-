@@ -30,3 +30,16 @@ var QuickTweetView = function( aControlsDivSelector, aListener )
   }
   
 }
+
+var mySingletonQuickTweetView;
+QuickTweetView.create = function(aControlsDivSelector, aListener)
+{
+  if (mySingletonQuickTweetView)
+  {
+    mySingletonQuickTweetView.abort();
+    return mySingletonQuickTweetView;
+  }
+  
+  mySingletonQuickTweetView = new QuickTweetView(aControlsDivSelector, aListener);
+  return mySingletonQuickTweetView;
+}

@@ -8,7 +8,6 @@ var TwitterView = function( aMaxTweets,
                             aControlsDivId, 
                             aConnectedToTwitterFlag,
                             aUserId,
-                            aSportId,
                             aTwitterViewVariableName)
 {
   
@@ -19,7 +18,6 @@ var TwitterView = function( aMaxTweets,
   this.myControlsDivSelector = "#" + aControlsDivId;
   this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
   this.myUserId = aUserId;
-  this.mySportId = aSportId;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
   
   this.myHashTags = {};
@@ -28,7 +26,6 @@ var TwitterView = function( aMaxTweets,
   this.myFullyLoadedFlag = false;
   this.myTwitterController = new TwitterController(this);
   this.myTwitterSearch = new TwitterSearch(this);
-  this.myQuickTweetView = new QuickTweetView( this.myControlsDivSelector, this );
   this.myRefreshTweetsInterval;
 
   var theCurrentPostVal = getCookie("#postForm #post_content");
@@ -54,7 +51,6 @@ var TwitterView = function( aMaxTweets,
     this.myNotTags = anArrayOfNotTags;
 
     $(this.myNewTweetDivSelector).click(createDelegate(this, this.showNewTweets));
-    this.myQuickTweetView.initializeButtons( this.mySportId, this.myHashTags );
   
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
   };
@@ -71,7 +67,6 @@ var TwitterView = function( aMaxTweets,
     this.myNewTweets = new Array();
     this.myFullyLoadedFlag = false;
     this.myTwitterSearch.abort();
-    this.myQuickTweetView.abort();
   };
 
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
