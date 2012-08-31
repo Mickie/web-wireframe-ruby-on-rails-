@@ -80,7 +80,7 @@ var UserManager = function()
   {
     for (var i = 0; i < this.myFanzoAccountDetails.user_post_votes.length; i++)
     {
-      if (this.myFanzoAccountDetails.user_post_votes[i].comment_id == aPostId )
+      if (this.myFanzoAccountDetails.user_post_votes[i].post_id == aPostId )
       {
         return this.myFanzoAccountDetails.user_post_votes[i];
       }

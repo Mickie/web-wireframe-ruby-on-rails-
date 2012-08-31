@@ -4,3 +4,4 @@ $("#post_<%= @post.id -%> .post_votes .fan_score").html("<%= @post.fan_score %>"
 <% else %>
   $("#post_<%= @post.id -%>").remove();
 <% end %>
+UserManager.get().addPostVote(<%= raw @vote.to_json %>);
