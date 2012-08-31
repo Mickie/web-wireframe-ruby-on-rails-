@@ -32,7 +32,7 @@ var FacebookController = function()
     }
     else
     {
-      this.myListener.onLoggedOut();
+      this.myListener.onFacebookLoggedOut();
     }
   };
 

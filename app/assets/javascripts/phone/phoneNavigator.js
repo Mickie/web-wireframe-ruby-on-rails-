@@ -4,7 +4,6 @@ var PhoneNavigator = function()
   var TILES_OPEN = 2;
   var FANZONE_OPEN = 3;
   
-  this.myFacebookController = new FacebookController();
   this.myFanzoneView = new FanzoneView();
   this.myCurrentState = TILES_OPEN;
   
@@ -124,11 +123,6 @@ var PhoneNavigator = function()
            });
   }
   
-  this.showLogin = function()
-  {
-    this.myFacebookController.showLogin();
-  }
-  
   this.showAllFanzones = function()
   {
     this.loadTilesIntoFrameContent("/tailgates?noLayout=true")
@@ -205,27 +199,6 @@ var PhoneNavigator = function()
   {
     console.log(anError);  
   };
-
-  this.onFacebookReady = function()
-  {
-    this.myFacebookController.initialize(this);
-  }
-  
-  this.onLoginComplete = function(aFacebookModel)
-  {
-    $("#leftNavUserPic").attr("src", aFacebookModel.getProfilePicUrl());
-    $("#leftNavUserName").html(aFacebookModel.name);
-    $("#phoneLeftNav .login").hide();
-    $("#phoneLeftNav .userProfile").show();
-    
-  }
-  
-  this.onLoggedOut = function()
-  {
-    $("#phoneLeftNav .login").show();
-    $("#phoneLeftNav .userProfile").hide();
-  }
-  
 
 }
 
