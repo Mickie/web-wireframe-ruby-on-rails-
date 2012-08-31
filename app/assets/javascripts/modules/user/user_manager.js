@@ -92,7 +92,38 @@ var UserManager = function()
   {
     this.myFanzoAccountDetails.user_post_votes.push(aVote);
   }
+  
+  this.isMyTailgate = function(aTailgateId)
+  {
+    if (this.isLoggedIn())
+    {
+      for (var i=0; i < this.myFanzoAccountDetails.tailgates.length; i++) 
+      {
+        if (this.myFanzoAccountDetails.tailgates[i].id == aTailgateId)
+        {
+          return true;
+        }
+      }
+    }
+    
+    return false;
+  }
 
+  this.isTailgateIFollow = function(aTailgateId)
+  {
+    if (this.isLoggedIn())
+    {
+      for (var i=0; i < this.myFanzoAccountDetails.followed_tailgates.length; i++) 
+      {
+        if (this.myFanzoAccountDetails.followed_tailgates[i].id == aTailgateId)
+        {
+          return true;
+        }
+      }
+    }
+    
+    return false;
+  }
 
   this.showTwitterModal = function()
   {

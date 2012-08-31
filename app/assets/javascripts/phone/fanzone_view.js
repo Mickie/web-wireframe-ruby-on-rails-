@@ -38,8 +38,9 @@ var FanzoneView = function()
     $("#phoneFanzoneContent").show();
     $("#phoneFanzoneLoading").hide();
 
-    this.renderBanner();    
-    this.renderPostForm();    
+    this.renderBanner();
+    this.renderFollowButton();  
+    this.renderPostForm();
     updateTimestamps();
     
     this.myFanzonePostView.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
@@ -50,6 +51,30 @@ var FanzoneView = function()
   this.renderBanner = function()
   {
     $("#phoneFanzoneBanner").render(this.myTailgateModel, this.getFanzoneDirective());
+  }
+  
+  this.renderFollowButton = function()
+  {
+    var theUserManager = UserManager.get();
+    if (theUserManager.isLoggedIn())
+    {
+      if ( theUserManager.isMyTailgate( this.myTailgateModel.id ))
+      {
+        $("#followButton").hide();
+      }
+      else if ( theUserManager.isTailgateIFollow( this.myTailgateModel.id ) )
+      {
+        $("#followButton").text("Unfollow").click( createDelegate( this, this.onUnfollow ) ).show();
+      }
+      else
+      {
+        $("#followButton").text("Follow").click( createDelegate( this, this.onFollow ) ).show();
+      }
+    }
+    else
+    {
+      $("#followButton").text("Follow").click( createDelegate( theUserManager, theUserManager.showFacebookModal ) ).show();
+    }
   }
   
   this.renderPostForm = function()
@@ -159,6 +184,16 @@ var FanzoneView = function()
   {
     console.log(anError);  
   };
+  
+  this.onFollow = function(e)
+  {
+    alert("follow")
+  }
+  
+  this.onUnfollow = function(e)
+  {
+    alert("unfollow")
+  }
   
   this.getFanzoneDirective = function()
   {
