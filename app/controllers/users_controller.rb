@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     end
     
     respond_to do |format|
-      format.json { render json: @user }
+      format.json { render json: @user.to_json(include: [ :user_post_votes, :user_comment_votes ]) }
     end
   end
 

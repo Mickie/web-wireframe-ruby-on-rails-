@@ -35,9 +35,21 @@
 
     }
     
-    div#posts div.post .post_comment_form .comment_form form #comment_content
+    #posts
     {
-      height: 24px;
+      .post
+      {
+        .post_comment_form .comment_form form #comment_content
+        {
+          height: 24px;
+        }
+      }
+      
+      .post_votes i.mine, .comment_votes i.mine
+      {
+        margin:0px;
+      }
     }
+    
   }
 }

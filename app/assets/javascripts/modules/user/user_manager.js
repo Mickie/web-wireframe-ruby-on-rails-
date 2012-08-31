@@ -38,6 +38,61 @@ var UserManager = function()
             && this.myFanzoAccountDetails.twitter_user_id
             && this.myFanzoAccountDetails.twitter_user_id.length > 0;
   }
+  
+  this.getUserId = function()
+  {
+    if (this.isLoggedIn())
+    {
+      return this.myFanzoAccountDetails.id;
+    }
+    
+    return nil;
+  }
+  
+  this.getProfilePicUrl = function()
+  {
+    if (this.isLoggedIn())
+    {
+      return "https://graph.facebook.com/" + this.myFanzoAccountDetails.facebook_user_id + "/picture?type=square";
+    }
+    
+    return this.myFacebookModel.getProfilePicUrl();
+  }
+  
+  this.getCommentVote = function( aCommentId )
+  {
+    for (var i = 0; i < this.myFanzoAccountDetails.user_comment_votes.length; i++)
+    {
+      if (this.myFanzoAccountDetails.user_comment_votes[i].comment_id == aCommentId )
+      {
+        return this.myFanzoAccountDetails.user_comment_votes[i];
+      }
+    }
+    return null;
+  }
+  
+  this.addCommentVote = function(aVote)
+  {
+    this.myFanzoAccountDetails.user_comment_votes.push(aVote);
+  }
+
+  this.getPostVote = function( aPostId )
+  {
+    for (var i = 0; i < this.myFanzoAccountDetails.user_post_votes.length; i++)
+    {
+      if (this.myFanzoAccountDetails.user_post_votes[i].comment_id == aPostId )
+      {
+        return this.myFanzoAccountDetails.user_post_votes[i];
+      }
+    }
+    return null;
+  }
+  
+  this.addPostVote = function(aVote)
+  {
+    this.myFanzoAccountDetails.user_post_votes.push(aVote);
+  }
+
 
   this.showTwitterModal = function()
   {

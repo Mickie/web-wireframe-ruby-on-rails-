@@ -4,3 +4,4 @@ $("#post_<%= @comment.post.id -%>_comment_<%= @comment.id -%> .comment_votes .fa
 <% else %>
   $("#post_<%= @comment.post.id -%>_comment_<%= @comment.id -%>").remove();
 <% end %>
+UserManager.get().addCommentVote(<%= raw @vote.to_json %>);

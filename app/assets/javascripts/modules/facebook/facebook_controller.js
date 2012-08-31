@@ -48,33 +48,9 @@ var FacebookController = function()
     this.myModel.last_name = aResponse.last_name;
     this.myModel.facebook_user_data = aResponse;
     
-    this.loginToFanzo();
+    this.myListener.onFacebookLoginComplete(this.myModel);
   }
   
-  this.loginToFanzo = function()
-  {
-    var theToken = $('meta[name=csrf-token]').attr('content');
-    var theData = {"facebook_user_id": this.myModel.id, "facebook_access_token": this.myModel.token}
-    $.ajax({
-             type:"POST",
-             data: theData,
-             url: "/users/client_facebook_login.json?authenticity_token=" + theToken,
-             cache:false,
-             dataType: "json",
-             success: createDelegate(this, this.onFanzoLoginComplete ),
-             error: createDelegate(this, this.onFanzoLoginError )
-           });
-  }
-  
-  this.onFanzoLoginComplete = function( aResponse )
-  {
-    this.myListener.onLoginComplete(this.myModel);
-  }
-  
-  this.onFanzoLoginError = function( aResponse )
-  {
-    console.log(aResponse)
-  }
   
   this.postToFeed = function( aMessage, aResultCallback )
   {

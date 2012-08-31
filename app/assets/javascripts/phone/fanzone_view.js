@@ -57,11 +57,31 @@ var FanzoneView = function()
     $("#postForm").render(this.myTailgateModel, this.getPostFormDirective());
   }
   
+  this.renderPost = function(aPost, aParentDiv)
+  {
+    var theUserId = UserManager.get().getUserId();
+    var theUsersPost = false;
+    var theUsersUpVote = false;
+    var theUsersDownVote = false;
+    
+    if (theUserId)
+    {
+      theUsersPost = theUserId == aPost.user_id;
+      
+      var theVote = UserManager.get().getPostVote(aPost.id);
+      theUsersUpVote = theVote && theVote.up_vote;
+      theUsersDownVote = theVote && !theVote.up_vote;
+    }
+
+    aParentDiv.append(this.generatePostDiv(aPost, theUsersPost, theUsersUpVote, theUsersDownVote));
+  }
+  
   this.renderPosts = function()
   {
+    var theParentDiv = $("#posts");
     for(var i=0,j=this.myTailgateModel.posts.length; i<j; i++)
     {
-      $("#posts").append(this.generatePostDiv(this.myTailgateModel.posts[i]));
+      this.renderPost(this.myTailgateModel.posts[i], theParentDiv);
     }
     updateTimestamps();
   }
@@ -85,7 +105,22 @@ var FanzoneView = function()
 
   this.renderCommentIntoDiv = function( aComment, aPost, aDiv )
   {
-    var theCommentDiv = $("#postCommentTemplate .comment").clone().render(aComment, this.getPostCommentDirective(aPost));
+    var theUserId = UserManager.get().getUserId();
+    var theUsersComment = false;
+    var theUsersUpVote = false;
+    var theUsersDownVote = false;
+    
+    if (theUserId)
+    {
+      theUsersComment = theUserId == aComment.user_id;
+      
+      var theVote = UserManager.get().getCommentVote(aComment.id);
+      theUsersUpVote = theVote && theVote.up_vote;
+      theUsersDownVote = theVote && !theVote.up_vote;
+    }
+    
+    var theCommentDiv = $("#postCommentTemplate .comment").clone();
+    theCommentDiv = theCommentDiv.render(aComment, this.getPostCommentDirective(aPost, theUsersComment, theUsersUpVote, theUsersDownVote));
     aDiv.find(".post_comments").append(theCommentDiv);
   }
   
@@ -104,11 +139,11 @@ var FanzoneView = function()
     this.renderCommentsFormIntoDiv( aPost, aDiv );
   }
 
-  this.generatePostDiv = function( aPost )
+  this.generatePostDiv = function( aPost, aUsersPost, aUsersUpVote, aUsersDownVote )
   {
     try
     {
-      var theDiv = $("#postTemplate").clone().render(aPost, this.getPostDirective());
+      var theDiv = $("#postTemplate").clone().render(aPost, this.getPostDirective( aUsersPost, aUsersUpVote, aUsersDownVote ));
       this.renderPostMediaIntoDiv(aPost, theDiv);
       this.renderCommentsIntoDiv(aPost, theDiv);
       return theDiv;
@@ -156,7 +191,7 @@ var FanzoneView = function()
     return {
       "#postForm .profile_pic": function(anItem)
       {
-        return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' width='24' height='24' />";
+        return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
       },
       "#new_post@action" : function(anItem)
       {
@@ -165,13 +200,13 @@ var FanzoneView = function()
     }
   }
   
-  this.getPostDirective = function()
+  this.getPostDirective = function( aUsersPost, aUsersUpVote, aUsersDownVote )
   {
-    var theThis = this;
-    return {
+    var theDirective = {
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
+      "p": "content",
       ".@class" : function(){ return "post"; },
       ".@id" : function(anItem)
       {
@@ -185,28 +220,59 @@ var FanzoneView = function()
       {
         return anItem.context.user.first_name + " " + anItem.context.user.last_name;
       },
-      "p": "content",
-      ".vote_up form.edit_post@action": function(anItem)
-      {
-        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/up_vote";
-      },
-      ".vote_down form.edit_post@action": function(anItem)
-      {
-        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/down_vote";
-      },
       ".profile_pic": function(anItem)
       {
         return "<img src='" + anItem.context.user.image + "' width='24' height='24' />";
-      },
+      }
+    };
+    
+    if (aUsersUpVote)
+    {
+      theDirective[".vote_up"] = function()
+      {
+        return "<i class=\"icon-thumbs-up icon-white disabled\"></i>";
+      }
     }
+    else
+    {
+      theDirective[".vote_up form.edit_post@action"] = function(anItem)
+      {
+        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/up_vote";
+      } 
+    }
+    
+    if (aUsersPost)
+    {
+      theDirective[".vote_down"] = function( anItem )
+      {
+         return "<a href=\"/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "\""
+                  + " data-confirm=\"Delete your post?\" data-method=\"delete\" data-remote=\"true\" rel=\"nofollow\">"
+                  + "<i class=\"icon-remove mine\"></i></a>"
+      }
+    }
+    else if (aUsersDownVote)
+    {
+      theDirective[".@style"] = function() { return "display:none;" };
+    }
+    else
+    {
+      theDirective[".vote_down form.edit_post@action"] = function(anItem)
+      {
+        return "/tailgates/" + anItem.context.tailgate_id + "/posts/" + anItem.context.id + "/down_vote";
+      }
+    }
+        
+    return theDirective;
   }  
 
-  this.getPostCommentDirective = function( aPost )
+  this.getPostCommentDirective = function( aPost, aUsersComment, aUsersUpVote, aUsersDownVote )
   {
-    return {
+    var theDirective =
+    {
       ".fan_score" : "fan_score",
       ".timestamp@title" : "created_at",
       ".timestamp" : "created_at",
+      "p": "content",
       ".@id" : function(anItem)
       {
         return "post_" + aPost.id + "_comment_" + anItem.context.id;
@@ -215,20 +281,49 @@ var FanzoneView = function()
       {
         return anItem.context.user.first_name + " " + anItem.context.user.last_name;
       },
-      "p": "content",
-      ".vote_up form.edit_comment@action": function(anItem)
-      {
-        return "/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "/up_vote";
-      },
-      ".vote_down form.edit_comment@action": function(anItem)
-      {
-        return "/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "/down_vote";
-      },
       ".profile_pic": function(anItem)
       {
         return "<img src='" + anItem.context.user.image + "' width='24' height='24' />";
-      },
+      }
+    };
+    
+    if (aUsersUpVote)
+    {
+      theDirective[".vote_up"] = function()
+      {
+        return "<i class=\"icon-thumbs-up icon-white disabled\"></i>";
+      }
     }
+    else
+    {
+      theDirective[".vote_up form.edit_comment@action"] = function(anItem)
+      {
+        return "/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "/up_vote";
+      } 
+    }
+    
+    if (aUsersComment)
+    {
+      theDirective[".vote_down"] = function( anItem )
+      {
+         return "<a href=\"/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "\""
+                  + " data-confirm=\"Delete your comment?\" data-method=\"delete\" data-remote=\"true\" rel=\"nofollow\">"
+                  + "<i class=\"icon-remove mine\"></i></a>"
+      }
+    }
+    else if (aUsersDownVote)
+    {
+      theDirective[".@style"] = function() { return "display:none;" };
+    }
+    else
+    {
+      theDirective[".vote_down form.edit_comment@action"] = function(anItem)
+      {
+        return "/tailgates/" + aPost.tailgate_id + "/posts/" + aPost.id + "/comments/" + anItem.context.id + "/down_vote";
+      }
+    }
+    
+    return theDirective;
   }
   
   this.getPostCommentFormDirective = function()
@@ -240,7 +335,7 @@ var FanzoneView = function()
       },
       ".profile_pic" : function(anItem)
       {
-        return "<img src='" + myPhoneNavigator.myFacebookController.myModel.getProfilePicUrl() + "' width='24' height='24' />";
+        return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
       }
     }
   }
