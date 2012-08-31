@@ -62,7 +62,7 @@ FanzoSite::Application.configure do
                                 'tailgates/new.js', 
                                 'tailgates/edit.js', 
                                 'tailgates/show.js', 
-                                'mobile.css',
+                                'phone.css',
                                 'email.css' ]
 
   # ActionMailer Config
