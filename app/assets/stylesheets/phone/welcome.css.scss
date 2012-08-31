@@ -1,0 +1,12 @@
+@import "web/modules/welcome";
+
+#welcome
+{
+  margin: 0px 10px 10px 10px;
+  
+  .welcomeMessage, .createFanzone, .or
+  {
+    display:none;
+  }
+  
+}
