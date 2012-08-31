@@ -19,7 +19,7 @@
       <div id="phoneLeftNav" class="hide">
         <div class="leftNavContent">
           <div class="login" 
-               onclick="myPhoneNavigator.showLogin()" 
+               onclick="UserManager.get().showFacebookLogin()" 
                style="display:<%= aUserSignedInFlag ? "none" : "block" -%>;">
             <div class="navIcon">
               <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
@@ -181,7 +181,7 @@
       <% end %>
 
       <% if current_user %>
-        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes ]) %>);
+        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates ]) %>);
       <% end %>
     </script>
   </body>
