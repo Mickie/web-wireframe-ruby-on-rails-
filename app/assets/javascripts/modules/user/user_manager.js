@@ -178,8 +178,8 @@ var UserManager = function()
   {
     this.myFanzoAccountDetails = aResponse;
 
-    $("#leftNavUserPic").attr("src", aFacebookModel.getProfilePicUrl());
-    $("#leftNavUserName").html(aFacebookModel.name);
+    $("#leftNavUserPic").attr("src", this.getProfilePicUrl());
+    $("#leftNavUserName").html(this.myFanzoAccountDetails.first_name + " " + this.myFanzoAccountDetails.first_name);
     $("#phoneLeftNav .login").hide();
     $("#phoneLeftNav .userProfile").show();
   }
