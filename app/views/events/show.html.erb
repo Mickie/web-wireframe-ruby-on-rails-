@@ -150,8 +150,6 @@
                                                   "tweetsVisiting", 
                                                   "newTweetsVisiting",
                                                   myFanzonePostView,
-                                                  <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
-                                                  <%= user_signed_in? ? current_user.id : 0 %>,
                                                   "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets(<%= raw @visitingHashTags %>,
                                                  <%= raw @event.visiting_team.social_info ? @event.visiting_team.social_info.not_tags.split(" ") : [] %> 
@@ -161,8 +159,6 @@
                                               "tweetsHome", 
                                               "newTweetsHome",
                                               myFanzonePostView,
-                                              <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
-                                              <%= user_signed_in? ? current_user.id : 0 %>,
                                               "myHomeTeamTwitterView");
     myHomeTeamTwitterView.startLoadingTweets( <%= raw @homeHashTags %>, 
                                               <%= raw @event.home_team.social_info ? @event.home_team.social_info.not_tags.split(" ") : [] %> 

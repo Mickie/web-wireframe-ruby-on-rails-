@@ -12,6 +12,7 @@ function onShowExplanationClick(e)
   $("#myLoginModal .whyFacebook").fadeOut(300);
   $("#myLoginModal .explanation").slideDown(600, onAnimationComplete);
   trackEvent("Login", "show_explanation");
+  return false;
 };
 
 function onShowOnlyFacebook(e)
@@ -23,6 +24,8 @@ function onShowOnlyFacebook(e)
   $("#myLoginModal .showUseFacebook").removeClass("active");
 
   trackEvent("Login", "show_only_facebook");
+  
+  return false;
 };
 
 function onShowUseFacebook(e)
@@ -34,6 +37,8 @@ function onShowUseFacebook(e)
   $("#myLoginModal .showOnlyFacebook").removeClass("active");
 
   trackEvent("Login", "show_use_facebook");
+  
+  return false;
 };
 
 function onLogin(e)

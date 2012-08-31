@@ -104,7 +104,7 @@
             </div>
           </div>
           
-          <div class="postsAndComments">
+          <div id="postsAndComments">
             <% @tailgate = Tailgate.find(15) %>
             <% @post = Post.new %>
             <div id="postForm">
@@ -167,25 +167,22 @@
       <script type="text/javascript" src="/cordova-2.0.0.js"></script>
     <% end %>
     
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-      {"parsetags": "explicit"}
-    </script>
-    <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '<%= ENV["GOOGLE_ANALYTICS_ACCOUNT"] %>']);
-      _gaq.push(['_setDomainName', '<%= ENV["FANZO_DOMAIN"] %>']);
-      _gaq.push(['_setCustomVar', 1, 'first_impression_date', '<%= Time.now.strftime("%Y%m%d") %>', 1]);
-      _gaq.push(['_setCustomVar', 2, 'logged_in', '<%= current_user.blank? ? "false" : "true" %>', 2]);
-      _gaq.push(['_setCustomVar', 3, 'mobile', 'true', 2]);
-      _gaq.push(['_trackPageview']);
-      _gaq.push(['_trackPageLoadTime']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+    <%= render partial: "partials/libs/pinterest" %>
+    <%= render partial: "partials/libs/google_plus" %>
+    <%= render partial: "partials/libs/google_analytics", locals: {aMobileFlag: "true"} %>
+
+    <script type="text/javascript">
+      UserManager.get().setMobile(true);
+      <% if @device %>
+        UserManager.get().setDevice(true);
+      <% else %>
+        UserManager.get().setDevice(false);
+      <% end %>
+
+      <% if current_user %>
+        UserManager.get().setAccountDetails(<%= raw current_user.to_json %>);
+      <% end %>
     </script>
   </body>
 </html>

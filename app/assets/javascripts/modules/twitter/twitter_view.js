@@ -6,8 +6,6 @@ var TwitterView = function( aMaxTweets,
                             aTweetDivId, 
                             aNewTweetDivId,
                             aFanzonePostView, 
-                            aConnectedToTwitterFlag,
-                            aUserId,
                             aTwitterViewVariableName)
 {
   
@@ -16,8 +14,6 @@ var TwitterView = function( aMaxTweets,
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
   this.myFanzonePostView = aFanzonePostView;
-  this.myConnectedToTwitterFlag = aConnectedToTwitterFlag;
-  this.myUserId = aUserId;
   this.myTwitterViewVariableName = aTwitterViewVariableName;
   
   this.myHashTags = {};
@@ -27,23 +23,6 @@ var TwitterView = function( aMaxTweets,
   this.myTwitterController = new TwitterController(this);
   this.myTwitterSearch = new TwitterSearch(this);
   this.myRefreshTweetsInterval;
-
-  var theCurrentPostVal = getCookie("#postForm #post_content");
-  if (theCurrentPostVal)
-  {
-    setCookie("#postForm #post_content", "", 0);
-    $("#postForm #post_content").val(theCurrentPostVal);
-  }
-
-  this.isLoggedIn = function()
-  {
-    return this.myUserId > 0;
-  }
-  
-  this.isConnectedToTwitter = function()
-  {
-    return this.myConnectedToTwitterFlag;
-  }
 
   this.startLoadingTweets = function( anArrayOfHashTags, anArrayOfNotTags )
   {
@@ -74,7 +53,7 @@ var TwitterView = function( aMaxTweets,
     this.myFanzonePostView.updatePostForm( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId );
   };
   
-  if (this.isConnectedToTwitter())
+  if (UserManager.get().isConnectedToTwitter())
   {
     this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
     this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
@@ -82,35 +61,17 @@ var TwitterView = function( aMaxTweets,
   }
   else
   {
-    this.saveData = function()
-    {
-      var theCurrentPostVal = $("#postForm #post_content").val();
-      setCookie("#postForm #post_content", theCurrentPostVal, 1);
-    };
-    
-    this.showTwitterModal = function()
-    {
-      this.saveData();
-      $("#myConnectTwitterModal").modal("show"); 
-    };
-    
-    this.showFacebookModal = function()
-    {
-      this.saveData();
-      $("#myLoginModal").modal("show");
-    };
-    
     this.showCorrectModal = function()
     {
-      if (this.isLoggedIn())
+      if (UserManager.get().isLoggedIn())
       {
         trackEvent("Twitter", "not_connected_click");    
-        this.showTwitterModal();
+        UserManager.get().showTwitterModal();
       }
       else
       {
         trackEvent("Twitter", "not_logged_in_click");    
-        this.showFacebookModal();
+        UserManager.get().showFacebookModal();
       }
     };
     
@@ -120,7 +81,7 @@ var TwitterView = function( aMaxTweets,
       if (theTwitterFlag)
       {
         trackEvent("Twitter", "not_connected_click");    
-        this.showTwitterModal()
+        UserManager.get().showTwitterModal()
         return false;
       }
       
@@ -129,13 +90,13 @@ var TwitterView = function( aMaxTweets,
 
     this.handleDisconnectStatus = function()
     {
-      if (this.isLoggedIn())
+      if (UserManager.get().isLoggedIn())
       {
         return this.disallowIfPostingToTwitter();
       }
 
 
-      this.showFacebookModal();
+      UserManager.get().showFacebookModal();
       trackEvent("Twitter", "not_logged_in_click");    
       return false; 
     };
@@ -343,8 +304,6 @@ TwitterView.create = function(aMaxTweets,
                               aTweetDivId, 
                               aNewTweetDivId,
                               aFanzonePostView, 
-                              aConnectedToTwitterFlag,
-                              aUserId,
                               aTwitterViewVariableName)
 {
   if (myCurrentTwitterViews[aTwitterViewVariableName])
@@ -357,8 +316,6 @@ TwitterView.create = function(aMaxTweets,
                                                                     aTweetDivId, 
                                                                     aNewTweetDivId,
                                                                     aFanzonePostView, 
-                                                                    aConnectedToTwitterFlag,
-                                                                    aUserId,
                                                                     aTwitterViewVariableName);
   
   return myCurrentTwitterViews[aTwitterViewVariableName];

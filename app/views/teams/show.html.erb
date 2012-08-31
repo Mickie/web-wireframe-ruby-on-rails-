@@ -105,8 +105,6 @@
                                         "tweets",
                                         "newTweets",
                                         myFanzonePostView,
-                                        <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
-                                        <%= user_signed_in? ? current_user.id : 0 %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets( <%= raw @team.social_info.hash_tags.split(",") %>,
                                       <%= raw @team.social_info.not_tags.split(",") %>

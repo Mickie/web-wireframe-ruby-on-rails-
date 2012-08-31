@@ -229,7 +229,7 @@
       return;
     }
 
-    myFanzonePostView = FanzonePostView.create("#postForm");
+    myFanzonePostView = FanzonePostView.create("#fanzonePosts");
     myFanzonePostView.initialize( <%= @tailgate.team.sport.id %>, 
                           '<%= @tailgate.topic_tags %>');                                      
     
@@ -237,8 +237,6 @@
                                         "tweets",
                                         "newTweets",
                                         myFanzonePostView,
-                                        <%= user_signed_in? && current_user.isConnectedToTwitter? %>,
-                                        <%= user_signed_in? ? current_user.id : 0 %>,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets( <%= raw @tailgate.topic_tags.split(",") %>,
                                       <%= raw @tailgate.not_tags.split(",") %>

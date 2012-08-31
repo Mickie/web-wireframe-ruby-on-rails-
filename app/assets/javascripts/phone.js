@@ -23,5 +23,7 @@
 //= require ./modules/infinite_scroller
 //= require ./modules/fanzone_post_view
 //= require_tree ./facebook
+//= require_tree ./modules/facebook
 //= require_tree ./modules/quick_tweet
+//= require_tree ./modules/user
 //= require_tree ./phone
