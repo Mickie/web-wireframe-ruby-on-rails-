@@ -6,6 +6,7 @@ var PhoneNavigator = function()
   
   this.myFanzoneView = new FanzoneView();
   this.myCurrentState = TILES_OPEN;
+  this.myTileScroller = null;
   
   this.initialize = function()
   {
@@ -15,6 +16,7 @@ var PhoneNavigator = function()
     this.connectToPhoneGap();
     this.handleOrientationChanges();
     this.adjustForDimensions();
+    this.setupTileScroller();
     this.myFanzoneView.initialize();
   }
   
@@ -22,14 +24,20 @@ var PhoneNavigator = function()
   {
     $("#showLeftNavButton").on( anEvent, createDelegate(this, this.onToggleLeftNav) );
     $("#backToTilesButton").on( anEvent, createDelegate(this, this.onBackToTiles) );
-    $('#frameContent').on( anEvent, '.fanzoneTile a', createDelegate(this, this.killEvent));
+    $('#frameContent').on( anEvent, '.fanzoneTile a', killEvent);
   }
   
-  this.killEvent = function(e)
+  this.setupTileScroller = function()
   {
-    e.stopPropagation();
-    e.preventDefault();
-    return false;
+    this.myTileScroller = new iScroll("phoneTileContent");
+    document.addEventListener('touchmove', killEvent, false);
+  }
+  
+  this.cleanupTileScroller = function()
+  {
+    this.myTileScroller.destroy()
+    this.myTileScroller = null;
+    document.removeEventListener('touchmove', killEvent, false);
   }
   
   this.handleOrientationChanges = function()
@@ -142,6 +150,7 @@ var PhoneNavigator = function()
     $("#phoneFanzoneContent").hide();
     $("#phoneFanzoneLoading").show();
 
+    this.cleanupTileScroller();
     this.positionFanzone();
     window.scrollTo(0, 1);
 
@@ -162,6 +171,8 @@ var PhoneNavigator = function()
     $("#followButton").hide();
 
     window.scrollTo(0, 1);
+    this.myFanzoneView.cleanup();
+    this.setupTileScroller();
     
     this.myCurrentState = TILES_OPEN;
   }
@@ -195,6 +206,11 @@ var PhoneNavigator = function()
   {
     $("#frameContent").html(aResult);
     updateTimestamps();
+    
+    if (this.myTileScroller)
+    {
+      this.myTileScroller.refresh();
+    }
   };
   
   this.onLoadError = function(anError)

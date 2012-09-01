@@ -51,6 +51,14 @@ function getCookie(aName)
   return null;
 };
 
+function killEvent(e)
+{
+  e.stopPropagation();
+  e.preventDefault();
+  return false;
+}
+
+
 String.prototype.escapeQuotes = function()
 {
   return this.replace(/([\\"'])/g, "\\$1");

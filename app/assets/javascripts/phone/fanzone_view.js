@@ -2,6 +2,7 @@ var FanzoneView = function()
 {
   this.myTailgateModel = {};
   this.myFanzonePostView = FanzonePostView.create("#postsAndComments");
+  this.myFanzoneScroller = null;
   
   this.initialize = function()
   {
@@ -10,8 +11,14 @@ var FanzoneView = function()
   this.loadTailgate = function( aPath )
   {
     var thePath = aPath + ".json";
-    this.clearContents();
+    this.setupFanzoneScroller();
     this.loadTailgateIntoFanzoneView( thePath );
+  }
+  
+  this.cleanup = function()
+  {
+    this.clearContents();
+    this.cleanupFanzoneScroller();
   }
   
   this.loadTailgateIntoFanzoneView = function( aPath )
@@ -25,6 +32,20 @@ var FanzoneView = function()
              error: createDelegate(this, this.onLoadError )
            });
   }
+  
+  this.setupFanzoneScroller = function()
+  {
+    this.myFanzoneScroller = new iScroll("phoneFanzoneContent");
+    document.addEventListener('touchmove', killEvent, false);
+  }
+  
+  this.cleanupFanzoneScroller = function()
+  {
+    this.myFanzoneScroller.destroy()
+    this.myFanzoneScroller = null;
+    document.removeEventListener('touchmove', killEvent, false);
+  }
+  
 
   this.clearContents = function()
   {
@@ -109,6 +130,7 @@ var FanzoneView = function()
       this.renderPost(this.myTailgateModel.posts[i], theParentDiv);
     }
     updateTimestamps();
+    this.myFanzoneScroller.refresh();
   }
   
   this.renderPostMediaIntoDiv = function( aPost, aDiv )

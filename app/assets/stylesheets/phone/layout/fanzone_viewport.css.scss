@@ -41,6 +41,10 @@
   
   #phoneFanzoneContent
   {
+    #phoneFanzoneWrapper
+    {
+      @include clearfix;
+    }
   }
 
   #phoneFanzoneFooterNav
