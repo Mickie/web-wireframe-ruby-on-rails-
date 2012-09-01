@@ -35,7 +35,11 @@ var FanzoneView = function()
   
   this.setupFanzoneScroller = function()
   {
-    this.myFanzoneScroller = new iScroll("phoneFanzoneContent");
+    this.myFanzoneScroller = new iScroll("phoneFanzoneContent",
+                                        {
+                                          useTransform: true,
+                                          onBeforeScrollStart: enableFormsOnBeforeScroll 
+                                        });
     document.addEventListener('touchmove', killEvent, false);
   }
   
