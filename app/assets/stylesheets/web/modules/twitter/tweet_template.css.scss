@@ -1,6 +1,6 @@
 @import "partials/colors";
 
-#template
+#tweetTemplate
 {
   display:none;
 }
@@ -31,8 +31,10 @@
     {
       .twitterActions
       {
-        a
+        span
         {
+          cursor: pointer;
+          color: $linkColor;
           padding: 5px;
           
           &:first-child

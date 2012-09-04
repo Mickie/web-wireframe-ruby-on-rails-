@@ -5,8 +5,7 @@ var DELAYED_TWEET_RELOAD_SCHEDULE = 60000;
 var TwitterView = function( aMaxTweets, 
                             aTweetDivId, 
                             aNewTweetDivId,
-                            aFanzonePostView, 
-                            aTwitterViewVariableName)
+                            aFanzonePostView)
 {
   
   
@@ -14,7 +13,6 @@ var TwitterView = function( aMaxTweets,
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
   this.myFanzonePostView = aFanzonePostView;
-  this.myTwitterViewVariableName = aTwitterViewVariableName;
   
   this.myHashTags = {};
   this.myNotTags = {};
@@ -202,7 +200,10 @@ var TwitterView = function( aMaxTweets,
   {
     try
     {
-      var theDiv = $("#template").clone().render(aTweet, this.getTweetDirective());
+      var theDiv = $("#tweetTemplate").clone().render(aTweet, this.getTweetDirective());
+      theDiv.on("click", ".reply", createDelegate(this, this.onReplyTo) );
+      theDiv.on("click", ".retweet", createDelegate(this, this.onRetweet) );
+      theDiv.on("click", ".invite", createDelegate(this, this.onInvite) );
       return theDiv;
     }
     catch(anError)
@@ -252,25 +253,17 @@ var TwitterView = function( aMaxTweets,
         var theTweetDate = new Date( anItem.context.created_at );
         return theTweetDate.toISOString();
       },
-      "a#reply@href" : function(anItem)
+      ".reply@data-tweet-id" : "id_str",
+      ".reply@data-user" : "from_user",
+      ".retweet@data-tweet-id" : "id_str",
+      ".retweet@data-user" : "from_user",
+      ".retweet@data-tweet-text" : function(anItem)
       {
-        var theId = anItem.context.id_str;
-        var theUser = anItem.context.from_user;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onReplyTo('" + theId + "', '@" + theUser + "')";
-      },
-      "a#retweet@href" : function(anItem)
-      {
-        var theId = anItem.context.id_str;
         var theText = anItem.context.text;
-        var theUser = anItem.context.from_user;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onRetweet('" + theId + "', \"" + theText.escapeQuotes() + "\", '@" + theUser + "')";
+        return theText.escapeQuotes();
       },
-      "a#invite@href" : function(anItem)
-      {
-        var theId = anItem.context.id_str;
-        var theUser = anItem.context.from_user;
-        return "javascript:" + theThis.myTwitterViewVariableName + ".onInvite('" + theId + "', '@" + theUser + "')";
-      },
+      ".invite@data-tweet-id" : "id_str",
+      ".invite@data-user" : "from_user",
       "div.alert > p@id" : function(anItem)
       {
         var theId = anItem.context.id_str;
@@ -283,7 +276,7 @@ var TwitterView = function( aMaxTweets,
   {
     if (aResponse)
     {
-      this.showAlertWithHtml( aResponse.id_str, "<strong>Success!</strong><br/>You added a Invite");
+      this.showAlertWithHtml( aResponse.id_str, "<strong>Success!</strong><br/>Invitation sent");
     }
   };
   
@@ -315,8 +308,7 @@ TwitterView.create = function(aMaxTweets,
   myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView(aMaxTweets, 
                                                                     aTweetDivId, 
                                                                     aNewTweetDivId,
-                                                                    aFanzonePostView, 
-                                                                    aTwitterViewVariableName);
+                                                                    aFanzonePostView);
   
   return myCurrentTwitterViews[aTwitterViewVariableName];
 };
