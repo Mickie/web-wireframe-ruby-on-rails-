@@ -149,7 +149,7 @@ var BingView = function(aContainerDivSelector,
     {
       theHtml += "<p>Source : " + aNewsItem.Source + "</p>";
     }
-    theHtml += "<p>Link : <a href='" + aNewsItem.Url + "' target='blank'>" + aNewsItem.Url + "</a></p>";
+    theHtml += "<p>Link : <a href='" + aNewsItem.Url + "' target='_blank'>" + aNewsItem.Url + "</a></p>";
     theHtml += "<p>When : <span class='timestamp' title='" + aNewsItem.Date + "'>" + aNewsItem.Date + "</span></p>";
     theHtml += "</div>";
     this.myDialogDiv.find("div.mediaImage").html("");
