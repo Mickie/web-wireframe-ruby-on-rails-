@@ -1,6 +1,3 @@
-var NORMAL_TWEET_RELOAD_SCHEDULE = 20000;
-var DELAYED_TWEET_RELOAD_SCHEDULE = 60000;
-
 
 var TwitterView = function( aMaxTweets, 
                             aTweetDivId, 
@@ -10,142 +7,41 @@ var TwitterView = function( aMaxTweets,
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
-  this.myFanzonePostsController = aFanzonePostsController;
   
-  this.myHashTags = {};
-  this.myNotTags = {};
-  this.myNewTweets = new Array();
-  this.myFullyLoadedFlag = false;
-  this.myTwitterController = new TwitterController(this);
-  this.myTwitterSearch = new TwitterSearch(this);
-  this.myRefreshTweetsInterval;
+  this.myTwitterController = new TwitterController(this, aFanzonePostsController);
 
   this.startLoadingTweets = function( anArrayOfHashTags, anArrayOfNotTags )
   {
-    this.myHashTags = anArrayOfHashTags;
-    this.myNotTags = anArrayOfNotTags;
+    this.myTwitterController.initialize( anArrayOfHashTags, anArrayOfNotTags, this.myMaxTweets );
 
-    $(this.myNewTweetDivSelector).click(createDelegate(this, this.showNewTweets));
-  
-    this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
-  };
-  
-  this.scheduleMoreTweetsToLoad = function( aTimerDuration )
-  {
-    clearTimeout(this.myRefreshTweetsInterval);
-    this.myRefreshTweetsInterval = setTimeout(createDelegate(this.myTwitterSearch, this.myTwitterSearch.grabMoreTweets), aTimerDuration);
+    $(this.myNewTweetDivSelector).click(createDelegate(this.myTwitterController, this.myTwitterController.onShowNewTweets));
   };
   
   this.reset = function()
   {
-    clearTimeout(this.myRefreshTweetsInterval);
-    this.myNewTweets = new Array();
-    this.myFullyLoadedFlag = false;
-    this.myTwitterSearch.abort();
+    this.myTwitterController.reset();
   };
 
-  this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
+  this.showCorrectModal = function()
   {
-    this.myFanzonePostsController.updatePostForm( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId );
-  };
-  
-  if (UserManager.get().isConnectedToTwitter())
-  {
-    this.onReplyTo = createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo);
-    this.onRetweet = createDelegate(this.myTwitterController, this.myTwitterController.onRetweet);
-    this.onInvite = createDelegate(this.myTwitterController, this.myTwitterController.onInvite);
-  }
-  else
-  {
-    this.showCorrectModal = function()
+    if (UserManager.get().isLoggedIn())
     {
-      if (UserManager.get().isLoggedIn())
-      {
-        trackEvent("Twitter", "not_connected_click");    
-        UserManager.get().showTwitterModal();
-      }
-      else
-      {
-        trackEvent("Twitter", "not_logged_in_click");    
-        UserManager.get().showFacebookModal();
-      }
-    };
-    
-    this.onReplyTo = this.showCorrectModal;
-    this.onRetweet = this.showCorrectModal;
-    this.onInvite = this.showCorrectModal;
-  }
-  
-  
-  this.onNewTweet = function(anIndex, aTweet)
-  {
-    if(this.myFullyLoadedFlag)
-    {
-      this.myNewTweets.push(aTweet);
-      this.showNewTweetsAlert();
+      trackEvent("Twitter", "not_connected_click");    
+      UserManager.get().showTwitterModal();
     }
     else
     {
-      var theNewDivSelector = "#" + aTweet.id_str;
-      $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
-      $(theNewDivSelector).slideDown(200);
-      
-      var theExtraTweetTemplateElement = 1;
-      if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets + theExtraTweetTemplateElement)
-      {
-        this.myFullyLoadedFlag = true;
-        this.scheduleMoreTweetsToLoad(NORMAL_TWEET_RELOAD_SCHEDULE);    
-      }
-      updateTimestamps();
+      trackEvent("Twitter", "not_logged_in_click");    
+      UserManager.get().showFacebookModal();
     }
-
-  };
-  
-  this.onSuccess = function()
-  {
-    $("#tweetError").slideUp(600);
-    this.scheduleMoreTweetsToLoad(NORMAL_TWEET_RELOAD_SCHEDULE);   
   };
 
-  this.onError = function(aMessage)
-  {
-    $("#tweetError").slideDown(600);
-    this.scheduleMoreTweetsToLoad(DELAYED_TWEET_RELOAD_SCHEDULE);
-  };
   
-  this.showNewTweetsAlert = function()
+  this.showNewTweetsAlert = function( aNumberOfNewTweets )
   {
-    var theNoun = this.myNewTweets.length > 1 ? "Tweets" : "Tweet";
-    $(this.myNewTweetDivSelector + " > p").html("<strong>" + this.myNewTweets.length + "</strong> new " + theNoun + "!");
+    var theNoun = aNumberOfNewTweets > 1 ? "Tweets" : "Tweet";
+    $(this.myNewTweetDivSelector + " > p").html("<strong>" + aNumberOfNewTweets + "</strong> new " + theNoun + "!");
     $(this.myNewTweetDivSelector).slideDown(600);
-  };
-
-  this.showNewTweets = function()
-  {
-    trackEvent("Twitter", "show_new_tweets", undefined, this.myNewTweets.length);    
-    $(this.myNewTweetDivSelector).slideUp(600);
-    this.chopOffOldestTweetsSoWeShowOnlyTheLatest();
-    $.each(this.myNewTweets, createDelegate(this, this.showTweet));
-    this.myNewTweets = new Array();
-  };
-
-  this.chopOffOldestTweetsSoWeShowOnlyTheLatest = function()
-  {
-    this.myNewTweets.sort(function(a,b)
-    {
-      if (a.created_at == b.created_at)
-      {
-        return 0;
-      }
-      
-      var theFirstDate = new Date(a.created_at);
-      var theSecondDate = new Date(b.created_at);
-      return theFirstDate > theSecondDate ? 1 : -1;
-    });
-    if (this.myNewTweets.length > this.myMaxTweets)
-    {
-      this.myNewTweets = this.myNewTweets.slice(this.myNewTweets.length - this.myMaxTweets);    
-    }
   };
 
   this.showTweet = function(i, aTweet)
@@ -161,6 +57,15 @@ var TwitterView = function( aMaxTweets,
     updateTimestamps();
   };
   
+  this.showInitialTweetAndGetCount = function( aTweet )
+  {
+    var theNewDivSelector = "#" + aTweet.id_str;
+    $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
+    $(theNewDivSelector).slideDown(200);
+    
+    return $(this.myTweetDivSelector).children().length;
+  }
+  
   this.onAddComplete = function()
   {
     $(".tweet:last").remove();
@@ -171,9 +76,20 @@ var TwitterView = function( aMaxTweets,
     try
     {
       var theDiv = $("#tweetTemplate").clone().render(aTweet, this.getTweetDirective());
-      theDiv.on("click", ".reply", createDelegate(this, this.onReplyTo) );
-      theDiv.on("click", ".retweet", createDelegate(this, this.onRetweet) );
-      theDiv.on("click", ".invite", createDelegate(this, this.onInvite) );
+      
+      if (UserManager.get().isConnectedToTwitter())
+      {
+        theDiv.on("click", ".reply", createDelegate(this.myTwitterController, this.myTwitterController.onReplyTo) );
+        theDiv.on("click", ".retweet", createDelegate(this.myTwitterController, this.myTwitterController.onRetweet) );
+        theDiv.on("click", ".invite", createDelegate(this.myTwitterController, this.myTwitterController.onInvite) );
+      }
+      else
+      {
+        var theDelegate = createDelegate(this, this.showCorrectModal);
+        theDiv.on("click", ".reply",  theDelegate);
+        theDiv.on("click", ".retweet", theDelegate );
+        theDiv.on("click", ".invite", theDelegate );
+      }
       return theDiv;
     }
     catch(anError)

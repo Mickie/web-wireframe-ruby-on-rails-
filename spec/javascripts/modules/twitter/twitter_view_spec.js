@@ -8,11 +8,7 @@ describe("TwitterView", function()
     myTwitterView = new TwitterView(1,
                                     "tweets",
                                     "newTweets",
-                                    "controls",
-                                    true,
-                                    1,
-                                    1,
-                                    "myTwitterView");
+                                    {});
 
     loadJasmineFixture('twitter_view');
   });
@@ -22,8 +18,7 @@ describe("TwitterView", function()
     
     beforeEach(function()
     {
-      myTwitterView.myNewTweets = [1,2];
-      myTwitterView.showNewTweetsAlert();
+      myTwitterView.showNewTweetsAlert(2);
     });
     
     it("shows the div", function() 
@@ -34,26 +29,6 @@ describe("TwitterView", function()
     it("displays the correct text", function() 
     {
       expect($('div#newTweets > p')).toContainHtml( "<strong>2</strong> new Tweets!" ); 
-    });
-  });
-    
-  describe(".chopOffOldestTweetsSoWeShowOnlyTheLatest", function()
-  {
-    
-    it("handles fewer than max", function() 
-    {
-      myTwitterView.myMaxTweets = 10;
-      myTwitterView.myNewTweets = [1,2,3,4];
-      myTwitterView.chopOffOldestTweetsSoWeShowOnlyTheLatest();
-      expect(myTwitterView.myNewTweets.length).toEqual(4);
-    });
-    
-    it("handles more than max", function() 
-    {
-      myTwitterView.myMaxTweets = 3;
-      myTwitterView.myNewTweets = [1,2,3,4,5,6,7];
-      myTwitterView.chopOffOldestTweetsSoWeShowOnlyTheLatest();
-      expect(myTwitterView.myNewTweets.length).toEqual(3);
     });
   });
     
