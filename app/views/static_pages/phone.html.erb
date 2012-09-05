@@ -81,24 +81,16 @@
             <div id="phoneFanzoneBanner">
               <div class="banner_content">
                 <div class="team_logo">
-                  <img width="80" height="80"/>
+                  <img width="50" height="50"/>
                 </div>
                 <div class="fanzone_details">
                   <div class="official">
                     <span>Official</span>
                   </div>
                   <h1 class="fanzoneName"></h1>
-                  <p class="description"></p>
                   <div class="owner">
-                    <div class="profile_pic">
-                      <img />
-                    </div>
                     <div class="owner_details">
                       <p>Created by <span class="owner_name"></span></p>
-                      <p>
-                        Updated: 
-                        <span class="timestamp" title="" ></span>
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -109,7 +101,6 @@
               <% @tailgate = Tailgate.find(15) %>
               <% @post = Post.new %>
               <div id="postForm">
-                <h4>Fanzone Posts</h4>
                 <div class="profile_pic">
                   <% if user_signed_in? %>
                     <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>

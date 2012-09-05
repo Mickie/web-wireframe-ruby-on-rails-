@@ -7,6 +7,7 @@
 {
   #postsAndComments
   {
+    clear: both;
     background-color: white;
 
     .drop_arrow
@@ -17,6 +18,16 @@
       border-top: white solid 10px;
       border-left: transparent solid 5px;
       border-right: transparent solid 5px;
+    }
+    
+    #postForm
+    {
+      padding: 10px 10px 5px 10px;
+      
+      #post_content
+      {
+        margin:0px;
+      }
     }
     
     .post_combo

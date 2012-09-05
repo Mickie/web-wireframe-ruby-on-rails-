@@ -156,7 +156,7 @@ var FanzoneView = function()
       {
         if (UserManager.get().isLoggedIn())
         {
-          return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
+          return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='32' height='32' />";
         }
         return "";
       },
@@ -172,15 +172,11 @@ var FanzoneView = function()
     var theThis = this;
     return {
       ".fanzoneName": "name",
-      ".description" : "description",
-      ".profile_pic img@src" : "user.image",
       ".owner_name" : "user.first_name",
-      ".timestamp@title" : "created_at",
-      ".timestamp" : "created_at",
       ".team_logo img@src" : function(anItem)
       {
         var theSlug = anItem.context.team.slug;
-        return "http://fanzo_static.s3.amazonaws.com/logos/" + theSlug + "_m.gif";
+        return "http://fanzo_static.s3.amazonaws.com/logos/" + theSlug + "_s.gif";
       },
       ".official@style": function(anItem)
       {
