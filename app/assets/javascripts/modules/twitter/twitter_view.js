@@ -73,37 +73,9 @@ var TwitterView = function( aMaxTweets,
       }
     };
     
-    this.disallowIfPostingToTwitter = function()
-    {
-      var theTwitterFlag = $("#postForm #post_twitter_flag").is(':checked');
-      if (theTwitterFlag)
-      {
-        trackEvent("Twitter", "not_connected_click");    
-        UserManager.get().showTwitterModal()
-        return false;
-      }
-      
-      return true;
-    };
-
-    this.handleDisconnectStatus = function()
-    {
-      if (UserManager.get().isLoggedIn())
-      {
-        return this.disallowIfPostingToTwitter();
-      }
-
-
-      UserManager.get().showFacebookModal();
-      trackEvent("Twitter", "not_logged_in_click");    
-      return false; 
-    };
-    
     this.onReplyTo = this.showCorrectModal;
     this.onRetweet = this.showCorrectModal;
     this.onInvite = this.showCorrectModal;
-    
-    $("div#frameContent").on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
   }
   
   

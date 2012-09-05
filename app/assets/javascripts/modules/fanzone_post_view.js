@@ -18,6 +18,7 @@ var FanzonePostView = function( aPostsSelector )
     $(this.myPostsSelector).on('ajax:before', ".new_comment", createDelegate( this, this.checkStatus ) );
     $(this.myPostsSelector).on('click', ".vote_up i:not(.disabled)", createDelegate( this, this.submitUpVote ) );
     $(this.myPostsSelector).on('click', ".vote_down i:not(.disabled)", createDelegate( this, this.submitDownVote ) );
+    $(this.myPostsSelector).on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
   }
   
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
@@ -33,6 +34,30 @@ var FanzonePostView = function( aPostsSelector )
     thePostsContainer.find("#post_twitter_retweet_id").val(aRetweetId ? aRetweetId : "");
   };
   
+  this.disallowIfPostingToTwitterAndNotConnected = function()
+  {
+    var theTwitterFlag = $(this.myPostsSelector).find("#post_twitter_flag").is(':checked');
+    if (theTwitterFlag && !UserManager.get().isConnectedToTwitter())
+    {
+      trackEvent("Twitter", "not_connected_click");    
+      UserManager.get().showTwitterModal()
+      return false;
+    }
+    
+    return true;
+  };
+
+  this.handleDisconnectStatus = function()
+  {
+    if (UserManager.get().isLoggedIn())
+    {
+      return this.disallowIfPostingToTwitterAndNotConnected();
+    }
+
+    UserManager.get().showFacebookModal();
+    trackEvent("Facebook", "not_logged_in_click");    
+    return false; 
+  };
 
   this.checkStatus = function(e)
   {
