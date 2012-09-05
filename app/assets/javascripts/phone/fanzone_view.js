@@ -252,7 +252,11 @@ var FanzoneView = function()
     return {
       "#postForm .profile_pic": function(anItem)
       {
-        return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
+        if (UserManager.get().isLoggedIn())
+        {
+          return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
+        }
+        return "";
       },
       "#new_post@action" : function(anItem)
       {
@@ -396,7 +400,11 @@ var FanzoneView = function()
       },
       ".profile_pic" : function(anItem)
       {
-        return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
+        if (UserManager.get().isLoggedIn())
+        {
+          return "<img src='" + UserManager.get().getProfilePicUrl() + "' width='24' height='24' />";
+        }
+        return "";
       }
     }
   }
