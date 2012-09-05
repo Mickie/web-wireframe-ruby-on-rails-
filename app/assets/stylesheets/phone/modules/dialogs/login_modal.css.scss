@@ -1,0 +1,27 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+@import "web/modules/dialogs/login_modal";
+
+div#myLoginModal
+{
+  .modal-body
+  {
+    width: 300px;
+    
+    .loginDetails
+    {
+      width: 250px;
+      padding: 30px 20px;
+    }
+
+    .whyFacebook
+    {
+      display: none;
+    }
+    
+    .explanation
+    {
+      width: 290px;
+    }
+  }
+}

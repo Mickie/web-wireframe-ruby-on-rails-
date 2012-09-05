@@ -1,0 +1,13 @@
+@import "partials/colors";
+@import "bootstrap/mixins";
+@import "web/modules/dialogs/connect_twitter_modal";
+
+div#myConnectTwitterModal
+{
+  .modal-body
+  {
+    width: 260px;
+    text-align:center;
+    padding: 30px 20px;
+  }
+}
