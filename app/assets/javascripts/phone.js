@@ -22,10 +22,12 @@
 //= require bootstrap-dropdown
 //= require bootstrap-modal
 //= require ./modules/dialogs/dialog_resizer
+//= require ./modules/dialogs/twitter_invite_dialog
 //= require ./modules/infinite_scroller
 //= require ./modules/fanzonePostsController
 //= require_tree ./facebook
 //= require_tree ./modules/facebook
+//= require_tree ./modules/twitter
 //= require_tree ./modules/quick_tweet
 //= require_tree ./modules/user
 //= require_tree ./phone

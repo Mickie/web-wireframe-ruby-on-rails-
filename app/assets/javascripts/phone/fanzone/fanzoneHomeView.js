@@ -1,36 +1,18 @@
 var FanzoneHomeView = function()
 {
-  this.myFanzoneScroller = null;
   this.myTailgateModel = null;
+  this.myFanzoneScroller = null;
   
-  this.render = function( aTailgateModel )
+  this.render = function( aTailgateModel, aFanzoneScroller )
   {
     this.myTailgateModel = aTailgateModel;
-    this.setupFanzoneScroller();
+    this.myFanzoneScroller = aFanzoneScroller;
     setTimeout(createDelegate(this, this.renderPosts), 10);
   }
   
   this.cleanup = function()
   {
-    this.cleanupFanzoneScroller();
     this.clearContents();
-  }
-  
-  this.setupFanzoneScroller = function()
-  {
-    this.myFanzoneScroller = new iScroll("phoneFanzoneContent",
-                                        {
-                                          useTransform: true,
-                                          onBeforeScrollStart: enableFormsOnBeforeScroll 
-                                        });
-    document.addEventListener('touchmove', killEvent, false);
-  }
-  
-  this.cleanupFanzoneScroller = function()
-  {
-    this.myFanzoneScroller.destroy()
-    this.myFanzoneScroller = null;
-    document.removeEventListener('touchmove', killEvent, false);
   }
   
   this.clearContents = function()

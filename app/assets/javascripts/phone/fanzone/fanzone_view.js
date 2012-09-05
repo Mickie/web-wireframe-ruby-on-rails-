@@ -1,11 +1,17 @@
 var FanzoneView = function()
 {
   this.myTailgateModel = {};
+  this.myFanzoneScroller = null;
   this.myFanzonePostsController = FanzonePostsController.create("#postsAndComments");
   this.myFanzoneHomeView = new FanzoneHomeView();
+  this.myFanzoneSocialView = new FanzoneSocialView();
   
   this.initialize = function()
   {
+    $("#fanzoneFooterHome").click(createDelegate(this, this.onHomeClicked));
+    $("#fanzoneFooterSocial").click(createDelegate(this, this.onSocialClicked));
+    $("#fanzoneFooterMedia").click(createDelegate(this, this.onMediaClicked));
+    $("#fanzoneFooterMap").click(createDelegate(this, this.onMapClicked));
   }
   
   this.loadTailgate = function( aPath )
@@ -17,6 +23,8 @@ var FanzoneView = function()
   this.cleanup = function()
   {
     this.myFanzoneHomeView.cleanup();
+    this.myFanzoneSocialView.cleanup();
+    this.cleanupFanzoneScroller();
   }
   
   this.loadTailgateIntoFanzoneView = function( aPath )
@@ -31,6 +39,23 @@ var FanzoneView = function()
            });
   }
   
+  this.setupFanzoneScroller = function()
+  {
+    this.myFanzoneScroller = new iScroll("phoneFanzoneContent",
+                                        {
+                                          useTransform: true,
+                                          onBeforeScrollStart: enableFormsOnBeforeScroll 
+                                        });
+    document.addEventListener('touchmove', killEvent, false);
+  }
+  
+  this.cleanupFanzoneScroller = function()
+  {
+    this.myFanzoneScroller.destroy()
+    this.myFanzoneScroller = null;
+    document.removeEventListener('touchmove', killEvent, false);
+  }
+  
 
   this.onTailgateLoadComplete = function( aResult )
   {
@@ -42,11 +67,13 @@ var FanzoneView = function()
     this.renderBanner();
     this.renderFollowButton();  
     this.renderPostForm();
-    this.myFanzoneHomeView.render(this.myTailgateModel);
-    
-    updateTimestamps();
-    
+    this.setupFanzoneScroller();
+
+    this.myFanzoneHomeView.render(this.myTailgateModel, this.myFanzoneScroller);
     this.myFanzonePostsController.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
+    this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController);
+
+    updateTimestamps();
   };
   
   this.onLoadError = function(anError)
@@ -62,6 +89,30 @@ var FanzoneView = function()
   this.onUnfollow = function(e)
   {
     alert("unfollow")
+  }
+  
+  this.onHomeClicked = function(e)
+  {
+    $("#posts").show();
+    $("#tweetHolder").hide();
+    this.myFanzoneScroller.refresh();
+  }
+  
+  this.onSocialClicked = function(e)
+  {
+    $("#posts").hide();
+    $("#tweetHolder").show();
+    this.myFanzoneScroller.refresh();
+  }
+  
+  this.onMediaClicked = function(e)
+  {
+    
+  }
+  
+  this.onMapClicked = function(e)
+  {
+    
   }
   
   this.renderBanner = function()

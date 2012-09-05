@@ -7,8 +7,6 @@ var TwitterView = function( aMaxTweets,
                             aNewTweetDivId,
                             aFanzonePostsController)
 {
-  
-  
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
@@ -269,18 +267,18 @@ TwitterView.create = function(aMaxTweets,
                               aTweetDivId, 
                               aNewTweetDivId,
                               aFanzonePostsController, 
-                              aTwitterViewVariableName)
+                              aUniqueId)
 {
-  if (myCurrentTwitterViews[aTwitterViewVariableName])
+  if (myCurrentTwitterViews[aUniqueId])
   {
-    myCurrentTwitterViews[aTwitterViewVariableName].reset();
-    return myCurrentTwitterViews[aTwitterViewVariableName];
+    myCurrentTwitterViews[aUniqueId].reset();
+    return myCurrentTwitterViews[aUniqueId];
   }
   
-  myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView(aMaxTweets, 
-                                                                    aTweetDivId, 
-                                                                    aNewTweetDivId,
-                                                                    aFanzonePostsController);
+  myCurrentTwitterViews[aUniqueId] = new TwitterView( aMaxTweets, 
+                                                      aTweetDivId, 
+                                                      aNewTweetDivId,
+                                                      aFanzonePostsController);
   
-  return myCurrentTwitterViews[aTwitterViewVariableName];
+  return myCurrentTwitterViews[aUniqueId];
 };

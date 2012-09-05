@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require_tree ./phone
+ *= require_tree ./web/modules/twitter
  *= require_tree ./lib
 */
