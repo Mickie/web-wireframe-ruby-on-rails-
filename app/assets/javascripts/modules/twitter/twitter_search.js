@@ -41,8 +41,7 @@ var TwitterSearch = function( aListener )
 
     if(aJSON && aJSON.results)
     {
-      $.each(aJSON.results, createDelegate( this.myListener, this.myListener.onNewTweet ) );
-      
+      this.myListener.onNewTweets(aJSON.results);
       this.myRefreshUrl = aJSON.refresh_url;
     }
     else

@@ -14,7 +14,8 @@ var TwitterView = function( aMaxTweets,
   {
     this.myTwitterController.initialize( anArrayOfHashTags, anArrayOfNotTags, this.myMaxTweets );
 
-    $(this.myNewTweetDivSelector).click(createDelegate(this.myTwitterController, this.myTwitterController.onShowNewTweets));
+    $(this.myNewTweetDivSelector).click(createDelegate(this, this.onShowNewTweets));
+    $(this.myTweetDivSelector).hover(createDelegate(this, this.onTweetsHoverIn), createDelegate(this, this.onTweetsHoverOut));
   };
   
   this.reset = function()
@@ -36,6 +37,22 @@ var TwitterView = function( aMaxTweets,
     }
   };
 
+  this.onShowNewTweets = function(e)
+  {
+    trackEvent("Twitter", "show_new_tweets", undefined, this.myNewTweets.length);
+    $(this.myNewTweetDivSelector).slideUp(600);
+    this.myTwitterController.play();  
+  }
+  
+  this.onTweetsHoverIn = function(e)
+  {
+    this.myTwitterController.pause();
+  }
+  
+  this.onTweetsHoverOut = function(e)
+  {
+    this.myTwitterController.play();
+  }
   
   this.showNewTweetsAlert = function( aNumberOfNewTweets )
   {
@@ -44,31 +61,20 @@ var TwitterView = function( aMaxTweets,
     $(this.myNewTweetDivSelector).slideDown(600);
   };
 
-  this.showTweet = function(i, aTweet)
+  this.showTweet = function(aTweet)
   {
-    if(i > this.myMaxTweets)
-    {
-      return;
-    }
-
     var theNewDivSelector = "#" + aTweet.id_str;
     $(this.myTweetDivSelector).prepend(this.generateTweetDiv(aTweet));
     $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
     updateTimestamps();
   };
   
-  this.showInitialTweetAndGetCount = function( aTweet )
-  {
-    var theNewDivSelector = "#" + aTweet.id_str;
-    $(this.myTweetDivSelector).append(this.generateTweetDiv(aTweet));
-    $(theNewDivSelector).slideDown(200);
-    
-    return $(this.myTweetDivSelector).children().length;
-  }
-  
   this.onAddComplete = function()
   {
-    $(".tweet:last").remove();
+    if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets)
+    {
+      $(".tweet:last").remove();
+    }
   };
   
   this.generateTweetDiv = function(aTweet)
