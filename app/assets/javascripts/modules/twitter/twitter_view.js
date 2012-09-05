@@ -5,14 +5,14 @@ var DELAYED_TWEET_RELOAD_SCHEDULE = 60000;
 var TwitterView = function( aMaxTweets, 
                             aTweetDivId, 
                             aNewTweetDivId,
-                            aFanzonePostView)
+                            aFanzonePostsController)
 {
   
   
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
-  this.myFanzonePostView = aFanzonePostView;
+  this.myFanzonePostsController = aFanzonePostsController;
   
   this.myHashTags = {};
   this.myNotTags = {};
@@ -48,7 +48,7 @@ var TwitterView = function( aMaxTweets,
 
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
   {
-    this.myFanzonePostView.updatePostForm( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId );
+    this.myFanzonePostsController.updatePostForm( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId );
   };
   
   if (UserManager.get().isConnectedToTwitter())
@@ -268,7 +268,7 @@ var myCurrentTwitterViews = {};
 TwitterView.create = function(aMaxTweets, 
                               aTweetDivId, 
                               aNewTweetDivId,
-                              aFanzonePostView, 
+                              aFanzonePostsController, 
                               aTwitterViewVariableName)
 {
   if (myCurrentTwitterViews[aTwitterViewVariableName])
@@ -280,7 +280,7 @@ TwitterView.create = function(aMaxTweets,
   myCurrentTwitterViews[aTwitterViewVariableName] = new TwitterView(aMaxTweets, 
                                                                     aTweetDivId, 
                                                                     aNewTweetDivId,
-                                                                    aFanzonePostView);
+                                                                    aFanzonePostsController);
   
   return myCurrentTwitterViews[aTwitterViewVariableName];
 };

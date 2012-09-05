@@ -1,6 +1,6 @@
-var FanzonePostView = function( aPostsSelector )
+var FanzonePostsController = function( aPostsSelector )
 {
-  var POST_CONTENT_COOKIE = "FanzonePostView.post_content";
+  var POST_CONTENT_COOKIE = "FanzonePostsController.post_content";
   
   this.myPostsSelector = aPostsSelector;
   this.myQuickTweetsView = new QuickTweetView(aPostsSelector, this);
@@ -129,14 +129,14 @@ var FanzonePostView = function( aPostsSelector )
   }
 }
 
-var mySingletonFanzonePostView;
-FanzonePostView.create = function(aPostsDivSelector)
+var mySingletonFanzonePostsController;
+FanzonePostsController.create = function(aPostsDivSelector)
 {
-  if (mySingletonFanzonePostView)
+  if (mySingletonFanzonePostsController)
   {
-    return mySingletonFanzonePostView;
+    return mySingletonFanzonePostsController;
   }
   
-  mySingletonFanzonePostView = new FanzonePostView(aPostsDivSelector);
-  return mySingletonFanzonePostView;
+  mySingletonFanzonePostsController = new FanzonePostsController(aPostsDivSelector);
+  return mySingletonFanzonePostsController;
 }

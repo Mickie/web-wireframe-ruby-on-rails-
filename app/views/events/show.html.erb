@@ -137,19 +137,19 @@
 <script language="JavaScript">
   var myVisitingTeamTwitterView;
   var myHomeTeamTwitterView;
-  var myFanzonePostView;
+  var myFanzonePostsController;
   
   $(function()
   {
-    myFanzonePostView = FanzonePostView.create("#tweetControls");
-    myFanzonePostView.initialize( <%= @event.home_team.sport.id %>, 
+    myFanzonePostsController = FanzonePostsController.create("#tweetControls");
+    myFanzonePostsController.initialize( <%= @event.home_team.sport.id %>, 
                           <%= raw (@visitingHashTags + @homeHashTags) %>);                                      
 
     
     myVisitingTeamTwitterView = TwitterView.create( 20, 
                                                   "tweetsVisiting", 
                                                   "newTweetsVisiting",
-                                                  myFanzonePostView,
+                                                  myFanzonePostsController,
                                                   "myVisitingTeamTwitterView");
     myVisitingTeamTwitterView.startLoadingTweets(<%= raw @visitingHashTags %>,
                                                  <%= raw @event.visiting_team.social_info ? @event.visiting_team.social_info.not_tags.split(" ") : [] %> 
@@ -158,7 +158,7 @@
     myHomeTeamTwitterView = TwitterView.create(  20, 
                                               "tweetsHome", 
                                               "newTweetsHome",
-                                              myFanzonePostView,
+                                              myFanzonePostsController,
                                               "myHomeTeamTwitterView");
     myHomeTeamTwitterView.startLoadingTweets( <%= raw @homeHashTags %>, 
                                               <%= raw @event.home_team.social_info ? @event.home_team.social_info.not_tags.split(" ") : [] %> 

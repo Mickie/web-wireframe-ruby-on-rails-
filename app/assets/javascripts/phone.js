@@ -23,7 +23,7 @@
 //= require bootstrap-modal
 //= require ./modules/dialogs/dialog_resizer
 //= require ./modules/infinite_scroller
-//= require ./modules/fanzone_post_view
+//= require ./modules/fanzonePostsController
 //= require_tree ./facebook
 //= require_tree ./modules/facebook
 //= require_tree ./modules/quick_tweet

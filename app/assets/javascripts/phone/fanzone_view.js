@@ -1,7 +1,7 @@
 var FanzoneView = function()
 {
   this.myTailgateModel = {};
-  this.myFanzonePostView = FanzonePostView.create("#postsAndComments");
+  this.myFanzonePostsController = FanzonePostsController.create("#postsAndComments");
   this.myFanzoneHomeView = new FanzoneHomeView();
   
   this.initialize = function()
@@ -46,7 +46,7 @@ var FanzoneView = function()
     
     updateTimestamps();
     
-    this.myFanzonePostView.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
+    this.myFanzonePostsController.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
   };
   
   this.onLoadError = function(anError)

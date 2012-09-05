@@ -88,7 +88,7 @@
 <script language="JavaScript">
   var myTwitterView;
   var myTeamMediaSlider;
-  var myFanzonePostView;
+  var myFanzonePostsController;
   
   $(function()
   {
@@ -97,14 +97,14 @@
       return;
     }
 
-    myFanzonePostView = FanzonePostView.create("#tweetControls");
-    myFanzonePostView.initialize( <%= @team.sport.id %>, 
+    myFanzonePostsController = FanzonePostsController.create("#tweetControls");
+    myFanzonePostsController.initialize( <%= @team.sport.id %>, 
                           '<%= @team.social_info.hash_tags %>');                                      
 
     myTwitterView = TwitterView.create( 20,
                                         "tweets",
                                         "newTweets",
-                                        myFanzonePostView,
+                                        myFanzonePostsController,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets( <%= raw @team.social_info.hash_tags.split(",") %>,
                                       <%= raw @team.social_info.not_tags.split(",") %>

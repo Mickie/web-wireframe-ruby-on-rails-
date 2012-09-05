@@ -218,7 +218,7 @@
 
 <script language="JavaScript">
   var myTwitterView;
-  var myFanzonePostView;
+  var myFanzonePostsController;
   var myTailgateMediaSlider;
   var myEditFanzoneDialog;
   
@@ -229,14 +229,14 @@
       return;
     }
 
-    myFanzonePostView = FanzonePostView.create("#fanzonePosts");
-    myFanzonePostView.initialize( <%= @tailgate.team.sport.id %>, 
+    myFanzonePostsController = FanzonePostsController.create("#fanzonePosts");
+    myFanzonePostsController.initialize( <%= @tailgate.team.sport.id %>, 
                           '<%= @tailgate.topic_tags %>');                                      
     
     myTwitterView = TwitterView.create( 15,
                                         "tweets",
                                         "newTweets",
-                                        myFanzonePostView,
+                                        myFanzonePostsController,
                                         "myTwitterView");
     myTwitterView.startLoadingTweets( <%= raw @tailgate.topic_tags.split(",") %>,
                                       <%= raw @tailgate.not_tags.split(",") %>
