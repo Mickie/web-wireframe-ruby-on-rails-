@@ -21,6 +21,7 @@ var FanzoneSocialView = function()
   this.cleanup = function()
   {
     this.myTwitterView.reset();
+    $("#phoneFanzoneContent #tweets").empty();
   }
   
 }

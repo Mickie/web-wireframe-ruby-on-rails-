@@ -12,11 +12,6 @@ var FanzoneHomeView = function()
   
   this.cleanup = function()
   {
-    this.clearContents();
-  }
-  
-  this.clearContents = function()
-  {
     $("#phoneFanzoneContent #posts").empty();
   }
   

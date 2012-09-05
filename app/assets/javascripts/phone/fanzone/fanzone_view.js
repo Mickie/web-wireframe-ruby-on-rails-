@@ -18,6 +18,7 @@ var FanzoneView = function()
   {
     var thePath = aPath + ".json";
     this.loadTailgateIntoFanzoneView( thePath );
+    this.onHomeClicked();
   }
   
   this.cleanup = function()
