@@ -24,6 +24,19 @@ dev:
 	"access_token"=>"AAAFSY6xPFu8BAA5piRK3smDpwNpwILHCY5ZBXtd13OdZB6cxs90VxevCvRse4pWrOfeO7n34YZB1VHoZAkcJ4voxDffMRs4099uQ2TnANto68ZCTfCz0t", 
 	"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004015077440&n=LbJ0YuTTg3i7RkZ", 
 	"email"=>"hnmsfbr_occhinoson_1341897667@tfbnw.net"
+	
+	
+	{	
+		"id"=>"100004340731000", 
+		"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004340731000&n=Dhati9KhBk7NL6j", 
+		"email"=>"mfnbiqg_wisemansky_1346813887@tfbnw.net", 
+		"password"=>"792863499"
+	}
+	{
+		"id"=>"100004296638470", 
+		"login_url"=>"https://www.facebook.com/platform/test_account_login.php?user_id=100004296638470&n=Zlvsi65ijvPItdp", 
+		"email"=>"edplawc_qinsteinwitzsensonmanbergescusky_1346814255@tfbnw.net", 
+		"password"=>"1491809837"}	
 } 
 
 Join:

@@ -1,10 +1,14 @@
-# Use this hook to configure devise mailer, warden hooks and so forth.
-# Many of these configuration options can be set straight in your model.
+FACEBOOK_SETUP_PROC = lambda do |env|
+  request = Rack::Request.new(env)
+  mobile_device = request.user_agent =~ /Mobile|webOS/i
+  request.env['omniauth.strategy'].options[:display] = mobile_device ? "touch" : "page"
+end
+
 Devise.setup do |config|
   
   require "omniauth-facebook"
   config.omniauth :facebook, ENV["FANZO_FACEBOOK_APP_ID"], ENV["FANZO_FACEBOOK_APP_SECRET"], 
-    :scope => 'email, publish_stream'
+    :scope => 'email, publish_stream', :setup => FACEBOOK_SETUP_PROC
 
 # user_hometown, user_interests, user_likes, user_location, 
 # user_birthday, friends_birthday, user_education_history, friends_education_history, user_events, 
