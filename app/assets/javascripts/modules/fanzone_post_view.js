@@ -15,10 +15,12 @@ var FanzonePostView = function( aPostsSelector )
   
   this.setupFormListeners = function()
   {
-    $(this.myPostsSelector).on('ajax:before', ".new_comment", createDelegate( this, this.checkStatus ) );
     $(this.myPostsSelector).on('click', ".vote_up i:not(.disabled)", createDelegate( this, this.submitUpVote ) );
     $(this.myPostsSelector).on('click', ".vote_down i:not(.disabled)", createDelegate( this, this.submitDownVote ) );
     $(this.myPostsSelector).on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
+    $(this.myPostsSelector).on('click', ".comment_input", createDelegate(this, this.checkLoginStatus ) );
+    $(this.myPostsSelector).on('click', "#post_content", createDelegate(this, this.checkLoginStatus ) );
+    $(this.myPostsSelector).on('ajax:before', ".new_comment", createDelegate( this, this.checkLoginStatus ) );
   }
   
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
@@ -59,7 +61,7 @@ var FanzonePostView = function( aPostsSelector )
     return false; 
   };
 
-  this.checkStatus = function(e)
+  this.checkLoginStatus = function(e)
   {
     if (!UserManager.get().isLoggedIn())
     {
