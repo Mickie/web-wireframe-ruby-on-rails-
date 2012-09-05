@@ -20,6 +20,8 @@
 //= require ./utilities/timestamps
 //= require google_analytics
 //= require bootstrap-dropdown
+//= require bootstrap-modal
+//= require ./modules/dialogs/dialog_resizer
 //= require ./modules/infinite_scroller
 //= require ./modules/fanzone_post_view
 //= require_tree ./facebook

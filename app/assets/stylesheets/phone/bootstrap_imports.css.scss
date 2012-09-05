@@ -1,0 +1,42 @@
+@import "bootstrap/mixins";
+@import "partials/colors";
+@import "bootstrap/dropdowns";
+@import "bootstrap/modals";
+@import "bootstrap/close";
+
+.modal-backdrop, .modal-backdrop.fade.in 
+{
+  opacity: 0.4;
+  height: 500px;
+}
+
+.modal.fade.in
+{
+  top:0px;
+}
+
+.modal
+{
+  top: 0px;
+  left:20%;
+  margin:0px;
+  @include border-radius(0);
+}
+
+.dropdown-menu 
+{
+  @include border-radius(0);
+  padding: 10px;
+
+  li:not(.divider) 
+  {
+    line-height: 23px;
+    
+    &:hover
+    {
+      background: $backgroundColor;
+      border: 1px solid $borderColor;
+      margin: -1px;
+    }
+  }
+}

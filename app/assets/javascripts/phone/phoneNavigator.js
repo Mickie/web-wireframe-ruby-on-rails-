@@ -94,7 +94,7 @@ var PhoneNavigator = function()
     
     console.log("width: " + theViewportWidth + " height: " + theViewportHeight);
     
-    $("#phoneUI").width(theViewportWidth).height(theViewportHeight);
+    $(".phoneUI").width(theViewportWidth).height(theViewportHeight);
     $("#phoneLeftNav").height(theViewportHeight);
     
     $("#phoneTileViewport").width(theViewportWidth).height(theViewportHeight);

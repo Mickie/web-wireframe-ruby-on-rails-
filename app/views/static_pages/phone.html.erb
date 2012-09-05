@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="fb-root"></div>
-    <div id="phoneUI">
+    <div id="page_content" class="phoneUI">
       <div id="phoneLeftNav" class="hide">
         <div class="leftNavContent">
           <div class="login" 
@@ -167,6 +167,11 @@
             </ul>
           </nav>
         </div>
+      </div>
+      
+      <div id="modals">
+        <%= render partial: "partials/dialogs/login_modal" %>
+        <%= render partial: "partials/dialogs/connect_twitter_modal" %>
       </div>
     </div>
     <% if @device %>
