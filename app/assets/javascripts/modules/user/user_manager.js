@@ -137,11 +137,6 @@ var UserManager = function()
     $("#myLoginModal").modal("show");
   };
   
-  this.showFacebookLogin = function()
-  {
-    this.myFacebookController.showLogin();      
-  };
-
   this.onFacebookLoginComplete = function( aFacebookModel )
   {
     this.myFacebookModel = aFacebookModel;
