@@ -111,6 +111,7 @@ var PhoneNavigator = function()
     {
       this.positionFanzone();
     }
+    window.scrollTo(0, 1);
   }
   
   this.loadTailgate = function( aPath )
