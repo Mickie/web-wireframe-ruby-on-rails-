@@ -46,7 +46,7 @@ var UserManager = function()
       return this.myFanzoAccountDetails.id;
     }
     
-    return nil;
+    return null;
   }
   
   this.getProfilePicUrl = function()
