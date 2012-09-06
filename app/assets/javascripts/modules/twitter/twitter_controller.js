@@ -82,13 +82,17 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
     this.myNewTweets = this.myNewTweets.concat(anArrayOfTweets);
     this.sortNewTweets();
     this.chopOffOldestTweetsSoWeShowOnlyTheLatest();
-    if (this.myPausedFlag)
+    
+    if (this.myNewTweets.length > 0)
     {
-      this.myTwitterView.showNewTweetsAlert( this.myNewTweets.length );
-    }
-    else if (this.myNewTweets.length > 0)
-    {
-      this.play();
+      if (this.myPausedFlag)
+      {
+        this.myTwitterView.showNewTweetsAlert( this.myNewTweets.length );
+      }
+      else
+      {
+        this.play();
+      }
     }
   }
 

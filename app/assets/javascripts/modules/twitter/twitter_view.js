@@ -39,7 +39,7 @@ var TwitterView = function( aMaxTweets,
 
   this.onShowNewTweets = function(e)
   {
-    trackEvent("Twitter", "show_new_tweets", undefined, this.myNewTweets.length);
+    trackEvent("Twitter", "show_new_tweets");
     $(this.myNewTweetDivSelector).slideUp(600);
     this.myTwitterController.play();  
   }
@@ -51,6 +51,7 @@ var TwitterView = function( aMaxTweets,
   
   this.onTweetsHoverOut = function(e)
   {
+    $(this.myNewTweetDivSelector).slideUp(600);
     this.myTwitterController.play();
   }
   

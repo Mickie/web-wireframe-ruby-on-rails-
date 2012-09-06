@@ -18,7 +18,6 @@ var FanzoneView = function()
   {
     var thePath = aPath + ".json";
     this.loadTailgateIntoFanzoneView( thePath );
-    this.onHomeClicked();
   }
   
   this.cleanup = function()
@@ -75,6 +74,7 @@ var FanzoneView = function()
     this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController);
 
     updateTimestamps();
+    this.onHomeClicked();
   };
   
   this.onLoadError = function(anError)
