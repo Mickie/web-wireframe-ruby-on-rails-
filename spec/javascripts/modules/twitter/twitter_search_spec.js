@@ -1,17 +1,17 @@
 describe("TwitterSearch", function()  
 {
   var myTwitterSearch;
-  var onNewTweet, onError, onSuccess;
+  var onNewTweets, onError, onSuccess;
   var THE_SEARCH_URL = 'http://search.twitter.com/search.json?lang=en&include_entities=true&q=notredame%20-dakota&rpp=1';
   
   beforeEach(function()
   {
-    onNewTweet = jasmine.createSpy('onNewTweet');
+    onNewTweets = jasmine.createSpy('onNewTweets');
     onError = jasmine.createSpy('onError');
     onSuccess = jasmine.createSpy('onSuccess');
     
     var theListener = {
-      "onNewTweet" : onNewTweet,
+      "onNewTweets" : onNewTweets,
       "onError" : onError,
       "onSuccess" : onSuccess
     };
@@ -72,14 +72,13 @@ describe("TwitterSearch", function()
       myTwitterSearch.getLatestTweetsForTerm( ['notredame'], ['dakota'], 1); 
     });
 
-    it("calls onNewTweet with a tweet", function() 
+    it("calls onNewTweets with an array of tweets", function() 
     {
-      expect(onNewTweet).toHaveBeenCalled();
+      expect(onNewTweets).toHaveBeenCalled();
  
-      var theArgs = onNewTweet.mostRecentCall.args;
+      var theArgs = onNewTweets.mostRecentCall.args;
 
-      expect(theArgs[0]).toEqual(0);
-      expect(theArgs[1].id).toEqual(202854280347127809);
+      expect(theArgs[0][0].id).toEqual(202854280347127809);
     });
     
     it ("calls onSuccess when done", function()
@@ -113,7 +112,7 @@ describe("TwitterSearch", function()
     it("calls onError with error message", function() 
     {
       expect(onSuccess).wasNotCalled();
-      expect(onNewTweet).wasNotCalled();
+      expect(onNewTweets).wasNotCalled();
       expect(onError).toHaveBeenCalled();
  
       var theArgs = onError.mostRecentCall.args;
