@@ -11,6 +11,7 @@
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
   <meta property="og:description"  content="<%= @tailgate.description ? @tailgate.description : "A fanzone about the #{@tailgate.team.name} #{@tailgate.team.sport.name} Team."%>" /> 
   <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />
+  <meta property="fb:admins" content="690891536" />     
   <link href="<%= tailgate_url(@tailgate) -%>" rel="canonical">
 <% end %>
 
