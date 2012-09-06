@@ -11,6 +11,7 @@
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
   <meta property="og:description"  content="<%= @tailgate.description ? @tailgate.description : "A fanzone about the #{@tailgate.team.name} #{@tailgate.team.sport.name} Team."%>" /> 
   <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />
+  <link href="<%= tailgate_url(@tailgate) -%>" rel="canonical">
 <% end %>
 
 <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
