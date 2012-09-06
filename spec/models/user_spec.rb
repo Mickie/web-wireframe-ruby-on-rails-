@@ -141,13 +141,13 @@ describe User do
   
     describe "when email address is already taken" do
       it "should raise error" do
-        expect { User.create!(email:@user.email, password:"please", password_confirmation: "please") }.should raise_error
+        expect { User.create!(email:@user.email, password:"please", password_confirmation: "please") }.to raise_error
       end 
     end
   
     describe "when email address is already taken, different case" do
       it "should raise error" do
-        expect { User.create!(email:@user.email.upcase, password:"please", password_confirmation: "please") }.should raise_error
+        expect { User.create!(email:@user.email.upcase, password:"please", password_confirmation: "please") }.to raise_error
       end 
     end
   end
