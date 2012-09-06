@@ -1,4 +1,9 @@
-
+if (typeof console === "undefined" || typeof console.log === "undefined") 
+{
+   console = {};
+   console.log = function() {};
+}
+   
 function createDelegate(anObject, aMethod)
 {
   var theDelegate = function()
