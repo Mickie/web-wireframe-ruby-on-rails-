@@ -1,6 +1,8 @@
 <%= provide(:title, @tailgate.name + " - Fanzo") %>
 
-<%= provide(:head_open_graph, "prefix='og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# #{ENV["FANZO_FACEBOOK_NAMESPACE"]}: http://ogp.me/ns/fb/#{ENV["FANZO_FACEBOOK_NAMESPACE"]}#'" )%>
+<% provide :head_open_graph do %>
+  <%= raw "prefix=\"og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# #{ENV["FANZO_FACEBOOK_NAMESPACE"]}: http://ogp.me/ns/fb/#{ENV["FANZO_FACEBOOK_NAMESPACE"]}#\"" %>
+<% end %>
 
 <% provide :opengraph_meta_tags do %>
   <meta property="fb:app_id" content="<%= ENV["FANZO_FACEBOOK_APP_ID"] -%>" /> 
@@ -9,7 +11,6 @@
   <meta property="og:title"  content="<%= @tailgate.name -%>" /> 
   <meta property="og:description"  content="<%= @tailgate.description ? @tailgate.description : "A fanzone about the #{@tailgate.team.name} #{@tailgate.team.sport.name} Team."%>" /> 
   <meta property="og:image"  content="<%= getLargeLogoBitly(@tailgate.team) -%>" />
-  <meta property="fb:admins" content="690891536" />     
 <% end %>
 
 <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
