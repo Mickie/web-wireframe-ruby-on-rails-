@@ -86,7 +86,7 @@ div#posts
       i.disabled
       {
         background-color: #CCCCCC;
-        @include border-radius(25%);
+        @include border-radius-with-ie(25%);
         cursor: inherit;
         opacity: 1;
       }

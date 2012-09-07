@@ -67,7 +67,7 @@
           width: 100%;
           padding-left: 25px;
           height:40px;
-          @include border-radius(20px);
+          @include border-radius-with-ie(20px);
         }
       }
       

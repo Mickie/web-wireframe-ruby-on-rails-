@@ -5,3 +5,9 @@
   @include box-shadow($shadow);
   behavior: asset-url("PIE.htc", image);
 }
+
+@mixin border-radius-with-ie($radius)
+{
+  @include border-radius($radius);
+  behavior: asset-url("PIE.htc", image);
+}

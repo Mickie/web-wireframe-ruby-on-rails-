@@ -94,7 +94,7 @@ a
   border: 2px solid rgba(255, 255, 255, .9);
   background: rgb(64, 64, 64);
   background: rgba(127, 127, 127, .7);
-  @include border-radius(50%);
+  @include border-radius-with-ie(50%);
     
   .playButton
   {
