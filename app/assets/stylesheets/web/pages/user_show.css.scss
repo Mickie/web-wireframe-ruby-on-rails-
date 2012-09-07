@@ -17,11 +17,6 @@ div#userShow
       color: white;
       @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
       
-      img
-      {
-        max-width:inherit;
-      }
-      
       .edit_setting
       {
         position: absolute;

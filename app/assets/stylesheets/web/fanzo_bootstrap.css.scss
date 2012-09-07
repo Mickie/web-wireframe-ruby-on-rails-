@@ -2,6 +2,11 @@
 @import "partials/mixins";
 @import "partials/colors";
 
+img
+{
+  max-width: inherit;
+}
+
 .modal-backdrop, .modal-backdrop.fade.in 
 {
   opacity: 0.4;
