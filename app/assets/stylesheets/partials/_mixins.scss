@@ -1,0 +1,7 @@
+@import "bootstrap/mixins";
+
+@mixin box-shadow-with-ie($shadow)
+{
+  @include box-shadow($shadow);
+  behavior: asset-url("PIE.htc", image);
+}

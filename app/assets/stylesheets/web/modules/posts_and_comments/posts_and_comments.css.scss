@@ -1,4 +1,4 @@
-@import "bootstrap/mixins";
+@import "partials/mixins";
 @import "partials/colors";
 
 #fanzonePosts
@@ -10,7 +10,7 @@
   textarea
   {
     @include border-radius(0);
-    @include box-shadow(none); 
+    @include box-shadow-with-ie(none); 
   }
 
 }

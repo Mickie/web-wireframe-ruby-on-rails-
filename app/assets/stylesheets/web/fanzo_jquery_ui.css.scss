@@ -1,4 +1,4 @@
-@import "bootstrap/mixins";
+@import "partials/mixins";
 @import "partials/colors";
 
 .ui-corner-all
@@ -18,5 +18,5 @@
 .ui-menu
 {
   padding: 10px;
-  @include box-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  @include box-shadow-with-ie(0 5px 10px rgba(0, 0, 0, 0.2));
 }

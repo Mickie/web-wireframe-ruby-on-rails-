@@ -1,4 +1,4 @@
-@import "bootstrap/mixins";
+@import "partials/mixins";
 @import "partials/colors";
 
 body
@@ -64,7 +64,7 @@ a
   height: 23px;
   vertical-align:inherit;
   @include border-radius(0);
-  @include box-shadow(none);
+  @include box-shadow-with-ie(none);
   
   &:hover
   {

@@ -1,5 +1,5 @@
 @import "partials/colors";
-@import "bootstrap/mixins";
+@import "partials/mixins";
 
 div#frameContent div#allTiles
 {
@@ -19,7 +19,7 @@ div#tailgate_show
 
   div.tailgate_content
   {
-    @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
+    @include box-shadow-with-ie( 0 1px 2px rgba(25, 25, 25, 0.5) );
     behavior: asset-url("PIE.htc", image);
              
     div.banner
