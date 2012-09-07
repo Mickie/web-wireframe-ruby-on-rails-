@@ -11,6 +11,7 @@ div.fanzoneTile
   float: left;
   cursor: pointer;
   @include box-shadow( 0 1px 2px rgba(25, 25, 25, 0.5) );
+  behavior: asset-url("PIE.htc", image);
 
   .banner
   {
