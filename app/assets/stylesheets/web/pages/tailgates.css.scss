@@ -46,6 +46,11 @@ div#tailgate_show
           background-color: $fanzoneBannerLogoBackground;
           border-top: $fanzoneBorder solid 1px;
           padding: 30px;
+          
+          img
+          {
+            max-width: inherit;
+          }
         }
         
         div.fanzone_details
