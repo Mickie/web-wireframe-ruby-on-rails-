@@ -68,6 +68,7 @@
           padding-left: 25px;
           height:40px;
           @include border-radius-with-ie(20px);
+          -pie-background: 1;
         }
       }
       
