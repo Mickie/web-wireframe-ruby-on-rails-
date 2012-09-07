@@ -56,7 +56,7 @@ div#tailgate_show
         
         div.fanzone_details
         {
-          padding-left:150px;
+          padding-left:140px;
           
           .official
           {
@@ -71,12 +71,13 @@ div#tailgate_show
           h1
           {
             color: $fanzoneBannerTextColor;
-            padding: 5px;
+            padding: 5px 10px;
             font-weight: normal;
           }
           
           .description
           {
+            padding-left: 10px;
             font-size: 14px;
           }
           

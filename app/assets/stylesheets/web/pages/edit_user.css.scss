@@ -25,6 +25,11 @@
     {
       @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
       border-bottom: 1px solid $borderColor;
+
+      img
+      {
+        max-width:inherit;
+      }
       
       h2
       {
