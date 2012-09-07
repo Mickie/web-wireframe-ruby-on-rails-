@@ -20,6 +20,11 @@ div#myMediaSlider
     float:left;
     position:relative;
     
+    img
+    {
+      max-width: inherit;
+    }
+    
     .bingNewsItem
     {
       height: 150px;
