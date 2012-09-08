@@ -29,5 +29,6 @@
 //= require_tree ./modules/facebook
 //= require_tree ./modules/twitter
 //= require_tree ./modules/quick_tweet
+//= require_tree ./modules/media_slider
 //= require_tree ./modules/user
 //= require_tree ./phone

@@ -5,6 +5,7 @@ var FanzoneView = function()
   this.myFanzonePostsController = FanzonePostsController.create("#postsAndComments");
   this.myFanzoneHomeView = new FanzoneHomeView();
   this.myFanzoneSocialView = new FanzoneSocialView();
+  this.myFanzoneMediaView = new FanzoneMediaView();
   
   this.initialize = function()
   {
@@ -72,6 +73,7 @@ var FanzoneView = function()
     this.myFanzoneHomeView.render(this.myTailgateModel, this.myFanzoneScroller);
     this.myFanzonePostsController.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
     this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController);
+    this.myFanzoneMediaView.render(this.myTailgateModel);
 
     updateTimestamps();
     this.onHomeClicked();
@@ -96,6 +98,7 @@ var FanzoneView = function()
   {
     $("#posts").show();
     $("#tweetHolder").hide();
+    $("#fanzoneMedia").hide();
     this.myFanzoneScroller.refresh();
   }
   
@@ -103,12 +106,15 @@ var FanzoneView = function()
   {
     $("#posts").hide();
     $("#tweetHolder").show();
+    $("#fanzoneMedia").hide();
     this.myFanzoneScroller.refresh();
   }
   
   this.onMediaClicked = function(e)
   {
-    
+    $("#posts").hide();
+    $("#tweetHolder").hide();
+    $("#fanzoneMedia").show();
   }
   
   this.onMapClicked = function(e)
