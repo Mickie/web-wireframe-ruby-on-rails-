@@ -65,9 +65,9 @@
             back
           </button>
           <h1 class="phoneTitle">Fanzo</h1>
-          <button id="followButton" class="fanzoButton hide">
-            follow
-          </button>
+          <div id="followButton" class="hide">
+            <%= render partial: "partials/buttons/follow_button", locals: { tailgate: Tailgate.first }%>
+          </div>
         </div>
         <div id="phoneFanzoneLoading" class="hide">
           <div>
@@ -199,7 +199,7 @@
       <% end %>
 
       <% if current_user %>
-        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates ]) %>);
+        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
       <% end %>
     </script>
   </body>

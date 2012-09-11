@@ -1,4 +1,4 @@
-<%= form_for(current_user.tailgate_followers.build(tailgate_id: tailgate.id), remote: true) do |f| %>
+<%= form_for(TailgateFollower.new(tailgate_id: tailgate.id), remote: true) do |f| %>
   <%= f.hidden_field :tailgate_id %>
   <%= f.submit "Follow", class: "follow_button fanzoButton", id:"#{tailgate.id}", onclick:"return handleFollowClick(event);" %>
 <% end %>

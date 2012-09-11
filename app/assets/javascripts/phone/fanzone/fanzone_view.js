@@ -138,16 +138,21 @@ var FanzoneView = function()
       }
       else if ( theUserManager.isTailgateIFollow( this.myTailgateModel.id ) )
       {
-        $("#followButton").text("Unfollow").click( createDelegate( this, this.onUnfollow ) ).show();
+        var theTailgateFollower = theUserManager.getTailgateFollower( this.myTailgateModel.id );
+        $("#followButton").render(theTailgateFollower, this.getUnfollowButtonDirective());
+        $("#followButton form > div").append("<input id=\"method\" name=\"_method\" type=\"hidden\" value=\"delete\">");
+        $("#followButton").show();
       }
       else
       {
-        $("#followButton").text("Follow").click( createDelegate( this, this.onFollow ) ).show();
+        $("#followButton").render(this.myTailgateModel, this.getFollowButtonDirective());
+        $("#followButton").find("#method").remove();
+        $("#followButton").show();
       }
     }
     else
     {
-      $("#followButton").text("Follow").click( createDelegate( theUserManager, theUserManager.showFacebookModal ) ).show();
+      $("#followButton").hide();
     }
   }
   
@@ -196,5 +201,28 @@ var FanzoneView = function()
     }
   };
   
+  this.getFollowButtonDirective = function()
+  {
+    return {
+      "form@action" : function() { return "/tailgate_followers"; },
+      "form@class" : function() { return "new_tailgate_follower"; },
+      "form@id" : function() { return "new_tailgate_follower"; },
+      "input.follow_button@value" : function() { return "Follow"},
+      "input.follow_button@id" : "id",
+      "input#tailgate_follower_tailgate_id@value" : "id",
+    }
+  }
+  
+  this.getUnfollowButtonDirective = function()
+  {
+    return {
+      "form@action" : function(anItem) { return "/tailgate_followers/" + anItem.context.id; },
+      "form@class" : function() { return "edit_tailgate_follower"; },
+      "form@id" : function() { return "edit_tailgate_follower"; },
+      "input.follow_button@value" : function() { return "Unfollow"; },
+      "input.follow_button@id" : function() { return ""; },
+      "input#tailgate_follower_tailgate_id@value" : function() { return ""; },
+    }
+  }
   
 }

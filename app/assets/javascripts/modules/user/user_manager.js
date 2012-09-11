@@ -113,18 +113,65 @@ var UserManager = function()
   {
     if (this.isLoggedIn())
     {
-      for (var i=0; i < this.myFanzoAccountDetails.followed_tailgates.length; i++) 
-      {
-        if (this.myFanzoAccountDetails.followed_tailgates[i].id == aTailgateId)
-        {
-          return true;
-        }
-      }
+      var theIndex = this.findFollowedTailgateIndex( aTailgateId );
+      return theIndex >= 0;
     }
     
     return false;
   }
-
+  
+  this.getTailgateFollower = function( aTailgateId )
+  {
+    if (this.isLoggedIn())
+    {
+      var theIndex = this.findTailgateFollowerIndex( aTailgateId );
+      return theIndex >= 0 ? this.myFanzoAccountDetails.tailgate_followers[theIndex] : null;
+    }
+    
+    return null;
+  }
+  
+  this.followTailgate = function( aTailgateFollower )
+  {
+    this.myFanzoAccountDetails.tailgate_followers.push( aTailgateFollower );
+    this.myFanzoAccountDetails.followed_tailgates.push( aTailgateFollower.tailgate );
+  }
+  
+  this.unfollowTailgate = function( aTailgateId )
+  {
+    var theIndex = this.findTailgateFollowerIndex( aTailgateId );
+    this.myFanzoAccountDetails.tailgate_followers.splice(theIndex, 1);
+    
+    theIndex = this.findFollowedTailgateIndex( aTailgateId );
+    this.myFanzoAccountDetails.followed_tailgates.splice(theIndex, 1);
+  }
+  
+  this.findTailgateFollowerIndex = function( aTailgateId )
+  {
+    for (var i=0; i < this.myFanzoAccountDetails.tailgate_followers.length; i++) 
+    {
+      if ( this.myFanzoAccountDetails.tailgate_followers[i].tailgate_id == aTailgateId )
+      {
+        return i;
+      }
+    };
+    
+    return -1;
+  }
+  
+  this.findFollowedTailgateIndex = function( aTailgateId )
+  {
+    for (var i=0; i < this.myFanzoAccountDetails.followed_tailgates.length; i++) 
+    {
+      if (this.myFanzoAccountDetails.followed_tailgates[i].id == aTailgateId)
+      {
+        return i;
+      }
+    }
+    
+    return -1;
+  }
+  
   this.showTwitterModal = function()
   {
     this.notifyObservers("onShowConnectionModal");

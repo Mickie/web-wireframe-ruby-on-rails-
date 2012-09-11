@@ -57,7 +57,7 @@
     <script type="text/javascript">
       UserManager.get().setMobile(false);
       <% if current_user %>
-        UserManager.get().setAccountDetails(<%= raw current_user.to_json %>);
+        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
       <% end %>
     </script>
 	</body>
