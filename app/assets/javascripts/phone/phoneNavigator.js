@@ -45,9 +45,14 @@ var PhoneNavigator = function()
     window.onorientationchange = createDelegate(this, this.adjustForDimensions);
   }
   
+  this.isDevice = function()
+  {
+    return typeof window.device !== "undefined";
+  }
+  
   this.connectToPhoneGap = function()
   {
-    if (typeof window.device !== "undefined" )
+    if ( this.isDevice() )
     {
       this.onGapReady();
     }
@@ -68,13 +73,27 @@ var PhoneNavigator = function()
       case 90:
       {
         theViewportWidth = 480;
-        theViewportHeight = 270;
+        if (this.isDevice())
+        {
+          theViewportHeight = 320;
+        }
+        else
+        {
+          theViewportHeight = 270;
+        }
         break;
       }
       default:
       {
         theViewportWidth = 320;
-        theViewportHeight = 416;
+        if (this.isDevice())
+        {
+          theViewportHeight = 465;
+        }
+        else
+        {
+          theViewportHeight = 416;
+        }
         break;
       }
     }
