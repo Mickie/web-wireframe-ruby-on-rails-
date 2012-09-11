@@ -124,7 +124,7 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
     var theTweetId = $(e.target).attr("data-tweet-id");
     var theUser = $(e.target).attr("data-user");
 
-    this.myFanzonePostsController.updatePostForm(true, "@" + theUser + " " + this.myTwitterView.myHashTags, theTweetId);
+    this.myFanzonePostsController.updatePostForm(true, "@" + theUser + " " + this.myHashTags, theTweetId);
     $("body").animate({scrollTop:0}, 400);
     trackEvent("Twitter", "reply_click");    
   };
@@ -145,7 +145,7 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
     var theTweetId = $(e.target).attr("data-tweet-id");
     var theUser = $(e.target).attr("data-user");
 
-    var theMessage = "@" + theUser + ", I've got a conversation going about this on my @FanzoFans fanzone, interested? " + this.myTwitterView.myHashTags;
+    var theMessage = "@" + theUser + ", I've got a conversation going about this on my @FanzoFans fanzone, interested? " + this.myHashTags;
     this.myTwitterInviteDialog.showDialog( theMessage, theTweetId );
     trackEvent("Twitter", "invite_click");    
   };
