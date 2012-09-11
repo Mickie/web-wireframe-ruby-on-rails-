@@ -62,20 +62,29 @@ var TwitterView = function( aMaxTweets,
     $(this.myNewTweetDivSelector).slideDown(600);
   };
 
+  this.isTweetDisplayFull = function()
+  {
+    return $(this.myTweetDivSelector).children().length >= this.myMaxTweets;
+  }
+
   this.showTweet = function(aTweet)
   {
     var theNewDivSelector = "#" + aTweet.id_str;
     $(this.myTweetDivSelector).prepend(this.generateTweetDiv(aTweet));
-    $(theNewDivSelector).slideDown(600, createDelegate(this, this.onAddComplete));
+    if (this.isTweetDisplayFull())
+    {
+      $(theNewDivSelector).slideDown(this.myTwitterController.NORMAL_TWEET_DISPLAY_SCHEDULE, createDelegate(this, this.onAddComplete));
+    }
+    else
+    {
+      $(theNewDivSelector).show();
+    }
     updateTimestamps();
   };
   
   this.onAddComplete = function()
   {
-    if ($(this.myTweetDivSelector).children().length >= this.myMaxTweets)
-    {
-      $(".tweet:last").remove();
-    }
+    $(".tweet:last").remove();
   };
   
   this.generateTweetDiv = function(aTweet)
@@ -97,6 +106,7 @@ var TwitterView = function( aMaxTweets,
         theDiv.on("click", ".retweet", theDelegate );
         theDiv.on("click", ".invite", theDelegate );
       }
+      theDiv.hide();
       return theDiv;
     }
     catch(anError)

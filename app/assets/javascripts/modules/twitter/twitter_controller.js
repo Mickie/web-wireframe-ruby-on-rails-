@@ -1,8 +1,9 @@
-var NORMAL_TWEET_RELOAD_SCHEDULE = 20000;
-var DELAYED_TWEET_RELOAD_SCHEDULE = 60000;
+var DELAYED_TWEET_RELOAD_FACTOR = 3;
 
 var TwitterController = function(aTwitterView, aFanzonePostsController)
 {
+  this.NORMAL_TWEET_DISPLAY_SCHEDULE = 1000;
+
   this.myTwitterView = aTwitterView;
   this.myFanzonePostsController = aFanzonePostsController;
   
@@ -17,11 +18,17 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
   this.myShowNextTweetTimeout;
   this.myPausedFlag = false;
 
+  this.myNormalTweetReloadSchedule;
+  this.myDelayedTweetReloadSchedule;
+  
   this.initialize = function( aHashTags, aNotTags, aMaxTweets )
   {
     this.myHashTags = aHashTags;
     this.myNotTags = aNotTags;
     this.myMaxTweets = aMaxTweets;
+    
+    this.myNormalTweetReloadSchedule = this.myMaxTweets * this.NORMAL_TWEET_DISPLAY_SCHEDULE;
+    this.myDelayedTweetReloadSchedule = this.myNormalTweetReloadSchedule * DELAYED_TWEET_RELOAD_FACTOR;
 
     this.myTwitterSearch.getLatestTweetsForTerm(this.myHashTags, this.myNotTags, this.myMaxTweets);
   }
@@ -36,7 +43,7 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
   {
     this.myPausedFlag = false;
     clearTimeout(this.myShowNextTweetTimeout);
-    this.myShowNextTweetTimeout = setTimeout(createDelegate(this, this.showNextTweet), 600);
+    this.myShowNextTweetTimeout = setTimeout(createDelegate(this, this.showNextTweet), this.NORMAL_TWEET_DISPLAY_SCHEDULE);
   }
 
   this.scheduleMoreTweetsToLoad = function( aTimerDuration )
@@ -89,20 +96,31 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
       {
         this.myTwitterView.showNewTweetsAlert( this.myNewTweets.length );
       }
-      else
+      else if (this.myTwitterView.isTweetDisplayFull())
       {
         this.play();
       }
+      else
+      {
+        while( this.myNewTweets.length > 0 && !this.myTwitterView.isTweetDisplayFull())
+        {
+          this.sendNextTweetToView();
+        }
+      }
     }
+  }
+  
+  this.sendNextTweetToView = function()
+  {
+    var theTweet = this.myNewTweets.shift();
+    this.myTwitterView.showTweet(theTweet);
   }
 
   this.showNextTweet = function()
   {
     if(!this.myPausedFlag && this.myNewTweets.length > 0)
     {
-      var theTweet = this.myNewTweets.shift();
-      this.myTwitterView.showTweet(theTweet);
-
+      this.sendNextTweetToView();
       this.play();
     }
   }
@@ -110,13 +128,13 @@ var TwitterController = function(aTwitterView, aFanzonePostsController)
   this.onSuccess = function()
   {
     $("#tweetError").slideUp(600);
-    this.scheduleMoreTweetsToLoad(NORMAL_TWEET_RELOAD_SCHEDULE);   
+    this.scheduleMoreTweetsToLoad(this.myNormalTweetReloadSchedule);   
   };
 
   this.onError = function(aMessage)
   {
     $("#tweetError").slideDown(600);
-    this.scheduleMoreTweetsToLoad(DELAYED_TWEET_RELOAD_SCHEDULE);
+    this.scheduleMoreTweetsToLoad(this.myDelayedTweetReloadSchedule);
   };
 
   this.onReplyTo = function(e)
