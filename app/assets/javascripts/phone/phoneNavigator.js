@@ -34,8 +34,11 @@ var PhoneNavigator = function()
   
   this.cleanupTileScroller = function()
   {
-    this.myTileScroller.destroy()
-    this.myTileScroller = null;
+    if (this.myTileScroller)
+    {
+      this.myTileScroller.destroy()
+      this.myTileScroller = null;
+    }
   }
   
   this.handleOrientationChanges = function()

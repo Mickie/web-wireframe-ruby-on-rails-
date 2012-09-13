@@ -1,7 +1,6 @@
 <% aUserSignedInFlag = user_signed_in? %>
 
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <title>Fanzo - Where Fans Rule!</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
@@ -55,7 +54,6 @@
         </div>
         <div id="phoneTileContent" class="phoneContent">
           <div id="frameContent">
-            <%= render partial: "partials/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } %>
           </div>
         </div>
       </div>
@@ -180,7 +178,7 @@
         <%= render partial: "partials/dialogs/connect_twitter_modal" %>
       </div>
     </div>
-    <% if @device %>
+    <% if aDevice %>
       <script type="text/javascript" src="/cordova-2.0.0.js"></script>
     <% end %>
     
@@ -191,15 +189,22 @@
 
     <script type="text/javascript">
       UserManager.get().setMobile(true);
-      <% if @device %>
-        UserManager.get().setDevice(true);
-      <% else %>
-        UserManager.get().setDevice(false);
-      <% end %>
+      UserManager.get().setDevice( <%= aDevice ? "true" : "false" -%>  )
 
       <% if current_user %>
         UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
+        myPhoneNavigator.showMyFanzones();
+      <% else %>
+        myPhoneNavigator.showAllFanzones();
       <% end %>
+
+      <% if aTailgate %>
+        myPhoneNavigator.loadTailgate( "<%= tailgate_path(aTailgate) -%>" );
+      <% else %>
+        myPhoneNavigator.onToggleLeftNav();
+      <% end %>
+
+
     </script>
   </body>
 </html>

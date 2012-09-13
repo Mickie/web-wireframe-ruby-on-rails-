@@ -39,7 +39,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     
     if (this.myScroller)
     {
-      this.myScoller.destroy();
+      this.myScroller.destroy();
       this.myScroller = null;
     }
 
