@@ -195,8 +195,8 @@ var YoutubeView = function(aContainerDivSelector,
       
       if (UserManager.get().isMobile())
       {
-        theWidth = '300';
-        theHeight = '180';
+        theWidth = '280';
+        theHeight = '170';
       }
       this.myDialogPlayer = new YT.Player('player', 
                                           {
