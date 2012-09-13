@@ -76,11 +76,37 @@ div#postForm
       {
         padding: 6px 10px;
         border-left: 1px solid $fanzoButtonBorder;
+        
+        &:focus
+        {
+          outline: none;
+        }
       }
       
       .dropdown-menu
       {
         width: 200px;
+        
+        li
+        {
+          cursor:pointer;
+          padding-left:5px;
+          
+          &:not(.divider):hover 
+          {
+            background: $backgroundColor;
+            border: 1px solid $borderColor;
+            margin: -1px;          
+          }
+                    
+          p
+          {
+            margin:0px;
+            padding-left: 5px;
+            font-size: 12px;
+          }
+        }
+
         li.sectionHeader
         {
           &:hover
@@ -88,18 +114,6 @@ div#postForm
             background: inherit;
             border: none;
             margin:0px;
-          }
-        }
-        
-        li
-        {
-          cursor:pointer;
-          padding-left:5px;
-          
-          p
-          {
-            margin:0px;
-            padding-left: 5px;
           }
         }
       }

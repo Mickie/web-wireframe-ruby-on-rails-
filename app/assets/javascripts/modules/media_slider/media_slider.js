@@ -36,11 +36,12 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   this.reset = function()
   {
     this.stopSliderTimer();
-    this.myScoller.destroy();
-    this.myScroller = null;
     
-    $(this.myContainerDivSelector + " div#myMediaContent").clearQueue();
-    $(this.myContainerDivSelector + " div#myMediaContent").stop();
+    if (this.myScroller)
+    {
+      this.myScoller.destroy();
+      this.myScroller = null;
+    }
 
     if (this.myInstagramView)
     {

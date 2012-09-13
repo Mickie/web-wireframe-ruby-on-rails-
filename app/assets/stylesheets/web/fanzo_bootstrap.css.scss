@@ -2,6 +2,11 @@
 @import "partials/mixins";
 @import "partials/colors";
 
+h1, h2, h3, h4, h5, h6
+{
+  margin:0px;
+}
+
 img
 {
   max-width: inherit;
@@ -30,11 +35,9 @@ img
   @include border-radius(0);
   padding: 10px;
 
-  li:not(.divider) 
+  li
   {
-    line-height: 23px;
-    
-    &:hover
+    a:hover, a:focus
     {
       background: $backgroundColor;
       border: 1px solid $borderColor;
