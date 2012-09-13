@@ -120,9 +120,7 @@ var BingView = function(aContainerDivSelector,
     }
     else
     {
-      var theImageTag = "<img src='" + aVideo.Thumbnail.MediaUrl 
-                        + "' width='" + aVideo.Thumbnail.Width 
-                        + "' height='" + aVideo.Thumbnail.Height + "'/>";
+      var theImageTag = "<img src='" + aVideo.Thumbnail.MediaUrl + "'/>";
 
       var theHtml = "<div class='bingVideo'>";
       theHtml += "<p><a href='" + aVideo.MediaUrl + "' target='_blank'>Watch: " + aVideo.Title + "</a></p>";
@@ -167,7 +165,7 @@ var BingView = function(aContainerDivSelector,
   
   this.loadBingImage = function( anImageItem )
   {
-    var theImageTag = "<img src='" + anImageItem.MediaUrl + "' width='" + anImageItem.Width + "' height='" + anImageItem.Height + "'/>";
+    var theImageTag = "<img src='" + anImageItem.MediaUrl + "'/>";
     var theAnchorTag = "Source: <a href='" + anImageItem.SourceUrl + "' target='_blank'>" + anImageItem.DisplayUrl + "</a>";
     this.myDialogDiv.find("div.mediaImage").html(theImageTag);
     this.myDialogDiv.find("div.mediaCaption").html(theAnchorTag);

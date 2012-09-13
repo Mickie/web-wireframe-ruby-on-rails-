@@ -8,12 +8,13 @@ div#myMediaModal
   {
     height: 24px;
     width: 290px;
-    padding: 10px;
+    padding: 5px 10px;
     margin: 0px;
     h3
     {
       width: 240px;
       height: 24px;
+      font-size: 1em;
     }
     .profile_pic
     {
@@ -31,19 +32,19 @@ div#myMediaModal
 
     .mediaImage
     {
-      width: 290px;
+      width: 280px;
       text-align:center;
       padding: 0px 5px;
       
       img
       {
         width: 280px;
-        height: 280px;
       }
     }
     
     .mediaCaption
     {
+      margin:0px;
       width: 290px;
     }  
 
