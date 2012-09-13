@@ -99,7 +99,7 @@
               <% @post = Post.new %>
               <div id="postForm">
                 <div class="profile_pic">
-                  <% if user_signed_in? %>
+                  <% if aUserSignedInFlag %>
                     <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
                   <% end %>
                 </div>
@@ -191,7 +191,7 @@
       UserManager.get().setMobile(true);
       UserManager.get().setDevice( <%= aDevice ? "true" : "false" -%>  )
 
-      <% if current_user %>
+      <% if aUserSignedInFlag %>
         UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
         myPhoneNavigator.showMyFanzones();
       <% else %>
