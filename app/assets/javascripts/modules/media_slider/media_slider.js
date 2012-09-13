@@ -9,6 +9,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   this.myPostDivSelector = aPostDivSelector;
   
   this.mySlideInterval = null;
+  this.myScroller = null;
   this.myElementArray = {};
 
   this.createSlider = function( aShortName,
@@ -35,6 +36,8 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   this.reset = function()
   {
     this.stopSliderTimer();
+    this.myScoller.destroy();
+    this.myScroller = null;
     
     $(this.myContainerDivSelector + " div#myMediaContent").clearQueue();
     $(this.myContainerDivSelector + " div#myMediaContent").stop();
@@ -73,6 +76,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   this.queueContainerLoads = function()
   {
     var i = 0;
+
     while(i < TOTAL_CONTAINERS)
     {
       this.myInstagramView.queueContainerLoad(this.myElementArray[i++]);
@@ -104,10 +108,23 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     $(this.myContainerDivSelector).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
     $(this.myContainerDivSelector + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
     $(this.myContainerDivSelector + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
+    
+    this.myScroller = new iScroll("myMediaContainer",
+                                  {
+                                    vScroll: false,
+                                    hScrollbar: false,
+                                    vScrollbar: false,
+                                    useTransform: true,
+                                    bounce: false,
+                                    snap: "div.mediaThumbnail",
+                                    onScrollStart: createDelegate(this, this.onScrollStart),
+                                    onScrollEnd: createDelegate(this, this.onScrollEnd)
+                                  }); 
   }
   
   this.onSlideInterval = function()
   {
+    this.myScroller.refresh();
     this.slideLeft();
   };
   
@@ -125,45 +142,23 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
 
   this.slideLeft = function()
   {
-    this.stopSliderTimer();
-    var theLeftMostDivImageWidth = $(this.myContainerDivSelector + " div#myMediaContent div:first img").attr("width");
-    $(this.myContainerDivSelector + " div#myMediaContent").animate({ left:"-" + theLeftMostDivImageWidth + "px"}, 
-                                                                500, 
-                                                                'linear', 
-                                                                createDelegate(this, this.onSlideLeftComplete) );
+    this.myScroller.scrollToPage("next", 0, 600);
   };
   
   this.slideRight = function()
   {
-    this.stopSliderTimer();
-    var theRightMostDiv = $(this.myContainerDivSelector + " div#myMediaContent div.mediaThumbnail:last").detach();
-    if (theRightMostDiv)
-    {
-      var theImageWidth = $(theRightMostDiv).find("img").attr("width");
-      $(this.myContainerDivSelector + " div#myMediaContent").prepend(theRightMostDiv);
-      $(this.myContainerDivSelector + " div#myMediaContent").css({left:"-" + theImageWidth + "px"});
-      $(this.myContainerDivSelector + " div#myMediaContent").animate({ left:"0px"}, 
-                                                                  500, 
-                                                                  'linear', 
-                                                                  createDelegate(this, this.onSlideRightComplete) );
-    }
+    this.myScroller.scrollToPage("prev", 0, 600);
   };
+
+  this.onScrollStart = function(e)
+  {
+    this.stopSliderTimer();
+  }
   
-  this.onSlideRightComplete = function()
+  this.onScrollEnd = function(e)
   {
     this.startSliderTimer();    
   }
-  
-  this.onSlideLeftComplete = function()
-  {
-    var theLeftMostDiv = $(this.myContainerDivSelector + " div#myMediaContent div:first").detach();
-    if (theLeftMostDiv)
-    {
-      $(this.myContainerDivSelector + " div#myMediaContent").append(theLeftMostDiv);
-      $(this.myContainerDivSelector + " div#myMediaContent").css({left:"0px"});
-      this.startSliderTimer();    
-    }
-  };
   
   this.onHoverStart = function(e)
   {

@@ -17,9 +17,12 @@ div#myMediaSlider
   
   div.mediaThumbnail
   {
-    float:left;
+    height: 150px;
     position:relative;
+    display: inline-block;
     background-color: $backgroundColor;
+    vertical-align: top;
+    
     
     .bingNewsItem
     {
@@ -28,6 +31,7 @@ div#myMediaSlider
       padding: 10px;
       color: white;
       background-color: black;
+      white-space:normal;
       
       h3
       {
@@ -98,11 +102,17 @@ div#myMediaSlider
     }
   }
   
-  div#myMediaContent
+  div#myMediaContainer
   {
-    position:absolute;
-    width: 3000px;
+    
+    div#myMediaContent
+    {
+      display:table;
+      white-space:nowrap;
+      height: 150px;
+    }
   }
+  
   
 }
 

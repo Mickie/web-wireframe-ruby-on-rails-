@@ -30,14 +30,12 @@ var PhoneNavigator = function()
   this.setupTileScroller = function()
   {
     this.myTileScroller = new iScroll("phoneTileContent");
-    document.addEventListener('touchmove', killEvent, false);
   }
   
   this.cleanupTileScroller = function()
   {
     this.myTileScroller.destroy()
     this.myTileScroller = null;
-    document.removeEventListener('touchmove', killEvent, false);
   }
   
   this.handleOrientationChanges = function()

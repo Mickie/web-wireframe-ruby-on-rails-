@@ -17,6 +17,7 @@
 //= require globals
 //= require ./lib/jquery.timeago
 //= require ./lib/pure
+//= require ./lib/iscroll
 //= require ./utilities/timestamps
 //= require google_analytics
 //= require bootstrap-dropdown

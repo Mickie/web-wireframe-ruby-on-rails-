@@ -44,17 +44,16 @@ var FanzoneView = function()
   {
     this.myFanzoneScroller = new iScroll("phoneFanzoneContent",
                                         {
-                                          useTransform: true,
+                                          hScroll: false,
+                                          hScrollbar: false,
                                           onBeforeScrollStart: enableFormsOnBeforeScroll 
                                         });
-    document.addEventListener('touchmove', killEvent, false);
   }
   
   this.cleanupFanzoneScroller = function()
   {
     this.myFanzoneScroller.destroy()
     this.myFanzoneScroller = null;
-    document.removeEventListener('touchmove', killEvent, false);
   }
   
 

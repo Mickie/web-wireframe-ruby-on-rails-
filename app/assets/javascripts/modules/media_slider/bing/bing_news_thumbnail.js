@@ -6,6 +6,7 @@ var BingNewsThumbnail = function( aBingView )
   {
     return {
       ".@id" : "ID",
+      ".@style" : function(){ return "width: 220px;" },
       "div.media" : function(){return "";},
       "div.mediaAnnotation" : function(anItem)
       { 

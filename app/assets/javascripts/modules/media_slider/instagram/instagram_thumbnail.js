@@ -6,6 +6,10 @@ var InstagramThumbnail = function( anInstagramView )
   {
     return {
       ".@id" : "id",
+      ".@style" : function(anItem)
+      {
+        return "width:" + anItem.context.images.thumbnail.width + "px;"
+      },
       "div.media img@style" : function(anItem){return "";},
       "div.media img@alt" : "caption.text",
       "div.media img@src" : "images.thumbnail.url",
