@@ -1,0 +1,34 @@
+@import "partials/mixins";
+@import "partials/colors";
+
+.playButtonBackground
+{
+  position:absolute;
+  top: 23px;
+  left: 45px;
+  width: 100px;
+  height: 100px;
+  border: 2px solid rgb(127, 127, 127);
+  border: 2px solid rgba(255, 255, 255, .9);
+  background: rgb(64, 64, 64);
+  background: rgba(127, 127, 127, .7);
+  @include border-radius-with-ie(50%);
+    
+  .playButton
+  {
+    position:absolute;
+    top: 30px;
+    left: 35px;
+    width:0px;
+    height:0px;
+    padding:0px;
+    margin:0px;
+    border-left: 40px solid rgb(127, 127, 127);
+    border-left: 40px solid rgba(255, 255, 255, .9);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    border-top: transparent solid 20px;
+    border-bottom: transparent solid 20px;
+  }
+}
+
