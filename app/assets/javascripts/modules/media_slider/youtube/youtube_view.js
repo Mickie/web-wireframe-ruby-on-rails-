@@ -165,8 +165,8 @@ var YoutubeView = function(aContainerDivSelector,
       
       if (UserManager.get().isMobile())
       {
-        theWidth = '300';
-        theHeight = '180';
+        theWidth = '260';
+        theHeight = '160';
       }
       this.myPostPlayer = new YT.Player('post_youtube', 
                                         {
