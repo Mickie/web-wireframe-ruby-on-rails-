@@ -46,9 +46,11 @@ var DialogResizer = function()
   
   this.updateHeight = function()
   {
-    if ($(window).height() <= this.myOriginalHeight )
+    var theHeight = DimensionManager.get().getDimensions().height;
+    
+    if ( theHeight <= this.myOriginalHeight )
     {
-      $(this.myCurrentDialog).css("height", ($(window).height() - 10) + "px");
+      $(this.myCurrentDialog).css("height", (theHeight - 10) + "px");
     }
     else
     {
@@ -58,13 +60,15 @@ var DialogResizer = function()
 
   this.updateWidth = function()
   {
-    if ($(window).width() <= this.myOriginalWidth )
+    var theDimensions = DimensionManager.get().getDimensions();
+    
+    if (theDimensions.width <= this.myOriginalWidth )
     {
-      $(this.myCurrentDialog).css("width", ($(window).width() - 10) + "px");
+      $(this.myCurrentDialog).css("width", (theDimensions.width - 10) + "px");
     }
     else
     {
-      if ($(window).height() <= this.myOriginalHeight )
+      if (theDimensions.height <= this.myOriginalHeight )
       {
         $(this.myCurrentDialog).css("width", (this.myOriginalWidth + 15) + "px");
       }
@@ -77,7 +81,7 @@ var DialogResizer = function()
   
   this.centerDialog = function()
   {
-    var theWindowWidth = $(window).width();
+    var theWindowWidth = DimensionManager.get().getDimensions().width;
     var theModalWidth = $(this.myCurrentDialog).width();
     thePosition = (theWindowWidth - theModalWidth)/2;
     $(this.myCurrentDialog).css("left", thePosition + "px");

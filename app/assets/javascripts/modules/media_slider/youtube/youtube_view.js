@@ -160,10 +160,18 @@ var YoutubeView = function(aContainerDivSelector,
   {
     if (!this.myPostPlayer)
     {
+      var theWidth = '320';
+      var theHeight = '195';
+      
+      if (UserManager.get().isMobile())
+      {
+        theWidth = '300';
+        theHeight = '180';
+      }
       this.myPostPlayer = new YT.Player('post_youtube', 
                                         {
-                                          height: '195',
-                                          width: '320',
+                                          height: theHeight,
+                                          width: theWidth,
                                           videoId: aVideoId,
                                           events: 
                                           {
@@ -182,10 +190,18 @@ var YoutubeView = function(aContainerDivSelector,
   {
     if (!this.myDialogPlayer)
     {
+      var theWidth = '640';
+      var theHeight = '390';
+      
+      if (UserManager.get().isMobile())
+      {
+        theWidth = '300';
+        theHeight = '180';
+      }
       this.myDialogPlayer = new YT.Player('player', 
                                           {
-                                            height: '390',
-                                            width: '640',
+                                            height: theHeight,
+                                            width: theWidth,
                                             videoId: aVideoId,
                                             events: 
                                             {

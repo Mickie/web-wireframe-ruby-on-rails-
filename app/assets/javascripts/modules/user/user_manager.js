@@ -17,11 +17,21 @@ var UserManager = function()
     this.myMobileFlag = aMobileFlag;
   }
   
+  this.isMobile = function()
+  {
+    return this.myMobileFlag;
+  }
+  
   this.setDevice = function(aDeviceFlag)
   {
     this.myDeviceFlag = aDeviceFlag;
   }
   
+  this.isDevice = function()
+  {
+    return this.myDeviceFlag;
+  }
+
   this.onFacebookReady = function()
   {
     this.myFacebookController.initialize(this);
@@ -188,7 +198,7 @@ var UserManager = function()
   {
     this.myFacebookModel = aFacebookModel;
     
-    if (!this.myFanzoAccountDetails && this.myMobileFlag)
+    if (!this.myFanzoAccountDetails && this.isMobile())
     {
       this.loginToFanzo();
     }

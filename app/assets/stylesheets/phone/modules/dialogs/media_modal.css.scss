@@ -1,0 +1,58 @@
+@import "web/modules/dialogs/media_modal";
+
+div#myMediaModal 
+{
+  width:310px;
+
+  .modal-header 
+  {
+    height: 24px;
+    width: 290px;
+    padding: 10px;
+    margin: 0px;
+    h3
+    {
+      width: 240px;
+      height: 24px;
+    }
+    .profile_pic
+    {
+      width: 24px;
+      height: 24px;
+      padding-right: 5px;
+    }
+  }
+  
+  .modal-body
+  {
+    max-height: inherit;
+    padding: 10px;
+    width: 290px;
+
+    .mediaImage
+    {
+      width: 290px;
+      text-align:center;
+      padding: 0px 5px;
+      
+      img
+      {
+        width: 280px;
+        height: 280px;
+      }
+    }
+    
+    .mediaCaption
+    {
+      width: 290px;
+    }  
+
+  }
+  
+  .modal-footer
+  {
+    padding: 10px;
+    width: 290px;
+  }
+  
+}

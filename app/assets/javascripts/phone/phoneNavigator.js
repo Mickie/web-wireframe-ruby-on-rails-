@@ -46,14 +46,9 @@ var PhoneNavigator = function()
     window.onorientationchange = createDelegate(this, this.adjustForDimensions);
   }
   
-  this.isDevice = function()
-  {
-    return typeof window.device !== "undefined";
-  }
-  
   this.connectToPhoneGap = function()
   {
-    if ( this.isDevice() )
+    if ( UserManager.get().isDevice() )
     {
       this.onGapReady();
     }
@@ -63,52 +58,11 @@ var PhoneNavigator = function()
     }
   }
   
-  this.getDimensions = function()
-  {
-    var theViewportWidth;
-    var theViewportHeight;
-    
-    switch(window.orientation) 
-    {
-      case -90:
-      case 90:
-      {
-        theViewportWidth = 480;
-        if (this.isDevice())
-        {
-          theViewportHeight = 320;
-        }
-        else
-        {
-          theViewportHeight = 270;
-        }
-        break;
-      }
-      default:
-      {
-        theViewportWidth = 320;
-        if (this.isDevice())
-        {
-          theViewportHeight = 465;
-        }
-        else
-        {
-          theViewportHeight = 416;
-        }
-        break;
-      }
-    }
-    
-    return {
-      "width": theViewportWidth,
-      "height": theViewportHeight
-    }
-  }
   
   
   this.adjustForDimensions = function()
   {
-    var theDimensions = this.getDimensions();
+    var theDimensions = DimensionManager.get().getDimensions();
     var theViewportWidth = theDimensions.width;
     var theViewportHeight = theDimensions.height;
     
@@ -180,7 +134,7 @@ var PhoneNavigator = function()
   
   this.positionFanzone = function()
   {
-    var theWidth = this.getDimensions().width;
+    var theWidth = DimensionManager.get().getDimensions().width;
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(-" + theWidth + "px, 0px, 0px)");
   }
