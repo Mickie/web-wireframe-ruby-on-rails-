@@ -6,6 +6,7 @@ var FanzoneView = function()
   this.myFanzoneHomeView = new FanzoneHomeView();
   this.myFanzoneSocialView = new FanzoneSocialView();
   this.myFanzoneMediaView = new FanzoneMediaView();
+  this.myAbortFlag = false;
   
   this.initialize = function()
   {
@@ -16,12 +17,14 @@ var FanzoneView = function()
   
   this.loadTailgate = function( aPath )
   {
+    this.myAbortFlag = false;
     var thePath = aPath + ".json";
     this.loadTailgateIntoFanzoneView( thePath );
   }
   
   this.cleanup = function()
   {
+    this.myAbortFlag = true;
     this.myFanzoneHomeView.cleanup();
     this.myFanzoneSocialView.cleanup();
     this.cleanupFanzoneScroller();
@@ -58,6 +61,11 @@ var FanzoneView = function()
 
   this.onTailgateLoadComplete = function( aResult )
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.myTailgateModel = aResult;
     
     $("#phoneFanzoneContent").show();

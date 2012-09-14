@@ -1,0 +1,10 @@
+<% aUserIsSignedIn = user_signed_in? %>
+<% aListOfPosts.each do | aPost | %>
+  <% if aUserIsSignedIn %>
+    <% thePostVote = current_user.user_post_votes.find_by_post_id(aPost.id) %>
+    <% if thePostVote && !thePostVote.up_vote %>
+      <% next %>
+    <% end %>
+  <% end %>
+  <%= render partial: "partials/posts_and_comments/post_with_comments", locals: {aPost: aPost, aPostVote: thePostVote}%>
+<% end %>

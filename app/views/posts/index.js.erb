@@ -1,0 +1,7 @@
+$("#posts").append("<%=  escape_javascript(render partial: "partials/posts_and_comments/posts", locals: {aListOfPosts: @posts}) %>");
+
+if (typeof myNavigator !== 'undefined')
+{
+  myNavigator.updatePinterestButtons();
+}
+updateTimestamps();

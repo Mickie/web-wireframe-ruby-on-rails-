@@ -21,6 +21,8 @@ class Post < ActiveRecord::Base
                   :video_id
 
   scope :visible, where("fan_score > -3")  
+  
+  paginates_per 10
                   
   def shortened_content
     if (self.content.length < 120)

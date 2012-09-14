@@ -2,6 +2,7 @@ var FanzoneMediaView = function()
 {
   this.myTailgateModel = null;
   this.myMediaSlider = null;
+  this.myAbortFlag = false;
   
   this.render = function( aTailgateModel )
   {
@@ -9,7 +10,8 @@ var FanzoneMediaView = function()
     {
       return;
     }
-
+    
+    this.myAbortFlag = false;
     this.myTailgateModel = aTailgateModel;
     this.loadTags();
   }
@@ -22,6 +24,11 @@ var FanzoneMediaView = function()
   
   this.onGetTagsComplete = function(aResult)
   {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    
     this.myMediaSlider =  MediaSlider.create();
     this.myMediaSlider.createSlider( this.myTailgateModel.team.short_name,
                                      "Football", 
@@ -32,7 +39,11 @@ var FanzoneMediaView = function()
   
   this.cleanup = function()
   {
-    this.myMediaSlider.reset();
+    this.myAbortFlag = true;
+    if (this.myMediaSlider)
+    {
+      this.myMediaSlider.reset();
+    }
   }
   
 }

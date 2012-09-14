@@ -6,11 +6,14 @@ class PostsController < ApplicationController
   
 
   def index
-    @posts  = @tailgate.posts.all
+    thePage = params[:page] ? params[:page] : 1
+
+    @posts  = @tailgate.posts.visible.page( thePage )
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.json { render json: @posts.to_json(include: [ :user, :comments => { include: :user } ] ) }
+      format.js
     end
   end
 

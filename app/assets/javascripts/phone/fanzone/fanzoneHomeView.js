@@ -2,6 +2,8 @@ var FanzoneHomeView = function()
 {
   this.myTailgateModel = null;
   this.myFanzoneScroller = null;
+  this.myCurrentPage = 1;
+  this.myAbortFlag = false;
   
   this.render = function( aTailgateModel, aFanzoneScroller )
   {
@@ -10,24 +12,49 @@ var FanzoneHomeView = function()
       return;
     }
     
+    this.myAbortFlag = false;
+    this.myCurrentPage = 1;
     this.myTailgateModel = aTailgateModel;
     this.myFanzoneScroller = aFanzoneScroller;
-    setTimeout(createDelegate(this, this.renderPosts), 10);
+    this.loadPosts();
   }
   
   this.cleanup = function()
   {
+    this.myAbortFlag = true;
     this.myTailgateModel = null;
     this.myFanzoneScroller = null;
     $("#phoneFanzoneContent #posts").empty();
   }
   
-  this.renderPosts = function()
+  this.loadPosts = function()
+  {
+    var theToken = $('meta[name=csrf-token]').attr('content');
+    var thePath = "/tailgates/" + this.myTailgateModel.slug + "/posts?authenticity_token=" + theToken + "&page=" + this.myCurrentPage
+    $.ajax({
+             url: thePath,
+             cache:false,
+             dataType: "json",
+             success: createDelegate(this, this.onPostsLoadComplete ),
+             error: createDelegate(this, this.onLoadError )
+           });
+  }
+  
+  this.onPostsLoadComplete = function(aResult)
+  {
+    if (this.myAbortFlag)
+    {
+      return;
+    }
+    this.renderPosts(aResult);
+  }
+  
+  this.renderPosts = function( aListOfPosts )
   {
     var theParentDiv = $("#posts");
-    for(var i=0,j=this.myTailgateModel.posts.length; i<j; i++)
+    for(var i=0,j=aListOfPosts.length; i<j; i++)
     {
-      this.renderPost(this.myTailgateModel.posts[i], theParentDiv);
+      this.renderPost(aListOfPosts[i], theParentDiv);
     }
     updateTimestamps();
     this.myFanzoneScroller.refresh();

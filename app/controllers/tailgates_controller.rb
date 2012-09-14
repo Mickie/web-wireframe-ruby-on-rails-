@@ -71,7 +71,7 @@ class TailgatesController < ApplicationController
           end
         end
       end
-      format.json { render json: @tailgate.to_json(include: [:user, :team, :posts => { include: [ :user, :comments => { include: :user } ] } ]) }
+      format.json { render json: @tailgate.to_json(include: [ :user, :team ]) }
     end
   end
 

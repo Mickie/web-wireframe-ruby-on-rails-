@@ -106,15 +106,7 @@
           </div>
         </div>
         <div id="posts">
-          <% @tailgate.posts.visible.each do | aPost | %>
-            <% if user_signed_in? %>
-              <% thePostVote = current_user.user_post_votes.find_by_post_id(aPost.id) %>
-              <% if thePostVote && !thePostVote.up_vote %>
-                <% next %>
-              <% end %>
-            <% end %>
-            <%= render partial: "partials/posts_and_comments/post_with_comments", locals: {aPost: aPost, aPostVote: thePostVote}%>
-          <% end %>
+          <%= render partial: "partials/posts_and_comments/posts", locals: {aListOfPosts: @tailgate.posts.visible.page(1)}%>
         </div>
       </div>
 
@@ -255,5 +247,7 @@
                                               
     myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal", true);
     myEditFanzoneDialog.initialize();
+    
+    InfiniteScroller.get().handleScrollingForResource('<%= tailgate_posts_path(@tailgate) %>');
   });
 </script>
