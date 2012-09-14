@@ -1,211 +1,247 @@
 <% aUserSignedInFlag = user_signed_in? %>
 
 <!DOCTYPE html>
-  <head>
-    <title>Fanzo - Where Fans Rule!</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag    "phone", :media => "all" %>
-    <%= javascript_include_tag "phone" %>
-    <%= csrf_meta_tags %>
-    <%= favicon_link_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-  </head>
-  <body>
-    <div id="fb-root"></div>
-    <div id="page_content" class="phoneUI">
-      <div id="phoneLeftNav" class="hide">
-        <div class="leftNavContent">
-          <div class="login" 
-               onclick="UserManager.get().showFacebookModal()" 
-               style="display:<%= aUserSignedInFlag ? "none" : "block" -%>;">
-            <div class="navIcon">
-              <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
-            </div>
-            <div class="navText">Log in with Facebook</div>
+<head>
+  <title>Fanzo - Where Fans Rule!</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "phone", :media => "all" %>
+  <%= javascript_include_tag "phone" %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+<body>
+  <div id="fb-root"></div>
+  <div id="page_content" class="phoneUI">
+    <div id="phoneLeftNav" class="hide">
+      <div class="leftNavContent">
+        <div class="login"
+        onclick="UserManager.get().showFacebookModal()"
+        style="display:<%= aUserSignedInFlag ? "none" : "block" -%>;">
+          <div class="navIcon">
+            <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
           </div>
-          <div class="userProfile"
-               style="display:<%= aUserSignedInFlag ? "block" : "none" -%>;">
-            <div class="navIcon">
-              <img id="leftNavUserPic" src="<%= aUserSignedInFlag ? current_user.image : ""-%>" width="32" height="32"/>
-            </div>
-            <div id="leftNavUserName" class="navText">
-              <%= aUserSignedInFlag ? current_user.full_name : "" %>
-            </div>
-          </div>
-          <div class="allFanzones" onclick="myPhoneNavigator.showAllFanzones()">
-            <div class="navIcon"><i></i></div>
-            <div class="navText">All Fanzones</div>
-          </div>
-          <div class="myFanzones" onclick="myPhoneNavigator.showMyFanzones()">
-            <div class="navIcon"><i></i></div>
-            <div class="navText">My Fanzones</div>
+          <div class="navText">
+            Log in with Facebook
           </div>
         </div>
-      </div>
-      <div id="phoneTileViewport" class="phoneViewport">
-        <div id="phoneTileTopNav" class="phoneTopNav">
-          <button id="showLeftNavButton" class="fanzoButton">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <h1 class="phoneTitle">Fanzo</h1>
-        </div>
-        <div id="phoneTileContent" class="phoneContent">
-          <div id="frameContent">
+        <div class="userProfile"
+        style="display:<%= aUserSignedInFlag ? "block" : "none" -%>;">
+          <div class="navIcon">
+            <img id="leftNavUserPic" src="<%= aUserSignedInFlag ? current_user.image : ""-%>" width="32" height="32"/>
+          </div>
+          <div id="leftNavUserName" class="navText">
+            <%= aUserSignedInFlag ? current_user.full_name : "" %>
           </div>
         </div>
-      </div>
-      <div id="phoneFanzoneViewport" class="phoneViewport hide">
-        <div id="phoneFanzoneTopNav" class="phoneTopNav">
-          <button id="backToTilesButton" class="fanzoButton">
-            back
-          </button>
-          <h1 class="phoneTitle">Fanzo</h1>
-          <div id="followButton" class="hide">
-            <%= render partial: "partials/buttons/follow_button", locals: { tailgate: Tailgate.first }%>
+        <div class="allFanzones" onclick="myPhoneNavigator.showAllFanzones()">
+          <div class="navIcon">
+            <i></i>
+          </div>
+          <div class="navText">
+            All Fanzones
           </div>
         </div>
-        <div id="phoneFanzoneLoading" class="hide">
-          <div>
-            <img src='/assets/loading.gif' />
-            <h1>Loading...</h1>
+        <div class="myFanzones" onclick="myPhoneNavigator.showMyFanzones()">
+          <div class="navIcon">
+            <i></i>
+          </div>
+          <div class="navText">
+            My Fanzones
           </div>
         </div>
-        <div id="phoneFanzoneContent" class="phoneContent">
-          <div id="phoneFanzoneWrapper">
-            <div id="phoneFanzoneBanner">
-              <div class="banner_content">
-                <div class="team_logo">
-                  <img width="50" height="50"/>
-                </div>
-                <div class="fanzone_details">
-                  <div class="official">
-                    <span>Official</span>
-                  </div>
-                  <h1 class="fanzoneName"></h1>
-                  <div class="owner">
-                    <div class="owner_details">
-                      <p>Created by <span class="owner_name"></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div id="postsAndComments">
-              <% @tailgate = Tailgate.find(15) %>
-              <% @post = Post.new %>
-              <div id="postForm">
-                <div class="profile_pic">
-                  <% if aUserSignedInFlag %>
-                    <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
-                  <% end %>
-                </div>
-                <div class="post_fields">
-                  <%= render "/posts/form" %>
-                </div>
-              </div>
-              
-              <div id="phoneFanzoneTemplates" class="hide">
-                <div id="postTemplate">
-                  <%= render partial: "partials/posts_and_comments/post_votes", locals: {aPost: @tailgate.posts.last, aPostVote: nil }%>
-                  <%= render partial: "partials/posts_and_comments/post", locals: {aPost: @tailgate.posts.last}%>
-                  <div class="post_comments"></div>
-                </div>
-                <div id="postCommentTemplate">
-                  <%= render partial: "partials/posts_and_comments/comment", locals: { aComment: @tailgate.posts.last.comments.first, aCommentVote: nil } %>
-                </div>
-                <div id="postCommentFormTemplate">
-                  <%= render partial: "partials/posts_and_comments/post_comment_form", locals: { aPost: @tailgate.posts.last }%>
-                </div>
-                <div id="postVideoTemplate">
-                  <div class="post_video" id="">
-                    <div class="playButtonBackground"><div class='playButton'></div></div>
-                    <img src="" width="200" />
-                  </div>
-                </div>
-                <div id="postImageTemplate">
-                  <div class="post_image">
-                    <img src="" width="200" />
-                  </div>
-                </div>
-                <%= render partial: "partials/twitter/tweet_template" %>
-              </div>
-  
-              <div id="posts">
-                
-              </div>
-              
-              <div id="tweetHolder" class="hide">
-                <div id="newTweets" class='alert alert-info fade in hide'>
-                  <a class='close' data-dismiss='alert' href='#'>×</a>
-                  <p>
-                    <strong>5</strong> new Tweets!
-                  </p>
-                </div>
-                <div id="tweetError" class='alert alert-error fade in hide'>
-                  <a class='close' data-dismiss='alert' href='#'>×</a>
-                  <p>
-                    Twitter has called timeout<br/>We'll try again in 60 seconds
-                  </p>
-                </div>
-                <div id="tweets"></div>
-              </div>
-              
-              <div id="fanzoneMedia" class="hide">
-                <%= render partial: "partials/media_slider/media_slider_template"%>
-              </div>
-              
-            </div>
-
-          </div>
-        </div>
-        <div id="phoneFanzoneFooterNav">
-          <nav>
-            <ul>
-              <li id="fanzoneFooterHome">Home</li>
-              <li id="fanzoneFooterSocial">Tweets</li>
-              <li id="fanzoneFooterMedia">Media</li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      
-      <div id="modals">
-        <%= render partial: "partials/dialogs/login_modal" %>
-        <%= render partial: "partials/dialogs/connect_twitter_modal" %>
-        <%= render partial: "partials/dialogs/media_modal" %>
       </div>
     </div>
-    <% if aDevice %>
-      <script type="text/javascript" src="/cordova-2.0.0.js"></script>
+    <div id="phoneTileViewport" class="phoneViewport">
+      <div id="phoneTileTopNav" class="phoneTopNav">
+        <button id="showLeftNavButton" class="fanzoButton">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h1 class="phoneTitle">Fanzo</h1>
+      </div>
+      <div id="phoneTileContent" class="phoneContent">
+        <div id="phoneTileScrollCanvas">
+          <div id="frameContent"></div>
+          <div id="pullUp">
+            <span class="pullUpIcon"></span><span class="pullUpLabel">Pull up to load more...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="phoneFanzoneViewport" class="phoneViewport hide">
+      <div id="phoneFanzoneTopNav" class="phoneTopNav">
+        <button id="backToTilesButton" class="fanzoButton">
+          back
+        </button>
+        <h1 class="phoneTitle">Fanzo</h1>
+        <div id="followButton" class="hide">
+          <%= render partial: "partials/buttons/follow_button", locals: { tailgate: Tailgate.first }%>
+        </div>
+      </div>
+      <div id="phoneFanzoneLoading" class="hide">
+        <div>
+          <img src='/assets/loading.gif' />
+          <h1>Loading...</h1>
+        </div>
+      </div>
+      <div id="phoneFanzoneContent" class="phoneContent">
+        <div id="phoneFanzoneWrapper">
+          <div id="phoneFanzoneBanner">
+            <div class="banner_content">
+              <div class="team_logo">
+                <img width="50" height="50"/>
+              </div>
+              <div class="fanzone_details">
+                <div class="official">
+                  <span>Official</span>
+                </div>
+                <h1 class="fanzoneName"></h1>
+                <div class="owner">
+                  <div class="owner_details">
+                    <p>
+                      Created by <span class="owner_name"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="postsAndComments">
+            <% @tailgate = Tailgate.find(15) %>
+            <% @post = Post.new %>
+            <div id="postForm">
+              <div class="profile_pic">
+                <% if aUserSignedInFlag %>
+                <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
+                <% end %>
+              </div>
+              <div class="post_fields">
+                <%= render "/posts/form" %>
+              </div>
+            </div>
+
+            <div id="phoneFanzoneTemplates" class="hide">
+              <div id="postTemplate">
+                <%= render partial: "partials/posts_and_comments/post_votes", 
+                           locals: {aPost: @tailgate.posts.last, aPostVote: nil }%>
+                <%= render partial: "partials/posts_and_comments/post", 
+                           locals: {aPost: @tailgate.posts.last} %>
+                <div class="post_comments"></div>
+              </div>
+              <div id="postCommentTemplate">
+                <%= render partial: "partials/posts_and_comments/comment", 
+                           locals: { aComment: @tailgate.posts.last.comments.first, aCommentVote: nil } %>
+              </div>
+              <div id="postCommentFormTemplate">
+                <%= render partial: "partials/posts_and_comments/post_comment_form", 
+                           locals: { aPost: @tailgate.posts.last }%>
+              </div>
+              <div id="postVideoTemplate">
+                <div class="post_video" id="">
+                  <div class="playButtonBackground">
+                    <div class='playButton'></div>
+                  </div>
+                  <img src="" width="200" />
+                </div>
+              </div>
+              <div id="postImageTemplate">
+                <div class="post_image">
+                  <img src="" width="200" />
+                </div>
+              </div>
+              <%= render partial: "partials/twitter/tweet_template" %>
+            </div>
+
+            <div id="posts">
+
+            </div>
+
+            <div id="tweetHolder" class="hide">
+              <div id="newTweets" class='alert alert-info fade in hide'>
+                <a class='close' data-dismiss='alert' href='#'>×</a>
+                <p>
+                  <strong>5</strong> new Tweets!
+                </p>
+              </div>
+              <div id="tweetError" class='alert alert-error fade in hide'>
+                <a class='close' data-dismiss='alert' href='#'>×</a>
+                <p>
+                  Twitter has called timeout
+                  <br/>
+                  We'll try again in 60 seconds
+                </p>
+              </div>
+              <div id="tweets"></div>
+            </div>
+
+            <div id="fanzoneMedia" class="hide">
+              <%= render partial: "partials/media_slider/media_slider_template"%>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div id="phoneFanzoneFooterNav">
+        <nav>
+          <ul>
+            <li id="fanzoneFooterHome">
+              Home
+            </li>
+            <li id="fanzoneFooterSocial">
+              Tweets
+            </li>
+            <li id="fanzoneFooterMedia">
+              Media
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div id="modals">
+      <%= render partial: "partials/dialogs/login_modal" %>
+      <%= render partial: "partials/dialogs/connect_twitter_modal" %>
+      <%= render partial: "partials/dialogs/media_modal" %>
+    </div>
+  </div>
+  <% if aDevice %>
+    <script type="text/javascript" src="/cordova-2.0.0.js"></script>
+  <% end %>
+
+  <%= render partial: "partials/libs/pinterest" %>
+  <%= render partial: "partials/libs/google_plus" %>
+  <%= render partial: "partials/libs/google_analytics", locals: {aMobileFlag: "true"} %>
+
+  <script type="text/javascript">
+    UserManager.get().setMobile(true);
+    UserManager.get().setDevice( <%= aDevice ? "true" : "false" -%> );
+
+    <% if aUserSignedInFlag %>
+      UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, 
+                                                                                  :user_comment_votes, 
+                                                                                  :tailgates, 
+                                                                                  :followed_tailgates, 
+                                                                                  :tailgate_followers ]) %>);
     <% end %>
     
-
-    <%= render partial: "partials/libs/pinterest" %>
-    <%= render partial: "partials/libs/google_plus" %>
-    <%= render partial: "partials/libs/google_analytics", locals: {aMobileFlag: "true"} %>
-
-    <script type="text/javascript">
-      UserManager.get().setMobile(true);
-      UserManager.get().setDevice( <%= aDevice ? "true" : "false" -%>  )
-
+    $(function()
+    {
       <% if aUserSignedInFlag %>
-        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
-        myPhoneNavigator.showMyFanzones();
+        myPhoneNavigator.showMyFanzones(); 
       <% else %>
         myPhoneNavigator.showAllFanzones();
       <% end %>
-
       <% if aTailgate %>
         myPhoneNavigator.loadTailgate( "<%= tailgate_path(aTailgate) -%>" );
       <% else %>
         myPhoneNavigator.onToggleLeftNav();
       <% end %>
-
-
-    </script>
-  </body>
+    })
+  </script>
+</body>
 </html>

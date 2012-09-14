@@ -4,19 +4,22 @@ var PhoneNavigator = function()
   var TILES_OPEN = 2;
   var FANZONE_OPEN = 3;
   
-  this.myFanzoneView = new FanzoneView();
+  this.myFanzoneView;
+  this.myTilesView;
   this.myCurrentState = TILES_OPEN;
-  this.myTileScroller = null;
   
   this.initialize = function()
   {
+    this.myFanzoneView = new FanzoneView();
+    this.myTilesView = new TilesView();
+
     this.registerHandlers("click");
     //this.registerHandlers("tap");
     
     this.connectToPhoneGap();
     this.handleOrientationChanges();
     this.adjustForDimensions();
-    this.setupTileScroller();
+    this.myTilesView.initialize();
     this.myFanzoneView.initialize();
   }
   
@@ -25,20 +28,6 @@ var PhoneNavigator = function()
     $("#showLeftNavButton").on( anEvent, createDelegate(this, this.onToggleLeftNav) );
     $("#backToTilesButton").on( anEvent, createDelegate(this, this.onBackToTiles) );
     $('#frameContent').on( anEvent, '.fanzoneTile a', killEvent);
-  }
-  
-  this.setupTileScroller = function()
-  {
-    this.myTileScroller = new iScroll("phoneTileContent");
-  }
-  
-  this.cleanupTileScroller = function()
-  {
-    if (this.myTileScroller)
-    {
-      this.myTileScroller.destroy()
-      this.myTileScroller = null;
-    }
   }
   
   this.handleOrientationChanges = function()
@@ -57,8 +46,6 @@ var PhoneNavigator = function()
       document.addEventListener('deviceready', createDelegate(this, this.onGapReady), false);
     }
   }
-  
-  
   
   this.adjustForDimensions = function()
   {
@@ -94,28 +81,15 @@ var PhoneNavigator = function()
     this.myFanzoneView.loadTailgate( aPath );
   }
   
-  this.loadTilesIntoFrameContent = function( aPath )
-  {
-    var theToken = $('meta[name=csrf-token]').attr('content');
-    $.ajax({
-             url: aPath + "&authenticity_token=" + theToken,
-             cache:false,
-             dataType: "html",
-             success: createDelegate(this, this.onTileLoadComplete ),
-             error: createDelegate(this, this.onLoadError )
-           });
-  }
-  
   this.showAllFanzones = function()
   {
-    this.loadTilesIntoFrameContent("/tailgates?noLayout=true")
-    InfiniteScroller.get().handleScrollingForResource("/tailgates");
+    this.myTilesView.loadAllFanzones();
     this.onToggleLeftNav();
   }
   
   this.showMyFanzones = function()
   {
-    this.loadTilesIntoFrameContent("/tailgates?filter=user&noLayout=true")
+    this.myTilesView.loadMyFanzones();
     this.onToggleLeftNav();
   }
   
@@ -125,7 +99,7 @@ var PhoneNavigator = function()
     $("#phoneFanzoneContent").hide();
     $("#phoneFanzoneLoading").show();
 
-    this.cleanupTileScroller();
+    this.myTilesView.onHidden();
     this.positionFanzone();
     window.scrollTo(0, 1);
 
@@ -147,7 +121,7 @@ var PhoneNavigator = function()
 
     window.scrollTo(0, 1);
     this.myFanzoneView.cleanup();
-    this.setupTileScroller();
+    this.myTilesView.onShown();
     
     this.myCurrentState = TILES_OPEN;
   }
@@ -177,22 +151,6 @@ var PhoneNavigator = function()
     alert("device:" + typeof window.device);
   }  
   
-  this.onTileLoadComplete = function(aResult)
-  {
-    $("#frameContent").html(aResult);
-    updateTimestamps();
-    
-    if (this.myTileScroller)
-    {
-      this.myTileScroller.refresh();
-    }
-  };
-  
-  this.onLoadError = function(anError)
-  {
-    console.log(anError);  
-  };
-
 }
 
 var myPhoneNavigator = new PhoneNavigator();

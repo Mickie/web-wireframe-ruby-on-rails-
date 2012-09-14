@@ -25,7 +25,6 @@
 //= require ./modules/dialogs/dialog_resizer
 //= require ./modules/dialogs/twitter_invite_dialog
 //= require ./modules/dimensionManager
-//= require ./modules/infinite_scroller
 //= require ./modules/fanzonePostsController
 //= require ./modules/follow_buttons
 //= require_tree ./facebook
