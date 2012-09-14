@@ -1,10 +1,11 @@
 var TilesView = function()
 {
   this.myPullToRefreshScroller = null;
+  this.myCurrentPage = 1;
 
   this.initialize = function()
   {
-    this.myPullToRefreshScroller = new PullToRefreshScroller("phoneTileContent", this);
+    this.myPullToRefreshScroller = new PullToRefreshScroller("phoneTileContent", "tilesPullUp", "tilesPullDown", this);
     this.myPullToRefreshScroller.initialize();
   }
   
@@ -20,29 +21,64 @@ var TilesView = function()
   
   this.loadAllFanzones = function()
   {
-    this.loadTilesIntoFrameContent("/tailgates?noLayout=true");
+    this.myBaseUrl = "/tailgates?noLayout=true";
+    this.loadFirstPage();
   }
 
   this.loadMyFanzones = function()
   {
-    this.loadTilesIntoFrameContent("/tailgates?filter=user&noLayout=true")
+    this.myBaseUrl = "/tailgates?noLayout=true&filter=user";
+    this.loadFirstPage();
+  }
+
+  this.loadFirstPage = function()
+  {
+    this.myCurrentPage = 1;
+    this.displayLoading();
+    this.loadTilesIntoFrameContent(this.getUrlForCurrentPage());
+  }
+  
+  this.displayLoading = function()
+  {
+    $("#frameContent").hide();
+    $("#frameLoading").show();
+    this.myPullToRefreshScroller.scrollToTop();
+  };
+  
+  
+  this.getUrlForCurrentPage = function()
+  {
+    var theToken = $('meta[name=csrf-token]').attr('content');
+    return this.myBaseUrl + "&authenticity_token=" + theToken + "&page=" + this.myCurrentPage;
   }
 
   this.loadTilesIntoFrameContent = function( aPath )
   {
-    var theToken = $('meta[name=csrf-token]').attr('content');
     $.ajax({
-             url: aPath + "&authenticity_token=" + theToken,
+             url: aPath,
              cache:false,
              dataType: "html",
              success: createDelegate(this, this.onTileLoadComplete ),
              error: createDelegate(this, this.onLoadError )
            });
   };
+  
+  this.loadNextPage = function()
+  {
+    this.myCurrentPage+=1;
+    $.ajax({
+      url: this.getUrlForCurrentPage(),
+      type: 'get',
+      dataType: 'script',
+      complete: createDelegate(this, this.onLoadNextPageComplete)
+    });
+    trackEvent("InfiniteScroller", "loading_new_page", this.myResourceUrl, this.myCurrentPage);    
+  }
 
   this.onTileLoadComplete = function(aResult)
   {
-    $("#frameContent").html(aResult);
+    $("#frameLoading").hide();
+    $("#frameContent").html(aResult).show();
     updateTimestamps();
     
     this.myPullToRefreshScroller.update();
@@ -52,6 +88,19 @@ var TilesView = function()
   {
     console.log(anError);  
   };
-
   
+  this.onLoadNextPageComplete = function()
+  {
+    this.myPullToRefreshScroller.update();
+  }
+
+  this.pullDownAction = function()
+  {
+    this.loadFirstPage();
+  }
+
+  this.pullUpAction = function()
+  {
+    this.loadNextPage(); 
+  }
 }

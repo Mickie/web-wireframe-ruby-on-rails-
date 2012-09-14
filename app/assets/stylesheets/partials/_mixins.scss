@@ -11,3 +11,28 @@
   @include border-radius($radius);
   behavior: asset-url("PIE.htc", image);
 }
+
+@mixin transition-duration($duration)
+{
+  -webkit-transition-duration: $duration;
+     -moz-transition-duration: $duration;
+       -o-transition-duration: $duration;
+          transition-duration: $duration;
+}
+
+@mixin rotate3d($x, $y, $z, $angle) 
+{
+  -webkit-transform: rotate3d($x, $y, $z, $angle);
+     -moz-transform: rotate3d($x, $y, $z, $angle);
+      -ms-transform: rotate3d($x, $y, $z, $angle);
+       -o-transform: rotate3d($x, $y, $z, $angle);
+          transform: rotate3d($x, $y, $z, $angle);
+}
+
+@mixin animation($name, $duration, $timing-function, $delay, $iteration-count, $direction)
+{
+  -webkit-animation: $name $duration $timing-function $delay $iteration-count $direction;
+     -moz-animation: $name $duration $timing-function $delay $iteration-count $direction;
+       -o-animation: $name $duration $timing-function $delay $iteration-count $direction;
+          animation: $name $duration $timing-function $delay $iteration-count $direction;
+}

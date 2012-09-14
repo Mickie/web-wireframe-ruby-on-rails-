@@ -31,6 +31,27 @@
   
   #phoneTileContent
   {
+    #frameLoading
+    {
+      .loadingContent
+      {
+        width: 200px;
+        text-align:center;
+        margin: 50px auto;
+        @include clearfix();
+                
+        img, h1
+        {
+          float: left;
+        }
+        
+        h1
+        {
+          padding: 20px 10px;
+        }
+      }
+    }
+    
     #frameContent
     {
       padding-top:10px;

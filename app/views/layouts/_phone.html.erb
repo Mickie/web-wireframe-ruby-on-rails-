@@ -64,8 +64,17 @@
       </div>
       <div id="phoneTileContent" class="phoneContent">
         <div id="phoneTileScrollCanvas">
-          <div id="frameContent"></div>
-          <div id="pullUp">
+          <div id="tilesPullDown" class="pullDown">
+            <span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+          </div>
+          <div id="frameLoading">
+            <div class="loadingContent">
+              <%= image_tag "loading.gif", size:"66x66" %>
+              <h1>Loading</h1>
+            </div>
+          </div>
+          <div id="frameContent" class="hide"></div>
+          <div id="tilesPullUp" class="pullUp">
             <span class="pullUpIcon"></span><span class="pullUpLabel">Pull up to load more...</span>
           </div>
         </div>

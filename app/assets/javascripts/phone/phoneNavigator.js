@@ -61,6 +61,7 @@ var PhoneNavigator = function()
     $("#phoneTileViewport").width(theViewportWidth).height(theViewportHeight);
     $("#phoneTileTopNav").width(theViewportWidth);
     $("#phoneTileContent").width(theViewportWidth).height(theViewportHeight - 30);
+    $("#frameLoading").width(theViewportWidth).height(theViewportHeight - 40);
 
     $("#phoneFanzoneViewport").width(theViewportWidth).height(theViewportHeight).css("position", "absolute").css("left", theViewportWidth + "px");
     $("#phoneFanzoneTopNav").width(theViewportWidth);
