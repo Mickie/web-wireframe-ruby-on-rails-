@@ -6,3 +6,8 @@ function enableFormsOnBeforeScroll(e)
   if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
     e.preventDefault();
 }
+
+function scrollWindowToTopOnTouchEnd(e)
+{
+  window.scrollTo(0, 1);
+}

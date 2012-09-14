@@ -57,7 +57,12 @@ var FanzoneHomeView = function()
       this.renderPost(aListOfPosts[i], theParentDiv);
     }
     updateTimestamps();
-    this.myFanzoneScroller.refresh();
+    
+    var theThis = this;
+    setTimeout(function()
+    {
+      theThis.myFanzoneScroller.refresh();
+    }, 0);
   }
 
   this.renderPost = function(aPost, aParentDiv)

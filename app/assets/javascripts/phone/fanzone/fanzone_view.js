@@ -48,7 +48,8 @@ var FanzoneView = function()
                                         {
                                           hScroll: false,
                                           hScrollbar: false,
-                                          onBeforeScrollStart: enableFormsOnBeforeScroll 
+                                          onBeforeScrollStart: enableFormsOnBeforeScroll,
+                                          onTouchEnd: scrollWindowToTopOnTouchEnd
                                         });
   }
   
