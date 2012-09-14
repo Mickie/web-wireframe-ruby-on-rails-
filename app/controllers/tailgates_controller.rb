@@ -26,11 +26,19 @@ class TailgatesController < ApplicationController
   # GET /tailgates
   # GET /tailgates.json
   def index
-    thePage = params[:page] ? params[:page] : 1
+    thePage = params[:page] ? params[:page].to_i : 1
 
     if ( params[:filter] == "user" && user_signed_in? )
-      @tailgates = current_user.tailgates.includes(:team, :posts => :user)
-      @tailgates += current_user.followed_tailgates.includes(:team, :posts => :user).page(thePage)
+      if ( current_user.tailgates.length > (thePage - 1) * 24)
+        @tailgates = current_user.tailgates.includes(:team, :posts => :user).page(thePage)
+      else
+        @tailgates = []
+      end
+      
+      if (@tailgates.length < 24)
+        theFollowedPage = thePage - (current_user.tailgates.length/24)
+        @tailgates += current_user.followed_tailgates.includes(:team, :posts => :user).page(theFollowedPage).per(24 - @tailgates.length)
+      end
     else
       @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(thePage) 
     end
