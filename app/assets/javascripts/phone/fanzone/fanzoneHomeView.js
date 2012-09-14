@@ -5,6 +5,11 @@ var FanzoneHomeView = function()
   
   this.render = function( aTailgateModel, aFanzoneScroller )
   {
+    if (this.myTailgateModel && this.myTailgateModel.id == aTailgateModel.id)
+    {
+      return;
+    }
+    
     this.myTailgateModel = aTailgateModel;
     this.myFanzoneScroller = aFanzoneScroller;
     setTimeout(createDelegate(this, this.renderPosts), 10);
@@ -12,6 +17,8 @@ var FanzoneHomeView = function()
   
   this.cleanup = function()
   {
+    this.myTailgateModel = null;
+    this.myFanzoneScroller = null;
     $("#phoneFanzoneContent #posts").empty();
   }
   

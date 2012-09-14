@@ -5,6 +5,11 @@ var FanzoneMediaView = function()
   
   this.render = function( aTailgateModel )
   {
+    if (this.myTailgateModel && this.myTailgateModel.id == aTailgateModel.id)
+    {
+      return;
+    }
+
     this.myTailgateModel = aTailgateModel;
     this.loadTags();
   }

@@ -7,11 +7,14 @@ var TwitterView = function( aMaxTweets,
   this.myMaxTweets = aMaxTweets;
   this.myTweetDivSelector = "#" + aTweetDivId;
   this.myNewTweetDivSelector = "#" + aNewTweetDivId;
-  
+
   this.myTwitterController = new TwitterController(this, aFanzonePostsController);
 
-  this.startLoadingTweets = function( anArrayOfHashTags, anArrayOfNotTags )
+  this.myListener;
+
+  this.startLoadingTweets = function( anArrayOfHashTags, anArrayOfNotTags, aListener )
   {
+    this.myListener = aListener;
     this.myTwitterController.initialize( anArrayOfHashTags, anArrayOfNotTags, this.myMaxTweets );
 
     $(this.myNewTweetDivSelector).click(createDelegate(this, this.onShowNewTweets));
@@ -78,6 +81,10 @@ var TwitterView = function( aMaxTweets,
     else
     {
       $(theNewDivSelector).show();
+      if (this.myListener)
+      {
+        this.myListener.onNewTweetShown();
+      }
     }
     updateTimestamps();
   };
@@ -85,6 +92,10 @@ var TwitterView = function( aMaxTweets,
   this.onAddComplete = function()
   {
     $(".tweet:last").remove();
+    if (this.myListener)
+    {
+      this.myListener.onNewTweetShown();
+    }
   };
   
   this.generateTweetDiv = function(aTweet)

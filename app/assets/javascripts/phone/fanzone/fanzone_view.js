@@ -12,7 +12,6 @@ var FanzoneView = function()
     $("#fanzoneFooterHome").click(createDelegate(this, this.onHomeClicked));
     $("#fanzoneFooterSocial").click(createDelegate(this, this.onSocialClicked));
     $("#fanzoneFooterMedia").click(createDelegate(this, this.onMediaClicked));
-    $("#fanzoneFooterMap").click(createDelegate(this, this.onMapClicked));
   }
   
   this.loadTailgate = function( aPath )
@@ -69,10 +68,7 @@ var FanzoneView = function()
     this.renderPostForm();
     this.setupFanzoneScroller();
 
-    this.myFanzoneHomeView.render(this.myTailgateModel, this.myFanzoneScroller);
     this.myFanzonePostsController.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
-    this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController);
-    this.myFanzoneMediaView.render(this.myTailgateModel);
 
     updateTimestamps();
     this.onHomeClicked();
@@ -83,42 +79,37 @@ var FanzoneView = function()
     console.log(anError);  
   };
   
-  this.onFollow = function(e)
+  this.updateScrollerAndScrollToTop = function()
   {
-    alert("follow")
-  }
-  
-  this.onUnfollow = function(e)
-  {
-    alert("unfollow")
+    this.myFanzoneScroller.refresh();
+    this.myFanzoneScroller.scrollTo(0,0,0);
   }
   
   this.onHomeClicked = function(e)
   {
+    this.myFanzoneHomeView.render(this.myTailgateModel, this.myFanzoneScroller);
     $("#posts").show();
     $("#tweetHolder").hide();
     $("#fanzoneMedia").hide();
-    this.myFanzoneScroller.refresh();
+    this.updateScrollerAndScrollToTop();
   }
   
   this.onSocialClicked = function(e)
   {
+    this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController, this.myFanzoneScroller);
     $("#posts").hide();
     $("#tweetHolder").show();
     $("#fanzoneMedia").hide();
-    this.myFanzoneScroller.refresh();
+    this.updateScrollerAndScrollToTop();
   }
   
   this.onMediaClicked = function(e)
   {
+    this.myFanzoneMediaView.render(this.myTailgateModel);
     $("#posts").hide();
     $("#tweetHolder").hide();
     $("#fanzoneMedia").show();
-  }
-  
-  this.onMapClicked = function(e)
-  {
-    
+    this.updateScrollerAndScrollToTop();
   }
   
   this.renderBanner = function()
