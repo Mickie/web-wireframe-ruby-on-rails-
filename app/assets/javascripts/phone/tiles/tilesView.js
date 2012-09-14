@@ -1,20 +1,21 @@
 var TilesView = function()
 {
-  this.myTileScroller = null;
+  this.myPullToRefreshScroller = null;
 
   this.initialize = function()
   {
-    this.setupTileScroller();
+    this.myPullToRefreshScroller = new PullToRefreshScroller("phoneTileContent", this);
+    this.myPullToRefreshScroller.initialize();
   }
   
   this.onHidden = function()
   {
-    this.cleanupTileScroller();
+    this.myPullToRefreshScroller.cleanup();
   }
 
   this.onShown = function()
   {
-    this.setupTileScroller();
+    this.myPullToRefreshScroller.initialize();
   }
   
   this.loadAllFanzones = function()
@@ -44,10 +45,7 @@ var TilesView = function()
     $("#frameContent").html(aResult);
     updateTimestamps();
     
-    if (this.myTileScroller)
-    {
-      this.myTileScroller.refresh();
-    }
+    this.myPullToRefreshScroller.update();
   };
   
   this.onLoadError = function(anError)
@@ -55,18 +53,5 @@ var TilesView = function()
     console.log(anError);  
   };
 
-  this.setupTileScroller = function()
-  {
-    this.myTileScroller = new iScroll("phoneTileContent");
-  }
-  
-  this.cleanupTileScroller = function()
-  {
-    if (this.myTileScroller)
-    {
-      this.myTileScroller.destroy()
-      this.myTileScroller = null;
-    }
-  }
   
 }
