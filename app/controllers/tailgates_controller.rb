@@ -74,7 +74,7 @@ class TailgatesController < ApplicationController
         format.html { render layout: false }
       else
         format.html do
-          if browser.mobile? && !browser.tablet?
+          if browser.iphone?
             return render partial: "layouts/phone", locals: { aDevice: params[:device], aTailgate: @tailgate }
           end
         end
