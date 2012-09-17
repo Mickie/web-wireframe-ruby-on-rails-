@@ -219,7 +219,7 @@
   
   $(function()
   {
-    if (myNavigator.isLoadInProgress())
+    if (typeof myNavigator !== 'undefined' && myNavigator.isLoadInProgress())
     {
       return;
     }

@@ -68,18 +68,13 @@ var FanzoneView = function()
     console.log(anError);  
   };
   
-  this.updateScrollerAndScrollToTop = function()
-  {
-    this.myFanzoneScroller.refresh();
-    this.myFanzoneScroller.scrollTo(0,0,0);
-  }
-  
   this.onHomeClicked = function(e)
   {
     this.myFanzoneHomeView.render(this.myTailgateModel);
     $("#postsScroller").show();
     $("#tweetScroller").hide();
     $("#fanzoneMedia").hide();
+    $(".modal").modal("hide");
   }
   
   this.onSocialClicked = function(e)
@@ -88,6 +83,7 @@ var FanzoneView = function()
     $("#postsScroller").hide();
     $("#tweetScroller").show();
     $("#fanzoneMedia").hide();
+    $(".modal").modal("hide");
   }
   
   this.onMediaClicked = function(e)
@@ -96,6 +92,7 @@ var FanzoneView = function()
     $("#postsScroller").hide();
     $("#tweetScroller").hide();
     $("#fanzoneMedia").show();
+    $(".modal").modal("hide");
   }
   
   this.renderBanner = function()

@@ -6,6 +6,8 @@ var TilesView = function()
   this.initialize = function()
   {
     this.myPullToRefreshScroller = new PullToRefreshScroller("phoneTileContent", "tilesPullUp", "tilesPullDown", this);
+    $('#phoneTeamSearch').on('railsAutocomplete.select', createDelegate(this, this.onSearchSelect) );
+
     this.myPullToRefreshScroller.initialize();
   }
   
@@ -17,6 +19,11 @@ var TilesView = function()
   this.onShown = function()
   {
     this.myPullToRefreshScroller.initialize();
+  }
+  
+  this.onSearchSelect = function(e)
+  {
+    $('#phoneTeamSearch form').submit();
   }
   
   this.loadAllFanzones = function()

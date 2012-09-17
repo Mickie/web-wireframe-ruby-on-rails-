@@ -19,6 +19,7 @@ var BingImageThumbnail = function( aBingView )
       },
       "div.media img@style" : function(){return "";},
       "div.media img@alt" : "Title",
+      "div.media img@title" : "Title",
       "div.media img@src" : "Thumbnail.MediaUrl",
       "div.media img@width" : getWidth,
       "div.media img@height" : function(){return "150";}

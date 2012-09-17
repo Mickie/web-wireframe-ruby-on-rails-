@@ -123,6 +123,7 @@ var PhoneNavigator = function()
     $("#phoneTileViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     $("#phoneFanzoneViewport").css("-webkit-transform", "translate3d(0px, 0px, 0px)");
     $("#followButton").hide();
+    $(".modal").modal("hide");
 
     window.scrollTo(0, 1);
     this.myFanzoneView.cleanup();

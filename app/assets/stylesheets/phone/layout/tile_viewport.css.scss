@@ -29,8 +29,43 @@
     }
   }
   
+  #phoneTeamSearch
+  {
+    position:fixed;
+    top: 30px;
+    height: 40px;
+    width: 100%;
+    background: $backgroundColor;
+        
+    form
+    {
+      padding:5px 13px 5px 10px;
+      height: 30px;
+      margin:0px;
+      
+      #team
+      {
+        font-size: 18px;
+        line-height: 20px;
+        width: 100%;
+        padding-left: 25px;
+        height:30px;
+        border: 1px inset;
+        @include border-radius(15px);
+      }
+    }
+    i
+    {
+      position:absolute;
+      left: 18px;
+      top: 13px;
+      opacity: 0.5;
+    }
+  }
+  
   #phoneTileContent
   {
+    top: 70px;
     #frameLoading
     {
       .loadingContent
