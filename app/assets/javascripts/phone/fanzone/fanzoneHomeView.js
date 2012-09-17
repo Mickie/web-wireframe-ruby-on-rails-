@@ -1,11 +1,11 @@
 var FanzoneHomeView = function()
 {
   this.myTailgateModel = null;
-  this.myFanzoneScroller = null;
   this.myCurrentPage = 1;
   this.myAbortFlag = false;
+  this.myPostsScroller = null;
   
-  this.render = function( aTailgateModel, aFanzoneScroller )
+  this.render = function( aTailgateModel )
   {
     if (this.myTailgateModel && this.myTailgateModel.id == aTailgateModel.id)
     {
@@ -15,7 +15,6 @@ var FanzoneHomeView = function()
     this.myAbortFlag = false;
     this.myCurrentPage = 1;
     this.myTailgateModel = aTailgateModel;
-    this.myFanzoneScroller = aFanzoneScroller;
     this.loadPosts();
   }
   
@@ -23,7 +22,7 @@ var FanzoneHomeView = function()
   {
     this.myAbortFlag = true;
     this.myTailgateModel = null;
-    this.myFanzoneScroller = null;
+    this.cleanupPostsScroller();
     $("#phoneFanzoneContent #posts").empty();
   }
   
@@ -47,6 +46,30 @@ var FanzoneHomeView = function()
       return;
     }
     this.renderPosts(aResult);
+    
+    setTimeout(createDelegate(this, this.setupPostsScroller), 200);
+  }
+  
+  this.setupPostsScroller = function()
+  {
+    this.myPostsScroller = new iScroll("postsScroller",
+                                        {
+                                          hScroll: false,
+                                          hScrollbar: false,
+                                          onBeforeScrollStart: enableFormsOnBeforeScroll,
+                                          onTouchEnd: scrollWindowToTopOnTouchEnd
+                                        });
+    $("#postsAndComments").on("touchmove", "#postsScroller", function (e) { e.preventDefault(); });
+  }
+  
+  this.cleanupPostsScroller = function()
+  {
+    $("#postsAndComments").off("touchmove", "#postsScroller");
+    if (this.myPostsScroller)
+    {
+      this.myPostsScroller.destroy()
+      this.myPostsScroller = null;
+    }
   }
   
   this.renderPosts = function( aListOfPosts )
@@ -57,12 +80,6 @@ var FanzoneHomeView = function()
       this.renderPost(aListOfPosts[i], theParentDiv);
     }
     updateTimestamps();
-    
-    var theThis = this;
-    setTimeout(function()
-    {
-      theThis.myFanzoneScroller.refresh();
-    }, 0);
   }
 
   this.renderPost = function(aPost, aParentDiv)

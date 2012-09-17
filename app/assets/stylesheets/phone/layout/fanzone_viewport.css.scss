@@ -44,15 +44,21 @@
     {
       @include clearfix;
     }
+    
+    #tweetScroller, #postsScroller
+    {
+      position:relative;
+    }
+    
   }
 
   #phoneFanzoneFooterNav
   {
     width:320px;
-    height: 40px;
+    height: 30px;
     position: fixed;
     left:0px;
-    top: 316px;
+    top: 326px;
     background-color: $phoneBottomNavColor;
     
     
@@ -65,7 +71,7 @@
       
       li
       {
-        padding: 10px;
+        padding: 5px 10px;
         float: left;
         color: white;
         font-size: 1.2em;

@@ -1,7 +1,6 @@
 var FanzoneView = function()
 {
   this.myTailgateModel = {};
-  this.myFanzoneScroller = null;
   this.myFanzonePostsController = FanzonePostsController.create("#postsAndComments");
   this.myFanzoneHomeView = new FanzoneHomeView();
   this.myFanzoneSocialView = new FanzoneSocialView();
@@ -27,7 +26,7 @@ var FanzoneView = function()
     this.myAbortFlag = true;
     this.myFanzoneHomeView.cleanup();
     this.myFanzoneSocialView.cleanup();
-    this.cleanupFanzoneScroller();
+    this.myFanzoneMediaView.cleanup();
   }
   
   this.loadTailgateIntoFanzoneView = function( aPath )
@@ -42,24 +41,6 @@ var FanzoneView = function()
            });
   }
   
-  this.setupFanzoneScroller = function()
-  {
-    this.myFanzoneScroller = new iScroll("phoneFanzoneContent",
-                                        {
-                                          hScroll: false,
-                                          hScrollbar: false,
-                                          onBeforeScrollStart: enableFormsOnBeforeScroll,
-                                          onTouchEnd: scrollWindowToTopOnTouchEnd
-                                        });
-  }
-  
-  this.cleanupFanzoneScroller = function()
-  {
-    this.myFanzoneScroller.destroy()
-    this.myFanzoneScroller = null;
-  }
-  
-
   this.onTailgateLoadComplete = function( aResult )
   {
     if (this.myAbortFlag)
@@ -75,7 +56,6 @@ var FanzoneView = function()
     this.renderBanner();
     this.renderFollowButton();  
     this.renderPostForm();
-    this.setupFanzoneScroller();
 
     this.myFanzonePostsController.initialize(this.myTailgateModel.team.sport_id, this.myTailgateModel.topic_tags);
 
@@ -96,29 +76,26 @@ var FanzoneView = function()
   
   this.onHomeClicked = function(e)
   {
-    this.myFanzoneHomeView.render(this.myTailgateModel, this.myFanzoneScroller);
-    $("#posts").show();
-    $("#tweetHolder").hide();
+    this.myFanzoneHomeView.render(this.myTailgateModel);
+    $("#postsScroller").show();
+    $("#tweetScroller").hide();
     $("#fanzoneMedia").hide();
-    this.updateScrollerAndScrollToTop();
   }
   
   this.onSocialClicked = function(e)
   {
-    this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController, this.myFanzoneScroller);
-    $("#posts").hide();
-    $("#tweetHolder").show();
+    this.myFanzoneSocialView.render(this.myTailgateModel, this.myFanzonePostsController);
+    $("#postsScroller").hide();
+    $("#tweetScroller").show();
     $("#fanzoneMedia").hide();
-    this.updateScrollerAndScrollToTop();
   }
   
   this.onMediaClicked = function(e)
   {
     this.myFanzoneMediaView.render(this.myTailgateModel);
-    $("#posts").hide();
-    $("#tweetHolder").hide();
+    $("#postsScroller").hide();
+    $("#tweetScroller").hide();
     $("#fanzoneMedia").show();
-    this.updateScrollerAndScrollToTop();
   }
   
   this.renderBanner = function()

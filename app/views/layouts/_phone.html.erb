@@ -165,26 +165,29 @@
               <%= render partial: "partials/twitter/tweet_template" %>
             </div>
 
-            <div id="posts">
-
+            <div id="postsScroller">
+              <div id="posts">
+              </div>
             </div>
 
-            <div id="tweetHolder" class="hide">
-              <div id="newTweets" class='alert alert-info fade in hide'>
-                <a class='close' data-dismiss='alert' href='#'>×</a>
-                <p>
-                  <strong>5</strong> new Tweets!
-                </p>
+            <div id="tweetScroller" class="hide">
+              <div id="tweetHolder">
+                <div id="newTweets" class='alert alert-info fade in hide'>
+                  <a class='close' data-dismiss='alert' href='#'>×</a>
+                  <p>
+                    <strong>5</strong> new Tweets!
+                  </p>
+                </div>
+                <div id="tweetError" class='alert alert-error fade in hide'>
+                  <a class='close' data-dismiss='alert' href='#'>×</a>
+                  <p>
+                    Twitter has called timeout
+                    <br/>
+                    We'll try again in 60 seconds
+                  </p>
+                </div>
+                <div id="tweets"></div>
               </div>
-              <div id="tweetError" class='alert alert-error fade in hide'>
-                <a class='close' data-dismiss='alert' href='#'>×</a>
-                <p>
-                  Twitter has called timeout
-                  <br/>
-                  We'll try again in 60 seconds
-                </p>
-              </div>
-              <div id="tweets"></div>
             </div>
 
             <div id="fanzoneMedia" class="hide">

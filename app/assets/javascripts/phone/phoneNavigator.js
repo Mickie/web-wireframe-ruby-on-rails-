@@ -61,13 +61,17 @@ var PhoneNavigator = function()
     $("#phoneTileViewport").width(theViewportWidth).height(theViewportHeight);
     $("#phoneTileTopNav").width(theViewportWidth);
     $("#phoneTileContent").width(theViewportWidth).height(theViewportHeight - 30);
-    $("#frameLoading").width(theViewportWidth).height(theViewportHeight - 40);
+    $("#frameLoading").width(theViewportWidth).height(theViewportHeight - 30);
 
     $("#phoneFanzoneViewport").width(theViewportWidth).height(theViewportHeight).css("position", "absolute").css("left", theViewportWidth + "px");
     $("#phoneFanzoneTopNav").width(theViewportWidth);
-    $("#phoneFanzoneContent").width(theViewportWidth).height(theViewportHeight - 70);
+    $("#phoneFanzoneContent").width(theViewportWidth).height(theViewportHeight - 60);
+    
+    $("#postsScroller").width(theViewportWidth).height(theViewportHeight - 60 - 142);
+    $("#tweetScroller").width(theViewportWidth).height(theViewportHeight - 60 - 142);
+    
     $("#phoneFanzoneFooterNav").width(theViewportWidth);
-    $("#phoneFanzoneFooterNav").css("top", (theViewportHeight - 40) + "px");
+    $("#phoneFanzoneFooterNav").css("top", (theViewportHeight - 30) + "px");
     
     if (this.myCurrentState == FANZONE_OPEN)
     {
