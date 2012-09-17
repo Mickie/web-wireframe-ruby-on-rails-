@@ -110,6 +110,7 @@ var TilesView = function()
   this.onLoadNextPageComplete = function()
   {
     this.myPullToRefreshScroller.update();
+    updateTimestamps();
   }
 
   this.pullDownAction = function()
