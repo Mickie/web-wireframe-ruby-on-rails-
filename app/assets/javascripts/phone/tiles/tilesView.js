@@ -23,7 +23,7 @@ var TilesView = function()
   
   this.onSearchComplete = function()
   {
-    this.myPullToRefreshScroller.initialize();
+    this.myPullToRefreshScroller.update();
     updateTimestamps();
   }
   

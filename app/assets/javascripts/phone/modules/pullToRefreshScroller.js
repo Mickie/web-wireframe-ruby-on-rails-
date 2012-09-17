@@ -73,6 +73,16 @@ var PullToRefreshScroller = function(aScrollParent, aPullUpDivId, aPullDownDivId
       $(this.myPullUpDiv).removeClass('loading');
       this.myPullUpDiv.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
     }
+    
+    if (this.noScrollNeeded())
+    {
+      $(this.myPullUpDiv).hide();
+    }
+  }
+  
+  this.noScrollNeeded = function()
+  {
+    return this.myScroller && ( this.myScroller.wrapperH - this.myScroller.scrollerH) > 0;
   }
 
   this.onScrollMove = function()
@@ -117,7 +127,10 @@ var PullToRefreshScroller = function(aScrollParent, aPullUpDivId, aPullDownDivId
       $(this.myPullUpDiv).removeClass('flip');
       $(this.myPullUpDiv).addClass('loading');
       this.myPullUpDiv.querySelector('.pullUpLabel').innerHTML = 'Loading...';
-      this.myListener.pullUpAction();
+      if (!this.noScrollNeeded())
+      {
+        this.myListener.pullUpAction();
+      }
     }
   }
 }
