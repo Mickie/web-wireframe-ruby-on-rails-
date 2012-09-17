@@ -51,6 +51,11 @@ var TilesView = function()
     this.loadTilesIntoFrameContent(this.getUrlForCurrentPage());
   }
   
+  this.clearSearch = function()
+  {
+    $('#phoneTeamSearch #team').val("");
+  }
+  
   this.displayLoading = function()
   {
     $("#frameContent").hide();
@@ -110,6 +115,7 @@ var TilesView = function()
   this.pullDownAction = function()
   {
     this.loadFirstPage();
+    this.clearSearch();
   }
 
   this.pullUpAction = function()
