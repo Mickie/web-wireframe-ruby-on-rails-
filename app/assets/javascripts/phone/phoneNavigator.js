@@ -111,6 +111,14 @@ var PhoneNavigator = function()
     this.myCurrentState = FANZONE_OPEN;
   }
   
+  this.notifySearchComplete = function()
+  {
+    if (this.myTilesView)
+    {
+      this.myTilesView.onSearchComplete();
+    }
+  }  
+  
   this.positionFanzone = function()
   {
     var theWidth = DimensionManager.get().getDimensions().width;

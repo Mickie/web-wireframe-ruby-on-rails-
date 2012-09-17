@@ -4,4 +4,7 @@ if (typeof myNavigator !== 'undefined')
 {
   myNavigator.notifySearchComplete();
 }
-updateTimestamps();
+else
+{
+  myPhoneNavigator.notifySearchComplete();
+}

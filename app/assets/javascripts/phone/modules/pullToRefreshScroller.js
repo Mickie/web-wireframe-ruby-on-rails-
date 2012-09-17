@@ -31,7 +31,8 @@ var PullToRefreshScroller = function(aScrollParent, aPullUpDivId, aPullDownDivId
       topOffset: this.myPullDownOffset || 0,
       onRefresh : createDelegate(this, this.onRefresh),
       onScrollMove : createDelegate(this, this.onScrollMove),
-      onScrollEnd : createDelegate(this, this.onScrollEnd)
+      onScrollEnd : createDelegate(this, this.onScrollEnd),
+      onTouchEnd: scrollWindowToTopOnTouchEnd
     });
   }
   

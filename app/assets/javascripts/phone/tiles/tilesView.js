@@ -21,6 +21,12 @@ var TilesView = function()
     this.myPullToRefreshScroller.initialize();
   }
   
+  this.onSearchComplete = function()
+  {
+    this.myPullToRefreshScroller.initialize();
+    updateTimestamps();
+  }
+  
   this.onSearchSelect = function(e)
   {
     $('#phoneTeamSearch form').submit();
