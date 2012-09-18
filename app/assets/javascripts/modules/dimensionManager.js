@@ -28,7 +28,7 @@ var DimensionManager = function()
       case 90:
       {
         theViewportWidth = 480;
-        if (UserManager.get().isDevice())
+        if (UserManager.get().isDevice() || window.navigator.standalone)
         {
           theViewportHeight = 320;
         }
@@ -41,7 +41,7 @@ var DimensionManager = function()
       default:
       {
         theViewportWidth = 320;
-        if (UserManager.get().isDevice())
+        if (UserManager.get().isDevice() || window.navigator.standalone)
         {
           theViewportHeight = 465;
         }
