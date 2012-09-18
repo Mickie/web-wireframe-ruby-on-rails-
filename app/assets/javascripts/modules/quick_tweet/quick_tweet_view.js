@@ -15,8 +15,9 @@ var QuickTweetView = function( aContainerSelector, aListener )
   {
     this.myController.addQuickTweetButtons( $( this.myContainerSelector + " ul.dropdown-menu") );
     
-    $( this.myContainerSelector + " p" ).each( createDelegate( this.myController,
+    $( this.myContainerSelector + " #post_combo p" ).each( createDelegate( this.myController,
                                                                this.myController.addQuickTweetClick ));
+    $( this.myContainerSelector + " #post_combo .quickTweetButton" ).dropdown();
   };
   
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText )
