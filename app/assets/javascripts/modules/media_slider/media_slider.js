@@ -103,29 +103,37 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     this.mySlideInterval = null;
   };
   
+  this.isOldIE = function()
+  {
+    return !window.addEventListener;
+  }
+  
   this.patchIScrollForIE8 = function()
   {
-    if (!window.addEventListener)
+    iScroll.prototype._bind = function (type, el, bubble) 
     {
-      iScroll.prototype._bind = function (type, el, bubble) 
-      {
-        $(el || this.scroller).bind(type, createDelegate(this, this.handleEvent));
-      };
+      $(el || this.scroller).bind(type, createDelegate(this, this.handleEvent));
+    };
 
-      iScroll.prototype._unbind = function (type, el, bubble) 
-      {
-        $(el || this.scroller).bind(type, createDelegate(this, this.handleEvent));
-      };
-    }
+    iScroll.prototype._unbind = function (type, el, bubble) 
+    {
+      $(el || this.scroller).bind(type, createDelegate(this, this.handleEvent));
+    };
   }
   
   this.setupNavigation = function()
   {
-    $(this.myContainerDivSelector).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
-    $(this.myContainerDivSelector + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
-    $(this.myContainerDivSelector + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
+    if (this.isOldIE())
+    {
+      this.patchIScrollForIE8();
+    }
+    else
+    {
+      $(this.myContainerDivSelector).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
+      $(this.myContainerDivSelector + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
+      $(this.myContainerDivSelector + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
+    }
     
-    this.patchIScrollForIE8();
     
     this.myScroller = new iScroll("myMediaContainer",
                                   {
@@ -142,11 +150,8 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   
   this.onSlideInterval = function()
   {
-    if (this.myScroller)
-    {
-      this.myScroller.refresh();
-      this.slideLeft();
-    }
+    this.myScroller.refresh();
+    this.slideLeft();
   };
   
   this.onNavRight = function(e)
