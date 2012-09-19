@@ -103,8 +103,6 @@ var YoutubeView = function(aContainerDivSelector,
     this.myDialogDiv.find("#post_media_button").data("youtubeVideo", null).hide();
     this.cleanupDialogPlayer();
   };
-
-  
   
   this.onPostedVideoClick = function(e)
   {
@@ -143,7 +141,8 @@ var YoutubeView = function(aContainerDivSelector,
 
       this.addYoutubeVideoToPost(theVideoId, theThumbnailUrl);      
       
-      trackEvent("MediaSlider", "post_youtube", theVideoId);    
+      trackEvent("MediaSlider", "post_youtube", theVideoId);
+      $(".modal").modal("hide");
     }
   };
   

@@ -222,8 +222,10 @@ var BingView = function(aContainerDivSelector,
         this.addBingImageToPost( theBingItem );
       }
       
-      trackEvent("MediaSlider", "post_bingItem", theBingItem.__metadata.type);    
+      trackEvent("MediaSlider", "post_bingItem", theBingItem.__metadata.type);
+      $(".modal").modal("hide");
     }
+
   };
   
   this.addBingNewsToPost = function( aBingNews )

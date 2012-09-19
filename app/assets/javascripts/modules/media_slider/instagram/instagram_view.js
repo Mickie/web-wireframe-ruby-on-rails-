@@ -103,6 +103,7 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
       this.myPostDiv.find(".media_preview").slideDown(600);
       
       trackEvent("MediaSlider", "post_instagram", theInstagramId);    
+      $(".modal").modal("hide");
     }
   };
   
