@@ -8,12 +8,7 @@ module ApplicationHelper
   end
   
   def logoPath(aSlug, aSize)
-    theSuffix = "_s.gif"
-    if aSize == :medium
-      theSuffix = "_m.gif"
-    elsif aSize == :large
-      theSuffix = "_l.gif"
-    end
+    theSuffix = "_l.png"
     
     return logosPath + aSlug + theSuffix
   end

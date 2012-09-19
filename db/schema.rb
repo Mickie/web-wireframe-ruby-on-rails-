@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824180307) do
+ActiveRecord::Schema.define(:version => 20120919194711) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -206,6 +206,20 @@ ActiveRecord::Schema.define(:version => 20120824180307) do
 
   add_index "people", ["social_info_id"], :name => "index_people_on_social_info_id"
   add_index "people", ["team_id"], :name => "index_people_on_team_id"
+
+  create_table "photos", :force => true do |t|
+    t.integer  "user_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "photos", ["user_id"], :name => "index_photos_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.text     "content",                                                :null => false

@@ -1,6 +1,6 @@
 FanzoSite::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  config.static_asset_base_path = "http://fanzo_static.s3.amazonaws.com/"
+  config.static_asset_base_path = "http://fanzo-static.s3.amazonaws.com/"
   
   # Code is not reloaded between requests
   config.cache_classes = true

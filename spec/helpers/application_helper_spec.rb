@@ -3,15 +3,15 @@ require "spec_helper"
 describe ApplicationHelper do
   describe "#logoPath" do
     it "returns the correct path for small" do
-      helper.logoPath("test-slug", :small).should eql("http://localhost/~paulingalls/fanzo_site/static/logos/test-slug_s.gif")
+      helper.logoPath("test-slug", :small).should eql("http://10.0.1.15/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
     end
 
     it "returns the correct path for medium" do
-      helper.logoPath("test-slug", :medium).should eql("http://localhost/~paulingalls/fanzo_site/static/logos/test-slug_m.gif")
+      helper.logoPath("test-slug", :medium).should eql("http://10.0.1.15/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
     end
 
     it "returns the correct path for large" do
-      helper.logoPath("test-slug", :large).should eql("http://localhost/~paulingalls/fanzo_site/static/logos/test-slug_l.gif")
+      helper.logoPath("test-slug", :large).should eql("http://10.0.1.15/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
     end
   end
   
@@ -21,15 +21,15 @@ describe ApplicationHelper do
     end
     
     it "returns the correct tag for small" do
-      helper.teamLogo(@team, :small).should match(/.*alt="Seahawks".*height="50".*seahawks_s.gif.*width="50"/)
+      helper.teamLogo(@team, :small).should match(/.*alt="Seahawks".*height="50".*seahawks_l.png.*width="50"/)
     end
 
     it "returns the correct tag for medium" do
-      helper.teamLogo(@team, :medium).should match(/.*alt="Seahawks".*height="80".*seahawks_m.gif.*width="80"/)
+      helper.teamLogo(@team, :medium).should match(/.*alt="Seahawks".*height="80".*seahawks_l.png.*width="80"/)
     end
 
     it "returns the correct tag for large" do
-      helper.teamLogo(@team, :large).should match(/.*alt="Seahawks".*height="110".*seahawks_l.gif.*width="110"/)
+      helper.teamLogo(@team, :large).should match(/.*alt="Seahawks".*height="110".*seahawks_l.png.*width="110"/)
     end
 
   end
