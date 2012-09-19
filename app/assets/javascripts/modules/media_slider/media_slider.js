@@ -109,12 +109,12 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     {
       iScroll.prototype._bind = function (type, el, bubble) 
       {
-        (el || this.scroller).attachEvent(type, this);
+        $(el || this.scroller).bind(type, createDelegate(this, this.handleEvent));
       };
 
       iScroll.prototype._unbind = function (type, el, bubble) 
       {
-        (el || this.scroller).detachEvent(type, this, !!bubble);
+        $(el || this.scroller).bind(type, createDelegate(this, this.handleEvent));
       };
     }
   }
