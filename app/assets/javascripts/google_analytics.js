@@ -1,7 +1,10 @@
 var _gaq = _gaq || [];
 
 $(function(){
-  gapi.plusone.go();  
+  if (typeof gapi !== 'undefined' && gapi.plusone)
+  {
+    gapi.plusone.go();  
+  }
 })
 
 function trackEvent( aCategory, anAction, aLabel, aValue )
