@@ -103,12 +103,29 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     this.mySlideInterval = null;
   };
   
+  this.patchIScrollForIE8 = function()
+  {
+    if (!window.addEventListener)
+    {
+      iScroll.prototype._bind = function (type, el, bubble) 
+      {
+        (el || this.scroller).attachEvent(type, this);
+      };
+
+      iScroll.prototype._unbind = function (type, el, bubble) 
+      {
+        (el || this.scroller).detachEvent(type, this, !!bubble);
+      };
+    }
+  }
   
   this.setupNavigation = function()
   {
     $(this.myContainerDivSelector).hover(createDelegate(this, this.onHoverStart), createDelegate(this, this.onHoverEnd));
     $(this.myContainerDivSelector + " div#navigate_forward").click( createDelegate(this, this.onNavRight ) );
     $(this.myContainerDivSelector + " div#navigate_backward").click( createDelegate(this, this.onNavLeft ) );
+    
+    this.patchIScrollForIE8();
     
     this.myScroller = new iScroll("myMediaContainer",
                                   {
@@ -125,8 +142,11 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   
   this.onSlideInterval = function()
   {
-    this.myScroller.refresh();
-    this.slideLeft();
+    if (this.myScroller)
+    {
+      this.myScroller.refresh();
+      this.slideLeft();
+    }
   };
   
   this.onNavRight = function(e)

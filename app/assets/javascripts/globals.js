@@ -3,6 +3,14 @@ if (typeof console === "undefined" || typeof console.log === "undefined")
    console = {};
    console.log = function() {};
 }
+
+if (!Date.now) 
+{
+  Date.now = function() 
+  {
+    return new Date().valueOf();
+  }
+}
    
 function createDelegate(anObject, aMethod)
 {
