@@ -38,7 +38,7 @@ describe "teams/show" do
     rendered.should match(/#{@division.name}/)
     rendered.should match(/#{@conference.name}/)
     rendered.should match(/#{@location.one_line_address}/)
-    rendered.should match(/killer-team_l.gif/)
+    rendered.should match(/killer-team_l.png/)
   end
   
   it "renders partial" do
