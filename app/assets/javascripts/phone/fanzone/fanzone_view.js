@@ -148,7 +148,11 @@ var FanzoneView = function()
       "#new_post@action" : function(anItem)
       {
         return "/tailgates/" + anItem.context.slug + "/posts";
-      }      
+      },
+      "#photo_picker" : function(anItem)
+      {
+        return "<i class='icon-camera'></i>";
+      }   
     }
   }
   
