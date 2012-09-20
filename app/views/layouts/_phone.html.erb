@@ -125,6 +125,7 @@
           <div id="postsAndComments">
             <% @tailgate = Tailgate.find(15) %>
             <% @post = Post.new %>
+            <% @post.build_photo %>
             <div id="postForm">
               <div class="profile_pic">
                 <% if aUserSignedInFlag %>

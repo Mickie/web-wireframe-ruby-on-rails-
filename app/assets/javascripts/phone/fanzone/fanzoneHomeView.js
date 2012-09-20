@@ -103,7 +103,12 @@ var FanzoneHomeView = function()
   
   this.renderPostMediaIntoDiv = function( aPost, aDiv )
   {
-    if (aPost.image_url && aPost.image_url.length > 0)
+    if ( aPost.photo_url && aPost.photo_url.length > 0 )
+    {
+      var theImageDiv = $("#postImageTemplate .post_image").clone().render(aPost, this.getPostImageDirective());
+      aDiv.find(".post_media").append(theImageDiv);
+    }
+    else if ( aPost.image_url && aPost.image_url.length > 0 )
     {
       if (aPost.video_id && aPost.video_id.length > 0)
       {
@@ -325,7 +330,10 @@ var FanzoneHomeView = function()
   this.getPostImageDirective = function()
   {
     return {
-      "img@src": "image_url"
+      "img@src": function(anItem)
+      {
+        return anItem.context.photo_url || anItem.context.image_url;
+      }
     };
   }
 }

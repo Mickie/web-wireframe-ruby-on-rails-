@@ -27,6 +27,10 @@ class Post < ActiveRecord::Base
   scope :visible, where("fan_score > -3")  
   
   paginates_per 10
+  
+  def photo_url
+    photo ? photo.image.url : nil
+  end
                   
   def shortened_content
     if (self.content.length < 120)

@@ -12,7 +12,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts.to_json(include: [ :user, :comments => { include: :user } ] ) }
+      format.json do
+        render json: @posts.to_json(include: [ :user, :comments => { include: :user } ], methods: [ :photo_url ] )
+      end
       format.js
     end
   end
