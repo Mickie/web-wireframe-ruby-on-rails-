@@ -136,6 +136,7 @@ var YoutubeView = function(aContainerDivSelector,
         if ( theVideo.media$group.media$thumbnail[i].yt$name == "hqdefault" )
         {
           theThumbnailUrl = theVideo.media$group.media$thumbnail[i].url;
+          break;
         }
       }
 
@@ -181,7 +182,14 @@ var YoutubeView = function(aContainerDivSelector,
     }
     else
     {
-      this.myPostPlayer.loadVideoById(aVideoId);
+      try
+      {
+        this.myPostPlayer.loadVideoById(aVideoId);
+      }
+      catch(error)
+      {
+        console.log(error);
+      }
     }
   };
   

@@ -4,6 +4,7 @@ var FanzoneHomeView = function()
   this.myCurrentPage = 1;
   this.myAbortFlag = false;
   this.myPostsScroller = null;
+  EventManager.get().addObserver("onCreatePostComplete", this);
   
   this.render = function( aTailgateModel )
   {
@@ -15,6 +16,7 @@ var FanzoneHomeView = function()
     this.myAbortFlag = false;
     this.myCurrentPage = 1;
     this.myTailgateModel = aTailgateModel;
+    
     this.loadPosts();
   }
   
@@ -26,6 +28,11 @@ var FanzoneHomeView = function()
     $("#phoneFanzoneContent #posts").empty();
   }
   
+  this.onCreatePostComplete = function()
+  {
+    this.myPostsScroller.refresh();
+  }
+
   this.loadPosts = function()
   {
     var theToken = $('meta[name=csrf-token]').attr('content');

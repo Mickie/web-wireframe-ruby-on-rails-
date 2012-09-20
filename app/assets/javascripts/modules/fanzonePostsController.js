@@ -9,7 +9,8 @@ var FanzonePostsController = function( aPostsSelector )
   {
     this.loadSavedDataIntoForm();
     this.myQuickTweetsView.initialize( aSportId, aHashTagString);
-    UserManager.get().addObserver(this);
+    EventManager.get().addObserver("onShowConnectionModal", this);
+    EventManager.get().addObserver("onCreatePostComplete", this);
     this.setupFormListeners();
   }
   
@@ -28,6 +29,16 @@ var FanzonePostsController = function( aPostsSelector )
   this.pickPhoto = function(e)
   {
     $(this.myPostsSelector).find("#post_photo_attributes_image").click();
+  }
+  
+  this.onCreatePostComplete = function()
+  {
+    $("#postForm .media_container").html("");
+    $("#postForm #post_content").val("");
+    $("#postForm #post_video_id").val("");
+    $("#postForm #post_image_url").val("");
+    $("#postForm #post_twitter_reply_id").val("");
+    $("#postForm #post_twitter_retweet_id").val("");
   }
   
   this.onPhotoPicked = function(e)

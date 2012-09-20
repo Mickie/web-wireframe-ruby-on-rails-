@@ -3,7 +3,6 @@ var UserManager = function()
   this.myFanzoAccountDetails = null;
   this.myFacebookModel = null;
   this.myFacebookController = new FacebookController();
-  this.myObservers = new Array();
   this.myMobileFlag = false;
   this.myDeviceFlag = false;
   
@@ -184,13 +183,13 @@ var UserManager = function()
   
   this.showTwitterModal = function()
   {
-    this.notifyObservers("onShowConnectionModal");
+    EventManager.get().notifyObservers("onShowConnectionModal");
     $("#myConnectTwitterModal").modal("show"); 
   };
   
   this.showFacebookModal = function()
   {
-    this.notifyObservers("onShowConnectionModal");
+    EventManager.get().notifyObservers("onShowConnectionModal");
     $("#myLoginModal").modal("show");
   };
   
@@ -239,19 +238,6 @@ var UserManager = function()
   this.onFanzoLoginError = function( aResponse )
   {
     console.log(aResponse)
-  }
-
-  this.addObserver = function( anObserver )
-  {
-    this.myObservers.push(anObserver);
-  }
-  
-  this.notifyObservers = function(aNotification, anArgumentsArray)
-  {
-    for(var i=0,j=this.myObservers.length; i<j; i++)
-    {
-      this.myObservers[i][aNotification].apply(this.myObservers[i], anArgumentsArray);
-    };
   }
   
 }

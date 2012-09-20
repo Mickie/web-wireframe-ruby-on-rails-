@@ -29,36 +29,44 @@ div#posts
         color: $lightTextColor;
       }
       
+      .post_text
+      {
+        clear: both;
+      }
+      
       .post_media
       {
-        position:relative;
-        width: 306px;
-        
         .post_image
         {
+          position:relative;
+          float:left;
           padding: 10px 0px;
           
           img
           {
-            padding-bottom: 20px;
+            max-width: 306px;
           }
           .pinButton
           {
-            position:absolute;
-            right: 0px;
-            bottom: 0px;
+            float:right;
             margin-top: 10px;
           }
         }
         
         .post_video
         {
+          position:relative;
           cursor: pointer;
           padding: 10px 0px;
           
+          img
+          {
+            width: 306px;
+          }
+
           .playButtonBackground
           {
-            top:30%;
+            top:20%;
             left:100px;
           }
         }

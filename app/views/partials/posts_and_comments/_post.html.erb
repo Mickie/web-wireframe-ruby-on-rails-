@@ -18,8 +18,10 @@
         </div>
       <% else %>
         <div class="post_image">
-          <% theUrl = aPost.photo ? aPost.photo.image.url : aPost.image_url %>
-          <img src="<%= theUrl -%>" width="306" />
+          <div>
+            <% theUrl = aPost.photo ? aPost.photo.image.url : aPost.image_url %>
+            <img src="<%= theUrl -%>" />
+          </div>
           <div class="pinButton">
             <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(aPost.tailgate) -%>&media=<%=u theUrl -%>&description=<%=u aPost.content -%>" 
                class="pin-it-button" 
@@ -31,5 +33,5 @@
       <% end %>
     <% end %>
   </div>
-  <p><%= raw handleNewlinesAndUrls( aPost.content ) %></p>
+  <p class="post_text"><%= raw handleNewlinesAndUrls( aPost.content ) %></p>
 </div>

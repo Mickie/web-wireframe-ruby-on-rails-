@@ -241,7 +241,7 @@ var BingView = function(aContainerDivSelector,
     if (this.isYoutubeVideo( aBingVideo.MediaUrl ))
     {
       var theVideoId = this.getIdFromYoutubeUrl( aBingVideo.MediaUrl );
-      var theThumbnailUrl = aBingVideo.Thumbnail.MediaUrl;
+      var theThumbnailUrl = "http://i.ytimg.com/vi/" + theVideoId + "/hqdefault.jpg";
           
       this.myYoutubeView.addYoutubeVideoToPost( theVideoId, theThumbnailUrl );  
     }

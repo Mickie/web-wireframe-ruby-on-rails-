@@ -43,64 +43,100 @@
         {
           margin-right: 10px;
         }
+
+        .facebook_check, .twitter_check
+        {
+          margin-top: 2px;
+        }
+        
       }
       
-    }
-    
-    #post_combo
-    {
-      position:relative;
-    }
-    
-    .post_content, .comment_content
-    {
-      margin-left: 32px;
-      
-      .post_media
+      #post_combo
       {
-        width: 200px;
+        position:relative;
       }
-    }
-    
-    #post_twitter_flag, #post_facebook_flag
-    {
-      width: 15px;
-      height: 15px;
-    }
-    
-    .facebook_check, .twitter_check
-    {
-      margin-top: 2px;
+      
+      #post_twitter_flag, #post_facebook_flag
+      {
+        width: 15px;
+        height: 15px;
+      }
     }
     
     #posts
     {
       .post
       {
-        .post_comment_form .comment_form form #comment_content
+        .profile_pic
         {
-          height: 24px;
-        }
-      }
-      
-      .post_votes i.mine, .comment_votes i.mine
-      {
-        margin:0px;
-      }
-      
-      .post_media
-      {
-        .post_video
-        {
-          .playButtonBackground
+          margin: 0px;
+          
+          img
           {
-            top:25%;
-            left:45px;
+            width: 24px;
+            height: 24px;
+          } 
+        }
+        
+        .post_votes i.mine, .comment_votes i.mine
+        {
+          margin:0px;
+        }
+
+        .post_comments 
+        {
+          padding-left: 32px;
+          
+          .comment
+          {
+            padding-top: 5px;
+          }
+        } 
+               
+        .post_comment_form
+        {
+          padding-top: 5px;
+          padding-left: 32px;
+          
+          .comment_form
+          {
+            padding-left: 32px;
+            form #comment_content
+            {
+              height: 24px;
+            }
+          }
+
+        }
+        
+        .post_content, .comment_content
+        {
+          margin-left: 32px;
+          
+          .post_media
+          {
+            width: 240px;
+
+            .post_image
+            {
+              padding: 0px;
+              img
+              {
+                max-width: 240px;
+              }
+            }
+            
+            .post_video
+            {
+              .playButtonBackground
+              {
+                top:25%;
+                left:45px;
+              }
+            }
           }
         }
       }
-      
     }
-    
   }
 }

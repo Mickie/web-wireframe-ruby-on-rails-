@@ -1,16 +1,3 @@
-$("#postForm .media_container").html("");
-$("#postForm #post_content").val("");
-$("#postForm #post_video_id").val("");
-$("#postForm #post_image_url").val("");
-$("#postForm #post_twitter_reply_id").val("");
-$("#postForm #post_twitter_retweet_id").val("");
 $("#posts").prepend("<%=  escape_javascript(render partial:'partials/posts_and_comments/post_with_comments', locals: { aPost: @post, aPostVote: nil }) %>");
-if (typeof myNavigator !== 'undefined')
-{
-  myNavigator.updatePinterestButtons();
-}
-else
-{
-  myPhoneNavigator.myFanzoneView.myFanzoneScroller.refresh();
-}
+EventManager.get().notifyObservers("onCreatePostComplete");
 updateTimestamps();

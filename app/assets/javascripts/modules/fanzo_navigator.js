@@ -10,6 +10,7 @@ var FanzoNavigator = function()
     this.updateFrameFromHash();
     this.initializeNavigationWatchers();
     this.myCreateFanzoneDialog.initialize();
+    EventManager.get().addObserver("onCreatePostComplete", this);
   };
   
   this.isLoadInProgress = function()
@@ -21,6 +22,11 @@ var FanzoNavigator = function()
   {
     this.mySearchSubmitInProcessFlag = false;
   };
+  
+  this.onCreatePostComplete = function()
+  {
+    this.updatePinterestButtons();
+  }
   
   this.updateFrameFromHash = function()
   {
