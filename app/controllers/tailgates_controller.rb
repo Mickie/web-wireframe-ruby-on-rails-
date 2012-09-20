@@ -64,7 +64,7 @@ class TailgatesController < ApplicationController
     end    
     
     @post = Post.new
-    @post.photo = Photo.new
+    @post.build_photo
     @currentCityState = getCityStateFromRequest( request )
     theCoordinates = getCoordinatesFromRequest( request )
     
