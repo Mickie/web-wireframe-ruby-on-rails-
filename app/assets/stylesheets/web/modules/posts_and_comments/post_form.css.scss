@@ -29,7 +29,9 @@ div#postForm
     
     .social_controls
     {
-      float:left;
+      float:right;
+      padding-top: 2px;
+      margin-right: 20px;
       
       input
       {
@@ -58,8 +60,7 @@ div#postForm
     
     #add_photo
     {
-      float:right;
-      margin: 0px 10px;
+      float:left;
       
       #photo_picker
       {
