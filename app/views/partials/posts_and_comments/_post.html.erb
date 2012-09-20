@@ -10,7 +10,7 @@
     <span class="timestamp" title="<%= aPost.created_at.getutc.iso8601 -%>" ><%= aPost.created_at.to_s %></span>
   </div>
   <div class="post_media">
-    <% if aPost.image_url && aPost.image_url.length > 0 %>
+    <% if (aPost.image_url && aPost.image_url.length > 0) || aPost.photo %>
       <% if aPost.video_id && aPost.video_id.length > 0 %>
         <div class="post_video" id="<%= aPost.video_id -%>">
           <div class="playButtonBackground"><div class='playButton'></div></div>
@@ -18,9 +18,10 @@
         </div>
       <% else %>
         <div class="post_image">
-          <img src="<%= aPost.image_url -%>" width="306" />
+          <% theUrl = aPost.photo ? aPost.photo.image.url : aPost.image_url %>
+          <img src="<%= theUrl -%>" width="306" />
           <div class="pinButton">
-            <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(aPost.tailgate) -%>&media=<%=u aPost.image_url -%>&description=<%=u aPost.content -%>" 
+            <a href="http://pinterest.com/pin/create/button/?url=<%=u tailgate_url(aPost.tailgate) -%>&media=<%=u theUrl -%>&description=<%=u aPost.content -%>" 
                class="pin-it-button" 
                count-layout="none" >
               <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />

@@ -28,4 +28,10 @@
     <%= f.submit "Post", id:"add_post", class:"fanzoButton" %>
     <%= render partial: "partials/buttons/quick_tweet_button" %>
   </div>
+  <div id="add_photo">
+    <%= f.fields_for :photo do |p|%>
+      <%= p.file_field :image, style:"display:none" %>
+      <div id="photo_picker" class="fanzoButton">Add Photo</div>
+    <% end %>
+  </div>
 <% end %>

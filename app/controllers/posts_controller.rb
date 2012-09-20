@@ -47,6 +47,10 @@ class PostsController < ApplicationController
     @post = @tailgate.posts.new(params[:post])
     @post.user = current_user
     
+    if (@post.photo)
+      @post.photo.user = current_user
+    end
+    
     respond_to do |format|
       if @post.save
         

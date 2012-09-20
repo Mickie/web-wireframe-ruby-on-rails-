@@ -21,6 +21,42 @@ var FanzonePostsController = function( aPostsSelector )
     $(this.myPostsSelector).on('click', ".comment_input", createDelegate(this, this.checkLoginStatus ) );
     $(this.myPostsSelector).on('click', "#post_content", createDelegate(this, this.checkLoginStatus ) );
     $(this.myPostsSelector).on('ajax:before', ".new_comment", createDelegate( this, this.checkLoginStatus ) );
+    $(this.myPostsSelector).on('click', "#photo_picker", createDelegate(this, this.pickPhoto));
+    $(this.myPostsSelector).on('change', "#post_photo_attributes_image", createDelegate(this, this.onPhotoPicked));
+  }
+  
+  this.pickPhoto = function(e)
+  {
+    $(this.myPostsSelector).find("#post_photo_attributes_image").click();
+  }
+  
+  this.onPhotoPicked = function(e)
+  {
+    var theFiles = e.target.files;
+    
+    if (theFiles.length > 0)
+    {
+      var theUrl = "";
+      if (window.webkitURL && window.webkitURL.createObjectURL)
+      {
+        var theUrl = window.webkitURL.createObjectURL(theFiles[0]);
+      }
+      else if (window.URL.createObjectURL && window.URL.createObjectURL)
+      {
+        var theUrl = window.URL.createObjectURL(theFiles[0]);
+      }
+  
+      if (theUrl.length > 0)
+      {
+        $(this.myPostsSelector).find(".media_container").html("<img src='" + theUrl + "' width='306' />");
+        $(this.myPostsSelector).find(".media_preview").slideDown(600);
+      }
+    }
+    else
+    {
+      $(this.myPostsSelector).find(".media_container").empty();
+      $(this.myPostsSelector).find(".media_preview").hide();
+    }
   }
   
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )

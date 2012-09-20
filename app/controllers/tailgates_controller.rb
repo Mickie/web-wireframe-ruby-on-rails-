@@ -63,7 +63,8 @@ class TailgatesController < ApplicationController
       return redirect_to @tailgate, status: :moved_permanently
     end    
     
-    @post = Post.new(facebook_flag:true)
+    @post = Post.new
+    @post.photo = Photo.new
     @currentCityState = getCityStateFromRequest( request )
     theCoordinates = getCoordinatesFromRequest( request )
     

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919194711) do
+ActiveRecord::Schema.define(:version => 20120919233508) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -237,8 +237,10 @@ ActiveRecord::Schema.define(:version => 20120919194711) do
     t.datetime "comments_updated_at", :default => '2012-07-29 03:46:56'
     t.string   "image_url"
     t.string   "video_id"
+    t.integer  "photo_id"
   end
 
+  add_index "posts", ["photo_id"], :name => "index_posts_on_photo_id"
   add_index "posts", ["tailgate_id"], :name => "index_posts_on_tailgate_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 

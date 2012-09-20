@@ -56,6 +56,18 @@ div#postForm
       }
     }
     
+    #add_photo
+    {
+      float:right;
+      margin: 0px 10px;
+      
+      #photo_picker
+      {
+        cursor: pointer;
+        height: 19px;
+      }
+    }
+    
     #post_combo
     {
       float: right;

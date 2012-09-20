@@ -1,12 +1,15 @@
 class Post < ActiveRecord::Base
   belongs_to :tailgate, touch: :posts_updated_at
   belongs_to :user
+  belongs_to :photo
   
   has_many :comments, inverse_of: :post, dependent: :destroy, order: "created_at"
   
   has_many :user_post_votes, inverse_of: :post, dependent: :delete_all
   
   validates :user, :tailgate, presence:true
+  
+  accepts_nested_attributes_for :photo
   
   attr_accessible :content, 
                   :tailgate_id, 
@@ -18,7 +21,8 @@ class Post < ActiveRecord::Base
                   :facebook_flag, 
                   :facebook_id,
                   :image_url,
-                  :video_id
+                  :video_id,
+                  :photo_attributes
 
   scope :visible, where("fan_score > -3")  
   

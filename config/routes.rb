@@ -1,7 +1,5 @@
 FanzoSite::Application.routes.draw do
 
-  resources :photos
-
   devise_for :admins, only: :sessions
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
@@ -77,6 +75,7 @@ FanzoSite::Application.routes.draw do
   resources :tailgate_venues
   resources :fanzo_tips
   resources :fun_facts
+  resources :photos
 
   resources :athlete, path: :people
   resources :coach, path: :people
