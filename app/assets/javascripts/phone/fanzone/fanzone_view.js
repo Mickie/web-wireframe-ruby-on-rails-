@@ -12,6 +12,8 @@ var FanzoneView = function()
     $("#fanzoneFooterHome").click(createDelegate(this, this.onHomeClicked));
     $("#fanzoneFooterSocial").click(createDelegate(this, this.onSocialClicked));
     $("#fanzoneFooterMedia").click(createDelegate(this, this.onMediaClicked));
+    
+    this.hidePhotoPickerIfOldIOS();
   }
   
   this.loadTailgate = function( aPath )
@@ -27,6 +29,14 @@ var FanzoneView = function()
     this.myFanzoneHomeView.cleanup();
     this.myFanzoneSocialView.cleanup();
     this.myFanzoneMediaView.cleanup();
+  }
+  
+  this.hidePhotoPickerIfOldIOS = function()
+  {
+    if ( !/iPhone OS 6/i.test(navigator.userAgent) )
+    {
+      $("#photo_picker").hide();
+    }
   }
   
   this.loadTailgateIntoFanzoneView = function( aPath )
