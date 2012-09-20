@@ -50,12 +50,14 @@ var FanzonePostsController = function( aPostsSelector )
       {
         $(this.myPostsSelector).find(".media_container").html("<img src='" + theUrl + "' width='306' />");
         $(this.myPostsSelector).find(".media_preview").slideDown(600);
+        $(this.myPostsSelector).find("#photo_picker").hide();
       }
     }
     else
     {
       $(this.myPostsSelector).find(".media_container").empty();
       $(this.myPostsSelector).find(".media_preview").hide();
+      $(this.myPostsSelector).find("#photo_picker").show();
     }
   }
   
