@@ -10,11 +10,14 @@
     </div>
   <% end %>
 
-  <div class="media_preview hide">
+  <div class="media_preview">
     <%= f.hidden_field :image_url %>
     <%= f.hidden_field :video_id %>
-    <div class="media_container">
-      
+    <div class="image_container hide">
+      <img />
+    </div>
+    <div class="video_container hide">
+      <div id="post_youtube"></div>
     </div>
   </div>
   <%= f.text_area :content, rows:3, placeholder:"What's up?" %>

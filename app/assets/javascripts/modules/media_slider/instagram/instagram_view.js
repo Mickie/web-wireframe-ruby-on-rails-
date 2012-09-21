@@ -99,8 +99,9 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
       
       this.myPostDiv.find("#post_image_url").val(theUrl);
       this.myPostDiv.find("#post_video_id").val("");
-      this.myPostDiv.find(".media_container").html("<img src='" + theUrl + "' width='306' height='306'/>");
-      this.myPostDiv.find(".media_preview").slideDown(600);
+      this.myPostDiv.find(".image_container img").attr("src", theUrl);
+      this.myPostDiv.find(".image_container").slideDown(600);
+      this.myPostDiv.find(".video_container").hide();
       
       trackEvent("MediaSlider", "post_instagram", theInstagramId);    
       $(".modal").modal("hide");

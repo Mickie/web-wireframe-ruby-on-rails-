@@ -24,7 +24,18 @@ div#postForm
     
     .media_preview
     {
-      padding-bottom: 10px;
+      .image_container, .video_container
+      {
+        padding-bottom: 10px;
+      }
+      
+      .image_container
+      {
+        img
+        {
+          max-width: 306px;
+        }
+      }
     }
     
     .social_controls

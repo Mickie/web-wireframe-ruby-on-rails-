@@ -35,6 +35,16 @@
         font-size: 20px;
       }
       
+      .media_preview
+      {
+        .image_container
+        {
+          img
+          {
+            max-width: 240px;
+          }
+        }
+      }
       .social_controls
       {
         margin-right: 10px;

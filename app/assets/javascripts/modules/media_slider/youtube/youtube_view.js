@@ -151,9 +151,9 @@ var YoutubeView = function(aContainerDivSelector,
   {
     this.myPostDiv.find("#post_video_id").val(aVideoId);
     this.myPostDiv.find("#post_image_url").val(aThumbnailUrl);
-    this.myPostDiv.find(".media_container").html("<div id='post_youtube'></div>");
     this.loadYouTubeInPost(aVideoId);
-    this.myPostDiv.find(".media_preview").slideDown(600);
+    this.myPostDiv.find(".video_container").slideDown(600);
+    this.myPostDiv.find(".image_container").hide();
   };
   
   this.loadYouTubeInPost = function( aVideoId )

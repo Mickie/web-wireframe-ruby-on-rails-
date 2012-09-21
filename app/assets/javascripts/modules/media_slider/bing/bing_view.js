@@ -253,8 +253,9 @@ var BingView = function(aContainerDivSelector,
       this.myPostDiv.find("#post_content").val( theHeader + theBody );
       this.myPostDiv.find("#post_image_url").val(aBingVideo.Thumbnail.MediaUrl);
       this.myPostDiv.find("#post_video_id").val("");
-      this.myPostDiv.find(".media_container").html("<img src='" + aBingVideo.Thumbnail.MediaUrl + "' width='160'/>");
-      this.myPostDiv.find(".media_preview").slideDown(600);
+      this.myPostDiv.find(".image_container img").attr("src", aBingVideo.Thumbnail.MediaUrl);
+      this.myPostDiv.find(".image_container").slideDown(600);
+      this.myPostDiv.find(".video_container").hide();
     }
     
   };
@@ -263,8 +264,9 @@ var BingView = function(aContainerDivSelector,
   {
     this.myPostDiv.find("#post_image_url").val(aBingImage.MediaUrl);
     this.myPostDiv.find("#post_video_id").val("");
-    this.myPostDiv.find(".media_container").html("<img src='" + aBingImage.MediaUrl + "' width='306'/>");
-    this.myPostDiv.find(".media_preview").slideDown(600);
+    this.myPostDiv.find(".image_container img").attr("src", aBingImage.MediaUrl );
+    this.myPostDiv.find(".image_container").slideDown(600);
+    this.myPostDiv.find(".video_container").hide();
   };
 
 }

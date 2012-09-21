@@ -33,7 +33,8 @@ var FanzonePostsController = function( aPostsSelector )
   
   this.onCreatePostComplete = function()
   {
-    $("#postForm .media_container").html("");
+    $("#postForm .video_container").hide();
+    $("#postForm .image_container").hide();
     $("#postForm #post_content").val("");
     $("#postForm #post_video_id").val("");
     $("#postForm #post_image_url").val("");
@@ -59,16 +60,18 @@ var FanzonePostsController = function( aPostsSelector )
   
       if (theUrl.length > 0)
       {
-        $(this.myPostsSelector).find(".media_container").html("<img src='" + theUrl + "' width='306' />");
-        $(this.myPostsSelector).find(".media_preview").slideDown(600);
-        $(this.myPostsSelector).find("#photo_picker").hide();
+        thePostDiv = $(this.myPostsSelector);
+        thePostDiv.find(".video_container").hide();
+        thePostDiv.find(".image_container img").attr("src", theUrl);
+        thePostDiv.find(".image_container").slideDown(600);
+        thePostDiv.find("#photo_picker").hide();
       }
     }
     else
     {
-      $(this.myPostsSelector).find(".media_container").empty();
-      $(this.myPostsSelector).find(".media_preview").hide();
-      $(this.myPostsSelector).find("#photo_picker").show();
+      thePostDiv = $(this.myPostsSelector);
+      thePostDiv.find(".image_container").hide();
+      thePostDiv.find("#photo_picker").show();
     }
   }
   
