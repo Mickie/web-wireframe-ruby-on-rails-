@@ -9,8 +9,8 @@
   <% end %>
 </div>
 
-<div id="left_nav">
-  <nav id="fanzo_navigation">
+<div id="top_nav" class="navbar">
+  <nav id="fanzo_navigation" class="navbar-inner">
     <div id="account">
       <div id="account_content">
         <% if aUserSignedInFlag %>
@@ -47,7 +47,7 @@
     </div>
     
     <div id="fanzone_nav">
-      <ul class="nav nav-tabs nav-stacked">
+      <ul class="nav">
         <li id="logo">
           <a href="/">
             <div>
@@ -103,14 +103,14 @@
     
         <% if aUserSignedInFlag %>
           <% current_user.myFanzones[0..5].each do | aTailgate |%>
-            <%= render partial: "partials/left_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
+            <%= render partial: "partials/navigation/top_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
           <% end %>
         <% end %>
     
       </ul>
     </div>
     <div id="fanzone_create">
-      <ul class="nav nav-tabs nav-stacked">
+      <ul class="nav">
         <li id="createFanzone">
           <% if aUserSignedInFlag %>
             <a href="#myCreateFanzoneModal" data-toggle="modal">
