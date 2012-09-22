@@ -3,7 +3,7 @@
 
 div#frameContent div#allTiles
 {
-  padding-top: 40px;
+  padding: 0px 40px;
   
   & [class*="span"]
   {
@@ -14,8 +14,7 @@ div#frameContent div#allTiles
 
 div#tailgate_show
 {
-  margin-left: 15px;
-  padding-top: 40px;
+  padding: 0px 40px;
 
   div.tailgate_content
   {

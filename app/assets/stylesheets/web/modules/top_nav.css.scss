@@ -1,0 +1,155 @@
+@import "partials/colors";
+@import "partials/mixins";
+
+#top_nav
+{
+  .navbar-inner
+  {
+    height: 40px;
+    padding: 10px 0px;
+    border: none;
+    border-bottom: 1px solid $topnavBottomBorderColor;
+
+    @include border-radius(0px);
+    @include box-shadow(0px 0px 20px 0px rgba(177,177,177,0.65));    
+
+    .drop_arrow
+    {
+      border-top: $topnavTextColor solid 10px;
+      float: left;
+      margin:5px 0px 0px 5px;
+    }
+
+    #fanzo_navigation
+    {
+      max-width: 960px;
+      margin: 0 auto;
+      
+      div#account
+      {
+        margin-top: 5px;
+        margin-right: 10px;
+        #account_content
+        {
+          height: 32px;
+          float:left;
+          color: $topnavTextColor;
+          text-transform: uppercase;
+          
+          .dropdown-menu
+          {
+            margin-top: 30px;
+            min-width: inherit;
+            
+            a
+            {
+              color: black;
+            }
+          }
+          
+          .login
+          {
+            padding-right: 10px;
+          }
+          
+          .users_name
+          {
+            div.name
+            {
+              float:left;
+              font-size: 2em;
+              letter-spacing: 1px;
+              font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
+              padding: 8px;
+              padding-right: 0px;
+            }
+            
+            .drop_arrow
+            {
+              margin-top: 12px; 
+            }
+          }
+        }
+      }
+      
+      #logo
+      {
+        margin-left: -20px;
+        float:left;
+        a
+        {
+          padding: 0px;
+          
+          div
+          {
+            float:left;
+          }
+          
+          .tagline
+          {
+            padding-top:20px;
+            padding-left:5px;
+            font-size:1.5em;
+            color: $topnavTaglineTextColor;
+            font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+        }
+      }
+      
+      #fanzone_search
+      {
+        margin-top: 5px;
+        margin-left: 30px;
+      }
+
+      .nav
+      {
+        @include clearfix;
+        margin-left: 50px;
+        li a
+        {
+          padding:17px 0px 0px 0px;
+          color: $topnavTextColor;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-size: 2em;
+          font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
+        }
+        
+        #myFanzones
+        {
+          span
+          {
+            float:left;
+          }
+        }
+        
+        #fanzone_search
+        {
+          position: relative;
+          form
+          {
+            
+            #team
+            {
+              padding-left: 25px;
+            }
+          }
+          
+          i
+          {
+            position:absolute;
+            left: 7px;
+            top: 12px;
+            opacity: 0.8;
+          }
+        }
+        
+      }
+    }
+
+  }
+  
+}

@@ -1,9 +1,10 @@
-<%= form_tag("/tailgates/search", :method => "get", remote: 'true',  class: "form-search") do %>
+<%= form_tag("/tailgates/search", :method => "get", remote: 'true',  class: "navbar-search pull-right") do %>
   <%= hidden_field_tag :team_id %>
   <%= autocomplete_field_tag 'team', 
                               '', 
                               autocomplete_team_name_teams_path, 
                               id_element: '#team_id',
-                              placeholder: 'Search for your team' %>
+                              placeholder: 'Search for your team',
+                              class: "search-query" %>
 <% end %>
 <i class="icon-search"></i>

@@ -3,17 +3,18 @@
 
 body
 {
-  padding:0px 20px 40px 20px;
+  padding:0px;
   min-height: 750px;
-  max-width: 1225px;
   margin: 0px auto;
   background-color: $backgroundColor;
-  background-image: asset-url("fanzo-background-horn.png", image);
-  background-repeat: repeat-y;
-  background-position: 0px 90px;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5em;
+}
+
+h1, h2, h3, h4
+{
+  font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
 }
 
 h1 

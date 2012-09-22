@@ -3,8 +3,7 @@
 
 div#userShow
 {
-  padding-top: 40px;
-  margin-left: 15px;
+  padding: 0px 40px;
   
   #userContent  
   {
@@ -26,6 +25,9 @@ div#userShow
       
       .userBannerContent
       {
+        background-image: asset-url("fanzo-horn-bg.png", image);
+        background-position: right bottom;
+        background-repeat: no-repeat;
         .big_profile_pic
         {
           float:left;
@@ -62,13 +64,6 @@ div#userShow
             font-size:11px;
           }
         }
-      }
-      
-      .horn
-      {
-        position:absolute;
-        right: 0px;
-        bottom: 0px;
       }
     }
     

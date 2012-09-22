@@ -1,5 +1,5 @@
 $("#fanzone_search input#team").val("");
-$("div#frameContent").html("<%= escape_javascript( render partial: "partials/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } ) -%>");
+$("div#frameContent").html("<%= escape_javascript( render partial: "partials/tiles/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } ) -%>");
 if (typeof myNavigator !== 'undefined')
 {
   myNavigator.notifySearchComplete();

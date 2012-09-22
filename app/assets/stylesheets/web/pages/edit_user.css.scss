@@ -3,8 +3,7 @@
 
 #edit_user
 {
-  padding-top: 40px;
-  margin-left: 15px;
+  margin: 0px 40px;
 
   form
   {
@@ -26,10 +25,18 @@
       @include gradient-vertical($userProfileBannerGradientTop, $userProfileBannerGradientBottom);
       border-bottom: 1px solid $borderColor;
 
-      h2
+      .header_content
       {
-        color: white;
-        padding-top: 40px;
+        @include clearfix;
+        background-image: asset-url("fanzo-horn-bg.png", image);
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        
+        h2
+        {
+          color: white;
+          padding-top: 40px;
+        }
       }
       
       .big_profile_pic

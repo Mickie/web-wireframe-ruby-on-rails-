@@ -10,118 +10,91 @@
 </div>
 
 <div id="top_nav" class="navbar">
-  <nav id="fanzo_navigation" class="navbar-inner">
-    <div id="account">
-      <div id="account_content">
-        <% if aUserSignedInFlag %>
-          <div class="dropdown" id="account_dropdown">
-            <a class="users_name" href="#account_dropdown" data-toggle="dropdown">
-              <div class="profile_pic">
-                <% if current_user.image %>
-                  <%= image_tag( current_user.image, size:"32x32", alt:"#{current_user.full_name}") %>
-                <% end %>
-              </div>
-              <div class="name"><%= current_user.first_name -%></div>
-              <div class="drop_arrow"></div>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", user_settings_edit_path %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
-              </li>
-            </ul>
-          </div>
-        <% else %>
-          <div class="login">
-            <a class="users_name" href="#myLoginModal" data-toggle="modal">
-              <div class="profile_pic">
-                <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
-              </div>
-              <div class="name">Log in</div>
-            </a>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    
-    <div id="fanzone_nav">
-      <ul class="nav">
-        <li id="logo">
-          <a href="/">
-            <div>
-              <%= image_tag "fanzo-logo.png", size:"200x50", alt:"Fanzo.me" %>
-              <p class="tagline">where fans rule</p>
+  <div class="navbar-inner">
+    <nav id="fanzo_navigation">
+      <div id="account" class="pull-right">
+        <div id="account_content">
+          <% if aUserSignedInFlag %>
+            <div class="dropdown" id="account_dropdown">
+              <a class="users_name" href="#account_dropdown" data-toggle="dropdown">
+                <div class="profile_pic">
+                  <% if current_user.image %>
+                    <%= image_tag( current_user.image, size:"32x32", alt:"#{current_user.full_name}") %>
+                  <% end %>
+                </div>
+                <div class="name"><%= current_user.first_name -%></div>
+                <div class="drop_arrow"></div>
+              </a>
+              <ul class="dropdown-menu pull-right">
+                <li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Settings", user_settings_edit_path %></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
+                </li>
+              </ul>
             </div>
+          <% else %>
+            <div class="login">
+              <a class="users_name" href="#myLoginModal" data-toggle="modal">
+                <div class="profile_pic">
+                  <%= image_tag( "fanzo-logo-square.gif", size:"32x32", alt:"Fanzo.me") %>
+                </div>
+                <div class="name">Log in</div>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="logo">
+        <a href="/">
+          <div>
+            <%= image_tag "fanzo-logo-01.png", size:"160x50", alt:"Fanzo.me" %>
+          </div>
+          <div class="tagline">where fans rule</div>
+        </a>
+      </div>
+      
+      <ul class="nav">
+        <li id="myFanzones">
+          <%if !aUserSignedInFlag %>
+            <a href="#myLoginModal" data-toggle="modal">
+          <% else %>
+            <a href="" data-target="#myFanzones" class="dropdown-toggle" data-toggle="dropdown">
+          <% end %>
+            <span>My Fanzones</span>
+            <div class="drop_arrow"></div>
           </a>
+          <ul class="dropdown-menu">
+            <% if aUserSignedInFlag %>
+              <% current_user.myFanzones.each do | aTailgate |%>
+                <%= render partial: "partials/navigation/top_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
+              <% end %>
+            <% end %>
+            <li id="allFanzones">
+              <a onclick="loadData('<%= tailgates_path %>', '#allFanzones')" href="#allFanzones">
+                <table>
+                  <tr>
+                    <td class="team_logo"><i></i></td>
+                    <td class="fanzone_name">
+                      <p>All Fanzones</p>
+                    </td>
+                    <td class="count">
+                      <p><%= Tailgate.count -%></p>
+                    </td>
+                  </tr>
+                </table>
+              </a>
+            </li>
+          </ul>
         </li>
 
         <li id="fanzone_search">
           <%= render partial:"partials/team_search" %>
         </li>
-        
-        <li id="allFanzones">
-          <a onclick="loadData('<%= tailgates_path %>', '#allFanzones')" href="#allFanzones">
-            <table>
-              <tr>
-                <td class="team_logo"><i></i></td>
-                <td class="fanzone_name">
-                  <p>All Fanzones</p>
-                </td>
-                <td class="count">
-                  <p><%= Tailgate.count -%></p>
-                </td>
-              </tr>
-            </table>
-          </a>
-        </li>
-        
-        <li id="myFanzones">
-          <%if user_signed_in? %>
-            <a onclick="loadData('<%= tailgates_path( filter:"user" ) %>', '#myFanzones')" href="#myFanzones">
-          <% else %>
-            <a href="#myLoginModal" data-toggle="modal">
-          <% end %>
-            <table>
-              <tr>
-                <td class="team_logo"><i></i></td>
-                <td class="fanzone_name">
-                  <p>My Fanzones</p>
-                </td>
-                <td class="count">
-                  <p>
-                    <% if aUserSignedInFlag %>
-                      <%= current_user.tailgates.size + current_user.followed_tailgates.size - 1 -%>
-                    <% end %>
-                  </p>
-                </td>
-              </tr>
-            </table>
-          </a>
-        </li>
-    
-        <% if aUserSignedInFlag %>
-          <% current_user.myFanzones[0..5].each do | aTailgate |%>
-            <%= render partial: "partials/navigation/top_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
-          <% end %>
-        <% end %>
     
       </ul>
-    </div>
-    <div id="fanzone_create">
-      <ul class="nav">
-        <li id="createFanzone">
-          <% if aUserSignedInFlag %>
-            <a href="#myCreateFanzoneModal" data-toggle="modal">
-          <% else %>
-            <a href="#myLoginModal" data-toggle="modal">
-          <% end %>
-              <span class="fanzoButton">+ &nbsp; Create a Fanzone</span>
-            </a>
-        </li>  
-      </ul>
-    </div>
-  </nav>
-  <%= render 'partials/footer' %>
+    </nav>  
+  </div>
 </div>
