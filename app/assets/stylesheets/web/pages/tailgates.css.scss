@@ -62,7 +62,6 @@ div#tailgate_show
         
         div.fanzone_details
         {
-          float: left;
           padding: 10px;
           
           .official
@@ -71,8 +70,6 @@ div#tailgate_show
             letter-spacing: 2px;
             color: $officialTextColor;
             height: 15px;
-            width:100%;
-            @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
           }
   
           h1
