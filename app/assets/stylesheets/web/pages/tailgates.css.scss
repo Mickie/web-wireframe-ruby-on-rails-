@@ -18,10 +18,11 @@ div#tailgate_show
 
   div.tailgate_content
   {
-    @include box-shadow-with-ie( 0 1px 2px rgba(25, 25, 25, 0.5) );
+    @include box-shadow-with-ie( #{"-1px 2px 3px 1px rgba(25, 25, 25, .1), 1px 2px 3px 1px rgba(25, 25, 25, .1)"} );
              
     div.banner
     {
+      @include border-radius(4px 4px 0px 0px);
       background-image: asset-url("white-gradient-140.png", image);
       background-repeat: repeat-x;
       background-color: black;
@@ -41,10 +42,12 @@ div#tailgate_show
         div.team_logo
         {
           float:left;
-          margin-right: 10px;
+          margin:10px;
+          margin-right: 20px;
+          padding: 20px;
           background-color: $fanzoneBannerLogoBackground;
           border-top: $fanzoneBorder solid 1px;
-          padding: 30px;
+          @include border-radius(4px);
         }
         
         div.fanzone_details
