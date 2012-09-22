@@ -63,20 +63,50 @@
             <% end %>
             <h1><%= @tailgate.name %></h1>
             <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) if @tailgate.description %></p>
+          </div>
+          <div class="bannerRight">
             <div class="owner">
+              <div>Created by</div>
               <% if @tailgate.user.image %>
                 <div class="profile_pic">
                   <%= link_to image_tag( @tailgate.user.image, size:"32x32" ), user_path(@tailgate.user) %>
                 </div>
               <% end %>
               <div class="owner_details">
-                <p>Created by <%= @tailgate.user.full_name %></p>
+                <h3><%= link_to @tailgate.user.full_name, user_path(@tailgate.user) %></h3>
+              </div>
+              <div class="lastUpdated">
                 <% if @tailgate.posts.any? %>
                   <p>
-                    Updated: 
+                    <span>Last Updated:</span> 
                     <span class="timestamp" title="<%= @tailgate.posts_updated_at.getutc.iso8601 -%>" ><%= @tailgate.posts_updated_at.to_s %></span>
                   </p>
                 <% end %>
+              </div>  
+            </div>
+            <div class="facebookSharing">
+              <div class="tweetGoogle">
+                <div class="googleButton">
+                  <div class="g-plusone" data-annotation="none" data-size="medium" data-href="<%= tailgate_url(@tailgate) -%>"></div>
+                </div>
+                <div class="tweetThis">
+                  <a  href="https://twitter.com/share" 
+                      class="twitter-share-button"
+                      data-url="<%= getTailgateBitly( @tailgate )-%>"
+                      data-count="none",
+                      data-counturl="<%= tailgate_url(@tailgate) -%>" 
+                      data-text="Check out this fanzone about <%= @tailgate.topic_tags.split(",").join(" and") -%>" 
+                      data-via="fanzofans" 
+                      data-related="fanzofans" 
+                      data-hashtags="fanzo">Tweet</a>
+                </div>
+              </div>
+              <div class="fb-like" 
+                   data-layout="button_count" 
+                   data-href="<%= tailgate_url(@tailgate)-%>" 
+                   data-send="true" 
+                   data-font="verdana" 
+                   data-ref="fanzone">
               </div>
             </div>
           </div>
@@ -129,31 +159,6 @@
                 </div>
               <% end %>
             <% end %>
-          </div>
-          <div class="facebookSharing">
-            <div class="tweetGoogle">
-              <div class="googleButton">
-                <div class="g-plusone" data-annotation="none" data-size="medium" data-href="<%= tailgate_url(@tailgate) -%>"></div>
-              </div>
-              <div class="tweetThis">
-                <a  href="https://twitter.com/share" 
-                    class="twitter-share-button"
-                    data-url="<%= getTailgateBitly( @tailgate )-%>"
-                    data-count="none",
-                    data-counturl="<%= tailgate_url(@tailgate) -%>" 
-                    data-text="Check out this fanzone about <%= @tailgate.topic_tags.split(",").join(" and") -%>" 
-                    data-via="fanzofans" 
-                    data-related="fanzofans" 
-                    data-hashtags="fanzo">Tweet</a>
-              </div>
-            </div>
-            <div class="fb-like" 
-                 data-layout="button_count" 
-                 data-href="<%= tailgate_url(@tailgate)-%>" 
-                 data-send="true" 
-                 data-font="verdana" 
-                 data-ref="fanzone">
-            </div>
           </div>
         </div>
         <div class="venues">
