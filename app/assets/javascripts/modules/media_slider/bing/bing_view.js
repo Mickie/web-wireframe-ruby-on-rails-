@@ -116,7 +116,7 @@ var BingView = function(aContainerDivSelector,
     if (this.isYoutubeVideo(aVideo.MediaUrl))
     {
       var theId = this.getIdFromYoutubeUrl( aVideo.MediaUrl );
-      this.myYoutubeView.showVideoDialog(theId, aVideo.Title);
+      this.myYoutubeView.showVideoDialog(theId, aVideo.Title, "");
     }
     else
     {
@@ -131,7 +131,7 @@ var BingView = function(aContainerDivSelector,
       this.myDialogDiv.find("div.mediaCaption").html(theHtml);
       this.myDialogDiv.find("div.modal-header img").hide();
       
-      this.myDialogDiv.find("#mediaImageData").show();
+      this.myDialogDiv.find("#mediaImageData").hide();
       this.myDialogDiv.find("#mediaVideoData").hide();
 
       $(".modal").modal("hide");

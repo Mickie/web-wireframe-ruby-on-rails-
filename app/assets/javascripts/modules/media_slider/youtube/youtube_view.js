@@ -84,10 +84,11 @@ var YoutubeView = function(aContainerDivSelector,
     this.myThumbnails = new Array();
   };
   
-  this.showVideoDialog = function( aVideoId, aTitle )
+  this.showVideoDialog = function( aVideoId, aTitle, aDescription )
   {
     this.myDialogDiv.find("div.modal-header h3").text( aTitle );
     this.myDialogDiv.find("div.modal-header img").hide();
+    this.myDialogDiv.find("div.mediaCaption").text(aDescription);
     
     this.loadYouTubeInDialog(aVideoId);
     
@@ -109,7 +110,7 @@ var YoutubeView = function(aContainerDivSelector,
     // TODO get data via odata
     var theVideoId = $(e.currentTarget).attr("id");
     this.myDialogDiv.find("#post_media_button").hide();
-    this.showVideoDialog( theVideoId, "" );
+    this.showVideoDialog( theVideoId, "", "" );
 
     trackEvent("PostAndComments", "youtube_click", theVideoId);    
   };  
@@ -118,7 +119,7 @@ var YoutubeView = function(aContainerDivSelector,
   {
     var theVideoId = aYoutubeVideo.media$group.yt$videoid.$t;
     this.myDialogDiv.find("#post_media_button").data("youtubeVideo", aYoutubeVideo).show();
-    this.showVideoDialog( theVideoId, aYoutubeVideo.title.$t );
+    this.showVideoDialog( theVideoId, aYoutubeVideo.title.$t, aYoutubeVideo.media$group.media$description.$t );
     
     trackEvent("MediaSlider", "youtube_click", theVideoId);    
   };
