@@ -64,7 +64,8 @@ FanzoSite::Application.configure do
                                 'tailgates/show.js', 
                                 'phone.css',
                                 'phone.js',
-                                'email.css' ]
+                                'email.css',
+                                'tablet.css' ]
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => ENV["FANZO_WEB_HOST"] }
