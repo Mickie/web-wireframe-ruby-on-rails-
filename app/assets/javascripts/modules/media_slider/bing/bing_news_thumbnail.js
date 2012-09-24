@@ -6,7 +6,6 @@ var BingNewsThumbnail = function( aBingView )
   {
     return {
       ".@id" : "ID",
-      ".@style" : function(){ return "width: 220px;" },
       "div.media" : function(){return "";},
       "div.mediaAnnotation" : function(anItem)
       { 
@@ -16,8 +15,7 @@ var BingNewsThumbnail = function( aBingView )
           theHtml += "<p>" + anItem.context.Source + "</p>";
         }
         return "<div class='bingNewsItem'>" + theHtml + "</div>";
-      },
-      "div.mediaAnnotation@class" : function(anItem){ return "mediaAnnotation bingNewsBackground";}
+      }
     }    
   };
   

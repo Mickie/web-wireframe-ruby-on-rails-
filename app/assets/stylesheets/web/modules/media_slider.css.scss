@@ -27,18 +27,25 @@ div#myMediaSlider
     .bingNewsItem
     {
       height: 150px;
-      width: 200px;
-      padding: 10px;
+      width: 220px;
       color: white;
       background-color: black;
       white-space:normal;
       
       h3
       {
-        font-size: 16px;
+        padding: 15px;
+        font-family: open sans;
+        font-size: 19px;
         line-height: 23px;
         color:white;
       }
+      
+      p
+      {
+        padding-left: 15px;
+      }
+      
     }
   }
   

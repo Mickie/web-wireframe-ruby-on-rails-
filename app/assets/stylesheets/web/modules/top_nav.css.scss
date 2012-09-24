@@ -27,7 +27,7 @@
       
       div#account
       {
-        margin-top: 5px;
+        margin-top: 8px;
         margin-right: 10px;
         #account_content
         {
@@ -56,9 +56,10 @@
           {
             div.name
             {
+              margin-top: 2px;
               float:left;
               font-size: 2em;
-              letter-spacing: 1px;
+              letter-spacing: 0.03em;
               font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
               padding: 8px;
               padding-right: 0px;
@@ -66,7 +67,7 @@
             
             .drop_arrow
             {
-              margin-top: 12px; 
+              margin-top: 14px; 
             }
           }
         }
@@ -93,7 +94,7 @@
             color: $topnavTaglineTextColor;
             font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.03em;
           }
         }
       }
@@ -107,7 +108,7 @@
           padding:17px 0px 0px 0px;
           color: $topnavTextColor;
           text-transform: uppercase;
-          letter-spacing: 1px;
+          letter-spacing: 0.03em;
           font-size: 2em;
           font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
         }
