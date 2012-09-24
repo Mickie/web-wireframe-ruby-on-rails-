@@ -19,7 +19,7 @@ class UserSettingsController < ApplicationController
     respond_to do |format|
       if @user.update_without_password(params[:user])
         sign_in @user, :bypass => true
-        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
+        format.html { redirect_to current_user, notice: 'Your settings were successfully updated.' }
         format.json { head :no_content }
       else
         format.html { 

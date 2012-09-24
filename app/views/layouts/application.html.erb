@@ -25,15 +25,12 @@
     <div id="page_content">
       <div>
         <%= render partial: 'partials/navigation/top_nav', locals: { user: @user, } %>
-      </div>
-      
-      <div id="frameContent">
+
         <% if flash[:notice] || flash[:error] %>
           <div id="flash_alerts">
             <% if flash[:notice] %>
               <div class="alert alert-success notice">
                 <a class="close" data-dismiss="alert" href="javascript:void(0);">×</a>
-                <h4 class="alert-heading">Sweet!</h4>
                 <%= flash[:notice] %>
               </div>
             <% end %>
@@ -46,7 +43,9 @@
             <% end %>
           </div>  
         <% end %>
-
+      </div>
+      
+      <div id="frameContent">
         <%= yield %>
       </div>    
 		</div>
