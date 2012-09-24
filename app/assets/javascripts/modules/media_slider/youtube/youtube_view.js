@@ -172,12 +172,7 @@ var YoutubeView = function(aContainerDivSelector,
                                         {
                                           height: theHeight,
                                           width: theWidth,
-                                          videoId: aVideoId,
-                                          events: 
-                                          {
-                                            'onReady': createDelegate(this, this.onPlayerReady),
-                                            'onStateChange': createDelegate(this, this.onPlayerStateChange)
-                                          }
+                                          videoId: aVideoId
                                         });
     }
     else
@@ -209,12 +204,7 @@ var YoutubeView = function(aContainerDivSelector,
                                           {
                                             height: theHeight,
                                             width: theWidth,
-                                            videoId: aVideoId,
-                                            events: 
-                                            {
-                                              'onReady': createDelegate(this, this.onPlayerReady),
-                                              'onStateChange': createDelegate(this, this.onPlayerStateChange)
-                                            }
+                                            videoId: aVideoId
                                           });
     }
     else
@@ -248,15 +238,4 @@ var YoutubeView = function(aContainerDivSelector,
     this.cleanupPlayer(this.myPostPlayer)
   };
   
-
-  this.onPlayerReady = function()
-  {
-    
-  };
-  
-  this.onPlayerStateChange = function()
-  {
-    
-  };
-
 }
