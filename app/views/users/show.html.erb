@@ -49,31 +49,35 @@
       </div>
     <% end %>
     
-    <div id="createdFanzones" class="row-fluid">
-      <div class="contentContainer">
-        <div class="contentTitle">
-          <h2><%= @user.first_name -%> hosts these Fanzones:</h2>
-        </div>
-        <div class="userContent">
-          <% @user.tailgates.each do |aTailgate| %>
-            <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
-          <% end %>
+    <% if @user.tailgates.length > 0 %>
+      <div id="createdFanzones" class="row-fluid">
+        <div class="contentContainer">
+          <div class="contentTitle">
+            <h2><%= @user.first_name -%> hosts these Fanzones:</h2>
+          </div>
+          <div class="userContent">
+            <% @user.tailgates.each do |aTailgate| %>
+              <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   
-    <div id="followedFanzones" class="row-fluid">
-      <div class="contentContainer">
-        <div class="contentTitle">
-          <h2><%= @user.first_name -%> follows these Fanzones:</h2>
-        </div>
-        <div class="userContent">
-          <% @user.followed_tailgates.each do |aTailgate| %>
-            <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
-          <% end %>
+    <% if @user.followed_tailgates.length > 0 %>
+      <div id="followedFanzones" class="row-fluid">
+        <div class="contentContainer">
+          <div class="contentTitle">
+            <h2><%= @user.first_name -%> follows these Fanzones:</h2>
+          </div>
+          <div class="userContent">
+            <% @user.followed_tailgates.each do |aTailgate| %>
+              <%= render partial: "partials/fanzone_tile", locals: { aTailgate: aTailgate, aUserSignedInFlag: user_signed_in? }%>  
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
