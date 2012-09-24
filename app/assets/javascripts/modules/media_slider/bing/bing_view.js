@@ -154,7 +154,7 @@ var BingView = function(aContainerDivSelector,
     this.myDialogDiv.find("div.mediaCaption").html(theHtml);
     this.myDialogDiv.find("div.modal-header img").hide();
     
-    this.myDialogDiv.find("#mediaImageData").show();
+    this.myDialogDiv.find("#mediaImageData").hide();
     this.myDialogDiv.find("#mediaVideoData").hide();
     
     updateTimestamps();   

@@ -32,9 +32,13 @@ div#myMediaModal
     
     .mediaImage
     {
-      width: 640px;
+      height: 360px;
       text-align:center;
-      max-height: 640px;
+      
+      img
+      {
+        height: 100%;
+      }
     }
     .mediaCaption
     {

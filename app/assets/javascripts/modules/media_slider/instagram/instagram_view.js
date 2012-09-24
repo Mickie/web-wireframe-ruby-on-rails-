@@ -69,7 +69,7 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
   
   this.showDialog = function( anInstagram )
   {
-    this.myDialogDiv.find("div.mediaImage").html("<img src='" + anInstagram.images.low_resolution.url + "'/>");
+    this.myDialogDiv.find("div.mediaImage").html("<img src='" + anInstagram.images.standard_resolution.url + "'/>");
     this.myDialogDiv.find("div.mediaCaption").text(anInstagram.caption.text);
     this.myDialogDiv.find("div.modal-header h3").text(anInstagram.user.full_name);
     this.myDialogDiv.find("div.modal-header img").attr("src", anInstagram.caption.from.profile_picture).show();

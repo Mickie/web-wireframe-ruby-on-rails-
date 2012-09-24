@@ -16,7 +16,8 @@ var DialogResizer = function()
     this.myOriginalHeight = $(this.myCurrentDialog).height();
     this.myOriginalWidth = $(this.myCurrentDialog).width();
     $(window).on('resize', createDelegate( this, this.onResize ) );
-    this.onResize(e);
+
+    setTimeout(createDelegate(this, this.refreshDimensions), 100);
     
     trackEvent("Dialog", "show", $(this.myCurrentDialog).attr("id"));
   };
