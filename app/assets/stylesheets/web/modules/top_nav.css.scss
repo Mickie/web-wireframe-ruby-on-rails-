@@ -98,12 +98,6 @@
         }
       }
       
-      #fanzone_search
-      {
-        margin-top: 5px;
-        margin-left: 30px;
-      }
-
       .nav
       {
         @include clearfix;
@@ -128,7 +122,10 @@
         
         #fanzone_search
         {
+          margin-top: 5px;
+          margin-left: 30px;
           position: relative;
+
           form
           {
             
@@ -144,6 +141,13 @@
             left: 7px;
             top: 12px;
             opacity: 0.8;
+          }
+
+          i.icon-remove
+          {
+            left: 165px;
+            cursor: pointer;
+            opacity: 0.5;
           }
         }
         

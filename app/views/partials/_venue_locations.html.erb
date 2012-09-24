@@ -1,4 +1,4 @@
-<div class="venue_locations" <%= "id='user_location_#{aUserLocation.id}'" unless aCurrentLocationFlag -%> >
+<div class="venue_locations" <%= "id=user_location_#{aUserLocation.id}" unless aCurrentLocationFlag -%> >
   <div class="locationLabel" style="background-color: <%= aLocationBackgroundColor -%>; color: <%= aLocationTextColor -%>">
     <% if aCurrentLocationFlag %>
       <span class="location_text">Current: <%= aLocationString %></span>
