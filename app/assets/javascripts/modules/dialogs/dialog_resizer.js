@@ -13,15 +13,24 @@ var DialogResizer = function()
   this.onShow = function(e)
   {
     this.myCurrentDialog = e.target;
-    this.myOriginalHeight = $(this.myCurrentDialog).height();
-    this.myOriginalWidth = $(this.myCurrentDialog).width();
+    this.refreshDimensions();
     $(window).on('resize', createDelegate( this, this.onResize ) );
-
-    setTimeout(createDelegate(this, this.refreshDimensions), 100);
+    $(document).on('keyup', this.dismissIfEscape );
     
     trackEvent("Dialog", "show", $(this.myCurrentDialog).attr("id"));
   };
   
+  this.onHidden = function(e)
+  {
+    $(window).off('resize');
+    $(document).off('keyup', this.dismissIfEscape );
+
+    $(this.myCurrentDialog).css("height", "auto");
+    $(this.myCurrentDialog).css("width", "auto");
+
+    trackEvent("Dialog", "hidden", $(this.myCurrentDialog).attr("id"));
+  };
+
   this.refreshDimensions = function()
   {
     this.myOriginalHeight = $(this.myCurrentDialog).height();
@@ -36,13 +45,12 @@ var DialogResizer = function()
     this.centerDialog();
   };
   
-  this.onHidden = function(e)
+  this.dismissIfEscape = function(e)
   {
-    $(window).off('resize');
-    $(this.myCurrentDialog).css("height", "auto");
-    $(this.myCurrentDialog).css("width", "auto");
-
-    trackEvent("Dialog", "hidden", $(this.myCurrentDialog).attr("id"));
+    if (e.keyCode == 27)
+    {
+      $(".modal").modal('hide');
+    }
   };
   
   this.updateHeight = function()
