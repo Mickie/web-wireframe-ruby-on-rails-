@@ -18,6 +18,21 @@ div.fanzoneTile
     height: 50px;
     position: relative;
     
+    .join_fanzone
+    {
+      position: absolute;
+      top: -10px;
+      right: 0px;
+      height: 20px;
+      z-index: 1;
+
+      .follow_button
+      {
+        border-right-width: 0px;
+        border-top-width: 0px;
+      }
+    }    
+    
     .banner_content
     {
       position: relative;

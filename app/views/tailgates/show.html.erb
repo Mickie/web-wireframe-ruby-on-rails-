@@ -29,27 +29,6 @@
     
     <div class="row-fluid">
       <div class="span12 banner" style="background-color: <%= @tailgate.color %>">
-  
-        <div class="fanzoneState">
-          <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
-            <div id="edit_fanzone" class="join_fanzone">
-              <a href="#myEditFanzoneModal" data-toggle="modal" class="fanzoButton">Edit</a>
-            </div>
-          <% else %>
-            <div class="join_fanzone">
-              <% if user_signed_in? %>
-                <% if current_user.following?(@tailgate) %>
-                  <%= render partial: "partials/buttons/unfollow_button", locals: { tailgate: @tailgate } %>
-                <% else %>
-                  <%= render partial: "partials/buttons/follow_button", locals: { tailgate: @tailgate } %>
-                <% end %>
-              <% else %>
-                <a href="#myLoginModal" data-toggle="modal" class="fanzoButton follow_button">Follow</a>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        
         <div class="banner_content">
           <div class="bannerRight">
             <div class="owner">
@@ -121,6 +100,64 @@
     
     <div id="fanzoneContent">
       
+      <div class="leftColumn">
+        <div class="fans">
+          <div class="fanControls">
+            <h4><span class="fan_count"><%= pluralize(@tailgate.tailgate_followers_count + 1, "Fan") -%></span></h4>
+            
+            <div class="fanzoneState">
+              <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
+                <div id="edit_fanzone" class="join_fanzone">
+                  <a href="#myEditFanzoneModal" data-toggle="modal" class="fanzoButton">Edit</a>
+                </div>
+              <% else %>
+                <div class="join_fanzone">
+                  <% if user_signed_in? %>
+                    <% if current_user.following?(@tailgate) %>
+                      <%= render partial: "partials/buttons/unfollow_button", locals: { tailgate: @tailgate } %>
+                    <% else %>
+                      <%= render partial: "partials/buttons/follow_button", locals: { tailgate: @tailgate } %>
+                    <% end %>
+                  <% else %>
+                    <a href="#myLoginModal" data-toggle="modal" class="fanzoButton follow_button">Follow</a>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            
+            <div class="inviteFans">
+              <a class="fanzoButton">Invite</a>
+            </div>
+          </div>
+          <ul class="fanList">
+            <li class="fanItem">
+              <div class="profile_pic">
+                <% if @tailgate.user.image %>
+                  <%= link_to image_tag( @tailgate.user.image, size:"48x48" ), user_path(@tailgate.user) %>
+                <% end %>
+              </div>
+              <div class="nameAndPost">
+                <h5><%= @tailgate.user.full_name %></h5>
+                <span>Location</span>
+              </div>
+            </li>
+            <% @tailgate.followers.limit(24).each do |aTailgateFollower| %>
+              <li class="fanItem">
+                <div class="profile_pic">
+                  <% if aTailgateFollower.image %>
+                    <%= link_to image_tag( aTailgateFollower.image, size:"48x48" ), user_path(aTailgateFollower) %>
+                  <% end %>
+                </div>
+                <div class="nameAndPost">
+                  <h5><%= aTailgateFollower.full_name %></h5>
+                  <span>Location</span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      
       <div id="fanzonePosts">
         <div id="twitterInviteSuccessAlert" class='alert alert-info fade in hide'>
           <a class='close' data-dismiss='alert' href='#'>×</a>
@@ -130,7 +167,7 @@
           <h4>Fanzone Posts</h4>
           <div class="profile_pic">
             <% if user_signed_in? %>
-              <%= link_to image_tag( current_user.image, size:"32x32" ), user_path(current_user) %>
+              <%= link_to image_tag( current_user.image, size:"48x48" ), user_path(current_user) %>
             <% end %>
           </div>
           <div class="post_fields">
@@ -143,28 +180,9 @@
       </div>
 
       <div class="rightColumn">
-        <div class="fans">
-          <div>
-            <h4 style="background-color: <%= @tailgate.color %>"><span class="fan_count"><%= pluralize(@tailgate.tailgate_followers_count + 1, "Fan") -%></span></h4>
-          </div>
-          <div class="fanPics">
-            <% if @tailgate.user.image %>
-              <div class="profile_pic">
-                <%= link_to image_tag( @tailgate.user.image, size:"32x32" ), user_path(@tailgate.user) %>
-              </div>
-            <% end %>
-            <% @tailgate.followers.limit(24).each do |aTailgateFollower| %>
-              <% if aTailgateFollower.image %>
-                <div class="profile_pic">
-                  <%= link_to image_tag( aTailgateFollower.image, size:"32x32" ), user_path(aTailgateFollower) %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
         <div class="venues">
           <div class="venueHeader">
-            <h4 style="background-color: <%= @tailgate.color %>">Local <%= @tailgate.team.mascot -%> Venues</h4>
+            <h4>Local <%= @tailgate.team.mascot -%> Venues</h4>
           </div>
           <div class="user_location_venues">
             <% if user_signed_in? %>
@@ -192,7 +210,7 @@
         </div>
         <div class="twitterStream">
           <div class="controls">
-            <h4 style="background-color: <%= @tailgate.color %>">Tweets</h4>
+            <h4>Tweets</h4>
           </div>
               
           <div id="tweetHolder">

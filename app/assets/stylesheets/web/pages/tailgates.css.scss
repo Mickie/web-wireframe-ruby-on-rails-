@@ -154,41 +154,69 @@ div#tailgate_show
       h4
       {
         text-transform: uppercase;
-        padding:10px;
-        background-color: $fanzoneBackground;
-        color: $fanzoneHeaderText;
-        font-weight: normal;
+        font-size: 1.8em;
+      }
+      
+      div.leftColumn
+      {
+        float: left;
+        width: 25%;
+        background-color: $fanzoneColumnBackground;
+        
+        .fans
+        {
+          .fanControls
+          {
+            padding: 10px;
+            background-color: $fanzoneHeaderBackground;
+            @include clearfix();
+            
+            .fanzoneState
+            {
+              float:left;
+              padding-top: 10px;
+            }
+            
+            .inviteFans
+            {
+              float:left;
+              padding-top: 10px;
+              padding-left: 10px;
+            }
+          }
+          
+          .fanList
+          {
+            margin:0px;
+            
+            .fanItem
+            {
+              list-style: none;
+              height: 48px;
+              padding: 10px 5px 0px 10px;
+              @include clearfix();
+
+              .profile_pic
+              {
+                float:left;
+                height: 48px;
+                width: 48px;
+              }
+              
+              .nameAndPost
+              {
+                margin-left: 58px;
+              }
+            }
+          }
+        }
       }
       
       div.rightColumn
       {
         float: left;
-        width: 33.2%;
-        border-left: $fanzoneBorder solid 1px;
+        width: 25%;
   
-        h4
-        {
-          background-color: inherit;
-          color: $fanzoneBannerTextColor;
-        }
-        
-        .fans
-        {
-          .fanPics
-          {
-            .profile_pic
-            {
-              margin-top: 5px;
-              margin-left: 5px;
-  
-              &:last-child
-              {
-                margin-bottom: 5px;
-              }
-            }
-          }
-        }
-        
         .venues
         {
           clear: both;

@@ -3,23 +3,24 @@
 
 div#postForm
 {
-  background-color: $fanzoneBackground;
+  background-color: $fanzoneFormBackground;
   padding: 0px 10px 10px 10px;
   @include clearfix;
   
   h4
   {
-    padding-top:0px;
+    padding:10px 0px;
   }
   
   .profile_pic
   {
-    margin-right:10px;
+    height: 48px;
+    width: 48px; 
   }
 
   .post_fields
   {
-    padding-left:42px;
+    padding-left:52px;
     padding-bottom: 7px;
     
     .media_preview
@@ -76,30 +77,33 @@ div#postForm
       #photo_picker
       {
         cursor: pointer;
-        height: 19px;
       }
     }
     
     #post_combo
     {
       float: right;
-      border: 1px solid $fanzoButtonBorder;
+      border: 2px solid $fanzoButtonBorder;
+      @include border-radius(4px);
       
       #add_post, .quickTweetButton
       {
         float:left;
         border:none;
+        @include border-radius(0);
       }
       
       #add_post
       {
         border-right: 1px solid white;
+        @include border-radius(4px 0px 0px 4px);
       }
       
       .quickTweetButton
       {
         padding: 6px 10px;
         border-left: 1px solid $fanzoButtonBorder;
+        @include border-radius(0px 4px 4px 0px);
         
         &:focus
         {

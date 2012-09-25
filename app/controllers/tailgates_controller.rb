@@ -150,7 +150,7 @@ class TailgatesController < ApplicationController
     @tailgate = Tailgate.find(params[:id])
 
     respond_to do |format|
-      if (@tailgate.user_id != current_user.id)
+      if (@tailgate.user_id != current_user.id && !admin_signed_in?)
         format.html { redirect_to user_path(current_user), error: 'Cannot update a tailgate owned by another user.' }
         format.json { render json: @tailgate.errors, status: :unprocessable_entity }
       elsif @tailgate.update_attributes(params[:tailgate])

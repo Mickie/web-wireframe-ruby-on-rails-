@@ -1,0 +1,42 @@
+@import "partials/colors";
+@import "partials/mixins";
+
+footer 
+{
+  padding: 0px;
+  margin-top:40px;
+  border-top: 1px solid $borderColor;
+  width: 100%;
+  
+  nav
+  {
+    clear: both;
+    margin: 0px auto;
+
+    ul 
+    {
+      list-style: none;
+      margin:5px 0px;
+      padding: 10px;
+      @include clearfix();
+      
+      li
+      {
+        float: left;
+        margin: 0px 10px;
+      }
+            
+      #facebook_like
+      {
+        width: 87px;
+        overflow: hidden;
+      }
+      
+      .about_nav
+      {
+        margin-right: 10px;
+      }
+    }
+  }
+  
+}
