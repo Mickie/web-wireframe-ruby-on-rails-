@@ -169,7 +169,7 @@
           <div class="user_location_venues">
             <% if user_signed_in? %>
               <% current_user.user_locations.each do | aUserLocation | %>
-                <%= render partial: "partials/venue_locations", 
+                <%= render partial: "partials/watch_site_venues/venue_locations", 
                            locals: { aCurrentLocationFlag: false,
                                      aUserLocation: aUserLocation,
                                      aLocationBackgroundColor: @tailgate.light_color,
@@ -182,7 +182,7 @@
             <% end %>
           </div>
           <div class="current_location_venues">
-            <%= render partial: "partials/venue_locations", 
+            <%= render partial: "partials/watch_site_venues/venue_locations", 
                        locals: { aCurrentLocationFlag: true,
                                  aLocationBackgroundColor: "white", 
                                  aLocationTextColor: "black", 
