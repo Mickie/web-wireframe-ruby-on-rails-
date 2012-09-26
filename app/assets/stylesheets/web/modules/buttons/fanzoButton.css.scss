@@ -12,7 +12,7 @@
   color: $fanzoButtonText;
   border: $fanzoButtonBorder solid 2px;
   background-color: $fanzoButtonBackground;
-  @include border-radius(4px);
+  @include border-radius-with-ie(4px);
   @include box-shadow(none);
 
   /* SVG as background image (IE9/Chrome/Safari/Opera) - made at http://ie.microsoft.com/testdrive/graphics/svggradientbackgroundmaker/default.html */ 

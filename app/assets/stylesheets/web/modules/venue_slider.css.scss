@@ -73,7 +73,7 @@
         background-color: $venueSliderVenueNameColor;
         width: 11px;
         height: 10px;
-        @include border-radius(50%)
+        @include border-radius-with-ie(50%)
       }
       
       .venue_name

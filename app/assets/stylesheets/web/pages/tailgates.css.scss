@@ -22,7 +22,7 @@ div#tailgate_show
              
     div.banner
     {
-      @include border-radius(4px 4px 0px 0px);
+      @include border-radius-with-ie(4px 4px 0px 0px);
       background-image: asset-url("white-gradient-140.png", image);
       background-repeat: repeat-x;
       background-color: black;
@@ -50,7 +50,7 @@ div#tailgate_show
           padding: 10px;
           background-color: $fanzoneBannerLogoBackground;
           border-top: $fanzoneBorder solid 1px;
-          @include border-radius(4px);
+          @include border-radius-with-ie(4px);
           
           .logoImage
           {
