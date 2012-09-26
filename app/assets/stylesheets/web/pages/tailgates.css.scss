@@ -47,16 +47,10 @@ div#tailgate_show
           position:relative;
           float:left;
           margin:10px;
-          padding: 10px;
+          padding: 5px;
           background-color: $fanzoneBannerLogoBackground;
           border-top: $fanzoneBorder solid 1px;
           @include border-radius-with-ie(4px);
-          
-          .logoImage
-          {
-            width: 100px;
-            height: 100px;
-          }
           
           .reflection
           {
@@ -72,10 +66,13 @@ div#tailgate_show
           
           .official
           {
+            font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
+            letter-spacing: 0.03em;
+            font-size: 1.7em;
             text-transform: uppercase;
-            letter-spacing: 2px;
             color: $officialTextColor;
             height: 15px;
+            padding-bottom: 5px;
           }
   
           h1
