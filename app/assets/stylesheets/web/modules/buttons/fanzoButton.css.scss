@@ -12,9 +12,11 @@
   color: $fanzoButtonText;
   border: $fanzoButtonBorder solid 2px;
   background-color: $fanzoButtonBackground;
-  @include gradient-vertical($fanzoButtonBackgroundTopGradient, $fanzoButtonBackgroundBottomGradient);
   @include border-radius(4px);
   @include box-shadow(none);
+
+  /* SVG as background image (IE9/Chrome/Safari/Opera) - made at http://ie.microsoft.com/testdrive/graphics/svggradientbackgroundmaker/default.html */ 
+  background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc4MDIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGQTYzM0UiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNGNTAwMDAiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2c4MDIpIiAvPgo8L3N2Zz4=);
 
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;  
