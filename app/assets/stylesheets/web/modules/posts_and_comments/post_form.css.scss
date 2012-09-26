@@ -71,73 +71,97 @@ div#postForm
     
     #add_photo
     {
-      float:left;
+      #photoFields
+      {
+        @include clearfix();
+        width: 100%;
+        padding-bottom: 10px;
+        
+        label
+        {
+          float:left;
+          padding-right: 2%;
+          width: 20%; 
+        }
+        input
+        {
+          float:left;
+          width: 78%;
+        }
+      }
       
+    }
+    
+    #post_controls
+    {
+      clear: both;
+
       #photo_picker
       {
+        float: left;
         cursor: pointer;
         height: 19px;
       }
-    }
-    
-    #post_combo
-    {
-      float: right;
-      border: 1px solid $fanzoButtonBorder;
-      
-      #add_post, .quickTweetButton
-      {
-        float:left;
-        border:none;
-      }
-      
-      #add_post
-      {
-        border-right: 1px solid white;
-      }
-      
-      .quickTweetButton
-      {
-        padding: 6px 10px;
-        border-left: 1px solid $fanzoButtonBorder;
-        
-        &:focus
-        {
-          outline: none;
-        }
-      }
-      
-      .dropdown-menu
-      {
-        width: 200px;
-        
-        li
-        {
-          cursor:pointer;
-          padding-left:5px;
-          
-          &:not(.divider):hover 
-          {
-            background: $backgroundColor;
-            border: 1px solid $borderColor;
-            margin: -1px;          
-          }
-                    
-          p
-          {
-            margin:0px;
-            padding-left: 5px;
-            font-size: 12px;
-          }
-        }
 
-        li.sectionHeader
+      #post_combo
+      {
+        float: right;
+        border: 1px solid $fanzoButtonBorder;
+        
+        #add_post, .quickTweetButton
         {
-          &:hover
+          float:left;
+          border:none;
+        }
+        
+        #add_post
+        {
+          border-right: 1px solid white;
+        }
+        
+        .quickTweetButton
+        {
+          padding: 6px 10px;
+          border-left: 1px solid $fanzoButtonBorder;
+          
+          &:focus
           {
-            background: inherit;
-            border: none;
-            margin:0px;
+            outline: none;
+          }
+        }
+        
+        .dropdown-menu
+        {
+          width: 200px;
+          
+          li
+          {
+            cursor:pointer;
+            padding-left:5px;
+            
+            &:not(.divider):hover 
+            {
+              background: $backgroundColor;
+              border: 1px solid $borderColor;
+              margin: -1px;          
+            }
+                      
+            p
+            {
+              margin:0px;
+              padding-left: 5px;
+              font-size: 12px;
+            }
+          }
+  
+          li.sectionHeader
+          {
+            &:hover
+            {
+              background: inherit;
+              border: none;
+              margin:0px;
+            }
           }
         }
       }
