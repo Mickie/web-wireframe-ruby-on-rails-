@@ -21,7 +21,11 @@ div#posts
       
       .user_name
       {
-        font-weight:bold;
+        font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
+        letter-spacing: 0.03em;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        color: $mediumTextColor;
       }
       
       .timestamp

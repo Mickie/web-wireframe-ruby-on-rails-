@@ -117,13 +117,18 @@ div#tailgate_show
             .lastUpdated
             {
               clear:both;
+              
+              p
+              {
+                margin:0px;
+              }
             }
           }
           
           .facebookSharing
           {
             clear: both;
-            padding: 5px;
+            padding: 5px 0px;
   
             .fb-like
             {
