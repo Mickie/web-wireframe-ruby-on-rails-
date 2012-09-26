@@ -127,13 +127,7 @@ div#tailgate_show
           
           .facebookSharing
           {
-            clear: both;
-            padding: 5px 0px;
-  
-            .fb-like
-            {
-              padding-bottom: 5px;
-            }
+            padding-top: 10px;
   
             .tweetGoogle
             {
@@ -148,6 +142,7 @@ div#tailgate_show
               .tweetThis
               {
                 float:left;
+                margin-right: 8px;
               }
             }
           }
