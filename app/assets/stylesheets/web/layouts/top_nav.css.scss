@@ -12,6 +12,7 @@
     background-color: $topnavBackroundColor;
     background-image: asset-url("30px-shine.png", image);
     background-repeat: repeat-x;
+    filter: none;
 
     @include border-radius(0px);
     @include box-shadow-with-ie(0px 2px 10px 15px rgba(177,177,177,0.65));    

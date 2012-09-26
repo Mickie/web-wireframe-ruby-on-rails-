@@ -118,14 +118,14 @@ div#postForm
         #add_post
         {
           border-right: 1px solid white;
-          @include border-radius-with-ie(4px 0px 0px 4px);
+          @include border-radius(4px 0px 0px 4px);
         }
         
         .quickTweetButton
         {
           padding: 7px 10px;
           border-left: 1px solid $fanzoButtonBorder;
-          @include border-radius-with-ie(0px 4px 4px 0px);
+          @include border-radius(0px 4px 4px 0px);
           
           &:focus
           {
