@@ -4,10 +4,10 @@
 .playButtonBackground
 {
   position:absolute;
-  top: 23px;
-  left: 45px;
-  width: 100px;
-  height: 100px;
+  top: 48px;
+  left: 70px;
+  width: 50px;
+  height: 50px;
   border: 2px solid rgb(127, 127, 127);
   border: 2px solid rgba(255, 255, 255, .9);
   background: rgb(64, 64, 64);
@@ -17,18 +17,18 @@
   .playButton
   {
     position:absolute;
-    top: 30px;
-    left: 35px;
+    top: 15px;
+    left: 18px;
     width:0px;
     height:0px;
     padding:0px;
     margin:0px;
-    border-left: 40px solid rgb(127, 127, 127);
-    border-left: 40px solid rgba(255, 255, 255, .9);
+    border-left: 20px solid rgb(127, 127, 127);
+    border-left: 20px solid rgba(255, 255, 255, .9);
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
-    border-top: transparent solid 20px;
-    border-bottom: transparent solid 20px;
+    border-top: transparent solid 10px;
+    border-bottom: transparent solid 10px;
   }
 }
 
