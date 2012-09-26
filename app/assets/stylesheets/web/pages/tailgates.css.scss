@@ -127,23 +127,24 @@ div#tailgate_show
           
           .facebookSharing
           {
-            padding-top: 10px;
+            padding-top: 20px;
+            clear:both;
   
-            .tweetGoogle
+            .googleButton
             {
+              float:left;
               margin-right: 8px;
-  
-              .googleButton
-              {
-                float:left;
-                margin-right: 8px;
-              }
-              
-              .tweetThis
-              {
-                float:left;
-                margin-right: 8px;
-              }
+            }
+            
+            .tweetThis
+            {
+              float:left;
+              margin-right: 8px;
+            }
+            
+            .fb-like
+            {
+              float:left;
             }
           }
         }

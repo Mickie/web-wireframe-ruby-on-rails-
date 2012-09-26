@@ -53,21 +53,19 @@
               </div>  
             </div>
             <div class="facebookSharing">
-              <div class="tweetGoogle">
-                <div class="googleButton">
-                  <div class="g-plusone" data-annotation="none" data-size="medium" data-href="<%= tailgate_url(@tailgate) -%>"></div>
-                </div>
-                <div class="tweetThis">
-                  <a  href="https://twitter.com/share" 
-                      class="twitter-share-button"
-                      data-url="<%= getTailgateBitly( @tailgate )-%>"
-                      data-count="none",
-                      data-counturl="<%= tailgate_url(@tailgate) -%>" 
-                      data-text="Check out this fanzone about <%= @tailgate.topic_tags.split(",").join(" and") -%>" 
-                      data-via="fanzofans" 
-                      data-related="fanzofans" 
-                      data-hashtags="fanzo">Tweet</a>
-                </div>
+              <div class="googleButton">
+                <div class="g-plusone" data-annotation="none" data-size="medium" data-href="<%= tailgate_url(@tailgate) -%>"></div>
+              </div>
+              <div class="tweetThis">
+                <a  href="https://twitter.com/share" 
+                    class="twitter-share-button"
+                    data-url="<%= getTailgateBitly( @tailgate )-%>"
+                    data-count="none",
+                    data-counturl="<%= tailgate_url(@tailgate) -%>" 
+                    data-text="Check out this fanzone about <%= @tailgate.topic_tags.split(",").join(" and") -%>" 
+                    data-via="fanzofans" 
+                    data-related="fanzofans" 
+                    data-hashtags="fanzo">Tweet</a>
               </div>
               <div class="fb-like" 
                    data-layout="button_count" 
