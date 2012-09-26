@@ -3,9 +3,11 @@
 
 .fanzoButton
 {
+  height: 30px;
   padding: 5px 10px;
   margin:0px;
   display: inline-block;
+  @include box-sizing(border-box);
 
   color: $fanzoButtonText;
   border: $fanzoButtonBorder solid 2px;
@@ -17,9 +19,9 @@
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;  
   font-size: 12px;
-  line-height: 12px;
+  line-height: 1.4em;
   font-weight: bold;
-  vertical-align:inherit;
+  vertical-align:top;
   
   &:hover
   {
