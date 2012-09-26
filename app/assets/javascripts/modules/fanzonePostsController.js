@@ -33,12 +33,14 @@ var FanzonePostsController = function( aPostsSelector )
     if(ie)
     {
       thePostsContainer.find("#photoFields").show();
+      thePostsContainer.find("#photo_picker").hide();
     }
     else
     {
       thePostsContainer.on('click', "#photo_picker", createDelegate(this, this.pickPhoto));
       thePostsContainer.on('change', "#post_photo_attributes_image", createDelegate(this, this.onPhotoPicked));
       thePostsContainer.find("#photo_picker").show();
+      thePostsContainer.find("#photoFields").hide();
     }
     
   }
