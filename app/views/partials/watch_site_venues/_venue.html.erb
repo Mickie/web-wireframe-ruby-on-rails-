@@ -1,9 +1,10 @@
 <div class="venue">
   <div class="venue_image"></div>
   <div class="venue_content">
-    <div class="venue_name"><%= aVenue.name -%></div>
+    <div class="venue_name"><h5><%= aVenue.name -%></h5></div>
     <div class="venue_address">
-      <%= aVenue.location.address1 -%><br/><%= aVenue.location.city -%>, <%= aVenue.location.stateNameOrRegion -%>
+      <span class="venue_street"><%= aVenue.location.address1 -%></span>
+      <span class="venue_city_state"><%= aVenue.location.city -%>, <%= aVenue.location.stateAbbreviationOrRegion -%></span>
     </div>
   </div>
 </div>  

@@ -15,6 +15,14 @@ class Location < ActiveRecord::Base
     end
   end
   
+  def stateAbbreviationOrRegion
+    if state_id
+      return state.abbreviation
+    else
+      return region
+    end
+  end
+  
   def one_line_address
     "#{address1}, #{address2}#{address2 && !address2.empty? ? ", " : ""}#{city}, #{state_id? ? state.abbreviation : region} #{postal_code}, #{country.abbreviation}"
   end

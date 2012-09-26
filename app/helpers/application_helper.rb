@@ -21,7 +21,7 @@ module ApplicationHelper
       elsif aSize == :large
         theImageSize = "110x110"
       end
-      return image_tag logoPath(aTeam.slug, aSize), { alt:aTeam.name, size:theImageSize }
+      return image_tag logoPath(aTeam.slug, aSize), { alt:aTeam.name, size:theImageSize, class:"logoImage" }
     end
   end
   

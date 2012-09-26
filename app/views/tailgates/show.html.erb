@@ -15,7 +15,9 @@
   <link href="<%= tailgate_url(@tailgate) -%>" rel="canonical">
 <% end %>
 
-<% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
+<% aUserSignedInFlag = user_signed_in? %>
+
+<% if admin_signed_in? || ( aUserSignedInFlag && current_user.mine?( @tailgate ) ) %>
   <%= render partial: "partials/dialogs/edit_fanzone_modal", locals: { aTailgate: @tailgate } %>
 <% end %>
 
@@ -77,7 +79,7 @@
             </div>
           </div>
           <div class="team_logo">
-            <%= teamLogo(@tailgate.team, :medium) %>
+            <%= teamLogo(@tailgate.team, :large) %>
             <%= image_tag "logo-reflection.png", size:"120x120", class:"reflection" %>  
           </div>
           <div class="fanzone_details">
@@ -98,6 +100,11 @@
       <%= render partial:'partials/media_slider/media_slider' %>
     </div>
     
+    <%= render partial: 'partials/watch_site_venues/venue_slider', 
+               locals:{ aCurrentCityState: @currentCityState,
+                        aLocalTeamWatchSites: @localTeamWatchSites,
+                        aUserSignedInFlag: aUserSignedInFlag }%>    
+    
     <div id="fanzoneContent">
       
       <div class="leftColumn">
@@ -106,13 +113,13 @@
             <h4><span class="fan_count"><%= pluralize(@tailgate.tailgate_followers_count + 1, "Fan") -%></span></h4>
             
             <div class="fanzoneState">
-              <% if admin_signed_in? || ( user_signed_in? && current_user.mine?( @tailgate ) ) %>
+              <% if admin_signed_in? || ( aUserSignedInFlag && current_user.mine?( @tailgate ) ) %>
                 <div id="edit_fanzone" class="join_fanzone">
                   <a href="#myEditFanzoneModal" data-toggle="modal" class="fanzoButton">Edit</a>
                 </div>
               <% else %>
                 <div class="join_fanzone">
-                  <% if user_signed_in? %>
+                  <% if aUserSignedInFlag %>
                     <% if current_user.following?(@tailgate) %>
                       <%= render partial: "partials/buttons/unfollow_button", locals: { tailgate: @tailgate } %>
                     <% else %>
@@ -166,7 +173,7 @@
         <div id="postForm">
           <h4>Fanzone Posts</h4>
           <div class="profile_pic">
-            <% if user_signed_in? %>
+            <% if aUserSignedInFlag %>
               <%= link_to image_tag( current_user.image, size:"48x48" ), user_path(current_user) %>
             <% end %>
           </div>
@@ -180,36 +187,8 @@
       </div>
 
       <div class="rightColumn">
-        <div class="venues">
-          <div class="venueHeader">
-            <h4>Local <%= @tailgate.team.mascot -%> Venues</h4>
-          </div>
-          <div class="user_location_venues">
-            <% if user_signed_in? %>
-              <% current_user.user_locations.each do | aUserLocation | %>
-                <%= render partial: "partials/watch_site_venues/venue_locations", 
-                           locals: { aCurrentLocationFlag: false,
-                                     aUserLocation: aUserLocation,
-                                     aLocationBackgroundColor: @tailgate.light_color,
-                                     aLocationTextColor: @tailgate.color, 
-                                     aLocationString: aUserLocation.location_query, 
-                                     aWatchSiteList: @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(aUserLocation.location_query, 50) }%>
-
-                
-              <% end %>
-            <% end %>
-          </div>
-          <div class="current_location_venues">
-            <%= render partial: "partials/watch_site_venues/venue_locations", 
-                       locals: { aCurrentLocationFlag: true,
-                                 aLocationBackgroundColor: "white", 
-                                 aLocationTextColor: "black", 
-                                 aLocationString: @currentCityState, 
-                                 aWatchSiteList: @localTeamWatchSites }%>
-          </div>
-        </div>
         <div class="twitterStream">
-          <div class="controls">
+          <div class="twitterHeader">
             <h4>Tweets</h4>
           </div>
               
@@ -273,6 +252,7 @@
     myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal", true);
     myEditFanzoneDialog.initialize();
     
+    VenueSlider.get().initialize("#venues");
     InfiniteScroller.get().handleScrollingForResource('<%= tailgate_posts_path(@tailgate) %>');
   });
 </script>

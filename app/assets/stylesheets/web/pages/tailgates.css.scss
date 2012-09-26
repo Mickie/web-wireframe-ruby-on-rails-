@@ -47,10 +47,16 @@ div#tailgate_show
           position:relative;
           float:left;
           margin:10px;
-          padding: 20px;
+          padding: 10px;
           background-color: $fanzoneBannerLogoBackground;
           border-top: $fanzoneBorder solid 1px;
           @include border-radius(4px);
+          
+          .logoImage
+          {
+            width: 100px;
+            height: 100px;
+          }
           
           .reflection
           {
@@ -149,6 +155,7 @@ div#tailgate_show
     div#fanzoneContent
     {
       background-color: $fanzoneContentBackground;
+      clear: both;
       @include clearfix;
       
       h4
@@ -206,6 +213,18 @@ div#tailgate_show
               .nameAndPost
               {
                 margin-left: 58px;
+                
+                h5
+                {
+                  text-transform: uppercase;
+                  font-size: 1.5em;
+                  color: $mediumTextColor;
+                }
+                
+                span
+                {
+                  color: $lightTextColor;
+                }
               }
             }
           }
@@ -216,66 +235,16 @@ div#tailgate_show
       {
         float: left;
         width: 25%;
-  
-        .venues
+        background-color: $fanzoneColumnBackground;
+        
+        .twitterStream
         {
-          clear: both;
-  
-          .venue_locations
+          .twitterHeader
           {
-            border-bottom: $fanzoneLightBorder solid 1px;
-            
-            .locationLabel
-            {
-              padding:10px;
-              
-              .location_text
-              {
-                font-weight: bold;
-              }
-              
-              .change_location, .location_delete
-              {
-                float: right;
-              }
-              
-            }
-            
-            .noVenues
-            {
-              border-top: $fanzoneLightBorder solid 1px;
-              background-color: white;
-              padding: 10px;
-            }
-            
-            .venue
-            {
-              border-top: $fanzoneLightBorder solid 1px;
-              background-color: white;
-              padding: 10px;
-              
-              .venue_image
-              {
-                float: left;
-                width:32px;
-                height:32px;
-                background-color: #F0F0F0;
-              }
-              
-              .venue_content
-              {
-                margin-left: 42px;
-                .venue_name
-                {
-                  font-weight:bold;
-                }
-                .venue_address
-                {
-                  
-                }
-              }
-            }
+            padding: 10px;
+            background-color: $fanzoneHeaderBackground;
           }
+          
         }
       }
     }

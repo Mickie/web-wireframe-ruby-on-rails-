@@ -1,0 +1,97 @@
+@import "partials/colors";
+@import "partials/mixins";
+
+#venues
+{
+  background-color: $venueSliderBackgroundColor;
+  background-image: asset-url("30px-shine.png", image);
+  background-repeat: repeat-x;
+  border-top: 1px solid $venueSliderTopBorderColor;
+  border-bottom: 1px solid $venueSliderBottomBorderColor;
+  @include clearfix;
+  
+  #locationPicker
+  {
+    padding: 20px 10px;
+    float:left;
+    
+    h4
+    {
+      float: left;
+      font-size: 1.8em;
+      
+      .localVenuesLabel
+      {
+        color: $venueSliderLabelColor;
+      }
+    }
+    
+    .drop_arrow
+    {
+      margin-top: 5px;
+      float: left;
+      border-top-color: $linkColor;
+    }
+    
+    .dropdown-menu
+    {
+      li
+      {
+        form
+        {
+          margin: 0px;
+          padding: 0px;
+        }
+        
+        a:hover
+        {
+          text-decoration: none;
+          color: white;         
+        }
+      }
+    }
+  }
+  
+  #locationVenues
+  {
+    float: left;
+    padding: 10px;
+    
+    .venue
+    {
+      position: relative;
+      float:left;
+      padding-left: 10px;
+      border-left: 1px solid $venueSliderVenueNameColor;
+      
+      .venue_image
+      {
+        position: absolute;
+        top: -1px;
+        left: -6px;
+        background-color: $venueSliderVenueNameColor;
+        width: 11px;
+        height: 10px;
+        @include border-radius(50%)
+      }
+      
+      .venue_name
+      {
+        h5
+        {
+          text-transform: uppercase;
+          color: $venueSliderVenueNameColor;
+          font-size: 1.8em;
+        }
+      }
+      
+      .venue_address
+      {
+        color: $lightTextColor;
+        text-transform: uppercase;
+      }
+    }
+  }
+  
+  
+}

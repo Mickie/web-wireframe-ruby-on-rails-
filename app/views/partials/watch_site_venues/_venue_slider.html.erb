@@ -1,0 +1,35 @@
+<div id="venues">
+  <div class="dropdown" id="locationPicker">
+    <a class="locationButton" href="javascript:void(0)" data-toggle="dropdown" data-target="#locationPicker">
+      <h4>
+        <span class="localVenuesLabel">LOCAL VENUES in</span>
+        <span class="currentLocation"><%= aCurrentCityState -%></span>
+      </h4>
+      <div class="drop_arrow"></div>
+    </a>
+    <ul class="dropdown-menu">
+      <% if aUserSignedInFlag %>
+        <% current_user.user_locations.each do | aUserLocation | %>
+          <li>
+            <%= form_tag("/watch_sites/search", :method => "get", remote: 'true',  class: "form-location") do %>
+              <%= hidden_field_tag(:team_id, @tailgate.team.id) %>
+              <%= hidden_field_tag(:location_id, aUserLocation.id) %>
+              <%= link_to aUserLocation.location_query, "javascript:void(0);", class:"locationSubmit", remote: "true"  %>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="divider"></li>
+      <% end %>
+  
+      <li>
+        <a href="#myChangeLocationModal" data-toggle="modal">Add Location</a>
+      </li>
+    </ul>
+  </div>
+  <div id="locationVenues">
+    <div class="venueList">
+      <%= render partial:"partials/watch_site_venues/watch_site_venue_list", 
+                 locals:{ aWatchSiteList: aLocalTeamWatchSites, aLocationString: aCurrentCityState } %>
+    </div>
+  </div>
+</div>

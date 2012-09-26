@@ -3,12 +3,18 @@ class WatchSitesController < ApplicationController
 
   # GET /watch_sites/search.js
   def search
-    @locationQuery = params[:location_query]
-    @watch_sites = WatchSite.includes(:team, :venue).where(team_id: params[:team_id]).near( @locationQuery, 50)
-    
-    if user_signed_in?
-      current_user.user_locations.create(location_query: @locationQuery )
+    @locationId = params[:location_id]
+    if (@locationId)
+      theLocation = UserLocation.find(@locationId)
+      @locationQuery = theLocation.location_query
+    else
+      @locationQuery = params[:location_query]
+      if user_signed_in?
+        current_user.user_locations.create(location_query: @locationQuery )
+      end
     end
+    
+    @watch_sites = WatchSite.includes(:team, :venue).where(team_id: params[:team_id]).near( @locationQuery, 50)
 
     respond_to do |format|
       format.html { render "index" }
