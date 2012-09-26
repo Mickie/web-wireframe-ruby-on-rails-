@@ -12,36 +12,60 @@ var FanzonePostsController = function( aPostsSelector )
     EventManager.get().addObserver("onShowConnectionModal", this);
     EventManager.get().addObserver("onCreatePostComplete", this);
     this.setupFormListeners();
+    this.setupPhotoPicker();
   }
   
   this.setupFormListeners = function()
   {
-    $(this.myPostsSelector).on('click', ".vote_up i:not(.disabled)", createDelegate( this, this.submitUpVote ) );
-    $(this.myPostsSelector).on('click', ".vote_down i:not(.disabled)", createDelegate( this, this.submitDownVote ) );
-    $(this.myPostsSelector).on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
-    $(this.myPostsSelector).on('click', ".comment_input", createDelegate(this, this.checkLoginStatus ) );
-    $(this.myPostsSelector).on('click', "#post_content", createDelegate(this, this.checkLoginStatus ) );
-    $(this.myPostsSelector).on('ajax:before', ".new_comment", createDelegate( this, this.checkLoginStatus ) );
-    $(this.myPostsSelector).on('click', "#photo_picker", createDelegate(this, this.pickPhoto));
-    $(this.myPostsSelector).on('change', "#post_photo_attributes_image", createDelegate(this, this.onPhotoPicked));
+    var thePostsContainer = $(this.myPostsSelector);
+    thePostsContainer.on('click', ".vote_up i:not(.disabled)", createDelegate( this, this.submitUpVote ) );
+    thePostsContainer.on('click', ".vote_down i:not(.disabled)", createDelegate( this, this.submitDownVote ) );
+    thePostsContainer.on('click', "#add_post", createDelegate(this, this.handleDisconnectStatus ) );
+    thePostsContainer.on('click', ".comment_input", createDelegate(this, this.checkLoginStatus ) );
+    thePostsContainer.on('click', "#post_content", createDelegate(this, this.checkLoginStatus ) );
+    thePostsContainer.on('ajax:before', ".new_comment", createDelegate( this, this.checkLoginStatus ) );
+  }
+  
+  this.setupPhotoPicker = function()
+  {
+    var thePostsContainer = $(this.myPostsSelector);
+
+    if(ie)
+    {
+      thePostsContainer.find("#photoFields").show();
+    }
+    else
+    {
+      thePostsContainer.on('click', "#photo_picker", createDelegate(this, this.pickPhoto));
+      thePostsContainer.on('change', "#post_photo_attributes_image", createDelegate(this, this.onPhotoPicked));
+      thePostsContainer.find("#photo_picker").show();
+    }
+    
   }
   
   this.pickPhoto = function(e)
   {
-    $(this.myPostsSelector).find("#post_photo_attributes_image").click();
+    var isLoggedIn = this.checkLoginStatus();
+    if (isLoggedIn)
+    {
+      $(this.myPostsSelector).find("#post_photo_attributes_image").click();
+    }
+    
+    return isLoggedIn;
   }
   
   this.onCreatePostComplete = function()
   {
-    $("#postForm .video_container").hide();
-    $("#postForm .image_container").hide();
-    $("#postForm #post_content").val("");
-    $("#postForm #post_video_id").val("");
-    $("#postForm #post_image_url").val("");
-    $("#postForm #post_twitter_reply_id").val("");
-    $("#postForm #post_twitter_retweet_id").val("");
+    var thePostsContainer = $(this.myPostsSelector);
+    thePostsContainer.find(".video_container").hide();
+    thePostsContainer.find(".image_container").hide();
+    thePostsContainer.find("#post_content").val("");
+    thePostsContainer.find("#post_video_id").val("");
+    thePostsContainer.find("#post_image_url").val("");
+    thePostsContainer.find("#post_twitter_reply_id").val("");
+    thePostsContainer.find("#post_twitter_retweet_id").val("");
   }
-  
+    
   this.onPhotoPicked = function(e)
   {
     var theFiles = e.target.files;
@@ -60,24 +84,24 @@ var FanzonePostsController = function( aPostsSelector )
   
       if (theUrl.length > 0)
       {
-        thePostDiv = $(this.myPostsSelector);
-        thePostDiv.find(".video_container").hide();
-        thePostDiv.find(".image_container img").attr("src", theUrl);
-        thePostDiv.find(".image_container").slideDown(600);
-        thePostDiv.find("#photo_picker").hide();
+        var thePostsContainer = $(this.myPostsSelector);
+        thePostsContainer.find(".video_container").hide();
+        thePostsContainer.find(".image_container img").attr("src", theUrl);
+        thePostsContainer.find(".image_container").slideDown(600);
+        thePostsContainer.find("#photo_picker").hide();
       }
     }
     else
     {
-      thePostDiv = $(this.myPostsSelector);
-      thePostDiv.find(".image_container").hide();
-      thePostDiv.find("#photo_picker").show();
+      var thePostsContainer = $(this.myPostsSelector);
+      thePostsContainer.find(".image_container").hide();
+      thePostsContainer.find("#photo_picker").show();
     }
   }
   
   this.updatePostForm = function( aForceTwitterFlag, aDefaultText, aReplyId, aRetweetId )
   {
-    thePostsContainer = $(this.myPostsSelector);
+    var thePostsContainer = $(this.myPostsSelector);
     if (aForceTwitterFlag)
     {
       thePostsContainer.find("#post_twitter_flag").prop("checked", true);
