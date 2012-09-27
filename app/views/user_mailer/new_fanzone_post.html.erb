@@ -17,9 +17,9 @@
 <%= provide :user_name, @post.user.full_name %>
 
 <% provide :content do %>
-  <% if @post.image_url && @post.image_url.length > 0 %>
+  <% if (@post.image_url && @post.image_url.length > 0) || @post.photo %>
     <div class="post_image">
-      <img src="<%= @post.image_url -%>" width="204" height="204" />
+      <img src="<%= @post.photo ? @post.photo.image.url : @post.image_url -%>" width="153" />
     </div>
   <% end %>
   <p><%= raw handleNewlinesAndUrls(@post.content) %></p>

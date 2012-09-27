@@ -138,7 +138,9 @@ class SocialSender
     begin
       theLink = getTailgateBitly(aPost.tailgate)
       
-      if aPost.image_url && aPost.image_url.length > 0
+      if aPost.photo && aPost.photo.image
+        thePicture = getBitlyForUrl( aPost.photo.image.url )
+      elsif aPost.image_url && aPost.image_url.length > 0
         thePicture = getBitlyForUrl( aPost.image_url )
       else
         thePicture = getLargeLogoBitly(aPost.tailgate.team)
