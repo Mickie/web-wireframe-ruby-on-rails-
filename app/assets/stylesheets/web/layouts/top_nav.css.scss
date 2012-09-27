@@ -166,7 +166,8 @@
 
           i.icon-remove
           {
-            left: 165px;
+            left: inherit;
+            right: 7px;
             cursor: pointer;
             opacity: 0.5;
           }
