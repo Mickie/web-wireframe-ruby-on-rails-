@@ -21,15 +21,17 @@ div.fanzoneTile
     .join_fanzone
     {
       position: absolute;
-      top: -10px;
-      right: 0px;
-      height: 20px;
+      top: 0px;
+      left: 0px;
+      height: 50px;
+      width: 200px;
       z-index: 1;
-
+      
       .follow_button
       {
-        border-right-width: 0px;
-        border-top-width: 0px;
+        margin: 125px 10px;
+        width: 200px;
+        height: 50px;
       }
     }    
     
@@ -86,7 +88,7 @@ div.fanzoneTile
         width: 170px;
         h3
         {
-          font-size: 1em;
+          font-size: 1.5em;
           line-height: 1.3em;
           padding-left: 3%;
           

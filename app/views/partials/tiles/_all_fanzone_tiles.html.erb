@@ -1,6 +1,4 @@
-<% if !aUserSignedInFlag %>
-  <%= render partial: 'partials/welcome' %>
-<% end %>
+<%= render partial: 'partials/welcome' %>
 
 <div id="allTiles" class="row-fluid">
   <%= render partial: "partials/tiles/tailgate_rows", locals: { aUserSignedInFlag: aUserSignedInFlag}  %>

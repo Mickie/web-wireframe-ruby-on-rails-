@@ -6,9 +6,11 @@ class StaticPagesController < ApplicationController
     end
 
     theCoordinates = getCoordinatesFromRequest( request )
-    
-    
-    if user_signed_in? && current_user.myFanzones.length > 0
+
+    if current_user && current_user.myFanzones.length < 2
+      @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1) 
+      return
+    elsif current_user
       @tailgate = current_user.myFanzones.first
     elsif theCoordinates
       theClosestTeam = Team.near(theCoordinates, 100).first

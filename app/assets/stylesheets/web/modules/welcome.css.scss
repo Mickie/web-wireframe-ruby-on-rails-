@@ -4,7 +4,7 @@
 #welcome
 {
   position:relative;
-  margin-left: 15px;
+  margin: 0px 30px 20px 30px;
   background-color: $welcomeBackgroundColor;
   background-image: asset-url("white-gradient-140.png", image);
   background-repeat: repeat-x;
@@ -17,114 +17,71 @@
     background-repeat: no-repeat;
   }
   
-  h1
-  {
-    color:white;
-    padding-bottom: 10px;
-  }
-  
   h2
   {
     color:white;
     font-weight: normal;
-    
-    a
-    {
-      color:white;
-      text-decoration:underline;
-      
-      &:hover
-      {
-        color:white;
-      }
-    }
   }
   
   .welcomeMessage
   {
     text-align: center;
-  }
   
-  .searchOrCreate
-  {
-    width: 510px;
-    margin: 0px auto;
-    
-    .teamSearch
-    {
-      padding-top: 20px;
-      width: 220px;
-      position: relative;
-      form
-      {
-        padding:0px;
-        margin:0px;
-        
-        #team
-        {
-          font-size: 18px;
-          line-height: 20px;
-          width: 100%;
-          padding-left: 25px;
-          height:40px;
-          @include border-radius-with-ie(20px);
-          -pie-background: 1;
-        }
-      }
-      
-      i
-      {
-        position:absolute;
-        left: 5px;
-        top: 33px;
-        opacity: 0.5;
-      }
-      
-      i.icon-remove
-      {
-        cursor:pointer;
-        left:inherit;
-        right: 5px;
-      }
-    }
-    
     .or
     {
-      padding-top: 20px;
-      width: 30px;
-      text-align: center;
+      color: white;
+      font-weight: bold;
     }
-
-    .createFanzone
+  
+    .teamSearch
     {
-      padding-top: 20px;
-      margin:0px;
-      width: 220px;
-      
-      a
+      padding-top: 5px;
+      width: 320px;
+      margin: 0 auto;
+
+      h2
       {
-        .fanzoButton
+        float:left;
+      }
+      
+      .searchControl
+      {
+        margin-left: 100px;
+        width: 220px;
+        position: relative;
+        
+        form
         {
-          margin-top:1px;
-          text-align: center;
-          font-size: 18px;
-          font-weight: normal;
-          line-height: 20px;
-          padding-top: 8px;
-          height: 27px;
-          border: 1px solid white;
-          position: relative;
+          padding:0px;
+          margin:0px;
           
-          span
+          #team
           {
-            position:absolute;
-            left: 10px;
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 18px;
+            line-height: 20px;
+            width: 100%;
+            padding-left: 25px;
+            height:40px;
+            @include border-radius-with-ie(20px);
+            -pie-background: 1;
           }
+        }
+        
+        i
+        {
+          position:absolute;
+          left: 5px;
+          top: 13px;
+          opacity: 0.5;
+        }
+        
+        i.icon-remove
+        {
+          cursor:pointer;
+          left:inherit;
+          right: 5px;
         }
       }
     }  
   }
-
 }
