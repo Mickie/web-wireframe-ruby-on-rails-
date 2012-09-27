@@ -27,12 +27,12 @@ img
   top: 0px;
   left:20%;
   margin:0px;
-  @include border-radius(0);
+  @include border-radius-with-ie(0px 0px 6px 6px);
 }
 
 .dropdown-menu 
 {
-  @include border-radius(0);
+  @include border-radius-with-ie(6px);
   padding: 10px;
 
   li

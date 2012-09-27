@@ -21,6 +21,10 @@
   <%= render partial: "partials/dialogs/edit_fanzone_modal", locals: { aTailgate: @tailgate } %>
 <% end %>
 
+<% if !aUserSignedInFlag %>
+  <%= render partial: "partials/dialogs/first_run_modal" %>
+<% end %>
+
 <div id="tailgate_show">
   <div class="modals">
     <%= render partial: "partials/dialogs/change_location", locals: { aTeam: @tailgate.team } %>
@@ -169,7 +173,7 @@
           <div class="messageHolder">Your twitter status was successfully updated with your invitation</div>
         </div>
         <div id="postForm">
-          <h4>Fanzone Posts</h4>
+          <h4>Fanzone Chatter</h4>
           <div class="profile_pic">
             <% if aUserSignedInFlag %>
               <%= link_to image_tag( current_user.image, size:"48x48" ), user_path(current_user) %>
@@ -246,11 +250,17 @@
                                         <%= raw @tailgate.topic_tags.split(",") %>,
                                         <%= raw @tailgate.instagram_tags.to_json %>,
                                         <%= @tailgate.team.id %> );
-                                              
-    myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal", true);
-    myEditFanzoneDialog.initialize();
-    
+
     VenueSlider.get().initialize("#venues");
     InfiniteScroller.get().handleScrollingForResource('<%= tailgate_posts_path(@tailgate) %>');
+
+    <% if admin_signed_in? || ( aUserSignedInFlag && current_user.mine?( @tailgate ) ) %>
+      myEditFanzoneDialog = new FanzoneDialog("#myEditFanzoneModal", true);
+      myEditFanzoneDialog.initialize();
+    <% end %>
+    
+    <% if !aUserSignedInFlag %>
+      FirstRunWizard.get().initialize("#myFirstRunModal");
+    <% end %>
   });
 </script>

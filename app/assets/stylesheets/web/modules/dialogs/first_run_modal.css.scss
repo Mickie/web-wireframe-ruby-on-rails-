@@ -1,0 +1,104 @@
+@import "partials/colors";
+@import "partials/mixins";
+
+#myFirstRunModal
+{
+  .welcome
+  {
+    padding: 10px 0px 5px 50px;
+    font-size: 1.7em;
+    font-weight: bold;
+    color: $lightTextColor;
+  }
+  
+  .firstRunContent
+  {
+    .branding
+    {
+      float: left;
+      .logo
+      {
+        overflow:hidden;
+        height: 55px;
+        margin-left: -50px;
+      }
+      
+      .tagline
+      {
+        padding-left: 50px;
+        
+        h2
+        {
+          text-transform: uppercase;
+          color: $mediumTextColor;  
+        }
+      }
+    }
+    
+    .callToAction
+    {
+      padding-left: 250px;
+      padding-right: 20px;
+      
+      .getStarted
+      {
+        color: $mediumTextColor;
+        padding: 10px;
+        padding-top: 0px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      
+      .goLogin
+      {
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.bubble
+{
+  max-width: 200px;
+  padding: 20px;
+  position:absolute;
+  z-index: 1051;
+  font-size: 14px;
+  font-weight: bold;
+  color: $mediumTextColor;
+  
+  @include gradient-vertical($firstRunBubbleTopGradient, $firstRunBubbleBottomGradient);
+  @include border-radius(6px);
+  @include box-shadow-with-ie(0 1px 3px rgba(25, 25, 25, 0.8));
+}
+
+#latestNews
+{
+  top: 180px;
+  left: 30px;
+}
+
+#localVenues
+{
+  top: 280px;
+  right: 30px;
+}
+
+#postThoughts
+{
+  top: 490px;
+  left: 260px;
+}
+
+#teamTweets
+{
+  top: 550px;
+  right: 230px;
+}
+
+#meetFans
+{
+  top: 600px;
+  left: 30px;
+}
+

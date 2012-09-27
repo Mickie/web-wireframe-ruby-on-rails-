@@ -1,10 +1,35 @@
 class StaticPagesController < ApplicationController
   def home
-    @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1)
     
     if browser.iphone?
       return render partial: "layouts/phone", locals: { aDevice: params[:device], aTailgate: nil }
     end
+
+    theCoordinates = getCoordinatesFromRequest( request )
+    
+    
+    if user_signed_in? && current_user.myFanzones.length > 0
+      @tailgate = current_user.myFanzones.first
+    elsif theCoordinates
+      theClosestTeam = Team.near(theCoordinates, 100).first
+      if !theClosestTeam
+        theClosestTeam = Team.find(313)
+      end
+      @tailgate = Tailgate.includes(:user, 
+                                    :team, 
+                                    :posts => [ {:comments => :user}, 
+                                                :user ] ).where(official:true).find_by_team_id(theClosestTeam.id)
+    else
+      @tailgate = Tailgate.includes(:user, :team, :posts => [ {:comments => :user}, :user ] ).find(15)
+    end
+    
+    @post = Post.new
+    @post.build_photo
+    @currentCityState = getCityStateFromRequest( request )
+    
+    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(theCoordinates, 50);
+    
+    render "tailgates/show"
   end
 
   def about

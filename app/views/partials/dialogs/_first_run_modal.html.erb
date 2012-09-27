@@ -1,0 +1,39 @@
+<div id="myFirstRunModal" class="modal hide">
+  <div class="modal-body">
+    <div class="welcome">welcome to</div>
+    <div class="firstRunContent">
+      <div class="branding">
+        <div class="logo">
+          <%= image_tag "fanzo-logo-01.png", size:"240x75", alt:"Fanzo.me" %>
+        </div>
+        <div class="tagline">
+          <h2>Where Fans Rule</h2>
+        </div>
+      </div>
+      <div class="callToAction">
+        <div class="getStarted">
+          Let's get started!<br/>Login to pick YOUR team:
+        </div>
+        <div class="goLogin">
+          <%= render partial: "partials/buttons/facebook_login_button", locals:{resource_name:"user"} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="latestNews" class="bubble">
+  Get the latest news, photos and videos for your team.
+</div>
+<div id="localVenues" class="bubble">
+  Find local venues to meet up with other fans and watch the game.
+</div>
+<div id="postThoughts" class="bubble">
+  Post your thoughts to the Fanzone Chatter stream.
+</div>
+<div id="teamTweets" class="bubble">
+  Real-time Tweets about your team.
+</div>
+<div id="meetFans" class="bubble">
+  Meet other fans and invite your friends to the party.
+</div>

@@ -47,7 +47,7 @@ var DialogResizer = function()
   
   this.dismissIfEscape = function(e)
   {
-    if (e.keyCode == 27)
+    if (e.keyCode == 27 && typeof mySingleFirstRunWizard === 'undefined')
     {
       $(".modal").modal('hide');
     }

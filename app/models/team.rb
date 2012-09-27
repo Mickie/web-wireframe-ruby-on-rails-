@@ -30,6 +30,19 @@ class Team < ActiveRecord::Base
   
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :social_info
+
+  geocoded_by :stadium_address
+  after_validation :geocode, :if => :stadium_address_changed?
+  
+  attr_accessible :name, :team_id, :venue_id
+  
+  def stadium_address
+    location.one_line_address
+  end
+  
+  def stadium_address_changed?
+    return location.one_line_address_changed? || latitude != location.latitude || longitude != location.longitude
+  end
   
   attr_accessible :name,
                   :short_name,
