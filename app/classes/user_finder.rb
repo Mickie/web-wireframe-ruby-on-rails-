@@ -18,6 +18,8 @@ class UserFinder
     rescue Exception => e
       Rails.logger.warn "Error getting info from facebook => #{e.to_s}"  
     end    
+    
+    #TODO Need to get long lived access token, see https://developers.facebook.com/roadmap/offline-access-removal/ 
 
     thePassword = Devise.friendly_token[0,20]
     theImage = "http://graph.facebook.com/#{aFacebookId}/picture?type=square"
@@ -46,7 +48,7 @@ class UserFinder
     theImage = access_token.info.image
     theLocation = access_token.info.location
   
-    theUserWithThisFacebookId = User.where( facebook_user_id: access_token.uid ).first
+    theUserWithThisFacebookId = User.find_by_facebook_user_id( theId )
     
     if theUserWithThisFacebookId
       theUserWithThisFacebookId.facebook_access_token = theToken
@@ -94,7 +96,7 @@ class UserFinder
     theImage = access_token.info.image
     theLocation = access_token.info.location
 
-    theUserWithThisFoursquareId = User.where( foursquare_user_id: theId).first
+    theUserWithThisFoursquareId = User.find_by_foursquare_user_id( theId )
 
     if theUserWithThisFoursquareId
       theUserWithThisFoursquareId.foursquare_access_token = theToken
@@ -144,7 +146,7 @@ class UserFinder
     theBio = access_token.info.description
     theLocation = access_token.info.location
   
-    theUserWithThisTwitterId = User.where( twitter_user_id: theId ).first
+    theUserWithThisTwitterId = User.find_by_twitter_user_id( theId )
 
     if aSignedInUser
       if theUserWithThisTwitterId && aSignedInUser.id != theUserWithThisTwitterId.id
@@ -179,7 +181,7 @@ class UserFinder
     theImage = access_token.info.image
     theBio = access_token.info.bio
 
-    theUserWithThisInstagramId = User.where( instagram_user_id: theId).first
+    theUserWithThisInstagramId = User.find_by_instagram_user_id( theId )
 
     if aSignedInUser
       if aSignedInUser == theUserWithThisInstagramId
