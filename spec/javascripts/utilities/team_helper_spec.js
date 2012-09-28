@@ -5,20 +5,20 @@ describe("team_helper", function() {
   describe("onTeamsReady", function() {
   
     beforeEach(function() {
-      myTeamHelper = new TeamHelper("#league_picker", "#team_picker");
+      myTeamHelper = new TeamHelper("div#fake_dialog");
       loadJasmineFixture('team_picker');
       
     });
   
     it("should add 2 teams as options", function() {
       myTeamHelper.onTeamsReady(TeamData.getResponse);
-      expect($("select#team_picker").children().length).toEqual(2); 
+      expect($("select#tailgate_team_id").children().length).toEqual(2); 
     });    
   
     it("should remove existing teams when new called again", function() { 
       myTeamHelper.onTeamsReady(TeamData.getResponse);
       myTeamHelper.onTeamsReady(TeamData.getResponse);
-      expect($("select#team_picker").children().length).toEqual(2); 
+      expect($("select#tailgate_team_id").children().length).toEqual(2); 
     });
   });
 
@@ -26,7 +26,7 @@ describe("team_helper", function() {
   describe("hooks league picker", function() {
   
     beforeEach(function() {
-      myTeamHelper = new TeamHelper("#league_picker", "#team_picker");
+      myTeamHelper = new TeamHelper("div#fake_dialog");
       loadJasmineFixture('team_picker');
 
       registerFakeAjax(
@@ -39,8 +39,8 @@ describe("team_helper", function() {
   
     it("should add 2 teams as options", function() {
       myTeamHelper.connectToLeaguePicker();
-      $("#league_picker").trigger($.Event('change', {target:{value:1}}));
-      expect($("select#team_picker").children().length).toEqual(2); 
+      $("#league_picker").val(1).change();
+      expect($("select#tailgate_team_id").children().length).toEqual(2); 
     });    
   
   });

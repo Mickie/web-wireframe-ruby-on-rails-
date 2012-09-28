@@ -1,4 +1,6 @@
 $(function()
 {
-  $("#createFanzone a").click();
+  var theNewFanzoneDialog = new FanzoneDialog("#myCreateFanzoneModal", false);
+  theNewFanzoneDialog.initialize();
+  $("#myCreateFanzoneModal").show();
 });

@@ -1,7 +1,5 @@
 <h1>New tailgate</h1>
 
-<% if !user_signed_in? %>
-    <%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: @tailgate } %>
-<% end %>
+<%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: @tailgate } %>
 
 <%= link_to 'Back', tailgates_path %>

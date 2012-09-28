@@ -1,28 +1,28 @@
-var TeamHelper = function(aLeagueSelectElementId, aTeamSelectElementId)
+var TeamHelper = function(aParentSelector)
 {
-  this.myLeagueSelectElementId = aLeagueSelectElementId;
-  this.myTeamSelectElementId = aTeamSelectElementId;
+  this.myParentSelector = aParentSelector;
   
   this.connectToLeaguePicker = function()
   {
-    $(this.myLeagueSelectElementId).change(createDelegate(this, this.onLeagueChanged));
+    $(this.myParentSelector).on("change", "#league_picker", createDelegate(this, this.onLeagueChanged));
   };
   
   this.onLeagueChanged = function(e)
   {
-    theLeagueId = e.target.value;
+    var theLeagueId = e.target.value;
     $.getJSON( "/teams.json?league_id=" + theLeagueId, createDelegate(this, this.onTeamsReady) );
   };
   
   this.onTeamsReady = function(aResult)
   {
-    $(this.myTeamSelectElementId).empty();
+    var theTeamSelect = $(this.myParentSelector).find("#tailgate_team_id");
+    theTeamSelect.empty();
     for(var i=0,j=aResult.length; i<j; i++)
     {
-      $(this.myTeamSelectElementId).append('<option value=' + aResult[i].id + '>' + aResult[i].name + '</option>');
+      theTeamSelect.append('<option value=' + aResult[i].id + '>' + aResult[i].name + '</option>');
     };
     
-    $(this.myTeamSelectElementId).change();
+    theTeamSelect.change();
   };
   
 }
