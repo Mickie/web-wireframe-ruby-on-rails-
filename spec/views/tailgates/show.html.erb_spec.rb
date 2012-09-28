@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe "tailgates/show" do
   before(:each) do
+    mock_geocoding!
+
     @social_info = stub_model(SocialInfo, hash_tags: "#goirish", not_tags:"")
     @sport = stub_model(Sport, id:1)
-    @team = stub_model(Team, id:1, name:"Seahawks", social_info:@social_info, sport:@sport, slug:"seahawks")
+    @location = FactoryGirl.create(:location)
+    @team = stub_model(Team, id:1, name:"Seahawks", social_info:@social_info, sport:@sport, slug:"seahawks", location:@location)
     @user = stub_model(User, email:"Joe@bar.com", id:1)
     @tailgate = assign(:tailgate, stub_model(Tailgate,
       :name => "Name",

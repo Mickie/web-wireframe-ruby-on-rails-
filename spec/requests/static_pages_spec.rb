@@ -5,15 +5,21 @@ describe "StaticPages" do
   subject { page }
   
   describe "Home page" do
-    before { visit root_path }
+
+    before do
+      mock_geocoding!
+      @team = FactoryGirl.create(:team)
+      Team.stub(:find).and_return(@team)
+      theTailgate = FactoryGirl.create(:tailgate, team:@team, official:true)
+      visit root_path 
+    end
     
     it "should successfully respond to a request" do
       get root_path
       response.status.should be(200)
     end
     
-    it { should have_selector('title', text: 'Fanzo - Where Fans Rule!') }
-    it { should have_selector('p.tagline', text: 'where fans rule') }
+    it { should have_selector('div.tagline', text: 'where fans rule') }
     
     describe "for guest" do
       
