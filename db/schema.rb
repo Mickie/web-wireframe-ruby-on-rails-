@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927062154) do
+ActiveRecord::Schema.define(:version => 20120929044125) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -448,6 +448,10 @@ ActiveRecord::Schema.define(:version => 20120927062154) do
     t.string   "description"
     t.integer  "email_bit_flags",         :default => 0,  :null => false
     t.string   "slug"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "hometown"
+    t.string   "location"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

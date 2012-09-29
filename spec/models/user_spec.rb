@@ -29,10 +29,13 @@ describe User do
   it { should respond_to(:user_locations) }
   it { should respond_to(:user_comment_votes) }
   it { should respond_to(:user_post_votes) }
-  it { should respond_to(:locations) }
   it { should respond_to(:tailgates) }
   it { should respond_to(:isConnectedToTwitter?)}
   it { should respond_to(:full_name)}
+  it { should respond_to(:latitude)}
+  it { should respond_to(:longitude)}
+  it { should respond_to(:hometown)}
+  it { should respond_to(:location)}
 
   it { should respond_to(:tailgate_followers)}
   it { should respond_to(:followed_tailgates)}
@@ -193,6 +196,84 @@ describe User do
     it "should return true when connected to twitter" do
       theUser = User.create(email:"joe@server.co", password:"please", password_confirmation: "please", twitter_user_token:'token', twitter_user_secret:'secret')
       theUser.isConnectedToTwitter?.should be_true
+    end
+  end
+
+  describe "updating from facebook data" do
+    before do
+      mock_geocoding!
+    end
+    
+    let(:theData) { '{"id": "690891536", 
+                      "name": "Paul Ingalls", 
+                      "first_name": "Paul", 
+                      "last_name": "Ingalls", 
+                      "link": "https://www.facebook.com/paulingalls", 
+                      "username": "paulingalls", 
+                      "hometown": {
+                        "id": "111723635511834", 
+                        "name": "Bellevue, Washington"
+                      }, 
+                      "location": {
+                        "id": "105506992816118", 
+                        "name": "Kirkland, Washington"
+                      },
+                      "favorite_teams": [
+                        {
+                          "id": "155703994459155", 
+                          "name": "Notre Dame Football"
+                        }, 
+                        {
+                          "id": "34459843588", 
+                          "name": "Seattle Sounders FC"
+                        }, 
+                        {
+                          "id": "84249551721", 
+                          "name": "Seattle Seahawks"
+                        }, 
+                        {
+                          "id": "132551270119496", 
+                          "name": "Notre Dame Fighting Irish"
+                        }
+                      ]
+                    }' }
+                    
+    it "should handle empty data" do
+      @user.updateFromFacebook("{}")
+    end
+    
+    it "should save off the hometown" do
+      @user.hometown.should be(nil)
+      @user.updateFromFacebook(theData)
+      @user.hometown.should eq("Bellevue, Washington")
+      @user.user_locations.find_by_location_query("Bellevue, Washington").should_not be(nil)
+    end
+    
+    it "should save off the location" do
+      @user.location.should be(nil)
+      @user.updateFromFacebook(theData)
+      @user.location.should eq("Kirkland, Washington")
+      @user.user_locations.find_by_location_query("Kirkland, Washington").should_not be(nil)
+    end
+    
+    it "should add favorite teams" do
+      theSounders = FactoryGirl.create(:team, name:"Seattle Sounders FC")
+      theSeahawks = FactoryGirl.create(:team, name:"Seattle Seahawks")
+      theIrish = FactoryGirl.create(:team, name:"Notre Dame Fighting Irish")
+      @user.teams.length.should be(0)
+      @user.updateFromFacebook(theData)
+      @user.teams.length.should be(3)
+    end
+    
+    it "doesn't add team if team already there" do
+      theSounders = FactoryGirl.create(:team, name:"Seattle Sounders FC")
+      theSeahawks = FactoryGirl.create(:team, name:"Seattle Seahawks")
+      theIrish = FactoryGirl.create(:team, name:"Notre Dame Fighting Irish")
+      @user.teams.push(theSounders)
+      @user.save
+      @user.teams.length.should be(1)
+      @user.updateFromFacebook(theData)
+      @user.teams.length.should be(3)
     end
   end
 

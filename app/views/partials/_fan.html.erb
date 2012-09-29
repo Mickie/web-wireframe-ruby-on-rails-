@@ -1,0 +1,9 @@
+<div class="profile_pic">
+  <% if aFan.image %>
+    <%= link_to image_tag( aFan.image, size:"48x48" ), user_path(aFan) %>
+  <% end %>
+</div>
+<div class="nameAndPost">
+  <h5><%= aFan.full_name %></h5>
+  <span><%= aFan.location %></span>
+</div>

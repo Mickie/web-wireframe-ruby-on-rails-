@@ -140,27 +140,11 @@
           </div>
           <ul class="fanList">
             <li class="fanItem">
-              <div class="profile_pic">
-                <% if @tailgate.user.image %>
-                  <%= link_to image_tag( @tailgate.user.image, size:"48x48" ), user_path(@tailgate.user) %>
-                <% end %>
-              </div>
-              <div class="nameAndPost">
-                <h5><%= @tailgate.user.full_name %></h5>
-                <span>Location</span>
-              </div>
+              <%= render partial: "/partials/fan", locals: { aFan: @tailgate.user } %>
             </li>
-            <% @tailgate.followers.limit(24).each do |aTailgateFollower| %>
+            <% @tailgate.followers.each do |aTailgateFollower| %>
               <li class="fanItem">
-                <div class="profile_pic">
-                  <% if aTailgateFollower.image %>
-                    <%= link_to image_tag( aTailgateFollower.image, size:"48x48" ), user_path(aTailgateFollower) %>
-                  <% end %>
-                </div>
-                <div class="nameAndPost">
-                  <h5><%= aTailgateFollower.full_name %></h5>
-                  <span>Location</span>
-                </div>
+                <%= render partial: "/partials/fan", locals: { aFan: aTailgateFollower } %>
               </li>
             <% end %>
           </ul>

@@ -32,6 +32,15 @@ class UsersController < ApplicationController
       format.json { render json: @user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) }
     end
   end
+  
+  def update_from_facebook
+    @user = User.find(params[:id])
+    @user.updateFromFacebook(params[:facebook_me])
+
+    respond_to do |format|
+      format.json { render json: @user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) }
+    end
+  end
 
   private
     

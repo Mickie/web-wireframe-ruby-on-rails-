@@ -12,6 +12,7 @@ FanzoSite::Application.routes.draw do
     get 'connect_twitter', on: :member
     get 'connect_instagram', on: :member
     post 'client_facebook_login', on: :collection, defaults: {format: "json"}
+    post 'update_from_facebook', on: :member, defaults: {format: "json"}
     resources :user_teams, only: [ :create, :destroy ] 
     resources :user_locations, only: [ :create, :destroy ]
     resources :user_brags, only: [ :create, :destroy ]

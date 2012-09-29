@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   has_many :teams, through: :user_teams
   
   has_many :user_locations, inverse_of: :user, dependent: :destroy
-  has_many :locations, through: :user_locations
 
   has_many :user_teams, inverse_of: :user, dependent: :delete_all
   has_many :teams, through: :user_teams
@@ -68,6 +67,18 @@ class User < ActiveRecord::Base
                   :no_fb_share_on_create_tailgate,
                   :no_fb_share_on_follow_tailgate
                   
+  geocoded_by :location_or_hometown
+  after_validation :geocode, :if => :location_or_hometown_changed?
+  
+  def location_or_hometown
+    location || hometown
+  end
+  
+  def location_or_hometown_changed?
+    return location_changed? || hometown_changed?
+  end
+                   
+                  
   def isConnectedToTwitter?
     return twitter_user_token? && twitter_user_secret?
   end
@@ -77,6 +88,32 @@ class User < ActiveRecord::Base
     if (theDefaultTailgate)
       follow!(theDefaultTailgate)
     end
+  end
+  
+  def updateFromFacebook( aDataJsonString )
+    theData = JSON.parse(aDataJsonString)
+    if (theData["hometown"] && theData["hometown"]["name"] && theData["hometown"]["name"] != self.hometown)
+      self.hometown = theData["hometown"]["name"]
+      self.user_locations.create(location_query: self.hometown)
+    end
+
+    if (theData["location"] && theData["location"]["name"] && theData["location"]["name"] != self.location)
+      self.location = theData["location"]["name"]
+      self.user_locations.create(location_query: self.location)
+    end
+    
+    if (theData["favorite_teams"])
+      theData["favorite_teams"].each do |aTeam|
+        if (aTeam["name"])
+          theTeam = Team.find_by_name(aTeam["name"])
+          if (theTeam && self.teams.find_by_id(theTeam.id) == nil)
+            self.teams.push(theTeam)
+          end
+        end
+      end
+    end
+
+    self.save
   end
   
   def full_name

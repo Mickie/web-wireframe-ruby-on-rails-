@@ -201,6 +201,38 @@ var UserManager = function()
     {
       this.loginToFanzo();
     }
+    else if (!this.myFanzoAccountDetails.location)
+    {
+      this.updateDataFromFacebook();
+    }
+  }
+  
+  this.updateDataFromFacebook = function()
+  {
+    var theToken = $('meta[name=csrf-token]').attr('content');
+    var theUrl = "/users/" + this.myFanzoAccountDetails.slug 
+                  + "/update_from_facebook.json?authenticity_token=" 
+                  + theToken;
+    var theData = { "facebook_me": JSON.stringify(this.myFacebookModel.facebook_user_data) };
+    $.ajax({
+             type:"POST",
+             data: theData,
+             url: theUrl,
+             cache:false,
+             dataType: "json",
+             success: createDelegate(this, this.onUpdateDataFromFacebookComplete ),
+             error: createDelegate(this, this.onUpdateDataFromFacebookError )
+           });
+  }
+  
+  this.onUpdateDataFromFacebookComplete = function(aResponse)
+  {
+    this.myFanzoAccountDetails = aResponse;
+  }
+  
+  this.onUpdateDataFromFacebookError = function()
+  {
+    
   }
   
   this.onFacebookLoggedOut = function()
