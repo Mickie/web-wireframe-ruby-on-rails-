@@ -66,10 +66,65 @@
   font-size: 14px;
   font-weight: bold;
   color: $mediumTextColor;
+  background-color: $firstRunBubbleTopGradient;
   
   @include gradient-vertical($firstRunBubbleTopGradient, $firstRunBubbleBottomGradient);
   @include border-radius(6px);
   @include box-shadow-with-ie(0 1px 3px rgba(25, 25, 25, 0.8));
+}
+
+.topArrow:after {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.topArrow:after {
+  border-color: rgba(253, 255, 228, 0);
+  border-bottom-color: #FDFFE4;
+  border-width: 15px;
+  left: 50%;
+  margin-left: -15px;
+}
+
+.rightArrow:after {
+  left: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.rightArrow:after {
+  border-color: rgba(253, 255, 228, 0);
+  border-left-color: #FCFFD8;
+  border-width: 15px;
+  top: 50%;
+  margin-top: -15px;
+}
+
+.leftArrow:after {
+  right: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.leftArrow:after {
+  border-color: rgba(253, 255, 228, 0);
+  border-right-color: #FCFFD8;
+  border-width: 15px;
+  top: 50%;
+  margin-top: -15px;
 }
 
 #latestNews
