@@ -70,17 +70,12 @@
                 <%= render partial: "partials/navigation/top_nav_tailgate", locals: { aTailgate: aTailgate } unless aTailgate.new_record? %>
               <% end %>
             <% end %>
-            <li id="allFanzones">
+            <li id="allFanzones" class="fanzone">
               <a onclick="loadData('<%= tailgates_path %>', '#allFanzones')" href="#allFanzones">
                 <table>
                   <tr>
-                    <td class="team_logo"><i></i></td>
-                    <td class="fanzone_name">
-                      <p>All Fanzones</p>
-                    </td>
-                    <td class="count">
-                      <p><%= Tailgate.count -%></p>
-                    </td>
+                    <td class="team_logo"><div></div></td>
+                    <td class="fanzone_name">All Fanzones - <%= Tailgate.count -%></td>
                   </tr>
                 </table>
               </a>
