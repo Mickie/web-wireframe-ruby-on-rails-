@@ -3,11 +3,13 @@
 
 #venues
 {
+  position:relative;
   background-color: $venueSliderBackgroundColor;
   background-image: asset-url("30px-shine.png", image);
   background-repeat: repeat-x;
   border-top: 1px solid $venueSliderTopBorderColor;
   border-bottom: 1px solid $venueSliderBottomBorderColor;
+  height: 60px;
   @include clearfix;
   
   #locationPicker
@@ -67,42 +69,53 @@
   
   #locationVenues
   {
-    float: left;
-    padding: 10px;
+    position: absolute;
+    top: 0px;
+    left: 25%;
+    width: 70%;
+    padding: 0px 10px;
+    overflow: hidden;
     
-    .venue
+    .venueList
     {
-      position: relative;
-      float:left;
-      padding-left: 10px;
-      border-left: 1px solid $venueSliderVenueNameColor;
-      
-      .venue_image
+      display:table;
+      white-space:nowrap;
+
+      .venue
       {
-        position: absolute;
-        top: -1px;
-        left: -6px;
-        background-color: $venueSliderVenueNameColor;
-        width: 11px;
-        height: 10px;
-        @include border-radius-with-ie(50%)
-      }
-      
-      .venue_name
-      {
-        h5
+        position: relative;
+        float:left;
+        margin: 10px 0px;
+        padding: 0px 10px;
+        border-left: 1px solid $venueSliderVenueNameColor;
+        
+        .venue_image
         {
-          text-transform: uppercase;
-          color: $venueSliderVenueNameColor;
-          font-size: 1.8em;
-          line-height: 1.0em;
+          position: absolute;
+          top: -1px;
+          left: -6px;
+          background-color: $venueSliderVenueNameColor;
+          width: 11px;
+          height: 10px;
+          @include border-radius-with-ie(50%)
         }
-      }
-      
-      .venue_address
-      {
-        color: $lightTextColor;
-        text-transform: uppercase;
+        
+        .venue_name
+        {
+          h5
+          {
+            text-transform: uppercase;
+            color: $venueSliderVenueNameColor;
+            font-size: 1.8em;
+            line-height: 1.0em;
+          }
+        }
+        
+        .venue_address
+        {
+          color: $lightTextColor;
+          text-transform: uppercase;
+        }
       }
     }
   }
