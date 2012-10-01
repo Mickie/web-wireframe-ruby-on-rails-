@@ -10,13 +10,8 @@
     <ul class="dropdown-menu">
       <% if aUserSignedInFlag %>
         <% current_user.user_locations.each do | aUserLocation | %>
-          <li>
-            <%= form_tag("/watch_sites/search", :method => "get", remote: 'true',  class: "form-location") do %>
-              <%= hidden_field_tag(:team_id, @tailgate.team.id) %>
-              <%= hidden_field_tag(:location_id, aUserLocation.id) %>
-              <%= link_to aUserLocation.location_query, "javascript:void(0);", class:"locationSubmit", remote: "true"  %>
-            <% end %>
-          </li>
+          <%= render partial: "partials/watch_site_venues/user_location_search", 
+                      locals: { aUserLocation: aUserLocation, aTeamId: @tailgate.team.id }%>
         <% end %>
         <li class="divider"></li>
       <% end %>

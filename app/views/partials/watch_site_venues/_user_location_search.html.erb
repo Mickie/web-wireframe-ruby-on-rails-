@@ -1,0 +1,7 @@
+<li>
+  <%= form_tag("/watch_sites/search", :method => "get", remote: 'true',  class: "form-location") do %>
+    <%= hidden_field_tag(:team_id, aTeamId) %>
+    <%= hidden_field_tag(:location_id, aUserLocation.id) %>
+    <%= link_to aUserLocation.location_query, "javascript:void(0);", class:"locationSubmit", remote: "true"  %>
+  <% end %>
+</li>

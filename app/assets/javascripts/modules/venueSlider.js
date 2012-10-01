@@ -11,7 +11,7 @@ var VenueSlider = function()
   this.setupPicker = function()
   {
     $(this.myVenueSelector).find(".dropdown-menu").dropdown();
-    $(this.myVenueSelector).find('.dropdown-menu a').click(createDelegate(this, this.onMenuSelect));
+    $(this.myVenueSelector).find('.dropdown-menu').on("click", "a", createDelegate(this, this.onMenuSelect));
   }
   
   this.onMenuSelect = function(e)

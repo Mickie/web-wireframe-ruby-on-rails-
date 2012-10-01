@@ -3,3 +3,11 @@ $("#myChangeLocationModal #location_query").val("");
 $("#locationVenues .venueList").html("<%= escape_javascript( render partial:"partials/watch_site_venues/watch_site_venue_list", 
                                                                      locals:{ aWatchSiteList: @watch_sites, 
                                                                               aLocationString: @locationQuery } ) %>")
+$("#locationPicker .currentLocation").text('<%=@locationQuery%>');
+<% if @newUserLocation != nil %>
+  $("#locationPicker .dropdown-menu .divider").before("<%= escape_javascript( 
+      render partial: "partials/watch_site_venues/user_location_search", 
+              locals: { aUserLocation: @newUserLocation, aTeamId: params[:team_id] }
+      ) %>");
+<% end %>
+

@@ -3,6 +3,7 @@ class WatchSitesController < ApplicationController
 
   # GET /watch_sites/search.js
   def search
+    @newUserLocation = nil;
     @locationId = params[:location_id]
     if (@locationId)
       theLocation = UserLocation.find(@locationId)
@@ -10,7 +11,7 @@ class WatchSitesController < ApplicationController
     else
       @locationQuery = params[:location_query]
       if user_signed_in?
-        current_user.user_locations.create(location_query: @locationQuery )
+        @newUserLocation = current_user.user_locations.create(location_query: @locationQuery )
       end
     end
     
