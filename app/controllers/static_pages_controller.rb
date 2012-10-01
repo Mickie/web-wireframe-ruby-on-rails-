@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     
-    if browser.iphone?
+    if false # browser.iphone?
       return render partial: "layouts/phone", locals: { aDevice: params[:device], aTailgate: nil }
     end
 
