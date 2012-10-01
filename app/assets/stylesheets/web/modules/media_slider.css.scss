@@ -23,15 +23,19 @@ div#myMediaSlider
     background-color: $backgroundColor;
     vertical-align: top;
     
-    
     .bingNewsItem
     {
       height: 130px;
       width: 226px;
       padding: 20px 20px 0px 20px;
       color: white;
-      background-color: black;
+      background-color: $bingNewsBackgroundColor;
       white-space:normal;
+      
+      &:hover
+      {
+        background-color: $bingNewsHoverColor;
+      }
       
       h3
       {
@@ -87,6 +91,11 @@ div#myMediaSlider
         left: -49px;
         border-left: 46px solid $fanzoButtonBackground;
         border-left: 46px solid rgba(223, 53, 7, .9);
+        
+        &:hover
+        {
+          border-left-color: $fanzoButtonHoverColor;
+        }
       }
     }
 
@@ -100,6 +109,10 @@ div#myMediaSlider
       {
         border-right: 46px solid $fanzoButtonBackground;
         border-right: 46px solid rgba(223, 53, 7, .9);
+        &:hover
+        {
+          border-right-color: $fanzoButtonHoverColor;
+        }
       }
     }
   }

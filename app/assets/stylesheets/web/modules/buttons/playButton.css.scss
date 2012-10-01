@@ -13,6 +13,12 @@
   background: rgb(64, 64, 64);
   background: rgba(127, 127, 127, .7);
   @include border-radius-with-ie(50%);
+  
+  &:hover
+  {
+    background: rgb(77, 51, 102);
+    background: rgba(153, 102, 204, .7);
+  }
     
   .playButton
   {

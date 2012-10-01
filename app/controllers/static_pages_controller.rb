@@ -15,14 +15,14 @@ class StaticPagesController < ApplicationController
     elsif theCoordinates
       theClosestTeam = Team.near(theCoordinates, 100).first
       if !theClosestTeam
-        theClosestTeam = Team.find(313)
+        theClosestTeam = Team.find(291)
       end
       @tailgate = Tailgate.includes(:user, 
                                     :team, 
                                     :posts => [ {:comments => :user}, 
                                                 :user ] ).where(official:true).find_by_team_id(theClosestTeam.id)
     else
-      @tailgate = Tailgate.includes(:user, :team, :posts => [ {:comments => :user}, :user ] ).find(15)
+      @tailgate = Tailgate.includes(:user, :team, :posts => [ {:comments => :user}, :user ] ).find(226)
     end
     
     @post = Post.new

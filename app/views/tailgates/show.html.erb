@@ -38,15 +38,6 @@
         <div class="banner_content">
           <div class="bannerRight">
             <div class="owner">
-              <div>Created by</div>
-              <% if @tailgate.user.image %>
-                <div class="profile_pic">
-                  <%= link_to image_tag( @tailgate.user.image, size:"32x32" ), user_path(@tailgate.user) %>
-                </div>
-              <% end %>
-              <div class="owner_details">
-                <h3><%= link_to @tailgate.user.full_name, user_path(@tailgate.user) %></h3>
-              </div>
               <div class="lastUpdated">
                 <% if @tailgate.posts.any? %>
                   <p>
@@ -135,7 +126,7 @@
             </div>
             
             <div class="inviteFans">
-              <a class="fanzoButton">Invite</a>
+              <!-- <a class="fanzoButton">Invite</a> -->
             </div>
           </div>
           <ul class="fanList">

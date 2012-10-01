@@ -131,6 +131,16 @@ div#postForm
           {
             outline: none;
           }
+          
+          .drop_arrow
+          {
+            border-top: white solid 10px;
+            
+            &:hover
+            {
+              border-top: white solid 10px;
+            }
+          }
         }
         
         .dropdown-menu

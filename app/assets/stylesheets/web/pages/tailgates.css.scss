@@ -93,10 +93,13 @@ div#tailgate_show
         
         .bannerRight
         {
+          position:absolute;
+          top: 0px;
+          bottom: 0px;
+          right: 0px;
           padding: 0px 20px;
           margin: 10px 0px;
           border-left: 1px solid $fanzoneBannerRightLeftBorder;
-          float:right;
 
           .owner
           {
@@ -197,7 +200,7 @@ div#tailgate_show
               height: 48px;
               padding: 10px 5px 0px 10px;
               @include clearfix();
-
+              
               .profile_pic
               {
                 float:left;
@@ -219,6 +222,19 @@ div#tailgate_show
                 span
                 {
                   color: $lightTextColor;
+                }
+              }
+              
+              &:hover
+              {
+                h5
+                {
+                  color: $linkHoverColor;
+                }
+
+                span
+                {
+                  color: $linkHoverColor;
                 }
               }
             }

@@ -201,7 +201,7 @@ var UserManager = function()
     {
       this.loginToFanzo();
     }
-    else if (!this.myFanzoAccountDetails.location)
+    else if (this.myFanzoAccountDetails && !this.myFanzoAccountDetails.location)
     {
       this.updateDataFromFacebook();
     }

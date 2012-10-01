@@ -1,0 +1,17 @@
+@import "partials/colors";
+
+.drop_arrow
+{
+  margin: 0px;
+  width:0px;
+  height:0px;
+  border-top: $dropArrowColor solid 10px;
+  border-left: transparent solid 5px;
+  border-right: transparent solid 5px;
+  
+  &:hover
+  {
+    border-top-color: $dropArrowHoverColor;
+  }
+}
+

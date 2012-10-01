@@ -3,13 +3,19 @@
 
 #top_nav
 {
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  z-index: 2;
+  
   .navbar-inner
   {
     height: 40px;
     padding: 10px 0px;
     border: none;
     border-bottom: 1px solid $topnavBottomBorderColor;
-    background-color: $topnavBackroundColor;
+    background-color: $topnavBackgroundColor;
     background-image: asset-url("30px-shine.png", image);
     background-repeat: repeat-x;
     filter: none;
@@ -19,7 +25,6 @@
 
     .drop_arrow
     {
-      border-top: $topnavTextColor solid 10px;
       float: left;
       margin:5px 0px 0px 5px;
     }
@@ -37,8 +42,20 @@
         {
           height: 32px;
           float:left;
-          color: $topnavTextColor;
           text-transform: uppercase;
+          
+          &:hover
+          {
+            .name
+            {
+              color: $linkHoverColor;
+            }
+            
+            .drop_arrow
+            {
+              border-top-color: $dropArrowHoverColor;
+            }
+          }
           
           .dropdown-menu
           {
@@ -90,6 +107,18 @@
             float:left;
           }
           
+          .logoHolder
+          {
+            background-image: asset-url("fanzo-logo-01.png", image);
+            width:160px;
+            height:50px;
+            
+            &:hover
+            {
+              background-image: asset-url("fanzo-logo-01h.png", image);
+            }
+          }
+          
           .tagline
           {
             padding-top:20px;
@@ -111,7 +140,6 @@
         & > li > a
         {
           padding:17px 0px 0px 0px;
-          color: $topnavTextColor;
           text-transform: uppercase;
           letter-spacing: 0.03em;
           font-size: 2em;
@@ -120,9 +148,26 @@
         
         #myFanzones
         {
+          
+          &:hover
+          {
+            color: $linkHoverColor;
+
+            .name
+            {
+              color: $linkHoverColor;
+            }
+            
+            .drop_arrow
+            {
+              border-top-color: $dropArrowHoverColor;
+            }
+          }
+          
           span
           {
             float:left;
+            color: $linkColor;
           }
           
           .fanzone

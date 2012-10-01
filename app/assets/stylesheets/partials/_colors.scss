@@ -8,16 +8,17 @@ $lightTextColor: #999999;
 $mediumTextColor: #666666;
 $darkTextColor: #333333;
 $linkColor: #DF3507;
+$linkHoverColor: #9966CC;
 
 $borderColor: #CCCCCC;
 $backgroundColor: #DDDDDD;
 
-$dropArrow: white;
+$dropArrowColor: $linkColor;
+$dropArrowHoverColor: $linkHoverColor;
 
 $topnavBottomBorderColor: #9869C9;
-$topnavTextColor: #DF3507;
 $topnavTaglineTextColor: #666666;
-$topnavBackroundColor: #f0f0f0;
+$topnavBackgroundColor: #f0f0f0;
 
 $navLoginBackground: #DF3507;
 $navLinkTextColor: #333333;
@@ -30,7 +31,8 @@ $navTaglineColor: #DF3507;
 $navHoverColor: #e7e2ec;
 
 $fanzoButtonText: white;
-$fanzoButtonBackground: #DF3507;
+$fanzoButtonBackground: $linkColor;
+$fanzoButtonHoverColor: $linkHoverColor;
 $fanzoButtonBackgroundTopGradient: #FA633E;
 $fanzoButtonBackgroundBottomGradient: #F50000;
 $fanzoButtonBorder: #F1F1F1;
@@ -47,6 +49,9 @@ $fanzoneBannerLogoBackground: white;
 $fanzoneContentBackground: #F7F7F7;
 $fanzoneBannerTextColor: white;
 $fanzoneBannerRightLeftBorder: #C9B7D1;
+
+$bingNewsBackgroundColor: black;
+$bingNewsHoverColor: $linkHoverColor;
 
 $venueSliderBackgroundColor: #f0f0f0;
 $venueSliderTopBorderColor: #EFEFEF;

@@ -37,7 +37,8 @@ a
   
   &:hover
   {
-    color: $linkColor;
+    color: $linkHoverColor;
+    text-decoration: none;
   }
 }
 
@@ -51,16 +52,6 @@ a
   float:left;
   width:32px;
   height:32px;
-}
-
-.drop_arrow
-{
-  margin: 0px;
-  width:0px;
-  height:0px;
-  border-top: $dropArrow solid 10px;
-  border-left: transparent solid 5px;
-  border-right: transparent solid 5px;
 }
 
 .debug_dump 

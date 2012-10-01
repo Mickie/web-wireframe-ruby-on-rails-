@@ -15,6 +15,19 @@
     padding: 15px 10px;
     float:left;
     
+    &:hover
+    {
+      .currentLocation
+      {
+        color: $linkHoverColor;
+      }
+      
+      .drop_arrow
+      {
+        border-top-color: $dropArrowHoverColor;
+      }
+    }
+    
     h4
     {
       float: left;
@@ -31,7 +44,6 @@
       margin-top: 10px;
       margin-left: 5px;
       float: left;
-      border-top-color: $linkColor;
     }
     
     .dropdown-menu

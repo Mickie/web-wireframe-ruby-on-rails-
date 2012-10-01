@@ -49,9 +49,7 @@
 
       <div id="logo">
         <a href="/">
-          <div>
-            <%= image_tag "fanzo-logo-01.png", size:"160x50", alt:"Fanzo.me" %>
-          </div>
+          <div class="logoHolder"></div>
           <div class="tagline">where fans rule</div>
         </a>
       </div>
@@ -63,7 +61,7 @@
           <% else %>
             <a href="" data-target="#myFanzones" class="dropdown-toggle" data-toggle="dropdown">
           <% end %>
-            <span>My Fanzones</span>
+            <span class="name">My Fanzones</span>
             <div class="drop_arrow"></div>
           </a>
           <ul class="dropdown-menu">
