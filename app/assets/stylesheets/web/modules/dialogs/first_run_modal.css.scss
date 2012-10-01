@@ -3,50 +3,44 @@
 
 #myFirstRunModal
 {
-  .welcome
+  .modal-body
   {
-    padding: 10px 0px 5px 50px;
-    font-size: 1.7em;
-    font-weight: bold;
-    color: $lightTextColor;
-  }
-  
-  .firstRunContent
-  {
-    .branding
+    width: 570px;
+    height: 190px;
+    padding-top: 30px;
+    
+    .firstRunContent
     {
       float: left;
-      .logo
+
+      .welcome
       {
-        overflow:hidden;
-        height: 55px;
-        margin-left: -50px;
+        padding: 0px 0px 5px 60px;
+        font-size: 1.6em;
+        color: $lightTextColor;
       }
-      
-      .tagline
+
+      .branding
       {
-        padding-left: 50px;
-        
-        h2
+        .logo
         {
-          text-transform: uppercase;
-          color: $mediumTextColor;  
+          margin-left: -15px;
         }
+        
       }
     }
-    
     .callToAction
     {
-      padding-left: 250px;
-      padding-right: 20px;
+      padding-left: 290px;
+      padding-right: 10px;
       
       .getStarted
       {
-        color: $mediumTextColor;
+        color: $darkTextColor;
         padding: 10px;
         padding-top: 0px;
-        font-weight: bold;
-        font-size: 13px;
+        font-size: 1.6em;
+        line-height: 1.3em; 
       }
       
       .goLogin
@@ -65,10 +59,9 @@
   z-index: 1049;
   font-size: 14px;
   font-weight: bold;
-  color: $mediumTextColor;
-  background-color: $firstRunBubbleTopGradient;
+  color: $firstRunBubbleTextColor;
+  background-color: $firstRunBubbleBackground;
   
-  @include gradient-vertical($firstRunBubbleTopGradient, $firstRunBubbleBottomGradient);
   @include border-radius(6px);
   @include box-shadow-with-ie(0 1px 3px rgba(25, 25, 25, 0.8));
 }
@@ -84,8 +77,8 @@
 }
 
 .topArrow:after {
-  border-color: rgba(253, 255, 228, 0);
-  border-bottom-color: #FDFFE4;
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: $firstRunBubbleBackground;
   border-width: 15px;
   left: 50%;
   margin-left: -15px;
@@ -102,8 +95,8 @@
 }
 
 .rightArrow:after {
-  border-color: rgba(253, 255, 228, 0);
-  border-left-color: #FCFFD8;
+  border-color: rgba(255, 255, 255, 0);
+  border-left-color: $firstRunBubbleBackground;
   border-width: 15px;
   top: 50%;
   margin-top: -15px;
@@ -120,8 +113,8 @@
 }
 
 .leftArrow:after {
-  border-color: rgba(253, 255, 228, 0);
-  border-right-color: #FCFFD8;
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: $firstRunBubbleBackground;
   border-width: 15px;
   top: 50%;
   margin-top: -15px;
