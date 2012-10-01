@@ -61,6 +61,7 @@ var FanzonePostsController = function( aPostsSelector )
     var thePostsContainer = $(this.myPostsSelector);
     thePostsContainer.find(".video_container").hide();
     thePostsContainer.find(".image_container").hide();
+    thePostsContainer.find("#photo_picker").show();
     thePostsContainer.find("#post_content").val("");
     thePostsContainer.find("#post_video_id").val("");
     thePostsContainer.find("#post_image_url").val("");

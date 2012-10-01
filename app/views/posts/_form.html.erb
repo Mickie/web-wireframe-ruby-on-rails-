@@ -20,6 +20,10 @@
       <div id="post_youtube"></div>
     </div>
   </div>
+  <div id="photo_picker" class="hide">
+    <div class="paperclip"></div>
+    <div class="pickerLabel">Attach A Photo</div>
+  </div>
   <%= f.text_area :content, rows:2, placeholder:"What's up?", required: true %>
   <div id="add_photo">
     <%= f.fields_for :photo do |p|%>
@@ -30,7 +34,6 @@
     <% end %>
   </div>
   <div id="post_controls">
-    <div id="photo_picker" class="fanzoButton hide">Attach Photo</div>
     <div id="post_combo" class="btn-group">
       <%= f.submit "Post", id:"add_post", class:"fanzoButton" %>
       <%= render partial: "partials/buttons/quick_tweet_button" %>

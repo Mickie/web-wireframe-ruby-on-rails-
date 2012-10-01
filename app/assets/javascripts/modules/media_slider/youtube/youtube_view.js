@@ -155,6 +155,7 @@ var YoutubeView = function(aContainerDivSelector,
     this.loadYouTubeInPost(aVideoId);
     this.myPostDiv.find(".video_container").slideDown(600);
     this.myPostDiv.find(".image_container").hide();
+    this.myPostDiv.find("#photo_picker").hide();
   };
   
   this.loadYouTubeInPost = function( aVideoId )

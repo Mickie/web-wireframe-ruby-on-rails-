@@ -256,6 +256,7 @@ var BingView = function(aContainerDivSelector,
       this.myPostDiv.find(".image_container img").attr("src", aBingVideo.Thumbnail.MediaUrl);
       this.myPostDiv.find(".image_container").slideDown(600);
       this.myPostDiv.find(".video_container").hide();
+      this.myPostDiv.find("#photo_picker").hide();
     }
     
   };
@@ -267,6 +268,7 @@ var BingView = function(aContainerDivSelector,
     this.myPostDiv.find(".image_container img").attr("src", aBingImage.MediaUrl );
     this.myPostDiv.find(".image_container").slideDown(600);
     this.myPostDiv.find(".video_container").hide();
+    this.myPostDiv.find("#photo_picker").hide();
   };
 
 }

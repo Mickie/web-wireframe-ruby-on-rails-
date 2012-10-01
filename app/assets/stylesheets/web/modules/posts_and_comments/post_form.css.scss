@@ -70,6 +70,40 @@ div#postForm
       }
     }
     
+    #photo_picker
+    {
+      margin-top: -30px;
+      float: right;
+      cursor: pointer;
+      color: $linkColor;
+      text-transform: uppercase;
+      
+      &:hover
+      {
+        color: $linkHoverColor;
+        
+        .paperclip
+        {
+          background: asset-url("fanzo-icons.png", image) -20px -40px no-repeat;
+        }
+      }
+      
+      .pickerLabel
+      {
+        margin-left: 25px;
+      }
+      
+      .paperclip
+      {
+        float: left;
+        width: 20px;
+        height: 20px;
+        background: asset-url("fanzo-icons.png", image) 0px -40px no-repeat;
+      }
+      
+      
+    }
+    
     #add_photo
     {
       #photoFields
@@ -95,12 +129,6 @@ div#postForm
     #post_controls
     {
       clear: both;
-
-      #photo_picker
-      {
-        float: left;
-        cursor: pointer;
-      }
 
       #post_combo
       {

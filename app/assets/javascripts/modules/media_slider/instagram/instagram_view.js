@@ -102,6 +102,7 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
       this.myPostDiv.find(".image_container img").attr("src", theUrl);
       this.myPostDiv.find(".image_container").slideDown(600);
       this.myPostDiv.find(".video_container").hide();
+      this.myPostDiv.find("#photo_picker").hide();
       
       trackEvent("MediaSlider", "post_instagram", theInstagramId);    
       $(".modal").modal("hide");
