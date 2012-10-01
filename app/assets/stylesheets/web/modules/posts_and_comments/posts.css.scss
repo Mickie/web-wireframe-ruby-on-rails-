@@ -13,6 +13,7 @@ div#posts
     background: white;
     padding: 10px;
     border-top: $fanzoneLightBorder solid 1px;
+    overflow:hidden;
     
     
     .post_content, .comment_content
