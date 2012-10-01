@@ -88,13 +88,12 @@
         float:left;
         margin: 10px 0px;
         padding: 0px 10px;
-        border-left: 1px solid $venueSliderVenueNameColor;
         
         .venue_image
         {
           position: absolute;
           top: -1px;
-          left: -6px;
+          left: 5px;
           background-color: $venueSliderVenueNameColor;
           width: 11px;
           height: 10px;
@@ -103,6 +102,7 @@
         
         .venue_name
         {
+          padding-left: 10px;
           h5
           {
             text-transform: uppercase;
@@ -110,12 +110,15 @@
             font-size: 1.8em;
             line-height: 1.0em;
           }
+          border-left: 1px solid $venueSliderVenueNameColor;
         }
         
         .venue_address
         {
+          padding-left: 10px;
           color: $lightTextColor;
           text-transform: uppercase;
+          border-left: 1px solid $venueSliderVenueNameColor;
         }
       }
     }

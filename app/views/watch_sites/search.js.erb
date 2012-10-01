@@ -11,3 +11,6 @@ $("#locationPicker .currentLocation").text('<%=@locationQuery%>');
       ) %>");
 <% end %>
 
+EventManager.get().notifyObservers("onVenueListChanged");
+
+

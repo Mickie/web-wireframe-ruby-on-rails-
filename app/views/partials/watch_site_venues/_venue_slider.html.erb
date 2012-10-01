@@ -22,9 +22,19 @@
     </ul>
   </div>
   <div id="locationVenues">
-    <div class="venueList">
-      <%= render partial:"partials/watch_site_venues/watch_site_venue_list", 
-                 locals:{ aWatchSiteList: aLocalTeamWatchSites, aLocationString: aCurrentCityState } %>
+    <div id="venueScroller">
+      <div class="venueList">
+        <%= render partial:"partials/watch_site_venues/watch_site_venue_list", 
+                   locals:{ aWatchSiteList: aLocalTeamWatchSites, aLocationString: aCurrentCityState } %>
+      </div>
+    </div>
+    <div id="scrollerControls" class="hide">
+      <div id="scrollLeft" class="navArrow navLeft">
+        <div class="navInnerControl"></div>
+      </div>
+      <div id="scrollRight" class="navArrow navRight">
+        <div class="navInnerControl"></div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,73 @@
+@import "partials/colors";
+
+.navArrow
+{
+  position:absolute;
+  top: 5px;
+  width:0px;
+  height:0px;
+  padding:0px;
+  margin:0px;
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  z-index: 1;
+  border-top: transparent solid 25px;
+  border-bottom: transparent solid 25px;
+}
+
+.navInnerControl
+{
+  position:absolute;
+  top: -23px;
+  left: 3px;
+  width:0px;
+  height:0px;
+  padding:0px;
+  margin:0px;
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  border-top: transparent solid 23px;
+  border-bottom: transparent solid 23px;      
+}
+
+
+
+.navRight
+{
+  height: 0px;
+  width: 0px;
+  right: 0px;
+  border-left: 40px solid white;
+  border-left: 40px solid rgba(255, 255, 255, .9);
+  
+  .navInnerControl
+  {
+    left: -39px;
+    border-left: 36px solid $fanzoButtonBackground;
+    border-left: 36px solid rgba(223, 53, 7, .9);
+    
+    &:hover
+    {
+      border-left-color: $fanzoButtonHoverColor;
+    }
+  }
+}
+
+.navLeft
+{
+  height: 0px;
+  width: 0px;
+  left: 0px;
+  border-right: 40px solid white;
+  border-right: 40px solid rgba(255, 255, 255, .9);
+
+  .navInnerControl
+  {
+    border-right: 36px solid $fanzoButtonBackground;
+    border-right: 36px solid rgba(223, 53, 7, .9);
+    &:hover
+    {
+      border-right-color: $fanzoButtonHoverColor;
+    }
+  }
+}
