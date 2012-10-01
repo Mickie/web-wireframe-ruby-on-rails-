@@ -93,10 +93,8 @@ div#tailgate_show
         
         .bannerRight
         {
-          position:absolute;
-          top: 0px;
-          bottom: 0px;
-          right: 0px;
+          float: right;
+          height: 120px;
           padding: 0px 20px;
           margin: 10px 0px;
           border-left: 1px solid $fanzoneBannerRightLeftBorder;
