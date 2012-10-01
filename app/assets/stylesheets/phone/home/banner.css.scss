@@ -24,18 +24,6 @@
     {
       padding-left:70px;
       
-      .official
-      {
-        display:none;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.9em;
-        color: $officialTextColor;
-        height: 12px;
-        width:100%;
-        @include gradient-horizontal($officialBadgeGradientBeginColor, $officialBadgeGradientEndColor);
-      }
-
       h1
       {
         color: $fanzoneBannerTextColor;

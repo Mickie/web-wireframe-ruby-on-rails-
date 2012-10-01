@@ -177,10 +177,6 @@ var FanzoneView = function()
         var theSlug = anItem.context.team.slug;
         return "http://fanzo-static.s3.amazonaws.com/logos/" + theSlug + "_l.png";
       },
-      ".official@style": function(anItem)
-      {
-        return anItem.context.official ? "display:block" : "display:none";
-      },
       ".banner_content@style": function(anItem)
       {
         return "background-color:" + anItem.context.color;

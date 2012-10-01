@@ -76,11 +76,6 @@
             <%= image_tag "logo-reflection.png", size:"120x120", class:"reflection" %>  
           </div>
           <div class="fanzone_details">
-            <% if @tailgate.official %>
-              <div class="official">
-                <span>Official Fanzone</span>
-              </div>
-            <% end %>
             <h1><%= @tailgate.name %></h1>
             <p class="description"><%= raw handleNewlinesAndUrls(@tailgate.description) if @tailgate.description %></p>
           </div>
