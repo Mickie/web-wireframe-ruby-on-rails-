@@ -36,7 +36,7 @@ var FanzoNavigator = function()
     {
       this.loadFrameFromHash(theHash);
     }
-    else if ( this.myCurrentHash.length > 0 )
+    else if ( this.myCurrentHash.length > 0 && !this.isFacebookCallbackHash( theHash ))
     {
       this.navToAllFanzones();
     }
