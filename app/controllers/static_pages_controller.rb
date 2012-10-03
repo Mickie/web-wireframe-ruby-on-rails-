@@ -5,15 +5,26 @@ class StaticPagesController < ApplicationController
       return render partial: "layouts/phone", locals: { aDevice: params[:device], aTailgate: nil }
     end
 
-    theCoordinates = getCoordinatesFromRequest( request )
+    @tailgate = nil;
+    
+    @currentCityState = getCityStateFromRequest( request )
+    if @currentCityState.blank?
+      if current_user && !current_user.location.blank?
+        @currentCityState = current_user.location
+      elsif current_user && !current_user.user_locations.empty?
+        @currentCityState = current_user.user_locations.first.location_query
+      else
+        @currentCityState = "Seattle, WA"
+      end
+    end
 
     if current_user && current_user.myFanzones.length < 2
       @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1) 
       return
     elsif current_user
       @tailgate = current_user.myFanzones.first
-    elsif theCoordinates
-      theClosestTeam = Team.near(theCoordinates, 100).first
+    elsif !@currentCityState.blank?
+      theClosestTeam = Team.near(@currentCityState, 100).first
       if !theClosestTeam
         theClosestTeam = Team.find(291)
       end
@@ -21,15 +32,16 @@ class StaticPagesController < ApplicationController
                                     :team, 
                                     :posts => [ {:comments => :user}, 
                                                 :user ] ).where(official:true).find_by_team_id(theClosestTeam.id)
-    else
+    end
+
+    if @tailgate.nil?
       @tailgate = Tailgate.includes(:user, :team, :posts => [ {:comments => :user}, :user ] ).find(226)
     end
     
     @post = Post.new
     @post.build_photo
-    @currentCityState = getCityStateFromRequest( request )
     
-    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(theCoordinates, 50);
+    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(@currentCityState, 50);
     
     render "tailgates/show"
   end
