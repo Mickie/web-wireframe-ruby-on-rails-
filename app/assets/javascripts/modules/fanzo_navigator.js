@@ -60,12 +60,12 @@ var FanzoNavigator = function()
   
   this.onAccountHoverStart = function(e)
   {
-    $('#account_dropdown .users_name').dropdown('toggle');
+    $('#account_dropdown .users_name').dropdown('open');
   };
   
   this.onAccountHoverEnd = function(e)
   {
-    $('#account_dropdown .users_name').dropdown('toggle');
+    $('#account_dropdown .users_name').dropdown('close');
   };
 
   this.loadData = function(aPath, aNewActiveSelector)

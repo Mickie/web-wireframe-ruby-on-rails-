@@ -36,4 +36,35 @@ $(function()
 
     return false
   }
+
+  $.fn.dropdown.Constructor.prototype.open = function(e)
+  {
+    var $this = $(this)
+      , $parent
+
+    if ($this.is('.disabled, :disabled')) return
+
+    $parent = getParent($this)
+
+    if (!$parent.hasClass('open')) {
+      $parent.addClass('open')
+      $this.focus()
+    }
+
+    return false
+  }
+
+  $.fn.dropdown.Constructor.prototype.close = function(e)
+  {
+    var $this = $(this)
+      , $parent
+
+    if ($this.is('.disabled, :disabled')) return
+
+    $parent = getParent($this)
+
+    $parent.removeClass('open');
+
+    return false
+  }
 })
