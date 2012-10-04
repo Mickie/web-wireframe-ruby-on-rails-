@@ -32,5 +32,21 @@ class ApplicationController < ActionController::Base
     
     return "Seattle, WA"
   end
+  
+  def getLocationQueryFromRequestOrUser(aRequest, aUser)
+    
+    theCurrentCityState = getCityStateFromRequest( aRequest )
+    if theCurrentCityState.blank?
+      if aUser && !aUser.location.blank?
+        theCurrentCityState = aUser.location
+      elsif aUser && !aUser.user_locations.empty?
+        theCurrentCityState = aUser.user_locations.first.location_query
+      else
+        theCurrentCityState = "Seattle, WA"
+      end
+    end
+    
+    return theCurrentCityState
+  end
 
 end

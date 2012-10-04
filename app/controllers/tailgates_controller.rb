@@ -65,10 +65,8 @@ class TailgatesController < ApplicationController
     
     @post = Post.new
     @post.build_photo
-    @currentCityState = getCityStateFromRequest( request )
-    theCoordinates = getCoordinatesFromRequest( request )
-    
-    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(theCoordinates, 50);
+    @currentCityState = getLocationQueryFromRequestOrUser( request, current_user )
+    @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(@currentCityState, 60);
 
     respond_to do |format|
       if (params[:noLayout])

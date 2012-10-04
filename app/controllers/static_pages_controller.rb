@@ -6,17 +6,7 @@ class StaticPagesController < ApplicationController
     end
 
     @tailgate = nil;
-    
-    @currentCityState = getCityStateFromRequest( request )
-    if @currentCityState.blank?
-      if current_user && !current_user.location.blank?
-        @currentCityState = current_user.location
-      elsif current_user && !current_user.user_locations.empty?
-        @currentCityState = current_user.user_locations.first.location_query
-      else
-        @currentCityState = "Seattle, WA"
-      end
-    end
+    @currentCityState = getLocationQueryFromRequestOrUser( request, current_user )
 
     if current_user && current_user.myFanzones.length < 2
       @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1) 
