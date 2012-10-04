@@ -36,9 +36,9 @@ var FanzoNavigator = function()
     {
       this.loadFrameFromHash(theHash);
     }
-    else if ( this.myCurrentHash.length > 0 && !this.isFacebookCallbackHash( theHash ))
+    else if ( this.myCurrentHash.length > 0 && !this.isFacebookCallbackHash( this.myCurrentHash ))
     {
-      this.navToAllFanzones();
+      window.location = window.location.protocol + "//" + window.location.host + "/";
     }
   };
 
