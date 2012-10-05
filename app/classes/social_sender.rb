@@ -63,7 +63,7 @@ class SocialSender
     
     theSender = SocialSender.new
     theListOfUsers.each do |aUser|
-      theSender.delay.sendFollowerTheirUpdate(aUser.id)
+      theSender.delay.sendFollowerTheirUpdate(aUser.id) unless aUser.no_email_summary_of_followed_tailgates
     end
 
   end
