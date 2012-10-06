@@ -48,6 +48,11 @@ var UserManager = function()
             && this.myFanzoAccountDetails.twitter_user_id.length > 0;
   }
   
+  this.inviteFriends = function( aMessage, aLink )
+  {
+    this.myFacebookController.showShareUi( aMessage, aLink );
+  }
+  
   this.getUserId = function()
   {
     if (this.isLoggedIn())

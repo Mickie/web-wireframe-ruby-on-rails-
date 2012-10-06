@@ -29,7 +29,7 @@
 //= require ./modules/dimensionManager
 //= require ./modules/eventManager
 //= require ./modules/fanzonePostsController
-//= require ./modules/follow_buttons
+//= require ./modules/buttons/follow_buttons
 //= require_tree ./facebook
 //= require_tree ./modules/facebook
 //= require_tree ./modules/twitter

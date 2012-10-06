@@ -57,11 +57,9 @@ FanzoSite::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += [ 'user_settings/edit.js', 
                                 'tailgates.js', 
-                                'static_pages/home.js', 
                                 'static_pages/about.js', 
                                 'tailgates/new.js', 
                                 'tailgates/edit.js', 
-                                'tailgates/show.js', 
                                 'phone.css',
                                 'phone.js',
                                 'email.css',

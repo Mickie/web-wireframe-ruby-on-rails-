@@ -121,7 +121,7 @@
             </div>
             
             <div class="inviteFans">
-              <!-- <a class="fanzoButton">Invite</a> -->
+              <a class="fanzoButton" href="javascript:inviteFriends('<%= @tailgate.name -%>', '<%= tailgate_url(@tailgate) %>');">Invite</a>
             </div>
           </div>
           <ul class="fanList">
@@ -201,6 +201,8 @@
     }
     
     document.title = "<%= @tailgate.name + ' - Fanzo' -%>";
+    $("#nav_<%= @tailgate.slug -%>" ).addClass('active'); 
+    
 
     myFanzonePostsController = FanzonePostsController.create("#fanzonePosts");
     myFanzonePostsController.initialize( <%= @tailgate.team.sport.id %>, 

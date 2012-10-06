@@ -57,4 +57,15 @@ var FacebookController = function()
     FB.api('/me/feed', 'post', { message: aMessage }, aResultCallback );
   }
   
+  this.showShareUi = function( aMessage, aLink )
+  {
+    FB.ui(
+      {
+        method: 'share',
+        name: aMessage,
+        link: aLink
+      }
+    );
+  }
+  
 }
