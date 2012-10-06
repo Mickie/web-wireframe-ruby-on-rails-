@@ -199,6 +199,8 @@
     {
       return;
     }
+    
+    document.title = "<%= @tailgate.name + ' - Fanzo' -%>";
 
     myFanzonePostsController = FanzonePostsController.create("#fanzonePosts");
     myFanzonePostsController.initialize( <%= @tailgate.team.sport.id %>, 
