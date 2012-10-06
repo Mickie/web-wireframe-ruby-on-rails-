@@ -38,7 +38,7 @@ var FanzoNavigator = function()
     }
     else if ( this.myCurrentHash.length > 0 && !this.isFacebookCallbackHash( this.myCurrentHash ))
     {
-      window.location = window.location.protocol + "//" + window.location.host + "/";
+      window.location = window.location.protocol + "//" + window.location.host + window.location.pathname;
     }
   };
 
