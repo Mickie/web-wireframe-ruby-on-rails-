@@ -28,6 +28,7 @@ gem 'delayed_job_active_record'
 gem 'oj'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'vacuum'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
