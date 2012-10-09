@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20120929044125) do
   add_index "affiliations", ["location_id"], :name => "index_affiliations_on_location_id"
   add_index "affiliations", ["social_info_id"], :name => "index_affiliations_on_social_info_id"
 
+  create_table "amazon_product_results_for_teams", :force => true do |t|
+    t.text     "product_result"
+    t.integer  "team_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "amazon_product_results_for_teams", ["team_id"], :name => "index_amazon_product_results_for_teams_on_team_id"
+
   create_table "bing_search_results_for_teams", :force => true do |t|
     t.text     "search_result"
     t.integer  "team_id"
