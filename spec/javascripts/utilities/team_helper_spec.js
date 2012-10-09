@@ -5,7 +5,7 @@ describe("team_helper", function() {
   describe("onTeamsReady", function() {
   
     beforeEach(function() {
-      myTeamHelper = new TeamHelper("div#fake_dialog");
+      myTeamHelper = new TeamHelper("div#fake_dialog", "#tailgate_team_id");
       loadJasmineFixture('team_picker');
       
     });
@@ -26,7 +26,7 @@ describe("team_helper", function() {
   describe("hooks league picker", function() {
   
     beforeEach(function() {
-      myTeamHelper = new TeamHelper("div#fake_dialog");
+      myTeamHelper = new TeamHelper("div#fake_dialog", "#tailgate_team_id");
       loadJasmineFixture('team_picker');
 
       registerFakeAjax(

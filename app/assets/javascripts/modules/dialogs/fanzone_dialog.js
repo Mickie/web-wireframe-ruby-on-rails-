@@ -7,7 +7,7 @@ var FanzoneDialog = function( aDialogSelector, anEditFlag )
   
   this.initialize = function()
   {
-    this.myTeamHelper = new TeamHelper(this.myDialogSelector);
+    this.myTeamHelper = new TeamHelper(this.myDialogSelector, "#tailgate_team_id");
     this.myTeamHelper.connectToLeaguePicker();
     this.initializeTopicPicker();
     this.initializeTeamPicker();

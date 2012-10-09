@@ -1,6 +1,7 @@
-var TeamHelper = function(aParentSelector)
+var TeamHelper = function(aParentSelector, aTeamSelector)
 {
   this.myParentSelector = aParentSelector;
+  this.myTeamSelector = aTeamSelector;
   
   this.connectToLeaguePicker = function()
   {
@@ -15,7 +16,7 @@ var TeamHelper = function(aParentSelector)
   
   this.onTeamsReady = function(aResult)
   {
-    var theTeamSelect = $(this.myParentSelector).find("#tailgate_team_id");
+    var theTeamSelect = $(this.myParentSelector).find(this.myTeamSelector);
     theTeamSelect.empty();
     for(var i=0,j=aResult.length; i<j; i++)
     {
