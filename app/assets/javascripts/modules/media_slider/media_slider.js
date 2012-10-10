@@ -93,7 +93,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
       this.myBingView.queueContainerLoad(this.myElementArray[i++]);
       this.myBingView.queueContainerLoad(this.myElementArray[i++]);
       this.myBingView.queueContainerLoad(this.myElementArray[i++]);
-      //this.myAmazonView.queueContainerLoad(this.myElementArray[i++]);
+      this.myAmazonView.queueContainerLoad(this.myElementArray[i++]);
     }
   }
   

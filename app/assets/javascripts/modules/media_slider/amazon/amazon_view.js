@@ -43,8 +43,6 @@ var AmazonView = function(aContainerDivSelector,
     {
 		try
 		{
-	    	console.log("TITLE: " + this.myAmazonProductResults[i].ItemAttributes.Title);
-
 	    	theProduct = new Object();
 	    	theProduct.detailUrl = this.myAmazonProductResults[i].DetailPageURL;
 	    	theProduct.title = this.myAmazonProductResults[i].ItemAttributes.Title;
@@ -159,8 +157,14 @@ var AmazonView = function(aContainerDivSelector,
   {
     var theHeader = aProduct.title;
     var theBody = "\n\n" + aProduct.detailUrl;
-    
+      
     this.myPostDiv.find("#post_content").val( theHeader + theBody );
+    this.myPostDiv.find("#post_image_url").val(aProduct.imageUrl);
+    this.myPostDiv.find("#post_video_id").val("");
+    this.myPostDiv.find(".image_container img").attr("src", aProduct.imageUrl);
+    this.myPostDiv.find(".image_container").slideDown(600);
+    this.myPostDiv.find(".video_container").hide();
+    this.myPostDiv.find("#photo_picker").hide();
   };
 
 }
