@@ -23,10 +23,13 @@ class AmazonProductFinder
     theTeam = Team.find(aTeamId)
     theQuery = "'#{theTeam.name} #{theTeam.sport.name}'"
     theResponse = getAmazonResultsForQuery( theQuery )
-    saveResponseToTeam( theResponse, theTeam )
+    if !theResponse.nil?
+      saveResponseToTeam( theResponse, theTeam )
+    end
   end
   
   def getAmazonResultsForQuery( aQuery )
+    theResponse = nil
     begin
       Rails.logger.info("getAmazonResultsForQuery #{aQuery}")
       theRequest = Vacuum.new 
@@ -42,7 +45,9 @@ class AmazonProductFinder
 
     rescue Exception => e
       Rails.logger.error("amazon product exception:  #{e.to_s}")
-    end      
+    end
+    
+    return theResponse
   end
 
   def saveResponseToTeam( aResponse, aTeam )
