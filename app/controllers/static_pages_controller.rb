@@ -9,7 +9,8 @@ class StaticPagesController < ApplicationController
     @currentCityState = getLocationQueryFromRequestOrUser( request, current_user )
 
     if current_user && current_user.myFanzones.length < 2
-      @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1) 
+      @tailgates = Tailgate.includes(:team, :posts => :user).order("posts_updated_at DESC").page(1)
+      render "tailgates/index" 
       return
     elsif current_user
       @tailgate = current_user.myFanzones.first
@@ -32,8 +33,6 @@ class StaticPagesController < ApplicationController
     @post.build_photo
     
     @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(@currentCityState, 50);
-    
-    render "tailgates/show"
   end
 
   def about

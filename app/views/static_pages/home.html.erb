@@ -1,3 +1,18 @@
-<%= provide(:title, 'Fanzo - Where Fans Rule!') %>
+<%= provide(:title, 'Find other fans, and where to watch the game at Fanzo.me - Where Fans Rule!') %>
 
-<%= render partial: "partials/tiles/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } %>
+<% provide :head_open_graph do %>
+  <%= raw "prefix=\"og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# #{ENV["FANZO_FACEBOOK_NAMESPACE"]}: http://ogp.me/ns/fb/#{ENV["FANZO_FACEBOOK_NAMESPACE"]}#\"" %>
+<% end %>
+
+<% provide :opengraph_meta_tags do %>
+  <meta property="fb:app_id" content="<%= ENV["FANZO_FACEBOOK_APP_ID"] -%>" /> 
+  <meta property="og:type"   content="<%= ENV["FANZO_FACEBOOK_NAMESPACE"] -%>:fanzone" /> 
+  <meta property="og:url"    content="<%= root_url -%>" /> 
+  <meta property="og:title"  content="Find other fans, and where to watch the game at Fanzo.me - Where Fans Rule!" /> 
+  <meta property="og:description"  content="Sports fans love their teams, but often have a hard time finding cool places to express their passion. Fanzo connects fans who root for the same teams, both online and at local sports bars during and after the games, to discuss and share photos and stories." /> 
+  <meta property="og:image"  content="<%= asset_path("fanzo-logo-square2-large.png") -%>" />
+  <meta property="fb:admins" content="690891536" />     
+  <link href="<%= root_url -%>" rel="canonical">
+<% end %>
+
+<%= render partial: "partials/tailgate"%>
