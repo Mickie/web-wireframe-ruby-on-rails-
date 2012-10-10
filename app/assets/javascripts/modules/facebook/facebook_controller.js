@@ -61,11 +61,17 @@ var FacebookController = function()
   {
     FB.ui(
       {
-        method: 'share',
+        method: 'send',
         name: aMessage,
         link: aLink
-      }
+      },
+      createDelegate(this, this.onShareComplete)
     );
+  }
+  
+  this.onShareComplete = function(aResponse)
+  {
+    console.log(aResponse);
   }
   
 }
