@@ -1,3 +1,2 @@
 $(".modal").modal("hide");
-$("#fanzone_nav ul.nav-stacked").append("<%= escape_javascript(render partial:"partials/left_nav_tailgate", locals:{ aTailgate: @tailgate }) %>");
-loadData('<%= tailgate_path( @tailgate ) %>', '#nav_<%= @tailgate.slug -%>');
+$("#fanzone_nav ul.nav-stacked").append("<%= escape_javascript(render partial:"partials/navigation/top_nav_tailgate", locals:{ aTailgate: @tailgate }) %>");

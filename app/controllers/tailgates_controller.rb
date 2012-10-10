@@ -4,8 +4,9 @@ class TailgatesController < ApplicationController
 
   # GET /tailgates/search.js
   def search
+    thePage = params[:page] ? params[:page].to_i : 1
     if (params[:team_id] && params[:team_id].length > 0)
-      @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").where(team_id: params[:team_id])
+      @tailgates = Tailgate.includes(:team, :posts => :user).order("posts.updated_at DESC").where(team_id: params[:team_id]).page(thePage)
     else
       teams = Team.arel_table
       theTeams = Team.where(teams[:name].matches("%#{params[:team]}%"))
@@ -13,7 +14,7 @@ class TailgatesController < ApplicationController
       theTeams.each do | aTeam |
         theTeamIds << aTeam.id
       end
-      @tailgates = Tailgate.includes(:posts).order("posts.updated_at DESC").where("team_id IN (?)", theTeamIds)
+      @tailgates = Tailgate.includes(:team, :posts => :user).order("posts.updated_at DESC").where("team_id IN (?)", theTeamIds).page(thePage)
     end
 
     respond_to do |format|

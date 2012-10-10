@@ -92,11 +92,6 @@
   
   $(function()
   {
-    if (typeof myNavigator !== 'undefined' && myNavigator.isLoadInProgress())
-    {
-      return;
-    }
-
     myFanzonePostsController = FanzonePostsController.create("#tweetControls");
     myFanzonePostsController.initialize( <%= @team.sport.id %>, 
                           '<%= @team.social_info.hash_tags %>');                                      

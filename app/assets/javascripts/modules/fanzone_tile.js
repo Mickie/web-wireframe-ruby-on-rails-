@@ -1,6 +1,5 @@
 $(function(){
   initializeTileHover();
-  stopAnchorFromNavigation();
 });
 
 function initializeTileHover()
@@ -18,14 +17,7 @@ function onTileHoverEnd(e)
   $(e.currentTarget).find(".fanzoneState").hide();
 }
 
-function stopAnchorFromNavigation()
+function onTileClick(aTailgatePath)
 {
-  $('#frameContent').on('click', '.fanzoneTile a', onAnchorClick);
-}
-
-function onAnchorClick(e)
-{
-  e.stopPropagation();
-  e.preventDefault();
-  return false;
+  window.location = aTailgatePath;
 }

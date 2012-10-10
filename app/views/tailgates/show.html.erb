@@ -195,11 +195,6 @@
   
   $(function()
   {
-    if (typeof myNavigator !== 'undefined' && myNavigator.isLoadInProgress())
-    {
-      return;
-    }
-    
     document.title = "<%= @tailgate.name + ' - Fanzo' -%>";
     $("#nav_<%= @tailgate.slug -%>" ).addClass('active'); 
     

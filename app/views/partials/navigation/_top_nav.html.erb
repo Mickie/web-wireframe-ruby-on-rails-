@@ -2,7 +2,6 @@
 
 <div id="modals">
   <% if aUserSignedInFlag %>
-    <%= render partial: "partials/dialogs/create_fanzone_modal", locals: { aTailgate: current_user.tailgates.build } %>
     <%= render partial: "partials/dialogs/connect_twitter_modal" %>
   <% else %>
     <%= render partial: "partials/dialogs/login_modal" %>
@@ -71,7 +70,7 @@
               <% end %>
             <% end %>
             <li id="allFanzones" class="fanzone">
-              <a onclick="loadData('<%= tailgates_path %>', '#allFanzones')" href="#allFanzones">
+              <a href="<%= tailgates_path %>">
                 <table>
                   <tr>
                     <td class="team_logo"><div></div></td>
@@ -84,7 +83,7 @@
         </li>
 
         <li id="fanzone_search">
-          <%= render partial:"partials/team_search" %>
+          <%= render partial:"partials/team_search", locals:{ aRemoteFlag: 'false' } %>
         </li>
     
       </ul>

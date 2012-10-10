@@ -1,3 +1,13 @@
 <%= provide(:title, 'Fanzo - Where Fans Rule!') %>
 
 <%= render partial: "partials/tiles/all_fanzone_tiles", locals:{ aUserSignedInFlag: user_signed_in? } %>
+
+<% if @tailgates.total_pages > 1 %>
+  <script language="JavaScript">
+    
+    $(function()
+    {
+      InfiniteScroller.get().handleScrollingForResource("/tailgates");
+    });
+  </script>
+<% end %>

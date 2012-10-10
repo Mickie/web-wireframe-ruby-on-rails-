@@ -1,4 +1,4 @@
-<%= form_tag("/tailgates/search", :method => "get", remote: 'true',  class: "navbar-search pull-right") do %>
+<%= form_tag("/tailgates/search", :method => "get", remote: aRemoteFlag,  class: "navbar-search pull-right") do %>
   <%= hidden_field_tag :team_id %>
   <%= autocomplete_field_tag 'team', 
                               '', 
