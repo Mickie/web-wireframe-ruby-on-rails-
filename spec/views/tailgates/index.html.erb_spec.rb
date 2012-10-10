@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "tailgates/index" do
   before(:each) do
     @team = stub_model(Team, id:1, name:"Seahawks")
-    assign(:tailgates, [
+    theTailgates = [
       stub_model(Tailgate,
         :name => "Name",
         :team => @team
@@ -16,8 +16,10 @@ describe "tailgates/index" do
         :name => "Name",
         :team => @team
       )
-    ])
-    view.stub(:user_signed_in?).and_return(false);    
+    ]
+    theTailgates.stub(:total_pages).and_return(1)
+    assign(:tailgates, theTailgates)
+    view.stub(:user_signed_in?).and_return(false)    
   end
 
   it "renders a list of tailgates" do
