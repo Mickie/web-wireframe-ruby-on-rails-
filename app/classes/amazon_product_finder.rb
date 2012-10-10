@@ -13,7 +13,7 @@ class AmazonProductFinder
   end
   
   def updateFanzoFounders
-    theTeam = Team.find_by_name("FANZO Founders")
+    theTeam = Team.find_by_name("Fanzo Founders")
     theQuery = "'Football Tailgate'"
     theResponse = getAmazonResultsForQuery( theQuery )
     saveResponseToTeam( theResponse, theTeam )
