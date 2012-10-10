@@ -10,3 +10,9 @@ task :update_bing_results => :environment do
     BingSearcher.new.delay.updateBingSearchResults
     puts "done."
 end
+
+task :update_amazon_results => :environment do
+    puts "Update teams with the latest Amazon search results"
+    AmazonProductFinder.new.delay.updateAmazonProductResults
+    puts "done."
+end
