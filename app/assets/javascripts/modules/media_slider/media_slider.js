@@ -1,7 +1,7 @@
 var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSelector )
 {
   var SLIDE_INTERVAL = 5000;
-  var NUMBER_OF_VIEW_TYPES = 5;
+  var NUMBER_OF_VIEW_TYPES = 6;
   var TOTAL_CONTAINERS = NUMBER_OF_VIEW_TYPES*15;
   
   this.myContainerDivSelector = aContainerDivSelector;
@@ -73,11 +73,26 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   this.createMediaContainers = function()
   {
     var theParentDiv = $(this.myContainerDivSelector + " div#myMediaContent");
+    var theSpinnerOptions = {
+      lines: 9,
+      length: 0,
+      width: 3,
+      radius: 10,
+      corners: 1,
+      rotate: 0,
+      trail: 50,
+      speed: 1,
+      left: 75
+    } 
 
     for (var i = 0; i < TOTAL_CONTAINERS; i++)
     {
       var theElement = $(this.myContainerDivSelector + " div#myMediaTemplate").clone().attr("id", "");
       theParentDiv.append(theElement);
+      if (i < 10)
+      {
+        theElement.spin(theSpinnerOptions, "red");
+      }
       this.myElementArray[i] = theElement;
     }
   };
@@ -86,7 +101,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   {
     var i = 0;
 
-    while(i < TOTAL_CONTAINERS)
+    while( i < TOTAL_CONTAINERS )
     {
       this.myInstagramView.queueContainerLoad(this.myElementArray[i++]);
       this.myYoutubeView.queueContainerLoad(this.myElementArray[i++]);

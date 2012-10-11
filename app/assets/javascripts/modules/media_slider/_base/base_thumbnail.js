@@ -15,6 +15,8 @@ var BaseThumbnail = function( aView )
     this.myData = aData;
     this.myElement = anElement;
     
+    this.removeSpinner();
+        
     try
     {
       this.myElement = anElement.render( this.myData, this.getRenderDirective() );
@@ -26,6 +28,16 @@ var BaseThumbnail = function( aView )
     }
 
   };
+  
+  this.removeSpinner = function()
+  {
+    var theData = $(this.myElement).data();
+    if (theData.spinner)
+    {
+      theData.spinner.stop();
+      delete theData.spinner;
+    }
+  }
   
   this.cleanup = function()
   {

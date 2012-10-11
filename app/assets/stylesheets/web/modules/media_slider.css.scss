@@ -20,7 +20,8 @@ div#myMediaSlider
     height: 150px;
     position:relative;
     display: inline-block;
-    background-color: $backgroundColor;
+    color: white;
+    background-color: $mediaSliderBackgroundColor;
     vertical-align: top;
     
     .bingNewsItem
