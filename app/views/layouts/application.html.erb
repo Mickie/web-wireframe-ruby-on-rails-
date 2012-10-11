@@ -23,8 +23,8 @@
 	<body>
     <div id="fb-root"></div>
     <div id="page_content">
+      <%= render partial: 'partials/navigation/top_nav', locals: { user: @user, } %>
       <div>
-        <%= render partial: 'partials/navigation/top_nav', locals: { user: @user, } %>
 
         <% if flash[:notice] || flash[:error] %>
           <div id="flash_alerts">
