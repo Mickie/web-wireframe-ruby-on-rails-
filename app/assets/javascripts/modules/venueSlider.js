@@ -53,7 +53,10 @@ var VenueSlider = function()
   
   this.onHoverStart = function(e)
   {
-    $(this.myVenueSelector + " div#scrollerControls").fadeIn(500);
+    if (this.myScroller.pagesX.length > 3)
+    {
+      $(this.myVenueSelector + " div#scrollerControls").fadeIn(500);
+    }
   };
   
   this.onHoverEnd = function(e)

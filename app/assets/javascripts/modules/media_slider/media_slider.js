@@ -174,8 +174,11 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
   
   this.onSlideInterval = function()
   {
-    this.myScroller.refresh();
-    this.slideLeft();
+    if ( this.myScroller.currPageX < this.myScroller.pagesX.length )
+    {
+      this.myScroller.refresh();
+      this.slideLeft();
+    }
   };
   
   this.onNavRight = function(e)
