@@ -1,0 +1,19 @@
+div#frameContent div#allTiles
+{
+  padding-left: 25px;
+  
+  & [class*="span"]
+  {
+    width:30%;
+    margin:0px 0px 20px 15px;
+  }
+}
+
+#allTiles.row-fluid
+{
+  width:auto;
+}
+
+div#frameContent div#allTiles
+{
+}

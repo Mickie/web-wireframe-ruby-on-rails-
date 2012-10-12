@@ -13,14 +13,4 @@
   position: absolute;
 }
 
-#allTiles.row-fluid
-{
-  width:auto;
-}
-
-div#frameContent div#allTiles
-{
-  padding: 0px 0px 0px 25px;
-}
-
 
