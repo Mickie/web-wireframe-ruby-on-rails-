@@ -145,8 +145,11 @@ var TwitterView = function( aMaxTweets,
     var theThis = this;
     return {
       ".@id" : "id_str",
-      "img.twitterAvatar@src" : "profile_image_url_https",
       "div.twitterName" : "from_user_name",
+      "img.twitterAvatar@src" : function(anItem)
+      {
+        return 'https:' == document.location.protocol ? anItem.context.profile_image_url_https : anItem.context.profile_image_url;
+      },
       "span.twitterText" : function(anItem)
       {
         var theText = anItem.context.text;
