@@ -1,4 +1,4 @@
-var TWITTER_SEARCH_URL = "http://search.twitter.com/search.json";
+var TWITTER_SEARCH_URL = buildUrl("search.twitter.com", "search.json");
 
 var TwitterSearch = function( aListener )
 {

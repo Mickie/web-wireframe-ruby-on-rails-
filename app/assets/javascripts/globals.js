@@ -87,6 +87,10 @@ function killEvent(e)
   return false;
 }
 
+function buildUrl(aServer, aPath)
+{
+  return ('https:' == document.location.protocol ? 'https://' : 'http://') + aServer + "/" + aPath;
+}
 
 String.prototype.escapeQuotes = function()
 {

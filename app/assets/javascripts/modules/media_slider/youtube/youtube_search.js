@@ -1,4 +1,4 @@
-var YOUTUBE_VIDEO_SEARCH_URL = "http://gdata.youtube.com/feeds/api/videos";
+var YOUTUBE_VIDEO_SEARCH_URL = buildUrl("gdata.youtube.com", "feeds/api/videos");
 var myLocalYouTubeSearch = null;
 
 function onYouTubeIframeAPIReady() 
@@ -23,7 +23,7 @@ var YouTubeSearch = function( aShortName,
   {
     myLocalYouTubeSearch = this;
     var theTag = document.createElement('script');
-    theTag.src = "http://www.youtube.com/iframe_api";
+    theTag.src = buildUrl("www.youtube.com", "iframe_api");
     var theFirstScriptTag = document.getElementsByTagName('script')[0];
     theFirstScriptTag.parentNode.insertBefore(theTag, theFirstScriptTag);  
   }
