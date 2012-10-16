@@ -46,7 +46,8 @@ var FanzoNavigator = function()
   this.updatePinterestButtons = function()
   {
     $('script[src*="assets.pinterest.com/js/pinit.js"]').remove();
-    $.ajax({ url: 'http://assets.pinterest.com/js/pinit.js', dataType: 'script', cache:true});
+    var theUrl = buildUrl("assets.pinterest.com", "js/pinit.js");
+    $.ajax({ url: theUrl, dataType: 'script', cache:true});
   };
     
   this.onSearchSubmit = function(e)

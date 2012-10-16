@@ -52,6 +52,8 @@ FanzoSite::Application.routes.draw do
   get 'robots.txt', to: "sitemap#index", as: "robots", defaults: { format: "txt" }
   get 'about',   to: 'static_pages#about'
   get 'channel', to: 'static_pages#channel'
+  post 'canvas', to: 'static_pages#canvas'
+  post 'pageTab', to: 'static_pages#pageTab'
 
   post "twitter_proxy/update_status"
   post "twitter_proxy/retweet"

@@ -175,7 +175,7 @@ var FanzoneView = function()
       ".team_logo img@src" : function(anItem)
       {
         var theSlug = anItem.context.team.slug;
-        return "http://fanzo-static.s3.amazonaws.com/logos/" + theSlug + "_l.png";
+        return buildUrl("fanzo-static.s3.amazonaws.com", "/logos/" + theSlug + "_l.png");
       },
       ".banner_content@style": function(anItem)
       {

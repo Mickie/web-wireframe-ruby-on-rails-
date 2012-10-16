@@ -18,7 +18,10 @@ var YoutubeThumbnail = function( aYoutubeView )
         return "width:" + getWidth(anItem) + "px;"
       },
       "div.media img@alt" : "title.$t",
-      "div.media img@src" : function(anItem){ return anItem.context.media$group.media$thumbnail[0].url; },
+      "div.media img@src" : function(anItem)
+      {
+        return makeUrlHttpsSafe(anItem.context.media$group.media$thumbnail[0].url);
+      },
       "div.media img@width" : getWidth,
       "div.media img@style" : function(anItem){return "";},
       "div.media img@height" : function(anItem){return "150";},

@@ -22,7 +22,7 @@ class UserFinder
     #TODO Need to get long lived access token, see https://developers.facebook.com/roadmap/offline-access-removal/ 
 
     thePassword = Devise.friendly_token[0,20]
-    theImage = "http://graph.facebook.com/#{aFacebookId}/picture?type=square"
+    theImage = "https://graph.facebook.com/#{aFacebookId}/picture?type=square"
     theNewUser = User.create!( email: theProfile["email"],
                                 password: thePassword,
                                 password_confirmation: thePassword,
