@@ -51,7 +51,7 @@ class AmazonProductFinder
   end
 
   def saveResponseToTeam( aResponse, aTeam )
-    Rails.logger.info("ammazon product response for #{aTeam.name}: #{aResponse.status}")
+    Rails.logger.info("amazon product response for #{aTeam.name}: #{aResponse.status}")
     if (aResponse.status == 200)
       json = Hash.from_xml(aResponse.body).to_json
 
