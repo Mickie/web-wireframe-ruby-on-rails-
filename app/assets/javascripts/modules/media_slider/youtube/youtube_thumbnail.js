@@ -21,7 +21,7 @@ var YoutubeThumbnail = function( aYoutubeView )
       "div.media img@src" : function(anItem)
       {
         var theUrl = anItem.context.media$group.media$thumbnail[0].url;
-        if (window.location.protocol == 'https')
+        if ('https:' == document.location.protocol)
         {
           theUrl = theUrl.replace("http", "https");
         } 
