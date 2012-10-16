@@ -22,7 +22,20 @@ class StaticPagesController < ApplicationController
   end
   
   def pageTab
-    
+    @pageId = nil;
+    @admin = false
+    if params[:signed_request]
+      theAuth = Koala::Facebook::OAuth.new(ENV["FANZO_FACEBOOK_APP_ID"], ENV["FANZO_FACEBOOK_APP_SECRET"])
+      theResult = theAuth.parse_signed_request(params[:signed_request])
+      if theResult["user_id"]
+        theUser = User.find_by_facebook_user_id(theResult["user_id"])
+        sign_in theUser
+      end
+      if theResult["page"]
+        @pageId = theResult["page"]["id"]
+        @admin = theResult["page"]["admin"]
+      end
+    end
   end
 
   def about
