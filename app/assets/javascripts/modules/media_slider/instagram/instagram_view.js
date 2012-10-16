@@ -69,10 +69,13 @@ var InstagramView = function( aContainerDivSelector, aDialogDivSelector, aPostDi
   
   this.showDialog = function( anInstagram )
   {
-    this.myDialogDiv.find("div.mediaImage").html("<img src='" + anInstagram.images.standard_resolution.url + "'/>");
+    var theProfileImage = makeUrlHttpsSafe(anInstagram.caption.from.profile_picture);
+    var theBigImage = makeUrlHttpsSafe(anInstagram.images.standard_resolution.url);    
+    
+    this.myDialogDiv.find("div.mediaImage").html("<img src='" + theBigImage + "'/>");
     this.myDialogDiv.find("div.mediaCaption").text(anInstagram.caption.text);
     this.myDialogDiv.find("div.modal-header h3").text(anInstagram.user.full_name);
-    this.myDialogDiv.find("div.modal-header img").attr("src", anInstagram.caption.from.profile_picture).show();
+    this.myDialogDiv.find("div.modal-header img").attr("src", theProfileImage).show();
     this.myDialogDiv.find("#post_media_button").data("instagram", anInstagram).show();
 
     this.myDialogDiv.find("#mediaImageData").show();

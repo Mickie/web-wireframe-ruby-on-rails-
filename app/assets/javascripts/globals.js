@@ -92,6 +92,15 @@ function buildUrl(aServer, aPath)
   return ('https:' == document.location.protocol ? 'https://' : 'http://') + aServer + "/" + aPath;
 }
 
+function makeUrlHttpsSafe(aUrl)
+{
+  if ('https:' == document.location.protocol)
+  {
+    return aUrl.replace("http", "https");
+  }
+  return aUrl;
+}
+
 String.prototype.escapeQuotes = function()
 {
   return this.replace(/([\\"'])/g, "\\$1");

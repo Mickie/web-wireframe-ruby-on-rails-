@@ -12,12 +12,7 @@ var InstagramThumbnail = function( anInstagramView )
       },
       "div.media img@src" : function(anItem)
       {
-        var theUrl = anItem.context.images.thumbnail.url;
-        if ('https:' == document.location.protocol)
-        {
-          theUrl = theUrl.replace("http", "https");
-        } 
-        return theUrl;
+        return makeUrlHttpsSafe(anItem.context.images.thumbnail.url);
       },
       "div.media img@style" : function(anItem){return "";},
       "div.media img@alt" : "caption.text",

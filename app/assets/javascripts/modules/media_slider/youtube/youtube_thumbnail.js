@@ -20,12 +20,7 @@ var YoutubeThumbnail = function( aYoutubeView )
       "div.media img@alt" : "title.$t",
       "div.media img@src" : function(anItem)
       {
-        var theUrl = anItem.context.media$group.media$thumbnail[0].url;
-        if ('https:' == document.location.protocol)
-        {
-          theUrl = theUrl.replace("http", "https");
-        } 
-        return theUrl; 
+        return makeUrlHttpsSafe(anItem.context.media$group.media$thumbnail[0].url);
       },
       "div.media img@width" : getWidth,
       "div.media img@style" : function(anItem){return "";},
