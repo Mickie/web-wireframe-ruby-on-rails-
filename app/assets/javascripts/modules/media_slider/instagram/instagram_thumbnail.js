@@ -10,9 +10,17 @@ var InstagramThumbnail = function( anInstagramView )
       {
         return "width:" + anItem.context.images.thumbnail.width + "px;"
       },
+      "div.media img@src" : function(anItem)
+      {
+        var theUrl = anItem.context.images.thumbnail.url;
+        if ('https:' == document.location.protocol)
+        {
+          theUrl = theUrl.replace("http", "https");
+        } 
+        return theUrl;
+      },
       "div.media img@style" : function(anItem){return "";},
       "div.media img@alt" : "caption.text",
-      "div.media img@src" : "images.thumbnail.url",
       "div.media img@width" : "images.thumbnail.width",
       "div.media img@height" : "images.thumbnail.height"
     }    
