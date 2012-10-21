@@ -14,7 +14,7 @@ Geocoder.configure do |config|
   #config.units = :km
 
   # caching (see below for details):
-  if !Rails.env.development?
+  if !Rails.env.development? && !Rails.env.test?
     uri = URI.parse(ENV["REDISTOGO_URL"])
     config.cache = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
