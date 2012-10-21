@@ -21,7 +21,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     this.myInstagramView = new InstagramView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
     this.myYoutubeView = new YoutubeView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
     this.myBingView = new BingView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector, this.myYoutubeView);
-    //this.myAmazonView = new AmazonView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
+    this.myAmazonView = new AmazonView(this.myContainerDivSelector, this.myMediaModalDivSelector, this.myPostDivSelector);
 
     this.createMediaContainers();
     this.queueContainerLoads();
@@ -29,7 +29,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
     this.myInstagramView.beginLoading(anArrayOfInstagramTags);
     this.myYoutubeView.beginLoading(aShortName, aSport, anArrayOfHashTags);
     this.myBingView.beginLoading(aTeamId);
-    //this.myAmazonView.beginLoading(aTeamId);
+    this.myAmazonView.beginLoading(aTeamId);
     
     this.setupNavigation();
     this.startSliderTimer();    
@@ -63,11 +63,11 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
       this.myBingView = null;
     }
 
-//    if (this.myAmazonView)
-//    {
-//      this.myAmazonView.cleanup();
-//      this.myAmazonView = null;
-//    }
+    if (this.myAmazonView)
+    {
+      this.myAmazonView.cleanup();
+      this.myAmazonView = null;
+    }
   };
   
   this.createMediaContainers = function()
@@ -108,7 +108,7 @@ var MediaSlider = function( aContainerDivSelector, aModalDivSelector, aPostDivSe
       this.myBingView.queueContainerLoad(this.myElementArray[i++]);
       this.myBingView.queueContainerLoad(this.myElementArray[i++]);
       this.myBingView.queueContainerLoad(this.myElementArray[i++]);
-      //this.myAmazonView.queueContainerLoad(this.myElementArray[i++]);
+      this.myAmazonView.queueContainerLoad(this.myElementArray[i++]);
     }
   }
   
