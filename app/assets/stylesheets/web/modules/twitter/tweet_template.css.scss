@@ -41,6 +41,11 @@
           {
             padding-left:0px;
           }
+          
+          &:hover
+          {
+            color: $linkHoverColor;
+          }
         }
       }
     }
