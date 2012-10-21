@@ -1,14 +1,16 @@
-<div class="profile_pic">
-  <% if aPost.user.image %>
-    <%= link_to image_tag( aPost.user.image, size:"32x32", alt: aPost.user.full_name ), user_path(aPost.user) %>
-  <% end %>
+<div class="post_owner">
+  <div class="profile_pic">
+    <% if aPost.user.image %>
+      <%= link_to image_tag( aPost.user.image, size:"32x32", alt: aPost.user.full_name ), user_path(aPost.user) %>
+    <% end %>
+  </div>
+  <div>
+    <span class="user_name"><%= link_to aPost.user.full_name, user_path(aPost.user) %> - </span>
+    <span class="timestamp" title="<%= aPost.created_at.getutc.iso8601 -%>" ><%= aPost.created_at.to_s %></span>
+  </div>
 </div>
 
 <div class="post_content">
-  <div>
-    <span class="user_name"><%= aPost.user.full_name %> - </span>
-    <span class="timestamp" title="<%= aPost.created_at.getutc.iso8601 -%>" ><%= aPost.created_at.to_s %></span>
-  </div>
   <div class="post_media">
     <% if (aPost.image_url && aPost.image_url.length > 0) || aPost.photo %>
       <% if aPost.video_id && aPost.video_id.length > 0 %>

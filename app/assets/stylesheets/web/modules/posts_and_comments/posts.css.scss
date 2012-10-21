@@ -3,11 +3,6 @@
 
 div#posts
 {
-  .profile_pic
-  {
-    margin: 0px 10px 0px 0px;
-  }
-
   div.post
   {
     background: white;
@@ -15,24 +10,44 @@ div#posts
     border-top: $fanzoneLightBorder solid 1px;
     overflow:hidden;
     
-    
-    .post_content, .comment_content
+    .post_owner
     {
-      margin-left: 42px;
-      
+      .profile_pic
+      {
+        margin: 0px 10px 0px 0px;
+      }
+
       .user_name
       {
         font-family: 'League Gothic',Helvetica,Arial,Verdana,sans-serif;
         letter-spacing: 0.03em;
         font-size: 1.5em;
         text-transform: uppercase;
-        color: $mediumTextColor;
+        
+        a
+        {
+          color: $mediumTextColor;
+        }
       }
       
       .timestamp
       {
         color: $lightTextColor;
       }
+      
+      &:hover
+      {
+        .user_name a
+        {
+          color: $linkHoverColor;
+        }
+      }
+    }
+    
+    
+    .post_content, .comment_content
+    {
+      margin-left: 42px;
       
       .post_text
       {
