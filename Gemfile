@@ -29,6 +29,7 @@ gem 'oj'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'vacuum'
+gem 'redis'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
