@@ -69,6 +69,6 @@ module FanzoSite
     
     config.cache_store = :dalli_store
     
-    config.static_asset_base_path = "http://10.0.1.15/~paulingalls/fanzo_site/static/"
+    config.static_asset_base_path = "http://localhost/~paulingalls/fanzo_site/static/"
   end
 end

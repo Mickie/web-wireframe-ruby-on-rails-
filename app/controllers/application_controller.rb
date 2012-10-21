@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end  
    
   def getCoordinatesFromRequest(aRequest)
-    if aRequest.remote_ip == "127.0.0.1" || aRequest.remote_ip == "10.0.1.15"
+    if aRequest.remote_ip == "127.0.0.1" || aRequest.remote_ip == "10.0.1.191"
       return "Northwest University, Kirkland WA"
     elsif aRequest.location && aRequest.location.coordinates
       return aRequest.location.coordinates 
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def getCityStateFromRequest(aRequest)
     
-    if aRequest.remote_ip == "127.0.0.1" || aRequest.remote_ip == "10.0.1.15"
+    if aRequest.remote_ip == "127.0.0.1" || aRequest.remote_ip == "10.0.1.191"
       return "Kirkland, WA"
     elsif aRequest.location
       return request.location.state_code == "" ? request.location.city : "#{request.location.city}, #{request.location.state_code}" 

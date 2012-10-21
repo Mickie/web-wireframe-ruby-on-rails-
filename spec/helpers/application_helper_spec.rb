@@ -3,15 +3,15 @@ require "spec_helper"
 describe ApplicationHelper do
   describe "#logoPath" do
     it "returns the correct path for small" do
-      helper.logoPath("test-slug", :small).should eql("http://10.0.1.15/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
+      helper.logoPath("test-slug", :small).should eql("http://localhost/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
     end
 
     it "returns the correct path for medium" do
-      helper.logoPath("test-slug", :medium).should eql("http://10.0.1.15/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
+      helper.logoPath("test-slug", :medium).should eql("http://localhost/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
     end
 
     it "returns the correct path for large" do
-      helper.logoPath("test-slug", :large).should eql("http://10.0.1.15/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
+      helper.logoPath("test-slug", :large).should eql("http://localhost/~paulingalls/fanzo_site/static/logos/test-slug_l.png")
     end
   end
   
