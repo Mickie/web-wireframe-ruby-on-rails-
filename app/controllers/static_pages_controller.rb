@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  include Devise::Controllers::Rememberable
+  
   def home
     
     if false # browser.iphone?
@@ -15,6 +17,7 @@ class StaticPagesController < ApplicationController
       if theResult["user_id"]
         theUser = User.find_by_facebook_user_id(theResult["user_id"])
         sign_in theUser
+        remember_me theUser
       end
     end
     
@@ -22,19 +25,40 @@ class StaticPagesController < ApplicationController
   end
   
   def pageTab
-    @pageId = nil;
-    @admin = false
+    thePageId = nil
+    theUser = nil
+    theAdminFlag = false
+
     if params[:signed_request]
       theAuth = Koala::Facebook::OAuth.new(ENV["FANZO_FACEBOOK_APP_ID"], ENV["FANZO_FACEBOOK_APP_SECRET"])
       theResult = theAuth.parse_signed_request(params[:signed_request])
+      
       if theResult["user_id"]
         theUser = User.find_by_facebook_user_id(theResult["user_id"])
         sign_in theUser
+        remember_me theUser
       end
+      
       if theResult["page"]
-        @pageId = theResult["page"]["id"]
-        @admin = theResult["page"]["admin"]
+        thePageId = theResult["page"]["id"]
+        theAdminFlag = theResult["page"]["admin"]
       end
+    end
+    
+    theFacebookPage = FacebookPage.find_by_page_id(thePageId)
+    if theFacebookPage
+      @tailgate = Tailgate.includes(:user, :team, :posts => [ {:comments => :user}, :user ] ).find(theFacebookPage.tailgate_id)
+      @currentCityState = getLocationQueryFromRequestOrUser( request, current_user )
+      @post = Post.new
+      @post.build_photo
+      @localTeamWatchSites = @tailgate.team.watch_sites.includes(:venue => {:location => :state}).near(@currentCityState, 50);
+      
+      return render "facebook_pages/show", layout: false
+    elsif theUser && theAdminFlag
+      @facebook_page = FacebookPage.new(page_id: thePageId)
+      return render "facebook_pages/new", layout: false
+    else
+      return render inline: "<h1>Sorry, there was a problem getting the page...</h1>"
     end
   end
 

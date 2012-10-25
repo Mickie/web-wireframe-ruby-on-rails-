@@ -63,6 +63,7 @@ FanzoSite::Application.routes.draw do
   get "instagram_proxy/find_tags_for_fanzone"
   get "instagram_proxy/media_for_tag"
 
+  resources :facebook_pages
   resources :admins, only: :show
   resources :sports
   resources :leagues

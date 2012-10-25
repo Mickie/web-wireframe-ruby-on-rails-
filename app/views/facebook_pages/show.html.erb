@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render 'layouts/head' %>
+  <body>
+    <%= render partial: "partials/tailgate"%>
+    <%= render partial: "partials/libs/pinterest" %>
+    <%= render partial: "partials/libs/google_plus" %>
+    <%= render partial: "partials/libs/google_analytics", locals: {aMobileFlag: "false"} %>
+    
+    <script type="text/javascript">
+      UserManager.get().setMobile(false);
+      <% if current_user %>
+        UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
+      <% end %>
+    </script>
+  </body>
+</html>
+

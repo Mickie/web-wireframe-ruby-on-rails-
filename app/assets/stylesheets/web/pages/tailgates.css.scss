@@ -1,9 +1,13 @@
 @import "partials/colors";
 @import "partials/mixins";
 
-div#tailgate_show
+.tailgateBuffer
 {
   padding: 0px 40px;
+}
+
+div#tailgate_show
+{
 
   div.tailgate_content
   {

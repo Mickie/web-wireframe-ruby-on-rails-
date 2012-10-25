@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render 'layouts/head' %>
+  <body>
+    <div id="newFacebookPage">
+      <h1>Setup Fanzo for your Facebook Page</h1>
+      <%= render 'facebook_pages/form' %>
+    </div>
+    <%= render partial: "partials/libs/google_analytics", locals: {aMobileFlag: "false"} %>
+  </body>
+</html>

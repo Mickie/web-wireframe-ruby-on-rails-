@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120929044125) do
+ActiveRecord::Schema.define(:version => 20121024172311) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -133,6 +133,17 @@ ActiveRecord::Schema.define(:version => 20120929044125) do
   add_index "events", ["home_team_id"], :name => "index_events_on_home_team_id"
   add_index "events", ["location_id"], :name => "index_events_on_location_id"
   add_index "events", ["visiting_team_id"], :name => "index_events_on_visiting_team_id"
+
+  create_table "facebook_pages", :force => true do |t|
+    t.string   "page_id"
+    t.integer  "user_id"
+    t.integer  "tailgate_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "facebook_pages", ["tailgate_id"], :name => "index_facebook_pages_on_tailgate_id"
+  add_index "facebook_pages", ["user_id"], :name => "index_facebook_pages_on_user_id"
 
   create_table "fanzo_tips", :force => true do |t|
     t.string   "name",       :null => false

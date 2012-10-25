@@ -1,0 +1,27 @@
+<h1>Listing facebook_pages</h1>
+
+<table>
+  <tr>
+    <th>Page</th>
+    <th>User</th>
+    <th>Tailgate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @facebook_pages.each do |facebook_page| %>
+  <tr>
+    <td><%= facebook_page.page_id %></td>
+    <td><%= facebook_page.user %></td>
+    <td><%= facebook_page.tailgate %></td>
+    <td><%= link_to 'Show', facebook_page %></td>
+    <td><%= link_to 'Edit', edit_facebook_page_path(facebook_page) %></td>
+    <td><%= link_to 'Destroy', facebook_page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Facebook page', new_facebook_page_path %>

@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head <%= yield(:head_open_graph) if content_for?(:head_open_graph) -%>>
-		<title><%= content_for?(:title) ? yield(:title) : "Fanzo - Where Fans Rule!" %></title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-		<%= stylesheet_link_tag    "application", :media => "all" %>
-		<% if browser.mobile? %>
-      <%= stylesheet_link_tag    "tablet", :media => "all" %>
-		<% end %>
-		<%= javascript_include_tag "application" %>
-    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller] + '.js') )  %>
-      <%= javascript_include_tag params[:controller] %>
-    <% end %>
-    <% if File.exists?( Rails.root.join("app", "assets", "javascripts", params[:controller], params[:action] + '.js') )  %>
-      <%= javascript_include_tag params[:controller] + '/' + params[:action] %>
-    <% end %>
-    <%= csrf_meta_tags %>
-    <%= yield :opengraph_meta_tags %>
-    <%= render 'layouts/shim' %>
-    <meta http-equiv="X-UA-Compatible" content="IE=8;" />
-    <%= favicon_link_tag %>
-	</head>
+  <%= render 'layouts/head' %>
 	<body>
     <div id="fb-root"></div>
     <div id="page_content">
