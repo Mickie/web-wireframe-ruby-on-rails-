@@ -53,6 +53,11 @@ var UserManager = function()
     this.myFacebookController.showShareUi( aMessage, aLink );
   }
   
+  this.addFanzoToFacebookPage = function( )
+  {
+    this.myFacebookController.addFanzoToFacebookPage( window.location );
+  }
+  
   this.getUserId = function()
   {
     if (this.isLoggedIn())
