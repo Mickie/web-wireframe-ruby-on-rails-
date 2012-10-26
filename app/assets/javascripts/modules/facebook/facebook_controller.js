@@ -74,11 +74,11 @@ var FacebookController = function()
     console.log(aResponse);
   }
   
-  this.addFanzoToFacebookPage = function(aRedirectUri)
+  this.addFanzoToFacebookPage = function( aRedirectUrl )
   {
     FB.ui({
       method: 'pagetab',
-      redirect_uri: aRedirectUri,
+      redirect_uri: aRedirectUrl
     });
   }  
   

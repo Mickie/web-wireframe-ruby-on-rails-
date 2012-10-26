@@ -8,7 +8,8 @@
     <%= render partial: "partials/libs/google_analytics", locals: {aMobileFlag: "false"} %>
     
     <script type="text/javascript">
-      UserManager.get().setMobile(false);
+      UserManager.get().setCanvas(true);
+      UserManager.get().setFacebookNamespace('<%= ENV["FANZO_FACEBOOK_NAMESPACE"] -%>')
       <% if current_user %>
         UserManager.get().setAccountDetails(<%= raw current_user.to_json(include: [ :user_post_votes, :user_comment_votes, :tailgates, :followed_tailgates, :tailgate_followers ]) %>);
       <% end %>

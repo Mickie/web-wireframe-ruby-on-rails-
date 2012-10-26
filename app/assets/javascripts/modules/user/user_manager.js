@@ -5,6 +5,8 @@ var UserManager = function()
   this.myFacebookController = new FacebookController();
   this.myMobileFlag = false;
   this.myDeviceFlag = false;
+  this.myCanvasFlag = false;
+  this.myFacebookNamespace = "fanzo";
   
   this.setAccountDetails = function( anAccountObject )
   {
@@ -31,6 +33,21 @@ var UserManager = function()
     return this.myDeviceFlag;
   }
 
+  this.setCanvas = function( aCanvasFlag )
+  {
+    this.myCanvasFlag = aCanvasFlag;
+  }
+  
+  this.isCanvas = function()
+  {
+    return this.myCanvasFlag;
+  }
+
+  this.setFacebookNamespace = function( aNamespace )
+  {
+    this.myFacebookNamespace = aNamespace;
+  }
+
   this.onFacebookReady = function()
   {
     this.myFacebookController.initialize(this);
@@ -55,7 +72,8 @@ var UserManager = function()
   
   this.addFanzoToFacebookPage = function( )
   {
-    this.myFacebookController.addFanzoToFacebookPage( window.location );
+    var theRedirectUrl = "https://apps.facebook.com/" + this.myFacebookNamespace;
+    this.myFacebookController.addFanzoToFacebookPage( theRedirectUrl );
   }
   
   this.getUserId = function()
