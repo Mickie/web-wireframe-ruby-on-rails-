@@ -1,7 +1,7 @@
 <div id="myFirstRunModal" class="modal hide">
   <div class="modal-body">
+    <div class="firstRunTopSwatch"></div>
     <div class="firstRunContent">
-      <div class="welcome">welcome to</div>
       <div class="branding">
         <div class="logo">
           <%= image_tag "fanzo-logo-260.png", size:"260x120", alt:"Fanzo.me, Where Fans Rule!" %>
@@ -10,13 +10,14 @@
     </div>
     <div class="callToAction">
       <div class="getStarted">
-        <p>Fanzo connects fans online and at venues near you</p>
-        <p>Start following YOUR team:</p>
+        <p>Root for your team with other fans, online and at local sports bars</p>
+        <p class="now">Start following YOUR team:</p>
       </div>
       <div class="goLogin">
         <%= render partial: "partials/buttons/facebook_login_button", locals:{resource_name:"user"} %>
       </div>
     </div>
+    <div class="firstRunBottomSwatch"></div>
   </div>
 </div>
 

@@ -6,33 +6,39 @@
   .modal-body
   {
     width: 570px;
-    height: 190px;
-    padding-top: 30px;
+    height: 255px;
+    padding: 0px;
+    overflow: hidden;
+
+    .firstRunTopSwatch, .firstRunBottomSwatch 
+    {
+      height: 40px;
+      width: 580px;
+      background-color: $linkColor;
+      @include rotate3d(0,0,0,-5deg);
+    }
+    
+    .firstRunTopSwatch
+    {
+      margin-left: -15px;
+      margin-top: -25px;
+      margin-bottom: 25px;
+    }
+
+    .firstRunBottomSwatch
+    {
+      margin-top: 15px;
+    }
     
     .firstRunContent
     {
       float: left;
-
-      .welcome
-      {
-        padding: 0px 0px 5px 60px;
-        font-size: 1.6em;
-        color: $lightTextColor;
-      }
-
-      .branding
-      {
-        .logo
-        {
-          margin-left: -15px;
-        }
-        
-      }
     }
     .callToAction
     {
       padding-left: 290px;
       padding-right: 10px;
+      height: 190px;
       
       .getStarted
       {
@@ -41,6 +47,11 @@
         padding-top: 0px;
         font-size: 1.6em;
         line-height: 1.3em; 
+        
+        .now
+        {
+          color: $linkColor;
+        }
       }
       
       .goLogin
