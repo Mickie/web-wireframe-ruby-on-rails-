@@ -129,7 +129,7 @@ var BingView = function(aContainerDivSelector,
 
       this.myDialogDiv.find("div.mediaImage").html(theImageTag);
       this.myDialogDiv.find("div.mediaCaption").html(theHtml);
-      this.myDialogDiv.find("div.modal-header img").hide();
+      this.myDialogDiv.find("div.modal-body img").hide();
       
       this.myDialogDiv.find("#mediaImageData").hide();
       this.myDialogDiv.find("#mediaVideoData").hide();
@@ -152,7 +152,7 @@ var BingView = function(aContainerDivSelector,
     theHtml += "</div>";
     this.myDialogDiv.find("div.mediaImage").html("");
     this.myDialogDiv.find("div.mediaCaption").html(theHtml);
-    this.myDialogDiv.find("div.modal-header img").hide();
+    this.myDialogDiv.find("div.modal-body img").hide();
     
     this.myDialogDiv.find("#mediaImageData").hide();
     this.myDialogDiv.find("#mediaVideoData").hide();
@@ -169,7 +169,7 @@ var BingView = function(aContainerDivSelector,
     var theAnchorTag = "Source: <a href='" + anImageItem.SourceUrl + "' target='_blank'>" + anImageItem.DisplayUrl + "</a>";
     this.myDialogDiv.find("div.mediaImage").html(theImageTag);
     this.myDialogDiv.find("div.mediaCaption").html(theAnchorTag);
-    this.myDialogDiv.find("div.modal-header img").hide();
+    this.myDialogDiv.find("div.modal-body img").hide();
 
     this.myDialogDiv.find("#mediaImageData").show();
     this.myDialogDiv.find("#mediaVideoData").hide();
@@ -180,7 +180,7 @@ var BingView = function(aContainerDivSelector,
 
   this.showDialog = function( aBingItem )
   {
-    this.myDialogDiv.find("div.modal-header h3").text(aBingItem.Title);
+    this.myDialogDiv.find("div.modal-body h3").text(aBingItem.Title);
     this.myDialogDiv.find("#post_media_button").data("bingItem", aBingItem).show();
     
     if (aBingItem.__metadata.type == "NewsResult")

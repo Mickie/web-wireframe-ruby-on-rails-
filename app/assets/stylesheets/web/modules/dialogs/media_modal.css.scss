@@ -7,20 +7,9 @@ div#myMediaModal
 
   .modal-header 
   {
-    height: 27px;
+    height: 10px;
     width: 640px;
-    
-    h3
-    {
-      float: left;
-      width: 580px;
-      height: 27px;
-      overflow: hidden;
-    }
-    .profile_pic
-    {
-      padding-right: 10px;
-    }
+    border-bottom: 0px;
   }
   
   .modal-body
@@ -40,11 +29,35 @@ div#myMediaModal
         height: 100%;
       }
     }
+
+    .profile_pic
+    {
+      float: left;
+      margin-left: 40px;
+      padding-top: 20px;
+      padding-right: 10px;
+      height: 64px;
+      width: 64px;
+    }
+    
     .mediaCaption
     {
-      width: 640px;
-      text-align: center;
-      margin-top: 10px;
+      float: left;
+      width: 500px;
+      margin-top: 0px;
+      
+      h3
+      {
+        overflow: hidden;
+        color: red;
+        font-size: 40px;
+      }
+      
+      p
+      {
+        color: red;
+        font-size: 20px;
+      }
       
       .bingNews
       {
@@ -57,7 +70,7 @@ div#myMediaModal
       }
     }
   }
-  
+
   .modal-footer
   {
     .fanzoButton
