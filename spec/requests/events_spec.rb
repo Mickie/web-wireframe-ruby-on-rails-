@@ -5,6 +5,8 @@ describe "Events" do
   before do
     mock_geocoding!
     @event = FactoryGirl.create(:event)
+    @home_tailgate = FactoryGirl.create(:tailgate, team_id: @event.home_team.id, official:true)
+    @visiting_tailgate = FactoryGirl.create(:tailgate, team_id: @event.visiting_team.id, official:true)
   end
   
   describe "without admin or user logged in" do
@@ -65,8 +67,8 @@ describe "Events" do
       end
 
       it "should show event data" do
-        page.should have_content(@event.home_team.name)
-        page.should have_content(@event.visiting_team.name)
+        page.should have_content(@event.home_team.short_name)
+        page.should have_content(@event.visiting_team.short_name)
       end
     end
     

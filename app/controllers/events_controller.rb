@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_admin!, except: [:index, :show]
-  before_filter :authenticate_user!, only: [:index, :show] 
+  before_filter :authenticate_admin!, except: [:index, :show, :addPost]
+  before_filter :authenticate_user!, only: [:index, :show, :addPost] 
 
   # GET /events
   # GET /events.json
@@ -17,44 +17,28 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    
-    @homeHashTags = []
-    if (@event.home_team.social_info && @event.home_team.social_info.hash_tags)
-      @homeHashTags = @event.home_team.social_info.hash_tags.split(',');
-    elsif @event.home_team.conference
-      @homeHashTags.push("#" + @event.home_team.conference.name)
+    @homeTailgate = Tailgate.where(official:true).find_by_team_id(@event.home_team.id)    
+    @visitingTailgate = Tailgate.where(official:true).find_by_team_id(@event.visiting_team.id)
+    @post = Post.new
+    @post.build_photo
+    @event_post = @event.event_posts.build
+
+    if current_user.mine_or_following? @homeTailgate
+      @tailgate = @homeTailgate
     else
-      @homeHashTags.push("#fanzo_" + @event.home_team.sport.name)
+      @tailgate = @visitingTailgate
     end
     
-    @visitingHashTags = []
-    if (@event.visiting_team.social_info && @event.visiting_team.social_info.hash_tags)
-      @visitingHashTags = @event.visiting_team.social_info.hash_tags.split(',');
-    elsif @event.visiting_team.conference
-      @visitingHashTags.push("#" + @event.visiting_team.conference.name)
-    else
-      @visitingHashTags.push("#fanzo_" + @event.visiting_team.sport.name)
-    end
-    
-    theCoordinates = getCoordinatesFromRequest( request )
-    
-    @localHomeTeamWatchSites = [];
-    @localVisitingTeamWatchSites = [];
-    WatchSite.near(theCoordinates, 50).each do | aWatchSite |
-      if aWatchSite.team.id == @event.home_team.id
-        @localHomeTeamWatchSites.push(aWatchSite)
-      end
-      if aWatchSite.team.id == @event.visiting_team.id
-        @localVisitingTeamWatchSites.push(aWatchSite)
-      end
-    end
+    #@currentCityState = getLocationQueryFromRequestOrUser( request, current_user )
+    #@localHomeTeamWatchSites = @event.home_team.watch_sites.includes(:venue => {:location => :state}).near(@currentCityState, 60);
+    #@localVisitingTeamWatchSites =  @event.visiting_team.watch_sites.includes(:venue => {:location => :state}).near(@currentCityState, 60);
     
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
     end
   end
-
+  
   # GET /events/new
   # GET /events/new.json
   def new

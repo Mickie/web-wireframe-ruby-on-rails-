@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
   has_many :game_watches, inverse_of: :event, :dependent => :delete_all
   has_many :venues, through: :game_watches 
   
+  has_many :event_posts, :dependent => :delete_all
+  
   validates :home_team, presence:true
   validates :visiting_team, presence:true
   validates :event_date, presence:true 

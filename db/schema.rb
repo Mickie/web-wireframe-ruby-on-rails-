@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024172311) do
+ActiveRecord::Schema.define(:version => 20121030170637) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -119,6 +119,20 @@ ActiveRecord::Schema.define(:version => 20121024172311) do
 
   add_index "divisions", ["league_id"], :name => "index_divisions_on_league_id"
 
+  create_table "event_posts", :force => true do |t|
+    t.integer  "visiting_post_id"
+    t.integer  "home_post_id"
+    t.integer  "event_id",         :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.boolean  "home_flag"
+    t.boolean  "visiting_flag"
+  end
+
+  add_index "event_posts", ["event_id"], :name => "index_event_posts_on_event_id"
+  add_index "event_posts", ["home_post_id"], :name => "index_event_posts_on_home_post_id"
+  add_index "event_posts", ["visiting_post_id"], :name => "index_event_posts_on_visiting_post_id"
+
   create_table "events", :force => true do |t|
     t.string   "name"
     t.integer  "home_team_id",     :null => false
@@ -128,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20121024172311) do
     t.integer  "location_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "bitly"
   end
 
   add_index "events", ["home_team_id"], :name => "index_events_on_home_team_id"

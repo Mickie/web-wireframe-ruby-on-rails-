@@ -1,0 +1,34 @@
+<%= form_for @event, url:{action:"addPost"}, html:{method: "post"}, remote: true do |f| %>
+  
+  <%= f.fields_for :post do |p|%>
+    <%= render partial: "/posts/post_social_controls", locals:{f:p} %>
+    <%= render partial: "/posts/post_fields", locals: { f:p } %>
+  <% end %>
+  
+
+  <div id="post_controls" class="teamSelectorsAndSubmit">
+    <div class="checkAndLogo">
+      <%= check_box_tag :visiting_flag %>
+      <div class="checkLogo">
+        <%= teamLogo(@event.visiting_team, :small) %>
+      </div>
+    </div>
+  
+    <div class="postButton">
+      <div id="post_combo" class="btn-group">
+        <%= f.submit "Post", id:"add_post", class:"fanzoButton" %>
+        <%= render partial: "partials/buttons/quick_tweet_button" %>
+      </div>
+    </div>
+  
+    <div class="checkAndLogo">
+      <%= check_box_tag :home_flag %>
+      <div class="checkLogo">
+        <%= teamLogo(@event.home_team, :small) %>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+<% end %>

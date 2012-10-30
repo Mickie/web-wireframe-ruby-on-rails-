@@ -1,24 +1,253 @@
-// Place all the styles related to the Events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "partials/colors";
+@import "partials/mixins";
 
-
-#homeTweetControls textarea
+div#event_show
 {
-  float:left;
-}
+  padding: 0px 40px;
+  
+  #eventContent
+  {
+    @include box-shadow-with-ie( #{"-1px 2px 3px 1px rgba(25, 25, 25, .1), 1px 2px 3px 1px rgba(25, 25, 25, .1)"} );
+ 
+    div.banner
+    {
+      position: relative;
+      
+      .teamBanner
+      {
+        width: 50%;
+        margin: 0px;
 
-#homeTweetControls div.btn-group
-{
-  float:left;
-}
+        background-image: asset-url("white-gradient-140.png", image);
+        background-repeat: repeat-x;
+        background-color: black;
+        position:relative;
+        
+        .bannerContent
+        {
+          padding: 10px;
+          
+          .teamName
+          {
+            padding: 0px 10px;
+            
+            h2
+            {
+              line-height: 1.1em;
+              font-size: 2.5em;
+              padding:0px;
+              margin:0px;
+              text-transform: uppercase;
+              
+              a
+              {
+                color: white;
+              }
+            }
+          }
+          
+          .teamLogo
+          {
+            position:relative;
+            padding: 5px;
+            background-color: $fanzoneBannerLogoBackground;
+            border-top: $fanzoneBorder solid 1px;
+            @include border-radius-with-ie(4px);
+            
+            .reflection
+            {
+              position:absolute;
+              left:0px;
+              top:0px;
+            }
+          }
+          
+          .fanLeaderboard
+          {
+            clear: both;
+            overflow:hidden;
+            height: 42px;
+            
+            .fanList
+            {
+              margin:0px;
+              
+              .fanItem
+              {
+                list-style: none;
+                height: 32px;
+                padding: 5px;
+                float: left;
+                
+                .profile_pic
+                {
+                  height: 32px;
+                  width: 32px;
+                }
+              }
+            }
+          }
+        }
+        
+      }
 
-#visitingTweetControls textarea
-{
-  float:left;
-}
+      .visiting
+      {
+        @include border-radius(4px 0px 0px 0px);
+        
+        .bannerContent
+        {
+          background-image: asset-url("fanzo-horn-background-02-left.png", image);
+          background-position: 100% 100%;
+          background-repeat: no-repeat;
 
-#visitingTweetControls div.btn-group
-{
-  float:left;
+          .teamLogo, .teamName
+          {
+            float: left;
+          }
+        }
+      }
+
+      .home
+      {
+        @include border-radius(0px 4px 0px 0px);
+        .bannerContent
+        {
+          background-image: asset-url("fanzo-horn-background-02-right.png", image);
+          background-position: 0% 100%;
+          background-repeat: no-repeat;
+
+          .teamLogo, .teamName
+          {
+            float: right;
+          }
+        }
+      }
+      
+      .vs
+      {
+        position:absolute;
+        left: 50%;
+        top:20px;
+        z-index: 1;
+        margin-left: -28px;
+        
+        .outerBorder
+        {
+          border: white 3px solid;
+          @include border-radius-with-ie(50%);
+          
+          .chromeBorder
+          {
+            padding: 5px;
+            @include border-radius-with-ie(50%);
+            background-color: black;
+            background-repeat: repeat-x;
+            background-image: -moz-linear-gradient(45deg, black, white 50%, black); // FF 3.6+
+            background-image: -webkit-linear-gradient(45deg, black, white 50%, black); // Safari 5.1+, Chrome 10+
+            background-image: -o-linear-gradient(45deg, black, white 50%, black); // Opera 11.10
+            background-image: linear-gradient(45deg, black, white 50%, black); // Standard, IE10            
+
+            .vsContent
+            {
+              @include border-radius-with-ie(50%);
+              background-color:black;
+              width: 30px;
+              height: 30px;
+              
+              h3
+              {
+                line-height: 1em;
+                margin:0px;
+                padding: 5px;
+                color: white;
+                text-transform: uppercase;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }  
+    
+    .createPost
+    {
+      #postForm
+      {
+        padding-top: 10px;          
+      }
+      
+      .post_fields
+      {
+        form
+        {
+          position: relative;
+          margin:0px;
+
+          .leftArrow
+          {
+            margin-right: 150px;
+          }
+          
+          .social_controls
+          {
+            float: none;
+            position: absolute;
+            right: 0px;
+            top: 29px;
+          }
+          
+          #photo_picker
+          {
+            float: none;
+            margin:0px;
+            position: absolute;
+            right: 0px;
+            top: 5px;
+          }
+        }
+        
+        .teamSelectorsAndSubmit
+        {
+          clear: both;
+          @include clearfix;
+          width: 400px;
+          margin: 0 auto;
+          
+          .postButton
+          {
+            float:left;
+            padding: 10px 30px;
+            
+            #add_post
+            {
+              width: 100px;
+            }
+          }
+          
+          .checkAndLogo
+          {
+            float:left;
+            
+            .checkLogo, input
+            {
+              float:left;
+            }
+            
+            input
+            {
+              margin-top: 20px;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+    
+    .tweetHolder
+    {
+      background-color: $fanzoneContentBackground;
+    }  
+     
+  }
 }

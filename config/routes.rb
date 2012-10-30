@@ -31,6 +31,11 @@ FanzoSite::Application.routes.draw do
       end
     end
   end
+  
+  resources :events do
+    resources :event_posts
+  end
+  
 
   resources :teams do
     get :autocomplete_team_name, on: :collection
@@ -72,7 +77,6 @@ FanzoSite::Application.routes.draw do
   resources :venues
   resources :venue_types
   resources :affiliations
-  resources :events
   resources :game_watches
   resources :quick_tweets
   resources :topics

@@ -5,10 +5,43 @@ class SocialSender
     thePost = Post.includes(:tailgate, :user).find_by_id(aPostId)
     
     if (thePost.twitter_flag)
-      sendToTwitter(thePost)
+      sendToTwitter(thePost, getTailgateBitly(thePost.tailgate) )
     end
     if (thePost.facebook_flag)
-      sendToFacebook(thePost)
+      theLink = getTailgateBitly(aPost.tailgate)
+      theName = aPost.tailgate.name
+      theDescription = aPost.tailgate.description
+      theCaption = "A Fanzo.me fanzone"
+      sendToFacebook(thePost, theLink, theName, theDescription, theCaption)
+    end
+  end
+  
+  def shareEventPost( anEventPostId )
+    theEventPost = EventPost.includes(:home_post, :visiting_post).find_by_id(anEventPostId)
+    
+    if theEventPost.home_post && theEventPost.visiting_post
+      theUser = theEventPost.home_post.user
+      if theUser.mine_or_following?(theEventPost.home_post.tailgate)
+        thePostToShare = theEventPost.home_post
+      else
+        thePostToShare = theEventPost.visiting_post
+      end
+    elsif theEventPost.home_post
+      thePostToShare = theEventPost.home_post
+    else
+      thePostToShare = theEventPost.visiting_post
+    end
+    
+    if (thePostToShare.twitter_flag)
+      sendToTwitter(thePostToShare, getEventBitly(theEventPost.event) )
+    end
+    
+    if (thePostToShare.facebook_flag)
+      theLink = getEventBitly(theEventPost.event)
+      theName = "#{ theEventPost.event.visiting_team.name } at #{ theEventPost.event.home_team.name }"
+      theDescription = "Watch the live social stream as the #{theEventPost.event.visiting_team.name } take on the #{ theEventPost.event.home_team.name }."
+      theCaption = "Fanzo.me"
+      sendToFacebook(thePostToShare, theLink, theName, theDescription, theCaption)
     end
   end
   
@@ -93,7 +126,7 @@ class SocialSender
     
   end
   
-  def sendToTwitter( aPost )
+  def sendToTwitter( aPost, aUrl )
     if (aPost.user.twitter_user_token == nil ||
         aPost.user.twitter_user_token.empty? ||
         aPost.user.twitter_user_secret == nil ||
@@ -107,7 +140,7 @@ class SocialSender
       oauth_token_secret: aPost.user.twitter_user_secret
     )
     
-    theText = "#{aPost.shortened_content} #{ getTailgateBitly(aPost.tailgate) }"
+    theText = "#{aPost.shortened_content} #{ aUrl }"
 
     begin
       if aPost.twitter_retweet_id && !aPost.twitter_retweet_id.empty?
@@ -126,17 +159,15 @@ class SocialSender
 
   end
 
-  def sendToFacebook( aPost )
+  def sendToFacebook( aPost, aUrl, aName, aDescription, aCaption )
     if (aPost.user.facebook_access_token == nil || aPost.user.facebook_access_token.empty? )
       Rails.logger.warn "Error posting to facebook: user not connected"
       return
     end
     
-    
     theGraph = Koala::Facebook::API.new(aPost.user.facebook_access_token)
     
     begin
-      theLink = getTailgateBitly(aPost.tailgate)
       
       if aPost.photo && aPost.photo.image
         thePicture = getBitlyForUrl( aPost.photo.image.url )
@@ -147,11 +178,11 @@ class SocialSender
       end
       
       theResult = theGraph.put_connections("me", "feed", { message: aPost.content,
-                                                            link: theLink,
-                                                            name: aPost.tailgate.name,
+                                                            link: aUrl,
+                                                            name: aName,
                                                             picture: thePicture,
-                                                            description: aPost.tailgate.description,
-                                                            caption: "A Fanzo.me fanzone" })
+                                                            description: aDescription,
+                                                            caption: aCaption })
 
       aPost.facebook_id = theResult["id"]
     rescue Exception => e

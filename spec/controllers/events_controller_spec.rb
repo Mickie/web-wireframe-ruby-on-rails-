@@ -33,68 +33,46 @@ describe EventsController do
 
   describe "GET show" do
     login_user
-    
-    describe "populated events" do 
+
+    describe "with valid tailgates" do
       before do
-        @event = Event.create! valid_attributes
-        get :show, {:id => @event.to_param}
+        theHomeTailgate = FactoryGirl.create(:tailgate, user_id: subject.current_user.id, team_id: @home_team.id, official:true)
+        theVisitingTailgate = FactoryGirl.create(:tailgate, user_id: subject.current_user.id, team_id: @visiting_team.id, official:true)
       end
       
-      it "assigns the requested event as @event" do
-        assigns(:event).should eq(@event)
-      end
-      
-      it "assigns the team hash tags to @visitingHashTag & @homeHashTag" do
-        assigns(:homeHashTags).should eq( @home_team.social_info.hash_tags.split(" ") )
-        assigns(:visitingHashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )
-      end
-    end
-    
-    describe "sparse events" do
-
-      it "assigns available team hash tags" do
-        @home_team.social_info = nil;
-        @home_team.save
-        @event = Event.create! valid_attributes
-        get :show, {:id => @event.to_param}
-        assigns(:visitingHashTags).should eq( @visiting_team.social_info.hash_tags.split(" ") )
-        assigns(:homeHashTags).should eq( ["#" + @home_team.conference.name ]  )
-      end
-
-      it "assigns team sport to @hashTag when teams don't have one" do
-        @visiting_team.social_info = nil
-        @visiting_team.save
-        @home_team.social_info = nil;
-        @home_team.conference = nil;
-        @home_team.save
-        @event = Event.create! valid_attributes
-        get :show, {:id => @event.to_param}
-        assigns(:visitingHashTags).should eq( ["#fanzo_" + @visiting_team.sport.name] )
-        assigns(:homeHashTags).should eq( ["#fanzo_" + @home_team.sport.name ]  )
-      end
-
-    end
-    
-    describe "events with local watch sites" do
-      before do
-        @event = Event.create! valid_attributes
-        @theFirstWatchSite = FactoryGirl.build(:watch_site, team:@home_team)
-        @theSecondWatchSite = FactoryGirl.build(:watch_site, team:@visiting_team)
-        @theThirdWatchSite = FactoryGirl.build(:watch_site)
+      describe "populated events" do 
+        before do
+          @event = Event.create! valid_attributes
+          get :show, {:id => @event.to_param}
+        end
         
-        WatchSite.should_receive(:near).and_return([@theFirstWatchSite, @theSecondWatchSite, @theThirdWatchSite])
+        it "assigns the requested event as @event" do
+          assigns(:event).should eq(@event)
+        end
+        
       end
       
-      it "returns the home teams watch sites near location in @localHomeTeamWatchSites" do
-        get :show, {:id => @event.to_param}
-        assigns(:localHomeTeamWatchSites).should eq([@theFirstWatchSite])
-      end
-      
-      it "returns the visiting teams watch sites near location in @localVisitingTeamWatchSites" do
-        get :show, {:id => @event.to_param}
-        assigns(:localVisitingTeamWatchSites).should eq([@theSecondWatchSite])
-      end
-      
+      # describe "events with local watch sites" do
+        # before do
+          # @event = Event.create! valid_attributes
+          # @theFirstWatchSite = FactoryGirl.build(:watch_site, team:@home_team)
+          # @theSecondWatchSite = FactoryGirl.build(:watch_site, team:@visiting_team)
+          # @theThirdWatchSite = FactoryGirl.build(:watch_site)
+#           
+          # WatchSite.should_receive(:near).and_return([@theFirstWatchSite, @theSecondWatchSite, @theThirdWatchSite])
+        # end
+#         
+        # it "returns the home teams watch sites near location in @localHomeTeamWatchSites" do
+          # get :show, {:id => @event.to_param}
+          # assigns(:localHomeTeamWatchSites).should eq([@theFirstWatchSite])
+        # end
+#         
+        # it "returns the visiting teams watch sites near location in @localVisitingTeamWatchSites" do
+          # get :show, {:id => @event.to_param}
+          # assigns(:localVisitingTeamWatchSites).should eq([@theSecondWatchSite])
+        # end
+      # end
+
     end
   end
 

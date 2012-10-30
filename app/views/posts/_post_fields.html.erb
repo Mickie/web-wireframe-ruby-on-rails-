@@ -1,0 +1,25 @@
+<div class="media_preview">
+  <%= f.hidden_field :image_url %>
+  <%= f.hidden_field :video_id %>
+  <div class="image_container hide">
+    <img />
+  </div>
+  <div class="video_container hide">
+    <div id="post_youtube"></div>
+  </div>
+</div>
+<div id="photo_picker" class="hide">
+  <div class="paperclip"></div>
+  <div class="pickerLabel">Attach A Photo</div>
+</div>
+<div class="leftArrow">
+  <%= f.text_area :content, rows:2, placeholder:"What's up?", required: true %>
+</div>
+<div id="add_photo">
+  <%= f.fields_for :photo do |p|%>
+    <div id="photoFields" class="hide">
+      <%= p.label :image, "Attach Photo:" %>
+      <%= p.file_field :image %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Visiting flag:</b>
+  <%= @event_post.visiting_flag %>
+</p>
+
+<p>
+  <b>Home flag:</b>
+  <%= @event_post.home_flag %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @event %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_event_post_path(@event, @event_post) %> |
+<%= link_to 'Back', event_event_posts_path(@event) %>

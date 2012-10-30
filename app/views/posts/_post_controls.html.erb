@@ -1,0 +1,7 @@
+<div id="post_controls">
+  <div id="post_combo" class="btn-group">
+    <%= f.submit "Post", id:"add_post", class:"fanzoButton" %>
+    <%= render partial: "partials/buttons/quick_tweet_button" %>
+  </div>
+  <%= render partial: "/posts/post_social_controls", locals:{f:f} %>
+</div>

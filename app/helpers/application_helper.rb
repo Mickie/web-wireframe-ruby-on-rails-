@@ -63,6 +63,24 @@ module ApplicationHelper
       return theTailgateUrl
     end
   end
+
+  def getEventBitly( anEvent )
+    if anEvent.bitly && anEvent.bitly.length > 0
+      return anEvent.bitly
+    end
+
+    theEventUrl = Rails.application.routes.url_helpers.event_url(anEvent, host: ENV["FANZO_WEB_HOST"])
+    theBitly = getBitlyForUrl(theEventUrl)
+    
+    if (theBitly && theBitly.length > 0)
+      anEvent.bitly = theBitly
+      anEvent.save
+      return anEvent.bitly
+    else
+      return theEventUrl
+    end
+  end
+
   
   def getLargeLogoBitly( aTeam )
     if (aTeam.large_logo_bitly && aTeam.large_logo_bitly.length > 0)
