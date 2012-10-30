@@ -1,5 +1,8 @@
 
 When /^I edit the event$/ do
+  theHomeTailgate = FactoryGirl.create(:tailgate, team_id: @edit_event.home_team.id, official:true)
+  theVisitingTailgate = FactoryGirl.create(:tailgate, team_id: @edit_event.visiting_team.id, official:true)
+
   fill_in "event_name",    with: "Superbowl"
   click_button "commit"
 end
@@ -10,7 +13,10 @@ Then /^the changes to the event should be saved$/ do
 end
 
 When /^I create a new event$/ do 
-  fill_in "event_name",    with: @new_event.name
+  theHomeTailgate = FactoryGirl.create(:tailgate, team_id: @edit_event.home_team.id, official:true)
+  theVisitingTailgate = FactoryGirl.create(:tailgate, team_id: @edit_event.visiting_team.id, official:true)
+  
+  fill_in "event_name",    with: @new_event.name 
   select @edit_event.home_team.name, from: 'event[home_team_id]'
   select @edit_event.visiting_team.name, from: 'event[visiting_team_id]'
 
