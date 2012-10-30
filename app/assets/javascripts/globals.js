@@ -101,6 +101,14 @@ function makeUrlHttpsSafe(aUrl)
   return aUrl;
 }
 
+if (typeof String.prototype.trim != 'function') 
+{
+  String.prototype.trim = function () 
+  {
+    return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+  };
+}
+
 String.prototype.escapeQuotes = function()
 {
   return this.replace(/([\\"'])/g, "\\$1");
