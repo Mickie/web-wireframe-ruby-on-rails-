@@ -127,8 +127,8 @@
   {
     myFanzonePostsController = FanzonePostsController.create(".createPost");
     myFanzonePostsController.initialize( <%= @event.home_team.sport.id %>, 
-                                         <%= raw (@event.home_team.social_info.hash_tags.split(",") +
-                                                  @event.visiting_team.social_info.hash_tags.split(",") ) %>
+                                         <%= raw (@event.home_team.social_info.hash_tags.split(",") ) %>, 
+                                         <%= raw (@event.visiting_team.social_info.hash_tags.split(",") ) %>
                                          );                                      
 
     

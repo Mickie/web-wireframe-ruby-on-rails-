@@ -73,9 +73,11 @@ class EventPostsController < ApplicationController
 
         format.html { redirect_to @event, notice: 'Event post was successfully created.' }
         format.json { render json: @event_post, status: :created, location: @event_post }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @event_post.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

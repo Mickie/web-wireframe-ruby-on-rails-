@@ -4,11 +4,15 @@ var FanzonePostsController = function( aPostsSelector )
   
   this.myPostsSelector = aPostsSelector;
   this.myQuickTweetsView = new QuickTweetView(aPostsSelector, this);
+  this.myHomeHashTagString = "";
+  this.myVisitingHashTagString = "";
   
-  this.initialize = function( aSportId, aHashTagString )
+  this.initialize = function( aSportId, aHomeHashTagString, aVisitingHashTagString )
   {
+    this.myHomeHashTagString = aHomeHashTagString;
+    this.myVisitingHashTagString = aVisitingHashTagString;
     this.loadSavedDataIntoForm();
-    this.myQuickTweetsView.initialize( aSportId, aHashTagString);
+    this.myQuickTweetsView.initialize( aSportId, aHomeHashTagString + aVisitingHashTagString);
     EventManager.get().addObserver("onShowConnectionModal", this);
     EventManager.get().addObserver("onCreatePostComplete", this);
     this.setupFormListeners();
@@ -24,6 +28,9 @@ var FanzonePostsController = function( aPostsSelector )
     thePostsContainer.on('click', ".comment_input", createDelegate(this, this.checkLoginStatus ) );
     thePostsContainer.on('click', "#post_content", createDelegate(this, this.checkLoginStatus ) );
     thePostsContainer.on('ajax:before', ".new_comment", createDelegate( this, this.checkLoginStatus ) );
+    thePostsContainer.on('ajax:before', "#new_event_post", createDelegate( this, this.validateEventPost ) );
+    thePostsContainer.on('click', "#event_post_visiting_flag", createDelegate(this, this.onVisitingTeamClicked) );
+    thePostsContainer.on('click', "#event_post_home_flag", createDelegate(this, this.onHomeTeamClicked) );
   }
   
   this.setupPhotoPicker = function()
@@ -54,6 +61,52 @@ var FanzonePostsController = function( aPostsSelector )
     }
     
     return isLoggedIn;
+  }
+  
+  this.validateEventPost = function(e)
+  {
+    var thePostsContainer = $(this.myPostsSelector);
+    
+    if (!thePostsContainer.find("#event_post_visiting_flag").is(":checked")
+        && !thePostsContainer.find("#event_post_home_flag").is(":checked") )
+    {
+      alert("Please pick a team to share your post with...");
+      return false;
+    }
+    
+    return this.checkLoginStatus();
+  }
+  
+  this.onVisitingTeamClicked = function(e)
+  {
+    var thePostsContainer = $(this.myPostsSelector);
+    if (thePostsContainer.find("#event_post_visiting_flag").is(":checked"))
+    {
+      var theExistingVal = thePostsContainer.find("#post_content").val();
+      thePostsContainer.find("#post_content").val(theExistingVal + " " + this.myVisitingHashTagString);
+    }
+    else
+    {
+      var theExistingVal = thePostsContainer.find("#post_content").val();
+      var theNewVal = theExistingVal.replace(this.myVisitingHashTagString, "");
+      thePostsContainer.find("#post_content").val(theNewVal.trim());
+    }
+  }
+
+  this.onHomeTeamClicked = function(e)
+  {
+    var thePostsContainer = $(this.myPostsSelector);
+    if (thePostsContainer.find("#event_post_home_flag").is(":checked"))
+    {
+      var theExistingVal = thePostsContainer.find("#post_content").val();
+      thePostsContainer.find("#post_content").val(theExistingVal + " " + this.myHomeHashTagString);
+    }
+    else
+    {
+      var theExistingVal = thePostsContainer.find("#post_content").val();
+      var theNewVal = theExistingVal.replace(this.myHomeHashTagString, "");
+      thePostsContainer.find("#post_content").val(theNewVal.trim());
+    }
   }
   
   this.onCreatePostComplete = function()

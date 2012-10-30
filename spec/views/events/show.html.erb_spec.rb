@@ -14,6 +14,7 @@ describe "events/show" do
     )
     @event = assign(:event, theStub)
     @event_post = assign(:event_post, stub_model(EventPost))
+    @post = assign(:post, stub_model(Post))
     
     assign(:current_user, FactoryGirl.create(:user))
     view.stub(:user_signed_in?).and_return(false);

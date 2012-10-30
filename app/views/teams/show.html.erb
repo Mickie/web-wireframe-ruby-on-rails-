@@ -94,7 +94,8 @@
   {
     myFanzonePostsController = FanzonePostsController.create("#tweetControls");
     myFanzonePostsController.initialize( <%= @team.sport.id %>, 
-                          '<%= @team.social_info.hash_tags %>');                                      
+                          '<%= @team.social_info.hash_tags %>',
+                          '');                                      
 
     myTwitterView = TwitterView.create( 20,
                                         "tweets",

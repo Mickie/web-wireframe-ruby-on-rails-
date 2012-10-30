@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= fields_for :post do |p|%>
+  <%= fields_for @post do |p|%>
     <%= render partial: "/posts/post_social_controls", locals:{f:p} %>
     <%= render partial: "/posts/post_fields", locals: { f:p } %>
   <% end %>

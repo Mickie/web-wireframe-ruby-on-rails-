@@ -184,7 +184,7 @@
 
     myFanzonePostsController = FanzonePostsController.create("#fanzonePosts");
     myFanzonePostsController.initialize( <%= @tailgate.team.sport.id %>, 
-                          '<%= @tailgate.topic_tags %>');                                      
+                          '<%= @tailgate.topic_tags %>', '');                                      
     
     myTwitterView = TwitterView.create( 15,
                                         "tweets",
