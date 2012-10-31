@@ -6,7 +6,7 @@ FactoryGirl.define do
     city 'Renton'
     state { State.find_by_abbreviation('WA')}
     postal_code '98056'
-    country {Country.first}
+    country {Country.find_by_abbreviation('US')}
   end
 
 end
