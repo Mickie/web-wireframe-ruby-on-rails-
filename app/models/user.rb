@@ -90,15 +90,29 @@ class User < ActiveRecord::Base
     end
   end
   
+  def getShortenedLocationQuery( aLongLocationQuery )
+    theParts = aLongLocationQuery.split(",")
+    if theParts.length > 1
+      theStateString = theParts[1]
+      theStateString.strip!
+      theState = State.find_by_name(theStateString)
+      if theState
+        return "#{theParts[0]}, #{theState.abbreviation}"
+      end
+    end
+    
+    return aLongLocationQuery
+  end
+  
   def updateFromFacebook( aDataJsonString )
     theData = JSON.parse(aDataJsonString)
     if (theData["hometown"] && theData["hometown"]["name"] && theData["hometown"]["name"] != self.hometown)
-      self.hometown = theData["hometown"]["name"]
+      self.hometown = getShortenedLocationQuery( theData["hometown"]["name"] )
       self.user_locations.create(location_query: self.hometown)
     end
 
     if (theData["location"] && theData["location"]["name"] && theData["location"]["name"] != self.location)
-      self.location = theData["location"]["name"]
+      self.location = getShortenedLocationQuery( theData["location"]["name"] )
       self.user_locations.create(location_query: self.location)
     end
     

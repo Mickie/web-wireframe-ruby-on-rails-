@@ -63,6 +63,14 @@ describe User do
     end
   end
   
+  describe "getShortenedLocationQuery" do
+    it "should handle various location strings" do
+      @user.getShortenedLocationQuery("Seattle, WA").should eq("Seattle, WA")
+      @user.getShortenedLocationQuery("Seattle, Washington").should eq("Seattle, WA")
+      @user.getShortenedLocationQuery("Seattle").should eq("Seattle")
+    end
+  end
+  
   describe "following a tailgate" do
     let(:tailgate) { FactoryGirl.create(:tailgate) }
     before do
@@ -245,15 +253,15 @@ describe User do
     it "should save off the hometown" do
       @user.hometown.should be(nil)
       @user.updateFromFacebook(theData)
-      @user.hometown.should eq("Bellevue, Washington")
-      @user.user_locations.find_by_location_query("Bellevue, Washington").should_not be(nil)
+      @user.hometown.should eq("Bellevue, WA")
+      @user.user_locations.find_by_location_query("Bellevue, WA").should_not be(nil)
     end
     
     it "should save off the location" do
       @user.location.should be(nil)
       @user.updateFromFacebook(theData)
-      @user.location.should eq("Kirkland, Washington")
-      @user.user_locations.find_by_location_query("Kirkland, Washington").should_not be(nil)
+      @user.location.should eq("Kirkland, WA")
+      @user.user_locations.find_by_location_query("Kirkland, WA").should_not be(nil)
     end
     
     it "should add favorite teams" do
