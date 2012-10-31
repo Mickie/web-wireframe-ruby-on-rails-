@@ -105,33 +105,27 @@ var AmazonView = function(aContainerDivSelector,
     this.myThumbnails = new Array();
   };
   
-  this.loadAmazonProduct = function( aProduct )
-  {
-    var theHtml = "<div class='AmazonProduct'>";
-    theHtml += "<p><a href='" + aProduct.detailUrl + "' target='blank'>" + aProduct.title + "</a></p>";
-    theHtml += "</div>";
-
-    var theImageTag = "<img src='" + aProduct.imageUrl + "'/>";
-
-    this.myDialogDiv.find("div.mediaImage").html(theImageTag);
-    this.myDialogDiv.find("div.mediaCaption").html(theHtml);
-    this.myDialogDiv.find("div.modal-header img").hide();
-    
-    this.myDialogDiv.find("#mediaImageData").show();
-    this.myDialogDiv.find("#mediaVideoData").hide();
-    
-    updateTimestamps();   
-
-    $(".modal").modal("hide");
-    this.myDialogDiv.modal("show");
-  };
-  
   this.showDialog = function( aProduct )
   {
-    this.myDialogDiv.find("div.modal-header h3").text("Team Gear From Amazon");
+    var theTitle = "Team Gear from Amazon";
+    var theAmazonIcon = "/assets/amazon-icon.png";
+
+    var theProductInfo = "<p><a href='" + aProduct.detailUrl + "' target='blank'>" + aProduct.title + "</a></p>";
+    var theProductImage = "<a href='" + aProduct.detailUrl + "' target='blank'><img src='" + aProduct.imageUrl + "'/></a>";
+
+    this.myDialogDiv.find("div.modal-body h3").text(theTitle);
+    this.myDialogDiv.find("div.modal-body img").attr("src", theAmazonIcon).show();
+    this.myDialogDiv.find("div.mediaCaption").html(theProductInfo);
+    this.myDialogDiv.find("div.mediaImage").html(theProductImage);
+
+    this.myDialogDiv.find("#mediaImageData").show();
+    this.myDialogDiv.find("#mediaVideoData").hide();
+
+    updateTimestamps();   
+
     this.myDialogDiv.find("#post_media_button").data("product", aProduct).show();
-    
-    this.loadAmazonProduct( aProduct );
+    $(".modal").modal("hide");
+    this.myDialogDiv.modal("show");
     
     trackEvent("MediaSlider", "Amazon_item_click", "product");    
   };
