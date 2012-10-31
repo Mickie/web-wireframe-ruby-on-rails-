@@ -18,6 +18,7 @@ describe "event_posts/edit" do
       :home_post => nil,
       :event => nil
     ))
+    @post = assign(:post, stub_model(Post))
   end
 
   it "renders the edit event_post form" do

@@ -13,6 +13,7 @@ describe "event_posts/new" do
       :event_time => Time.now
     )
     @event = assign(:event, theStub)
+    @post = assign(:post, stub_model(Post))
 
     assign(:event_post, stub_model(EventPost,
       :visiting_post => nil,
