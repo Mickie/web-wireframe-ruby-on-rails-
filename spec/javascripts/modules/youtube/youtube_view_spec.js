@@ -35,7 +35,7 @@ describe("YoutubeView", function()
     
     it("adds the correct title to the modal", function() 
     {
-      expect($("div#myMediaModal div.modal-header h3")).toHaveText(YouTubeData.videoSearchResponse.feed.entry[0].title.$t);
+      expect($("div#myMediaModal div.modal-body h3.mediaTitle")).toHaveText(YouTubeData.videoSearchResponse.feed.entry[0].title.$t);
     });
     
   });

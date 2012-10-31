@@ -63,7 +63,7 @@ describe("BingView", function()
     
     it("adds the correct title to the modal", function() 
     {
-      expect($("div#myMediaModal div.modal-header h3")).toHaveText(BingSearchData.d.results[0].Image[1].Title);
+      expect($("div#myMediaModal div.modal-body h3.mediaTitle")).toHaveText(BingSearchData.d.results[0].Image[1].Title);
     });
   });
   
