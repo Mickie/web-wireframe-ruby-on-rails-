@@ -129,7 +129,7 @@ var BingView = function(aContainerDivSelector,
 
       this.myDialogDiv.find("div.mediaImage").html(theImageTag);
       this.myDialogDiv.find("div.mediaCaption").html(theHtml);
-      this.myDialogDiv.find("div.modal-body img").hide();
+      this.myDialogDiv.find("div.modal-body img.profile_pic").hide();
       
       this.myDialogDiv.find("#mediaImageData").hide();
       this.myDialogDiv.find("#mediaVideoData").hide();
@@ -141,18 +141,19 @@ var BingView = function(aContainerDivSelector,
   
   this.loadBingNews = function( aNewsItem )
   {
-    var theHtml = "<div class='bingNews'>";
-    theHtml += "<h4>" + aNewsItem.Description + "</h4>";
+    var theHtml = "<div class='bingNews'><p class='source'>";
     if (aNewsItem.Source)
     {
-      theHtml += "<p>Source : " + aNewsItem.Source + "</p>";
+      theHtml += aNewsItem.Source + " - ";
     }
-    theHtml += "<p>Link : <a href='" + aNewsItem.Url + "' target='_blank'>" + aNewsItem.Url + "</a></p>";
-    theHtml += "<p>When : <span class='timestamp' title='" + aNewsItem.Date + "'>" + aNewsItem.Date + "</span></p>";
+    theHtml += "<span class='timestamp' title='" + aNewsItem.Date + "'>" + aNewsItem.Date + "</span></p>"
+    theHtml += "<p class='description'>" + aNewsItem.Description + "</p>";
+
+    theHtml += "<p class='storyLink'><a href='" + aNewsItem.Url + "' target='_blank'>" + aNewsItem.Url + "</a></p>";
     theHtml += "</div>";
     this.myDialogDiv.find("div.mediaImage").html("");
     this.myDialogDiv.find("div.mediaCaption").html(theHtml);
-    this.myDialogDiv.find("div.modal-body img").hide();
+    this.myDialogDiv.find("div.modal-body img.profile_pic").hide();
     
     this.myDialogDiv.find("#mediaImageData").hide();
     this.myDialogDiv.find("#mediaVideoData").hide();
@@ -169,7 +170,7 @@ var BingView = function(aContainerDivSelector,
     var theAnchorTag = "Source: <a href='" + anImageItem.SourceUrl + "' target='_blank'>" + anImageItem.DisplayUrl + "</a>";
     this.myDialogDiv.find("div.mediaImage").html(theImageTag);
     this.myDialogDiv.find("div.mediaCaption").html(theAnchorTag);
-    this.myDialogDiv.find("div.modal-body img").hide();
+    this.myDialogDiv.find("div.modal-body img.profile_pic").hide();
 
     this.myDialogDiv.find("#mediaImageData").show();
     this.myDialogDiv.find("#mediaVideoData").hide();
@@ -180,7 +181,7 @@ var BingView = function(aContainerDivSelector,
 
   this.showDialog = function( aBingItem )
   {
-    this.myDialogDiv.find("div.modal-body h3").text(aBingItem.Title);
+    this.myDialogDiv.find("div.modal-body h3.mediaTitle").text(aBingItem.Title);
     this.myDialogDiv.find("#post_media_button").data("bingItem", aBingItem).show();
     
     if (aBingItem.__metadata.type == "NewsResult")

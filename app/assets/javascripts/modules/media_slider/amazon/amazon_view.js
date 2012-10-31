@@ -114,7 +114,7 @@ var AmazonView = function(aContainerDivSelector,
     var theProductImage = "<a href='" + aProduct.detailUrl + "' target='blank'><img src='" + aProduct.imageUrl + "'/></a>";
 
     this.myDialogDiv.find("div.modal-body h3").text(theTitle);
-    this.myDialogDiv.find("div.modal-body img").attr("src", theAmazonIcon).show();
+    this.myDialogDiv.find("div.modal-body img.profile_pic").attr("src", theAmazonIcon).show();
     this.myDialogDiv.find("div.mediaCaption").html(theProductInfo);
     this.myDialogDiv.find("div.mediaImage").html(theProductImage);
 

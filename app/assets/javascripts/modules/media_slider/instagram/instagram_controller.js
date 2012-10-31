@@ -1,0 +1,4 @@
+var InstagramController = function()
+{
+  
+}

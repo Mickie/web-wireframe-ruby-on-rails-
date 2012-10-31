@@ -13,7 +13,7 @@ class InstagramWrapper
       theClient = getClient
       begin
         theMedia = theClient.tag_recent_media(aTag)
-        Rails.cache.write(theTagKey, theMedia, expires_in: 5.minutes)
+        Rails.cache.write(theTagKey, theMedia, expires_in: 59.seconds)
       rescue Exception => e
         theMedia = []
         Rails.logger.warn "Error getting instagram media for tag: #{theTag} => #{e.to_s}"

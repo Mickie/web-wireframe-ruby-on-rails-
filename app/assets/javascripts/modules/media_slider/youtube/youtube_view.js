@@ -87,7 +87,7 @@ var YoutubeView = function(aContainerDivSelector,
   this.showVideoDialog = function( aVideoId, aTitle, aDescription )
   {
     this.myDialogDiv.find("div.modal-body h3").text( aTitle );
-    this.myDialogDiv.find("div.modal-body img").hide();
+    this.myDialogDiv.find("div.modal-body img.profile_pic").hide();
     this.myDialogDiv.find("div.mediaCaption").text(aDescription);
     
     this.loadYouTubeInDialog(aVideoId);

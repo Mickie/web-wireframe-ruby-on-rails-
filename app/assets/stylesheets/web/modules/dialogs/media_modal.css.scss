@@ -1,3 +1,4 @@
+@import "partials/colors";
 
 div#myMediaModal 
 {
@@ -19,56 +20,77 @@ div#myMediaModal
     width: 640px;
     overflow: auto;
     
-    .mediaImage
+    .mediaContent
     {
-      height: 360px;
-      text-align:center;
-      
-      img
+      .mediaImageData, .mediaVideoData
       {
-        height: 100%;
-      }
-    }
-
-    .profile_pic
-    {
-      float: left;
-      margin-left: 40px;
-      padding-top: 20px;
-      padding-right: 10px;
-      height: 64px;
-      width: 64px;
-    }
-    
-    .mediaCaption
-    {
-      float: left;
-      width: 500px;
-      margin-top: 0px;
-      
-      h3
-      {
-        overflow: hidden;
-        color: red;
-        font-size: 40px;
+        padding-bottom: 20px;
       }
       
-      p
+      .mediaImage
       {
-        color: red;
-        font-size: 20px;
-      }
-      
-      .bingNews
-      {
-        text-align: left;
+        height: 360px;
+        text-align:center;
         
-        h4
+        img
         {
-          margin-bottom: 10px;
+          height: 100%;
         }
       }
+  
+      
+      .mediaData
+      {
+        padding: 0px 140px;
+        
+        .mediaTitle
+        {
+          padding-top: 17px;
+          line-height: 1.2em;
+          text-transform: uppercase;
+        }
+        
+        .profile
+        {
+          float:left; 
+          padding-top: 20px;
+          height: 100px;
+          
+          .profile_pic
+          {
+            padding-right: 10px;
+            height: 64px;
+            width: 64px;
+          }
+        }
+
+        .mediaCaption
+        {
+          margin-top: 0px;
+          
+          .bingNews
+          {
+            .source
+            {
+              color: $lightTextColor;
+            }
+            
+            .description
+            {
+              padding: 15px 0px;
+              font-size: 1.25em;
+            }
+            
+            .storyLink
+            {
+              
+            }
+          }
+        }
+      }
+      
     }
+    
   }
 
   .modal-footer
